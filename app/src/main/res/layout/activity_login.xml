@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/beautiful"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
@@ -18,15 +18,15 @@
         android:text="Sign Up Account"
         android:textColor="#00ffffff"
         android:textSize="21sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_title"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="70dp"
         android:layout_marginRight="30dp"
+        android:layout_marginTop="70dp"
         android:background="#80FFFFFF"
         android:elevation="4dp"
         android:orientation="vertical"
@@ -72,38 +72,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/usersingup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:paddingTop="5dp"
-                    android:text="Don't have a account? Register Here"
-                    android:textColor="#089471"
-                    android:textSize="13sp" />
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/forgot_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:paddingTop="5dp"
+                    android:paddingTop="15dp"
                     android:text="Forgot Password?"
                     android:textColor="#0000FF"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
+
+
             </LinearLayout>
+
             <Button
                 android:id="@+id/btnUserlogin"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="22dp"
+                android:layout_margin="25dp"
                 android:background="#80FFFFFF"
                 android:text="Sign in"
                 android:textAllCaps="false"
                 android:textColor="#007FFF"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/usersingup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+
+                android:text="Don't have a account? Register Here"
+                android:textColor="#089471"
+                android:textSize="13sp" />
+
+
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

@@ -12,6 +12,12 @@ android
             }
             buildTypes {
                 release {
+                    buildConfigField "String", "API_SERVER_IP", "\"http://akwebtech.com/\""
+                    minifyEnabled false
+                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                }
+                debug {
+                    buildConfigField "String", "API_SERVER_IP", "\"http://akwebtech.com/\""
                     minifyEnabled false
                     proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
                 }
@@ -34,9 +40,15 @@ dependencies {
 
 
     implementation 'com.jakewharton:butterknife:6.1.0'
-    implementation 'com.android.support:design:23.4.0'
+    implementation 'com.android.support:design:27.1.1'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     //*************************
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'com.squareup.okio:okio:1.7.0'
+    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.koushikdutta.ion:ion:2.+'
