@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="fagments.ProfileFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/notification"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/pofile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/user_profile"
+            tools:ignore="VectorDrawableCompat" />
+        <TextView
+            android:id="@+id/user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/josefin_regular"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"
+            android:text="2378764525" />
+
+        <Button
+            android:id="@+id/logout_"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Logout"
+            android:background="@drawable/flame"
+            android:fontFamily="@font/josefin_regular"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#fddf1d"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+          android:background="@drawable/flame"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:fontFamily="@font/josefin_regular"
+                        android:textColor="#fddf1d"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/followers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Followers"
+                        android:fontFamily="@font/josefin_regular"
+                        android:textColor="#fddf1d"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:fontFamily="@font/josefin_regular"
+                        android:textColor="#fddf1d"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/follow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Follow"
+                        android:fontFamily="@font/josefin_regular"
+                        android:textColor="#fddf1d"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:fontFamily="@font/josefin_regular"
+                        android:id="@+id/counter_text"
+                        android:textColor="#fddf1d"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/plusText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Flames"
+                        android:fontFamily="@font/josefin_regular"
+                        android:textColor="#fddf1d"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/Relmyvedio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ci1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ve"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0.5dp" />
+
+            <TextView
+                android:id="@+id/t1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/list_avatar"
+                android:text="My vedio "
+                android:fontFamily="@font/josefin_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/i1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layout1"
+            android:layout_marginTop="10dp"
+            android:background="#aeb6bf" />
+
+        <RelativeLayout
+            android:id="@+id/relinvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/l3"
+            android:paddingTop="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/c4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/invite"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0.5dp" />
+
+            <TextView
+                android:id="@+id/t4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/list_avatar"
+                android:text="Invite Friends "
+                android:fontFamily="@font/josefin_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/i4invite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layout1"
+            android:layout_marginTop="10dp"
+            android:background="#aeb6bf" />
+        <RelativeLayout
+            android:id="@+id/relwallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/c21"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/wallet"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0.5dp" />
+
+            <TextView
+                android:id="@+id/t2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/list_avatar"
+                android:text="Wallet "
+                android:fontFamily="@font/josefin_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/i2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layout1"
+            android:layout_marginTop="10dp"
+            android:background="#aeb6bf" />
+
+        <RelativeLayout
+            android:id="@+id/relsetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/l5"
+            android:paddingTop="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/c6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/setting"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0.5dp" />
+
+            <TextView
+                android:id="@+id/t6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/list_avatar"
+                android:text="Setting "
+                android:fontFamily="@font/josefin_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/i6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layout1"
+            android:layout_marginTop="10dp"
+            android:background="#aeb6bf" />
+        <RelativeLayout
+            android:id="@+id/relfeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/l6"
+            android:paddingTop="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/c7"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/feedback"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0.5dp" />
+
+            <TextView
+                android:id="@+id/t7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/list_avatar"
+                android:text="Feedback "
+                android:fontFamily="@font/josefin_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/i7feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layout1"
+            android:layout_marginTop="10dp"
+            android:background="#aeb6bf" />
+        <RelativeLayout
+            android:id="@+id/relrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/l7"
+            android:paddingTop="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/c8"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/rateus"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0.5dp" />
+
+            <TextView
+                android:id="@+id/t8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/list_avatar"
+                android:text="Rateus "
+                android:fontFamily="@font/josefin_regular"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/i8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layout1"
+            android:layout_marginTop="10dp"
+            android:background="#aeb6bf" />
+    </LinearLayout>
+
+</ScrollView>
