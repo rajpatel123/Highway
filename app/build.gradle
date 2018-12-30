@@ -3,7 +3,7 @@ android
         {
             compileSdkVersion 27
             defaultConfig {
-                applicationId "dev_video.dev_video"
+                applicationId "com.videoapp"
                 minSdkVersion 16
                 targetSdkVersion 27
                 versionCode 1

@@ -1,7 +1,6 @@
-package adapter;
+package com.videoapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import dev_video.dev_video.Invite;
-import dev_video.dev_video.Login;
-import dev_video.dev_video.R;
-import model.Itemlistobject;
+import com.videoapp.R;
+import com.videoapp.model.Itemlistobject;
 
 public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Itemlistobject> itemList;

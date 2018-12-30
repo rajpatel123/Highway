@@ -1,4 +1,4 @@
-package adapter;
+package com.videoapp.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import dev_video.dev_video.R;
-import model.Notification_Model;
+import com.videoapp.R;
+import com.videoapp.model.Notification_Model;
 
 public class Notification_Adapter extends RecyclerView.Adapter<Notification_Adapter.MyViewHolder> {
 

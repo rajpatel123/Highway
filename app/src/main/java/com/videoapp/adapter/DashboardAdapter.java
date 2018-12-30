@@ -1,8 +1,7 @@
-package adapter;
+package com.videoapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
-import dev_video.dev_video.Main2Activity;
-import dev_video.dev_video.R;
+import com.videoapp.R;
+import com.videoapp.activities.Main2Activity;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ProgrammingViewHolder> {
     Context context;

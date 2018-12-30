@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="dev_video.dev_video">
+    package="com.videoapp">
 
     <!-- Uses Permissions -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -40,29 +40,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Splash">
+        <activity android:name="com.videoapp.activities.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Signup" />
-        <activity android:name=".Login" />
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".Test" />
-        <activity android:name=".deep_link" />
-        <activity android:name=".PaymentOffers" />
-        <activity android:name=".RestaurantsOffers" />
-        <activity android:name=".CamActivity" />
-        <activity android:name=".Invite" />
-        <activity android:name=".My_vedio_edit_profife" />
-        <activity android:name=".wallet" />
-        <activity android:name=".rate" />
-        <activity android:name=".Music_player" />
-        <activity android:name=".player" />
-        <activity android:name=".user" />
+        <activity android:name="com.videoapp.activities.MainActivity" />
+        <activity android:name="com.videoapp.activities.Signup" />
+        <activity android:name="com.videoapp.activities.Login" />
+        <activity android:name="com.videoapp.activities.Main2Activity" />
+        <activity android:name="com.videoapp.activities.Test" />
+        <activity android:name="com.videoapp.activities.DeepLinkActivity" />
+        <activity android:name="com.videoapp.activities.PaymentOffers" />
+        <activity android:name="com.videoapp.activities.RestaurantsOffers" />
+        <activity android:name="com.videoapp.activities.CamActivity" />
+        <activity android:name="com.videoapp.activities.Invite" />
+        <activity android:name="com.videoapp.activities.My_vedio_edit_profife" />
+        <activity android:name="com.videoapp.activities.wallet" />
+        <activity android:name="com.videoapp.activities.rate" />
+        <activity android:name="com.videoapp.activities.Music_player" />
+        <activity android:name="com.videoapp.activities.player" />
+        <activity android:name="com.videoapp.activities.user" />
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/notification"
     android:layout_height="match_parent"
-    tools:context=".My_vedio_edit_profife">
+    tools:context="com.videoapp.activities.My_vedio_edit_profife">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
