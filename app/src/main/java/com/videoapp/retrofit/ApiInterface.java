@@ -26,7 +26,7 @@ public interface ApiInterface {
 
     @POST("dev/api/api.php/req=login")
     @Headers({"Content-Type: application/json", "Accept: application/json"})
-    Call<LoginResponse> loginUser(@Body RequestBody body);
+    Call<LoginResponse> loginUser(@Part RequestBody body);
 
     @POST("dev/api/api.php/req=registration")
     Call<CommonApiResponse> registerUser(@Field("name") RequestBody name,
