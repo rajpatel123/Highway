@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FF080202"
-    tools:context="com.videoapp.activities.Splash">
+    tools:context="com.videoapp.activities.SplashActivity">
     <LinearLayout
         android:gravity="center"
         android:orientation="vertical"

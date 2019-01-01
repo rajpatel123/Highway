@@ -18,19 +18,20 @@ import com.videoapp.BuildConfig;
 import com.videoapp.R;
 import com.videoapp.model.LoginResponse;
 import com.videoapp.retrofit.RestClient;
-import com.videoapp.shared_preferences.AlertDialogManager;
-import com.videoapp.shared_preferences.SessionManager;
+import com.videoapp.utill.AlertDialogManager;
+import com.videoapp.utill.AppConstants;
 import com.videoapp.utill.AppUtils;
 import com.videoapp.utill.RuntimePermissionHelper;
+import com.videoapp.utill.VideoAppPrefs;
 
-import okhttp3.MultipartBody;
+import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText emails, password;
     String email_str, pass_str;
@@ -41,10 +42,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private static final String LoginUrl = " http://akwebtech.com/dev/api/api.php?req=login ";
     AlertDialogManager alert = new AlertDialogManager();
 
-    // Session Manager Class
-    SessionManager session;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +50,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         password = findViewById(R.id.userpassword);
         btn_login_ = findViewById(R.id.btnUserlogin);
         signup_text_ = findViewById(R.id.usersingup);
-
-
-        //shared preferences
-        session = new SessionManager(getApplicationContext());
-
-        //Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
-
 
         btn_login_.setOnClickListener(this);
         signup_text_.setOnClickListener(this);
@@ -107,6 +97,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnUserlogin) {
+//            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+//            finish();
+
             email_str = emails.getText().toString();
             pass_str = password.getText().toString();
             if (TextUtils.isEmpty(email_str.trim()) || email_str.length() ==0) {
@@ -118,28 +111,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 return;
             }
 
-            RequestBody requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart("email_id", email_str)
-                    .addFormDataPart("password", pass_str)
-                    .build();
+            RequestBody email = RequestBody.create(MediaType.parse("text/plain"), email_str);
 
+            RequestBody pwd = RequestBody.create(MediaType.parse("text/plain"), pass_str);
 
-            AppUtils.showProgressDialog(Login.this, "Please wait...");
-            RestClient.loginUser(requestBody, new Callback<LoginResponse>() {
+            AppUtils.showProgressDialog(LoginActivity.this, "Please wait...");
+            RestClient.loginUser(email,pwd, new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     AppUtils.dismissProgressDialog();
                     if (response != null && response.body() != null) {
                         LoginResponse loginResponse = response.body();
                         if (Integer.parseInt(loginResponse.getStatus()) == 1) {
-                            AppUtils.displayToast(Login.this, loginResponse.getMessage());
-                            startActivity(new Intent(Login.this, Signup.class));
+                            AppUtils.displayToast(LoginActivity.this, loginResponse.getMessage());
+                            VideoAppPrefs.putString(getApplicationContext(), AppConstants.CUSTOMER_ID,loginResponse.getLoginDetail().get(0).getId());
+                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();
                         }
 
                     } else {
-                        AppUtils.displayToast(Login.this, "Invalid login detail");
+                        AppUtils.displayToast(LoginActivity.this, "Invalid login detail");
 
                     }
                 }
@@ -147,12 +138,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     AppUtils.dismissProgressDialog();
-                    AppUtils.displayToast(Login.this, "Invalid login detail");
+                    AppUtils.displayToast(LoginActivity.this, "Invalid login detail");
 
                 }
             });
         } else if (v.getId() == R.id.usersingup) {
-            startActivity(new Intent(Login.this, Signup.class));
+            startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            finish();
         }
     }
 }

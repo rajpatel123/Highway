@@ -32,7 +32,7 @@ Button arrowimageview;
 arrowimageview.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        Intent i=new Intent(context,Invite.class);
+        Intent i=new Intent(context,InviteActivity.class);
         context.startActivity(i);
 
     }

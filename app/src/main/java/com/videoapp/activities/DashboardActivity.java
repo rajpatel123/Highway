@@ -18,24 +18,20 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
 import com.videoapp.R;
 import com.videoapp.fagments.DashboardFragment;
 import com.videoapp.fagments.HomeFragment;
 import com.videoapp.fagments.NotificationsFragment;
 import com.videoapp.fagments.ProfileFragment;
-import com.videoapp.shared_preferences.AlertDialogManager;
-import com.videoapp.shared_preferences.SessionManager;
+import com.videoapp.utill.AlertDialogManager;
 
-public class MainActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
 
  BottomNavigationView bottomNavigationView;
 
     // Alert Dialog Manager
     AlertDialogManager alert = new AlertDialogManager();
     // Session Manager Class
-    SessionManager session;
     // Button Logout
     Button btnLogout;
     ImageButton dash;
@@ -95,29 +91,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction tx = fm.beginTransaction();
         tx.replace(R.id.main_activity, fr);
         tx.commit();
-
-        session = new SessionManager(getApplicationContext());
-        Toast.makeText(getApplicationContext(), "User Login Status: "
-                + session.isLoggedIn(), Toast.LENGTH_LONG).show();
-        session.checkLogin();
-
-        // get user data from session
-        HashMap<String, String> user = session.getUserDetails();
-
-        String name = user.get(SessionManager.KEY_NAME);
-
-        // email
-        String email = user.get(SessionManager.KEY_EMAIL);
-
-//
-//        loadFragment(new HomeFragment());
-//
-//         BottomNavigationView navigation = findViewById(R.id.navigation);
-//        navigation.setOnNavigationItemSelectedListener(this);
     }
 
     public void showDialog(){
-        final Dialog dialog = new Dialog(MainActivity.this);
+        final Dialog dialog = new Dialog(DashboardActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.record_video_time);
         //dialog.setTitle("Your Title goes here");
@@ -131,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 int selectedId = recordSelectionRadioGroup.getCheckedRadioButtonId();
 
                 selectedRadioButton = dialog.findViewById(selectedId);
-                Toast.makeText(MainActivity.this,selectedRadioButton.getText().toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(DashboardActivity.this,selectedRadioButton.getText().toString(),Toast.LENGTH_SHORT).show();
 
                 int time = 0;
 
@@ -142,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 else if(selectedRadioButton.getText().toString().equals("90 Seconds"))
                     time = 90;
 
-                Intent intent=new Intent(MainActivity.this,CamActivity.class);
+                Intent intent=new Intent(DashboardActivity.this,CamActivity.class);
                 startActivity(intent);
 
                 dialog.dismiss();

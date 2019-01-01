@@ -12,8 +12,7 @@ import com.videoapp.R;
 public class Main2Activity extends AppCompatActivity {//implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener {
 
 
-    private static final String SAMPLE_VIDEO =
-            "https://video.twimg.com/ext_tw_video/703677246528221184/pu/vid/180x320/xnI48eAV8iPFW9aA.mp4";
+    private static  String SAMPLE_VIDEO ="https://video.twimg.com/ext_tw_video/703677246528221184/pu/vid/180x320/xnI48eAV8iPFW9aA.mp4";
 
     private SimpleVideoView videoView;
     /*private SurfaceView surfaceView;
@@ -27,6 +26,9 @@ public class Main2Activity extends AppCompatActivity {//implements SurfaceHolder
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+//        if(getIntent().hasExtra("url")){
+//            SAMPLE_VIDEO=getIntent().getStringExtra("url");
+//        }
         /*surfaceView = findViewById(R.id.selected_video);
         mediaPlayer = new MediaPlayer();
 

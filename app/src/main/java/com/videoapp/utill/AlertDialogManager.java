@@ -1,4 +1,4 @@
-package com.videoapp.shared_preferences;
+package com.videoapp.utill;
 
 import android.app.AlertDialog;
 import android.content.Context;

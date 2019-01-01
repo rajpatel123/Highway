@@ -16,14 +16,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import com.videoapp.activities.Invite;
+import com.videoapp.activities.InviteActivity;
+import com.videoapp.activities.LoginActivity;
 import com.videoapp.activities.My_vedio_edit_profife;
 import com.videoapp.R;
-import com.videoapp.activities.rate;
+import com.videoapp.activities.RateUsActivity;
 import com.videoapp.activities.wallet;
 import com.videoapp.model.DataNote;
 import com.videoapp.model.DataNoteInformation;
-import com.videoapp.shared_preferences.SessionManager;
+import com.videoapp.utill.AppConstants;
+import com.videoapp.utill.VideoAppPrefs;
 
 
 public class ProfileFragment extends Fragment {
@@ -31,7 +33,6 @@ public class ProfileFragment extends Fragment {
     private ProgressBar mProgressBarLoading;
     private ImageView mImageViewEmpty;
     ImageView imageView_logout;
-    SessionManager session;
     Button logout_;
     RelativeLayout invite;
     RelativeLayout l;
@@ -68,7 +69,6 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        session = new SessionManager(getActivity());
         invite = view.findViewById(R.id.relinvite);
         countertext = view.findViewById(R.id.counter_text);
         plusText1 = view.findViewById(R.id.plusText);
@@ -94,14 +94,14 @@ public class ProfileFragment extends Fragment {
         rating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),rate.class);
+                Intent i=new Intent(getActivity(),RateUsActivity.class);
                 getActivity().startActivity(i);
             }
         });
         invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),Invite.class);
+                Intent i=new Intent(getActivity(),InviteActivity.class);
                 getActivity().startActivity(i);
             }
         });
@@ -133,7 +133,9 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                session.logoutUser();
+                VideoAppPrefs.putString(getActivity(), AppConstants.CUSTOMER_ID,"");
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
             }
         });
 //

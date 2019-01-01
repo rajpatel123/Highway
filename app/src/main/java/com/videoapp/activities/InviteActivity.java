@@ -18,11 +18,11 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.videoapp.R;
 
 
-public class Invite extends AppCompatActivity implements
+public class InviteActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
-    private static final String TAG = com.videoapp.activities.MainActivity.class.getSimpleName();
+    private static final String TAG = DashboardActivity.class.getSimpleName();
     private static final int REQUEST_INVITE = 0;
 
     private GoogleApiClient mGoogleApiClient;
@@ -31,7 +31,7 @@ public class Invite extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite);
-        // Invite button click listener
+        // InviteActivity button click listener
         findViewById(R.id.invite_button).setOnClickListener(this);
         findViewById(R.id.custom_invite_button).setOnClickListener(this);
         // [END_EXCLUDE]
@@ -42,7 +42,7 @@ public class Invite extends AppCompatActivity implements
                 .enableAutoManage(this, this)
                 .build();
 
-        // Check for App Invite invitations and launch deep-link activity if possible.
+        // Check for App InviteActivity invitations and launch deep-link activity if possible.
         // Requires that an Activity is registered in AndroidManifest.xml to handle
         // deep-link URLs.
         boolean autoLaunchDeepLink = true;
@@ -67,7 +67,7 @@ public class Invite extends AppCompatActivity implements
     }
 
     /**
-     * User has clicked the 'Invite' button, launch the invitation UI with the proper
+     * User has clicked the 'InviteActivity' button, launch the invitation UI with the proper
      * title, message, and deep link
      */
     // [START on_invite_clicked]
@@ -83,7 +83,7 @@ public class Invite extends AppCompatActivity implements
     // [END on_invite_clicked]
 
     /**
-     * User has clicked the 'Custom Invite' button, launch the invitation UI but pass in
+     * User has clicked the 'Custom InviteActivity' button, launch the invitation UI but pass in
      * a custom HTML body and subject for email invites.
      */
     // [START on_custom_invite_clicked]

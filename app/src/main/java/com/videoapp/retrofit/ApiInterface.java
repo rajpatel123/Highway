@@ -2,12 +2,14 @@ package com.videoapp.retrofit;
 
 import com.videoapp.model.LoginResponse;
 import com.videoapp.model.CommonApiResponse;
+import com.videoapp.model.VideoListResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -24,12 +26,16 @@ public interface ApiInterface {
 //    Call<LoginResponse> loginUser(@Field(value="email_id",encoded = true) String email, @Field(value = "password",encoded = true) String password);
 //
 
-    @POST("dev/api/api.php/req=login")
-    @Headers({"Content-Type: application/json", "Accept: application/json"})
-    Call<LoginResponse> loginUser(@Part RequestBody body);
+    @Multipart
+    @POST("dev/api/api.php?req=login")
+    Call<LoginResponse> loginUser(@Part("email_id") RequestBody actionId, @Part("password") RequestBody offerCode);
 
-    @POST("dev/api/api.php/req=registration")
-    Call<CommonApiResponse> registerUser(@Field("name") RequestBody name,
+    @GET("dev/api/api.php?req=videolist")
+    Call<VideoListResponse> getVideoList();
+
+    @Multipart
+    @POST("dev/api/api.php?req=registration")
+    Call<CommonApiResponse> registerUser(@Part("name") RequestBody name,
                                          @Part("email_id") RequestBody email,
                                          @Part("mobile_no") RequestBody mobile,
                                          @Part("password") RequestBody password);

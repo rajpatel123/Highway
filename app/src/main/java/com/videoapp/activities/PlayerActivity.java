@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class player extends AppCompatActivity {
+public class PlayerActivity extends AppCompatActivity {
     static MediaPlayer mp;
     ArrayList<File> mysong;
     Uri u;

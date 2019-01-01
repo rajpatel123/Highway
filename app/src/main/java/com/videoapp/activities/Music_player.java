@@ -38,7 +38,7 @@ public class Music_player extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                startActivity(new Intent(getApplicationContext(), player.class).putExtra("pos", position).putExtra("songlist", mysong));
+                startActivity(new Intent(getApplicationContext(), PlayerActivity.class).putExtra("pos", position).putExtra("songlist", mysong));
             }
         });
     }

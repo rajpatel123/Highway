@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.videoapp.R;
 
 
-public class rate extends AppCompatActivity {
+public class RateUsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

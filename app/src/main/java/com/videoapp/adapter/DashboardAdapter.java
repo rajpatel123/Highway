@@ -9,18 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.videoapp.R;
 import com.videoapp.activities.Main2Activity;
+import com.videoapp.model.VideoList;
+
+import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ProgrammingViewHolder> {
     Context context;
     String link;
-
-    public DashboardAdapter(Context context, String link) {
+    List<VideoList> videoLists;
+    public DashboardAdapter(Context context, List<VideoList> videoLists) {
         this.context = context;
-        this.link = link;
+        this.videoLists = videoLists;
     }
 
     @NonNull
@@ -31,47 +35,51 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Prog
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProgrammingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ProgrammingViewHolder holder, int position) {
+        holder.like.setTag("black");
 
+        holder.uploadedby.setText(videoLists.get(holder.getAdapterPosition()).getUserName());
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.like.getTag().equals("black")) {
+                    holder.like.setImageDrawable(context.getResources().getDrawable(R.drawable.liked));
+                    holder.like.setTag("red");
+                }
+                else if(holder.like.getTag().equals("red")){
+                    holder.like.setImageDrawable(context.getResources().getDrawable(R.drawable.like));
+                    holder.like.setTag("black");
+                }
+            }
+        });
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, Main2Activity.class);
+                i.putExtra("url",videoLists.get(holder.getAdapterPosition()).getVideo());
+                Toast.makeText(context, holder.getAdapterPosition()+"", Toast.LENGTH_SHORT).show();
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return videoLists.size();
     }
 
     public class ProgrammingViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         ImageButton like, shareVideo;
+        TextView uploadedby;
         public ProgrammingViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_feeds);
             like = itemView.findViewById(R.id.like_button);
+            uploadedby = itemView.findViewById(R.id.uploadedby);
             shareVideo = itemView.findViewById(R.id.share_video);
-            like.setTag("black");
 
-            like.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(like.getTag().equals("black")) {
-                        like.setImageDrawable(context.getResources().getDrawable(R.drawable.liked));
-                        like.setTag("red");
-                    }
-                    else if(like.getTag().equals("red")){
-                        like.setImageDrawable(context.getResources().getDrawable(R.drawable.like));
-                        like.setTag("black");
-                    }
-                }
-            });
-
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(context, Main2Activity.class);
-                    Toast.makeText(context, getAdapterPosition()+"", Toast.LENGTH_SHORT).show();
-                    context.startActivity(i);
-                }
-            });
         }
     }
 }
