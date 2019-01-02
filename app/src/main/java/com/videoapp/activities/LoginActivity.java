@@ -2,6 +2,7 @@ package com.videoapp.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,8 +10,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     EditText emails, password;
     String email_str, pass_str;
-    Button btn_login_;
+    ImageButton btn_login_;
     TextView signup_text_;
     private RuntimePermissionHelper runtimePermissionHelper;
     private int count = 0;
@@ -46,6 +50,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            Window w = getWindow(); // in Activity's onCreate() for instance
+//            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//        }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
+        }
+
         emails = findViewById(R.id.useremail);
         password = findViewById(R.id.userpassword);
         btn_login_ = findViewById(R.id.btnUserlogin);
@@ -66,6 +83,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
 // SDK below API 23. Do nothing just go with the flow.
         }
+
+
 
 
     }
