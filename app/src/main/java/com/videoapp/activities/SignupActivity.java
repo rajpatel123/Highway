@@ -98,7 +98,7 @@ public class SignupActivity extends AppCompatActivity {
             RequestBody mobile = RequestBody.create(MediaType.parse("text/plain"), usercontact.getText().toString().trim());
             RequestBody password = RequestBody.create(MediaType.parse("text/plain"), userpassword.getText().toString().trim());
 
-            AppUtils.showProgressDialog(getApplicationContext(), "PLease wait...");
+            //AppUtils.showProgressDialog(getApplicationContext(), "PLease wait...");
             RestClient.registerUser(name, email, mobile, password, new Callback<CommonApiResponse>() {
                 @Override
                 public void onResponse(Call<CommonApiResponse> call, retrofit2.Response<CommonApiResponse> response) {
