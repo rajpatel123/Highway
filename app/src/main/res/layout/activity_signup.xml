@@ -60,7 +60,7 @@
         android:background="@drawable/bg_login_edittext"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/righteous"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:hint="Enter password"
         android:textSize="14sp"
         android:paddingLeft="20dp"
@@ -75,7 +75,7 @@
         android:background="@drawable/bg_login_edittext"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/righteous"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:hint="Enter your email address"
         android:textSize="14sp"
         android:paddingLeft="20dp"
@@ -90,7 +90,7 @@
         android:background="@drawable/bg_login_edittext"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/righteous"
-        android:inputType="text"
+        android:inputType="phone"
         android:hint="Enter your phone number"
         android:textSize="14sp"
         android:paddingLeft="20dp"
@@ -107,6 +107,7 @@
         android:background="@drawable/bg_login_button"
         android:fontFamily="@font/josefin_bold"
         android:text="submit"
+        android:textColor="@android:color/white"
         android:textSize="17sp"/>
 
     <android.support.percent.PercentRelativeLayout

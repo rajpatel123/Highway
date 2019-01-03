@@ -15,6 +15,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -79,41 +81,54 @@ public class SignupActivity extends AppCompatActivity {
 
     }
     private void Resigaternewuser(){
-        RequestBody name = RequestBody.create(MediaType.parse("text/plain"), username.getText().toString().trim());
-        RequestBody email = RequestBody.create(MediaType.parse("text/plain"), useremail.getText().toString().trim());
-        RequestBody mobile = RequestBody.create(MediaType.parse("text/plain"), usercontact.getText().toString().trim());
-        RequestBody password = RequestBody.create(MediaType.parse("text/plain"), userpassword.getText().toString().trim());
 
-        AppUtils.showProgressDialog(getApplicationContext(),"PLease wait...");
-        RestClient.registerUser(name, email, mobile, password, new Callback<CommonApiResponse>() {
-            @Override
-            public void onResponse(Call<CommonApiResponse> call, retrofit2.Response<CommonApiResponse> response) {
-              AppUtils.dismissProgressDialog();
-                if (response.body()!=null){
-                    if (response.body().getStatus().equalsIgnoreCase("1")){
-                        AppUtils.displayToast(getApplicationContext(),"Successfuly registered");
-                        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                        finish();
+        if (TextUtils.isEmpty(username.getText().toString())){
+            username.setError(Html.fromHtml("<font color=white>" + "Username is required." + "</font>"));
+        } else if (TextUtils.isEmpty(userpassword.getText().toString())) {
+            userpassword.setError(Html.fromHtml("<font color=white>" + "Password is required." + "</font>"));
+        } else if (TextUtils.isEmpty(useremail.getText().toString())){
+            useremail.setError(Html.fromHtml("<font color=white>" + "Email is required." + "</font>"));
+        } else if (TextUtils.isEmpty(usercontact.getText().toString())){
+            usercontact.setError(Html.fromHtml("<font color=white>" + "Contact number is required." + "</font>"));
+        } else {
+
+
+            RequestBody name = RequestBody.create(MediaType.parse("text/plain"), username.getText().toString().trim());
+            RequestBody email = RequestBody.create(MediaType.parse("text/plain"), useremail.getText().toString().trim());
+            RequestBody mobile = RequestBody.create(MediaType.parse("text/plain"), usercontact.getText().toString().trim());
+            RequestBody password = RequestBody.create(MediaType.parse("text/plain"), userpassword.getText().toString().trim());
+
+            AppUtils.showProgressDialog(getApplicationContext(), "PLease wait...");
+            RestClient.registerUser(name, email, mobile, password, new Callback<CommonApiResponse>() {
+                @Override
+                public void onResponse(Call<CommonApiResponse> call, retrofit2.Response<CommonApiResponse> response) {
+                    AppUtils.dismissProgressDialog();
+                    if (response.body() != null) {
+                        if (response.body().getStatus().equalsIgnoreCase("1")) {
+                            AppUtils.displayToast(getApplicationContext(), "Successfuly registered");
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                            finish();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<CommonApiResponse> call, Throwable t) {
-                AppUtils.dismissProgressDialog();
-                AppUtils.displayToast(getApplicationContext(),"Unable to register, please try again later");
+                @Override
+                public void onFailure(Call<CommonApiResponse> call, Throwable t) {
+                    AppUtils.dismissProgressDialog();
+                    AppUtils.displayToast(getApplicationContext(), "Unable to register, please try again later");
 
-            }
-        });
-        //link_login=findViewById(R.id.link_login);
+                }
+            });
+            //link_login=findViewById(R.id.link_login);
 
-        link_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent login=new Intent(SignupActivity.this,LoginActivity.class);
-                startActivity(login);
-            }
-        });
+//            link_login.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent login = new Intent(SignupActivity.this, LoginActivity.class);
+//                    startActivity(login);
+//                }
+//            });
+        }
 
 
 
@@ -179,15 +194,6 @@ public class SignupActivity extends AppCompatActivity {
             }
         }
 
-    }
-
-    private String encodeImage(Bitmap bm) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-
-        return encImage;
     }
 
     public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
