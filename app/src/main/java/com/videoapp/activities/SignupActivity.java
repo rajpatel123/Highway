@@ -59,7 +59,6 @@ public class SignupActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.BLACK);
         }
         username=findViewById(R.id.regUserName);
-        //link_login=findViewById(R.id.link_login);
         imgUserImage = (ImageView) findViewById(R.id.imgUserImage);
         userpassword=findViewById(R.id.regUserpassword);
         useremail=findViewById(R.id.regUserEmail);
