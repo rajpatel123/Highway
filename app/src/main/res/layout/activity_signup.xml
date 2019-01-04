@@ -7,34 +7,41 @@
     android:layout_height="match_parent"
     android:background="#DCDCDC">
 
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_login_image"
+        android:scaleType="fitXY"
+        android:alpha="0.9"
+        android:foreground="@drawable/bg_gradient"/>
+
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/imageLayout"
-        app:layout_widthPercent="30%"
-        app:layout_heightPercent="20%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_marginTopPercent="8%"
         android:layout_centerHorizontal="true">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/imgUserImage"
             android:padding="5dp"
-            android:src="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <android.support.design.widget.FloatingActionButton
+            android:background="@drawable/user_image_circle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="fncPickImage"
-            app:backgroundTint="#ff3366"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:clickable="true"
-            android:id="@+id/btnCamera"
-            android:src="@drawable/ic_edit_icon"
-            android:layout_alignParentRight="true" />
+            android:layout_height="wrap_content"/>
 
     </android.support.percent.PercentRelativeLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="fncPickImage"
+        app:backgroundTint="#ff3366"
+        app:fabSize="mini"
+        android:clickable="true"
+        android:src="@drawable/ic_edit_icon"
+        android:layout_alignBottom="@+id/imageLayout"
+        android:layout_alignRight="@+id/imageLayout"/>
 
 
     <EditText
@@ -125,7 +132,7 @@
             android:textColor="@android:color/white"
             android:id="@+id/txtSignUpOption"
             android:fontFamily="@font/josefin_regular"
-            android:text="By singing in, you agree to our"
+            android:text="By singing up, you agree to our"
             />
         <TextView
             android:layout_width="wrap_content"

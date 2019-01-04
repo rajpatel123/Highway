@@ -24,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.videoapp.R;
@@ -44,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText username,userpassword,useremail,usercontact;
     Button btnRegister;
     TextView link_login;
-    CircleImageView imgUserImage;
+    ImageView imgUserImage;
 
 
     @Override
@@ -59,7 +60,7 @@ public class SignupActivity extends AppCompatActivity {
         }
         username=findViewById(R.id.regUserName);
         //link_login=findViewById(R.id.link_login);
-        imgUserImage = (CircleImageView) findViewById(R.id.imgUserImage);
+        imgUserImage = (ImageView) findViewById(R.id.imgUserImage);
         userpassword=findViewById(R.id.regUserpassword);
         useremail=findViewById(R.id.regUserEmail);
         usercontact=findViewById(R.id.regUserContactNo);
