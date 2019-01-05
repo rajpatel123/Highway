@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -76,44 +77,49 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Prog
 
 
         if (!list.getProfilePics().isEmpty() || !list.getProfilePics().equals(null)){
-
-            Thread thread = new Thread(new Runnable() {
+            final Bitmap image=null;
+            new AsyncTask<Void,Void,Bitmap>(){
+                Bitmap targetBitmap=null;
                 @Override
-                public void run() {
+                protected Bitmap doInBackground(Void... voids) {
                     try {
                         URL url = new URL(list.getProfilePics());
-                        Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                        Bitmap circleImage = getRoundedShape(image);
-                        holder.imgProfilePic.setImageBitmap(circleImage);
+                         Bitmap image= BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        int targetWidth = 250;
+                        int targetHeight = 250;
+                        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
+                                targetHeight,Bitmap.Config.ARGB_8888);
+
+                        Canvas canvas = new Canvas(targetBitmap);
+                        Path path = new Path();
+                        path.addCircle(((float) targetWidth - 1) / 2,
+                                ((float) targetHeight - 1) / 2,
+                                (Math.min(((float) targetWidth),
+                                        ((float) targetHeight)) / 2),
+                                Path.Direction.CCW);
+
+                        canvas.clipPath(path);
+                        Bitmap sourceBitmap = image;
+                        canvas.drawBitmap(sourceBitmap,
+                                new Rect(0, 0, sourceBitmap.getWidth(),
+                                        sourceBitmap.getHeight()),
+                                new Rect(0, 0, targetWidth, targetHeight), null);
+                        return targetBitmap;
                     } catch(Exception e) {
                         e.printStackTrace();
                     }
+                    return null;
                 }
 
-                public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
-                    int targetWidth = 250;
-                    int targetHeight = 250;
-                    Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
-                            targetHeight,Bitmap.Config.ARGB_8888);
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    super.onPostExecute(bitmap);
 
-                    Canvas canvas = new Canvas(targetBitmap);
-                    Path path = new Path();
-                    path.addCircle(((float) targetWidth - 1) / 2,
-                            ((float) targetHeight - 1) / 2,
-                            (Math.min(((float) targetWidth),
-                                    ((float) targetHeight)) / 2),
-                            Path.Direction.CCW);
-
-                    canvas.clipPath(path);
-                    Bitmap sourceBitmap = scaleBitmapImage;
-                    canvas.drawBitmap(sourceBitmap,
-                            new Rect(0, 0, sourceBitmap.getWidth(),
-                                    sourceBitmap.getHeight()),
-                            new Rect(0, 0, targetWidth, targetHeight), null);
-                    return targetBitmap;
+                    holder.imgProfilePic.setImageBitmap(bitmap);
                 }
-            });
-            thread.start();
+            }.execute();
+
+
 
         } else {
             holder.uploadedby.setVisibility(View.GONE);

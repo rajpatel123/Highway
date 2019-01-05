@@ -134,9 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             RequestBody pwd = RequestBody.create(MediaType.parse("text/plain"), pass_str);
 
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
+
 
             AppUtils.showProgressDialog(LoginActivity.this, "Please wait...");
             RestClient.loginUser(email,pwd, new Callback<LoginResponse>() {
@@ -150,6 +148,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             VideoAppPrefs.putString(getApplicationContext(), AppConstants.CUSTOMER_ID,loginResponse.getLoginDetail().get(0).getId());
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();
+                        }else{
+                            AppUtils.displayToast(LoginActivity.this, "Invalid login detail");
                         }
 
                     } else {
@@ -165,7 +165,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 }
             });
-
 
 
         } else if (v.getId() == R.id.usersingup) {
