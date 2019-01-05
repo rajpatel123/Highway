@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.klinker.android.simple_videoview.SimpleVideoView
+    <VideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:fitsSystemWindows="true"
-        app:loop="true"
-        app:stopSystemAudio="true"
-        app:muted="false"
-        app:showSpinner="false"/>
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+</RelativeLayout>

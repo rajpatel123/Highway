@@ -134,33 +134,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             RequestBody pwd = RequestBody.create(MediaType.parse("text/plain"), pass_str);
 
-            AppUtils.showProgressDialog(LoginActivity.this, "Please wait...");
-            RestClient.loginUser(email,pwd, new Callback<LoginResponse>() {
-                @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                    AppUtils.dismissProgressDialog();
-                    if (response != null && response.body() != null) {
-                        LoginResponse loginResponse = response.body();
-                        if (Integer.parseInt(loginResponse.getStatus()) == 1) {
-                            AppUtils.displayToast(LoginActivity.this, loginResponse.getMessage());
-                            VideoAppPrefs.putString(getApplicationContext(), AppConstants.CUSTOMER_ID,loginResponse.getLoginDetail().get(0).getId());
-                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                            finish();
-                        }
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
 
-                    } else {
-                        AppUtils.displayToast(LoginActivity.this, "Invalid login detail");
+//            AppUtils.showProgressDialog(LoginActivity.this, "Please wait...");
+//            RestClient.loginUser(email,pwd, new Callback<LoginResponse>() {
+//                @Override
+//                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+//                    AppUtils.dismissProgressDialog();
+//                    if (response != null && response.body() != null) {
+//                        LoginResponse loginResponse = response.body();
+//                        if (Integer.parseInt(loginResponse.getStatus()) == 1) {
+//                            AppUtils.displayToast(LoginActivity.this, loginResponse.getMessage());
+//                            VideoAppPrefs.putString(getApplicationContext(), AppConstants.CUSTOMER_ID,loginResponse.getLoginDetail().get(0).getId());
+//                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+//                            finish();
+//                        }
+//
+//                    } else {
+//                        AppUtils.displayToast(LoginActivity.this, "Invalid login detail");
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<LoginResponse> call, Throwable t) {
+//                    AppUtils.dismissProgressDialog();
+//                    AppUtils.displayToast(LoginActivity.this, "Invalid login detail");
+//
+//                }
+//            });
 
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    AppUtils.dismissProgressDialog();
-                    AppUtils.displayToast(LoginActivity.this, "Invalid login detail");
 
-                }
-            });
         } else if (v.getId() == R.id.usersingup) {
             startActivity(new Intent(LoginActivity.this, SignupActivity.class));
 //            finish();
