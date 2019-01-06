@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment implements MyAdapter.ItemClickListene
     TextView t1,t2,t3;
     private RecyclerView mRecyclerView;
     DashboardActivity activity;
-    private MyAdapter mAdapter;
+   // private MyAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private OnFragmentInteractionListener mListener;
 
@@ -56,19 +56,6 @@ public class HomeFragment extends Fragment implements MyAdapter.ItemClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_home, container, false);
-        //mRecyclerView = (RecyclerView)view.findViewById(R.id.my_recycler_view);
-
-// use this setting to improve performance if you know that changes
-// in content do not change the layout size of the RecyclerView
-        //mRecyclerView.setHasFixedSize(true);
-        List<Itemlistobject> rowListItem = getAllItemList();
-// use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        //mRecyclerView.setLayoutManager(mLayoutManager);
-// specify an adapter (see also next example)
-        mAdapter =new MyAdapter(getActivity(),rowListItem);
-        //mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setClickListener(this);
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.vp);
         setUpViewPager(viewPager);
@@ -79,23 +66,7 @@ public class HomeFragment extends Fragment implements MyAdapter.ItemClickListene
 
         return view;
     }
-    private List<Itemlistobject> getAllItemList() {
 
-        List<Itemlistobject> allItems = new ArrayList<Itemlistobject>();
-
-        allItems.add(new Itemlistobject("Banwait productions","", R.mipmap.aliya));
-        allItems.add(new Itemlistobject("Mohit","insta-royal" + "-gabru",R.drawable.k));
-        allItems.add(new Itemlistobject("sonakshi","pls like and comment", R.mipmap.aliya));
-        allItems.add(new Itemlistobject("balwant singh","", R.drawable.k));
-        allItems.add(new Itemlistobject("Akki sharma","acting good",R.mipmap.aliya));
-        allItems.add(new Itemlistobject("Priyanshu","thank u friends",R.drawable.k));
-        allItems.add(new Itemlistobject("Your rajni","",R.mipmap.aliya));
-        allItems.add(new Itemlistobject("yash","",R.drawable.k));
-        allItems.add(new Itemlistobject("Yuvansh","please subcribe my vedio", R.drawable.k));
-
-        return allItems;
-
-    }
 
     private void setUpViewPager(ViewPager viewPager){
 

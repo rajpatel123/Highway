@@ -3,11 +3,15 @@ package com.videoapp.model;
 public class Itemlistobject {
     private String name;
     private String desc;
-    private int photo;
-    public Itemlistobject(String name, String desc , int photo) {
+    private String photo;
+
+    public Itemlistobject(String name, String desc , String photo) {
         this.name = name;
         this.desc = desc;
         this.photo = photo;
+    }
+
+    public Itemlistobject() {
     }
 
     public String getName() {
@@ -23,10 +27,10 @@ public class Itemlistobject {
         this.desc = desc;
     }
 
-    public int getPhoto() {
+    public String getPhoto() {
         return photo;
     }
-    public void setPhoto(int photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
