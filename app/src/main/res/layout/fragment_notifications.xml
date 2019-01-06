@@ -8,6 +8,7 @@
     android:background="@android:color/white"
     android:layout_height="match_parent">
 
+
     <RelativeLayout
         android:id="@+id/layout_heading"
         android:layout_width="match_parent"
@@ -42,7 +43,6 @@
 
 
     </RelativeLayout>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rec_notification"
         android:layout_width="match_parent"
