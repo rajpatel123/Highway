@@ -1,5 +1,13 @@
 package com.videoapp.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URL;
 import java.util.List;
 
 import com.videoapp.R;
@@ -28,12 +37,58 @@ public class Notification_Adapter extends RecyclerView.Adapter<Notification_Adap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        Notification_Model notification_model = moviesList.get(i);
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
+        final Notification_Model notification_model = moviesList.get(i);
         myViewHolder.title.setText(notification_model.getTitle());
-        myViewHolder.imageView.setImageResource(notification_model.getImg());
+        //myViewHolder.imageView.setImageResource(notification_model.getImg());
         myViewHolder.days.setText(notification_model.getDays());
         myViewHolder.detail.setText(notification_model.getDetail());
+
+
+        if (!notification_model.getImg().isEmpty() || !notification_model.getImg().equals(null)){
+            new AsyncTask<Void,Void,Bitmap>(){
+                Bitmap targetBitmap=null;
+                @Override
+                protected Bitmap doInBackground(Void... voids) {
+                    try {
+                        URL url = new URL(notification_model.getImg());
+                        Bitmap image= BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        int targetWidth = 250;
+                        int targetHeight = 250;
+                        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
+                                targetHeight,Bitmap.Config.ARGB_8888);
+
+                        Canvas canvas = new Canvas(targetBitmap);
+                        Path path = new Path();
+                        path.addCircle(((float) targetWidth - 1) / 2,
+                                ((float) targetHeight - 1) / 2,
+                                (Math.min(((float) targetWidth),
+                                        ((float) targetHeight)) / 2),
+                                Path.Direction.CCW);
+
+                        canvas.clipPath(path);
+                        Bitmap sourceBitmap = image;
+                        canvas.drawBitmap(sourceBitmap,
+                                new Rect(0, 0, sourceBitmap.getWidth(),
+                                        sourceBitmap.getHeight()),
+                                new Rect(0, 0, targetWidth, targetHeight), null);
+                        return targetBitmap;
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    super.onPostExecute(bitmap);
+
+                    myViewHolder.imageView.setImageBitmap(bitmap);
+                }
+            }.execute();
+        }
+
+
 
 
     }

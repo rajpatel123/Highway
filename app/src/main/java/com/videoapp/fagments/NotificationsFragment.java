@@ -56,21 +56,21 @@ public class NotificationsFragment extends Fragment {
     private void prepareMovieData() {
 
         Notification_Model notification_model ;
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("John Marley","1 day ago ","You got new follow ","https://www.sheffield.ac.uk/polopoly_fs/1.739455!/image/A_Cochrane_300x300.jpg");
         movieList.add(notification_model);
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("Steven Grace","1 day ago ","You got new follow ","https://andersonstrathern.co.uk/uploads/images/ws_cropper/4_0x0_439x439_440x440_bruce_farquhar.jpg");
         movieList.add(notification_model);
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("Charlie Harper","1 day ago ","You got new follow ","https://andersonstrathern.co.uk/uploads/images/ws_cropper/4_0x0_439x439_440x440_bruce_farquhar.jpg");
         movieList.add(notification_model);
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("Alan Harper","1 day ago ","You got new follow ","https://www.sheffield.ac.uk/polopoly_fs/1.739455!/image/A_Cochrane_300x300.jpg");
         movieList.add(notification_model);
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("Jeff Strongman","1 day ago ","You got new follow ","https://www.sheffield.ac.uk/polopoly_fs/1.739455!/image/A_Cochrane_300x300.jpg");
         movieList.add(notification_model);
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("Richard Gracio","1 day ago ","You got new follow ","https://warwick.ac.uk/fac/soc/economics/staff/aadvani/profile.jpg");
         movieList.add(notification_model);
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("Jacob Muff","1 day ago ","You got new follow ","https://www.sheffield.ac.uk/polopoly_fs/1.739455!/image/A_Cochrane_300x300.jpg");
         movieList.add(notification_model);
-        notification_model= new Notification_Model("Dev.in","1 day ago ","you got new follow ",R.drawable.logo);
+        notification_model= new Notification_Model("Andrew Phill","1 day ago ","You got new follow ","https://warwick.ac.uk/fac/soc/economics/staff/aadvani/profile.jpg");
         movieList.add(notification_model);
 
         mAdapter.notifyDataSetChanged();}

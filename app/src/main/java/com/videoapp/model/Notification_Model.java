@@ -3,9 +3,9 @@ package com.videoapp.model;
 public class Notification_Model {
 
     private String title,days,detail;
-    private int img;
+    private String img;
 
-    public Notification_Model(String title, String days, String detail, int img) {
+    public Notification_Model(String title, String days, String detail, String img) {
         this.title = title;
         this.days = days;
         this.detail = detail;
@@ -36,11 +36,11 @@ public class Notification_Model {
         this.detail = detail;
     }
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 }
