@@ -41,30 +41,47 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.videoapp.activities.SplashActivity">
+        <activity android:name="com.videoapp.activities.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.videoapp.activities.DashboardActivity" />
-        <activity android:name="com.videoapp.activities.SignupActivity" />
-        <activity android:name="com.videoapp.activities.LoginActivity" />
-        <activity android:name="com.videoapp.activities.Main2Activity" />
+        <activity android:name="com.videoapp.activities.DashboardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.SignupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.Main2Activity"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.videoapp.activities.Test" />
-        <activity android:name="com.videoapp.activities.DeepLinkActivity" />
-        <activity android:name="com.videoapp.activities.PaymentOffers" />
-        <activity android:name="com.videoapp.activities.RestaurantsOffers" />
-        <activity android:name="com.videoapp.activities.CamActivity" />
-        <activity android:name="com.videoapp.activities.ExoPlayerActivity" />
-        <activity android:name="com.videoapp.activities.InviteActivity" />
-        <activity android:name="com.videoapp.activities.My_vedio_edit_profife" />
-        <activity android:name="com.videoapp.activities.wallet" />
-        <activity android:name="com.videoapp.activities.RateUsActivity" />
-        <activity android:name="com.videoapp.activities.Music_player" />
-        <activity android:name="com.videoapp.activities.PlayerActivity" />
-        <activity android:name="com.videoapp.activities.user" />
+        <activity android:name="com.videoapp.activities.DeepLinkActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.PaymentOffers"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.RestaurantsOffers"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.CamActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.ExoPlayerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.InviteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.My_vedio_edit_profife"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.wallet"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.RateUsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.Music_player"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.PlayerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.videoapp.activities.user"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
