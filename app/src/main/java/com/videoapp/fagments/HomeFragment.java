@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -77,7 +78,7 @@ public class HomeFragment extends Fragment implements MyAdapter.ItemClickListene
 
     }
 
-    public class ViewPagerAdapter extends FragmentPagerAdapter {
+    public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<android.support.v4.app.Fragment> mFragmentList = new ArrayList<>();//fragment array list
         private final List<String> mFragmentTitleList = new ArrayList<>();//title array list
 
