@@ -1,7 +1,13 @@
 package com.videoapp.fagments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 import com.videoapp.activities.InviteActivity;
@@ -32,7 +39,7 @@ public class ProfileFragment extends Fragment {
     private TextView mTextViewEmpty;
     private ProgressBar mProgressBarLoading;
     private ImageView mImageViewEmpty;
-    ImageView imageView_logout;
+    ImageView imageView_logout, profile_image;
     Button logout_;
     RelativeLayout invite;
     RelativeLayout l;
@@ -72,7 +79,51 @@ public class ProfileFragment extends Fragment {
         invite = view.findViewById(R.id.relinvite);
         countertext = view.findViewById(R.id.counter_text);
         plusText1 = view.findViewById(R.id.plusText);
+        profile_image = (ImageView) view.findViewById(R.id.profile_image);
         initCounter();
+
+        new AsyncTask<Void,Void,Bitmap>(){
+            Bitmap targetBitmap=null;
+            @Override
+            protected Bitmap doInBackground(Void... voids) {
+                try {
+                    URL url = new URL("https://www.victoria.ac.nz/images/staffpics/jason-young.jpg");
+                    Bitmap image= BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    int targetWidth = 250;
+                    int targetHeight = 250;
+                    Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
+                            targetHeight,Bitmap.Config.ARGB_8888);
+
+                    Canvas canvas = new Canvas(targetBitmap);
+                    Path path = new Path();
+                    path.addCircle(((float) targetWidth - 1) / 2,
+                            ((float) targetHeight - 1) / 2,
+                            (Math.min(((float) targetWidth),
+                                    ((float) targetHeight)) / 2),
+                            Path.Direction.CCW);
+
+                    canvas.clipPath(path);
+                    Bitmap sourceBitmap = image;
+                    canvas.drawBitmap(sourceBitmap,
+                            new Rect(0, 0, sourceBitmap.getWidth(),
+                                    sourceBitmap.getHeight()),
+                            new Rect(0, 0, targetWidth, targetHeight), null);
+                    return targetBitmap;
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                super.onPostExecute(bitmap);
+
+                profile_image.setImageBitmap(bitmap);
+            }
+        }.execute();
+
+
         plusText1.setOnClickListener(onClickListener);
         Wallet=view.findViewById(R.id.relwallet);
         Wallet.setOnClickListener(new View.OnClickListener() {
