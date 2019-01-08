@@ -129,6 +129,7 @@ public class DashboardActivity extends AppCompatActivity {
                     time = 90;
 
                 Intent intent=new Intent(DashboardActivity.this,CamActivity.class);
+                intent.putExtra("Timing", time);
                 startActivity(intent);
 
                 dialog.dismiss();
