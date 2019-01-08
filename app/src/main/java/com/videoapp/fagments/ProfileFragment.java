@@ -1,5 +1,6 @@
 package com.videoapp.fagments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,8 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -72,7 +75,7 @@ public class ProfileFragment extends Fragment {
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -145,8 +148,39 @@ public class ProfileFragment extends Fragment {
         rating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(),RateUsActivity.class);
-                getActivity().startActivity(i);
+//                Intent i=new Intent(getActivity(),RateUsActivity.class);
+//                getActivity().startActivity(i);
+
+
+                final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                alertDialog.setCancelable(false);
+                LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+                final View dialogView = layoutInflater.inflate(R.layout.rating_dialog, null);
+                alertDialog.setView(dialogView);
+
+                RatingBar ratingBar = (RatingBar) dialogView.findViewById(R.id.ratingBar);
+                EditText txtFeedback = (EditText) dialogView.findViewById(R.id.txtFeedback);
+                Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
+                Button btnSend = (Button) dialogView.findViewById(R.id.btnSend);
+
+                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+
+
+
+                    }
+                });
+
+
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                alertDialog.show();
             }
         });
         invite.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +195,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.setType("plain/text");;
+                sendIntent.setType("plain/text");
                 sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "aap_feedback@Dev vedio.com" });
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from Anonymous");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Dev Vedio:Android:Build 302(2.3.5) device:vivo v3 Android version: 5.1.1 user Anonymous)");

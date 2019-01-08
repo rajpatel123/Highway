@@ -213,10 +213,10 @@
 
                 <TextView
                     android:id="@+id/t1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/josefin_regular"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:text="My vedio "
                     android:textColor="#000000"
                     android:textSize="16sp" />
@@ -259,11 +259,11 @@
 
                 <TextView
                     android:id="@+id/t4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/josefin_regular"
-                    android:text="Invite Friends "
+                    android:text="Invite Friends"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -305,9 +305,9 @@
 
                 <TextView
                     android:id="@+id/t2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/josefin_regular"
                     android:text="Wallet"
                     android:textColor="#000000"
@@ -351,9 +351,9 @@
 
                 <TextView
                     android:id="@+id/t6"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/josefin_regular"
                     android:text="Settings"
                     android:textColor="#000000"
@@ -396,12 +396,12 @@
 
                 <TextView
                     android:id="@+id/t7"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/josefin_regular"
-                    android:text="Feedback "
+                    android:text="Feedback"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -441,11 +441,12 @@
 
                 <TextView
                     android:id="@+id/t8"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/josefin_regular"
                     android:text="Rateus "
+                    android:layout_centerInParent="true"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
