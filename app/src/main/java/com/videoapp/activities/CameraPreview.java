@@ -28,89 +28,13 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the camera where to draw the preview.
-
-        try{
-            if (mCamera == null){
-                mCamera.setPreviewDisplay(holder);
-                mCamera.startPreview();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-//        try {
-//            mCamera.setDisplayOrientation(90);
-//            mCamera.getParameters();
-//            mCamera.setPreviewDisplay(holder);
-//            mCamera.startPreview();
-//        } catch (IOException e) {
-//            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
-//        }
-    }
-
-    @SuppressWarnings("deprecation")
-    public void refreshCamera(Camera camera,String effect) {
-        filter_effect=effect;
-        if (mHolder.getSurface() == null) {
-            // preview surface does not exist
-            return;
-        }
-        // stop preview before making changes
         try {
-            mCamera.stopPreview();
-        } catch (Exception e) {
-            // ignore: tried to stop a non-existent preview
-        }
-        // set preview size and make any resize, rotate or
-        // reformatting changes here
-        // start preview with new settings
-        setCamera(camera);
-        try {
-            Camera.Parameters params = mCamera.getParameters();
-            if(filter_effect.equals("none"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_NONE);
-            }
-            else if(filter_effect.equals("mono"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_MONO);
-            }
-            else if(filter_effect.equals("negative"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_NEGATIVE);
-            }
-            else if(filter_effect.equals("solarize"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_SOLARIZE);
-            }
-            else if(filter_effect.equals("sepia"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_SEPIA);
-            }
-            else if(filter_effect.equals("posterize"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_POSTERIZE);
-            }
-            else if(filter_effect.equals("whiteboard"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_WHITEBOARD);
-            }
-            else if(filter_effect.equals("blackboard"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_BLACKBOARD);
-            }
-            else if(filter_effect.equals("aqua"))
-            {
-                params.setColorEffect(Camera.Parameters.EFFECT_AQUA);
-            }
-            mCamera.setParameters(params);
-            mCamera.setPreviewDisplay(mHolder);
-
             mCamera.setDisplayOrientation(90);
+            mCamera.getParameters();
+            mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
-        } catch (Exception e) {
-            Log.d(VIEW_LOG_TAG, "Error starting camera preview: " + e.getMessage());
+        } catch (IOException e) {
+            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }
     }
 
@@ -128,37 +52,34 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     public void surfaceDestroyed(SurfaceHolder holder) {
         // empty. Take care of releasing the Camera preview in your activity.
-        mCamera.release();
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         // If your preview can change or rotate, take care of those events here.
         // Make sure to stop the preview before resizing or reformatting it.
 
-//        if (mHolder.getSurface() == null){
-//            // preview surface does not exist
-//            return;
-//        }
-//
-//        // stop preview before making changes
-//        try {
-//            mCamera.stopPreview();
-//        } catch (Exception e){
-//            // ignore: tried to stop a non-existent preview
-//        }
-//
-//        // set preview size and make any resize, rotate or
-//        // reformatting changes here
-//
-//        // start preview with new settings
-//        try {
-//            mCamera.setPreviewDisplay(mHolder);
-//            mCamera.startPreview();
-//
-//        } catch (Exception e){
-//            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-//        }
+        if (mHolder.getSurface() == null){
+            // preview surface does not exist
+            return;
+        }
 
-        refreshCamera(mCamera,filter_effect);
+        // stop preview before making changes
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e){
+            // ignore: tried to stop a non-existent preview
+        }
+
+        // set preview size and make any resize, rotate or
+        // reformatting changes here
+
+        // start preview with new settings
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+            mCamera.startPreview();
+
+        } catch (Exception e){
+            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+        }
     }
 }
