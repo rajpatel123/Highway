@@ -5,10 +5,10 @@ public class Itemlistobject {
     private String desc;
     private String photo;
 
-    public Itemlistobject(String name, String desc , String photo) {
+    public Itemlistobject(String name) {
         this.name = name;
-        this.desc = desc;
-        this.photo = photo;
+//        this.desc = desc;
+//        this.photo = photo;
     }
 
     public Itemlistobject() {
@@ -20,18 +20,18 @@ public class Itemlistobject {
     public void setName(String name) {
         this.name = name;
     }
-    public String getDesc() {
-        return desc;
-    }
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+//    public String getDesc() {
+//        return desc;
+//    }
+//    public void setDesc(String desc) {
+//        this.desc = desc;
+//    }
+//
+//    public String getPhoto() {
+//        return photo;
+//    }
+//    public void setPhoto(String photo) {
+//        this.photo = photo;
+//    }
 
 }

@@ -2,6 +2,7 @@ package com.videoapp.retrofit;
 
 import com.videoapp.model.LoginResponse;
 import com.videoapp.model.CommonApiResponse;
+import com.videoapp.model.RecommendedApiResponse;
 import com.videoapp.model.VideoListResponse;
 
 import okhttp3.RequestBody;
@@ -26,6 +27,10 @@ public class RestClient {
 
     public static void registerUser(RequestBody name,RequestBody email_id, RequestBody mobile_no ,RequestBody password, Callback<CommonApiResponse> callback) {
         RetrofitClient.getClient().registerUser(name,email_id,mobile_no,password).enqueue(callback);
+    }
+
+    public static void recommendedList(RequestBody user_id, Callback<RecommendedApiResponse> callback){
+        RetrofitClient.getClient().getRecommendedList(user_id).enqueue(callback);
     }
 
 }

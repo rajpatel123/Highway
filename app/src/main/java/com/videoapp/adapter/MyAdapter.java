@@ -58,7 +58,7 @@ arrowimageview.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textView.setText(itemList.get(position).getName());
-        holder.textView1.setText(itemList.get(position).getDesc());
+        //holder.textView1.setText(itemList.get(position).getDesc());
         //holder.imageView.setImageResource(itemList.get(position).getPhoto());
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override

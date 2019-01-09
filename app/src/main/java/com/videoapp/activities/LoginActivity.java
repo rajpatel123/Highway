@@ -1,6 +1,8 @@
 package com.videoapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -46,6 +48,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String LoginUrl = " http://akwebtech.com/dev/api/api.php?req=login ";
     AlertDialogManager alert = new AlertDialogManager();
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.BLACK);
         }
+
+        preferences = getSharedPreferences("Prefs", Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
         emails = findViewById(R.id.useremail);
         password = findViewById(R.id.userpassword);
@@ -145,6 +153,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         LoginResponse loginResponse = response.body();
                         if (Integer.parseInt(loginResponse.getStatus()) == 1) {
                             AppUtils.displayToast(LoginActivity.this, loginResponse.getMessage());
+                            editor.putString("USER_ID", loginResponse.getLoginDetail().get(0).getId());
+                            editor.commit();
+
                             VideoAppPrefs.putString(getApplicationContext(), AppConstants.CUSTOMER_ID,loginResponse.getLoginDetail().get(0).getId());
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();

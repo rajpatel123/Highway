@@ -2,6 +2,7 @@ package com.videoapp.retrofit;
 
 import com.videoapp.model.LoginResponse;
 import com.videoapp.model.CommonApiResponse;
+import com.videoapp.model.RecommendedApiResponse;
 import com.videoapp.model.VideoListResponse;
 
 import okhttp3.MultipartBody;
@@ -39,4 +40,8 @@ public interface ApiInterface {
                                          @Part("email_id") RequestBody email,
                                          @Part("mobile_no") RequestBody mobile,
                                          @Part("password") RequestBody password);
+
+    @Multipart
+    @POST("http://akwebtech.com/dev/api/api.php?req=recommended")
+    Call<RecommendedApiResponse> getRecommendedList(@Part("user_id") RequestBody user_id);
 }

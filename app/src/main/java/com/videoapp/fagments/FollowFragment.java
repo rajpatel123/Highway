@@ -82,13 +82,13 @@ public class FollowFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        for (int i = 0; i < arrProfilePics.size(); i++){
-            Itemlistobject items = new Itemlistobject();
-            items.setPhoto(arrProfilePics.get(i));
-            items.setName(arrNames.get(i));
-            items.setDesc(arrDesc.get(i));
-            list.add(items);
-        }
+//        for (int i = 0; i < arrProfilePics.size(); i++){
+//            Itemlistobject items = new Itemlistobject();
+//            items.setPhoto(arrProfilePics.get(i));
+//            items.setName(arrNames.get(i));
+//            items.setDesc(arrDesc.get(i));
+//            list.add(items);
+//        }
 
     }
 
