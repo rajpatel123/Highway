@@ -1,21 +1,38 @@
 package com.videoapp.activities;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.videoapp.R;
@@ -201,57 +218,57 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.button_capture:
                 Toast.makeText(this, "Start recording", Toast.LENGTH_SHORT).show();
                 prepareVideoRecorder();
-                /*final Dialog dialog = new Dialog(CamActivity.this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.record_video_time);
-                //dialog.setTitle("Your Title goes here");
+            /*final Dialog dialog = new Dialog(CamActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.record_video_time);
+            //dialog.setTitle("Your Title goes here");
 
-                Button dialogButton = (Button) dialog.findViewById(R.id.button_ok);
+            Button dialogButton = (Button) dialog.findViewById(R.id.button_ok);
 
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        recordSelectionRadioGroup = dialog.findViewById(R.id.record_video_radio_group);
-                        int selectedId = recordSelectionRadioGroup.getCheckedRadioButtonId();
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recordSelectionRadioGroup = dialog.findViewById(R.id.record_video_radio_group);
+                    int selectedId = recordSelectionRadioGroup.getCheckedRadioButtonId();
 
-                        selectedRadioButton = dialog.findViewById(selectedId);
-                        Toast.makeText(CamActivity.this,selectedRadioButton.getText().toString(),Toast.LENGTH_SHORT).show();
+                    selectedRadioButton = dialog.findViewById(selectedId);
+                    Toast.makeText(CamActivity.this,selectedRadioButton.getText().toString(),Toast.LENGTH_SHORT).show();
 
-                        int time = 0;
+                    int time = 0;
 
-                        if(selectedRadioButton.getText().toString().equals("30 Seconds"))
-                            time = 30;
-                        else if(selectedRadioButton.getText().toString().equals("60 Seconds"))
-                            time = 60;
-                        else if(selectedRadioButton.getText().toString().equals("90 Seconds"))
-                            time = 90;
-                        if (isRecording) {
-                            mMediaRecorder.stop();
-                            releaseMediaRecorder();
-                            mCamera.lock();
+                    if(selectedRadioButton.getText().toString().equals("30 Seconds"))
+                        time = 30;
+                    else if(selectedRadioButton.getText().toString().equals("60 Seconds"))
+                        time = 60;
+                    else if(selectedRadioButton.getText().toString().equals("90 Seconds"))
+                        time = 90;
+                    if (isRecording) {
+                        mMediaRecorder.stop();
+                        releaseMediaRecorder();
+                        mCamera.lock();
+
+                        Toast.makeText(getApplicationContext(),"Capture",Toast.LENGTH_SHORT).show();
+                        isRecording = true;
+                    } else {
+                        if (prepareVideoRecorder()) {
+                            mMediaRecorder.start();
 
                             Toast.makeText(getApplicationContext(),"Capture",Toast.LENGTH_SHORT).show();
                             isRecording = true;
                         } else {
-                            if (prepareVideoRecorder()) {
-                                mMediaRecorder.start();
+                            releaseMediaRecorder();
 
-                                Toast.makeText(getApplicationContext(),"Capture",Toast.LENGTH_SHORT).show();
-                                isRecording = true;
-                            } else {
-                                releaseMediaRecorder();
-
-                            }
                         }
-
-
-                        dialog.dismiss();
                     }
-                });
 
-                dialog.show();
-                Window window = dialog.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);*/
+
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);*/
 
                 //mCamera.takePicture(null,null,mMediaRecorder);
 
@@ -320,9 +337,10 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
         return true;
     }
 
-     /*mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-    mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-    mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);*/
+ /*mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);*/
+
 
 
 }
