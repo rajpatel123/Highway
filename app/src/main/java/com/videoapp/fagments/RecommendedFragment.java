@@ -118,6 +118,7 @@ public class RecommendedFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 AppUtils.dismissProgressDialog();
+                Toast.makeText(activity, "Error loading data!", Toast.LENGTH_SHORT).show();
             }
         })
 
