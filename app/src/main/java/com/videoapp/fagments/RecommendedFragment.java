@@ -91,28 +91,7 @@ public class RecommendedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), preferences.getString("USER_ID", null));
-//
         AppUtils.showProgressDialog(activity, "Please wait...");
-//        RestClient.recommendedList(user_id, new Callback<RecommendedApiResponse>() {
-//            @Override
-//            public void onResponse(Call<RecommendedApiResponse> call, Response<RecommendedApiResponse> response) {
-//                AppUtils.dismissProgressDialog();
-//                if (response != null && response.body() != null){
-//                    RecommendedApiResponse RecResponse = response.body();
-//
-//                } else {
-//                    Toast.makeText(activity, "Error.....", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<RecommendedApiResponse> call, Throwable t) {
-//                AppUtils.dismissProgressDialog();
-//                Toast.makeText(activity, "Error parsing data.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         RequestQueue requestQueue = Volley.newRequestQueue(activity);
         StringRequest request = new StringRequest(Request.Method.POST, "http://akwebtech.com/dev/api/api.php?req=recommended",
@@ -129,14 +108,7 @@ public class RecommendedFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++){
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     Itemlistobject items = new Itemlistobject();
-                                    //String strUserName = object.getString("user_name");
-
-
-
-
-                                    //items.setPhoto(arrProfilePics.get(i));
                                     items.setName(object.getString("user_name"));
-                                    //items.setDesc(arrDesc.get(i));
                                     list.add(items);
 
                                 }
@@ -155,12 +127,7 @@ public class RecommendedFragment extends Fragment {
 
                             adapter.notifyDataSetChanged();
 
-
                         }
-
-
-
-
                     }
                 }, new com.android.volley.Response.ErrorListener() {
             @Override
@@ -173,7 +140,7 @@ public class RecommendedFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("user_id", "user_id");
+                map.put("user_id", preferences.getString("USER_ID", null));
                 return map;
             }
         };
