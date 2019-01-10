@@ -49,48 +49,48 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.MyViewHold
 
         final Itemlistobject items = itemlistobjects.get(position);
 
-//        if (!items.getPhoto().isEmpty() || !items.getPhoto().equals(null)){
-//            new AsyncTask<Void,Void,Bitmap>(){
-//                Bitmap targetBitmap=null;
-//                @Override
-//                protected Bitmap doInBackground(Void... voids) {
-//                    try {
-//                        URL url = new URL(items.getPhoto());
-//                        Bitmap image= BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//                        int targetWidth = 250;
-//                        int targetHeight = 250;
-//                        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
-//                                targetHeight,Bitmap.Config.ARGB_8888);
-//
-//                        Canvas canvas = new Canvas(targetBitmap);
-//                        Path path = new Path();
-//                        path.addCircle(((float) targetWidth - 1) / 2,
-//                                ((float) targetHeight - 1) / 2,
-//                                (Math.min(((float) targetWidth),
-//                                        ((float) targetHeight)) / 2),
-//                                Path.Direction.CCW);
-//
-//                        canvas.clipPath(path);
-//                        Bitmap sourceBitmap = image;
-//                        canvas.drawBitmap(sourceBitmap,
-//                                new Rect(0, 0, sourceBitmap.getWidth(),
-//                                        sourceBitmap.getHeight()),
-//                                new Rect(0, 0, targetWidth, targetHeight), null);
-//                        return targetBitmap;
-//                    } catch(Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                    return null;
-//                }
-//
-//                @Override
-//                protected void onPostExecute(Bitmap bitmap) {
-//                    super.onPostExecute(bitmap);
-//
-//                    holder.imgPicFoll.setImageBitmap(bitmap);
-//                }
-//            }.execute();
-//        }
+        if (!items.getPhoto().isEmpty() || !items.getPhoto().equals(null)){
+            new AsyncTask<Void,Void,Bitmap>(){
+                Bitmap targetBitmap=null;
+                @Override
+                protected Bitmap doInBackground(Void... voids) {
+                    try {
+                        URL url = new URL(items.getPhoto());
+                        Bitmap image= BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        int targetWidth = 250;
+                        int targetHeight = 250;
+                        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
+                                targetHeight,Bitmap.Config.ARGB_8888);
+
+                        Canvas canvas = new Canvas(targetBitmap);
+                        Path path = new Path();
+                        path.addCircle(((float) targetWidth - 1) / 2,
+                                ((float) targetHeight - 1) / 2,
+                                (Math.min(((float) targetWidth),
+                                        ((float) targetHeight)) / 2),
+                                Path.Direction.CCW);
+
+                        canvas.clipPath(path);
+                        Bitmap sourceBitmap = image;
+                        canvas.drawBitmap(sourceBitmap,
+                                new Rect(0, 0, sourceBitmap.getWidth(),
+                                        sourceBitmap.getHeight()),
+                                new Rect(0, 0, targetWidth, targetHeight), null);
+                        return targetBitmap;
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    super.onPostExecute(bitmap);
+
+                    holder.imgPicFoll.setImageBitmap(bitmap);
+                }
+            }.execute();
+        }
 
         if (!items.getName().isEmpty()){
             holder.lblNamesFoll.setText(items.getName());
@@ -98,11 +98,11 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.MyViewHold
             holder.lblNamesFoll.setVisibility(View.GONE);
         }
 
-//        if (!items.getDesc().isEmpty()){
-//            holder.lblDescFoll.setText(items.getDesc());
-//        } else {
-//            holder.lblDescFoll.setVisibility(View.GONE);
-//        }
+        if (!items.getDesc().isEmpty()){
+            holder.lblDescFoll.setText(items.getDesc());
+        } else {
+            holder.lblDescFoll.setVisibility(View.GONE);
+        }
 
     }
 

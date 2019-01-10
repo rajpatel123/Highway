@@ -93,7 +93,15 @@ public class RecommendedFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++){
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     Itemlistobject items = new Itemlistobject();
-                                    items.setName(object.getString("user_name"));
+                                    if (object.has("user_name")) {
+                                        items.setName(object.getString("user_name"));
+                                    }
+                                    if (object.has("user_image_url") && object.has("user_image")) {
+                                        items.setPhoto(object.getString("user_image_url") + "/" + object.getString("user_image"));
+                                    }
+                                    if (object.has("user_status")) {
+                                        items.setDesc(object.getString("user_status"));
+                                    }
                                     list.add(items);
 
                                 }
