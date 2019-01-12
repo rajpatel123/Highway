@@ -25,8 +25,8 @@ public class RestClient {
         RetrofitClient.getClient().getVideoList().enqueue(callback);
     }
 
-    public static void registerUser(RequestBody name,RequestBody email_id, RequestBody mobile_no ,RequestBody password, Callback<CommonApiResponse> callback) {
-        RetrofitClient.getClient().registerUser(name,email_id,mobile_no,password).enqueue(callback);
+    public static void registerUser(RequestBody name,RequestBody email_id, RequestBody mobile_no , RequestBody image, RequestBody password, Callback<CommonApiResponse> callback) {
+        RetrofitClient.getClient().registerUser(name, email_id, mobile_no, image, password).enqueue(callback);
     }
 
     public static void recommendedList(RequestBody user_id, Callback<RecommendedApiResponse> callback){

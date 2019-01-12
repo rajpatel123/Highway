@@ -1,5 +1,6 @@
 package com.videoapp.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -20,6 +21,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
@@ -80,7 +82,7 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
 
 
         // Create our Preview view and set it as the content of our activity.
-        CameraPreview mPreview = new CameraPreview(this, mCamera);
+        mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         if (preview != null) {
             preview.addView(mPreview);
@@ -217,7 +219,15 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.button_capture:
                 Toast.makeText(this, "Start recording", Toast.LENGTH_SHORT).show();
-                prepareVideoRecorder();
+
+//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+//
+//                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
+//                            0);
+//
+//                } else {
+                    prepareVideoRecorder();
+                //}
             /*final Dialog dialog = new Dialog(CamActivity.this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.record_video_time);
@@ -310,7 +320,16 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
         mMediaRecorder.setCamera(mCamera);
 
         // Step 2: Set sources
-        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
+                    1);
+
+        } else {
+
+            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+        }
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)

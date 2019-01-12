@@ -48,7 +48,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
         final Itemlistobject items = itemlistobjects.get(position);
 
-        if (!items.getPhoto().isEmpty() || !items.getPhoto().equals(null)){
+        if (!items.getPhoto().isEmpty()){
             new AsyncTask<Void,Void,Bitmap>(){
                 Bitmap targetBitmap=null;
                 @Override

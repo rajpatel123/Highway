@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -17,6 +18,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.videoapp.ItemDecor.ItemOffsetDecoration;
 import com.videoapp.adapter.DashboardAdapter;
 
@@ -31,6 +38,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,6 +98,25 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+//        AppUtils.showProgressDialog(activity, "Please wait...");
+//        RequestQueue requestQueue = Volley.newRequestQueue(activity);
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://akwebtech.com/dev/api/api.php?req=videolist",
+//                new com.android.volley.Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//
+//                        Log.i("Reponse", response);
+//
+//                    }
+//                }, new com.android.volley.Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//
+//        requestQueue.add(stringRequest);
 
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(activity, numberOfColumns));

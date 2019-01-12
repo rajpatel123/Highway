@@ -25,7 +25,7 @@ public interface ApiInterface {
 
 //    @POST("dev/api/api.php/req=login")
 //    Call<LoginResponse> loginUser(@Field(value="email_id",encoded = true) String email, @Field(value = "password",encoded = true) String password);
-//
+
 
     @Multipart
     @POST("dev/api/api.php?req=login")
@@ -35,10 +35,11 @@ public interface ApiInterface {
     Call<VideoListResponse> getVideoList();
 
     @Multipart
-    @POST("dev/api/api.php?req=registration")
+    @POST("http://akwebtech.com/dev/api/api.php?req=registration")
     Call<CommonApiResponse> registerUser(@Part("name") RequestBody name,
                                          @Part("email_id") RequestBody email,
                                          @Part("mobile_no") RequestBody mobile,
+                                         @Part("image") RequestBody image,
                                          @Part("password") RequestBody password);
 
     @Multipart

@@ -82,8 +82,8 @@ public class FollowFragment extends Fragment {
                                     if (object.has("user_name")) {
                                         items.setName(object.getString("user_name"));
                                     }
-                                    if (object.has("user_image_url") && object.has("user_image")) {
-                                        items.setPhoto(object.getString("user_image_url") + object.getString("user_image"));
+                                    if (object.has("user_image_url")) {
+                                        items.setPhoto(object.getString("user_image_url"));
                                     }
                                     if (object.has("user_status")) {
                                         items.setDesc(object.getString("user_status"));
