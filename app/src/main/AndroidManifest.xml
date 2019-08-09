@@ -1,87 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.videoapp">
+    package="com.highway">
 
-    <!-- Uses Permissions -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- Uses hardware flash light -->
-    <uses-feature android:name="android.hardware.camera" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
-
-    <uses-feature android:name="android.hardware.camera" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature
-        android:name="android.hardware.camera.front"
-        android:required="false" />
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_highway"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_highway"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.videoapp.activities.SplashActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/AppTheme">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".Profile" />
+        <activity android:name=".Setting" />
+        <activity android:name=".activity.wallet" />
+
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">  </activity>
+            <activity android:name=".SplashScreen">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+
         </activity>
-        <activity android:name="com.videoapp.activities.DashboardActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.SignupActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.Main2Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.Test" />
-        <activity android:name="com.videoapp.activities.DeepLinkActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.PaymentOffers"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.RestaurantsOffers"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.CamActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.ExoPlayerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.InviteActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.My_vedio_edit_profife"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.wallet"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.RateUsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.Music_player"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.PlayerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.videoapp.activities.user"
-            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
