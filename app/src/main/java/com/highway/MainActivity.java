@@ -1,4 +1,4 @@
-package com.highway.activity;
+package com.highway;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

@@ -1,4 +1,4 @@
-package com.highway.activity;
+package com.highway;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
