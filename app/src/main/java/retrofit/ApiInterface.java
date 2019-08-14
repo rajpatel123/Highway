@@ -1,4 +1,18 @@
 package retrofit;
 
+import modelclass.LoginRequest;
+import modelclass.LoginResponse;
+import modelclass.VerifyOTPRequest;
+import modelclass.VerifyOTPResponse;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
 public interface ApiInterface {
+
+    @POST("http://vrok.in/highway_dev/login_register.php")
+    Call<LoginResponse> loginResponseCall(@Body LoginRequest loginRequest);
+
+    @POST("http://vrok.in/highway_dev/otp_verify")
+    Call<VerifyOTPResponse> VerifyOTPResponseCall(@Body VerifyOTPRequest verifyOTPRequest);
 }

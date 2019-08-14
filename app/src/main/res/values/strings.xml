@@ -2,7 +2,7 @@
     <string name="app_name">Highway</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">Ramashish Kumar</string>
     <string name="nav_header_subtitle">+91 8210380660 </string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -48,5 +48,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="By_accepting____">By accepting to create account you accepted</string>
+    <string name="term_and_condition">terms and canditions and privacy policy</string>
+
 
 </resources>

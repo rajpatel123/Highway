@@ -182,8 +182,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_gender"
             android:orientation="horizontal"
-            android:padding="@dimen/padding_5"
-            android:visibility="gone">
+            android:padding="@dimen/padding_5">
+           <!-- android:visibility="gone"> -->
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -199,6 +199,7 @@
                     android:src="@drawable/date_of_birth_profile_icon" />
 
             </FrameLayout>
+
 
 
             <LinearLayout

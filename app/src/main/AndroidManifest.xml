@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.highway">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
+      <application
         android:allowBackup="true"
         android:icon="@drawable/logo_highway"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo_highway"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".Profile" />
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:label">
+        <activity android:name=".RegistrationFormActivity" />
+        <activity android:name=".OTP_VerificationActivity" />
+        <activity android:name=".LoginRegisterActivity"/>
+        <activity android:name=".MapActivity"  />
+        <activity android:name=".Profile"/>
         <activity android:name=".Setting" />
         <activity android:name=".wallet" />
         <activity
@@ -28,5 +32,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

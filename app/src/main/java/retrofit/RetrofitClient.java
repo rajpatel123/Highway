@@ -17,7 +17,6 @@ public class RetrofitClient {
         return retrofitBuilder().create(ApiInterface.class);
     }
 
-
     public static Gson gson() {
         return new GsonBuilder().setDateFormat("yyyy-M  M-dd'T'HH:mm:ssZ").create();
     }
@@ -46,7 +45,7 @@ public class RetrofitClient {
     private static Retrofit retrofitBuilder() {
         return new Retrofit.Builder()
                 .client(okHttp())
-              //  .baseUrl((String) BuildConfig.API_SERVER_IP)
+                .baseUrl(BuildConfig.API_SERVER_IP)
                 .addConverterFactory(GsonConverterFactory.create(gson()))
                 .build();
     }

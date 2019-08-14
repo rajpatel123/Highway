@@ -3,7 +3,7 @@ package utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class HighwayPrefs {
+public class HighwayPreface {
     private static final String KENT_SECURITY_PREFS = "HFCSecurity";
     private static SharedPreferences sharedPreferences;
 
@@ -58,4 +58,6 @@ public class HighwayPrefs {
         getInstance(context);
         return sharedPreferences.getLong(str, 0);
     }
+
+
 }

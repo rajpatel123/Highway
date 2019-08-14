@@ -28,7 +28,6 @@ public class Utils {
         }
     }
 
-
     private static ProgressDialog pDialog;
 
     public static void showProgressDialog(Context context) {
@@ -62,6 +61,7 @@ public class Utils {
      * @param context Application Context
      * @return true if connected with active internet else false
      */
+
     public static boolean isInternetConnected(Context context) {
         try {
             if (context != null) {

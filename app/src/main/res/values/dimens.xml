@@ -56,6 +56,9 @@
     <dimen name="margin_44">44sp</dimen>
     <dimen name="margin_100">100sp</dimen>
     <dimen name="margin_180">180sp</dimen>
+    <dimen name="margin_200">200sp</dimen>
+    <dimen name="margin_Top100">100sp</dimen>
+    <dimen name="margin_Top80">80sp</dimen>
 
     <dimen name="margin_left_5">5sp</dimen>
     <dimen name="margin_right_5">5sp</dimen>
@@ -87,6 +90,14 @@
 
     <dimen name="margin_top_30">30sp</dimen>
     <dimen name="margin_left_30">30sp</dimen>
+
+    <dimen name="margin_top_30dp">30dp</dimen>
+    <dimen name="margin_top_40dp">40dp</dimen>
+    <dimen name="margin_top_50dp">50dp</dimen>
+
+    <dimen name="margin_top_60dp">60dp</dimen>
+    <dimen name="margin_top_70dp">70dp</dimen>
+
     <dimen name="margin_right_30">30sp</dimen>
     <dimen name="margin_bottom_30">30sp</dimen>
 
@@ -115,6 +126,22 @@
     <dimen name="padding_top_30">30sp</dimen>
     <dimen name="padding_left_30">30sp</dimen>
     <dimen name="padding_right_30">30sp</dimen>
+
+    <dimen name="padding_left_40">40dp</dimen>
+    <dimen name="padding_right_40">40dp</dimen>
+
+
+    <dimen name="padding_left_50">50dp</dimen>
+    <dimen name="padding_right_50">50dp</dimen>
+    <dimen name="padding_left_60dp">60dp</dimen>
+    <dimen name="padding_right_60dp">60dp</dimen>
+    <dimen name="padding_left_30dp">30dp</dimen>
+    <dimen name="padding_right_30dp">30dp</dimen>
+    <dimen name="padding_left_40dp">40dp</dimen>
+    <dimen name="padding_right_40dp">40dp</dimen>
+
+
+
     <dimen name="padding_bottom_30">30sp</dimen>
     <dimen name="margin_width_30">30sp</dimen>
 
@@ -137,7 +164,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
 
     <dimen name="title">18sp</dimen>
-    <dimen name="sub_title">14sp</dimen>
+    <dimen name="sub_title">16sp</dimen>
     <dimen name="normal_txt">12sp</dimen>
     <dimen name="frame_height">300sp</dimen>
     <dimen name="margin_fifteen">15sp</dimen>
