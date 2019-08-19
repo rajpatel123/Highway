@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginRegisterActivity">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/login_page"
@@ -80,18 +82,22 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-
-                <EditText
-                    android:id="@+id/login_phone_number"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="Phone number"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/_10dp"
-                    android:textSize="@dimen/sub_title" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/login_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="Phone number"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/_10dp"
+                        android:textSize="@dimen/sub_title" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -106,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left_30"
-            android:layout_marginTop="@dimen/margin_top_30"
+            android:layout_marginTop="@dimen/margin_top_20"
             android:layout_marginRight="@dimen/margin_right_30"
             android:orientation="horizontal">
 
@@ -114,11 +120,13 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="@dimen/flag_width"
                     android:layout_height="@dimen/flag_height"
+                    android:layout_gravity="center"
                     android:src="@drawable/ic_lock_outline_black_24dp" />
             </LinearLayout>
 
@@ -130,19 +138,44 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/login_password"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="Password"
-                    android:imeOptions=""
-                    android:inputType="textPassword"
-                    android:maxLength="8"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/_10dp"
-                    android:singleLine="true"
-                    android:textSize="@dimen/sub_title" />
+                    android:layout_height="wrap_content">
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleDrawable="@drawable/show_password_selector"
+                        app:passwordToggleEnabled="true">
+
+                        <EditText
+                            android:id="@+id/login_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/flag_height"
+                            android:background="@null"
+                            android:hint="Password"
+                            android:imeOptions=""
+                            android:inputType="textPassword"
+                            android:maxLength="6"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/_10dp"
+                            android:singleLine="true"
+                            android:textSize="@dimen/sub_title" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/show_pass_btn"
+                        android:layout_width="@dimen/flag_width"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:alpha=".5"
+                        android:onClick="ShowHidePass"
+                        tools:ignore="OnClick" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -156,7 +189,8 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_8">
 
             <TextView
                 android:id="@+id/forgot_password"
@@ -165,7 +199,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="@dimen/margin_right_30"
-                android:paddingTop="@dimen/_8dp"
                 android:text="Forgot Password"
                 android:textColor="@color/project_color"
                 android:textSize="@dimen/sub_title"
@@ -209,5 +242,5 @@
             android:textStyle="normal" />
     </LinearLayout>
 
-
 </RelativeLayout>
+</ScrollView>

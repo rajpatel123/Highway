@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_highway"/>
+        android:src="@drawable/transportlogo"/>
 
     <TextView
         android:id="@+id/txt_android_info"

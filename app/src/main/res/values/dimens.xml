@@ -19,6 +19,9 @@
     <dimen name="size_15">15sp</dimen>
     <dimen name="padding_10">10sp</dimen>
     <dimen name="size_14">14sp</dimen>
+    <dimen name="margin_left_16">16sp</dimen>
+    <dimen name="margin_left_17">17sp</dimen>
+    <dimen name="margin_left_19">19sp</dimen>
     <dimen name="margin_left_15">15sp</dimen>
     <dimen name="margin_18">18sp</dimen>
     <dimen name="margin_14">14sp</dimen>
@@ -57,10 +60,16 @@
     <dimen name="margin_100">100sp</dimen>
     <dimen name="margin_180">180sp</dimen>
     <dimen name="margin_200">200sp</dimen>
+    <dimen name="margin_220">220sp</dimen>
+    <dimen name="margin_225">225sp</dimen>
     <dimen name="margin_Top100">100sp</dimen>
     <dimen name="margin_Top80">80sp</dimen>
 
     <dimen name="margin_left_5">5sp</dimen>
+    <dimen name="margin_left_4">4sp</dimen>
+    <dimen name="margin_left_3">3sp</dimen>
+    <dimen name="margin_left_2">2sp</dimen>
+    <dimen name="margin_left_7">7sp</dimen>
     <dimen name="margin_right_5">5sp</dimen>
     <dimen name="margin_bottom_5">5sp</dimen>
 
@@ -90,6 +99,14 @@
 
     <dimen name="margin_top_30">30sp</dimen>
     <dimen name="margin_left_30">30sp</dimen>
+    <dimen name="margin_left_35">35sp</dimen>
+    <dimen name="margin_left_36">36sp</dimen>
+    <dimen name="margin_left_37">37sp</dimen>
+    <dimen name="margin_left_38">38sp</dimen>
+    <dimen name="margin_left_39">39sp</dimen>
+    <dimen name="margin_left_40">40sp</dimen>
+    <dimen name="margin_left_41">41sp</dimen>
+    <dimen name="margin_left_42">42sp</dimen>
 
     <dimen name="margin_top_30dp">30dp</dimen>
     <dimen name="margin_top_40dp">40dp</dimen>
@@ -139,6 +156,7 @@
     <dimen name="padding_right_30dp">30dp</dimen>
     <dimen name="padding_left_40dp">40dp</dimen>
     <dimen name="padding_right_40dp">40dp</dimen>
+    <dimen name="padding_right_50dp">50dp</dimen>
 
 
 
@@ -157,8 +175,10 @@
     <dimen name="padding_8">8sp</dimen>
     <dimen name="margin_top_5">5sp</dimen>
     <dimen name="size_16">16sp</dimen>
-    <dimen name="margin_left_40">40sp</dimen>
     <dimen name="margin_width_80">80dp</dimen>
+
+    <dimen name="margin_left_50">50sp</dimen>
+    <dimen name="margin_left_60">60sp</dimen>
 
 
     <!-- Default screen margins, per the Android Design guidelines. -->
@@ -199,7 +219,5 @@
     <dimen name="margin_35">35dp</dimen>
     <dimen name="margin_50">50sp</dimen>
     <dimen name="margin_40">40sp</dimen>
-
-
 
 </resources>

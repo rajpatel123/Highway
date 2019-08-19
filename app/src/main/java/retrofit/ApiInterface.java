@@ -2,6 +2,8 @@ package retrofit;
 
 import modelclass.LoginRequest;
 import modelclass.LoginResponse;
+import modelclass.RegistrationSignUpRequest;
+import modelclass.RegistrationSignUpResponse;
 import modelclass.VerifyOTPRequest;
 import modelclass.VerifyOTPResponse;
 import retrofit2.Call;
@@ -15,4 +17,9 @@ public interface ApiInterface {
 
     @POST("http://vrok.in/highway_dev/otp_verify")
     Call<VerifyOTPResponse> VerifyOTPResponseCall(@Body VerifyOTPRequest verifyOTPRequest);
+
+    @POST("http://vrok.in/highway_dev/signup")
+    Call<RegistrationSignUpResponse> VerifyRegistrationSignUpCall(@Body RegistrationSignUpRequest registrationSignUpRequest);
+
+
 }

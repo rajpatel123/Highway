@@ -1,7 +1,6 @@
 package com.highway;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -77,7 +76,7 @@ public class OTP_VerificationActivity extends AppCompatActivity {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
                             if (response.body().getStatus() == true) {
-                                Intent i = new Intent(OTP_VerificationActivity.this, RegistrationFormActivity.class);
+                                Intent i = new Intent(OTP_VerificationActivity.this, RegistrationSignUpFormActivity.class);
                                 startActivity(i);
                                 Toast.makeText(OTP_VerificationActivity.this, "Otp verified successfully", Toast.LENGTH_SHORT).show();
                                 finish();
