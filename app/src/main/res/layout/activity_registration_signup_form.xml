@@ -70,25 +70,23 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                   >
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10dp"
-                        android:background="@drawable/registration_shape_design"
+                        android:background="@null"
                         android:hint="Name"
                         android:textSize="@dimen/size_20"
                         android:padding="4dp"/>
                 </android.support.design.widget.TextInputLayout>
 
-           <!--     <View
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="3px"
-                    android:background="@color/project_color" /> -->
+                    android:background="@color/project_color" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -101,18 +99,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
-                        android:background="@drawable/registration_shape_design"
+                        android:background="@null"
                         android:hint="Email"
                         android:padding="4dp"
                         android:textSize="@dimen/size_20"
                         android:inputType="textEmailAddress" />
                 </android.support.design.widget.TextInputLayout>
 
-            <!--    <View
+                <View
                     android:id="@+id/emailView"
                     android:layout_width="match_parent"
                     android:layout_height="3px"
-                    android:background="@color/Black" /> -->
+                    android:background="@color/project_color" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -125,7 +123,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_top_10"
-                        android:background="@drawable/registration_shape_design"
+                        android:background="@null"
                         android:hint="D.O.B"
                         android:textSize="@dimen/size_20"
                         android:paddingLeft="4dp"
@@ -148,10 +146,10 @@
 
                 </RelativeLayout>
 
-            <!--    <View
+               <View
                     android:layout_width="match_parent"
                     android:layout_height="3px"
-                    android:background="@color/Black" /> -->
+                    android:background="@color/project_color" />
 
 
             </LinearLayout>
@@ -161,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_15"
-                android:background="@drawable/registration_shape_design"
+                android:background="@null"
                 android:orientation="horizontal">
 
                 <TextView
@@ -201,10 +199,10 @@
 
             </LinearLayout>
 
-         <!--   <View
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/Black" />  -->
+                android:background="@color/project_color" />
 
 
             <LinearLayout
@@ -212,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_13"
-                android:background="@drawable/registration_shape_design"
+                android:background="@null"
                 android:orientation="horizontal">
 
                 <TextView
@@ -252,10 +250,10 @@
                 </RadioGroup>
             </LinearLayout>
 
-         <!--   <View
+           <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/Black" /> -->
+                android:background="@color/project_color" />
 
         </LinearLayout>
 
