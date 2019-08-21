@@ -1,7 +1,9 @@
-package com.highway;
+package com.highway.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.highway.R;
 
 public class CustomerAdharcardId extends AppCompatActivity {
 

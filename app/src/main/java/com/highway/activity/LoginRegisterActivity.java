@@ -1,17 +1,15 @@
-package com.highway;
+package com.highway.activity;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.highway.R;
 
 import modelclass.LoginRequest;
 import modelclass.LoginResponse;
@@ -83,6 +81,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
             RestClient.loginUser(loginRequest, new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
+
                     Utils.dismissProgressDialog();
 
                     if (response.body() != null && !TextUtils.isEmpty(response.body().getUserStatus())) {

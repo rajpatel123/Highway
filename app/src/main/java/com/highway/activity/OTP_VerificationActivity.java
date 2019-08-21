@@ -1,13 +1,17 @@
-package com.highway;
+package com.highway.activity;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.highway.R;
 
 import modelclass.VerifyOTPRequest;
 import modelclass.VerifyOTPResponse;
@@ -23,6 +27,7 @@ public class OTP_VerificationActivity extends AppCompatActivity {
     private EditText verifypin;
     private Button btnVerify;
     private ImageView backImage;
+    private TextView timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +37,10 @@ public class OTP_VerificationActivity extends AppCompatActivity {
         verifypin = findViewById(R.id.Verifypin_edittext);
         backImage = findViewById(R.id.back_arrow_OTP);
         btnVerify = findViewById(R.id.VerifyPin_btn);
+        timer = findViewById(R.id.timmer_textview);
 
-        verifyPerformOperation();
+        verifyPerformOperation();                // otp option perform
+        timerInOtp();                          // time count dowan of otp
         backArrowOperationOnOtpVerifypage();  // arrow operation
     }
 
@@ -105,6 +112,21 @@ public class OTP_VerificationActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void timerInOtp(){
+
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+            public void onFinish() {
+                timer.setText("Resend otp");
+            }
+
+        }.start();
 
     }
 

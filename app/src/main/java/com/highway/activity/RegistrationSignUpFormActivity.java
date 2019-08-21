@@ -1,8 +1,7 @@
-package com.highway;
+package com.highway.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.highway.R;
 
 import java.util.Calendar;
 
@@ -32,7 +33,7 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
     private EditText name, dobDate, email;
     private RadioButton userMale, userFemale, userDiver, userCustomer;
     private String gender;
-    private String person;
+    private String userRole;
     private Button signUp;
 
     private RadioGroup radiogroup_Gender;
@@ -93,7 +94,8 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                         datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
-                        dobDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        //dobDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        dobDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     }
                 }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -124,14 +126,14 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
             case R.id.radio_Driver:
                 if (checked)
                     userDiver.setText("Driver");
-                person = userCustomer.getText().toString().trim();
+                userRole = userDiver.getText().toString().trim();
                 break;
 
             case R.id.radio_Customer:
                 if (checked)
 
                     userCustomer.setText("Customer");
-                person = userCustomer.getText().toString().trim();
+                userRole = userCustomer.getText().toString().trim();
                 break;
         }
     }
@@ -152,13 +154,14 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
     public void registrationAndValidateSignUpOpertion() {
 
         if (inputValidation()) {
+
             RegistrationSignUpRequest registrationSignUpRequest = new RegistrationSignUpRequest();
 
             registrationSignUpRequest.setName(name_User);
             registrationSignUpRequest.setEmail(email_User);
             registrationSignUpRequest.setDob(dobDate_User);
             registrationSignUpRequest.setGender(gender);
-            registrationSignUpRequest.setRole(person);
+            registrationSignUpRequest.setRole(userRole);
             registrationSignUpRequest.setId(userId);
 
             Utils.showProgressDialog(this);
@@ -170,29 +173,22 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
                     Utils.dismissProgressDialog();
 
                     if (response.body() != null && !TextUtils.isEmpty(response.body().getUserStatus())) {
-                        if (response.body().getUserStatus().equalsIgnoreCase("1")) {
-                            if (response.body().getUserStatus().equalsIgnoreCase("Driver")) {
-
-                                Intent i = new Intent(RegistrationSignUpFormActivity.this, DriveryLicenceActivity.class);
+                        if (response.body().getUserStatus().equalsIgnoreCase("1")){
+                            if (response.body().getRole().equalsIgnoreCase("Driver")){
+                                Intent i = new Intent(RegistrationSignUpFormActivity.this,DriveryLicenceActivity.class);
                                 startActivity(i);
-                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a driver pls enter your details ", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else if (response.body().getUserStatus().equalsIgnoreCase("Customer")) {
+                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a driver pls  enter your details ", Toast.LENGTH_SHORT).show();
+                            }else if (response.body().getRole().equalsIgnoreCase("Customer")){
                                 Intent i = new Intent(RegistrationSignUpFormActivity.this, CustomerAdharcardId.class);
                                 startActivity(i);
-                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a Customer pls enter your details ", Toast.LENGTH_SHORT).show();
-                                finish();
+                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a Customer pls enter your details", Toast.LENGTH_SHORT).show();
                             }
-
-
-                        } else if (response.body().getUserStatus().equalsIgnoreCase("0")) {
-                            Toast.makeText(RegistrationSignUpFormActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(RegistrationSignUpFormActivity.this, "Pls enter your details.", Toast.LENGTH_SHORT).show();
+                        }else if (response.body().getStatus()==false){
+                            Toast.makeText(RegistrationSignUpFormActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(RegistrationSignUpFormActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
                         }
-
                     }
-
                 }
 
                 @Override
@@ -211,7 +207,7 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
         name_User = name.getText().toString().trim();
         email_User = email.getText().toString().trim();
         dobDate_User = dobDate.getText().toString().trim();
-        userId = HighwayPreface.getString(getApplicationContext(), "user_id");
+        userId = HighwayPreface.getString(getApplicationContext(), "id");
 
         if (name_User.isEmpty()) {
             name.setError("enter a valid email address");
@@ -243,9 +239,8 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
     }
 
     private boolean validEmai(EditText email) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"; // onClick of button perform this simplest code.
 
-// onClick of button perform this simplest code.
         if (email.getText().toString().matches(emailPattern)) {
             return true;
         } else {

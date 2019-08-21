@@ -1,13 +1,15 @@
-package com.highway;
+package com.highway.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class DriveryLicenceActivity extends AppCompatActivity {
+import com.highway.R;
+
+public class Setting extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drivery_licence);
+        setContentView(R.layout.activity_setting);
     }
 }

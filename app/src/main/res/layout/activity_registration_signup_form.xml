@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RegistrationSignUpFormActivity">
+    tools:context=".activity.RegistrationSignUpFormActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -227,7 +227,7 @@
                     android:id="@+id/radiogroup_User"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onUserRadioButtonClicked"
+
                     android:layout_marginLeft="@dimen/margin_left_30"
                     android:gravity="center"
                     android:orientation="horizontal">
@@ -238,12 +238,14 @@
                         android:layout_height="wrap_content"
                         android:paddingRight="5dp"
                         android:text=" Driver "
+                        android:onClick="onUserRadioButtonClicked"
                         tools:ignore="OnClick" />
 
                     <RadioButton
                         android:id="@+id/radio_Customer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="onUserRadioButtonClicked"
                         android:paddingRight="5dp"
                         android:text="Customer"
                         tools:ignore="OnClick" />
