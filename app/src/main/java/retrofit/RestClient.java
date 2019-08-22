@@ -23,4 +23,8 @@ public class RestClient {
         RetrofitClient.getClient().VerifyRegistrationSignUpCall(registrationSignUpRequest).enqueue(callback);
     }
 
+    public static void driveryLicences(RegistrationSignUpRequest registrationSignUpRequest, Callback<RegistrationSignUpResponse> callback){
+        RetrofitClient.getClient().VerifyRegistrationSignUpCall(registrationSignUpRequest).enqueue(callback);
+    }
+
 }
