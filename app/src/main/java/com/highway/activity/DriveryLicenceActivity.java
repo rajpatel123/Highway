@@ -29,7 +29,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 
+import modelclass.UploadDLRequest;
+import modelclass.UploadDLResponse;
+import retrofit.RestClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import utils.CameraUtils;
+import utils.HighwayPreface;
+import utils.Utils;
 
 public class DriveryLicenceActivity extends AppCompatActivity {
 
@@ -67,6 +75,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
     private String baseimageserver;
     private Bitmap bitmap;
+    private String userIdNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +84,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
         txtDescription = findViewById(R.id.txt_desc);
         licenceimageViewFront = findViewById(R.id.drivingLicencefront);
-        licenceimageViewBack = findViewById(R.id.drivingLicenceback);
+        // licenceimageViewBack = findViewById(R.id.drivingLicenceback);
         cameraOpenButton = findViewById(R.id.DlcameraOpen);
 
         dlExpDate = findViewById(R.id.edt_DlExpireDate);
@@ -84,6 +93,14 @@ public class DriveryLicenceActivity extends AppCompatActivity {
         submitDldetails = findViewById(R.id.submitDL_Button);
 
         backArrowDlOperation();       // backArrow On Dl Page
+
+
+        submitDldetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadDLValidationSubmit();
+            }
+        });
 
    /*     licenceimageViewFront.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,13 +214,14 @@ public class DriveryLicenceActivity extends AppCompatActivity {
         // get the file url
         imageStoragePath = savedInstanceState.getString(KEY_IMAGE_STORAGE_PATH);
     }
+
     /**
      * Activity result method will be called after closing the camera
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if the result is capturing Image
-       /* if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // Refreshing the gallery
                 CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
@@ -211,7 +229,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
                 // successfully captured the image
                 // display it in image view
                 previewCapturedImageFont();
-               // previewCapturedImageBack();
+                // previewCapturedImageBack();
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),
@@ -230,7 +248,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
                 // video successfully recorded
                 // preview the recorded video
-              //  previewVideo();
+                //  previewVideo();
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled recording
                 Toast.makeText(getApplicationContext(),
@@ -242,9 +260,9 @@ public class DriveryLicenceActivity extends AppCompatActivity {
                         "Sorry! Failed to record video", Toast.LENGTH_SHORT)
                         .show();
             }
-        } */
+        }
 
-        switch (requestCode) {
+       /* switch (requestCode) {
             case CAMERA_CAPTURE_BACK_IMAGE_REQUEST_CODE:
 
                 if (resultCode == RESULT_OK) {
@@ -284,10 +302,11 @@ public class DriveryLicenceActivity extends AppCompatActivity {
                     // failed to capture image
                     Toast.makeText(getApplicationContext(), "Sorry! Failed to capture image", Toast.LENGTH_SHORT).show();
                 }
-        }
+        }*/
 
 
     }
+
     public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -303,14 +322,13 @@ public class DriveryLicenceActivity extends AppCompatActivity {
         try {
             // hide video preview
             txtDescription.setVisibility(View.GONE);
-            licenceimageViewBack.setVisibility(View.GONE);
+            // licenceimageViewBack.setVisibility(View.GONE);
 
             licenceimageViewFront.setVisibility(View.VISIBLE);
 
             Bitmap bitmap = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
 
-            baseimageserver =getEncoded64ImageStringFromBitmap(bitmap);
-
+            baseimageserver = getEncoded64ImageStringFromBitmap(bitmap);
 
             licenceimageViewFront.setImageBitmap(bitmap);
 
@@ -318,7 +336,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    private void previewCapturedImageBack() {
+  /*  private void previewCapturedImageBack() {
         try {
             txtDescription.setVisibility(View.GONE);
             licenceimageViewFront.setVisibility(View.GONE);
@@ -336,7 +354,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     private void showPermissionsAlert() {
@@ -368,24 +386,110 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
     /**
      * Display image from gallery
+     * <p>
+     * private void previewCapturedImageBack() {
+     * try {
+     * // hide video preview
+     * txtDescription.setVisibility(View.GONE);
+     * licenceimageViewFront.setVisibility(View.GONE);
+     * <p>
+     * licenceimageViewBack.setVisibility(View.VISIBLE);
+     * <p>
+     * Bitmap bitmap = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
+     * <p>
+     * licenceimageViewBack.setImageBitmap(bitmap);
+     * <p>
+     * } catch (NullPointerException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     */
 
-     private void previewCapturedImageBack() {
-     try {
-     // hide video preview
-     txtDescription.setVisibility(View.GONE);
-     licenceimageViewFront.setVisibility(View.GONE);
 
-     licenceimageViewBack.setVisibility(View.VISIBLE);
 
-     Bitmap bitmap = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
+    public void uploadDLValidationSubmit() {
 
-     licenceimageViewBack.setImageBitmap(bitmap);
+        String dL_Number = dlNumber.getText().toString();
+        String dL_Expire = dlExpDate.getText().toString();
+      //String Dl_Image = licenceimageViewFront.getVisibility().
 
-     } catch (NullPointerException e) {
-     e.printStackTrace();
-     }
-     }*/
+        boolean check = true;
 
+        if (dL_Number.isEmpty() || dlNumber.length()==16) {
+            dlNumber.setError(" enter a valid DL number ");
+            check = false;
+        } else {
+            dlNumber.setError(null);
+        }
+
+        if (dL_Expire.isEmpty() ) {
+            dlExpDate.setError("enter valid expire date in yy-mm-dd");
+            check = false;
+        } else {
+            dlExpDate.setError(null);
+        }
+
+        if (check){
+
+            UploadDLRequest uploadDLRequest = new UploadDLRequest();
+            uploadDLRequest.setLicenseNumber(dL_Number);
+            uploadDLRequest.setExpiryDate(dL_Expire);
+
+            uploadDLRequest.setLicenseImage(baseimageserver);
+
+            userIdNew = HighwayPreface.getString(getApplicationContext(), "id");
+            uploadDLRequest.setUserId(userIdNew);
+
+            Utils.showProgressDialog(this);
+
+            RestClient.uploadDL(uploadDLRequest, new Callback<UploadDLResponse>() {
+                @Override
+                public void onResponse(Call<UploadDLResponse> call, Response<UploadDLResponse> response) {
+                    Utils.dismissProgressDialog();
+                    Toast.makeText(DriveryLicenceActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onFailure(Call<UploadDLResponse> call, Throwable t) {
+                    Toast.makeText(DriveryLicenceActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+
+
+    }
+
+ /*   public void sendDLDeatails() {
+
+        UploadDLRequest uploadDLRequest = new UploadDLRequest();
+
+        userIdNew = HighwayPreface.getString(getApplicationContext(), "id");
+
+        uploadDLRequest.setLicenseImage(baseimageserver);
+        uploadDLRequest.setExpiryDate("2019-12-12");
+        uploadDLRequest.setLicenseNumber("12345678");
+
+        uploadDLRequest.setUserId(userIdNew);
+
+
+        RestClient.uploadDL(uploadDLRequest, new Callback<UploadDLResponse>() {
+            @Override
+            public void onResponse(Call<UploadDLResponse> call, Response<UploadDLResponse> response) {
+                Toast.makeText(DriveryLicenceActivity.this, "DL Uploaded Successfull", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<UploadDLResponse> call, Throwable t) {
+                Toast.makeText(DriveryLicenceActivity.this, "failure", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+    } */
 
 
 }

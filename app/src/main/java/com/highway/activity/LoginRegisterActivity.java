@@ -82,7 +82,6 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-
                     Utils.dismissProgressDialog();
 
                     if (response.body() != null && !TextUtils.isEmpty(response.body().getUserStatus())) {

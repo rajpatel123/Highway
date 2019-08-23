@@ -79,6 +79,9 @@
                         android:layout_marginTop="@dimen/_10dp"
                         android:background="@null"
                         android:hint="Name"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:maxLength="20"
                         android:textSize="@dimen/size_20"
                         android:padding="4dp"/>
                 </android.support.design.widget.TextInputLayout>
@@ -91,7 +94,7 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top_8">
+                    android:layout_marginTop="@dimen/margin_top_5">
 
 
                     <EditText
@@ -115,7 +118,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:orientation="horizontal">
 
                     <EditText
@@ -135,8 +138,8 @@
 
                     <ImageView
                         android:id="@+id/calenderPicker"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="-40dp"
                         android:layout_marginTop="5dp"
@@ -199,10 +202,10 @@
 
             </LinearLayout>
 
-            <View
+          <!--  <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/project_color" />
+                android:background="@color/project_color" /> -->
 
 
             <LinearLayout
@@ -252,10 +255,10 @@
                 </RadioGroup>
             </LinearLayout>
 
-           <View
+    <!--       <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
-                android:background="@color/project_color" />
+                android:background="@color/project_color" />  -->
 
         </LinearLayout>
 
