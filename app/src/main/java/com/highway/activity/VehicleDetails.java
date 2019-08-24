@@ -30,8 +30,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 
-import modelclass.UploadDLRequest;
-import modelclass.UploadDLResponse;
+import modelclass.UploadVehicleRcRequest;
+import modelclass.UploadVehicleRcResponse;
 import retrofit.RestClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,14 +40,13 @@ import utils.CameraUtils;
 import utils.HighwayPreface;
 import utils.Utils;
 
-public class DriveryLicenceActivity extends AppCompatActivity {
+public class VehicleDetails extends AppCompatActivity {
 
     // Activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
     private static final int CAMERA_CAPTURE_FRONT_IMAGE_REQUEST_CODE = 100;
     private static final int CAMERA_CAPTURE_BACK_IMAGE_REQUEST_CODE = 101;
-
 
     // key to store image path in savedInstance state
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
@@ -67,69 +66,38 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
     private static String imageStoragePath;
 
-    private ImageView cameraOpenButton, licenceimageViewFront, licenceimageViewBack, backArrowOnDl;
+    private ImageView backVRCimageView, imageViewVichealFont, imageViewVichealBack, vhRcCameraOpenNew;
     private AnimatorSet animatorSet;
-    private Button submitDldetails;
-    private EditText dlNumber, dlExpDate;
-    private TextView txtDescription;
+    private TextView vRctxtDescription;
+    private Button submitVehicleRcdetails;
+    private EditText vehicleRcNumber, vehicleColor;
+    private String base64ImageServerVRc;
+    private String vehicleId, vrc_number, v_Color;
 
-    private String base64imageserverDL;
-    private Bitmap bitmap;
-    private String userIdNew;
-    private  String  dL_Number,dL_Expire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drivery_licence);
+        setContentView(R.layout.activity_vehicle_details);
 
-        txtDescription = findViewById(R.id.txt_desc);
-        licenceimageViewFront = findViewById(R.id.drivingLicencefront);
-        // licenceimageViewBack = findViewById(R.id.drivingLicenceback);
-        cameraOpenButton = findViewById(R.id.DlcameraOpen);
+        vhRcCameraOpenNew = findViewById(R.id.vh_Rc_CameraOpen);
+        imageViewVichealFont = findViewById(R.id.Vichiel_RC_ImageviewFont);
+        vRctxtDescription = findViewById(R.id.Vehical_Rc_txt_desc);
+        vehicleRcNumber = findViewById(R.id.Vehicle_Rc_Number);
+        vehicleColor = findViewById(R.id.Vehicle_Rc_color);
+        submitVehicleRcdetails = findViewById(R.id.sub_Vehicle_Rc_Button);
+        backVRCimageView = findViewById(R.id.backArrow_Vihal_Rc_Image);
 
-        dlExpDate = findViewById(R.id.edt_DlExpireDate);
-        dlNumber = findViewById(R.id.edt_DlNumber);
-        backArrowOnDl = findViewById(R.id.backArrow_Dl_Image);
-        submitDldetails = findViewById(R.id.submitDL_Button);
+        //vehicleRcBackArrow();
 
-        backArrowDlOperation();       // backArrow On Dl Page
-
-
-        submitDldetails.setOnClickListener(new View.OnClickListener() {
+        submitVehicleRcdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadDLValidationSubmit();
+                vehicleRCDetailsSubmit();
             }
         });
 
-   /*     licenceimageViewFront.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                licenceimageViewFront.setVisibility(View.VISIBLE);
-                licenceimageViewBack.setVisibility(View.GONE);
-                txtDescription.setVisibility(View.GONE);
-
-            }
-        });
-
-        licenceimageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                licenceimageViewFront.setVisibility(View.GONE);
-                licenceimageViewBack.setVisibility(View.GONE);
-                txtDescription.setVisibility(View.VISIBLE);
-
-
-            }
-        });*/
-
-        /**
-         * Capture image on button click
-         */
-        cameraOpenButton.setOnClickListener(new View.OnClickListener() {
-
+        vhRcCameraOpenNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CameraUtils.checkPermissions(getApplicationContext())) {
@@ -139,12 +107,8 @@ public class DriveryLicenceActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
-    /*
-     * Requesting permissions using Dexter library
-     */
     private void requestCameraPermission(final int type) {
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.CAMERA,
@@ -173,38 +137,31 @@ public class DriveryLicenceActivity extends AppCompatActivity {
                 }).check();
     }
 
+
     private void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = CameraUtils.getOutputMediaFile(MEDIA_TYPE_IMAGE);
         if (file != null) {
             imageStoragePath = file.getAbsolutePath();
         }
-
         Uri fileUri = CameraUtils.getOutputMediaFileUri(getApplicationContext(), file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);   // start the image capture Intent
     }
 
-    /**
-     * Saving stored image path to saved instance state
-     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_IMAGE_STORAGE_PATH, imageStoragePath);
     }
 
-    /**
-     * Restoring image path from saved instance state
-     */
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        imageStoragePath = savedInstanceState.getString(KEY_IMAGE_STORAGE_PATH);  // get the file url
+        imageStoragePath = savedInstanceState.getString(KEY_IMAGE_STORAGE_PATH); // get the file url
     }
-    /**
-     * Activity result method will be called after closing the camera
-     */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if the result is capturing Image
@@ -212,8 +169,9 @@ public class DriveryLicenceActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
-                //successfully captured the image & display it in image view
+                //successfully captured the image display it in image view
                 previewCapturedImageFont();
+                // previewCapturedImageBack();
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image capture", Toast.LENGTH_SHORT)
@@ -227,7 +185,8 @@ public class DriveryLicenceActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
-                /* video successfully recorded && preview the recorded video */
+
+                /*video successfully recorded preview the recorded video  */
                 //  previewVideo();
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled recording
@@ -242,6 +201,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
             }
         }
 
+
     }
 
     public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
@@ -254,16 +214,12 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
     private void previewCapturedImageFont() {
         try {
-             txtDescription.setVisibility(View.GONE);
-            // licenceimageViewBack.setVisibility(View.GONE);
-
-            licenceimageViewFront.setVisibility(View.VISIBLE);
-
+            vRctxtDescription.setVisibility(View.GONE);
+            // imageViewVichealBack.setVisibility(View.GONE);
+            imageViewVichealFont.setVisibility(View.VISIBLE);
             Bitmap bitmap = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
-
-            base64imageserverDL = getEncoded64ImageStringFromBitmap(bitmap);
-
-            licenceimageViewFront.setImageBitmap(bitmap);
+            base64ImageServerVRc = getEncoded64ImageStringFromBitmap(bitmap);
+            imageViewVichealFont.setImageBitmap(bitmap);
 
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -289,14 +245,13 @@ public class DriveryLicenceActivity extends AppCompatActivity {
         }
     }*/
 
-
     private void showPermissionsAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Permissions required!")
                 .setMessage("Camera needs few permissions to work properly. Grant them in settings.")
                 .setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        CameraUtils.openSettings(DriveryLicenceActivity.this);
+                        CameraUtils.openSettings(VehicleDetails.this);
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -307,85 +262,65 @@ public class DriveryLicenceActivity extends AppCompatActivity {
     }
 
 
-    public void backArrowDlOperation() {
-        backArrowOnDl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(DriveryLicenceActivity.this, RegistrationSignUpFormActivity.class);
-                startActivity(i);
-            }
-        });
-    }
-
-
-    public boolean input_DL_Validation() {
-
-        dL_Number = dlNumber.getText().toString();
-        dL_Expire = dlExpDate.getText().toString();
+    public boolean inputVehicle_RC_DetailsValidation() {
 
         //boolean check = true;
+        vrc_number = vehicleRcNumber.getText().toString();
+        v_Color = vehicleColor.getText().toString();
 
-        if (TextUtils.isEmpty(dL_Number) || dL_Number.length()==16) {
-            dlNumber.setError("Enter a valid DL number ");
+        if (TextUtils.isEmpty(vrc_number) || vrc_number.length() <= 8 || vrc_number.length() >= 14) {
+            vehicleRcNumber.setError("Enter a valid Vehicle RC Number");
             return false;
         } else {
-            dlNumber.setError(null);
+            vehicleRcNumber.setError(null);
         }
 
-        if (dL_Expire.isEmpty() ) {
-            dlExpDate.setError("enter valid expire date in yy-mm-dd");
+        if (TextUtils.isEmpty(v_Color)) {
+            vehicleColor.setError("enter Vehicle color");
             return false;
         } else {
-            dlExpDate.setError(null);
+            vehicleColor.setError(null);
         }
-
-        if(TextUtils.isEmpty(base64imageserverDL)){
-            Toast.makeText(this, "Pls capture the dl image", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(base64ImageServerVRc)) {
+            Toast.makeText(this, "Pls capture Image", Toast.LENGTH_SHORT).show();
             return false;
         }
-
-      return true;
+        return true;
     }
 
-    public void uploadDLValidationSubmit(){
-        if (input_DL_Validation()){
+    public void vehicleRCDetailsSubmit() {
+        if (inputVehicle_RC_DetailsValidation()) {
+            UploadVehicleRcRequest uploadVehicleRcRequest = new UploadVehicleRcRequest();
+            uploadVehicleRcRequest.setVehicalNumber(vrc_number);
+            uploadVehicleRcRequest.setBikeColour(v_Color);
+            uploadVehicleRcRequest.setRcImage(base64ImageServerVRc);
+            vehicleId = HighwayPreface.getString(getApplicationContext(), "id");
+            uploadVehicleRcRequest.setUserId(vehicleId);
 
-                UploadDLRequest uploadDLRequest = new UploadDLRequest();
-                uploadDLRequest.setLicenseNumber(dL_Number);
-                uploadDLRequest.setExpiryDate(dL_Expire);
+            Utils.showProgressDialog(getApplicationContext());
 
-                uploadDLRequest.setLicenseImage(base64imageserverDL);
-
-                userIdNew = HighwayPreface.getString(getApplicationContext(),"id");
-                uploadDLRequest.setUserId(userIdNew);
-
-                Utils.showProgressDialog(this);
-
-                RestClient.uploadDL(uploadDLRequest, new Callback<UploadDLResponse>() {
-                    @Override
-                    public void onResponse(Call<UploadDLResponse> call, Response<UploadDLResponse> response) {
-                        Utils.dismissProgressDialog();
-                        if (response.body().getStatus()==true){
-                            Intent i = new Intent(DriveryLicenceActivity.this, VehicleDetails.class);
-                            startActivity(i);
-                            finish();
-                            Toast.makeText(DriveryLicenceActivity.this, "DL Details upload success", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(DriveryLicenceActivity.this, "Details Uploading Failed !", Toast.LENGTH_SHORT).show();
-                        }
+            RestClient.uploadVehicleRC(uploadVehicleRcRequest, new Callback<UploadVehicleRcResponse>() {
+                @Override
+                public void onResponse(Call<UploadVehicleRcResponse> call, Response<UploadVehicleRcResponse> response) {
+                    Utils.dismissProgressDialog();
+                    if (response.body().getStatus() == true) {
+                        Intent i = new Intent(VehicleDetails.this, MainActivity.class);
+                        startActivity(i);
+                        Toast.makeText(VehicleDetails.this, "registration successfull", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(VehicleDetails.this, "Detail uploading Failed", Toast.LENGTH_SHORT).show();
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<UploadDLResponse> call, Throwable t) {
-                        Toast.makeText(DriveryLicenceActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                @Override
+                public void onFailure(Call<UploadVehicleRcResponse> call, Throwable t) {
+                    Toast.makeText(VehicleDetails.this, "Failure", Toast.LENGTH_SHORT).show();
 
-
+                }
+            });
         }
+
     }
-
-
-
 
 }

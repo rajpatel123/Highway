@@ -3,24 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.highway">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/transportlogo"
@@ -28,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:label">
-        <activity android:name=".activity.DriveryLicenceActivity"></activity>
+        <activity android:name=".activity.VehicleDetails"></activity>
+        <activity android:name=".activity.DriveryLicenceActivity" />
         <activity android:name=".activity.CustomerAdharcardId" />
         <activity android:name=".activity.RegistrationSignUpFormActivity" />
         <activity android:name=".activity.OTP_VerificationActivity" />
@@ -56,11 +39,24 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"
-               />
+                android:resource="@xml/filepaths" />
         </provider>
     </application>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 </manifest>

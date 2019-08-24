@@ -6,6 +6,8 @@ import modelclass.RegistrationSignUpRequest;
 import modelclass.RegistrationSignUpResponse;
 import modelclass.UploadDLRequest;
 import modelclass.UploadDLResponse;
+import modelclass.UploadVehicleRcRequest;
+import modelclass.UploadVehicleRcResponse;
 import modelclass.VerifyOTPRequest;
 import modelclass.VerifyOTPResponse;
 import retrofit2.Callback;
@@ -27,6 +29,10 @@ public class RestClient {
 
     public static void uploadDL(UploadDLRequest uploadDLRequest , Callback<UploadDLResponse> callback){
         RetrofitClient.getClient().UPLOAD_DL_RESPONSE_CALL(uploadDLRequest).enqueue(callback);
+    }
+
+    public static void uploadVehicleRC(UploadVehicleRcRequest uploadVehicleRcRequest , Callback<UploadVehicleRcResponse> callback){
+        RetrofitClient.getClient().UPLOAD_RC_RESPONSE_CALL(uploadVehicleRcRequest).enqueue(callback);
     }
 
 

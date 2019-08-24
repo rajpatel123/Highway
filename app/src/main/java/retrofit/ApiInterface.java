@@ -6,6 +6,8 @@ import modelclass.RegistrationSignUpRequest;
 import modelclass.RegistrationSignUpResponse;
 import modelclass.UploadDLRequest;
 import modelclass.UploadDLResponse;
+import modelclass.UploadVehicleRcRequest;
+import modelclass.UploadVehicleRcResponse;
 import modelclass.VerifyOTPRequest;
 import modelclass.VerifyOTPResponse;
 import retrofit2.Call;
@@ -26,4 +28,7 @@ public interface ApiInterface {
 
     @POST("http://vrok.in/highway_dev/upload_DL")
     Call<UploadDLResponse>UPLOAD_DL_RESPONSE_CALL(@Body UploadDLRequest uploadDLRequest);
+
+    @POST("http://vrok.in/highway_dev/upload_RC")
+    Call<UploadVehicleRcResponse>UPLOAD_RC_RESPONSE_CALL(@Body UploadVehicleRcRequest uploadDLRequest);
 }
