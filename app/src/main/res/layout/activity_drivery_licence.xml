@@ -63,8 +63,7 @@
             android:orientation="horizontal"
             android:background="@color/app_bg"
             android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginLeft="@dimen/_10dp"
-            android:layout_marginRight="@dimen/_10dp">
+            >
 
            <!-- <FrameLayout
                 android:layout_width="match_parent"
@@ -77,9 +76,7 @@
                 android:id="@+id/drivingLicencefront"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_30"
                 android:background="#c7c7c8"
-                android:scaleType="centerCrop"
                 android:visibility="gone"
                 />
 
@@ -89,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_30"
                     android:background="#c7c7c8"
-                   android:scaleType="centerCrop"
                    android:visibility="gone"
                     />  -->
 
@@ -98,7 +94,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:layout_margin="@dimen/margin_5"
                     android:background="#c7c7c8"
                     android:text="@string/preview_description"
                     android:textSize="15dp" />
@@ -148,7 +143,7 @@
                         android:layout_marginRight="10dp"
                         android:hint="Driving License Number"
                         android:maxLines="1"
-                        android:maxLength="16"
+                        android:maxLength="14"
                         android:textColorHint="@color/black"
                         android:textSize="15dp" />
                 </android.support.design.widget.TextInputLayout>
