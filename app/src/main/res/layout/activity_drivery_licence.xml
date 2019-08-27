@@ -59,20 +59,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="200dp"
             android:orientation="horizontal"
             android:background="@color/app_bg"
             android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginRight="@dimen/_10dp"
-            android:layout_marginLeft="@dimen/_10dp"
             >
 
-           <!-- <FrameLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/margin_10"
-                android:background="@color/app_bg"> -->
+                android:background="@color/app_bg">
 
             <!-- Capture Image hear  -->
 
@@ -82,7 +80,6 @@
                 android:layout_height="match_parent"
                 android:background="#c7c7c8"
                 android:scaleType="fitXY"
-                android:visibility="gone"
                 />
 
              <!--  <ImageView
@@ -101,13 +98,33 @@
                     android:gravity="center"
                     android:background="#c7c7c8"
                     android:text="@string/preview_description"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:visibility="gone"/>
 
-          <!--  </FrameLayout> -->
+            </FrameLayout>
+
+
 
         </LinearLayout>
-
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/DLEditOption"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+               android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/_10dp"
+                android:background="@drawable/circle_camera_open"
+                android:src="@drawable/pencilicon"
+                android:tint="@color/Black" />
+        </RelativeLayout>
+
+
+
+     <!--   <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
@@ -122,7 +139,7 @@
                 android:background="@color/app_bg"
                 android:src="@drawable/ic_camera_alt_24dp"
                 android:tint="@color/project_color" />
-        </RelativeLayout>
+        </RelativeLayout> -->
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"

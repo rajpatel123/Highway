@@ -26,8 +26,12 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import modelclass.UploadDLRequest;
@@ -67,7 +71,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
     private static String imageStoragePath;
 
-    private ImageView cameraOpenButton, licenceimageViewFront, licenceimageViewBack, backArrowOnDl;
+    private ImageView dLOpenGlaryCamera, licenceimageViewFront, licenceimageViewBack, backArrowOnDl;
     private AnimatorSet animatorSet;
     private Button submitDldetails;
     private EditText dlNumber, dlExpDate;
@@ -83,15 +87,15 @@ public class DriveryLicenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drivery_licence);
 
-        txtDescription = findViewById(R.id.txt_desc);
         licenceimageViewFront = findViewById(R.id.drivingLicencefront);
-        // licenceimageViewBack = findViewById(R.id.drivingLicenceback);
-        cameraOpenButton = findViewById(R.id.DlcameraOpen);
-
+        dLOpenGlaryCamera = findViewById(R.id.DLEditOption);
         dlExpDate = findViewById(R.id.edt_DlExpireDate);
         dlNumber = findViewById(R.id.edt_DlNumber);
         backArrowOnDl = findViewById(R.id.backArrow_Dl_Image);
         submitDldetails = findViewById(R.id.submitDL_Button);
+
+        // licenceimageViewBack = findViewById(R.id.drivingLicenceback);
+        //  txtDescription = findViewById(R.id.txt_desc);
 
         backArrowDlOperation();       // backArrow On Dl Page
 
@@ -125,10 +129,10 @@ public class DriveryLicenceActivity extends AppCompatActivity {
             }
         });*/
 
-        /**
-         * Capture image on button click
-         */
-        cameraOpenButton.setOnClickListener(new View.OnClickListener() {
+
+
+
+        licenceimageViewFront.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -213,7 +217,9 @@ public class DriveryLicenceActivity extends AppCompatActivity {
                 CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
                 //successfully captured the image & display it in image view
+
                 previewCapturedImageFont();
+
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image capture", Toast.LENGTH_SHORT)
@@ -254,7 +260,7 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
     private void previewCapturedImageFont() {
         try {
-             txtDescription.setVisibility(View.GONE);
+            // txtDescription.setVisibility(View.GONE);
             // licenceimageViewBack.setVisibility(View.GONE);
 
             licenceimageViewFront.setVisibility(View.VISIBLE);
@@ -269,25 +275,6 @@ public class DriveryLicenceActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-  /*  private void previewCapturedImageBack() {
-        try {
-            txtDescription.setVisibility(View.GONE);
-            licenceimageViewFront.setVisibility(View.GONE);
-
-            licenceimageViewBack.setVisibility(View.VISIBLE);
-
-            Bitmap bitmap = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
-
-            baseimageserver =getEncoded64ImageStringFromBitmap(bitmap);
-
-
-            licenceimageViewBack.setImageBitmap(bitmap);
-
-
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
     private void showPermissionsAlert() {
@@ -348,12 +335,12 @@ public class DriveryLicenceActivity extends AppCompatActivity {
     }
 
     public void uploadDLValidationSubmit(){
+
         if (input_DL_Validation()){
 
                 UploadDLRequest uploadDLRequest = new UploadDLRequest();
                 uploadDLRequest.setLicenseNumber(dL_Number);
                 uploadDLRequest.setExpiryDate(dL_Expire);
-
                 uploadDLRequest.setLicenseImage(base64imageserverDL);
 
                 userIdNew = HighwayPreface.getString(getApplicationContext(),"id");
@@ -365,23 +352,36 @@ public class DriveryLicenceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<UploadDLResponse> call, Response<UploadDLResponse> response) {
                         Utils.dismissProgressDialog();
-                        if (response.body().getStatus()==true){
-                            Intent i = new Intent(DriveryLicenceActivity.this, VehicleDetails.class);
-                            startActivity(i);
-                            finish();
-                            Toast.makeText(DriveryLicenceActivity.this, "DL Details upload success", Toast.LENGTH_SHORT).show();
+                        if (response.body()!=null) {
+                            if (response.body().getStatus() == true) {
+                                Intent i = new Intent(DriveryLicenceActivity.this, VehicleRcDetails.class);
+                                startActivity(i);
+                                Toast.makeText(DriveryLicenceActivity.this, "DL Details upload success", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(DriveryLicenceActivity.this, "Details Uploading Failed !", Toast.LENGTH_SHORT).show();
+                            }
                         }else{
-                            Toast.makeText(DriveryLicenceActivity.this, "Details Uploading Failed !", Toast.LENGTH_SHORT).show();
+                            try{
+                                String rowdata = response.errorBody().string();
+                                JSONObject  jsonObject = new JSONObject(rowdata);
+
+                                String message = jsonObject.optString("message");
+                                Toast.makeText(DriveryLicenceActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(DriveryLicenceActivity.this, "", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<UploadDLResponse> call, Throwable t) {
                         Toast.makeText(DriveryLicenceActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
         }
     }
 

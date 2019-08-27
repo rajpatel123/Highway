@@ -9,9 +9,9 @@ public class UploadVehicleRcRequest {
 @SerializedName("User_Id")
 @Expose
 private String userId;
-@SerializedName("Rc_Image")
+@SerializedName("RC_Image")
 @Expose
-private String rcImage;
+private String rCImage;
 @SerializedName("Bike_Colour")
 @Expose
 private String bikeColour;
@@ -27,12 +27,12 @@ public void setUserId(String userId) {
 this.userId = userId;
 }
 
-public String getRcImage() {
-return rcImage;
+public String getRCImage() {
+return rCImage;
 }
 
-public void setRcImage(String rcImage) {
-this.rcImage = rcImage;
+public void setRCImage(String rCImage) {
+this.rCImage = rCImage;
 }
 
 public String getBikeColour() {

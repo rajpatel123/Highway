@@ -4,6 +4,8 @@ import modelclass.LoginRequest;
 import modelclass.LoginResponse;
 import modelclass.RegistrationSignUpRequest;
 import modelclass.RegistrationSignUpResponse;
+import modelclass.UploadAdharRequest;
+import modelclass.UploadAdharResponse;
 import modelclass.UploadDLRequest;
 import modelclass.UploadDLResponse;
 import modelclass.UploadVehicleRcRequest;
@@ -30,5 +32,8 @@ public interface ApiInterface {
     Call<UploadDLResponse>UPLOAD_DL_RESPONSE_CALL(@Body UploadDLRequest uploadDLRequest);
 
     @POST("http://vrok.in/highway_dev/upload_RC")
-    Call<UploadVehicleRcResponse>UPLOAD_RC_RESPONSE_CALL(@Body UploadVehicleRcRequest uploadDLRequest);
+    Call<UploadVehicleRcResponse>UPLOAD_VEHICLE_RC_RESPONSE_CALL(@Body UploadVehicleRcRequest uploadVehicleRcRequest);
+
+    @POST("http://vrok.in/highway_dev/upload_adhar")
+    Call<UploadAdharResponse>UPLOAD_ADHAR_RESPONSE_CALL(@Body UploadAdharRequest uploadAdharRequest);
 }

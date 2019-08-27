@@ -26,8 +26,12 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import modelclass.UploadVehicleRcRequest;
@@ -40,7 +44,7 @@ import utils.CameraUtils;
 import utils.HighwayPreface;
 import utils.Utils;
 
-public class VehicleDetails extends AppCompatActivity {
+public class VehicleRcDetails extends AppCompatActivity {
 
     // Activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -50,7 +54,6 @@ public class VehicleDetails extends AppCompatActivity {
 
     // key to store image path in savedInstance state
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
-
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
 
@@ -66,7 +69,7 @@ public class VehicleDetails extends AppCompatActivity {
 
     private static String imageStoragePath;
 
-    private ImageView backVRCimageView, imageViewVichealFont, imageViewVichealBack, vhRcCameraOpenNew;
+    private ImageView backVRCimageView, imageViewVichealFont, imageViewVichealBack, vhRcCameraGalleryOpen;
     private AnimatorSet animatorSet;
     private TextView vRctxtDescription;
     private Button submitVehicleRcdetails;
@@ -80,24 +83,23 @@ public class VehicleDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_details);
 
-        vhRcCameraOpenNew = findViewById(R.id.vh_Rc_CameraOpen);
+        vhRcCameraGalleryOpen = findViewById(R.id.VehicleEditOpen);
         imageViewVichealFont = findViewById(R.id.Vichiel_RC_ImageviewFont);
-        vRctxtDescription = findViewById(R.id.Vehical_Rc_txt_desc);
         vehicleRcNumber = findViewById(R.id.Vehicle_Rc_Number);
         vehicleColor = findViewById(R.id.Vehicle_Rc_color);
         submitVehicleRcdetails = findViewById(R.id.sub_Vehicle_Rc_Button);
-        backVRCimageView = findViewById(R.id.backArrow_Vihal_Rc_Image);
+        // backVRCimageView = findViewById(R.id.backArrow_Vihal_Rc_Image);
+        //  vRctxtDescription = findViewById(R.id.Vehical_Rc_txt_desc);
 
-        //vehicleRcBackArrow();
 
         submitVehicleRcdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vehicleRCDetailsSubmit();
+                submitVehicleRCDetails();
             }
         });
 
-        vhRcCameraOpenNew.setOnClickListener(new View.OnClickListener() {
+        imageViewVichealFont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CameraUtils.checkPermissions(getApplicationContext())) {
@@ -214,8 +216,10 @@ public class VehicleDetails extends AppCompatActivity {
 
     private void previewCapturedImageFont() {
         try {
-            vRctxtDescription.setVisibility(View.GONE);
+
+            //vRctxtDescription.setVisibility(View.GONE);
             // imageViewVichealBack.setVisibility(View.GONE);
+
             imageViewVichealFont.setVisibility(View.VISIBLE);
             Bitmap bitmap = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
             base64ImageServerVRc = getEncoded64ImageStringFromBitmap(bitmap);
@@ -251,7 +255,7 @@ public class VehicleDetails extends AppCompatActivity {
                 .setMessage("Camera needs few permissions to work properly. Grant them in settings.")
                 .setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        CameraUtils.openSettings(VehicleDetails.this);
+                        CameraUtils.openSettings(VehicleRcDetails.this);
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -288,34 +292,47 @@ public class VehicleDetails extends AppCompatActivity {
         return true;
     }
 
-    public void vehicleRCDetailsSubmit() {
+    public void submitVehicleRCDetails() {
         if (inputVehicle_RC_DetailsValidation()) {
             UploadVehicleRcRequest uploadVehicleRcRequest = new UploadVehicleRcRequest();
             uploadVehicleRcRequest.setVehicalNumber(vrc_number);
             uploadVehicleRcRequest.setBikeColour(v_Color);
-            uploadVehicleRcRequest.setRcImage(base64ImageServerVRc);
-            vehicleId = HighwayPreface.getString(getApplicationContext(), "id");
+            uploadVehicleRcRequest.setRCImage(base64ImageServerVRc);
+            vehicleId = HighwayPreface.getString(getApplicationContext(),"id");
             uploadVehicleRcRequest.setUserId(vehicleId);
+            Utils.showProgressDialog(this);
 
-            Utils.showProgressDialog(getApplicationContext());
-
-            RestClient.uploadVehicleRC(uploadVehicleRcRequest, new Callback<UploadVehicleRcResponse>() {
+            RestClient.uploadVehicleRCDetails(uploadVehicleRcRequest, new Callback<UploadVehicleRcResponse>() {
                 @Override
                 public void onResponse(Call<UploadVehicleRcResponse> call, Response<UploadVehicleRcResponse> response) {
-                    Utils.dismissProgressDialog();
-                    if (response.body().getStatus() == true) {
-                        Intent i = new Intent(VehicleDetails.this, MainActivity.class);
-                        startActivity(i);
-                        Toast.makeText(VehicleDetails.this, "registration successfull", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(VehicleDetails.this, "Detail uploading Failed", Toast.LENGTH_SHORT).show();
+                    if (response.body()!=null){
+                        if (response.body().getStatus()==true){
+                            Intent i = new Intent(VehicleRcDetails.this,MainActivity.class);
+                            startActivity(i);
+                            Toast.makeText(VehicleRcDetails.this, "Vehicle Rc Details uploaded successfully", Toast.LENGTH_SHORT).show();
+                           finish();
+                        }else if (response.body().getStatus()==false){
+                            Toast.makeText(VehicleRcDetails.this, "Details Uploaded failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        try {
+                            String rowdata = response.errorBody().string();
+                            JSONObject jsonObject = new JSONObject(rowdata);
+                            String message = jsonObject.optString("message");
+                            Toast.makeText(VehicleRcDetails.this,message, Toast.LENGTH_SHORT).show();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(VehicleRcDetails.this, "", Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
                 @Override
                 public void onFailure(Call<UploadVehicleRcResponse> call, Throwable t) {
-                    Toast.makeText(VehicleDetails.this, "Failure", Toast.LENGTH_SHORT).show();
 
                 }
             });

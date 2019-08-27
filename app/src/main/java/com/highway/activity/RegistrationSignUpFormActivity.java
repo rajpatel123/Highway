@@ -16,6 +16,10 @@ import android.widget.Toast;
 
 import com.highway.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Calendar;
 
 import modelclass.RegistrationSignUpRequest;
@@ -150,57 +154,6 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void registrationAndValidateSignUpOpertion() {
-
-        if (inputValidation()) {
-
-            RegistrationSignUpRequest registrationSignUpRequest = new RegistrationSignUpRequest();
-
-            registrationSignUpRequest.setName(name_User);
-            registrationSignUpRequest.setEmail(email_User);
-            registrationSignUpRequest.setDob(dobDate_User);
-            registrationSignUpRequest.setGender(gender);
-            registrationSignUpRequest.setRole(userRole);
-            registrationSignUpRequest.setId(userId);
-
-            Utils.showProgressDialog(this);
-
-            RestClient.registrationSignUp(registrationSignUpRequest, new Callback<RegistrationSignUpResponse>() {
-                @Override
-                public void onResponse(Call<RegistrationSignUpResponse> call, Response<RegistrationSignUpResponse> response) {
-
-                    Utils.dismissProgressDialog();
-
-                    if (response.body() != null && !TextUtils.isEmpty(response.body().getUserStatus())) {
-                        if (response.body().getUserStatus().equalsIgnoreCase("1")){
-                            if (response.body().getRole().equalsIgnoreCase("Driver")){
-                                Intent i = new Intent(RegistrationSignUpFormActivity.this,DriveryLicenceActivity.class);
-                                startActivity(i);
-                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a driver pls  enter your details ", Toast.LENGTH_SHORT).show();
-                            }else if (response.body().getRole().equalsIgnoreCase("Customer")){
-                                Intent i = new Intent(RegistrationSignUpFormActivity.this, CustomerAdharcardId.class);
-                                startActivity(i);
-                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a Customer pls enter your details", Toast.LENGTH_SHORT).show();
-                            }
-                        }else if (response.body().getStatus()==false){
-                            Toast.makeText(RegistrationSignUpFormActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(RegistrationSignUpFormActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<RegistrationSignUpResponse> call, Throwable t) {
-
-                    Toast.makeText(RegistrationSignUpFormActivity.this, "sign up Failure", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-
     // email validation operation perform
     public boolean inputValidation() {
 
@@ -247,5 +200,74 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
             return false;
         }
     }
+
+
+    public void registrationAndValidateSignUpOpertion() {
+
+        if (inputValidation()) {
+
+            RegistrationSignUpRequest registrationSignUpRequest = new RegistrationSignUpRequest();
+
+            registrationSignUpRequest.setName(name_User);
+            registrationSignUpRequest.setEmail(email_User);
+            registrationSignUpRequest.setDob(dobDate_User);
+            registrationSignUpRequest.setGender(gender);
+            registrationSignUpRequest.setRole(userRole);
+            registrationSignUpRequest.setId(userId);
+
+            Utils.showProgressDialog(this);
+
+            RestClient.registrationSignUp(registrationSignUpRequest, new Callback<RegistrationSignUpResponse>() {
+                @Override
+                public void onResponse(Call<RegistrationSignUpResponse> call, Response<RegistrationSignUpResponse> response) {
+
+                    Utils.dismissProgressDialog();
+
+                    if (response.body() != null && !TextUtils.isEmpty(response.body().getUserStatus())) {
+                        if (response.body().getUserStatus().equalsIgnoreCase("1")){
+                            if (response.body().getRole().equalsIgnoreCase("Driver")){
+                                Intent i = new Intent(RegistrationSignUpFormActivity.this,DriveryLicenceActivity.class);
+                                startActivity(i);
+                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a driver pls  enter your details ", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }else if (response.body().getRole().equalsIgnoreCase("Customer")){
+                                Intent i = new Intent(RegistrationSignUpFormActivity.this, CustomerAdharcardId.class);
+                                startActivity(i);
+                                Toast.makeText(RegistrationSignUpFormActivity.this, "You are a Customer pls enter your details", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }else if (response.body().getStatus()==false){
+                            Toast.makeText(RegistrationSignUpFormActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(RegistrationSignUpFormActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        try {
+                            String rowdata = response.errorBody().string();
+                            JSONObject jsonObject = new JSONObject(rowdata);
+
+                            String message = jsonObject.optString("message");
+                            Toast.makeText(RegistrationSignUpFormActivity.this, message , Toast.LENGTH_SHORT).show();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Toast.makeText(RegistrationSignUpFormActivity.this, "", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RegistrationSignUpResponse> call, Throwable t) {
+
+                    Toast.makeText(RegistrationSignUpFormActivity.this, "sign up Failure", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
 }
+
 
