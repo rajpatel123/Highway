@@ -49,10 +49,16 @@
     <string name="search">Search</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="upcoming_fragment">Hello UpCoing fragment</string>
+    <string name="ongoing_fragment">Hello OnGoing fragment</string>
+    <string name="cenceled_fragment">Cenceled fragment</string>
+    <string name="Completed_fragment">Completed fragment</string>
 
     <string name="By_accepting____">By accepting to create account you accepted</string>
     <string name="term_and_condition">terms and canditions and privacy policy</string>
+
+
+
 
 
 </resources>

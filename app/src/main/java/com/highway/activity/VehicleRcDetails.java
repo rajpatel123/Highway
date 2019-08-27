@@ -333,6 +333,7 @@ public class VehicleRcDetails extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<UploadVehicleRcResponse> call, Throwable t) {
+                    Toast.makeText(VehicleRcDetails.this, "Failure", Toast.LENGTH_SHORT).show();
 
                 }
             });

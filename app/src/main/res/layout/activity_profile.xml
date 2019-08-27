@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/margin_2"
-    tools:context=".activity.Profile">
+    tools:context=".activity.ProfileActivity">
 
     <RelativeLayout
         android:id="@+id/relative_one"
