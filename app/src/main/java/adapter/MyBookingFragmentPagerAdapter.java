@@ -16,11 +16,10 @@ public class MyBookingFragmentPagerAdapter extends FragmentPagerAdapter {
 
     List<Fragment> fragments;
 
-    public MyBookingFragmentPagerAdapter(FragmentManager fm ,List<Fragment> fragments) {
+    public MyBookingFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
-        this.fragments = fragments;
+        this.fragments= fragments;
     }
-
 
     @Override
     public Fragment getItem(int position) {
