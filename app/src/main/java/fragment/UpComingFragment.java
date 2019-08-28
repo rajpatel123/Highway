@@ -12,11 +12,11 @@ import com.highway.R;
 public class UpComingFragment extends Fragment {
 
     public UpComingFragment() {
-        // Required empty public constructor
+
     }
 
 
-    public static UpComingFragment newInstance(String param1, String param2) {
+    public static UpComingFragment newInstance() {
         UpComingFragment fragment = new UpComingFragment();
         Bundle args = new Bundle();
 
@@ -33,10 +33,9 @@ public class UpComingFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_up_coming, container, false);
+
     }
 
 

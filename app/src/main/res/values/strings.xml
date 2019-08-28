@@ -57,8 +57,8 @@
     <string name="By_accepting____">By accepting to create account you accepted</string>
     <string name="term_and_condition">terms and canditions and privacy policy</string>
 
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

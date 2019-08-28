@@ -106,7 +106,7 @@ public class OTP_VerificationActivity extends AppCompatActivity {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(OTP_VerificationActivity.this, LoginRegisterActivity.class);
+                Intent i = new Intent(OTP_VerificationActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
             }
