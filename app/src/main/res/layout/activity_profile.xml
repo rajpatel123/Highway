@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/margin_2"
     tools:context=".activity.ProfileActivity">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/relative_one"
         android:layout_width="match_parent"
@@ -14,17 +16,16 @@
         android:background="@color/blue">
 
         <ImageView
-            android:id="@+id/back_arrow_profile"
+            android:id="@+id/ImgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_4"
             android:src="@drawable/back_arrow_icon"
             android:tint="@color/white" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/back_arrow_profile"
+            android:layout_below="@id/ImgBack"
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
@@ -34,30 +35,30 @@
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/profile_image"
                 android:tint="@color/white" />
+
             <TextView
+                android:id="@+id/profileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="@dimen/padding_3"
                 android:text="Ramashish Kumar"
                 android:textColor="@color/white"
                 android:textSize="@dimen/title"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"/>
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/profileUsernumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
                 android:text="+91-8210380660"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sub_title"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"/>
-
+                android:textStyle="bold" />
         </LinearLayout>
-
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -65,17 +66,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/relative_one">
-
-        <TextView
-            android:id="@+id/txt_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_5"
-            android:layout_marginLeft="@dimen/margin_5"
-            android:padding="@dimen/padding_5"
-            android:text="Profile"
-            android:textColor="@color/black_titles"
-            android:textSize="@dimen/title" />
 
         <LinearLayout
             android:id="@+id/txt_email"
@@ -118,6 +108,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/profileuseEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -166,6 +157,7 @@
                     android:textSize="@dimen/sub_title" />
 
                 <TextView
+                    android:id="@+id/userGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -183,7 +175,7 @@
             android:layout_below="@id/txt_gender"
             android:orientation="horizontal"
             android:padding="@dimen/padding_5">
-           <!-- android:visibility="gone"> -->
+            <!-- android:visibility="gone"> -->
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -199,7 +191,6 @@
                     android:src="@drawable/date_of_birth_profile_icon" />
 
             </FrameLayout>
-
 
 
             <LinearLayout
@@ -219,6 +210,7 @@
                     android:textSize="@dimen/sub_title" />
 
                 <TextView
+                    android:id="@+id/userDob"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -268,6 +260,7 @@
                     android:textSize="@dimen/sub_title" />
 
                 <TextView
+                    android:id="@+id/profileMember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -317,14 +310,26 @@
                     android:textSize="@dimen/sub_title" />
 
                 <TextView
+                    android:id="@+id/profileEmerGencyContacts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Share rider with trusted contacts"
+                    android:text="Share Driverr with trusted contacts"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sub_title" />
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:padding="@dimen/padding_5"
+            android:text="Profile"
+            android:textColor="@color/black_titles"
+            android:textSize="@dimen/title" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -333,28 +338,16 @@
         android:layout_below="@id/relative_two"
         android:paddingTop="@dimen/margin_10">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="@color/simple_white" />
-
-        <TextView
-            android:id="@+id/txt_others"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_5"
-            android:padding="@dimen/padding_5"
-            android:text="Others"
-            android:textColor="@color/black_titles"
-            android:textSize="@dimen/title" />
-
         <LinearLayout
             android:id="@+id/txt_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_others"
             android:orientation="horizontal"
-            android:padding="@dimen/padding_5">
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="@dimen/padding_bottom_30">
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -386,7 +379,22 @@
                     android:textSize="@dimen/title" />
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5"
+            android:padding="@dimen/padding_5"
+            android:text="Others"
+            android:textColor="@color/black_titles"
+            android:textSize="@dimen/title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/simple_white" />
     </RelativeLayout>
-
-
 </RelativeLayout>
+
+</ScrollView>

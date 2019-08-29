@@ -24,7 +24,7 @@ import utils.Utils;
 
 public class OTP_VerificationActivity extends AppCompatActivity {
 
-    private EditText verifypin;
+    private EditText verifyPin;
     private Button btnVerify;
     private ImageView backImage;
     private TextView timer;
@@ -34,9 +34,9 @@ public class OTP_VerificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp__verification);
 
-        verifypin = findViewById(R.id.Verifypin_edittext);
+        verifyPin = findViewById(R.id.verifyPin_edittext);
         backImage = findViewById(R.id.back_arrow_OTP);
-        btnVerify = findViewById(R.id.VerifyPin_btn);
+        btnVerify = findViewById(R.id.verifyPin_btn);
         timer = findViewById(R.id.timmer_textview);
 
         verifyPerformOperation();                // otp option perform
@@ -59,18 +59,18 @@ public class OTP_VerificationActivity extends AppCompatActivity {
     public void verifyPinOperation() {
 
         boolean check = true;
-        String otpNumber = verifypin.getText().toString().trim();
+        String otpNumber = verifyPin.getText().toString().trim();
         String Usermobilenumber = HighwayPreface.getString(getApplicationContext(), "phone_number");
 
         if (otpNumber.isEmpty()) {
-            verifypin.setError("enter a valid otp");
+            verifyPin.setError("enter a valid otp");
             check = false;
         } else {
-            verifypin.setError(null);
+            verifyPin.setError(null);
         }
 
         if (check) {
-            if (verifypin != null) {
+            if (verifyPin != null) {
 
                 VerifyOTPRequest verifyOTPRequest = new VerifyOTPRequest();
                 verifyOTPRequest.setOtp(otpNumber);
@@ -129,6 +129,4 @@ public class OTP_VerificationActivity extends AppCompatActivity {
         }.start();
 
     }
-
-
 }

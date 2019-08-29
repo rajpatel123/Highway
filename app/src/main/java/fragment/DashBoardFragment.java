@@ -36,14 +36,18 @@ public class DashBoardFragment extends Fragment {
     public static DashBoardFragment newInstance() {
         DashBoardFragment fragment = new DashBoardFragment();
         Bundle args = new Bundle();
-
-        fragment.setArguments(args);
+       fragment.setArguments(args);
         return fragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+
+        }
 
     }
 

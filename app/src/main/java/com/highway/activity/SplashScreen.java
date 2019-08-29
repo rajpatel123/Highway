@@ -12,31 +12,34 @@ import utils.HighwayPreface;
 
 public class SplashScreen extends AppCompatActivity {
 
+  //  private static int SPLASH_TIME_OUT = 3000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        new Handler().postDelayed(splashRunnable,4000);
+        splashScreenHandler();
 
     }
 
 
+    public void splashScreenHandler() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-    Runnable splashRunnable = new Runnable() {
-        @Override
-        public void run() {
-
-            if (HighwayPreface.getBoolean(SplashScreen.this, Constants.LOGGED_IN)){
-                Intent i = new Intent(SplashScreen.this,MainActivity.class);
-                startActivity(i);
-            }else{
-                Intent i = new Intent(SplashScreen.this, LoginActivity.class);
-                startActivity(i);
+                if (HighwayPreface.getBoolean(SplashScreen.this, Constants.LOGGED_IN)) {
+                    Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    Intent i = new Intent(SplashScreen.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
+        },3000);
+    }
 
-
-            finish();
-        }
-    };
 }

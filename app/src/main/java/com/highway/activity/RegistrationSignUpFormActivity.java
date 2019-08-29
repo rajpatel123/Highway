@@ -33,7 +33,7 @@ import utils.Utils;
 
 public class RegistrationSignUpFormActivity extends AppCompatActivity {
 
-    private ImageView regBackArrow, signUp_Profile_image, calenderDatePicker;
+    private ImageView regBackArrow, signUpProfileImage, calenderDatePicker;
     private EditText name, dobDate, email;
     private RadioButton userMale, userFemale, userDiver, userCustomer;
     private String gender;
@@ -53,7 +53,7 @@ public class RegistrationSignUpFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration_signup_form);
 
         regBackArrow = findViewById(R.id.registration_Back_Arrow);
-        signUp_Profile_image = findViewById(R.id.reg_faculty_image);
+        signUpProfileImage = findViewById(R.id.reg_faculty_image);
         calenderDatePicker = findViewById(R.id.calenderPicker);
         dobDate = findViewById(R.id.user_dob);
         // calenderDatePicker.setEnabled(false);
