@@ -103,8 +103,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-
                             finish();
+
                         } else if (loginResponse.getUserStatus().equalsIgnoreCase("0")) {
 
                             Intent intent = new Intent(LoginActivity.this, OTP_VerificationActivity.class);
@@ -120,7 +120,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             Toast.makeText(LoginActivity.this, "you are not Register", Toast.LENGTH_SHORT).show();
                             finish();
-
                         }
                     }
                 }

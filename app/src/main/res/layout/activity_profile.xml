@@ -1,45 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margin_2"
     tools:context=".activity.ProfileActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/relative_one"
+
+    <LinearLayout
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_180"
-        android:background="@color/blue">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ImgBack"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/relative_one"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/back_arrow_icon"
-            android:tint="@color/white" />
+            android:background="@color/blue">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ImgBack"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
-
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
+                android:id="@+id/ImgBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/profile_image"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/margin_left_10"
+                android:layout_marginTop="@dimen/margin_top_10"
+                android:src="@drawable/back_arrow_icon"
                 android:tint="@color/white" />
 
             <TextView
-                android:id="@+id/profileName"
+                android:id="@+id/UserPNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/userPName"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:text="+91-8210380660"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sub_title"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_15"/>
+
+            <TextView
+                android:id="@+id/userPName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userPImage"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
                 android:padding="@dimen/padding_3"
@@ -48,277 +56,24 @@
                 android:textSize="@dimen/title"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/profileUsernumber"
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userPImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="+91-8210380660"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sub_title"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_below="@+id/ImgBack"
+                android:layout_centerInParent="true"
+                android:src="@drawable/profile_image"
+                android:tint="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/relative_two"
+    <LinearLayout
+        android:id="@+id/txtLinear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/relative_one">
-
-        <LinearLayout
-            android:id="@+id/txt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_profile"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_5">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_20"
-                android:background="@drawable/email_background_profile">
-
-                <ImageView
-                    android:id="@+id/email_button"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_gravity="center"
-                    android:src="@drawable/email_profile_icon" />
-            </FrameLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Email"
-                    android:textColor="@color/simple_white"
-                    android:textSize="@dimen/sub_title"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/profileuseEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/email"
-                    android:textColor="@color/Black"
-                    android:textSize="@dimen/sub_title" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/txt_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_email"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_5">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_20"
-                android:background="@drawable/gender_background_profile">
-
-                <ImageView
-                    android:id="@+id/gender_button"
-                    android:layout_width="18dp"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_gravity="center"
-                    android:src="@drawable/gender_profile_icon" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Gender"
-                    android:textColor="@color/simple_white"
-                    android:textSize="@dimen/sub_title" />
-
-                <TextView
-                    android:id="@+id/userGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Male"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sub_title" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/txt_dateofbirth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_gender"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_5">
-            <!-- android:visibility="gone"> -->
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_20"
-                android:background="@drawable/birth_background_profile">
-
-                <ImageView
-                    android:id="@+id/birth_button"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_gravity="center"
-                    android:src="@drawable/date_of_birth_profile_icon" />
-
-            </FrameLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Date Of Birth"
-                    android:textColor="@color/simple_white"
-                    android:textSize="@dimen/sub_title" />
-
-                <TextView
-                    android:id="@+id/userDob"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="01/06/1993"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sub_title" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/txt_member_since"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_dateofbirth"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_5">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_20"
-                android:background="@drawable/member_since_background_profile">
-
-                <ImageView
-                    android:id="@+id/member_since_button"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_gravity="center"
-                    android:src="@drawable/member_since_profile_icon" />
-            </FrameLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Member Since"
-                    android:textSize="@dimen/sub_title" />
-
-                <TextView
-                    android:id="@+id/profileMember"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="March 2019"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sub_title" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/txt_emergency_contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_member_since"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_5">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_20"
-                android:background="@drawable/emergency_background_profile">
-
-                <ImageView
-                    android:id="@+id/emergency_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_gravity="center"
-                    android:src="@drawable/emergency_profile_icon" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Emergency Contacts"
-                    android:textColor="@color/simple_white"
-                    android:textSize="@dimen/sub_title" />
-
-                <TextView
-                    android:id="@+id/profileEmerGencyContacts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Share Driverr with trusted contacts"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sub_title" />
-            </LinearLayout>
-        </LinearLayout>
+        android:layout_below="@+id/linear1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txt_profile"
@@ -330,71 +85,446 @@
             android:text="Profile"
             android:textColor="@color/black_titles"
             android:textSize="@dimen/title" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relative_two"
-        android:paddingTop="@dimen/margin_10">
-
-        <LinearLayout
-            android:id="@+id/txt_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_others"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="@dimen/padding_bottom_30">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_20"
-                android:background="@drawable/logout_background_profile">
-
-                <ImageView
-                    android:id="@+id/logout_button"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_gravity="center"
-                    android:src="@drawable/logout_profile_icon" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Logout"
-                    android:textSize="@dimen/title" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/txt_others"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_5"
-            android:padding="@dimen/padding_5"
-            android:text="Others"
-            android:textColor="@color/black_titles"
-            android:textSize="@dimen/title" />
 
         <View
+            android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="2px"
             android:background="@color/simple_white" />
-    </RelativeLayout>
-</RelativeLayout>
+    </LinearLayout>
 
-</ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtLinear1"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/profileScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relative_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/txt_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_5">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:background="@drawable/user_name_background_profile">
+
+                        <ImageView
+                            android:id="@+id/Name_image"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_gravity="center"
+                            android:src="@drawable/profile_image" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Name"
+                            android:textColor="@color/simple_white"
+                            android:textSize="@dimen/sub_title"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/profileuserName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/name"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/txt_user_mob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/txt_Name"
+                    android:padding="@dimen/padding_5">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:background="@drawable/mob_background_profile">
+
+                        <ImageView
+                            android:id="@+id/mob_img"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_phone_iphone_white_24dp" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Mob Number"
+                            android:textColor="@color/simple_white"
+                            android:textSize="@dimen/sub_title"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/user_mob_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/User_Mob"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/txt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/txt_user_mob"
+                    android:padding="@dimen/padding_5">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:background="@drawable/email_background_profile">
+
+                        <ImageView
+                            android:id="@+id/email_button"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_gravity="center"
+                            android:src="@drawable/email_profile_icon" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Email"
+                            android:textColor="@color/simple_white"
+                            android:textSize="@dimen/sub_title"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/profileuseEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/email"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/txt_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_email"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_5">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:background="@drawable/gender_background_profile">
+
+                        <ImageView
+                            android:id="@+id/gender_button"
+                            android:layout_width="18dp"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gender_profile_icon" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Gender"
+                            android:textColor="@color/simple_white"
+                            android:textSize="@dimen/sub_title" />
+
+                        <TextView
+                            android:id="@+id/userGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Male"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/txt_dateofbirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_gender"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_5">
+                    <!-- android:visibility="gone"> -->
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:background="@drawable/birth_background_profile">
+
+                        <ImageView
+                            android:id="@+id/birth_button"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_gravity="center"
+                            android:src="@drawable/date_of_birth_profile_icon" />
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Date Of Birth"
+                            android:textColor="@color/simple_white"
+                            android:textSize="@dimen/sub_title" />
+
+                        <TextView
+                            android:id="@+id/userDob"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="01/06/1993"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/txt_member_since"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_dateofbirth"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_5">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:background="@drawable/member_since_background_profile">
+
+                        <ImageView
+                            android:id="@+id/member_since_button"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_gravity="center"
+                            android:src="@drawable/member_since_profile_icon" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Member Since"
+                            android:textSize="@dimen/sub_title" />
+
+                        <TextView
+                            android:id="@+id/profileMember"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="March 2019"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/txt_emergency_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_member_since"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_5">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:background="@drawable/emergency_background_profile">
+
+                        <ImageView
+                            android:id="@+id/emergency_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_gravity="center"
+                            android:src="@drawable/emergency_profile_icon" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Emergency Contacts"
+                            android:textColor="@color/simple_white"
+                            android:textSize="@dimen/sub_title" />
+
+                        <TextView
+                            android:id="@+id/profileEmerGencyContacts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Share Driverr with trusted contacts"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_emergency_contact"
+                    android:paddingTop="@dimen/margin_10">
+
+                    <LinearLayout
+                        android:id="@+id/txt_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_others"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/margin_50"
+                       android:padding="@dimen/padding_5">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_20"
+                            android:background="@drawable/logout_background_profile">
+
+                            <ImageView
+                                android:id="@+id/logout_button"
+                                android:layout_width="@dimen/margin_25"
+                                android:layout_height="@dimen/margin_25"
+                                android:layout_gravity="center"
+                                android:src="@drawable/logout_profile_icon" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/margin_10"
+                            android:orientation="vertical"
+                            android:padding="@dimen/padding_5"
+                          >
+
+                            <TextView
+                                android:id="@+id/userLogOut"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="Logout"
+                                android:textSize="@dimen/title" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_others"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_5"
+                        android:padding="@dimen/padding_5"
+                        android:text="Others"
+                        android:textColor="@color/black_titles"
+                        android:textSize="@dimen/title" />
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="@color/simple_white" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

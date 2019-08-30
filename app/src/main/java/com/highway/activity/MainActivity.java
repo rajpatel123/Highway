@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
 
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -162,9 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_send:
                 break;
-            case R.id.nev_logOut:
-                logout();   //logout operation
-                break;
+
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -190,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         HighwayPreface.putBoolean(MainActivity.this, Constants.LoginCheck, false);
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
-
     }
 
 }

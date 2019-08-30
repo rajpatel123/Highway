@@ -85,6 +85,7 @@
     <color name="emergency_background_profile">#ff0000</color>
     <color name="logout_backgroud_color">#580606</color>
     <color name="app_bg_color">#9E9E9E</color>
+    <color name="phone_Background_color">#ff8105</color>
 
 
     <color name="project_color">#2389ee</color>
