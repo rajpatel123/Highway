@@ -174,9 +174,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             if (fragmentManager != null) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.ContaintMain, fragment, "");
+                fragmentTransaction.replace(R.id.fragmentContainer, fragment, "");
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
             }
         } catch (Exception e) {
             e.printStackTrace();
