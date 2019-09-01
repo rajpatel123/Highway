@@ -185,10 +185,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void logout() {
+    /*public void logout() {
         HighwayPreface.putBoolean(MainActivity.this, Constants.LoginCheck, false);
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
-    }
+    }*/
 
 }
