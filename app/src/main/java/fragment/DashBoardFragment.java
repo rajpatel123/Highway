@@ -63,10 +63,10 @@ public class DashBoardFragment extends Fragment {
         fragmentList.add(new CompletedFragment());
         fragmentList.add(new CanceledFragment());
 
-        MyBookingFragmentPagerAdapter myBookingFragmentPagerAdapter = new MyBookingFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
+        MyBookingFragmentPagerAdapter myBookingFragmentPagerAdapter = new MyBookingFragmentPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList);
 
-        myBookingTabLayout.setupWithViewPager(myBookingViewPager);
         myBookingViewPager.setAdapter(myBookingFragmentPagerAdapter);
+        myBookingTabLayout.setupWithViewPager(myBookingViewPager);
 
         myBookingTabLayout.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
@@ -105,9 +105,14 @@ public class DashBoardFragment extends Fragment {
         return view;
     }
 
-    private FragmentManager getSupportFragmentManager() {
-        return null;
-    }
+
+    /**
+     * Its bad practice that's why commented
+     * @return
+     */
+//    private FragmentManager getSupportFragmentManager() {
+//        return null;
+//    }
 
 
     @Override
