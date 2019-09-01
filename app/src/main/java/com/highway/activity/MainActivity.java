@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fragment.DashBoardFragment;
+import fragment.NewBookingFragmentMapActivity;
 import utils.Constants;
 import utils.HighwayPreface;
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
 
-        tvName= headerView.findViewById(R.id.txt_profile_name);
+        tvName = headerView.findViewById(R.id.txt_profile_name);
         tvMobileNo = headerView.findViewById(R.id.txt_mobNo);
         circleImageView = headerView.findViewById(R.id.profile_imageView);
         imgHeaderProfile = headerView.findViewById(R.id.NevHeaderProfileBtn);
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imgHeaderProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvName.setText(name);
         tvMobileNo.setText(userMobNo);
 
-       if (!TextUtils.isEmpty(image)) {
+        if (!TextUtils.isEmpty(image)) {
             Picasso.with(this).load(image)
                     .error(R.drawable.logo_highway)
                     .into(circleImageView);
@@ -95,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .load(R.drawable.logo_highway)
                     .error(R.drawable.logo_highway)
                     .into(circleImageView);
-
         }
 
     }
@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.nav_new_booking:
+                fragment = NewBookingFragmentMapActivity.newInstance();
+                replaceFragment(fragment);
                 break;
 
             case R.id.nav_my_booking:
@@ -183,10 +185,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void logout() {
+    /*public void logout() {
         HighwayPreface.putBoolean(MainActivity.this, Constants.LoginCheck, false);
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
-    }
+    }*/
 
 }
