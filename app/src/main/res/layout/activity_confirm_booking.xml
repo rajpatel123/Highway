@@ -234,7 +234,7 @@
             android:id="@+id/DropConformImg2"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_left_15"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="@dimen/margin_top_15"
             android:src="@drawable/ic_lens_red_24dp" />
 
@@ -242,7 +242,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="@dimen/_10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -253,8 +252,7 @@
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   >
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/DropFabImgCnfBooking"
@@ -276,7 +274,7 @@
                         android:textStyle="bold" />
 
                     <View
-                        android:layout_width="300dp"
+                        android:layout_width="320dp"
                         android:layout_height="1dp"
                         android:layout_below="@+id/DropTextCnfBooking"
                         android:background="@color/app_bg_color" />
@@ -308,13 +306,13 @@
                         android:layout_width="300dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
-                        android:text="Raj"
                         android:gravity="center_vertical"
+                        android:text="Raj"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <View
-                        android:layout_width="300dp"
+                        android:layout_width="320dp"
                         android:layout_height="1dp"
                         android:layout_below="@+id/txtRaj"
                         android:background="@color/app_bg_color" />
@@ -338,9 +336,9 @@
                         android:layout_width="300dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:text="9988776655"
                         android:textColor="@color/black"
-                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <View
@@ -387,16 +385,185 @@
 
 
         </LinearLayout>
-
-
     </LinearLayout>
 
+    <!--Drop Another location -->
+    <LinearLayout
+        android:id="@+id/linearConFormPage4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearConFormPage3"
+        android:layout_marginLeft="@dimen/margin_left_5"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="@dimen/margin_right_5"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10dp"
+        android:visibility="gone">
 
+        <ImageView
+            android:id="@+id/DropConformImg3"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="@dimen/margin_top_15"
+            android:src="@drawable/ic_lens_red_24dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/DropFabImgCnfBooking2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/DropTextCnfBooking2"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_favorite_in_pick_up_location_24dp" />
+
+                    <TextView
+                        android:id="@+id/DropTextCnfBooking2"
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Sirdi Pur Bihar India"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="320dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/DropTextCnfBooking2"
+                        android:background="@color/app_bg_color" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/RajTxtIcon2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/txtRaj2"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_contact_phone_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/txtRaj2"
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Raj"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="320dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/txtRaj2"
+                        android:background="@color/app_bg_color" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtMobNo2"
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="9988776655"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="300dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/txtMobNo2"
+                        android:background="@color/app_bg_color" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/CheckSender2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/txtsameAsSender2"
+                        android:src="@drawable/ic_delete_24dp" />
+
+                    <TextView
+                        android:id="@+id/txtsameAsSender2"
+                        android:layout_width="270dp"
+                        android:layout_height="30dp"
+                        android:layout_toRightOf="@+id/CheckSender2"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Same as sender"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--Adding Drop another location  -->
     <LinearLayout
         android:id="@+id/linearCnfDropPage"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/linearConFormPage3"
+        android:layout_below="@+id/linearConFormPage4"
         android:layout_marginLeft="@dimen/margin_left_5"
         android:layout_marginTop="20dp"
         android:layout_marginRight="@dimen/margin_right_5"
@@ -412,28 +579,26 @@
             android:src="@drawable/ic_add_another_drop_location_24dp" />
 
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_left_15"
+            android:src="@drawable/ic_favorite_in_pick_up_location_24dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_right_25"
-            android:text="@string/bangalore_international_airport_pvt_ltd"
+            android:layout_marginLeft="@dimen/padding_left_20"
+            android:text="@string/add_another_drop_location"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="65dp"
             android:background="@color/app_bg_color" />
-
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:src="@drawable/ic_favorite_in_pick_up_location_24dp"
-           android:layout_marginLeft="@dimen/padding_left_15"/>
     </LinearLayout>
-
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/ConformToolBar"

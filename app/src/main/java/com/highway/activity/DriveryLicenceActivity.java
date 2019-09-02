@@ -338,6 +338,9 @@ public class DriveryLicenceActivity extends AppCompatActivity {
 
         if (input_DL_Validation()){
 
+            /*dL_Number = dlNumber.getText().toString();
+            dL_Expire = dlExpDate.getText().toString();*/
+
                 UploadDLRequest uploadDLRequest = new UploadDLRequest();
                 uploadDLRequest.setLicenseNumber(dL_Number);
                 uploadDLRequest.setExpiryDate(dL_Expire);
