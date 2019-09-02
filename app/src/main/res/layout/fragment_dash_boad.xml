@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        app:tabMode="scrollable"
         />
 
     <android.support.v4.view.ViewPager
@@ -25,6 +26,5 @@
         android:layout_below="@+id/myBookingViewpager"
         android:layout_alignParentBottom="true"
         android:gravity="center"/>
-
 
 </RelativeLayout>

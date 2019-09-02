@@ -7,22 +7,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ViewFlipper;
 
 import com.highway.R;
 
 
-public class NewBookingFragmentMapActivity extends Fragment {
+public class NewBookingFragmentMap extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
 
-    public NewBookingFragmentMapActivity() {
+    public NewBookingFragmentMap() {
         // Required empty public constructor
     }
 
-    public static NewBookingFragmentMapActivity newInstance() {
-        NewBookingFragmentMapActivity fragment = new NewBookingFragmentMapActivity();
+    public static NewBookingFragmentMap newInstance() {
+        NewBookingFragmentMap fragment = new NewBookingFragmentMap();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
