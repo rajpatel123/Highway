@@ -178,6 +178,7 @@
     <dimen name="margin_width_80">80dp</dimen>
 
     <dimen name="margin_left_50">50sp</dimen>
+    <dimen name="margin_left_55">55sp</dimen>
     <dimen name="margin_left_60">60sp</dimen>
     <dimen name="margin_left_120">120sp</dimen>
 
