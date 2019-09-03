@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.highway.R;
 
 public class UpComingFragment extends Fragment {
+    private View recyclerView;
 
     public UpComingFragment() {
 
