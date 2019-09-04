@@ -25,11 +25,13 @@
                 android:layout_margin="5dp">
 
                 <TextView
+                    android:id="@+id/UpcomingDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/margin_5"
                     android:text="30 Aug"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="16dp" />
             </LinearLayout>
 
@@ -39,6 +41,7 @@
                 android:layout_marginTop="@dimen/margin_top_5">
 
                 <ImageView
+                    android:id="@+id/UpcomingImg"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:padding="5dp"
@@ -53,11 +56,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/UpcomingPickUpAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:text="IBM India Pvt Ltd D3 Block Vittal Mallya rd ,Kg Halli,D'Souza Layout ,Ashok"
                     android:textColor="@color/black" />
-
 
             </LinearLayout>
 
@@ -68,11 +71,11 @@
                 android:gravity="bottom">
 
                 <TextView
+                    android:id="@+id/UpcomingVehicleName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TATA ACE "
                     android:textColor="@color/black" />
-
             </LinearLayout>
         </LinearLayout>
 
@@ -96,9 +99,9 @@
                 android:layout_margin="5dp">
 
                 <TextView
+                    android:id="@+id/UpcomingTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="04:45 PM"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
@@ -115,6 +118,7 @@
                 android:layout_marginTop="@dimen/margin_top_5">
 
                 <ImageView
+                    android:id="@+id/UpcomingDeliverImg"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:padding="5dp"
@@ -129,6 +133,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/UpcomingDeliverAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:text="IBM India Pvt Ltd D3 Block Vittal Mallya rd ,Kg Halli,D'Souza Layout ,Ashok"
@@ -143,6 +148,7 @@
                 android:layout_gravity="center_horizontal">
 
                 <TextView
+                    android:id="@+id/UpcomingIndication"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -183,6 +189,7 @@
                     android:padding="@dimen/margin_5"
                     android:text="30 Aug"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="16dp" />
             </LinearLayout>
 
