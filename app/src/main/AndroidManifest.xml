@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:label">
-        <activity android:name=".activity.BookingDetailsAccepted"></activity>
+        <activity android:name=".activity.ConformBookingBottomSheet"></activity>
+        <activity android:name=".activity.BookingDetailsAccepted" />
         <activity android:name=".activity.ConfirmBooking" />
         <activity android:name=".activity.VehicleRcDetails" />
         <activity android:name=".activity.DriveryLicenceActivity" />

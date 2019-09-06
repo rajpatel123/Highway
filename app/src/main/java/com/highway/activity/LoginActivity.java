@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         nextBtn.setOnClickListener(this);
 
-
     }
 
 
@@ -50,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             default:
         }
-
     }
 
     private boolean validateInput(String phone_number, String password) {
