@@ -222,7 +222,9 @@ public class VehicleRcDetails extends AppCompatActivity {
 
             imageViewVichealFont.setVisibility(View.VISIBLE);
             Bitmap bitmap = CameraUtils.optimizeBitmap(BITMAP_SAMPLE_SIZE, imageStoragePath);
+
             base64ImageServerVRc = getEncoded64ImageStringFromBitmap(bitmap);
+
             imageViewVichealFont.setImageBitmap(bitmap);
 
         } catch (NullPointerException e) {

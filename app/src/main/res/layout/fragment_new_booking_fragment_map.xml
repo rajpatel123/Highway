@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
-    tools:context="fragment.NewBookingFragmentMapActivity">
+    tools:context="fragment.NewBookingFragmentMap">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -124,11 +124,11 @@
                 android:layout_height="wrap_content">
 
 
-              <!--  <include
+               <include
                     layout="@layout/driverlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"/>-->
+                    android:layout_alignParentBottom="true"/>
 
 
                 <include
@@ -140,6 +140,7 @@
 
         </LinearLayout>
 
+
         <ProgressBar
             android:id="@+id/loader"
             android:layout_width="wrap_content"
@@ -147,11 +148,12 @@
             android:layout_gravity="center"
             android:translationZ="@dimen/_12dp" />
 
-<!--        <fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--            android:id="@+id/map"-->
-<!--            android:name="com.google.android.gms.maps.SupportMapFragment"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
+      <!--  <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
+
     </FrameLayout>
 
 </RelativeLayout>

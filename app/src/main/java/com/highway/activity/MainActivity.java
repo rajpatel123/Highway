@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import fragment.DashBoardFragment;
-import fragment.NewBookingFragmentMapActivity;
+import fragment.NewBookingFragmentMap;
 import utils.Constants;
 import utils.HighwayPreface;
 
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.nav_new_booking:
-                fragment = NewBookingFragmentMapActivity.newInstance();
+                fragment = NewBookingFragmentMap.newInstance();
                 replaceFragment(fragment);
                 break;
 
@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_send:
                 break;
-
         }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

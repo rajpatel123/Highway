@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 
 import com.highway.R;
 
-import fragment.NewBookingFragmentMapActivity;
+import fragment.NewBookingFragmentMap;
 
-public class BottomSheetNewBookingDialog extends NewBookingFragmentMapActivity {
+public class BottomSheetNewBookingDialog extends NewBookingFragmentMap {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

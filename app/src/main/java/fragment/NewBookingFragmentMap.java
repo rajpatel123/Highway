@@ -11,17 +11,17 @@ import android.view.ViewGroup;
 import com.highway.R;
 
 
-public class NewBookingFragmentMapActivity extends Fragment {
+public class NewBookingFragmentMap extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
 
-    public NewBookingFragmentMapActivity() {
+    public NewBookingFragmentMap() {
         // Required empty public constructor
     }
 
-    public static NewBookingFragmentMapActivity newInstance() {
-        NewBookingFragmentMapActivity fragment = new NewBookingFragmentMapActivity();
+    public static NewBookingFragmentMap newInstance() {
+        NewBookingFragmentMap fragment = new NewBookingFragmentMap();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -37,9 +37,9 @@ public class NewBookingFragmentMapActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_new_booking_fragment_map, container, false);
+        View view =  inflater.inflate(R.layout.fragment_new_booking_fragment_map, container, false);
+        return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -52,7 +52,6 @@ public class NewBookingFragmentMapActivity extends Fragment {
         super.onDetach();
 
     }
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

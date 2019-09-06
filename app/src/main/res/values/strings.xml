@@ -50,6 +50,10 @@
     <string name="User_Mob">User mobile no</string>
     <string name="enter_otp_on_phone">Enter the otp send on your phone</string>
     <string name="search">Search</string>
+    <string name="bangalore_international_airport_pvt_ltd">Bangalore international airport pvt ltd</string>
+    <string name="add_another_drop_location">Add another drop location</string>
+    <string name="Pune_Airport">Pune Airport</string>
+    <string name="location">Bangalore international airpoart pvt LTD,Kempegowda inti Airpoart Rd,Hunchur,Karnataka 560300,India</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="upcoming_fragment">Hello UpCoing fragment</string>
