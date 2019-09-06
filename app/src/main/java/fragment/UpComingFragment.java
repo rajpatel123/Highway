@@ -59,8 +59,32 @@ public class UpComingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_up_coming, container, false);
 
         recyclerView =  view.findViewById(R.id.Upcoming_RecyclerView);
+
+        prepareList();
         return view;
 
+
+    }
+
+    private void prepareList() {
+
+        upComingFragmentModelStaticallies = new ArrayList<>();
+
+        for (int i = 0; i < 20; i++) {
+            UpComingFragmentModelStatically upcominglist = new UpComingFragmentModelStatically();
+            /*upcominglist.setUpcomingDateTv("30 Aug" + i);*/
+            upcominglist.setUpcomingDateTv("30 Aug");
+            upcominglist.setUpcomingTimeTv("04:45 PM");
+            upcominglist.setUpcomingPickUpAddressTv("IBM India Pvt Ltd D3 Block Vittal Mallya rd ,Kg Halli,D'Souza Layout ,Ashok");
+            upcominglist.setUpcomingDeliverAddressTv("IBM India Pvt Ltd D3 Block Vittal Mallya rd ,Kg Halli,D'Souza Layout ,Ashok");
+            upcominglist.setUpcomingIndicationTv("UPCOMING");
+            upcominglist.setUpcomingVehicleNameTv("TATA ACE" );
+
+               /*upcominglist.setVUpcomingImgImg().toString();
+               upcominglist.setUpcomingDeliverImgImg().toString();*/
+
+            upComingFragmentModelStaticallies.add(upcominglist);
+        }
 
     }
 
@@ -79,34 +103,15 @@ public class UpComingFragment extends Fragment {
 
             Log.d("Data Size ",""+upComingFragmentModelStaticallies.size());
 
-            upComingFragmentAdapter = new UpComingFragmentAdapter(getActivity(),upComingFragmentModelStaticallies,this);
+            upComingFragmentAdapter = new UpComingFragmentAdapter(getActivity(),upComingFragmentModelStaticallies);
 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(upComingFragmentAdapter);
 
-            List<UpComingFragmentModelStatically> upComingFragmentModelStaticallyList = new ArrayList<>();
 
-            for (int i = 0; i < 20; i++) {
-                UpComingFragmentModelStatically upcominglist = new UpComingFragmentModelStatically();
 
-               upcominglist.setUpcomingDateTv("30 Aug" + i);
-               upcominglist.setUpcomingTimeTv("04:45 PM" + i);
-               upcominglist.setUpcomingPickUpAddressTv("IBM India Pvt Ltd D3 Block Vittal Mallya rd ,Kg Halli,D'Souza Layout ,Ashok" + i);
-               upcominglist.setUpcomingDeliverAddressTv("IBM India Pvt Ltd D3 Block Vittal Mallya rd ,Kg Halli,D'Souza Layout ,Ashok" + i);
-               upcominglist.setUpcomingIndicationTv("UPCOMING" + i);
-               upcominglist.setUpcomingVehicleNameTv("TATA ACE " + i);
-
-               /*upcominglist.setVUpcomingImgImg().toString();
-               upcominglist.setUpcomingDeliverImgImg().toString();*/
-
-               upComingFragmentModelStaticallyList.add(upcominglist);
-            }
-
-            UpComingFragmentAdapter adapter = new UpComingFragmentAdapter(this, upComingFragmentModelStaticallyList);
-
-            recyclerView.setAdapter(adapter);
 
 
         }

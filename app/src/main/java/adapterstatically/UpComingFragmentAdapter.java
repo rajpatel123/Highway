@@ -2,6 +2,7 @@ package adapterstatically;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,22 +21,20 @@ public class UpComingFragmentAdapter extends RecyclerView.Adapter<UpComingFragme
 
     Context context;
     List<UpComingFragmentModelStatically>upComingFragmentModelStaticallies;
+    CallCsallBack callCsallBack;
 
-    public UpComingFragmentAdapter(Context context, List<UpComingFragmentModelStatically> upComingFragmentModelStaticallyList, UpComingFragment upComingFragment) {
+    public UpComingFragmentAdapter(Context context, List<UpComingFragmentModelStatically> upComingFragmentModelStaticallyList) {
         this.context = context;
         this.upComingFragmentModelStaticallies = upComingFragmentModelStaticallyList;
     }
 
-    public UpComingFragmentAdapter(UpComingFragment upComingFragment, List<UpComingFragmentModelStatically> upComingFragmentModelStaticallyList) {
-        this.upComingFragmentModelStaticallies = upComingFragmentModelStaticallyList;
-    }
 
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+       LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.fragment_up_coming_item,viewGroup,false);
         return new MyViewHolder(view);
 
@@ -43,6 +42,8 @@ public class UpComingFragmentAdapter extends RecyclerView.Adapter<UpComingFragme
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+
+        final UpComingFragmentModelStatically upcominghistory = upComingFragmentModelStaticallies.get(i);
 
         UpComingFragmentModelStatically upComingFragmentModelStatically = upComingFragmentModelStaticallies.get(i);
 
@@ -52,6 +53,16 @@ public class UpComingFragmentAdapter extends RecyclerView.Adapter<UpComingFragme
           myViewHolder.tvUpcomingDeliverAddress.setText(upComingFragmentModelStatically.getUpcomingDeliverAddressTv());
           myViewHolder.tvUpcomingVehicleName.setText(upComingFragmentModelStatically.getUpcomingVehicleNameTv());
           myViewHolder.tvUpcomingIndication.setText(upComingFragmentModelStatically.getUpcomingIndicationTv());
+
+
+      /*  myViewHolder..setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callCsallBack!=null){
+
+                } }
+        });*/
+
 
 
     }
@@ -80,4 +91,14 @@ public class UpComingFragmentAdapter extends RecyclerView.Adapter<UpComingFragme
 
         }
     }
+
+
+
+    public  interface CallCsallBack{
+        public  void onCall(String number);
+
+    }
+
+
+
 }

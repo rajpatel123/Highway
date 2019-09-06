@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/app_bg"
-    android:paddingTop="@dimen/_10dp"
+    android:paddingTop="3dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_5"
-        android:layout_marginRight="5dp"
         android:background="@color/white"
+        android:layout_margin="2dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -21,8 +20,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="5dp">
+                android:layout_gravity="bottom">
 
                 <TextView
                     android:id="@+id/UpcomingDate"
@@ -38,18 +36,19 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginTop="@dimen/margin_top_5">
 
                 <ImageView
                     android:id="@+id/UpcomingImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:padding="5dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_lens_green_24dp" />
+
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="@dimen/margin_180"
                 android:layout_height="@dimen/margin_top_60dp"
                 android:layout_margin="5dp"
                 android:background="@color/white"
@@ -65,14 +64,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
                 android:gravity="bottom">
 
                 <TextView
                     android:id="@+id/UpcomingVehicleName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TATA ACE "
                     android:textColor="@color/black" />
@@ -84,7 +82,7 @@
             android:layout_height="wrap_content">
 
             <View
-                android:layout_width="@dimen/margin_70"
+                android:layout_width="60dp"
                 android:layout_height="2dp"
                 android:background="@color/app_bg_color" />
         </LinearLayout>
@@ -96,7 +94,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+               >
 
                 <TextView
                     android:id="@+id/UpcomingTime"
@@ -119,14 +117,13 @@
 
                 <ImageView
                     android:id="@+id/UpcomingDeliverImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:padding="5dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_lens_red_24dp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="@dimen/margin_top_60dp"
                 android:layout_margin="5dp"
                 android:background="@color/white"
@@ -134,7 +131,7 @@
 
                 <TextView
                     android:id="@+id/UpcomingDeliverAddress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="60dp"
                     android:text="IBM India Pvt Ltd D3 Block Vittal Mallya rd ,Kg Halli,D'Souza Layout ,Ashok"
                     android:textColor="@color/black" />
@@ -143,18 +140,19 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/UpcomingIndication"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
                     android:background="@drawable/oval_shape_green"
                     android:gravity="center"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:layout_gravity="center_vertical"
                     android:text="UPCOMING "
+                    android:textSize="@dimen/_12dp"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -163,14 +161,15 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
+<!--visibility gone -->
+  <!--  <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginLeft="@dimen/margin_5"
         android:layout_marginRight="5dp"
         android:background="@color/white"
+       android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout
@@ -201,12 +200,11 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:padding="5dp"
                     android:src="@drawable/ic_lens_green_24dp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="@dimen/margin_180"
                 android:layout_height="@dimen/margin_top_60dp"
                 android:layout_margin="5dp"
                 android:background="@color/white"
@@ -222,7 +220,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:gravity="bottom">
@@ -262,11 +260,11 @@
                     android:text="04:45 PM"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
-                <!--<TimePicker
+                &lt;!&ndash;<TimePicker
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:timePickerMode="clock">
-                </TimePicker>-->
+                </TimePicker>&ndash;&gt;
             </LinearLayout>
 
             <LinearLayout
@@ -277,12 +275,11 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:padding="5dp"
                     android:src="@drawable/ic_lens_red_24dp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="@dimen/margin_180"
                 android:layout_height="@dimen/margin_top_60dp"
                 android:layout_margin="5dp"
                 android:background="@color/white"
@@ -298,7 +295,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal">
 
@@ -316,7 +313,7 @@
         </LinearLayout>
 
     </LinearLayout>
-
+-->
 
 
 
