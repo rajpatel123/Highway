@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="fragment.NewBookingFragmentMap">
 
     <FrameLayout
@@ -151,12 +152,14 @@
             android:layout_gravity="center"
             android:translationZ="@dimen/_12dp" />
 
-      <!--  <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        <fragment
             android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />-->
-
+            android:layout_gravity="center"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:name="com.highway.activity.MainActivity"
+            android:layout_height="match_parent"
+            />
     </FrameLayout>
 
 </RelativeLayout>
