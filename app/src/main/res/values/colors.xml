@@ -3,8 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-
-    <color name="dark_orange">#f37636</color>
+    <color name="dark_orange">#EB5406</color>
     <color name="heavy_dark_orange">#dc5d01</color>
     <color name="Fully_dark_orange">#f37636</color>
     <color name="black_secondary">#757575</color>
@@ -17,7 +16,8 @@
     <color name="black">#000000</color>
     <color name="dark_gray">#aaa</color>
     <color name="email_gray">#43AAAAAA</color>
-
+    <color name="edittextcolor">#33EBEBEB</color>
+    <color name="textcolor">#ffffff</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="mdtp_transparent_black">#7f000000</color>
     <color name="orange1">#ed854f</color>
