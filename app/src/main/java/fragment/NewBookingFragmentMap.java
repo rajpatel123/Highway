@@ -27,8 +27,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.highway.BuildConfig;
+
 import com.highway.R;
+import com.karumi.dexter.BuildConfig;
 
 
 public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallback, LocationListener {
@@ -69,7 +70,6 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
         } else {
             loadMap();
         }
-
 
         return view;
     }
@@ -217,7 +217,7 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
                                 intent.setAction(
                                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                                 Uri uri = Uri.fromParts("package",
-                                        BuildConfig.APPLICATION_ID, null);
+                                        BuildConfig.APPLICATION_ID, null);  // buildconfig error
                                 intent.setData(uri);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
