@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-import fragment.CanceledFragment;
+import fragment.CancledFragment;
 import fragment.CompletedFragment;
 import fragment.OnGoingFragment;
 import fragment.UpComingFragment;
@@ -40,7 +40,7 @@ public class MyBookingFragmentPagerAdapter extends FragmentPagerAdapter {
             return "UPCOMING";
         }else if (fragments.get(position)instanceof CompletedFragment){
             return "COMPLETED";
-        }if (fragments.get(position)instanceof CanceledFragment){
+        }if (fragments.get(position)instanceof CancledFragment){
             return "CANCELED";
         }
         return " ";

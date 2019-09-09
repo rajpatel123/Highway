@@ -29,8 +29,6 @@ public class UpComingFragment extends Fragment {
 
     List<UpComingFragmentModelStatically> upComingFragmentModelStaticallies = new ArrayList<>();
 
-
-
     public UpComingFragment() {
 
     }
@@ -109,9 +107,6 @@ public class UpComingFragment extends Fragment {
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(upComingFragmentAdapter);
-
-
-
 
 
         }

@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +60,7 @@ public class DashBoardFragment extends Fragment {
         fragmentList.add(new OnGoingFragment());
         fragmentList.add(new UpComingFragment());
         fragmentList.add(new CompletedFragment());
-        fragmentList.add(new CanceledFragment());
+        fragmentList.add(new CancledFragment());
 
         MyBookingFragmentPagerAdapter myBookingFragmentPagerAdapter = new MyBookingFragmentPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList);
 
