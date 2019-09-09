@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fragment.DashBoardFragment;
 import fragment.NewBookingFragmentMap;
+import fragment.WalletFragment;
 import utils.Constants;
 import utils.HighwayPreface;
 
@@ -148,6 +149,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_track_your_booking:
                 break;
             case R.id.nav_wallet:
+                fragment = WalletFragment.newInstance();
+                replaceFragment(fragment);
                 break;
             case R.id.nav_setting:
                 break;

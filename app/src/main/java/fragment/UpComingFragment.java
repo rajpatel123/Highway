@@ -25,7 +25,7 @@ public class UpComingFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private UpComingFragmentAdapter upComingFragmentAdapter;
-    private RecyclerView.Adapter UpComingFragmentAdapter;
+   // private RecyclerView.Adapter UpComingFragmentAdapter;
 
     List<UpComingFragmentModelStatically> upComingFragmentModelStaticallies = new ArrayList<>();
 

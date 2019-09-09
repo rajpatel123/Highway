@@ -7,6 +7,8 @@ import android.widget.TextView;
 public class WalletModelStatically {
 
     String tvNetAmount;
+    String tvAddMoneyView;
+    String etEnterRechargeAmount;
     String tvFirstMoney;
     String tvSecondMoney;
     String tvThirdMoney;
@@ -17,6 +19,8 @@ public class WalletModelStatically {
     public String toString() {
         return "WalletModelStatically{" +
                 "tvNetAmount='" + tvNetAmount + '\'' +
+                ", tvAddMoneyView='" + tvAddMoneyView + '\'' +
+                ", etEnterRechargeAmount='" + etEnterRechargeAmount + '\'' +
                 ", tvFirstMoney='" + tvFirstMoney + '\'' +
                 ", tvSecondMoney='" + tvSecondMoney + '\'' +
                 ", tvThirdMoney='" + tvThirdMoney + '\'' +
@@ -26,12 +30,29 @@ public class WalletModelStatically {
     }
 
 
+
     public String getTvNetAmount() {
         return tvNetAmount;
     }
 
     public void setTvNetAmount(String tvNetAmount) {
         this.tvNetAmount = tvNetAmount;
+    }
+
+    public String getTvAddMoneyView() {
+        return tvAddMoneyView;
+    }
+
+    public void setTvAddMoneyView(String tvAddMoneyView) {
+        this.tvAddMoneyView = tvAddMoneyView;
+    }
+
+    public String getEtEnterRechargeAmount() {
+        return etEnterRechargeAmount;
+    }
+
+    public void setEtEnterRechargeAmount(String etEnterRechargeAmount) {
+        this.etEnterRechargeAmount = etEnterRechargeAmount;
     }
 
     public String getTvFirstMoney() {
@@ -73,6 +94,8 @@ public class WalletModelStatically {
     public void setBtnAddAmount(String btnAddAmount) {
         this.btnAddAmount = btnAddAmount;
     }
+
+
 
 
 
