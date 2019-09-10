@@ -48,7 +48,6 @@ public class AllowPermissionActivity extends AppCompatActivity implements View.O
                 allowPermission();
 
         }
-
     }
 
     private void allowPermission() {
