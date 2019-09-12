@@ -103,7 +103,7 @@
                         android:src="@drawable/ic_lens_red_24dp" />
 
                     <ImageView
-                        android:id="@+id/dropFavoriteImg"
+                        android:id="@+id/DropAnotherlocationImg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_3"
@@ -113,7 +113,7 @@
                         android:src="@drawable/ic_add_broun_24dp" />
 
                     <View
-                        android:id="@+id/ViewDrop"
+                        android:id="@+id/DropView"
                         android:layout_width="1dp"
                         android:layout_height="25dp"
                         android:layout_marginTop="@dimen/margin_15"
@@ -136,7 +136,7 @@
 
 
                 <include
-                    layout="@layout/bottom_sheet_new_booking_fragment_map_dialog"
+                    layout="@layout/fragment_new_booking_map_bottom_sheet_dialog"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true" />
@@ -151,23 +151,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:translationZ="@dimen/_12dp" />
+        <!-- by sir-->
+            <fragment
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:name="com.highway.activity.MainActivity"
+                />
 
-        <fragment
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            class="com.google.android.gms.maps.SupportMapFragment"
-            android:name="com.highway.activity.MainActivity"
-            />
-
-        <!-- by sir
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-           android:id="@+id/map"
-           android:name="com.google.android.gms.maps.SupportMapFragment"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent" />
-           -->
+        <!-- by me
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+               android:id="@+id/map"
+               android:name="com.google.android.gms.maps.SupportMapFragment"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" />
+               -->
     </FrameLayout>
 
 </RelativeLayout>

@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
@@ -148,22 +149,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_track_your_booking:
                 break;
+
             case R.id.nav_wallet:
                 fragment = WalletFragment.newInstance();
                 replaceFragment(fragment);
                 break;
+
             case R.id.nav_setting:
                 break;
+
             case R.id.nav_notification:
                 break;
+
             case R.id.nav_rate_card:
                 break;
+
             case R.id.nav_help:
                 break;
+
             case R.id.nav_about:
                 break;
+
             case R.id.nav_share:
                 break;
+
             case R.id.nav_send:
                 break;
         }
@@ -174,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //kar raha hu sir click
+
     private void replaceFragment(Fragment fragment) {
         try {
             FragmentManager fragmentManager = getSupportFragmentManager();

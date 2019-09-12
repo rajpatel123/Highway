@@ -187,7 +187,6 @@
                         android:padding="5dp"
                         android:text="@string/Rs"
                         android:textSize="@dimen/_16dp" />
-
                 </LinearLayout>
 
                 <LinearLayout

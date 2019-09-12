@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_sheet"
+    android:id="@+id/newBooking_bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:visibility="gone"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+   <!-- -->
+
     <!---->
 
     <LinearLayout
@@ -19,13 +20,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
 
-
-
             <TextView
+                android:id="@+id/TxtAviVehicleName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tata Ace  "
@@ -44,6 +44,7 @@
                 android:src="@drawable/ic_local_highway_24dp" />
 
             <TextView
+                android:id="@+id/TxtNoAviVehicleName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No Vichle"
