@@ -44,6 +44,7 @@
                         android:layout_marginRight="2dp"
                         android:layout_toRightOf="@+id/pic_img"
                         android:background="@null"
+                        android:onClick="searchPickUpLocation"
                         android:hint="Pick up from location" />
 
                     <ImageView
@@ -91,6 +92,7 @@
                         android:layout_marginRight="2dp"
                         android:layout_toRightOf="@+id/drop_img"
                         android:background="@null"
+                        android:onClick="searchDropLocation"
                         android:hint="Enter drop location" />
 
                     <ImageView
@@ -103,7 +105,7 @@
                         android:src="@drawable/ic_lens_red_24dp" />
 
                     <ImageView
-                        android:id="@+id/DropAnotherlocationImg"
+                        android:id="@+id/imgDropAnotherlocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_3"
@@ -145,13 +147,14 @@
         </LinearLayout>
 
 
-        <ProgressBar
+        <!--<ProgressBar
             android:id="@+id/loader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:translationZ="@dimen/_12dp" />
+            android:translationZ="@dimen/_12dp" />-->
         <!-- by sir-->
+
             <fragment
                 android:id="@+id/map"
                 android:layout_width="match_parent"

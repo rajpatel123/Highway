@@ -1,9 +1,12 @@
 package fragment;
 
 import android.Manifest;
+import android.app.assist.AssistStructure;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -28,17 +32,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.highway.R;
 import com.highway.activity.ConfirmBooking;
 import com.highway.activity.MainActivity;
 import com.karumi.dexter.BuildConfig;
+
+import java.io.IOException;
+import java.util.List;
 
 
 public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallback, LocationListener {
@@ -61,12 +75,18 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
     private MainActivity mainActivity;
 
     private ImageView imgPic_img, imgPickupFavoriteImg, imgDrop_img, imgDropAnotherLocationImg;
-    private EditText edtSourceLocation, edtDestinationLocation;
+    private EditText edtLocationSearch, edtDestinationLocationSearch;
     private View viewDrop;
     private LinearLayout linearLayoutBottomSheet;
     private LinearLayout conformBookingBottomSheet;
     private TextView TvAviVehicleName, TvNoAviVehicleName;
     private Button BookLatter, BookNow;
+    private AssistStructure.ViewNode locationSearch;
+    private Location mLastLocation;
+
+    Marker mCurrLocationMarker;
+    GoogleApiClient mGoogleApiClient;
+    LocationRequest mLocationRequest;
 
     public NewBookingFragmentMap() {
         // Required empty public constructor
@@ -99,18 +119,23 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        /*if (Build.VERSION.SDK_INT >= 21) {
-            mainActivity.getWindow().setStatusBarColor(ContextCompat.getColor(mainActivity, R.color.transparent));
-        }
-*/
+        /*today*/
+
+        /*// Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync((OnMapReadyCallback) getActivity());*/
+
+     /* *   *  */
+
         /*fragment new booking id*/
         imgPic_img = view.findViewById(R.id.pic_img);
         imgPickupFavoriteImg = view.findViewById(R.id.pickupFavoriteImg);
         imgDrop_img = view.findViewById(R.id.drop_img);
-        imgDropAnotherLocationImg = view.findViewById(R.id.DropAnotherLocation);
+        imgDropAnotherLocationImg = view.findViewById(R.id.imgDropAnotherlocation);
         viewDrop = view.findViewById(R.id.DropView);
-        edtSourceLocation = view.findViewById(R.id.edt_pickUpFromLOcation);
-        edtDestinationLocation = view.findViewById(R.id.edt_DropLOcation);
+        edtLocationSearch = view.findViewById(R.id.edt_pickUpFromLOcation);
+        edtDestinationLocationSearch = view.findViewById(R.id.edt_DropLOcation);
         /* bottomsheet new booking bottomSheet*/
         linearLayoutBottomSheet = view.findViewById(R.id.newBooking_bottom_sheet);
         TvAviVehicleName = view.findViewById(R.id.TxtAviVehicleName);
@@ -131,8 +156,6 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
 
             }
         });
-
-
 
         return view;
     }
@@ -183,6 +206,19 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+          /*today */
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+            }
+        }
+        else {
+            mMap.setMyLocationEnabled(true);
+        }
+        /* *************** */
+
         try {
             mMap.setMyLocationEnabled(true);
         } catch (SecurityException ex) {
@@ -194,18 +230,45 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
             ex.printStackTrace();
         }
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(origin, 15));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(origin, 11));
 
     }
 
-    @Override
+   /* @Override
     public void onLocationChanged(Location location) {
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
         mMap.animateCamera(cameraUpdate);
         locationManager.removeUpdates(this);
+    }*/
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        mLastLocation = location;
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
+        //Place current location marker
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Current Position");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        mCurrLocationMarker = mMap.addMarker(markerOptions);
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
+        }
     }
+
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -270,7 +333,7 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
                 .setAction(getString(actionStringId), listener).show();
     }
 
-
+/*today*/
     private  void DistanceBetweenSourceAndDestination(){
 
         Location locationA = new Location("point A");
@@ -281,11 +344,63 @@ public class NewBookingFragmentMap extends Fragment implements OnMapReadyCallbac
         locationB.setLatitude(destLocation.latitude);
         locationB.setLongitude(destLocation.longitude);
 
-       /* double distance = locationA.distanceTo(locationB)/1000;
-        Toast.makeText(navigationActivity,""+distance+"km", Toast.LENGTH_SHORT).show();*/
+        double distance = locationA.distanceTo(locationB)/1000;
+        Toast.makeText(getContext(),""+distance+"km", Toast.LENGTH_SHORT).show();
 
     }
 
 
 
+/*today*/
+
+
+    public void searchPickUpLocation(View view) {
+
+        String location = edtLocationSearch.getText().toString();
+
+        List<Address> addressList = null;
+
+        if (location != null || !location.equals("")) {
+            Geocoder geocoder = new Geocoder(getContext());
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            Toast.makeText(getContext(),address.getLatitude()+" "+address.getLongitude(),Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
+
+    public void searchDropLocation(View view) {
+
+        String location = edtDestinationLocationSearch.getText().toString();
+
+        List<Address> addressList = null;
+
+        if (location != null || !location.equals("")) {
+            Geocoder geocoder = new Geocoder(getContext());
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            Toast.makeText(getContext(),address.getLatitude()+" "+address.getLongitude(),Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+/*******************/
 }

@@ -15,6 +15,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/ConformToolBar"
             android:layout_width="match_parent"
+            android:layout_margin="@dimen/margin_left_5"
             android:layout_height="wrap_content"
             android:background="@color/white">
 
@@ -24,26 +25,28 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/back_arrow_icon" />
 
-            <TextView
-                style="@style/CardView"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_left_120"
-                android:gravity="center"
-                android:text="Conform Booking"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:gravity="center_horizontal">
+
+                <TextView
+                    style="@style/CardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Conform Booking"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </android.support.v7.widget.Toolbar>
-
-
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10dp"
-        android:layout_below="@+id/toolBarlinear">
+        android:layout_below="@+id/toolBarlinear"
+        android:layout_marginTop="@dimen/_10dp">
 
         <!-- <RelativeLayout
              android:layout_width="match_parent"
@@ -54,12 +57,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:paddingBottom="250dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="250dp">
 
             <LinearLayout
                 android:id="@+id/linearConFormPage1"
-                android:layout_width="match_parent"
+                android:layout_width="390dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="@dimen/margin_left_5"
 
@@ -69,7 +72,7 @@
 
                 <ImageView
                     android:id="@+id/HelperConformImg1"
-                    android:layout_width="45dp"
+                    android:layout_width="40dp"
                     android:layout_height="60dp"
                     android:src="@drawable/ic_helper_person1_black_24dp" />
 
@@ -93,7 +96,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingTop="2dp"
-                        android:text="Helper's change is not included in hear" />
+                        android:text="Helper's change is not included in hear"
+                        android:textSize="@dimen/_12dp" />
                 </LinearLayout>
 
 
@@ -103,7 +107,7 @@
 
                     <ImageView
                         android:id="@+id/HelperPerson2"
-                        android:layout_width="45dp"
+                        android:layout_width="40dp"
                         android:layout_height="60dp"
                         android:layout_marginLeft="@dimen/margin_5"
                         android:layout_toRightOf="@+id/CountHealperPerson"
@@ -198,7 +202,7 @@
             <!--Pick Up Location -->
             <LinearLayout
                 android:id="@+id/linearConFormPage2"
-                android:layout_width="match_parent"
+                android:layout_width="390dp"
                 android:layout_height="60dp"
                 android:layout_below="@+id/ChooseNoOfHealperPerson"
                 android:layout_marginLeft="@dimen/margin_left_5"
@@ -215,7 +219,7 @@
                     android:src="@drawable/ic_lens_green_24dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="@dimen/_10dp"
@@ -269,7 +273,7 @@
             <!--Drop location -->
             <LinearLayout
                 android:id="@+id/linearConFormPage3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearConFormPage2"
                 android:layout_marginLeft="@dimen/margin_left_5"
@@ -345,7 +349,9 @@
                                 android:id="@+id/RajTxtIcon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="20dp"
+                                android:layout_alignParentBottom="true"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginBottom="1dp"
                                 android:layout_toRightOf="@+id/txtRaj"
                                 android:padding="2dp"
                                 android:src="@drawable/ic_contact_phone_black_24dp" />
@@ -390,8 +396,18 @@
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
+                            <ImageView
+                                android:id="@+id/phoneIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_toRightOf="@+id/txtMobNo"
+                                android:padding="2dp"
+                                android:src="@drawable/ic_local_phone_call" />
+
+
                             <View
-                                android:layout_width="300dp"
+                                android:layout_width="320dp"
                                 android:layout_height="1dp"
                                 android:layout_below="@+id/txtMobNo"
                                 android:background="@color/app_bg_color" />
@@ -437,177 +453,177 @@
             </LinearLayout>
 
             <!--Drop Another location  visibility gone-->
-           <!-- <LinearLayout
-                android:id="@+id/linearConFormPage4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linearConFormPage3"
-                android:layout_marginLeft="@dimen/margin_left_5"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="@dimen/margin_right_5"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:padding="@dimen/_10dp">&lt;!&ndash;android:visibility="gone"&ndash;&gt;
+            <!-- <LinearLayout
+                 android:id="@+id/linearConFormPage4"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/linearConFormPage3"
+                 android:layout_marginLeft="@dimen/margin_left_5"
+                 android:layout_marginTop="20dp"
+                 android:layout_marginRight="@dimen/margin_right_5"
+                 android:background="@color/white"
+                 android:orientation="horizontal"
+                 android:padding="@dimen/_10dp">&lt;!&ndash;android:visibility="gone"&ndash;&gt;
 
-                <ImageView
-                    android:id="@+id/DropConformImg3"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="@dimen/margin_top_15"
-                    android:src="@drawable/ic_lens_red_24dp" />
+                 <ImageView
+                     android:id="@+id/DropConformImg3"
+                     android:layout_width="20dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="8dp"
+                     android:layout_marginTop="@dimen/margin_top_15"
+                     android:src="@drawable/ic_lens_red_24dp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="vertical">
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="15dp"
+                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                         <RelativeLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content">
 
-                            <ImageView
-                                android:id="@+id/DropFabImgCnfBooking2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="20dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_toRightOf="@+id/DropTextCnfBooking2"
-                                android:padding="2dp"
-                                android:src="@drawable/ic_favorite_in_pick_up_location_24dp" />
+                             <ImageView
+                                 android:id="@+id/DropFabImgCnfBooking2"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="20dp"
+                                 android:layout_marginTop="10dp"
+                                 android:layout_toRightOf="@+id/DropTextCnfBooking2"
+                                 android:padding="2dp"
+                                 android:src="@drawable/ic_favorite_in_pick_up_location_24dp" />
 
-                            <TextView
-                                android:id="@+id/DropTextCnfBooking2"
-                                android:layout_width="300dp"
-                                android:layout_height="30dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Sirdi Pur Bihar India"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
+                             <TextView
+                                 android:id="@+id/DropTextCnfBooking2"
+                                 android:layout_width="300dp"
+                                 android:layout_height="30dp"
+                                 android:layout_weight="1"
+                                 android:gravity="center_vertical"
+                                 android:text="Sirdi Pur Bihar India"
+                                 android:textColor="@color/black"
+                                 android:textStyle="bold" />
 
-                            <View
-                                android:layout_width="320dp"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/DropTextCnfBooking2"
-                                android:background="@color/app_bg_color" />
-                        </RelativeLayout>
+                             <View
+                                 android:layout_width="320dp"
+                                 android:layout_height="1dp"
+                                 android:layout_below="@+id/DropTextCnfBooking2"
+                                 android:background="@color/app_bg_color" />
+                         </RelativeLayout>
 
-                    </LinearLayout>
+                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                         <RelativeLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content">
 
-                            <ImageView
-                                android:id="@+id/RajTxtIcon2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="20dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_toRightOf="@+id/txtRaj2"
-                                android:padding="2dp"
-                                android:src="@drawable/ic_contact_phone_black_24dp" />
+                             <ImageView
+                                 android:id="@+id/RajTxtIcon2"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="20dp"
+                                 android:layout_marginTop="10dp"
+                                 android:layout_toRightOf="@+id/txtRaj2"
+                                 android:padding="2dp"
+                                 android:src="@drawable/ic_contact_phone_black_24dp" />
 
-                            <TextView
-                                android:id="@+id/txtRaj2"
-                                android:layout_width="300dp"
-                                android:layout_height="30dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Raj"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
+                             <TextView
+                                 android:id="@+id/txtRaj2"
+                                 android:layout_width="300dp"
+                                 android:layout_height="30dp"
+                                 android:layout_weight="1"
+                                 android:gravity="center_vertical"
+                                 android:text="Raj"
+                                 android:textColor="@color/black"
+                                 android:textStyle="bold" />
 
-                            <View
-                                android:layout_width="320dp"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/txtRaj2"
-                                android:background="@color/app_bg_color" />
-                        </RelativeLayout>
+                             <View
+                                 android:layout_width="320dp"
+                                 android:layout_height="1dp"
+                                 android:layout_below="@+id/txtRaj2"
+                                 android:background="@color/app_bg_color" />
+                         </RelativeLayout>
 
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/txtMobNo2"
-                                android:layout_width="300dp"
-                                android:layout_height="30dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="9988776655"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <View
-                                android:layout_width="300dp"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/txtMobNo2"
-                                android:background="@color/app_bg_color" />
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <CheckBox
-                                android:id="@+id/CheckSender2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_toRightOf="@+id/txtsameAsSender2"
-                                android:src="@drawable/ic_delete_24dp" />
-
-                            <TextView
-                                android:id="@+id/txtsameAsSender2"
-                                android:layout_width="270dp"
-                                android:layout_height="30dp"
-                                android:layout_toRightOf="@+id/CheckSender2"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Same as sender"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-                    </LinearLayout>
+                     </LinearLayout>
 
 
-                </LinearLayout>
-            </LinearLayout>-->
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         android:orientation="horizontal">
+
+                         <RelativeLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content">
+
+                             <TextView
+                                 android:id="@+id/txtMobNo2"
+                                 android:layout_width="300dp"
+                                 android:layout_height="30dp"
+                                 android:layout_weight="1"
+                                 android:gravity="center_vertical"
+                                 android:text="9988776655"
+                                 android:textColor="@color/black"
+                                 android:textStyle="bold" />
+
+                             <View
+                                 android:layout_width="300dp"
+                                 android:layout_height="1dp"
+                                 android:layout_below="@+id/txtMobNo2"
+                                 android:background="@color/app_bg_color" />
+                         </RelativeLayout>
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal">
+
+                         <RelativeLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content">
+
+                             <CheckBox
+                                 android:id="@+id/CheckSender2"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content" />
+
+                             <ImageView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="5dp"
+                                 android:layout_toRightOf="@+id/txtsameAsSender2"
+                                 android:src="@drawable/ic_delete_24dp" />
+
+                             <TextView
+                                 android:id="@+id/txtsameAsSender2"
+                                 android:layout_width="270dp"
+                                 android:layout_height="30dp"
+                                 android:layout_toRightOf="@+id/CheckSender2"
+                                 android:layout_weight="1"
+                                 android:gravity="center_vertical"
+                                 android:text="Same as sender"
+                                 android:textColor="@color/black"
+                                 android:textStyle="bold" />
+                         </RelativeLayout>
+                     </LinearLayout>
 
 
-            <!--Adding Drop another location  -->
+                 </LinearLayout>
+             </LinearLayout>-->
+
+
+            <!--Adding Drop another location
             <LinearLayout
                 android:id="@+id/linearCnfDropPage"
                 android:layout_width="match_parent"
@@ -619,12 +635,12 @@
                 android:background="@color/white"
                 android:orientation="horizontal">
 
-                <RelativeLayout
+               <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/padding_bottom_20">
+                    >
 
                     <ImageView
                         android:id="@+id/DropAnotherLocation"
@@ -636,8 +652,12 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
                         android:layout_marginLeft="@dimen/padding_left_15"
                         android:layout_marginTop="@dimen/margin_top_20"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginRight="0dp"
                         android:layout_toRightOf="@+id/DropLocationView"
                         android:src="@drawable/ic_favorite_in_pick_up_location_24dp" />
 
@@ -656,14 +676,14 @@
                         android:id="@+id/DropLocationView"
                         android:layout_width="1dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="120dp"
+                        android:layout_marginLeft="110dp"
                         android:layout_marginTop="@dimen/margin_top_10"
                         android:layout_toRightOf="@+id/DropAnotherlocationImg"
                         android:background="@color/app_bg_color" />
 
                 </RelativeLayout>
 
-            </LinearLayout>
+            </LinearLayout> -->
 
         </LinearLayout>
 
