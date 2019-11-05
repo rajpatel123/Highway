@@ -31,7 +31,7 @@
         <activity android:name=".activity.MillerLoginActivity" android:screenOrientation="portrait" />
         <activity android:name=".activity.DriverLoginActivity" android:screenOrientation="portrait" />
         <activity android:name=".activity.LoginOptionActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.RegistrationDetailsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".usermodule.activitries.RegistrationDetailsActivity" android:screenOrientation="portrait" />
         <activity android:name=".activity.MobileOtpVerificationActivity" android:screenOrientation="portrait" />
         <activity android:name=".activity.CustomerLoginActivity" android:screenOrientation="portrait" />
         <activity
