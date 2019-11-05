@@ -14,6 +14,8 @@
     <dimen name="margin_width_120">120sp</dimen>
     <dimen name="margin_10">10sp</dimen>
     <dimen name="margin_height_120">120sp</dimen>
+    <dimen name="margin_height_150">150sp</dimen>
+    <dimen name="margin_width_150">150sp</dimen>
     <dimen name="padding_bottom_8">8sp</dimen>
     <dimen name="padding_5">5sp</dimen>
     <dimen name="size_15">15sp</dimen>
@@ -157,7 +159,6 @@
     <dimen name="padding_left_40dp">40dp</dimen>
     <dimen name="padding_right_40dp">40dp</dimen>
     <dimen name="padding_right_50dp">50dp</dimen>
-
 
 
     <dimen name="padding_bottom_30">30sp</dimen>

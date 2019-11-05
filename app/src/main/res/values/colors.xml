@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#FFB400</color><!-- <color name="colorPrimary">#008577</color>-->
+    <color name="colorPrimaryDark">#FFB400</color> <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <color name="colorAccent">#FFB400</color> <!-- <color name="colorAccent">#D81B60</color>-->
+
+
     <color name="dark_orange">#EB5406</color>
     <color name="heavy_dark_orange">#dc5d01</color>
     <color name="Fully_dark_orange">#f37636</color>
@@ -13,7 +15,9 @@
     <color name="app_bg1">#dc5d01</color>
     <color name="card_gray">#E7E3DE</color>
     <color name="knowmorebck">#ebeaef</color>
+    <color name="new_black">#C8000000</color>
     <color name="black">#000000</color>
+    <color name="project_black">#DA252525</color>
     <color name="dark_gray">#aaa</color>
     <color name="email_gray">#43AAAAAA</color>
     <color name="edittextcolor">#33EBEBEB</color>
@@ -69,7 +73,9 @@
     <color name="prferences_setting_color">#6327CF</color>
 
     <color name="freecharge_background_color">#f37636</color>
-    <color name="yellow">#CDDC39</color>
+    <color name="yellow">#FCE409</color>
+    <color name="project_yellow_color">#FFB400</color>
+
 
     <color name="loginbutton">#00bff3</color>
     <color name="link_color_payment">#2ba2af</color>
@@ -87,8 +93,6 @@
     <color name="logout_backgroud_color">#580606</color>
     <color name="app_bg_color">#9E9E9E</color>
     <color name="phone_Background_color">#ff8105</color>
-
-
     <color name="project_color">#2389ee</color>
 
 

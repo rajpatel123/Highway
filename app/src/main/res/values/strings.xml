@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Highway</string>
+    <string name="app_name">HighwayJprProject</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Profile Name</string>
@@ -10,16 +12,18 @@
 
     <string name="menu_new_booking">New Booking</string>
     <string name="menu_my_booking">My Booking</string>
+    <string name="menu_add_vehicle">Add Vehicle</string>
     <string name="men_track_your_booking">Track Your Booking</string>
     <string name="menu_rate_card">Rate Card</string>
     <string name="menu_wallet">Wallet</string>
     <string name="menu_notification">Notification</string>
     <string name="menu_Help">Help</string>
-    <string name="menu_About">About</string>
+    <string name="menu_About">About Us</string>
     <string name="menu_tool">Tool</string>
     <string name="menu_share">Share</string>
     <string name="name">User name</string>
     <string name="menu_send">Send</string>
+    <string name="menu_term_condition">Term and Condition</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_setting">Setting</string>
     <string name="email">ramashish.bhumca16@gmail.com</string>
@@ -63,11 +67,37 @@
 
     <string name="By_accepting____">By accepting to create account you accepted</string>
     <string name="term_and_condition">terms and canditions and privacy policy</string>
+    <string name="of_highway">Of Highway</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_newbooking_fragment">Hello new booking fragment</string>
+    <string name="hello_mybooking_fragment">Hello my booking fragment</string>
+    <string name="hello_wallet_fragment">Hello wallet fragment</string>
+    <string name="hello_notificaton_fragment">Hello notification fragment</string>
+    <string name="hello_ratecard_fragment">Hello rateCard fragment</string>
+    <string name="hello_help_fragment">Hello help fragment</string>
+    <string name="hello_about_fragment">Hello about fragment</string>
     <string name="permission_denied_explanation">Location access denied</string>
     <string name="settings">Enable Location</string>
+    <string name="title_activity_dash_board">DashBoardActivity</string>
 
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_dashboard_fragment">Hello Dashborad fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_upcoming_fragment"> UpComing Booking</string>
+    <string name="hello_ongoing_fragment"> OnGoing Booking</string>
+    <string name="hello_pending_fragment"> Pending  Booking</string>
+    <string name="hello_completed_fragment"> Completed  Booking</string>
+    <string name="hello_cancel_fragment"> Cancle Booking</string>
+
+    <string name="title_activity_new_booking_maps">Map</string>
+    <string name="title_activity_booking_maps">Map</string>
+    <string name="title_activity_new_dashboard">NewDashboardActivity</string>
+    <string name="title_activity_new_booking_map">Map</string>
 </resources>
