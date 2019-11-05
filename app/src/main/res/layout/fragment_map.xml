@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".map.MapFragment">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearPickup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/_16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:background="@drawable/oval_shape_white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/picupLinear1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/edtSourceLOcation"
+                        android:layout_width="230dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_toRightOf="@+id/pic_img"
+                        android:background="@null"
+                        android:hint="Pick up from location" />
+
+                    <ImageView
+                        android:id="@+id/pic_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:padding="@dimen/_10dp"
+                        android:layout_marginRight="@dimen/_10dp"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:src="@drawable/ic_lens_green_24dp" />
+
+                    <ImageView
+                        android:id="@+id/pickupFavoriteImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:elevation="@dimen/margin_15"
+                        android:layout_toRightOf="@+id/edtSourceLOcation"
+                        android:layout_marginLeft="@dimen/_10dp"
+                        android:src="@drawable/ic_favorite_in_pick_up_location_24dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+              <!--  <include
+                    layout="@layout/driverlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"/>
+
+
+                <include
+                    layout="@layout/fragment_new_booking_map_bottom_sheet_dialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true" />-->
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            />
+
+        <!-- by me
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+               android:id="@+id/map"
+               android:name="com.google.android.gms.maps.SupportMapFragment"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" />
+               -->
+    </FrameLayout>
+
+
+
+
+</RelativeLayout>

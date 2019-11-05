@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MillerLoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/login_page"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:paddingTop="1dp"
+            android:background="@color/project_yellow_color"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="@dimen/margin_Top80"
+                android:text="Miller Login/Register  "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Enter phone number and password.we shall "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="50dp"
+                android:text="create an account"
+                android:textColor="@color/black"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/login_page">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/login_page"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:layout_marginTop="@dimen/margin_50"
+                    android:layout_marginRight="@dimen/margin_30"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/padding_5"
+                            android:text="Mobile Number "
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:background="@drawable/input_round_shape">
+
+                        <EditText
+                            android:id="@+id/edtTxtMillerMobNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_40"
+                            android:background="@null"
+                            android:hint="Enter Mobile Number"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/_10dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_top_30"
+                        android:text="@string/By_accepting____"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/term_and_condition"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left_30"
+                        android:layout_marginRight="@dimen/margin_right_30"
+                        android:text="@string/of_highway"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size_14"
+                        android:textStyle="normal" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/margin_50">
+
+                        <Button
+                            android:id="@+id/btnSendMillerOtp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/margin_40"
+                            android:layout_below="@+id/forgot_password"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/btn_shape_draw"
+                            android:paddingLeft="@dimen/padding_left_50"
+                            android:paddingRight="@dimen/padding_right_50"
+                            android:text="Send OTP "
+                            android:textColor="@color/project_yellow_color" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
