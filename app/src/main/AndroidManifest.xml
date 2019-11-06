@@ -27,19 +27,35 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".activity.OwnerLoginActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.MillerLoginActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.DriverLoginActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.LoginOptionActivity" android:screenOrientation="portrait" />
-        <activity android:name=".usermodule.activitries.RegistrationDetailsActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.MobileOtpVerificationActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.CustomerLoginActivity" android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.DashBoardActivity"  android:screenOrientation="portrait"
+            android:name=".vehicleOwner.vehicleOwnerActivity.OwnerLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".millusers.milluserActivity.MillerLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drivers.driverActivity.DriverLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonActivity.activity.LoginOptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usermodule.userActivity.RegistrationDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonActivity.activity.MobileOtpVerificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customers.customerActivity.CustomerLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".commonActivity.activity.DashBoardActivity"
             android:label="@string/title_activity_dash_board"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.SplashActivity" android:screenOrientation="portrait">
+            android:name=".commonActivity.activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,6 +79,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDeZEGKWXQv_jnm-x-7isfOHH1jjNV9asM" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

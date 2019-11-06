@@ -100,4 +100,5 @@
     <string name="title_activity_booking_maps">Map</string>
     <string name="title_activity_new_dashboard">NewDashboardActivity</string>
     <string name="title_activity_new_booking_map">Map</string>
+    <string name="please_check_your_internet_connection">Please check internet Connection!!!</string>
 </resources>

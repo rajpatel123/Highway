@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.Vehicle_Owner.VehicleOnGoingFragment">
+    tools:context=".vehicleOwner.vehicleOwnerFragment.VehicleOnGoingFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

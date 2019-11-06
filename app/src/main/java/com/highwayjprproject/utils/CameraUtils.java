@@ -16,7 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.highwayjprproject.BuildConfig;
-import com.highwayjprproject.usermodule.activitries.RegistrationDetailsActivity;
+import com.highwayjprproject.usermodule.userActivity.RegistrationDetailsActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
