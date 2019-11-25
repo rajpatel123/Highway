@@ -72,7 +72,10 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
     EditText edtSourceLOcationEDT;
 
-    private double latitude, longitude;
+    private double sourceLatitude, sourceLongitude;
+    private double destLatitude, destLongitude;
+    private String sourceName;
+    private String destName;
     private DashBoardActivity mActivity;
 
 
