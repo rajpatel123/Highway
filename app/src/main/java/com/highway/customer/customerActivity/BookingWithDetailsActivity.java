@@ -61,7 +61,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BookingActivityWithDetailsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class BookingWithDetailsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, TaskLoadedCallback {
 
@@ -103,7 +103,7 @@ public class BookingActivityWithDetailsActivity extends FragmentActivity impleme
                              double destLongitude) {
 
 
-        Intent intent = new Intent(activity, BookingActivityWithDetailsActivity.class);
+        Intent intent = new Intent(activity, BookingWithDetailsActivity.class);
         intent.putExtra("sourceName", sourceName);
         intent.putExtra("sourceLatitude", sourceLatitude);
         intent.putExtra("sourceLongitude", sourceLongitude);
@@ -123,6 +123,7 @@ public class BookingActivityWithDetailsActivity extends FragmentActivity impleme
 
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
+        recyclerView = findViewById(R.id.vehicleListRV);
 
         initLocations(getIntent());
 
@@ -133,7 +134,7 @@ public class BookingActivityWithDetailsActivity extends FragmentActivity impleme
         }
 
 
-        new FetchURL(BookingActivityWithDetailsActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+        new FetchURL(BookingWithDetailsActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
@@ -151,7 +152,7 @@ public class BookingActivityWithDetailsActivity extends FragmentActivity impleme
                 Intent intent = new Autocomplete.IntentBuilder(
                         AutocompleteActivityMode.FULLSCREEN, fields)
                         .setCountry("IN")
-                        .build(BookingActivityWithDetailsActivity.this);
+                        .build(BookingWithDetailsActivity.this);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
             }
         });
@@ -166,7 +167,7 @@ public class BookingActivityWithDetailsActivity extends FragmentActivity impleme
                 Intent intent = new Autocomplete.IntentBuilder(
                         AutocompleteActivityMode.FULLSCREEN, fields)
                         .setCountry("IN")
-                        .build(BookingActivityWithDetailsActivity.this);
+                        .build(BookingWithDetailsActivity.this);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
             }
         });

@@ -47,6 +47,7 @@
         <activity android:name=".common.base.activity.MobileOtpVerificationActivity" android:screenOrientation="portrait" />
         <activity android:name=".common.base.BaseActivity" android:screenOrientation="portrait" />
         <activity android:name=".customer.customerActivity.CustomerLoginActivity" android:screenOrientation="portrait" />
+        <activity android:name=".customer.customerActivity.OwnerLoginActivity" android:screenOrientation="portrait" />
         <activity android:name=".customer.RegistrationDetailsActivity" android:screenOrientation="portrait" />
         <activity android:name=".drivermodule.driverActivity.DriverLoginActivity" android:screenOrientation="portrait" />
     </application>

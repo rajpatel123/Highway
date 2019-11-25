@@ -20,9 +20,9 @@ import com.highway.ownermodule.owner.owneractivities.OwnerLoginActivity;
 
 public class LoginOptionActivity extends AppCompatActivity {
     private LinearLayout customer, driver, miller, owner;
-    private ImageView imgCustomer, imgDriver,imgMiller, imgOwner;
-    private TextView tvCustomer,tvMiller,tvOwner,tvDriver;
-    private Button  btnNext;
+    private ImageView imgCustomer, imgDriver, imgMiller, imgOwner;
+    private TextView tvCustomer, tvMiller, tvOwner, tvDriver;
+    private Button btnNext;
     private String userRole;
     Intent intent;
 
@@ -36,8 +36,8 @@ public class LoginOptionActivity extends AppCompatActivity {
 
     }
 
-    public void initialView(){
-        customer  = findViewById(R.id.LinearCustomer);
+    public void initialView() {
+        customer = findViewById(R.id.LinearCustomer);
         driver = findViewById(R.id.LinearDriver);
         miller = findViewById(R.id.LinearMiller);
         owner = findViewById(R.id.LnearOwner);
@@ -56,11 +56,11 @@ public class LoginOptionActivity extends AppCompatActivity {
 
     }
 
-    public void clickListenerView(){
+    public void clickListenerView() {
         miller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userRole="2";
+                userRole = "2";
                 updateSelectionView(miller);
             }
         });
@@ -68,7 +68,7 @@ public class LoginOptionActivity extends AppCompatActivity {
         driver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userRole="3";
+                userRole = "3";
                 updateSelectionView(driver);
 
             }
@@ -85,7 +85,7 @@ public class LoginOptionActivity extends AppCompatActivity {
         owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userRole= "5";
+                userRole = "5";
                 updateSelectionView(owner);
             }
         });
@@ -93,32 +93,40 @@ public class LoginOptionActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(userRole)){
+                if (TextUtils.isEmpty(userRole)) {
                     Toast.makeText(LoginOptionActivity.this, "Pls select user role", Toast.LENGTH_SHORT).show();
-
-                }else{
-                    switch (userRole){
+                    return;
+                } else {
+                    switch (userRole) {
                         case "2":
                             intent = new Intent(LoginOptionActivity.this, MillerLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
                         case "3":
                             intent = new Intent(LoginOptionActivity.this, DriverLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
+
                         case "4":
                             intent = new Intent(LoginOptionActivity.this, CustomerLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
+
                         case "5":
                             intent = new Intent(LoginOptionActivity.this, OwnerLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
+
                     }
                 }
             }
         });
     }
+
     private void updateSelectionView(LinearLayout selectedView) {
         customer.setBackgroundResource(R.drawable.cardview_border_default);
         driver.setBackgroundResource(R.drawable.cardview_border_default);
