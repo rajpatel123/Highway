@@ -51,7 +51,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.customer.customerActivity.BookingActivityWithDetailsActivity;
+import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -233,7 +233,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
     private void openBookingActivity() {
         if (!TextUtils.isEmpty(sourceName) && !TextUtils.isEmpty(destName)){
-            BookingActivityWithDetailsActivity.start(mActivity,sourceName,sourceLatitude,sourceLongitude,destName,destLatitude,destLongitude);
+            BookingWithDetailsActivity.start(mActivity,sourceName,sourceLatitude,sourceLongitude,destName,destLatitude,destLongitude);
         }
 
 

@@ -1,8 +1,10 @@
-package com.highway;
+package com.highway.customer.customerActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.highway.R;
 
 public class VehicleList extends AppCompatActivity {
 

@@ -24,7 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VehicleList"></activity>
+        <activity android:name=".customer.customerActivity.VehicleList"></activity>
         <activity android:name=".customer.customerActivity.BookingWithDetailsActivity" />
 
         <meta-data
