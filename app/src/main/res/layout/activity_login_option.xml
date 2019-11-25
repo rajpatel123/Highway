@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_primary"
+    android:orientation="vertical"
+    tools:context=".commonActivity.activity.LoginOptionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/project_yellow_color"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/margin_100"
+            android:layout_height="@dimen/margin_100"
+            android:src="@drawable/highway_logo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_top_8">
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="2"
+                    android:columnOrderPreserved="true">
+
+                    <LinearLayout
+                        android:id="@+id/LinearCustomer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="@dimen/_10dp"
+                        android:background="@drawable/cardview_border_default"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/padding_bottom_8">
+
+                        <ImageView
+                            android:id="@+id/ImgCustomer"
+                            android:layout_width="@dimen/margin_100"
+                            android:layout_height="@dimen/margin_100"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/padding_5"
+                            android:src="@drawable/highway_customer"
+                            android:textSize="@dimen/size_15"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtCustomer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingLeft="@dimen/padding_left_15"
+                            android:paddingRight="@dimen/padding_left_15"
+                            android:text="Customer"
+                            android:textAllCaps="true"
+                            android:textColor="@color/Black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LinearMiller"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="10dp"
+                        android:layout_marginLeft="@dimen/padding_left_10"
+                        android:background="@drawable/cardview_border_default"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp">
+
+
+                        <ImageView
+                            android:id="@+id/ImgMiller"
+                            android:layout_width="@dimen/margin_100"
+                            android:layout_height="@dimen/margin_100"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/padding_5"
+                            android:src="@drawable/highway_miller"
+                            android:textSize="@dimen/size_15"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtMiller"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingLeft="@dimen/padding_left_15"
+                            android:paddingRight="@dimen/padding_left_15"
+                            android:text=" Miller "
+                            android:textAllCaps="true"
+                            android:textColor="@color/Black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LnearOwner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/cardview_border_default"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp">
+
+
+                        <ImageView
+                            android:id="@+id/ImgOwner"
+                            android:layout_width="@dimen/margin_100"
+                            android:layout_height="@dimen/margin_100"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/padding_5"
+                            android:src="@drawable/highway_ownerlogo"
+                            android:textSize="@dimen/size_15"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtOwner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingLeft="@dimen/padding_left_15"
+                            android:paddingRight="@dimen/padding_left_15"
+                            android:text=" Owner "
+                            android:textAllCaps="true"
+                            android:textColor="@color/Black" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/LinearDriver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/cardview_border_default"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp">
+
+
+                        <ImageView
+                            android:id="@+id/ImgDriver"
+                            android:layout_width="@dimen/margin_100"
+                            android:layout_height="@dimen/margin_100"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/padding_5"
+                            android:src="@drawable/highway_driver"
+                            android:textSize="@dimen/size_15"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtDriver"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingLeft="@dimen/padding_left_15"
+                            android:paddingRight="@dimen/padding_left_15"
+                            android:text=" Driver "
+                            android:textAllCaps="true"
+                            android:textColor="@color/Black" />
+                    </LinearLayout>
+
+
+                </GridLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_30"
+                android:background="@drawable/btn_shape_draw"
+                android:paddingLeft="@dimen/padding_left_50"
+                android:paddingRight="@dimen/padding_right_50"
+                android:text=" Next "
+                android:textColor="@color/project_yellow_color" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
