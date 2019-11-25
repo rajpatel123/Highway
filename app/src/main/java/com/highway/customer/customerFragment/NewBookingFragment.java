@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,8 +48,10 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.customer.customerActivity.BookingActivityWithDetailsActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,7 +64,8 @@ import static android.app.Activity.RESULT_OK;
 public class NewBookingFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-    int AUTOCOMPLETE_REQUEST_CODE = 1;
+    int AUTOCOMPLETE_REQUEST_CODE_SOURCE = 1;
+    int AUTOCOMPLETE_REQUEST_CODE_DEST = 2;
 
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
@@ -71,6 +75,8 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
 
     EditText edtSourceLOcationEDT;
+    EditText edtDropLocation;
+
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
@@ -107,6 +113,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.map_view_fragment, container, false);
         edtSourceLOcationEDT = view.findViewById(R.id.edtSourceLOcation);
+        edtDropLocation = view.findViewById(R.id.edtDropLocation);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -126,8 +133,37 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
                 Intent intent = new Autocomplete.IntentBuilder(
                         AutocompleteActivityMode.FULLSCREEN, fields)
+                        .setCountry("IN")
                         .build(mActivity);
-                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
+            }
+        });
+
+        edtDropLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+
+                Intent intent = new Autocomplete.IntentBuilder(
+                        AutocompleteActivityMode.FULLSCREEN, fields)
+                        .setCountry("IN")
+                        .build(mActivity);
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
+            }
+        });
+
+
+        edtSourceLOcationEDT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+
+                Intent intent = new Autocomplete.IntentBuilder(
+                        AutocompleteActivityMode.FULLSCREEN, fields)
+                        .build(mActivity);
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
             }
         });
 
@@ -141,38 +177,65 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == AUTOCOMPLETE_REQUEST_CODE_SOURCE) {
+
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
 
-                edtSourceLOcationEDT.setText("" + place.getName());
+                if (!TextUtils.isEmpty(place.getName())) {
+                    edtSourceLOcationEDT.setText("" + place.getName());
+                    if (mMap != null && place.getLatLng() != null) {
 
 
-                if (mMap != null && place.getLatLng() != null) {
+                        LatLng latLng = place.getLatLng();
+                        sourceName = place.getName();
+                        sourceLatitude = latLng.latitude;
+                        sourceLongitude = latLng.longitude;
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
+                        mMap.moveCamera(cameraUpdate);
+                    }
 
-
-                    LatLng latLng = place.getLatLng();
-
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(latLng);
-                    markerOptions.title("" + place.getName());
-                    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
-                    mCurrLocationMarker = mMap.addMarker(markerOptions);
-
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
-                    mMap.moveCamera(cameraUpdate);
                 }
+            } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE_DEST) {
+
+                Place placeDest = Autocomplete.getPlaceFromIntent(data);
+
+                if (!TextUtils.isEmpty(placeDest.getName())) {
+                    Log.i("TAG", "Place: " + placeDest.getName() + ", " + placeDest.getId());
+
+                    edtDropLocation.setText("" + placeDest.getName());
+                    if (mMap != null && placeDest.getLatLng() != null) {
 
 
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
-                Status status = Autocomplete.getStatusFromIntent(data);
-                Log.i("TAG", status.getStatusMessage());
-            } else if (resultCode == RESULT_CANCELED) {
-                // The user canceled the operation.
+                        LatLng latLng = placeDest.getLatLng();
+
+
+                        destName = placeDest.getName();
+                        destLatitude = latLng.latitude;
+                        destLongitude = latLng.longitude;
+
+                        openBookingActivity();
+
+                    }
+
+                }
             }
+        } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            // TODO: Handle the error.
+            Status status = Autocomplete.getStatusFromIntent(data);
+            Log.i("TAG", status.getStatusMessage());
+        } else if (resultCode == RESULT_CANCELED) {
+            // The user canceled the operation.
         }
+
+    }
+
+    private void openBookingActivity() {
+        if (!TextUtils.isEmpty(sourceName) && !TextUtils.isEmpty(destName)){
+            BookingActivityWithDetailsActivity.start(mActivity,sourceName,sourceLatitude,sourceLongitude,destName,destLatitude,destLongitude);
+        }
+
 
     }
 

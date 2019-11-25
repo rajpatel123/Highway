@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.customerActivity.BookingWithDetailsActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".customer.customerActivity.BookingActivityWithDetailsActivity">
 
 
     <FrameLayout
@@ -39,10 +40,10 @@
 
                     <View
                         android:id="@+id/sourceIndicator"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/margin_5"
+                        android:layout_margin="@dimen/margin_8"
                         android:background="@drawable/source_indicator" />
 
                     <EditText
@@ -86,10 +87,11 @@
 
                     <View
                         android:id="@+id/destIndicator"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/margin_5"
+                        android:layout_margin="@dimen/margin_8"
+
                         android:background="@drawable/dest_indicator" />
 
                     <EditText
@@ -127,35 +129,197 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/bottomView"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
+
         <View
             android:layout_width="@dimen/margin_top_30dp"
             android:layout_height="13px"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_5"
-            android:background="@color/green"/>
+            android:background="@color/green" />
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:layout_marginTop="@dimen/margin_10"
-           android:background="@color/green"
-           android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_10"
+            android:orientation="vertical">
 
-           <androidx.recyclerview.widget.RecyclerView
-               android:layout_width="match_parent"
-               android:layout_height="0dp"
-               android:layout_weight="1"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_weight="1" />
 
 
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="0dp"
-               android:layout_weight="1">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_10"
+                android:background="@color/email_gray" />
 
-           </RelativeLayout>
-       </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pickup Contact : " />
+
+
+                    <LinearLayout
+                        android:layout_width="@dimen/margin_top_30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_5"
+                            android:textColor="@color/colorPrimary"
+                            android:text="8285886155" />
+
+                        <View
+                            android:layout_width="5px"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/margin_5"
+                            android:background="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_5"
+                            android:layout_marginEnd="@dimen/margin_5"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Raj Patel" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_margin="@dimen/margin_5"
+                    android:background="@color/quantum_grey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pickup Contact : " />
+
+
+                    <LinearLayout
+                        android:layout_width="@dimen/margin_top_30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_5"
+                            android:textColor="@color/colorPrimary"
+                            android:text="8285886155" />
+
+                        <View
+                            android:layout_width="5px"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/margin_5"
+                            android:background="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_5"
+                            android:layout_marginEnd="@dimen/margin_5"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Raj Patel" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:cardUseCompatPadding="true"
+                android:layout_weight=".5">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_10">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
+                            app:srcCompat="@drawable/money"
+                            android:layout_marginStart="2dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:textSize="@dimen/margin_20"
+                            android:textColor="@color/green"
+                            android:textStyle="bold"
+                            android:text="CASH"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/login_arrow_icon"
+                            android:layout_marginStart="2dp"
+                            android:rotation="90"/>
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/margin_20"
+                        android:paddingEnd="@dimen/margin_20"
+                        android:background="@drawable/btn_shape_draw"
+                        android:textColor="@color/white"
+                        android:layout_alignParentEnd="true"
+                        android:maxHeight="@dimen/size_30"
+                        android:layout_marginEnd="@dimen/margin_20"
+                        android:text="Book TATA ACE"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
