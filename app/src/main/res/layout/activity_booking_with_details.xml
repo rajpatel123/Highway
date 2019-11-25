@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.customerActivity.BookingActivityWithDetailsActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomView">
+
+        <LinearLayout
+            android:id="@+id/linearPickup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/margin_20"
+            android:elevation="@dimen/_16dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/oval_shape_white"
+                android:elevation="@dimen/margin_5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/picupLinear1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <View
+                        android:id="@+id/sourceIndicator"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/margin_5"
+                        android:background="@drawable/source_indicator" />
+
+                    <EditText
+                        android:id="@+id/edtSourceLOcation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_toEndOf="@+id/sourceIndicator"
+                        android:background="@color/white"
+                        android:cursorVisible="false"
+                        android:ellipsize="end"
+                        android:enabled="true"
+                        android:hint="Enter Pickup location"
+                        android:lines="1"
+                        android:singleLine="true" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/oval_shape_white"
+                android:elevation="@dimen/margin_5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/dropLinear1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <View
+                        android:id="@+id/destIndicator"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/margin_5"
+
+                        android:background="@drawable/dest_indicator" />
+
+                    <EditText
+                        android:id="@+id/edtDropLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_toEndOf="@+id/destIndicator"
+                        android:background="@color/white"
+                        android:cursorVisible="false"
+                        android:ellipsize="end"
+                        android:enabled="true"
+                        android:hint="Enter drop location"
+                        android:singleLine="true" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_alignParentBottom="true"
+       >
+        <View
+            android:layout_width="@dimen/margin_top_30dp"
+            android:layout_height="13px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@color/green"/>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginTop="@dimen/margin_10"
+           android:background="@color/green"
+
+           android:orientation="vertical">
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"/>
+
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1">
+
+           </RelativeLayout>
+       </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
