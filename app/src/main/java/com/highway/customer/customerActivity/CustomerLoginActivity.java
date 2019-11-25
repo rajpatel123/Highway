@@ -12,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.login.LoginRegisterResponse;
 import com.highway.commonretrofit.RestClient;
+import com.highway.millmodule.milluserActivity.MillerLoginActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -69,40 +71,49 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
         if (validateInput()){
 
-            Intent intent = new Intent(CustomerLoginActivity.this, MobileOtpVerificationActivity.class);
+           /* Intent intent = new Intent(CustomerLoginActivity.this, DashBoardActivity.class);
             HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
             startActivity(intent);
-            finish();
+            finish();*/
 
-//            LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-//            loginRegisterRequest.setMobile(phone_number);
-//
-//            if (Utils.isInternetConnected(this)) {
-//
-//                Utils.showProgressDialog(this);
-//
-//                RestClient.loginUser(loginRegisterRequest, new Callback<LoginRegisterResponse>() {
-//                    @Override
-//                    public void onResponse(Call<LoginRegisterResponse> call, Response<LoginRegisterResponse> response) {
-//                        Utils.dismissProgressDialog();
-//                        if (response.body() != null) {
-//                            if (response.body().getStatus() == true) {
-//                                Intent intent = new Intent(CustomerLoginActivity.this, MobileOtpVerificationActivity.class);
-//                                HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
-//                                startActivity(intent);
-//                                finish();
-//                                Toast.makeText(CustomerLoginActivity.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//                    @Override
-//                    public void onFailure(Call<LoginRegisterResponse> call, Throwable t) {
-//                        Toast.makeText(CustomerLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//
-//            }
+            LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
+            loginRegisterRequest.setMobile(phone_number);
+
+            if (Utils.isInternetConnected(this)) {
+
+                Utils.showProgressDialog(this);
+
+                RestClient.loginUser(loginRegisterRequest, new Callback<LoginRegisterResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginRegisterResponse> call, Response<LoginRegisterResponse> response) {
+                        Utils.dismissProgressDialog();
+                        if (response.body() != null) {
+                            if (response.body().getStatus() == true) {
+                                Intent intent = new Intent(CustomerLoginActivity.this, DashBoardActivity.class);
+                                HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
+
+                                /* ///////////////// */
+                                HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ID,"4");
+                                HighwayPrefs.putString(CustomerLoginActivity.this,Constants.NAME,"Ramashish");
+                                HighwayPrefs.putString(CustomerLoginActivity.this,Constants.CustomerEmail,"prit@gmail.com");
+                                HighwayPrefs.putString(CustomerLoginActivity.this,Constants.MillerGender,"Male");
+                                HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ROLEID,"4");
+                                HighwayPrefs.putBoolean(CustomerLoginActivity.this,Constants.User_statuss,true);
+
+                                startActivity(intent);
+                                finish();
+                                Toast.makeText(CustomerLoginActivity.this, "Welcome Customer !", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<LoginRegisterResponse> call, Throwable t) {
+                        Toast.makeText(CustomerLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
         }
     }
 

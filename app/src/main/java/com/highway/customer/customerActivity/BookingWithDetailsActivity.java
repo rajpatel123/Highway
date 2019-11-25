@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.highway.R;
 
-public class BookingActivityWithDetailsActivity extends AppCompatActivity {
+public class BookingWithDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

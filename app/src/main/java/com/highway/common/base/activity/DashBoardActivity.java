@@ -127,11 +127,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public void navAccoringRoleId() {
         userRole = HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID);
         switch (userRole) {
-            case "4":
+
+            case "2":
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 addVehicle.setVisible(false);
-                wallet.setVisible(true);
+                wallet.setVisible(false);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
                 help.setVisible(false);
@@ -141,7 +142,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
                 logout.setVisible(true);
-
                 break;
 
             case "3":
@@ -160,11 +160,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "2":
+            case "4":
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 addVehicle.setVisible(false);
-                wallet.setVisible(false);
+                wallet.setVisible(true);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
                 help.setVisible(false);
@@ -176,7 +176,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-          /*  case "5":
+            case "5":
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 addVehicle.setVisible(true);
@@ -190,9 +190,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
                 logout.setVisible(true);
-                break;*/
+                break;
         }
-
     }
 
 

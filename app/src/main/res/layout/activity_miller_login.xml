@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".millusers.milluserActivity.MillerLoginActivity">
+    tools:context=".millmodule.milluserActivity.MillerLoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

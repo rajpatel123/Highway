@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.customerActivity.BookingActivityWithDetailsActivity">
+    tools:context=".customer.customerActivity.BookingWithDetailsActivity">
 
 
     <FrameLayout
@@ -39,8 +39,8 @@
 
                     <View
                         android:id="@+id/sourceIndicator"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/margin_5"
                         android:background="@drawable/source_indicator" />
@@ -86,11 +86,10 @@
 
                     <View
                         android:id="@+id/destIndicator"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
                         android:layout_centerVertical="true"
                         android:layout_margin="@dimen/margin_5"
-
                         android:background="@drawable/dest_indicator" />
 
                     <EditText
@@ -129,8 +128,7 @@
         android:id="@+id/bottomView"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:layout_alignParentBottom="true"
-       >
+        android:layout_alignParentBottom="true">
         <View
             android:layout_width="@dimen/margin_top_30dp"
             android:layout_height="13px"
@@ -143,7 +141,6 @@
            android:layout_height="match_parent"
            android:layout_marginTop="@dimen/margin_10"
            android:background="@color/green"
-
            android:orientation="vertical">
 
            <androidx.recyclerview.widget.RecyclerView

@@ -441,9 +441,9 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             } else if (userRole.equalsIgnoreCase("MillUser")) {
                 registrationDetailsRequest.setRoleId("2");
 
-            }/* else if (userRole.equalsIgnoreCase("Vehicle Owner")) {
+            } else if (userRole.equalsIgnoreCase("Vehicle Owner")) {
                 registrationDetailsRequest.setRoleId("5");
-            }*/
+            }
 
             if (Utils.isInternetConnected(this)) {
                 Utils.showProgressDialog(getApplicationContext());
