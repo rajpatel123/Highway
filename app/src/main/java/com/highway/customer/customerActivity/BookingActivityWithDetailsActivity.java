@@ -304,7 +304,7 @@ public class BookingActivityWithDetailsActivity extends FragmentActivity impleme
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setMinZoomPreference(10.0f);
+        mMap.setMinZoomPreference(0.0f);
         mMap.setMaxZoomPreference(18.0f);
 
         //Initialize Google Play Services
