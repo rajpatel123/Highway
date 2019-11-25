@@ -91,7 +91,6 @@ public class CustomerLoginActivity extends AppCompatActivity {
                             if (response.body().getStatus() == true) {
                                 Intent intent = new Intent(CustomerLoginActivity.this, DashBoardActivity.class);
                                 HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
-
                                 /* ///////////////// */
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ID,"4");
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.NAME,"Ramashish");

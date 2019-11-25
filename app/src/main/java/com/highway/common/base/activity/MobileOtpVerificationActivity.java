@@ -115,42 +115,40 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
             verifyOtpResponse.setMobile("4657247345");
             gotoDashboardAfterLogin(verifyOtpResponse);
 
-//            if (Utils.isInternetConnected(this)) {
-//
-//
-//                Utils.showProgressDialog(this);
-//
-//                RestClient.otpVerify(verifyOtpRequest, new Callback<VerifyOtpResponse>() {
-//                    @Override
-//                    public void onResponse(Call<VerifyOtpResponse> call, Response<VerifyOtpResponse> response) {
-//                        Utils.dismissProgressDialog();
-//
-//                        if (response.body() != null) {
-//                            if (response.body().getUserStatus().equalsIgnoreCase("1")) {
-//                                gotoDashboardAfterLogin(response.body());
-//
-//                            } else if (TextUtils.isEmpty(response.body().getName())) {
-//                                Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
-//
-//                                HighwayPrefs.putString(getApplicationContext(), Constants.ID, response.body().getId());
-//
-//                                startActivity(intent);
-//                                finish();
-//                            }
-//                        } else {
-//                            Toast.makeText(MobileOtpVerificationActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-//                        }
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<VerifyOtpResponse> call, Throwable t) {
-//                        Toast.makeText(MobileOtpVerificationActivity.this, "Otp verification failed", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//            }
+            if (Utils.isInternetConnected(this)) {
+
+
+                Utils.showProgressDialog(this);
+
+                RestClient.otpVerify(verifyOtpRequest, new Callback<VerifyOtpResponse>() {
+                    @Override
+                    public void onResponse(Call<VerifyOtpResponse> call, Response<VerifyOtpResponse> response) {
+                        Utils.dismissProgressDialog();
+
+                        if (response.body() != null) {
+                            if (response.body().getUserStatus().equalsIgnoreCase("1")) {
+                                gotoDashboardAfterLogin(response.body());
+
+                            } else if (TextUtils.isEmpty(response.body().getName())) {
+                                Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
+
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ID, response.body().getId());
+
+                                startActivity(intent);
+                                finish();
+                            }
+                        } else {
+                            Toast.makeText(MobileOtpVerificationActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<VerifyOtpResponse> call, Throwable t) {
+                        Toast.makeText(MobileOtpVerificationActivity.this, "Otp verification failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
         }
     }
 

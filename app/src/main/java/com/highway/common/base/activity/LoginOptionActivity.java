@@ -102,18 +102,22 @@ public class LoginOptionActivity extends AppCompatActivity {
                             intent = new Intent(LoginOptionActivity.this, MillerLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
                         case "3":
                             intent = new Intent(LoginOptionActivity.this, DriverLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
                         case "4":
                             intent = new Intent(LoginOptionActivity.this, CustomerLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
                         case "5":
                             intent = new Intent(LoginOptionActivity.this, OwnerLoginActivity.class);
                             startActivity(intent);
                             finish();
+                            break;
                     }
                 }
             }
