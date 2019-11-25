@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "51049388182",
+    "firebase_url": "https://highwayjpr.firebaseio.com",
+    "project_id": "highwayjpr",
+    "storage_bucket": "highwayjpr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51049388182:android:599508b0692c799c690ab7",
+        "android_client_info": {
+          "package_name": "com.highway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51049388182-29ae0lei984a70qe729k11050na9oqhm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.highway",
+            "certificate_hash": "f8a22d0585fbb9ee05a8b0eded3498e47f1367ee"
+          }
+        },
+        {
+          "client_id": "51049388182-a0gcbuh19m44eqe9to7cvichag227g2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdy30nb27PAfFI909DklSfLQVuxpqvrik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51049388182-a0gcbuh19m44eqe9to7cvichag227g2l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
