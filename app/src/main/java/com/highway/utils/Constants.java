@@ -17,4 +17,12 @@ public class Constants {
     public static final String GENDER = "gender";
     public static final String ROLEID = "roleid";
     public static final String ADDRESS = "address";
+    public static final String MillerEmail = "millerEmail";
+    public static final String MillerGender = "millerGender";
+    public static final String User_statuss = "user_statuss";
+    public static final String CustomerEmail = "customerEmail";
+    public static final String OwnerEmail = "ownerEmail";
+    public static final String DriverEmail = "driverEmail";
+
+
 }

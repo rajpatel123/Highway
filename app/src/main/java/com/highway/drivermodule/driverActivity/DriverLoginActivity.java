@@ -11,10 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.login.LoginRegisterResponse;
 import com.highway.commonretrofit.RestClient;
+import com.highway.millmodule.milluserActivity.MillerLoginActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -80,11 +82,19 @@ public class DriverLoginActivity extends AppCompatActivity {
 
                         if (response.body() != null) {
                             if (response.body().getStatus() == true) {
-                                Intent intent = new Intent(DriverLoginActivity.this, MobileOtpVerificationActivity.class);
+                                Intent intent = new Intent(DriverLoginActivity.this, DashBoardActivity.class);
                                 HighwayPrefs.putString(DriverLoginActivity.this, Constants.USERMOBILE, phone_number);
+                                /*..............*/
+                                HighwayPrefs.putString(DriverLoginActivity.this,Constants.ID,"3");
+                                HighwayPrefs.putString(DriverLoginActivity.this,Constants.NAME,"Santosh");
+                                HighwayPrefs.putString(DriverLoginActivity.this,Constants.DriverEmail,"prit@gmail.com");
+                                HighwayPrefs.putString(DriverLoginActivity.this,Constants.MillerGender,"Male");
+                                HighwayPrefs.putString(DriverLoginActivity.this,Constants.ROLEID,"3");
+                                HighwayPrefs.putBoolean(DriverLoginActivity.this,Constants.User_statuss,true);
+
                                 startActivity(intent);
                                 finish();
-                                Toast.makeText(DriverLoginActivity.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DriverLoginActivity.this, "Welcome Driver", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
