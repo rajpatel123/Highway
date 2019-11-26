@@ -324,7 +324,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setMinZoomPreference(0.0f);
+        mMap.setMinZoomPreference(2.0f);
         mMap.setMaxZoomPreference(18.0f);
 
 
