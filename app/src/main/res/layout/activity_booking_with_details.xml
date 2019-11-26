@@ -40,11 +40,11 @@
 
                     <View
                         android:id="@+id/sourceIndicator"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="12px"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/margin_8"
-                        android:background="@drawable/source_indicator" />
+                        android:background="@color/green"
+                      />
 
                     <EditText
                         android:id="@+id/edtSourceLOcation"
@@ -87,12 +87,10 @@
 
                     <View
                         android:id="@+id/destIndicator"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="12px"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/margin_8"
-
-                        android:background="@drawable/dest_indicator" />
+                        android:background="@color/red"/>
 
                     <EditText
                         android:id="@+id/edtDropLocation"
@@ -146,12 +144,12 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/vehicleRecyclerView"
+                android:id="@+id/vehicleListRV"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_marginEnd="@dimen/margin_20"
-                android:layout_weight="1" />
+                android:layout_weight="2" />
 
 
             <View
@@ -163,7 +161,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_10"
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_marginEnd="@dimen/margin_20"
@@ -271,12 +269,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:cardUseCompatPadding="true"
-                android:layout_weight=".5">
+                android:paddingBottom="@dimen/margin_10"
+                android:layout_weight=".9">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/margin_10">
 
                     <LinearLayout
@@ -306,15 +306,17 @@
                             android:rotation="90"/>
                     </LinearLayout>
 
-                    <Button
+                    <TextView
+                        android:id="@+id/bookTruckTv"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:paddingStart="@dimen/margin_20"
                         android:paddingEnd="@dimen/margin_20"
                         android:background="@drawable/btn_shape_draw"
                         android:textColor="@color/white"
                         android:layout_alignParentEnd="true"
-                        android:maxHeight="@dimen/size_30"
+                        android:gravity="center"
+                        android:maxHeight="@dimen/margin_40"
                         android:layout_marginEnd="@dimen/margin_20"
                         android:text="Book TATA ACE"/>
 

@@ -14,19 +14,21 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,8 +45,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -63,9 +65,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BookingWithDetailsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class BookingWithDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, TaskLoadedCallback {
+        LocationListener, TaskLoadedCallback, BookingVehicleAdapter.OnClickEvents {
 
 
     Button getDirection;
@@ -73,6 +75,8 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
 
     MarkerOptions markerOptions1;
     MarkerOptions markerOptions2;
+
+    List<Marker> markers = new ArrayList<>();
 
     RecyclerView recyclerView;
 
@@ -88,6 +92,7 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
 
     EditText edtSourceLOcationEDT;
     EditText edtDropLocation;
+    TextView bookTruckTv;
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
@@ -95,7 +100,7 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
     private String destName;
 
     List<Vehicle> vehicleList = new ArrayList<>();
-   private BookingVehicleAdapter bookingVehicleAdapter;
+    private BookingVehicleAdapter bookingVehicleAdapter;
 
 
     public static void start(Activity activity,
@@ -127,8 +132,8 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
 
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
-
-        recyclerView = findViewById(R.id.vehicleRecyclerView);
+        recyclerView = findViewById(R.id.vehicleListRV);
+        bookTruckTv = findViewById(R.id.bookTruckTv);
 
 
         initLocations(getIntent());
@@ -139,6 +144,11 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
             mapFragment.getMapAsync(this);
         }
 
+        if (getSupportActionBar() != null) {
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         new FetchURL(BookingWithDetailsActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
@@ -179,24 +189,11 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
         });
 
 
-
-
-        bookingVehicleAdapter = new BookingVehicleAdapter(vehicleList);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,true);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(bookingVehicleAdapter);
-
-
-        List<Vehicle> vehicles = new ArrayList<>();
-
-
         for (int i = 0; i < 8; i++) {
             Vehicle vehicle = new Vehicle();
             vehicle.setvName("TATA ACE");
             vehicle.setDuration("26 min");
-            vehicle.setFare("1398.00");
+            vehicle.setFare("398.00");
             vehicle.setIcon(R.drawable.truck);
             vehicle.setCapacity("580Kg");
             vehicle.setInfo1("In given fare 60 mins free loading & unloading time");
@@ -208,11 +205,13 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
 
             vehicleList.add(vehicle);
         }
-        BookingVehicleAdapter bookingVehicleAdapter1 = new BookingVehicleAdapter(this, vehicles);
 
-        recyclerView.setAdapter(bookingVehicleAdapter1);
-
-
+        bookingVehicleAdapter = new BookingVehicleAdapter(this, vehicleList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        bookingVehicleAdapter.setOnClickEvents(this);
+        recyclerView.setAdapter(bookingVehicleAdapter);
 
 
     }
@@ -325,8 +324,35 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setMinZoomPreference(0.0f);
+        mMap.setMinZoomPreference(2.0f);
         mMap.setMaxZoomPreference(18.0f);
+
+
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                //Your code where exception occurs goes here..
+                //
+                if (sourceLatitude > 0 && sourceLongitude > 0) {
+
+
+                    Marker markerS = mMap.addMarker(markerOptions1);
+                    Marker markerD = mMap.addMarker(markerOptions2);
+                    markers.add(markerS);
+                    markers.add(markerD);
+
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    for (Marker marker : markers) {
+                        builder.include(marker.getPosition());
+                    }
+                    LatLngBounds bounds = builder.build();
+                    int padding = 0; // offset from edges of the map in pixels
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+                    mMap.moveCamera(cu);
+                }
+            }
+        });
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -342,21 +368,7 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
         }
 
 
-        if (sourceLatitude > 0 && sourceLongitude > 0) {
 
-
-            mMap.addMarker(markerOptions1);
-            mMap.addMarker(markerOptions2);
-            CameraPosition googlePlex = CameraPosition.builder()
-                    .target(new LatLng(sourceLatitude, sourceLatitude))
-                    .zoom(7)
-                    .bearing(0)
-                    .tilt(45)
-                    .build();
-
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 5000, null);
-
-        }
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -515,4 +527,82 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
             currentPolyline.remove();
         currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.home) {
+            finish();
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCLickInfo(int position) {
+        if (vehicleList != null && vehicleList.size() > 0)
+            showInfoDialog(vehicleList.get(position));
+    }
+
+    @Override
+    public void onCLickTruck(int position) {
+
+        if (vehicleList != null && vehicleList.size() > 0)
+            bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
+
+    }
+
+
+    private void showInfoDialog(Vehicle vehicle) {
+
+        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
+        // ...Irrelevant code for customizing the buttons and titl
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.fare_info, null);
+        dialogBuilder.setView(dialogView);
+
+        final android.app.AlertDialog dialog = dialogBuilder.create();
+        Button btn_yes = dialogView.findViewById(R.id.done);
+        TextView nameTv = dialogView.findViewById(R.id.truckName);
+        TextView vihicleImg = dialogView.findViewById(R.id.vehicleImg);
+        TextView capacityTv = dialogView.findViewById(R.id.capacity);
+        TextView sizeTV = dialogView.findViewById(R.id.sizeTV);
+
+
+        TextView okay = dialogView.findViewById(R.id.done);
+
+        capacityTv.setText(vehicle.getCapacity());
+        sizeTV.setText(vehicle.getCapacity());
+
+
+        TextView info1 = dialogView.findViewById(R.id.info1);
+        TextView info2 = dialogView.findViewById(R.id.info2);
+        TextView info3 = dialogView.findViewById(R.id.info3);
+        TextView info4 = dialogView.findViewById(R.id.info4);
+        TextView info5 = dialogView.findViewById(R.id.info6);
+        TextView info6 = dialogView.findViewById(R.id.info5);
+
+        nameTv.setText(vehicle.getvName());
+        info1.setText(vehicle.getInfo1());
+        info2.setText(vehicle.getInfo2());
+        info3.setText(vehicle.getInfo3());
+        info4.setText(vehicle.getInfo4());
+        info5.setText(vehicle.getInfo5());
+        info6.setText(vehicle.getInfo6());
+
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        if (!isFinishing() && !dialog.isShowing())
+            dialog.show();
+
+
+    }
+
 }
