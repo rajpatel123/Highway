@@ -7,7 +7,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+
+import com.highway.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -193,5 +198,9 @@ public class Utils {
         int minutesToMs = Integer.parseInt(tokens[1]) * 60000;
         int hoursToMs = Integer.parseInt(tokens[0]) * 3600000;
         return secondsToMs + minutesToMs + hoursToMs;
+    }
+
+    public static void setTintForImage(Context context,ImageView imageView,int color){
+        imageView.setColorFilter(ContextCompat.getColor(context, color), android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 }
