@@ -46,6 +46,7 @@
     <string name="close">Close Sheet</string>
     <string name="expand">Expand Sheet</string>
     <string name="Rs_one">"\u20B9" 15.0</string>
+    <string name="Rs_one1">"\u20B9" 645.00</string>
     <string name="invalid_mobile">Please Enter Valid Phone!!!</string>
     <string name="valid_phone">Enter 10 Number Phone!!!</string>
     <string name="invalid_email">Please Enter Valid Email!!</string>

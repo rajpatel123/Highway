@@ -27,6 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -93,6 +95,8 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
     private String destName;
 
     List<Vehicle> vehicleList = new ArrayList<>();
+   private BookingVehicleAdapter bookingVehicleAdapter;
+
 
     public static void start(Activity activity,
                              String sourceName,
@@ -124,6 +128,9 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
         recyclerView = findViewById(R.id.vehicleListRV);
+
+        recyclerView = findViewById(R.id.vehicleRecyclerView);
+
 
         initLocations(getIntent());
 
@@ -173,6 +180,19 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
         });
 
 
+
+
+        bookingVehicleAdapter = new BookingVehicleAdapter(vehicleList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(bookingVehicleAdapter);
+
+
+        List<Vehicle> vehicles = new ArrayList<>();
+
+
         for (int i = 0; i < 8; i++) {
             Vehicle vehicle = new Vehicle();
             vehicle.setvName("TATA ACE");
@@ -189,6 +209,11 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
 
             vehicleList.add(vehicle);
         }
+        BookingVehicleAdapter bookingVehicleAdapter1 = new BookingVehicleAdapter(this, vehicles);
+
+        recyclerView.setAdapter(bookingVehicleAdapter1);
+
+
 
 
     }
@@ -216,8 +241,6 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
         if (resultCode == RESULT_OK) {
             if (requestCode == AUTOCOMPLETE_REQUEST_CODE_SOURCE) {
 
@@ -227,7 +250,6 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
                 if (TextUtils.isEmpty(place.getName())) {
                     edtSourceLOcationEDT.setText("" + place.getName());
                     if (mMap != null && place.getLatLng() != null) {
-
 
                         LatLng latLng = place.getLatLng();
 
@@ -251,7 +273,6 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
 
                     edtSourceLOcationEDT.setText("" + placeDest.getName());
                     if (mMap != null && placeDest.getLatLng() != null) {
-
 
                         LatLng latLng = placeDest.getLatLng();
 
