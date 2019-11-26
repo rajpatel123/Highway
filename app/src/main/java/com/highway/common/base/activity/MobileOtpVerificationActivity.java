@@ -129,6 +129,21 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
                             if (response.body().getUserStatus().equalsIgnoreCase("1")) {
                                 gotoDashboardAfterLogin(response.body());
 
+                               /* Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
+
+                                HighwayPrefs.putBoolean(getApplicationContext(), Constants.LOGGED_IN, true);
+                                HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getName());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getMobile());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, response.body().getImage());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getEmail());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, response.body().getGender());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getRoleId());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, response.body().getAddress());
+
+                                startActivity(intent);
+                                Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();
+                                finish();*/
+
                             } else if (TextUtils.isEmpty(response.body().getName())) {
                                 Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
 

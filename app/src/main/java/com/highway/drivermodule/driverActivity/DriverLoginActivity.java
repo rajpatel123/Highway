@@ -82,19 +82,19 @@ public class DriverLoginActivity extends AppCompatActivity {
 
                         if (response.body() != null) {
                             if (response.body().getStatus() == true) {
-                                Intent intent = new Intent(DriverLoginActivity.this, DashBoardActivity.class);
+                                Intent intent = new Intent(DriverLoginActivity.this, MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(DriverLoginActivity.this, Constants.USERMOBILE, phone_number);
-                                /*..............*/
+                               /*
                                 HighwayPrefs.putString(DriverLoginActivity.this,Constants.ID,"3");
                                 HighwayPrefs.putString(DriverLoginActivity.this,Constants.NAME,"Santosh");
                                 HighwayPrefs.putString(DriverLoginActivity.this,Constants.DriverEmail,"prit@gmail.com");
                                 HighwayPrefs.putString(DriverLoginActivity.this,Constants.MillerGender,"Male");
                                 HighwayPrefs.putString(DriverLoginActivity.this,Constants.ROLEID,"3");
-                                HighwayPrefs.putBoolean(DriverLoginActivity.this,Constants.User_statuss,true);
+                                HighwayPrefs.putBoolean(DriverLoginActivity.this,Constants.User_statuss,true);*/
 
                                 startActivity(intent);
                                 finish();
-                                Toast.makeText(DriverLoginActivity.this, "Welcome Driver", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DriverLoginActivity.this, "Pls verify Otp ", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -105,10 +105,7 @@ public class DriverLoginActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
-
         }
 
     }

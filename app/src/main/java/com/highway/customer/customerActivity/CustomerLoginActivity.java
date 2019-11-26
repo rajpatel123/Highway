@@ -71,11 +71,6 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
         if (validateInput()){
 
-           /* Intent intent = new Intent(CustomerLoginActivity.this, DashBoardActivity.class);
-            HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
-            startActivity(intent);
-            finish();*/
-
             LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
             loginRegisterRequest.setMobile(phone_number);
 
@@ -89,19 +84,19 @@ public class CustomerLoginActivity extends AppCompatActivity {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
                             if (response.body().getStatus() == true) {
-                                Intent intent = new Intent(CustomerLoginActivity.this, DashBoardActivity.class);
+                                Intent intent = new Intent(CustomerLoginActivity.this,MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
-                                /* ///////////////// */
-                                HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ID,"4");
+
+                                /*HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ID,"4");
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.NAME,"Ramashish");
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.CustomerEmail,"prit@gmail.com");
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.MillerGender,"Male");
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ROLEID,"4");
-                                HighwayPrefs.putBoolean(CustomerLoginActivity.this,Constants.User_statuss,true);
+                                HighwayPrefs.putBoolean(CustomerLoginActivity.this,Constants.User_statuss,true);*/
 
                                 startActivity(intent);
                                 finish();
-                                Toast.makeText(CustomerLoginActivity.this, "Welcome Customer !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CustomerLoginActivity.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
