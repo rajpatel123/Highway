@@ -183,7 +183,7 @@ public class BookingWithDetailsActivity extends FragmentActivity implements OnMa
 
         bookingVehicleAdapter = new BookingVehicleAdapter(vehicleList);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(bookingVehicleAdapter);
