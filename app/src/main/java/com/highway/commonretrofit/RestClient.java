@@ -8,11 +8,12 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationDetailsRequest;
 import com.highway.common.base.commonModel.registration.RegistrationDetailsResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
 public class RestClient {
     // login mob no
-    public static void loginUser(LoginRegisterRequest loginRegisterRequest, Callback<LoginRegisterResponse> callback) {
+    public static void loginUser(LoginRegisterRequest loginRegisterRequest, Callback<ResponseBody> callback) {
         RetrofitClient.getClient().loginResponseCall(loginRegisterRequest).enqueue(callback);
     }
 

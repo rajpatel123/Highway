@@ -10,18 +10,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.highway.R;
-import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
-import com.highway.common.base.commonModel.login.LoginRegisterResponse;
 import com.highway.commonretrofit.RestClient;
-import com.highway.millmodule.milluserActivity.MillerLoginActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,12 +75,12 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
                 Utils.showProgressDialog(this);
 
-                RestClient.loginUser(loginRegisterRequest, new Callback<LoginRegisterResponse>() {
+                RestClient.loginUser(loginRegisterRequest, new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<LoginRegisterResponse> call, Response<LoginRegisterResponse> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
-                            if (response.body().getStatus() == true) {
+                            if (response.code()==200) {
                                 Intent intent = new Intent(CustomerLoginActivity.this,MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
 
@@ -96,12 +93,12 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
                                 startActivity(intent);
                                 finish();
-                                Toast.makeText(CustomerLoginActivity.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CustomerLoginActivity.this, "Otp sent successfull", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
                     @Override
-                    public void onFailure(Call<LoginRegisterResponse> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Toast.makeText(CustomerLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
 
                     }
