@@ -86,20 +86,20 @@ public class OwnerLoginActivity extends AppCompatActivity {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
                             if (response.body().getStatus() == true) {
-                                Intent intent = new Intent(OwnerLoginActivity.this, DashBoardActivity.class);
+                                Intent intent = new Intent(OwnerLoginActivity.this, MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(OwnerLoginActivity.this, USERMOBILE, phone_number);
-                                /*///////////////////////////*/
+                                /*
                                 HighwayPrefs.putString(OwnerLoginActivity.this, Constants.ID,"5");
                                 HighwayPrefs.putString(OwnerLoginActivity.this,Constants.NAME,"Nitin");
                                 HighwayPrefs.putString(OwnerLoginActivity.this,Constants.OwnerEmail,"prit@gmail.com");
                                 HighwayPrefs.putString(OwnerLoginActivity.this,Constants.MillerGender,"Male");
                                 HighwayPrefs.putString(OwnerLoginActivity.this,Constants.ROLEID,"5");
-                                HighwayPrefs.putBoolean(OwnerLoginActivity.this,Constants.User_statuss,true);
+                                HighwayPrefs.putBoolean(OwnerLoginActivity.this,Constants.User_statuss,true);*/
                                 startActivity(intent);
                                 finish();
 
-                                /*Toast.makeText(OwnerLoginActivity.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();*/
-                                Toast.makeText(OwnerLoginActivity.this, "Welcome Owner !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(OwnerLoginActivity.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();
+                                /*Toast.makeText(OwnerLoginActivity.this, "Welcome Owner !", Toast.LENGTH_SHORT).show();*/
                             }
                         }
                     }

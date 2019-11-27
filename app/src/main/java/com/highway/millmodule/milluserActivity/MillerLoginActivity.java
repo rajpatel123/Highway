@@ -81,23 +81,23 @@ public class MillerLoginActivity extends AppCompatActivity {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
                             if (response.body().getStatus() == true) {
-                                Intent intent = new Intent(MillerLoginActivity.this, DashBoardActivity.class);
+                                Intent intent = new Intent(MillerLoginActivity.this, MobileOtpVerificationActivity.class);
 
                                 HighwayPrefs.putString(MillerLoginActivity.this, Constants.USERMOBILE, phone_number);
                                 /********************/
-                               /* HighwayPrefs.putString(MillerLoginActivity.this,Constants.MillerMOBILE,"9471444622");*/
+                              /* *//* HighwayPrefs.putString(MillerLoginActivity.this,Constants.MillerMOBILE,"9471444622");*//*
                                 HighwayPrefs.putString(MillerLoginActivity.this,Constants.ID,"2");
                                 HighwayPrefs.putString(MillerLoginActivity.this,Constants.NAME,"Vikash");
                                 HighwayPrefs.putString(MillerLoginActivity.this,Constants.MillerEmail,"prit@gmail.com");
                                 HighwayPrefs.putString(MillerLoginActivity.this,Constants.MillerGender,"Male");
                                 HighwayPrefs.putString(MillerLoginActivity.this,Constants.ROLEID,"2");
-                                HighwayPrefs.putBoolean(MillerLoginActivity.this,Constants.User_statuss,true);
+                                HighwayPrefs.putBoolean(MillerLoginActivity.this,Constants.User_statuss,true);*/
 
                                 startActivity(intent);
                                 finish();
 
-                                /*Toast.makeText(MillerLoginActivity.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();*/
-                                Toast.makeText(MillerLoginActivity.this, "Welcome Miller", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MillerLoginActivity.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();
+                               /* Toast.makeText(MillerLoginActivity.this, "Welcome Miller", Toast.LENGTH_SHORT).show();*/
                             }
                         }
                     }
