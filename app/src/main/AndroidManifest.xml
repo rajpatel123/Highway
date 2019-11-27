@@ -23,6 +23,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".customer.customerActivity.BookingWithDetailsActivity"
@@ -67,7 +68,7 @@
             android:name=".customer.customerActivity.OwnerLoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".customer.RegistrationDetailsActivity"
+            android:name=".common.base.activity.RegistrationDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".drivermodule.driverActivity.DriverLoginActivity"

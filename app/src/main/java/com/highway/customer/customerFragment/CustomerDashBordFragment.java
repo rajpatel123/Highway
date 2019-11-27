@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.highway.R;
-import com.highway.customer.CustomerFragmentAdapter;
+import com.highway.customer.customerAdapter.CustomerFragmentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

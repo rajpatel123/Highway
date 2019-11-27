@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".commonActivity.RegistrationDetailsActivity">
+    tools:context=".common.base.activity.RegistrationDetailsActivity">
 
 
     <LinearLayout
@@ -142,7 +142,7 @@
                         android:textColor="@color/black" />
 
                 </LinearLayout>
-
+<!--
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -232,7 +232,7 @@
                     </RadioGroup>
 
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -251,7 +251,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="4dp"
                             android:paddingTop="4dp"
-                            android:paddingRight="@dimen/padding_right_30dp"
+                            android:paddingRight="@dimen/margin_right_5"
                             android:paddingBottom="4dp"
                             android:text="Role"
                             android:textColor="@color/black"
@@ -287,6 +287,14 @@
                             android:layout_height="wrap_content"
                             android:onClick="onUserRadioButtonClicked"
                             android:text="MillUser "
+                            tools:ignore="OnClick" />
+
+                        <RadioButton
+                            android:id="@+id/radio_Owner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="onUserRadioButtonClicked"
+                            android:text="Owner "
                             tools:ignore="OnClick" />
                     </RadioGroup>
 

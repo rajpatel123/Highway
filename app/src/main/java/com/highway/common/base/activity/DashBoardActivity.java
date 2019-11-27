@@ -28,6 +28,7 @@ import com.highway.customer.customerFragment.CustomerDashBordFragment;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DriverDashBoardFragment;
 import com.highway.millmodule.milluserFragment.MillUserDashBoardFragment;
+import com.highway.ownermodule.owner.ownerfragment.VehicleDashBoardFragment;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -128,7 +129,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         userRole = HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID);
         switch (userRole) {
 
-            case "2":
+            case "1":                                     // Admin
+                break;
+
+            case "2":                                    //  mill user
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 addVehicle.setVisible(false);
@@ -144,7 +148,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "3":
+            case "3":                                 // Driver
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 addVehicle.setVisible(false);
@@ -160,7 +164,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "4":
+            case "4":                                  //  Customer
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 addVehicle.setVisible(false);
@@ -176,7 +180,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "5":
+            case "5":                              // Owner .. vehicle Owner
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 addVehicle.setVisible(true);
@@ -274,8 +278,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(fragment);
                         break;
                     case "5":
-                       /* fragment = CustomerDashBordFragment.newInstance();
-                          replaceFragment(fragment);*/
+                        fragment = VehicleDashBoardFragment.newInstance();
+                          replaceFragment(fragment);
                         break;
                 }
                 break;

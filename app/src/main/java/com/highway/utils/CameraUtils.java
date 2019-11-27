@@ -17,7 +17,7 @@ import androidx.core.content.FileProvider;
 
 
 import com.highway.BuildConfig;
-import com.highway.customer.RegistrationDetailsActivity;
+import com.highway.common.base.activity.RegistrationDetailsActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

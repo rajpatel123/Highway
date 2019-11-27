@@ -570,7 +570,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         TextView capacityTv = dialogView.findViewById(R.id.capacity);
         TextView sizeTV = dialogView.findViewById(R.id.sizeTV);
 
-
         TextView okay = dialogView.findViewById(R.id.done);
 
         capacityTv.setText(vehicle.getCapacity());
