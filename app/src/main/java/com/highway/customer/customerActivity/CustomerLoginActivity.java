@@ -22,6 +22,8 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,10 +84,11 @@ public class CustomerLoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginRegisterResponse> call, Response<LoginRegisterResponse> response) {
                         Utils.dismissProgressDialog();
-                        if (response.body() != null) {
-                            if (response.body().getStatus() == true) {
-                                Intent intent = new Intent(CustomerLoginActivity.this,MobileOtpVerificationActivity.class);
-                                HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
+                        if (response.code()== HttpsURLConnection.HTTP_OK) {
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == true) {
+                                    Intent intent = new Intent(CustomerLoginActivity.this, MobileOtpVerificationActivity.class);
+                                    HighwayPrefs.putString(CustomerLoginActivity.this, Constants.USERMOBILE, phone_number);
 
                                 /*HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ID,"4");
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.NAME,"Ramashish");
@@ -94,9 +97,10 @@ public class CustomerLoginActivity extends AppCompatActivity {
                                 HighwayPrefs.putString(CustomerLoginActivity.this,Constants.ROLEID,"4");
                                 HighwayPrefs.putBoolean(CustomerLoginActivity.this,Constants.User_statuss,true);*/
 
-                                startActivity(intent);
-                                finish();
-                                Toast.makeText(CustomerLoginActivity.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                    finish();
+                                    Toast.makeText(CustomerLoginActivity.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     }
