@@ -18,7 +18,6 @@ public interface ApiInterface {
     @POST("http://vrok.in/highway_dev/login_register")  // mobile logon
     Call<ResponseBody> loginResponseCall(@Body LoginRegisterRequest loginRequest);
 
-
     @POST("http://vrok.in/highway_dev/otp_verify") // otp verification
     Call<VerifyOtpResponse> verifyOtpResponseCall(@Body VerifyOtpRequest verifyOtpRequest);
 

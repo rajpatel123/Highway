@@ -1,4 +1,4 @@
-package com.highway.customer;
+package com.highway.customer.customerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

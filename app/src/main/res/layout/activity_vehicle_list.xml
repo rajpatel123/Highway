@@ -10,17 +10,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:minWidth="@dimen/margin_100"
         android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/margin_5"
-      >
+        android:padding="@dimen/margin_5">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:minWidth="78dp"
+            android:minWidth="100dp"
             android:orientation="vertical">
 
             <TextView
@@ -35,8 +34,7 @@
                 android:id="@+id/vehicleImg1"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/truck"
-                />
+                android:src="@drawable/truck" />
 
             <TextView
                 android:id="@+id/timeDurationTv2"
@@ -44,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="8 mins"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,6 +57,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/Rs_one1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textColor="@color/black" />
 
                 <ImageView
@@ -65,10 +66,10 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
+                    android:paddingLeft="2.5sp"
                     app:srcCompat="@drawable/info_icon" />
             </LinearLayout>
         </LinearLayout>
-
 
     </LinearLayout>
 

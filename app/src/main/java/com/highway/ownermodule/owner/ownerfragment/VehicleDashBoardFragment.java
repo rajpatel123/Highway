@@ -26,7 +26,7 @@ public class VehicleDashBoardFragment extends Fragment {
     public VehicleDashBoardFragment() {
     }
 
-    public static VehicleDashBoardFragment newInstance(String param1, String param2) {
+    public static VehicleDashBoardFragment newInstance() {
         VehicleDashBoardFragment fragment = new VehicleDashBoardFragment();
         Bundle args = new Bundle();
 

@@ -1,4 +1,4 @@
-package com.highway.customer;
+package com.highway.common.base.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.highway.R;
-import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.registration.RegistrationDetailsRequest;
 import com.highway.common.base.commonModel.registration.RegistrationDetailsResponse;
 import com.highway.commonretrofit.RestClient;
@@ -52,7 +51,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
     private ImageView imgDetailbackArrow, imgDetailProfile, imgCalenderDatePicker;
     private EditText edtTxtUserName, edtTxtUserEmail, edtTxtUserMobile, edtTxtUserDobDate, edtTxtUserAddress;
-    private RadioButton userRadioMale, userRadioFemale, userRadioDiver, userRadioCustomer, userRadioMillUser;
+    private RadioButton userRadioMale, userRadioFemale, userRadioDiver, userRadioCustomer, userRadioMillUser,userRadioOwner;
     private String gender;
     private String userRole;
     private Button btnSubmit;
@@ -98,8 +97,8 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
         initView();  // finding by id
         setOnClickListener();
-        calenderPickOperation();         //  calender picker
-        radioGenderGroupOperation();    // gender group operation
+        //calenderPickOperation();         //  dob calender picker
+        //radioGenderGroupOperation();    // gender group operation
         backArrowOperation();
     }
 
@@ -120,19 +119,19 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         edtTxtUserEmail = findViewById(R.id.edtTxtInputUserEmail);
         edtTxtUserAddress = findViewById(R.id.edtTxtInputUserAddress);
 
-        imgCalenderDatePicker = findViewById(R.id.dobCalenderPicker);
+       /* imgCalenderDatePicker = findViewById(R.id.dobCalenderPicker);
         edtTxtUserDobDate = findViewById(R.id.edtTxtInputUserDOB);
         // calenderDatePicker.setEnabled(false);
 
         userRadioMale = findViewById(R.id.radio_Male);
-        userRadioFemale = findViewById(R.id.radio_female);
+        userRadioFemale = findViewById(R.id.radio_female);*/
         userRadioDiver = findViewById(R.id.radio_Driver);
         userRadioCustomer = findViewById(R.id.radio_Customer);
         userRadioMillUser = findViewById(R.id.radio_MillUser);
-
+        userRadioOwner = findViewById(R.id.radio_Owner);
         btnSubmit = findViewById(R.id.btnSubmitDetails);
 
-        radiogroup_Gender = (RadioGroup) findViewById(R.id.radiogroup_Gender);
+       /* radiogroup_Gender = (RadioGroup) findViewById(R.id.radiogroup_Gender);*/
         radioGroup_RoleUser = (RadioGroup) findViewById(R.id.radiogroup_Role);
     }
 
@@ -270,7 +269,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                     }
                 }).show();
     }
-
+           // Img Uploading on Server in base 64 bit
     public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -332,18 +331,16 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
     public void onUserRadioButtonClicked(View v) {
         boolean checked = ((RadioButton) v).isChecked();
         switch (v.getId()) {
-
+            //  1 Admin  //  2 Mill user   // 3  Driver // // 4  Customer   // 5 Owner
             case R.id.radio_Customer:
                 if (checked)
-
-                    userRadioCustomer.setText("Customer");
+                    userRadioCustomer.setText("Customer");   // Customer
                 userRole = userRadioCustomer.getText().toString().trim();
                 Toast.makeText(this, userRadioCustomer.getText().toString(), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.radio_Driver:
                 if (checked)
-
                     userRadioDiver.setText("Driver");       // userRadioDiver.setText("Driver");
                 userRole = userRadioDiver.getText().toString().trim();
                 Toast.makeText(this, userRadioDiver.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -352,10 +349,16 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
             case R.id.radio_MillUser:
                 if (checked)
-
-                    userRadioMillUser.setText("MillUser");
+                    userRadioMillUser.setText("MillUser"); // MillUser
                 userRole = userRadioMillUser.getText().toString().trim();
                 Toast.makeText(this, userRadioMillUser.getText().toString(), Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.radio_Owner:
+                if (checked)
+                    userRadioOwner.setText("VehicleOwner");  // VehicleOwner
+                userRole =userRadioOwner.getText().toString().trim();
+                Toast.makeText(this, userRadioOwner.getText().toString(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -367,10 +370,10 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         userDobDate = edtTxtUserDobDate.getText().toString().trim();
         userAddress = edtTxtUserAddress.getText().toString().trim();
 
-        if (TextUtils.isEmpty(base64UserImg)) {
+       /* if (TextUtils.isEmpty(base64UserImg)) {
             Toast.makeText(this, "Pls capture the user image", Toast.LENGTH_SHORT).show();
             return false;
-        }
+        }*/
 
         if (userName.isEmpty()) {
             edtTxtUserName.setError("enter a valid email address");
@@ -391,12 +394,12 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             return false;
         }
 
-        if (userDobDate.isEmpty()) {
+       /* if (userDobDate.isEmpty()) {
             edtTxtUserDobDate.setError("enter a valid D.O.B");
             return false;
         } else {
             edtTxtUserDobDate.setError(null);
-        }
+        }*/
 
         if (userAddress.isEmpty()) {
             edtTxtUserAddress.setError("pls enter Address");
@@ -451,9 +454,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                 RestClient.regDetails(registrationDetailsRequest, new Callback<RegistrationDetailsResponse>() {
                     @Override
                     public void onResponse(Call<RegistrationDetailsResponse> call, Response<RegistrationDetailsResponse> response) {
-
                         Utils.dismissProgressDialog();
-
                         if (response.body() != null && response.body().getStatus()) {
                             if (response.body().getUserStatus().equalsIgnoreCase("1")) {
 

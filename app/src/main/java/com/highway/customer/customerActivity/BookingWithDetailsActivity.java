@@ -304,7 +304,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         ImageView markerImage = marker.findViewById(R.id.imgLogo);
         markerImage.setImageResource(resource);
 
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         marker.setLayoutParams(new ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -334,7 +333,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 //Your code where exception occurs goes here..
                 //
                 if (sourceLatitude > 0 && sourceLongitude > 0) {
-
 
                     Marker markerS = mMap.addMarker(markerOptions1);
                     Marker markerD = mMap.addMarker(markerOptions2);
@@ -569,7 +567,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         TextView vihicleImg = dialogView.findViewById(R.id.vehicleImg);
         TextView capacityTv = dialogView.findViewById(R.id.capacity);
         TextView sizeTV = dialogView.findViewById(R.id.sizeTV);
-
 
         TextView okay = dialogView.findViewById(R.id.done);
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import com.highway.R;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
@@ -93,7 +94,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
                                 startActivity(intent);
                                 finish();
-                                Toast.makeText(CustomerLoginActivity.this, "Otp sent successfull", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CustomerLoginActivity.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

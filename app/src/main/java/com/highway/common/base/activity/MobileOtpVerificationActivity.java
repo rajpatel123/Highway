@@ -19,7 +19,6 @@ import com.highway.R;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.commonretrofit.RestClient;
-import com.highway.customer.RegistrationDetailsActivity;
 import com.highway.customer.customerActivity.CustomerLoginActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -109,11 +108,11 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
             verifyOtpRequest.setOtp(otpNumber);
             verifyOtpRequest.setMobile(usermobileNumber);
 
-            VerifyOtpResponse verifyOtpResponse = new VerifyOtpResponse();
+           /* VerifyOtpResponse verifyOtpResponse = new VerifyOtpResponse();
             verifyOtpResponse.setEmail("fhd@fhjdfh.fnd");
             verifyOtpResponse.setImage("");
-            verifyOtpResponse.setMobile("4657247345");
-            gotoDashboardAfterLogin(verifyOtpResponse);
+            verifyOtpResponse.setMobile("4657247345");*/
+            //gotoDashboardAfterLogin(verifyOtpResponse);
 
             if (Utils.isInternetConnected(this)) {
 
@@ -128,13 +127,10 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
                         if (response.body() != null) {
                             if (TextUtils.isEmpty(response.body().getName())) {
                                 Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
-
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ID, response.body().getId());
-
                                 startActivity(intent);
                                 finish();
                             }else{
-
                                 gotoDashboardAfterLogin(response.body());
 
                                /* Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
