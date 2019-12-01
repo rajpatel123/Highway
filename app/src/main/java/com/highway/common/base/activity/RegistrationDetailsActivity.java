@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.highway.R;
-import com.highway.common.base.commonModel.registration.RegistrationDetailsRequest;
-import com.highway.common.base.commonModel.registration.RegistrationDetailsResponse;
+import com.highway.common.base.commonModel.registration.RegistrationRequest;
+import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.commonretrofit.RestClient;
 import com.highway.utils.CameraUtils;
 import com.highway.utils.Constants;
@@ -51,7 +50,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
     private ImageView imgDetailbackArrow, imgDetailProfile, imgCalenderDatePicker;
     private EditText edtTxtUserName, edtTxtUserEmail, edtTxtUserMobile, edtTxtUserDobDate, edtTxtUserAddress;
-    private RadioButton userRadioMale, userRadioFemale, userRadioDiver, userRadioCustomer, userRadioMillUser,userRadioOwner;
+    private RadioButton userRadioMale, userRadioFemale, userRadioDiver, userRadioCustomer, userRadioMillUser, userRadioOwner;
     private String gender;
     private String userRole;
     private Button btnSubmit;
@@ -131,7 +130,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         userRadioOwner = findViewById(R.id.radio_Owner);
         btnSubmit = findViewById(R.id.btnSubmitDetails);
 
-       /* radiogroup_Gender = (RadioGroup) findViewById(R.id.radiogroup_Gender);*/
+        /* radiogroup_Gender = (RadioGroup) findViewById(R.id.radiogroup_Gender);*/
         radioGroup_RoleUser = (RadioGroup) findViewById(R.id.radiogroup_Role);
     }
 
@@ -269,7 +268,8 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                     }
                 }).show();
     }
-           // Img Uploading on Server in base 64 bit
+
+    // Img Uploading on Server in base 64 bit
     public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -357,7 +357,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             case R.id.radio_Owner:
                 if (checked)
                     userRadioOwner.setText("VehicleOwner");  // VehicleOwner
-                userRole =userRadioOwner.getText().toString().trim();
+                userRole = userRadioOwner.getText().toString().trim();
                 Toast.makeText(this, userRadioOwner.getText().toString(), Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -367,7 +367,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
         userName = edtTxtUserName.getText().toString().trim();
         userEmail = edtTxtUserEmail.getText().toString().trim();
-        userDobDate = edtTxtUserDobDate.getText().toString().trim();
+        /* userDobDate = edtTxtUserDobDate.getText().toString().trim();*/
         userAddress = edtTxtUserAddress.getText().toString().trim();
 
        /* if (TextUtils.isEmpty(base64UserImg)) {
@@ -425,13 +425,13 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
         if (inputValidation()) {
 
-            RegistrationDetailsRequest registrationDetailsRequest = new RegistrationDetailsRequest();
+            RegistrationRequest registrationDetailsRequest = new RegistrationRequest();
             registrationDetailsRequest.setName(userName);
             registrationDetailsRequest.setEmail(userEmail);
-            registrationDetailsRequest.setDob(userDobDate);
-            registrationDetailsRequest.setGender(gender);
+            /* registrationDetailsRequest.setDob(userDobDate);*/
+            /*registrationDetailsRequest.setGender(gender);*/
             registrationDetailsRequest.setAddress(userAddress);
-            registrationDetailsRequest.setBase64File(base64UserImg);   // img uploading
+            /* registrationDetailsRequest.setBase64File(base64UserImg); */  // img uploading
             userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
             registrationDetailsRequest.setUserId(userId);
 
@@ -451,28 +451,31 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             if (Utils.isInternetConnected(this)) {
                 Utils.showProgressDialog(getApplicationContext());
 
-                RestClient.regDetails(registrationDetailsRequest, new Callback<RegistrationDetailsResponse>() {
+                RestClient.regDetails(registrationDetailsRequest, new Callback<RegistrationResponse>() {
                     @Override
-                    public void onResponse(Call<RegistrationDetailsResponse> call, Response<RegistrationDetailsResponse> response) {
+                    public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                         Utils.dismissProgressDialog();
-                        if (response.body() != null && response.body().getStatus()) {
-                            if (response.body().getUserStatus().equalsIgnoreCase("1")) {
+                        if (response.body() != null ) {
+                            if (response.body().getStatus().equalsIgnoreCase("1")) {
 
                                 Intent intent = new Intent(RegistrationDetailsActivity.this, DashBoardActivity.class);
+                                String name = response.body().getUser().getName();
 
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getRoleId());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getName());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getMobile());
+                                intent.putExtra("userName", name);
+
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getUser().getRoleId());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getUser().getMobile());
                                 /* use our requirement  */
-                                HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, response.body().getImage());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getEmail());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, response.body().getGender());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, response.body().getAddress());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, response.body().getUser().getImage());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getUser().getEmail());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, response.body().getUser().getGender());
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, response.body().getUser().getAddress());
 
                                 startActivity(intent);
                                 finish();
 
-                            } else if (response.body().getStatus() == false) {
+                            } else if (response.body().getStatus().equalsIgnoreCase("0")) {
                                 Toast.makeText(RegistrationDetailsActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(RegistrationDetailsActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
@@ -481,7 +484,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<RegistrationDetailsResponse> call, Throwable t) {
+                    public void onFailure(Call<RegistrationResponse> call, Throwable t) {
                         Toast.makeText(RegistrationDetailsActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -490,8 +493,9 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
     }
 
-// onBacked pressed registration
+    // onBacked pressed registration
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -511,7 +515,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             }
         }, 2000);
     }
-
 
 
 }

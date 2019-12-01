@@ -125,12 +125,14 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
                         Utils.dismissProgressDialog();
 
                         if (response.body() != null) {
-                            if (TextUtils.isEmpty(response.body().getName())) {
+                            if (TextUtils.isEmpty(response.body().getUser().getName())) {
                                 Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ID, response.body().getId());
+                                String id = response.body().getUser().getUserId();
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ID, id);
+
                                 startActivity(intent);
                                 finish();
-                            }else{
+                            } else {
                                 gotoDashboardAfterLogin(response.body());
 
                                /* Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
@@ -150,7 +152,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
 
                                 Toast.makeText(MobileOtpVerificationActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                             }
-                            }
+                        }
                     }
 
                     @Override
@@ -167,13 +169,13 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
         Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
 
         HighwayPrefs.putBoolean(getApplicationContext(), Constants.LOGGED_IN, true);
-        HighwayPrefs.putString(getApplicationContext(), Constants.NAME, verifyOtpResponse.getName());
-        HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, verifyOtpResponse.getMobile());
-        HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, verifyOtpResponse.getImage());
-        HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, verifyOtpResponse.getEmail());
-        HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, verifyOtpResponse.getGender());
-        HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, verifyOtpResponse.getRoleId());
-        HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, verifyOtpResponse.getAddress());
+        HighwayPrefs.putString(getApplicationContext(), Constants.NAME, verifyOtpResponse.getUser().getName());
+        HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, verifyOtpResponse.getUser().getMobile());
+        HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, verifyOtpResponse.getUser().getImage());
+        HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, verifyOtpResponse.getUser().getEmail());
+        HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, verifyOtpResponse.getUser().getGender());
+        HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, verifyOtpResponse.getUser().getRoleId());
+        HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, verifyOtpResponse.getUser().getAddress());
 
         startActivity(intent);
         Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();

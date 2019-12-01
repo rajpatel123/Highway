@@ -239,6 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/margin_15"
+                    android:layout_weight="5"
                     android:background="@null"
                     android:orientation="horizontal">
 
@@ -249,10 +250,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="4dp"
-                            android:paddingTop="4dp"
-                            android:paddingRight="@dimen/margin_right_5"
-                            android:paddingBottom="4dp"
+
+                            android:layout_weight="1"
+
                             android:text="Role"
                             android:textColor="@color/black"
                             android:textSize="@dimen/size_20" />
@@ -268,6 +268,7 @@
                         <RadioButton
                             android:id="@+id/radio_Customer"
                             android:layout_width="wrap_content"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:onClick="onUserRadioButtonClicked"
                             android:text="Customer"
@@ -276,6 +277,7 @@
                         <RadioButton
                             android:id="@+id/radio_Driver"
                             android:layout_width="wrap_content"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:onClick="onUserRadioButtonClicked"
                             android:text="Driver"
@@ -284,6 +286,7 @@
                         <RadioButton
                             android:id="@+id/radio_MillUser"
                             android:layout_width="wrap_content"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:onClick="onUserRadioButtonClicked"
                             android:text="MillUser "
@@ -295,6 +298,7 @@
                             android:layout_height="wrap_content"
                             android:onClick="onUserRadioButtonClicked"
                             android:text="Owner "
+                            android:layout_weight="1"
                             tools:ignore="OnClick" />
                     </RadioGroup>
 

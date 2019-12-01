@@ -1,14 +1,14 @@
 
-package com.highway.common.base.commonModel.otpverify;
+package com.highway.common.base.commonModel.registration;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VerifyOtpResponse {
+public class RegistrationResponse {
 
     @SerializedName("Status")
     @Expose
-    private Boolean status;
+    private String status;
     @SerializedName("Message")
     @Expose
     private String message;
@@ -16,11 +16,11 @@ public class VerifyOtpResponse {
     @Expose
     private User user;
 
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

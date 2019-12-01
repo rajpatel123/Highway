@@ -106,11 +106,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     public void updateNavViewHeader() {
         Intent intent = getIntent();
+        String username = intent.getStringExtra("userName");
         image = HighwayPrefs.getString(getApplicationContext(), Constants.IMAGE);
-        name = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
+      //  name = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
         mobNo = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
 
-        nevUserName.setText(name);
+        nevUserName.setText(username);
         nevUserMobNo.setText(mobNo);
 
         if (!TextUtils.isEmpty(image)) {
@@ -279,7 +280,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
                         fragment = VehicleDashBoardFragment.newInstance();
-                          replaceFragment(fragment);
+                        replaceFragment(fragment);
                         break;
                 }
                 break;

@@ -2,11 +2,10 @@ package com.highway.commonretrofit;
 
 
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
-import com.highway.common.base.commonModel.login.LoginRegisterResponse;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
-import com.highway.common.base.commonModel.registration.RegistrationDetailsRequest;
-import com.highway.common.base.commonModel.registration.RegistrationDetailsResponse;
+import com.highway.common.base.commonModel.registration.RegistrationRequest;
+import com.highway.common.base.commonModel.registration.RegistrationResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -22,7 +21,7 @@ public class RestClient {
         RetrofitClient.getClient().verifyOtpResponseCall(verifyOtpRequest).enqueue(otpResponseCallback);
     }
     // registration details
-    public static void regDetails(RegistrationDetailsRequest registrationDetailsRequest, Callback<RegistrationDetailsResponse>registrationDetailsResponseCallback){
+    public static void regDetails(RegistrationRequest registrationDetailsRequest, Callback<RegistrationResponse>registrationDetailsResponseCallback){
         RetrofitClient.getClient().regDetailsResponseCall(registrationDetailsRequest).enqueue(registrationDetailsResponseCallback);
     }
 
