@@ -26,6 +26,10 @@ import com.highway.R;
 import com.highway.customer.customerActivity.CustomerLoginActivity;
 import com.highway.customer.customerFragment.CustomerDashBordFragment;
 import com.highway.customer.customerFragment.NewBookingFragment;
+import com.highway.drivermodule.diverModels.CancelTrip;
+import com.highway.drivermodule.diverModels.CompletedTrip;
+import com.highway.drivermodule.diverModels.OngoingTrip;
+import com.highway.drivermodule.diverModels.UpcomingTrip;
 import com.highway.drivermodule.driverFragment.DriverDashBoardFragment;
 import com.highway.millmodule.milluserFragment.MillUserDashBoardFragment;
 import com.highway.ownermodule.owner.ownerfragment.VehicleDashBoardFragment;
@@ -33,11 +37,53 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    private List<CancelTrip> cancelTrips = new ArrayList<>();
+
+    public List<CancelTrip> getCancelTrips() {
+        return cancelTrips;
+    }
+
+    public void setCancelTrips(List<CancelTrip> cancelTrips) {
+        this.cancelTrips = cancelTrips;
+    }
+
+    public List<CompletedTrip> getCompletedTrips() {
+        return completedTrips;
+    }
+
+    public void setCompletedTrips(List<CompletedTrip> completedTrips) {
+        this.completedTrips = completedTrips;
+    }
+
+    public List<OngoingTrip> getOngoingTrips() {
+        return ongoingTrips;
+    }
+
+    public void setOngoingTrips(List<OngoingTrip> ongoingTrips) {
+        this.ongoingTrips = ongoingTrips;
+    }
+
+    public List<UpcomingTrip> getUpcomingTrips() {
+        return upcomingTrips;
+    }
+
+    public void setUpcomingTrips(List<UpcomingTrip> upcomingTrips) {
+        this.upcomingTrips = upcomingTrips;
+    }
+
+    private List<CompletedTrip> completedTrips = new ArrayList<>();
+    private List<OngoingTrip> ongoingTrips= new ArrayList<>();
+    private List<UpcomingTrip> upcomingTrips= new ArrayList<>();
+
 
     private Toolbar dashBoardToolbar;
     private CircleImageView nevCircularUserImgView;

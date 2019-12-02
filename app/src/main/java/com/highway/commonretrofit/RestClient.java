@@ -6,6 +6,8 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
+import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -25,6 +27,8 @@ public class RestClient {
         RetrofitClient.getClient().regDetailsResponseCall(registrationDetailsRequest).enqueue(registrationDetailsResponseCallback);
     }
 
-
+    public static void  allDriverTrips(AllDriverTripsRequest allDriverTripsRequest, Callback<AllDriverTripsResponse>allDriverTripsResponseCallback){
+        RetrofitClient.getClient().driverTrips(allDriverTripsRequest).enqueue(allDriverTripsResponseCallback);
+    }
 
 }
