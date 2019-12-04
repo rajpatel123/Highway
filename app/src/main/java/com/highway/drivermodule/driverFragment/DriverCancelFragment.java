@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class DriverCancelFragment extends Fragment {
     private List<CancelTrip> cancelTrips = new ArrayList<>();
     FragmentDriverCancelBinding binding;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerViewCancel;
     CancelTripAdapter cancelTripAdapter;
     DashBoardActivity dashBoardActivity;
 
@@ -67,7 +67,7 @@ public class DriverCancelFragment extends Fragment {
                 inflater, R.layout.fragment_driver_cancel, container, false);
         View view = binding.getRoot();
 
-        recyclerView = view.findViewById(R.id.cancel);
+        recyclerViewCancel = (RecyclerView) view.findViewById(R.id.cancelrecyclerview);
 
         return view;
     }
@@ -85,17 +85,22 @@ public class DriverCancelFragment extends Fragment {
         super.onDetach();
     }
 
-    public void updateList(List<CancelTrip> cancelTrips) {
+    public void updateListCancel(List<CancelTrip> cancelTrips) {
 
-        if (this.cancelTrips != null && this.cancelTrips.size() > 0) {
-            cancelTripAdapter = new CancelTripAdapter(this.cancelTrips, getContext());
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(cancelTripAdapter);
+        if (cancelTrips != null && cancelTrips.size() > 0) {
+            cancelTripAdapter = new CancelTripAdapter(cancelTrips, getContext());
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerViewCancel.setLayoutManager(layoutManager);
+            recyclerViewCancel.setItemAnimator(new DefaultItemAnimator());
+            recyclerViewCancel.setAdapter(cancelTripAdapter);
 
+
+        } else {
+            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
 
         }
+
 
     }
 

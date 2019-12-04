@@ -25,6 +25,7 @@ import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
 import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
 import com.highway.drivermodule.diverModels.CancelTrip;
 import com.highway.drivermodule.diverModels.CompletedTrip;
+import com.highway.drivermodule.diverModels.OngoingTrip;
 import com.highway.drivermodule.diverModels.UpcomingTrip;
 import com.highway.utils.Utils;
 
@@ -91,17 +92,29 @@ public class DriverCompletedFragment extends Fragment {
     }
 
     public void updateList(List<CompletedTrip> completedTrips) {
-        if (this.completedTrips != null && this.completedTrips.size() > 0) {
-            oncompletedTripAdapter = new OncompletedTripAdapter(this.completedTrips, getContext());
+        if (completedTrips != null &&completedTrips.size() > 0) {
+            oncompletedTripAdapter = new OncompletedTripAdapter(completedTrips, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerViewNew.setLayoutManager(layoutManager);
             recyclerViewNew.setItemAnimator(new DefaultItemAnimator());
             recyclerViewNew.setAdapter(oncompletedTripAdapter);
 
 
+        } else {
+            Toast.makeText(dashBoardActivity, "Something went wrong", Toast.LENGTH_SHORT).show();
+
         }
+
+
+
+
+
+
+
+        }
+
 
     }
 
 
-}
+

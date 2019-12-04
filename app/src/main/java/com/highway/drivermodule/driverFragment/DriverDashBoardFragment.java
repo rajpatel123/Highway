@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -73,6 +72,7 @@ public class DriverDashBoardFragment extends Fragment {
 
         driverTabLayout = view.findViewById(R.id.drivertabMode);
         driverViewPager = view.findViewById(R.id.driverViewPager);
+        driverViewPager.setOffscreenPageLimit(6);
 
         driverUpComingFragment = new DriverUpComingFragment();
         driverCancelFragment = new DriverCancelFragment();
@@ -91,7 +91,7 @@ public class DriverDashBoardFragment extends Fragment {
 
         driverViewPager.setAdapter(driverFragmentAdapter);
         driverTabLayout.setupWithViewPager(driverViewPager);
-        driverViewPager.setOffscreenPageLimit(5);
+
         driverTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -132,6 +132,7 @@ public class DriverDashBoardFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        getCompletedDetail();
 
     }
 
@@ -150,15 +151,6 @@ public class DriverDashBoardFragment extends Fragment {
 
     }
 
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getCompletedDetail();
-
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
@@ -174,11 +166,10 @@ public class DriverDashBoardFragment extends Fragment {
             @Override
             public void onResponse(Call<AllDriverTripsResponse> call, Response<AllDriverTripsResponse> response) {
                 Utils.dismissProgressDialog();
-
-
                 if (response.body() != null) {
+                    if (response.body().getStatus().booleanValue() == true) {
 
-                    AllDriverTripsResponse allDriverTripsResponse = response.body();
+                        AllDriverTripsResponse allDriverTripsResponse = response.body();
 
                         if (allDriverTripsResponse != null) {
                             if (allDriverTripsResponse.getCancelTrips() != null && allDriverTripsResponse.getCancelTrips().size() > 0) {
@@ -199,30 +190,32 @@ public class DriverDashBoardFragment extends Fragment {
                         }
 
 
-
+                    }
 
 
                 } else {
-                    Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(dashBoardActivity, "some thig went wrong", Toast.LENGTH_SHORT).show();
 
                 }
 
             }
 
-            public void updateAllFragment() {
-                driverCancelFragment.updateList(dashBoardActivity.getCancelTrips());
-                driverOnGoingFragment.updateList(dashBoardActivity.getOngoingTrips());
-                driverUpComingFragment.updateList(dashBoardActivity.getUpcomingTrips());
-                driverCompletedFragment.updateList(dashBoardActivity.getCompletedTrips());
 
-
-            }
 
             @Override
             public void onFailure(Call<AllDriverTripsResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), " Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(dashBoardActivity, " Failure", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    public void updateAllFragment() {
+        driverCancelFragment.updateListCancel(dashBoardActivity.getCancelTrips());
+        driverOnGoingFragment.updateListOnGoing(dashBoardActivity.getOngoingTrips());
+        driverUpComingFragment.updateListUpComing(dashBoardActivity.getUpcomingTrips());
+        driverCompletedFragment.updateList(dashBoardActivity.getCompletedTrips());
+
 
     }
 

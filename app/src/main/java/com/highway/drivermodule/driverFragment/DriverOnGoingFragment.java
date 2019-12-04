@@ -67,6 +67,8 @@ public class DriverOnGoingFragment extends Fragment {
                 inflater, R.layout.fragment_driver_on_going, container, false);
         View view = binding.getRoot();
 
+        recyclerViewNew = view.findViewById(R.id.oncoming);
+
 
         return view;
     }
@@ -79,13 +81,13 @@ public class DriverOnGoingFragment extends Fragment {
         dashBoardActivity = (DashBoardActivity) getActivity();
 
     }
-    public void updateList(List<OngoingTrip> ongoingTrips) {
+    public void updateListOnGoing(List<OngoingTrip> ongoingTrips) {
             if (ongoingTrips != null && ongoingTrips.size() > 0) {
                 ongoingTripAdapter = new OngoingTripAdapter(ongoingTrips, getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-                binding.onGoingRecyclerView.setLayoutManager(layoutManager);
-                binding.onGoingRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                binding.onGoingRecyclerView.setAdapter(ongoingTripAdapter);
+                recyclerViewNew.setLayoutManager(layoutManager);
+                recyclerViewNew.setItemAnimator(new DefaultItemAnimator());
+                recyclerViewNew.setAdapter(ongoingTripAdapter);
 
 
             }
