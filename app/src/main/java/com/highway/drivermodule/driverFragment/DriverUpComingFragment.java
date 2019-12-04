@@ -95,9 +95,6 @@ public class DriverUpComingFragment extends Fragment {
             recyclerView.setAdapter(upComingTripAdapter);
 
 
-        } else {
-            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-
         }
 
 

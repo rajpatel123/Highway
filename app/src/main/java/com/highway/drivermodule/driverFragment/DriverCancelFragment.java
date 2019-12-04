@@ -95,11 +95,7 @@ public class DriverCancelFragment extends Fragment {
             recyclerView.setAdapter(cancelTripAdapter);
 
 
-        } else {
-            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-
         }
-
 
     }
 

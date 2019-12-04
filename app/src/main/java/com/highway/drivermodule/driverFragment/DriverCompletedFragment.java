@@ -99,11 +99,7 @@ public class DriverCompletedFragment extends Fragment {
             recyclerViewNew.setAdapter(oncompletedTripAdapter);
 
 
-        } else {
-            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
-
         }
-
 
     }
 
