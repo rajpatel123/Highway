@@ -85,10 +85,10 @@ public class DriverUpComingFragment extends Fragment {
         super.onDetach();
     }
 
-    public void updateList(List<UpcomingTrip> upcomingTrips) {
+    public void updateListUpComing(List<UpcomingTrip> upcomingTrips) {
 
-        if (this.upcomingTrips != null && this.upcomingTrips.size() > 0) {
-            upComingTripAdapter = new UpComingTripAdapter(this.upcomingTrips, getContext());
+        if (upcomingTrips != null && upcomingTrips.size() > 0) {
+            upComingTripAdapter = new UpComingTripAdapter(upcomingTrips, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -96,7 +96,7 @@ public class DriverUpComingFragment extends Fragment {
 
 
         } else {
-            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "Something went wrong", Toast.LENGTH_SHORT).show();
 
         }
 

@@ -72,6 +72,7 @@ public class DriverDashBoardFragment extends Fragment {
 
         driverTabLayout = view.findViewById(R.id.drivertabMode);
         driverViewPager = view.findViewById(R.id.driverViewPager);
+        driverViewPager.setOffscreenPageLimit(6);
 
         driverUpComingFragment = new DriverUpComingFragment();
         driverCancelFragment = new DriverCancelFragment();
@@ -131,6 +132,7 @@ public class DriverDashBoardFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        getCompletedDetail();
 
     }
 
@@ -146,13 +148,7 @@ public class DriverDashBoardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getCompletedDetail();
 
-            }
-        },1*1000);
     }
 
     @Override
@@ -198,26 +194,28 @@ public class DriverDashBoardFragment extends Fragment {
 
 
                 } else {
-                    Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(dashBoardActivity, "some thig went wrong", Toast.LENGTH_SHORT).show();
 
                 }
 
             }
 
-            public void updateAllFragment() {
-                driverCancelFragment.updateList(dashBoardActivity.getCancelTrips());
-                driverOnGoingFragment.updateList(dashBoardActivity.getOngoingTrips());
-                driverUpComingFragment.updateList(dashBoardActivity.getUpcomingTrips());
-                driverCompletedFragment.updateList(dashBoardActivity.getCompletedTrips());
 
-
-            }
 
             @Override
             public void onFailure(Call<AllDriverTripsResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), " Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(dashBoardActivity, " Failure", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    public void updateAllFragment() {
+        driverCancelFragment.updateListCancel(dashBoardActivity.getCancelTrips());
+        driverOnGoingFragment.updateListOnGoing(dashBoardActivity.getOngoingTrips());
+        driverUpComingFragment.updateListUpComing(dashBoardActivity.getUpcomingTrips());
+        driverCompletedFragment.updateList(dashBoardActivity.getCompletedTrips());
+
 
     }
 

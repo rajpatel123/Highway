@@ -81,11 +81,11 @@ public class DriverOnGoingFragment extends Fragment {
         dashBoardActivity = (DashBoardActivity) getActivity();
 
     }
-    public void updateList(List<OngoingTrip> ongoingTrips) {
+    public void updateListOnGoing(List<OngoingTrip> ongoingTrips) {
             if (ongoingTrips != null && ongoingTrips.size() > 0) {
                 ongoingTripAdapter = new OngoingTripAdapter(ongoingTrips, getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-                binding.oncoming.setLayoutManager(layoutManager);
+                recyclerViewNew.setLayoutManager(layoutManager);
                 recyclerViewNew.setItemAnimator(new DefaultItemAnimator());
                 recyclerViewNew.setAdapter(ongoingTripAdapter);
 
