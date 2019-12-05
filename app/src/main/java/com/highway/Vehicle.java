@@ -8,6 +8,16 @@ public class Vehicle {
     private String capacity;
     private String size;
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    private boolean isSelected;
+
     private String info1;
     private String info2;
     private String info3;

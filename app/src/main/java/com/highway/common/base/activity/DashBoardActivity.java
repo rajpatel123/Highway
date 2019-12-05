@@ -278,29 +278,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         switch (id) {
             case R.id.nav_new_booking:
                 dashBoardToolbar.setTitle("New Booking");
-                switch (userRole) {
-                    case "1":
-
-                        break;
-//                    case "2":
-//                        fragment = MapFragment.newInstance();
-//                        replaceFragment(fragment);
-//                        break;
-//                    case "3":
-//                        fragment = MapFragment.newInstance();
-//                        replaceFragment(fragment);
-//                        break;
-//                    case "4":
-//                        fragment = MapFragment.newInstance();
-//                        replaceFragment(fragment);
-//                       /*  intent = new Intent(DashBoardActivity.this, BookingMapActivity.class);
-//                        startActivity(intent);
-//                        finish();*/
-//                        break;
-                    case "5":
-
-                        break;
-                }
+                Fragment newBookingFragment = NewBookingFragment.newInstance();
+                replaceFragment(newBookingFragment);
                 break;
 
             case R.id.nav_my_booking:

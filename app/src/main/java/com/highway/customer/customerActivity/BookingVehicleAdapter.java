@@ -44,11 +44,18 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         holder.timeTv2.setText(vehicle.getDuration());
         holder.faireChargeTv3.setText(vehicle.getFare());
 
+        if (vehicle.isSelected()){
+            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
+        }else{
+            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
+        }
+
         holder.infoImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onClickEvents != null) {
                     onClickEvents.onCLickInfo(holder.getAdapterPosition());
+
                 }
             }
         });
@@ -59,7 +66,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             public void onClick(View v) {
                 if (onClickEvents != null) {
                     onClickEvents.onCLickTruck(holder.getAdapterPosition());
-                    Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
+
                 }
             }
         });

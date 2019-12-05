@@ -1,12 +1,14 @@
 package com.highway.customer.customerFragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,24 +42,23 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
-import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
+import com.highway.utils.Utils;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -74,8 +76,11 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     LocationRequest mLocationRequest;
 
 
-    EditText edtSourceLOcationEDT;
-    EditText edtDropLocation;
+    TextView edtSourceLOcationEDT;
+    TextView edtDropLocation;
+
+    LinearLayout sourceLL;
+    LinearLayout destLL;
 
 
     private double sourceLatitude, sourceLongitude;
@@ -114,6 +119,8 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         View view = inflater.inflate(R.layout.map_view_fragment, container, false);
         edtSourceLOcationEDT = view.findViewById(R.id.edtSourceLOcation);
         edtDropLocation = view.findViewById(R.id.edtDropLocation);
+        sourceLL = view.findViewById(R.id.sourceLL);
+        destLL = view.findViewById(R.id.destLL);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -125,7 +132,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             Places.initialize(mActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
         }
 
-        edtSourceLOcationEDT.setOnClickListener(new View.OnClickListener() {
+        sourceLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -139,7 +146,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             }
         });
 
-        edtDropLocation.setOnClickListener(new View.OnClickListener() {
+        destLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -232,18 +239,18 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     }
 
     private void openBookingActivity() {
-        if (!TextUtils.isEmpty(sourceName) && !TextUtils.isEmpty(destName)){
-            BookingWithDetailsActivity.start(mActivity,sourceName,sourceLatitude,sourceLongitude,destName,destLatitude,destLongitude);
+        if (!TextUtils.isEmpty(sourceName) && !TextUtils.isEmpty(destName)) {
+            BookingWithDetailsActivity.start(mActivity, sourceName, sourceLatitude, sourceLongitude, destName, destLatitude, destLongitude);
         }
 
 
     }
 
-    public  Bitmap createCustomMarker(@DrawableRes int resource) {
+    public Bitmap createCustomMarker(@DrawableRes int resource) {
 
         View marker = ((LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
 
-        ImageView markerImage =  marker.findViewById(R.id.imgLogo);
+        ImageView markerImage = marker.findViewById(R.id.imgLogo);
         markerImage.setImageResource(resource);
 
 
@@ -273,6 +280,15 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(18.0f);
+
+
+        try {
+            mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style));
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+            // Oops, looks like the map style resource couldn't be found!
+        }
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -330,6 +346,12 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
+
+        sourceName = Utils.getAddress(mActivity,latLng);
+        sourceLatitude = latLng.latitude;
+        sourceLongitude = latLng.longitude;
+        edtSourceLOcationEDT.setText(""+sourceName);
+
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
@@ -340,6 +362,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         }
 
     }
+
 
 
     /**

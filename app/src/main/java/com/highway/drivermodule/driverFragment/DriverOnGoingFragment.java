@@ -50,7 +50,7 @@ public class DriverOnGoingFragment extends Fragment {
         LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.fragment_driver_on_going, container ,false);
 
-        recyclerViewNew = view.findViewById(R.id.oncoming);
+        recyclerViewNew = view.findViewById(R.id.onGoingRecyclerView);
 
 
         return view;

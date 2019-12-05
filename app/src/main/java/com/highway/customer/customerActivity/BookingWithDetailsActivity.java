@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.location.Location;
@@ -18,8 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -90,8 +92,11 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     LocationRequest mLocationRequest;
 
 
-    EditText edtSourceLOcationEDT;
-    EditText edtDropLocation;
+    TextView edtSourceLOcationEDT;
+    TextView edtDropLocation;
+    LinearLayout sourceLL;
+    LinearLayout destLL;
+
     TextView bookTruckTv;
 
     private double sourceLatitude, sourceLongitude;
@@ -132,6 +137,11 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
+
+
+        sourceLL = findViewById(R.id.sourceLL);
+        destLL = findViewById(R.id.destLL);
+
         recyclerView = findViewById(R.id.vehicleListRV);
         bookTruckTv = findViewById(R.id.bookTruckTv);
 
@@ -159,7 +169,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
         }
 
-        edtSourceLOcationEDT.setOnClickListener(new View.OnClickListener() {
+        sourceLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -174,7 +184,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         });
 
 
-        edtDropLocation.setOnClickListener(new View.OnClickListener() {
+        destLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -326,6 +336,13 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         mMap.setMinZoomPreference(2.0f);
         mMap.setMaxZoomPreference(18.0f);
 
+        try {
+            mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(this, R.raw.style));
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+            // Oops, looks like the map style resource couldn't be found!
+        }
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
@@ -364,7 +381,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
-
 
 
     }
@@ -529,12 +545,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.home) {
-            finish();
-
-        }
+        finish();
         return super.onOptionsItemSelected(item);
     }
 
@@ -550,6 +561,13 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
 
+
+        for (Vehicle vehicle :vehicleList){
+            vehicle.setSelected(false);
+        }
+
+
+
     }
 
 
@@ -562,9 +580,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         dialogBuilder.setView(dialogView);
 
         final android.app.AlertDialog dialog = dialogBuilder.create();
-        Button btn_yes = dialogView.findViewById(R.id.done);
         TextView nameTv = dialogView.findViewById(R.id.truckName);
-        TextView vihicleImg = dialogView.findViewById(R.id.vehicleImg);
+        ImageView vihicleImg = dialogView.findViewById(R.id.vehicleImg);
         TextView capacityTv = dialogView.findViewById(R.id.capacity);
         TextView sizeTV = dialogView.findViewById(R.id.sizeTV);
 
@@ -588,6 +605,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info4.setText(vehicle.getInfo4());
         info5.setText(vehicle.getInfo5());
         info6.setText(vehicle.getInfo6());
+
+        vihicleImg.setBackgroundResource(R.drawable.truck);
 
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
