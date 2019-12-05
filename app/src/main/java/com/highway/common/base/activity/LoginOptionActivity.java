@@ -16,7 +16,7 @@ import com.highway.R;
 import com.highway.customer.customerActivity.CustomerLoginActivity;
 import com.highway.drivermodule.driverActivity.DriverLoginActivity;
 import com.highway.millmodule.milluserActivity.MillerLoginActivity;
-import com.highway.ownermodule.owner.owneractivities.OwnerLoginActivity;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.OwnerLoginActivity;
 
 public class LoginOptionActivity extends AppCompatActivity {
     private LinearLayout customer, driver, miller, owner;

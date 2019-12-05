@@ -11,6 +11,7 @@
     <color name="black_secondary">#757575</color>
     <color name="black_primary">#212121</color>
     <color name="app_bg">#EAEDF2</color>
+    <color name="app_bg3">#FCE409</color>
     <color name="app_bg2">#F4F5F7</color>
     <color name="app_bg1">#dc5d01</color>
     <color name="card_gray">#E7E3DE</color>

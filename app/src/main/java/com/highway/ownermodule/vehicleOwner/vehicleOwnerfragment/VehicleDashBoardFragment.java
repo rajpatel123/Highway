@@ -1,4 +1,4 @@
-package com.highway.ownermodule.owner.ownerfragment;
+package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.highway.R;
-import com.highway.ownermodule.owner.owneradapter.VehicleOwnerAdapter;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.VehicleOwnerTabAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +53,9 @@ public class VehicleDashBoardFragment extends Fragment {
         vehicleOwnerfragmentlist.add(new VehicleCompletedFragment());
         vehicleOwnerfragmentlist.add(new VehicleCancelFragment());
 
-        VehicleOwnerAdapter vehicleOwnerAdapter = new VehicleOwnerAdapter(getActivity().getSupportFragmentManager(),vehicleOwnerfragmentlist);
+        VehicleOwnerTabAdapter vehicleOwnerTabAdapter = new VehicleOwnerTabAdapter(getActivity().getSupportFragmentManager(),vehicleOwnerfragmentlist);
 
-        vehicleOwnerViewPager.setAdapter(vehicleOwnerAdapter);
+        vehicleOwnerViewPager.setAdapter(vehicleOwnerTabAdapter);
         vehicleOwnerTabMode.setupWithViewPager(vehicleOwnerViewPager);
 
 

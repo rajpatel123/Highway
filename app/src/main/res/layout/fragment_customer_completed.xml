@@ -6,7 +6,7 @@
     tools:context=".customers.customerFragment.CustomerCompletedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/completedRecyclerView"
+        android:id="@+id/CuscompletedRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </androidx.recyclerview.widget.RecyclerView>

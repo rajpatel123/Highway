@@ -14,8 +14,15 @@
     <dimen name="margin_width_120">120sp</dimen>
     <dimen name="margin_10">10sp</dimen>
     <dimen name="margin_height_120">120sp</dimen>
+    <dimen name="margin_height_100">100sp</dimen>
+    <dimen name="margin_height_80">80sp</dimen>
+    <dimen name="margin_height_60">60sp</dimen>
     <dimen name="margin_height_150">150sp</dimen>
+    <dimen name="margin_height_50">50sp</dimen>
     <dimen name="margin_width_150">150sp</dimen>
+    <dimen name="margin_width_80">80sp</dimen>
+    <dimen name="margin_width_60">60sp</dimen>
+    <dimen name="margin_width_50">50sp</dimen>
     <dimen name="padding_bottom_8">8sp</dimen>
     <dimen name="padding_5">5sp</dimen>
     <dimen name="size_15">15sp</dimen>
@@ -163,6 +170,7 @@
 
     <dimen name="padding_bottom_30">30sp</dimen>
     <dimen name="margin_width_30">30sp</dimen>
+    <dimen name="margin_height_30">30sp</dimen>
 
     <dimen name="size_20">20sp</dimen>
     <dimen name="size_22">22sp</dimen>
@@ -176,7 +184,6 @@
     <dimen name="padding_8">8sp</dimen>
     <dimen name="margin_top_5">5sp</dimen>
     <dimen name="size_16">16sp</dimen>
-    <dimen name="margin_width_80">80dp</dimen>
 
     <dimen name="margin_left_50">50sp</dimen>
     <dimen name="margin_left_55">55sp</dimen>
@@ -214,7 +221,7 @@
     <dimen name="circle_margin_10">10sp</dimen>
     <dimen name="nav_profile_padding">5dp</dimen>
     <dimen name="padding_3">3sp</dimen>
-
+    <dimen name="padding_2">2sp</dimen>
     <dimen name="txt_medium">14sp</dimen>
     <dimen name="_8dp">8dp</dimen>
     <dimen name="_10dp">10dp</dimen>

@@ -1,4 +1,4 @@
-package com.highway.ownermodule.owner.ownerfragment;
+package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,15 +11,14 @@ import androidx.fragment.app.Fragment;
 import com.highway.R;
 
 
-public class VehiclePendingFragment extends Fragment {
-
-    public VehiclePendingFragment() {
-        // Required empty public constructor
-    }
+public class VehicleCancelFragment extends Fragment {
 
 
-    public static VehiclePendingFragment newInstance(String param1, String param2) {
-        VehiclePendingFragment fragment = new VehiclePendingFragment();
+    public VehicleCancelFragment() { }
+
+
+    public static VehicleCancelFragment newInstance() {
+        VehicleCancelFragment fragment = new VehicleCancelFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -35,7 +34,8 @@ public class VehiclePendingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_vehicle_pending, container, false);
+        View view = inflater.inflate(R.layout.fragment_vehicle_cancel, container, false);
+
         return view;
     }
 
@@ -51,6 +51,5 @@ public class VehiclePendingFragment extends Fragment {
         super.onDetach();
 
     }
-
 
 }

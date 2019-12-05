@@ -1,4 +1,4 @@
-package com.highway.ownermodule.owner.owneractivities;
+package com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities;
 
 import android.content.Intent;
 import android.os.Bundle;

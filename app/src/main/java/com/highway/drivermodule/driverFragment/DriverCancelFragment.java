@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,30 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.commonretrofit.RestClient;
-import com.highway.databinding.FragmentDriverCancelBinding;
 import com.highway.drivermodule.adapter.CancelTripAdapter;
-import com.highway.drivermodule.adapter.OngoingTripAdapter;
-import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
-import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
 import com.highway.drivermodule.diverModels.CancelTrip;
-import com.highway.drivermodule.diverModels.OngoingTrip;
-import com.highway.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 
 public class DriverCancelFragment extends Fragment {
     private List<CancelTrip> cancelTrips = new ArrayList<>();
-    FragmentDriverCancelBinding binding;
     private RecyclerView recyclerViewCancel;
     CancelTripAdapter cancelTripAdapter;
     DashBoardActivity dashBoardActivity;
+    public Context context;
 
 
     public DriverCancelFragment() {
@@ -63,9 +51,8 @@ public class DriverCancelFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_driver_cancel, container, false);
-        View view = binding.getRoot();
+        LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater1.inflate(R.layout.fragment_driver_cancel, container ,false);
 
         recyclerViewCancel = (RecyclerView) view.findViewById(R.id.cancelrecyclerview);
 

@@ -11,9 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.drivermodule.diverModels.CancelTrip;
-import com.highway.drivermodule.diverModels.CompletedTrip;
-import com.highway.drivermodule.diverModels.OngoingTrip;
-import com.highway.drivermodule.diverModels.UpcomingTrip;
 
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class CancelTripAdapter extends RecyclerView.Adapter<CancelTripAdapter.My
     @Override
     public CancelTripAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.oncompletedrecycleritem, parent, false);
+                .inflate(R.layout.on_completed_fragment_recycler_item, parent, false);
 
         return new CancelTripAdapter.MyViewHolder(itemView);
     }

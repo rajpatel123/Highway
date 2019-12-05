@@ -1,4 +1,4 @@
-package com.highway.ownermodule.owner.owneradapter;
+package com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,18 +7,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 
-import com.highway.ownermodule.owner.ownerfragment.VehicleCancelFragment;
-import com.highway.ownermodule.owner.ownerfragment.VehicleCompletedFragment;
-import com.highway.ownermodule.owner.ownerfragment.VehicleOnGoingFragment;
-import com.highway.ownermodule.owner.ownerfragment.VehiclePendingFragment;
-import com.highway.ownermodule.owner.ownerfragment.VehicleUpComingFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehicleCancelFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehicleCompletedFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehicleOnGoingFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehiclePendingFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehicleUpComingFragment;
 
 import java.util.List;
 
-public class VehicleOwnerAdapter extends FragmentPagerAdapter {
+public class VehicleOwnerTabAdapter extends FragmentPagerAdapter {
     List<Fragment> vehicleOwnerfragment;
 
-    public VehicleOwnerAdapter(@NonNull FragmentManager fm,  List<Fragment> fragments) {
+    public VehicleOwnerTabAdapter(@NonNull FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.vehicleOwnerfragment =fragments;
     }

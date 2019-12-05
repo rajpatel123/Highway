@@ -444,7 +444,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             } else if (userRole.equalsIgnoreCase("MillUser")) {
                 registrationDetailsRequest.setRoleId("2");
 
-            } else if (userRole.equalsIgnoreCase("Vehicle Owner")) {
+            } else if (userRole.equalsIgnoreCase("VehicleOwner")) {
                 registrationDetailsRequest.setRoleId("5");
             }
 

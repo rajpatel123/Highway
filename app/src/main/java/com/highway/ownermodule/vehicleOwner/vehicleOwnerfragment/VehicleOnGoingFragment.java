@@ -1,4 +1,4 @@
-package com.highway.ownermodule.owner.ownerfragment;
+package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,15 +11,13 @@ import androidx.fragment.app.Fragment;
 import com.highway.R;
 
 
-public class VehicleCompletedFragment extends Fragment {
+public class VehicleOnGoingFragment extends Fragment {
 
-    public VehicleCompletedFragment() {
-
-    }
+    public VehicleOnGoingFragment() { }
 
 
-    public static VehicleCompletedFragment newInstance(String param1, String param2) {
-        VehicleCompletedFragment fragment = new VehicleCompletedFragment();
+    public static VehicleOnGoingFragment newInstance(String param1, String param2) {
+        VehicleOnGoingFragment fragment = new VehicleOnGoingFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -35,10 +33,10 @@ public class VehicleCompletedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view =  inflater.inflate(R.layout.fragment_vehicle_completed, container, false);
+        View view =  inflater.inflate(R.layout.fragment_vehicle_on_going, container, false);
         return view;
     }
+
 
 
     @Override
@@ -50,8 +48,7 @@ public class VehicleCompletedFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
-    }
+      }
 
 
 }
