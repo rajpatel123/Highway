@@ -53,6 +53,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
+import com.highway.utils.Utils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -346,7 +347,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
 
-        sourceName = getAddress(latLng);
+        sourceName = Utils.getAddress(mActivity,latLng);
         sourceLatitude = latLng.latitude;
         sourceLongitude = latLng.longitude;
         edtSourceLOcationEDT.setText(""+sourceName);
@@ -362,30 +363,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
     }
 
-    private String  getAddress(LatLng latLng) {
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(mActivity, Locale.getDefault());
-
-        try {
-            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-
-            if (!TextUtils.isEmpty(address)){
-                return address;
-            }else{
-                return "";
-            }
-
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 
 
     /**

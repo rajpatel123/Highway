@@ -67,7 +67,7 @@ public class DriverOnGoingFragment extends Fragment {
                 inflater, R.layout.fragment_driver_on_going, container, false);
         View view = binding.getRoot();
 
-        recyclerViewNew = view.findViewById(R.id.oncoming);
+        recyclerViewNew = view.findViewById(R.id.onGoingRecyclerView);
 
 
         return view;

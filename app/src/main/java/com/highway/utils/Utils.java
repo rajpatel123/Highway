@@ -3,8 +3,11 @@ package com.highway.utils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -12,12 +15,17 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class Utils {
 
@@ -203,4 +211,30 @@ public class Utils {
     public static void setTintForImage(Context context,ImageView imageView,int color){
         imageView.setColorFilter(ContextCompat.getColor(context, color), android.graphics.PorterDuff.Mode.MULTIPLY);
     }
+
+    public static String getAddress(DashBoardActivity mActivity, LatLng latLng) {
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(mActivity, Locale.getDefault());
+
+            try {
+                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+
+                if (!TextUtils.isEmpty(address)){
+                    return address;
+                }else{
+                    return "";
+                }
+
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
 }
