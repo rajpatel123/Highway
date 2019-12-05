@@ -40,7 +40,7 @@ public class CustomerCompletedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_customer_completed, container, false);
 
-        completedRecycler = view.findViewById(R.id.completedRecyclerView);
+        completedRecycler = view.findViewById(R.id.CuscompletedRecyclerView);
         return view;
     }
 

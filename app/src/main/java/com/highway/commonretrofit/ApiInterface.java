@@ -8,6 +8,8 @@ import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
 import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,6 +31,12 @@ public interface ApiInterface {
     // Driver All Trips
     @POST("http://vrok.in/highway_dev/getAllTripByDriverId")
     Call<AllDriverTripsResponse> driverTrips(@Body AllDriverTripsRequest allDriverTripsRequest);
+
+    // Vehicle Owner trip details
+/*
+    @POST("http://vrok.in/highway_dev/getAllTripByOwnerId")
+    Call<VehicleOwnerCompletedTripResponse>vehicleOwnerTrip(@Body VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest);
+*/
 
 
 }

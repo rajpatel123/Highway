@@ -54,7 +54,7 @@ public class OwnerLoginActivity extends AppCompatActivity {
 
         phone_number = ownerPhoneNo.getText().toString();
 
-        if (phone_number.isEmpty() && ownerPhoneNo.length()==10) {
+        if (phone_number.isEmpty() && ownerPhoneNo.length()!=10) {
             ownerPhoneNo.setError(" enter a valid phone number ");
             check = false;
         } else {

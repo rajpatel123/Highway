@@ -8,6 +8,8 @@ import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
 import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -31,4 +33,7 @@ public class RestClient {
         RetrofitClient.getClient().driverTrips(allDriverTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
 
+   /* public static void allVehicleOwnerCompletedTrip(VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest, Callback<VehicleOwnerCompletedTripResponse>vehicleOwnerCompletedTripResponseCallback){
+        RetrofitClient.getClient().vehicleOwnerTrip(vehicleOwnerCompletedTripRequest).enqueue(vehicleOwnerCompletedTripResponseCallback);
+    }*/
 }

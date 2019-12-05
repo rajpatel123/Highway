@@ -87,8 +87,6 @@ public class DriverCancelFragment extends Fragment {
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
 
         }
-
-
     }
 
 

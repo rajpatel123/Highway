@@ -1,5 +1,6 @@
 package com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,8 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.CancelTrip;
+
+import java.util.List;
 
 public class VehicleOwnerCancleTripAdapter extends RecyclerView.Adapter<VehicleOwnerCancleTripAdapter.ViewHolder> {
+
+    public VehicleOwnerCancleTripAdapter(List<CancelTrip> cancelTrips, Context context) {
+
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

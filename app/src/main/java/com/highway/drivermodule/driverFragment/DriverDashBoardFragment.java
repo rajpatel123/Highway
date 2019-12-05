@@ -35,15 +35,17 @@ import retrofit2.Response;
 
 
 public class DriverDashBoardFragment extends Fragment {
+
     private TabLayout driverTabLayout;
     private ViewPager driverViewPager;
+
     DriverUpComingFragment driverUpComingFragment;
     DashBoardActivity dashBoardActivity;
     DriverOnGoingFragment driverOnGoingFragment;
-
     DriverPendingFragment driverPendingFragment;
     DriverCompletedFragment driverCompletedFragment;
     DriverCancelFragment driverCancelFragment;
+
     List<Fragment> driverFragmentList = new ArrayList<>();
 
     public DriverDashBoardFragment() {

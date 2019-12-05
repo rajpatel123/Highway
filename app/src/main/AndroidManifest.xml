@@ -65,7 +65,7 @@
             android:name=".customer.customerActivity.CustomerLoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".customer.customerActivity.OwnerLoginActivity"
+            android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.OwnerLoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".common.base.activity.RegistrationDetailsActivity"

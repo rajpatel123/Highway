@@ -54,6 +54,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         this.cancelTrips = cancelTrips;
     }
 
+    // for Driver
+    private List<CompletedTrip> completedTrips = new ArrayList<>();
+    private List<OngoingTrip> ongoingTrips= new ArrayList<>();
+    private List<UpcomingTrip> upcomingTrips= new ArrayList<>();
+
+
     public List<CompletedTrip> getCompletedTrips() {
         return completedTrips;
     }
@@ -78,9 +84,48 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         this.upcomingTrips = upcomingTrips;
     }
 
-    private List<CompletedTrip> completedTrips = new ArrayList<>();
-    private List<OngoingTrip> ongoingTrips= new ArrayList<>();
-    private List<UpcomingTrip> upcomingTrips= new ArrayList<>();
+
+    // VehicleOwner
+    private List<CompletedTrip> completedTripsForVehicleOwner = new ArrayList<>();
+    private List<OngoingTrip> ongoingTripsForVehicleOwner= new ArrayList<>();
+    private List<UpcomingTrip> upcomingTripsForVehicleOwner= new ArrayList<>();
+    private List<CancelTrip> cancelTripsForVehicleOwner = new ArrayList<>();
+
+    public List<CompletedTrip> getCompletedTripsForVehicleOwner() {
+        return completedTripsForVehicleOwner;
+    }
+
+    public void setCompletedTripsForVehicleOwner(List<CompletedTrip> completedTripsForVehicleOwner) {
+        this.completedTripsForVehicleOwner = completedTripsForVehicleOwner;
+    }
+
+    public List<OngoingTrip> getOngoingTripsForVehicleOwner() {
+        return ongoingTripsForVehicleOwner;
+    }
+
+    public void setOngoingTripsForVehicleOwner(List<OngoingTrip> ongoingTripsForVehicleOwner) {
+        this.ongoingTripsForVehicleOwner = ongoingTripsForVehicleOwner;
+    }
+
+    public List<UpcomingTrip> getUpcomingTripsForVehicleOwner() {
+        return upcomingTripsForVehicleOwner;
+    }
+
+    public void setUpcomingTripsForVehicleOwner(List<UpcomingTrip> upcomingTripsForVehicleOwner) {
+        this.upcomingTripsForVehicleOwner = upcomingTripsForVehicleOwner;
+    }
+
+    public List<CancelTrip> getCancelTripsForVehicleOwner() {
+        return cancelTripsForVehicleOwner;
+    }
+
+    public void setCancelTripsForVehicleOwner(List<CancelTrip> cancelTripsForVehicleOwner) {
+        this.cancelTripsForVehicleOwner = cancelTripsForVehicleOwner;
+    }
+
+
+
+
 
 
     private Toolbar dashBoardToolbar;

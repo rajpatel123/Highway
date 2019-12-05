@@ -212,7 +212,7 @@ public class Utils {
         imageView.setColorFilter(ContextCompat.getColor(context, color), android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
-    public static String getAddress(DashBoardActivity mActivity, LatLng latLng) {
+    public static String getAddress(Context mActivity, LatLng latLng) {
             Geocoder geocoder;
             List<Address> addresses;
             geocoder = new Geocoder(mActivity, Locale.getDefault());
@@ -226,9 +226,6 @@ public class Utils {
                 }else{
                     return "";
                 }
-
-
-
 
             } catch (IOException e) {
                 e.printStackTrace();

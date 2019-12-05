@@ -10,16 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.CompletedTrip;
+import com.highway.utils.Utils;
 
 import java.util.List;
+
+import okhttp3.internal.Util;
 
 public class VehicleOwnerCompletedTripAdapter extends RecyclerView.Adapter<VehicleOwnerCompletedTripAdapter.MyViewHolder> {
 
     List<CompletedTrip> completedTrips;
     Context context;
-
 
     public VehicleOwnerCompletedTripAdapter(List<CompletedTrip>completedTrips,Context context){
         this.completedTrips = completedTrips;
@@ -38,10 +41,18 @@ public class VehicleOwnerCompletedTripAdapter extends RecyclerView.Adapter<Vehic
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         CompletedTrip completedTrip = completedTrips.get(position);
-        holder.tv1CompleteDate.setText(completedTrip.getEndDate());
+         // for Address finding
+        LatLng sourceAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getDestinationLong()));
 
-
-
+        holder.tv1CompleteDate.setText(""+completedTrip.getEndDate());
+        holder.tv2SourceAddress.setText(""+Utils.getAddress(context,sourceAddLatLng));
+        holder.tv4DestAddress.setText("" +Utils.getAddress(context,destAddLatLng));
+        holder.tv3SourceTime.setText(""+completedTrip.getPickupTime());
+        holder.tv5DestTime.setText(""+completedTrip.getDropTime());
+        holder.tv6VehicleName.setText(""+completedTrip.getVehicleName());
+        holder.tv7FairCharge.setText(""+completedTrip.getVehicleName());
+        // load img
 
     }
 
