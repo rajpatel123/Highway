@@ -84,6 +84,7 @@ public class VehicleDashBoardFragment extends Fragment {
                 .getSupportFragmentManager(),vehicleOwnerfragmentlist);
 
         vehicleOwnerViewPager.setAdapter(vehicleOwnerTabAdapter);
+        vehicleOwnerViewPager.setOffscreenPageLimit(5);
         vehicleOwnerTabMode.setupWithViewPager(vehicleOwnerViewPager);
 
 
@@ -127,16 +128,21 @@ public class VehicleDashBoardFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        getVehivleOwnerCompletedDetail();
-
+        dashBoardActivity = (DashBoardActivity) getActivity();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        dashBoardActivity = (DashBoardActivity) getActivity();
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getVehivleOwnerCompletedDetail();
+
+    }
 
     public void getVehivleOwnerCompletedDetail(){
 
@@ -187,7 +193,7 @@ public class VehicleDashBoardFragment extends Fragment {
     }
 
     public void updateAllVehicleOwnerFragment(){
-        vehicleCompletedFragment.completedUpdatedTripList(dashBoardActivity.getCompletedTrips());
+        vehicleCompletedFragment.completedUpdatedTripList(dashBoardActivity.getCompletedTrips(),this);
         vehicleOnGoingFragment.vehicleOnGoingUpdateList(dashBoardActivity.getOngoingTrips());
         vehicleCancelFragment.vehicleCancleUpdatedTripList(dashBoardActivity.getCancelTrips());
         vehicleUpComingFragment.vehicleUpcomingUpdatedTripList(dashBoardActivity.getUpcomingTrips());

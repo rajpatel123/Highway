@@ -45,6 +45,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private AppBarConfiguration mAppBarConfiguration;
 
     private List<CancelTrip> cancelTrips = new ArrayList<>();
+    private MillUserDashBoardFragment millUserDashBoardFragment;
+    private DriverDashBoardFragment driverDashBoardFragment;
+    private CustomerDashBordFragment customerDashBordFragment;
+    private VehicleDashBoardFragment vehicleDashBoardFragment;
 
     public List<CancelTrip> getCancelTrips() {
         return cancelTrips;
@@ -317,7 +321,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment fragment = null;
         int id = menuItem.getItemId();
         //  1 admin  //  2 mill user   // 3  driver // // 4  customer   // 5 owner
         switch (id) {
@@ -335,20 +338,23 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(fragment);*/
                         break;
                     case "2":
-                        fragment = MillUserDashBoardFragment.newInstance();
-                        replaceFragment(fragment);
+                        millUserDashBoardFragment = MillUserDashBoardFragment.newInstance();
+                        replaceFragment(millUserDashBoardFragment);
                         break;
                     case "3":
-                        fragment = DriverDashBoardFragment.newInstance();
-                        replaceFragment(fragment);
+                        driverDashBoardFragment = DriverDashBoardFragment.newInstance();
+                        replaceFragment(driverDashBoardFragment);
                         break;
                     case "4":
-                        fragment = CustomerDashBordFragment.newInstance();
-                        replaceFragment(fragment);
+                        customerDashBordFragment = CustomerDashBordFragment.newInstance();
+                        replaceFragment(customerDashBordFragment);
                         break;
                     case "5":
-                        fragment = VehicleDashBoardFragment.newInstance();
-                        replaceFragment(fragment);
+                        if (vehicleDashBoardFragment==null){
+                            vehicleDashBoardFragment = VehicleDashBoardFragment.newInstance();
+                            replaceFragment(vehicleDashBoardFragment);
+                        }
+
                         break;
                 }
                 break;
