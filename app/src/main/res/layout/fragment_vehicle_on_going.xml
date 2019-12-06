@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".owner.ownerfragment.VehicleOnGoingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_ongoing_fragment" />
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/vehicleOnGoiingRecy">
+
+   </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

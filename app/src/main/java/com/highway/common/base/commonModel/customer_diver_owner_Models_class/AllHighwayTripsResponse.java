@@ -1,11 +1,11 @@
 
-package com.highway.drivermodule.diverModels;
+package com.highway.common.base.commonModel.customer_diver_owner_Models_class;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AllDriverTripsResponse {
+public class AllHighwayTripsResponse {
 
     @SerializedName("Status")
     @Expose

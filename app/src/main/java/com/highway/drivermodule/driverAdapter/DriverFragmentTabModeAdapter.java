@@ -15,10 +15,10 @@ import com.highway.drivermodule.driverFragment.DriverUpComingFragment;
 
 import java.util.List;
 
-public class DriverFragmentAdapter  extends FragmentPagerAdapter {
+public class DriverFragmentTabModeAdapter extends FragmentPagerAdapter {
     List<Fragment>driverfragmentlist;
 
-    public DriverFragmentAdapter(@NonNull FragmentManager fm, List<Fragment>driverfragmentlist) {
+    public DriverFragmentTabModeAdapter(@NonNull FragmentManager fm, List<Fragment>driverfragmentlist) {
         super(fm);
         this.driverfragmentlist=driverfragmentlist;
     }

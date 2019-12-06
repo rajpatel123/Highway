@@ -24,10 +24,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.highway.R;
 import com.highway.customer.customerFragment.CustomerDashBordFragment;
 import com.highway.customer.customerFragment.NewBookingFragment;
-import com.highway.drivermodule.diverModels.CancelTrip;
-import com.highway.drivermodule.diverModels.CompletedTrip;
-import com.highway.drivermodule.diverModels.OngoingTrip;
-import com.highway.drivermodule.diverModels.UpcomingTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CancelTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CompletedTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.OngoingTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.UpcomingTrip;
 import com.highway.drivermodule.driverFragment.DriverDashBoardFragment;
 import com.highway.millmodule.milluserFragment.MillUserDashBoardFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehicleDashBoardFragment;
@@ -194,13 +194,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
     public void updateNavViewHeader() {
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("userName");
+       /* Intent intent = getIntent();
+        String username = intent.getStringExtra("userName");*/
         image = HighwayPrefs.getString(getApplicationContext(), Constants.IMAGE);
-      //  name = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
+        name = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
         mobNo = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
 
-        nevUserName.setText(username);
+        nevUserName.setText(name);
         nevUserMobNo.setText(mobNo);
 
         if (!TextUtils.isEmpty(image)) {

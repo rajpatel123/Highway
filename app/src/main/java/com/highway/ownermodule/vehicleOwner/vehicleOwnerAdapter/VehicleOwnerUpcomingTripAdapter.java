@@ -1,5 +1,7 @@
 package com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -8,28 +10,60 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CompletedTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.UpcomingTrip;
+import com.highway.utils.Utils;
+
+import java.util.List;
 
 public class VehicleOwnerUpcomingTripAdapter extends RecyclerView.Adapter<VehicleOwnerUpcomingTripAdapter.ViewHolder> {
+
+    List<UpcomingTrip> upcomingTrips;
+    Context context;
+
+
+    public VehicleOwnerUpcomingTripAdapter(List<UpcomingTrip> upcomingTrips, Context context) {
+        this.context = context;
+        this.upcomingTrips = upcomingTrips;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.completed_fragment_recycler_item, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        UpcomingTrip upcomingTrip = upcomingTrips.get(position);
+
+        LatLng sourceAddressLatlng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
+        LatLng destAddressLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
+
+        holder.tv2SourceAddress.setText("" + Utils.getAddress(context, sourceAddressLatlng));
+        holder.tv4DestAddress.setText("" + Utils.getAddress(context, destAddressLatLng));
+        holder.tv1CompleteDate.setText(""+upcomingTrip.getEndDate());
+        holder.tv3SourceTime.setText("" + upcomingTrip.getPickupTime());
+        holder.tv5DestTime.setText("" + upcomingTrip.getDropTime());
+        holder.tv6VehicleName.setText("" + upcomingTrip.getVehicleName());
+        holder.tv7FairCharge.setText("" + upcomingTrip.getVehicleName());
+        //img
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return upcomingTrips.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv1CompleteDate,tv2SourceAddress,tv3SourceTime,tv4DestAddress,tv5DestTime, tv6VehicleName,tv7FairCharge;
-        private ImageView img1SourceIndicator,img2DestIndicator,img3_gmap_locator,img4VehicleImg;
+        private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
+        private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

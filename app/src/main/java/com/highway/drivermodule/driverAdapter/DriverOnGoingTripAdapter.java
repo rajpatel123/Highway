@@ -1,4 +1,4 @@
-package com.highway.drivermodule.adapter;
+package com.highway.drivermodule.driverAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,34 +10,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.drivermodule.diverModels.OngoingTrip;
-import com.highway.drivermodule.diverModels.UpcomingTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.OngoingTrip;
 
 import java.util.List;
 
-public class OngoingTripAdapter extends RecyclerView.Adapter<OngoingTripAdapter.MyViewHolder> {
+public class DriverOnGoingTripAdapter extends RecyclerView.Adapter<DriverOnGoingTripAdapter.MyViewHolder> {
 
     private List<OngoingTrip> ongoingTrips;
     private Context context;
 
     @NonNull
     @Override
-    public OngoingTripAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DriverOnGoingTripAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragmentupcomingrecycleritem, parent, false);
 
-        return new OngoingTripAdapter.MyViewHolder(itemView);
+        return new DriverOnGoingTripAdapter.MyViewHolder(itemView);
     }
 
 
-    public OngoingTripAdapter(List<OngoingTrip> ongoingTrips, Context context) {
+    public DriverOnGoingTripAdapter(List<OngoingTrip> ongoingTrips, Context context) {
 
         this.ongoingTrips = ongoingTrips;
         this.context = context;
 
     }
     @Override
-    public void onBindViewHolder(@NonNull OngoingTripAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DriverOnGoingTripAdapter.MyViewHolder holder, int position) {
 
         OngoingTrip ongoingTrip = ongoingTrips.get(position);
         holder.vechileNametextView.setText(ongoingTrip.getVehicleName());

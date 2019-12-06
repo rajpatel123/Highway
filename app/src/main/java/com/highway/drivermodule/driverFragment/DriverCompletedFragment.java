@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.drivermodule.adapter.OncompletedTripAdapter;
-import com.highway.drivermodule.diverModels.CompletedTrip;
+import com.highway.drivermodule.driverAdapter.DriverOnCompletedTripAdapter;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CompletedTrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class DriverCompletedFragment extends Fragment {
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     RecyclerView recyclerViewNew;
     DashBoardActivity dashBoardActivity;
-    OncompletedTripAdapter oncompletedTripAdapter;
+    DriverOnCompletedTripAdapter driverOnCompletedTripAdapter;
     Context context;
 
     public DriverCompletedFragment() {
@@ -75,11 +75,11 @@ public class DriverCompletedFragment extends Fragment {
 
     public void updateList(List<CompletedTrip> completedTrips) {
         if (completedTrips != null &&completedTrips.size() > 0) {
-            oncompletedTripAdapter = new OncompletedTripAdapter(completedTrips, getContext());
+            driverOnCompletedTripAdapter = new DriverOnCompletedTripAdapter(completedTrips, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerViewNew.setLayoutManager(layoutManager);
             recyclerViewNew.setItemAnimator(new DefaultItemAnimator());
-            recyclerViewNew.setAdapter(oncompletedTripAdapter);
+            recyclerViewNew.setAdapter(driverOnCompletedTripAdapter);
 
 
         } else {

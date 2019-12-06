@@ -1,4 +1,4 @@
-package com.highway.drivermodule.adapter;
+package com.highway.drivermodule.driverAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,34 +10,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.drivermodule.diverModels.CancelTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CancelTrip;
 
 import java.util.List;
 
-public class CancelTripAdapter extends RecyclerView.Adapter<CancelTripAdapter.MyViewHolder> {
+public class DriverCancelTripAdapter extends RecyclerView.Adapter<DriverCancelTripAdapter.MyViewHolder> {
 
     private List<CancelTrip> cancelTrips;
     private Context context;
 
     @NonNull
     @Override
-    public CancelTripAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DriverCancelTripAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.on_completed_fragment_recycler_item, parent, false);
 
-        return new CancelTripAdapter.MyViewHolder(itemView);
+        return new DriverCancelTripAdapter.MyViewHolder(itemView);
     }
 
 
-    public CancelTripAdapter(List<CancelTrip> cancelTrips, Context context) {
-
+    public DriverCancelTripAdapter(List<CancelTrip> cancelTrips, Context context) {
         this.cancelTrips = cancelTrips;
         this.context = context;
-
     }
-    @Override
-    public void onBindViewHolder(@NonNull CancelTripAdapter.MyViewHolder holder, int position) {
 
+    @Override
+    public void onBindViewHolder(@NonNull DriverCancelTripAdapter.MyViewHolder holder, int position) {
         CancelTrip cancelTrip = cancelTrips.get(position);
         holder.vechileNametextView.setText(cancelTrip.getVehicleName());
         holder.vehicleNumbertv.setText(cancelTrip.getVehicleNumber());

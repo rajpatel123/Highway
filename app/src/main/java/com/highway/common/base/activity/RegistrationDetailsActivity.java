@@ -459,9 +459,8 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                             if (response.body().getStatus().equalsIgnoreCase("1")) {
 
                                 Intent intent = new Intent(RegistrationDetailsActivity.this, DashBoardActivity.class);
-                                String name = response.body().getUser().getName();
-
-                                intent.putExtra("userName", name);
+                                /*String name = response.body().getUser().getName();
+                                intent.putExtra("userName", name);*/
 
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getUser().getRoleId());
                                 HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());

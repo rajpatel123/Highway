@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.drivermodule.adapter.OngoingTripAdapter;
-import com.highway.drivermodule.diverModels.OngoingTrip;
+import com.highway.drivermodule.driverAdapter.DriverOnGoingTripAdapter;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.OngoingTrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class DriverOnGoingFragment extends Fragment {
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
     RecyclerView recyclerViewNew;
     DashBoardActivity dashBoardActivity;
-    OngoingTripAdapter ongoingTripAdapter;
+    DriverOnGoingTripAdapter driverOnGoingTripAdapter;
     private Context context;
 
     public DriverOnGoingFragment() {
@@ -50,7 +50,7 @@ public class DriverOnGoingFragment extends Fragment {
         LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.fragment_driver_on_going, container ,false);
 
-        recyclerViewNew = view.findViewById(R.id.onGoingRecyclerView);
+        recyclerViewNew = view.findViewById(R.id.DriverOnGoingRecyclerView);
 
 
         return view;
@@ -66,11 +66,11 @@ public class DriverOnGoingFragment extends Fragment {
     }
     public void updateListOnGoing(List<OngoingTrip> ongoingTrips) {
             if (ongoingTrips != null && ongoingTrips.size() > 0) {
-                ongoingTripAdapter = new OngoingTripAdapter(ongoingTrips, getContext());
+                driverOnGoingTripAdapter = new DriverOnGoingTripAdapter(ongoingTrips, getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 recyclerViewNew.setLayoutManager(layoutManager);
                 recyclerViewNew.setItemAnimator(new DefaultItemAnimator());
-                recyclerViewNew.setAdapter(ongoingTripAdapter);
+                recyclerViewNew.setAdapter(driverOnGoingTripAdapter);
 
 
             }

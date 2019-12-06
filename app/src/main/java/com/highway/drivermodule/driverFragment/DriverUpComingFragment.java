@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.drivermodule.adapter.UpComingTripAdapter;
-import com.highway.drivermodule.diverModels.UpcomingTrip;
+import com.highway.drivermodule.driverAdapter.DriverUpComingTripAdapter;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.UpcomingTrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class DriverUpComingFragment extends Fragment {
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
     RecyclerView recyclerView;
     DashBoardActivity dashBoardActivity;
-    UpComingTripAdapter upComingTripAdapter;
+    DriverUpComingTripAdapter driverUpComingTripAdapter;
     private Context context;
 
     public DriverUpComingFragment() {
@@ -54,7 +54,7 @@ public class DriverUpComingFragment extends Fragment {
         LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.fragment_driver_up_coming, container ,false);
 
-        recyclerView = view.findViewById(R.id.upcomingRecycler);
+        recyclerView = view.findViewById(R.id.DriverUpComRecycler);
 
         return view;
     }
@@ -75,11 +75,11 @@ public class DriverUpComingFragment extends Fragment {
     public void updateListUpComing(List<UpcomingTrip> upcomingTrips) {
 
         if (upcomingTrips != null && upcomingTrips.size() > 0) {
-            upComingTripAdapter = new UpComingTripAdapter(upcomingTrips, getContext());
+            driverUpComingTripAdapter = new DriverUpComingTripAdapter(upcomingTrips, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(upComingTripAdapter);
+            recyclerView.setAdapter(driverUpComingTripAdapter);
 
 
         } else {

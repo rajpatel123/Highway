@@ -1,4 +1,4 @@
-package com.highway.drivermodule.adapter;
+package com.highway.drivermodule.driverAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,33 +10,34 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.drivermodule.diverModels.UpcomingTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.UpcomingTrip;
 
 import java.util.List;
 
-public class UpComingTripAdapter extends RecyclerView.Adapter<UpComingTripAdapter.MyViewHolder> {
+public class DriverUpComingTripAdapter extends RecyclerView.Adapter<DriverUpComingTripAdapter.MyViewHolder> {
 
     private List<UpcomingTrip> upcomingTrips;
     private Context context;
 
-    @NonNull
-    @Override
-    public UpComingTripAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragmentupcomingrecycleritem, parent, false);
-
-        return new UpComingTripAdapter.MyViewHolder(itemView);
-    }
-
-
-    public UpComingTripAdapter(List<UpcomingTrip> upcomingTrips, Context context) {
+    public DriverUpComingTripAdapter(List<UpcomingTrip> upcomingTrips, Context context) {
 
         this.upcomingTrips = upcomingTrips;
         this.context = context;
 
     }
+
+    @NonNull
     @Override
-    public void onBindViewHolder(@NonNull UpComingTripAdapter.MyViewHolder holder, int position) {
+    public DriverUpComingTripAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.fragmentupcomingrecycleritem, parent, false);
+
+        return new DriverUpComingTripAdapter.MyViewHolder(itemView);
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull DriverUpComingTripAdapter.MyViewHolder holder, int position) {
 
         UpcomingTrip upcomingTrip = upcomingTrips.get(position);
         holder.vechileNametextView.setText(upcomingTrip.getVehicleName());

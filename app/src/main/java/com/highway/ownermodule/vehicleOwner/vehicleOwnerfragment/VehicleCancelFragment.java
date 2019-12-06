@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CancelTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.VehicleOwnerCancleTripAdapter;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.VehicleOwnerCompletedTripAdapter;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.CancelTrip;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.CompletedTrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +59,7 @@ public class VehicleCancelFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        dashBoardActivity = (DashBoardActivity) getActivity();
 
     }
 
@@ -70,9 +69,8 @@ public class VehicleCancelFragment extends Fragment {
 
     }
 
-    public  void cancleUpdatedTripList(List<CancelTrip> cancelTrips){
+    public  void vehicleCancleUpdatedTripList(List<CancelTrip> cancelTrips){
         if (cancelTrips !=null && cancelTrips.size()>0){
-
             vehicleOwnerCancleTripAdapter = new VehicleOwnerCancleTripAdapter(cancelTrips,getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             cancleRecycler.setLayoutManager(layoutManager);

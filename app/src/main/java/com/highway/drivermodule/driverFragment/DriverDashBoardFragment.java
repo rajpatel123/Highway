@@ -2,7 +2,6 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +9,15 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
-import com.highway.drivermodule.adapter.OncompletedTripAdapter;
-import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
-import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
-import com.highway.drivermodule.diverModels.CompletedTrip;
-import com.highway.drivermodule.driverAdapter.DriverFragmentAdapter;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsRequest;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsResponse;
+import com.highway.drivermodule.driverAdapter.DriverFragmentTabModeAdapter;
 import com.highway.utils.Utils;
 
 import java.util.ArrayList;
@@ -88,10 +82,10 @@ public class DriverDashBoardFragment extends Fragment {
         driverFragmentList.add(driverOnGoingFragment);
         driverFragmentList.add(driverPendingFragment);
 
-        DriverFragmentAdapter driverFragmentAdapter = new DriverFragmentAdapter(getActivity().
+        DriverFragmentTabModeAdapter driverFragmentTabModeAdapter = new DriverFragmentTabModeAdapter(getActivity().
                 getSupportFragmentManager(), driverFragmentList);
 
-        driverViewPager.setAdapter(driverFragmentAdapter);
+        driverViewPager.setAdapter(driverFragmentTabModeAdapter);
         driverTabLayout.setupWithViewPager(driverViewPager);
 
         driverTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
@@ -160,31 +154,31 @@ public class DriverDashBoardFragment extends Fragment {
 
     public void getCompletedDetail() {
 
-        AllDriverTripsRequest allDriverTripsRequest = new AllDriverTripsRequest();
-        allDriverTripsRequest.setUserId("3");
+        AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
+        allHighwayTripsRequest.setUserId("3");
 
         Utils.showProgressDialog(getContext());
-        RestClient.allDriverTrips(allDriverTripsRequest, new Callback<AllDriverTripsResponse>() {
+        RestClient.allDriverTrips(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {
             @Override
-            public void onResponse(Call<AllDriverTripsResponse> call, Response<AllDriverTripsResponse> response) {
+            public void onResponse(Call<AllHighwayTripsResponse> call, Response<AllHighwayTripsResponse> response) {
                 Utils.dismissProgressDialog();
                 if (response.body() != null) {
                     if (response.body().getStatus().booleanValue() == true) {
 
-                        AllDriverTripsResponse allDriverTripsResponse = response.body();
+                        AllHighwayTripsResponse allHighwayTripsResponse = response.body();
 
-                        if (allDriverTripsResponse != null) {
-                            if (allDriverTripsResponse.getCancelTrips() != null && allDriverTripsResponse.getCancelTrips().size() > 0) {
-                                dashBoardActivity.setCancelTrips(allDriverTripsResponse.getCancelTrips());
+                        if (allHighwayTripsResponse != null) {
+                            if (allHighwayTripsResponse.getCancelTrips() != null && allHighwayTripsResponse.getCancelTrips().size() > 0) {
+                                dashBoardActivity.setCancelTrips(allHighwayTripsResponse.getCancelTrips());
                             }
-                            if (allDriverTripsResponse.getCompletedTrips() != null && allDriverTripsResponse.getCompletedTrips().size() > 0) {
-                                dashBoardActivity.setCompletedTrips(allDriverTripsResponse.getCompletedTrips());
+                            if (allHighwayTripsResponse.getCompletedTrips() != null && allHighwayTripsResponse.getCompletedTrips().size() > 0) {
+                                dashBoardActivity.setCompletedTrips(allHighwayTripsResponse.getCompletedTrips());
                             }
-                            if (allDriverTripsResponse.getOngoingTrips() != null && allDriverTripsResponse.getOngoingTrips().size() > 0) {
-                                dashBoardActivity.setOngoingTrips(allDriverTripsResponse.getOngoingTrips());
+                            if (allHighwayTripsResponse.getOngoingTrips() != null && allHighwayTripsResponse.getOngoingTrips().size() > 0) {
+                                dashBoardActivity.setOngoingTrips(allHighwayTripsResponse.getOngoingTrips());
                             }
-                            if (allDriverTripsResponse.getUpcomingTrips() != null && allDriverTripsResponse.getUpcomingTrips().size() > 0) {
-                                dashBoardActivity.setUpcomingTrips(allDriverTripsResponse.getUpcomingTrips());
+                            if (allHighwayTripsResponse.getUpcomingTrips() != null && allHighwayTripsResponse.getUpcomingTrips().size() > 0) {
+                                dashBoardActivity.setUpcomingTrips(allHighwayTripsResponse.getUpcomingTrips());
                             }
 
                             updateAllFragment();
@@ -205,7 +199,7 @@ public class DriverDashBoardFragment extends Fragment {
 
 
             @Override
-            public void onFailure(Call<AllDriverTripsResponse> call, Throwable t) {
+            public void onFailure(Call<AllHighwayTripsResponse> call, Throwable t) {
                 Toast.makeText(dashBoardActivity, " Failure", Toast.LENGTH_SHORT).show();
             }
         });

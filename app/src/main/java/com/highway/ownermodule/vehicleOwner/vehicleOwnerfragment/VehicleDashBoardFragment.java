@@ -13,18 +13,16 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsRequest;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsResponse;
 import com.highway.commonretrofit.RestClient;
-import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
-import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
+
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.VehicleOwnerTabAdapter;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripResponse;
 import com.highway.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -142,28 +140,35 @@ public class VehicleDashBoardFragment extends Fragment {
 
     public void getVehivleOwnerCompletedDetail(){
 
-        AllDriverTripsRequest allDriverTripsRequest = new AllDriverTripsRequest();
-        allDriverTripsRequest.setUserId("5");
+        AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
+        allHighwayTripsRequest.setUserId("5");
 
      /*   VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest = new VehicleOwnerCompletedTripRequest();
         vehicleOwnerCompletedTripRequest.setUserId("5");*/
 
         Utils.showProgressDialog(getContext());
 
-        RestClient.allDriverTrips(allDriverTripsRequest, new Callback<AllDriverTripsResponse>() {
+        RestClient.allDriverTrips(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {
             @Override
-            public void onResponse(Call<AllDriverTripsResponse> call, Response<AllDriverTripsResponse> response) {
+            public void onResponse(Call<AllHighwayTripsResponse> call, Response<AllHighwayTripsResponse> response) {
                 Utils.dismissProgressDialog();
 
                 if (response.body()!=null){
                     if (response.body().getStatus()){
+                        AllHighwayTripsResponse allHighwayTripsResponse = response.body();
+                        if (allHighwayTripsResponse != null){
 
-                        /*VehicleOwnerCompletedTripResponse vehicleOwnerCompletedTripResponse = response.body();*/
-                        AllDriverTripsResponse allDriverTripsResponse = response.body();
-                        if (allDriverTripsResponse != null){
-
-                            if (allDriverTripsResponse.getCompletedTrips()!=null && allDriverTripsResponse.getCompletedTrips().size()>0){
-                                dashBoardActivity.setCompletedTrips(allDriverTripsResponse.getCompletedTrips());
+                            if (allHighwayTripsResponse.getCompletedTrips()!=null && allHighwayTripsResponse.getCompletedTrips().size()>0){
+                                dashBoardActivity.setCompletedTrips(allHighwayTripsResponse.getCompletedTrips());
+                            }
+                            if (allHighwayTripsResponse.getOngoingTrips()!=null && allHighwayTripsResponse.getOngoingTrips().size()>0){
+                                dashBoardActivity.setOngoingTrips(allHighwayTripsResponse.getOngoingTrips());
+                            }
+                            if (allHighwayTripsResponse.getUpcomingTrips()!=null && allHighwayTripsResponse.getUpcomingTrips().size()>0){
+                                dashBoardActivity.setUpcomingTrips(allHighwayTripsResponse.getUpcomingTrips());
+                            }
+                            if (allHighwayTripsResponse.getCancelTrips()!=null && allHighwayTripsResponse.getCancelTrips().size()>0){
+                                dashBoardActivity.setCancelTrips(allHighwayTripsResponse.getCancelTrips());
                             }
                            updateAllVehicleOwnerFragment();
                         }
@@ -174,7 +179,7 @@ public class VehicleDashBoardFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<AllDriverTripsResponse> call, Throwable t) {
+            public void onFailure(Call<AllHighwayTripsResponse> call, Throwable t) {
                 Toast.makeText(dashBoardActivity, "failed", Toast.LENGTH_SHORT).show();
 
             }
@@ -182,6 +187,10 @@ public class VehicleDashBoardFragment extends Fragment {
     }
 
     public void updateAllVehicleOwnerFragment(){
+        vehicleCompletedFragment.completedUpdatedTripList(dashBoardActivity.getCompletedTrips());
+        vehicleOnGoingFragment.vehicleOnGoingUpdateList(dashBoardActivity.getOngoingTrips());
+        vehicleCancelFragment.vehicleCancleUpdatedTripList(dashBoardActivity.getCancelTrips());
+        vehicleUpComingFragment.vehicleUpcomingUpdatedTripList(dashBoardActivity.getUpcomingTrips());
 
     }
 

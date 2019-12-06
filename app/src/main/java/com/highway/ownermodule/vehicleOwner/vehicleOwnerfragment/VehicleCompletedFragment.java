@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.drivermodule.adapter.OncompletedTripAdapter;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CompletedTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.VehicleOwnerCompletedTripAdapter;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.CompletedTrip;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,6 @@ public class VehicleCompletedFragment extends Fragment {
 
     public  void completedUpdatedTripList(List<CompletedTrip>completedTrips){
         if (completedTrips !=null && completedTrips.size()>0){
-
             vehicleOwnerCompletedTripAdapter = new VehicleOwnerCompletedTripAdapter(completedTrips,getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             completedRecycler.setLayoutManager(layoutManager);

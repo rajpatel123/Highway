@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CompletedTrip;
 import com.highway.utils.Utils;
 
 import java.util.List;
-
-import okhttp3.internal.Util;
 
 public class VehicleOwnerCompletedTripAdapter extends RecyclerView.Adapter<VehicleOwnerCompletedTripAdapter.MyViewHolder> {
 
@@ -42,12 +40,12 @@ public class VehicleOwnerCompletedTripAdapter extends RecyclerView.Adapter<Vehic
 
         CompletedTrip completedTrip = completedTrips.get(position);
          // for Address finding
-        LatLng sourceAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getDestinationLong()));
+        LatLng sourceAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
+        LatLng destAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getDestinationLong()));
 
         holder.tv1CompleteDate.setText(""+completedTrip.getEndDate());
-        holder.tv2SourceAddress.setText(""+Utils.getAddress(context,sourceAddLatLng));
-        holder.tv4DestAddress.setText("" +Utils.getAddress(context,destAddLatLng));
+        holder.tv2SourceAddress.setText(""+Utils.getAddress(context,sourceAddressLatLng));
+        holder.tv4DestAddress.setText("" +Utils.getAddress(context,destAddressLatLng));
         holder.tv3SourceTime.setText(""+completedTrip.getPickupTime());
         holder.tv5DestTime.setText(""+completedTrip.getDropTime());
         holder.tv6VehicleName.setText(""+completedTrip.getVehicleName());
@@ -58,7 +56,7 @@ public class VehicleOwnerCompletedTripAdapter extends RecyclerView.Adapter<Vehic
 
     @Override
     public int getItemCount() {
-        return 0;
+        return completedTrips.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.drivermodule.adapter.CancelTripAdapter;
-import com.highway.drivermodule.diverModels.CancelTrip;
+import com.highway.drivermodule.driverAdapter.DriverCancelTripAdapter;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CancelTrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 public class DriverCancelFragment extends Fragment {
     private List<CancelTrip> cancelTrips = new ArrayList<>();
     private RecyclerView recyclerViewCancel;
-    CancelTripAdapter cancelTripAdapter;
+    DriverCancelTripAdapter driverCancelTripAdapter;
     DashBoardActivity dashBoardActivity;
     public Context context;
 
@@ -75,12 +75,12 @@ public class DriverCancelFragment extends Fragment {
     public void updateListCancel(List<CancelTrip> cancelTrips) {
 
         if (cancelTrips != null && cancelTrips.size() > 0) {
-            cancelTripAdapter = new CancelTripAdapter(cancelTrips, getContext());
+            driverCancelTripAdapter = new DriverCancelTripAdapter(cancelTrips, getContext());
             final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerViewCancel.setLayoutManager(layoutManager);
             recyclerViewCancel.setItemAnimator(new DefaultItemAnimator());
-            recyclerViewCancel.setAdapter(cancelTripAdapter);
+            recyclerViewCancel.setAdapter(driverCancelTripAdapter);
 
 
         } else {

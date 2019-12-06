@@ -6,10 +6,8 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
-import com.highway.drivermodule.diverModels.AllDriverTripsRequest;
-import com.highway.drivermodule.diverModels.AllDriverTripsResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleOwnerCompletedTripResponse;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsRequest;
+import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -30,7 +28,7 @@ public interface ApiInterface {
 
     // Driver All Trips
     @POST("http://vrok.in/highway_dev/getAllTripByDriverId")
-    Call<AllDriverTripsResponse> driverTrips(@Body AllDriverTripsRequest allDriverTripsRequest);
+    Call<AllHighwayTripsResponse> driverTrips(@Body AllHighwayTripsRequest allHighwayTripsRequest);
 
     // Vehicle Owner trip details
 /*
