@@ -148,7 +148,7 @@ public class VehicleDashBoardFragment extends Fragment {
 
         Utils.showProgressDialog(getContext());
 
-        RestClient.allDriverTrips(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {
+        RestClient.allVehicleOwnerCompletedTrip(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {
             @Override
             public void onResponse(Call<AllHighwayTripsResponse> call, Response<AllHighwayTripsResponse> response) {
                 Utils.dismissProgressDialog();

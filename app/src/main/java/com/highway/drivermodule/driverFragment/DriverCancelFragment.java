@@ -2,6 +2,7 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +52,12 @@ public class DriverCancelFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater1 = (LayoutInflater) dashBoardActivity.getSystemService(dashBoardActivity.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.fragment_driver_cancel, container ,false);
 
         recyclerViewCancel = (RecyclerView) view.findViewById(R.id.cancelrecyclerview);
 
+        Log.d("OncreateView ", "CancelF");
         return view;
     }
 
@@ -73,6 +75,7 @@ public class DriverCancelFragment extends Fragment {
     }
 
     public void updateListCancel(List<CancelTrip> cancelTrips) {
+        Log.d("OncreateView ", "cancelF");
 
         if (cancelTrips != null && cancelTrips.size() > 0) {
             driverCancelTripAdapter = new DriverCancelTripAdapter(cancelTrips, getContext());

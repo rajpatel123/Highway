@@ -21,7 +21,7 @@ import com.highway.utils.HighwayPrefs;
 public class SplashActivity extends AppCompatActivity {
 
     private Handler handler;
-    private static int SPLASH_TIME_OUT = 2000;
+    private static int SPLASH_TIME_OUT = 1000;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)

@@ -2,6 +2,7 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ public class DriverOnGoingFragment extends Fragment {
     RecyclerView recyclerViewNew;
     DashBoardActivity dashBoardActivity;
     DriverOnGoingTripAdapter driverOnGoingTripAdapter;
-    private Context context;
 
     public DriverOnGoingFragment() {
         // Required empty public constructor
@@ -47,10 +47,11 @@ public class DriverOnGoingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater1 = (LayoutInflater) dashBoardActivity.getSystemService(dashBoardActivity.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.fragment_driver_on_going, container ,false);
 
         recyclerViewNew = view.findViewById(R.id.DriverOnGoingRecyclerView);
+        Log.d("OncreateView ", "Ongoing");
 
 
         return view;
@@ -65,7 +66,9 @@ public class DriverOnGoingFragment extends Fragment {
 
     }
     public void updateListOnGoing(List<OngoingTrip> ongoingTrips) {
-            if (ongoingTrips != null && ongoingTrips.size() > 0) {
+        Log.d("OncreateView ", "Ongoing");
+
+        if (ongoingTrips != null && ongoingTrips.size() > 0) {
                 driverOnGoingTripAdapter = new DriverOnGoingTripAdapter(ongoingTrips, getContext());
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 recyclerViewNew.setLayoutManager(layoutManager);

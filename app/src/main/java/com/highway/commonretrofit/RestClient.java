@@ -31,7 +31,7 @@ public class RestClient {
         RetrofitClient.getClient().driverTrips(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
 
-   /* public static void allVehicleOwnerCompletedTrip(VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest, Callback<VehicleOwnerCompletedTripResponse>vehicleOwnerCompletedTripResponseCallback){
+    public static void allVehicleOwnerCompletedTrip(AllHighwayTripsRequest vehicleOwnerCompletedTripRequest, Callback<AllHighwayTripsResponse>vehicleOwnerCompletedTripResponseCallback){
         RetrofitClient.getClient().vehicleOwnerTrip(vehicleOwnerCompletedTripRequest).enqueue(vehicleOwnerCompletedTripResponseCallback);
-    }*/
+    }
 }

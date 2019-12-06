@@ -2,6 +2,7 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,10 +52,11 @@ public class DriverUpComingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       /*  binding = DataBindingUtil.inflate(inflater, R.layout.fragment_driver_up_coming, container, false);
         View view = binding.getRoot();*/
-        LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater1 = (LayoutInflater) dashBoardActivity.getSystemService(dashBoardActivity.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.fragment_driver_up_coming, container ,false);
 
         recyclerView = view.findViewById(R.id.DriverUpComRecycler);
+        Log.d("OncreateView ", "Upcoming");
 
         return view;
     }
@@ -73,6 +75,8 @@ public class DriverUpComingFragment extends Fragment {
     }
 
     public void updateListUpComing(List<UpcomingTrip> upcomingTrips) {
+
+        Log.d("OncreateView ", "Upcoming");
 
         if (upcomingTrips != null && upcomingTrips.size() > 0) {
             driverUpComingTripAdapter = new DriverUpComingTripAdapter(upcomingTrips, getContext());

@@ -31,10 +31,10 @@ public interface ApiInterface {
     Call<AllHighwayTripsResponse> driverTrips(@Body AllHighwayTripsRequest allHighwayTripsRequest);
 
     // Vehicle Owner trip details
-/*
+
     @POST("http://vrok.in/highway_dev/getAllTripByOwnerId")
-    Call<VehicleOwnerCompletedTripResponse>vehicleOwnerTrip(@Body VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest);
-*/
+    Call<AllHighwayTripsResponse>vehicleOwnerTrip(@Body AllHighwayTripsRequest vehicleOwnerCompletedTripRequest);
+
 
 
 }

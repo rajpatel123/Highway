@@ -2,6 +2,7 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,9 +53,10 @@ public class DriverCompletedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater1 = (LayoutInflater) dashBoardActivity.getSystemService(dashBoardActivity.LAYOUT_INFLATER_SERVICE);
         View view = inflater1.inflate(R.layout.fragment_driver_up_coming, container ,false);
         recyclerViewNew = view.findViewById(R.id.completedRecycler);
+        Log.d("OncreateView ", "completed");
 
         return view;
     }
@@ -74,6 +76,8 @@ public class DriverCompletedFragment extends Fragment {
     }
 
     public void updateList(List<CompletedTrip> completedTrips) {
+        Log.d("OncreateView ", "completed");
+
         if (completedTrips != null &&completedTrips.size() > 0) {
             driverOnCompletedTripAdapter = new DriverOnCompletedTripAdapter(completedTrips, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
