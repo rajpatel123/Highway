@@ -43,12 +43,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    // for Driver
     private List<CancelTrip> cancelTrips = new ArrayList<>();
     private MillUserDashBoardFragment millUserDashBoardFragment;
     private DriverDashBoardFragment driverDashBoardFragment;
     private CustomerDashBordFragment customerDashBordFragment;
     private VehicleDashBoardFragment vehicleDashBoardFragment;
+    private List<CompletedTrip> completedTrips = new ArrayList<>();
+    private List<OngoingTrip> ongoingTrips = new ArrayList<>();
+    private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
 
     public List<CancelTrip> getCancelTrips() {
         return cancelTrips;
@@ -57,12 +60,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public void setCancelTrips(List<CancelTrip> cancelTrips) {
         this.cancelTrips = cancelTrips;
     }
-
-    // for Driver
-    private List<CompletedTrip> completedTrips = new ArrayList<>();
-    private List<OngoingTrip> ongoingTrips= new ArrayList<>();
-    private List<UpcomingTrip> upcomingTrips= new ArrayList<>();
-
 
     public List<CompletedTrip> getCompletedTrips() {
         return completedTrips;
@@ -89,10 +86,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    // VehicleOwner
+    /*// VehicleOwner
     private List<CompletedTrip> completedTripsForVehicleOwner = new ArrayList<>();
-    private List<OngoingTrip> ongoingTripsForVehicleOwner= new ArrayList<>();
-    private List<UpcomingTrip> upcomingTripsForVehicleOwner= new ArrayList<>();
+    private List<OngoingTrip> ongoingTripsForVehicleOwner = new ArrayList<>();
+    private List<UpcomingTrip> upcomingTripsForVehicleOwner = new ArrayList<>();
     private List<CancelTrip> cancelTripsForVehicleOwner = new ArrayList<>();
 
     public List<CompletedTrip> getCompletedTripsForVehicleOwner() {
@@ -125,12 +122,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     public void setCancelTripsForVehicleOwner(List<CancelTrip> cancelTripsForVehicleOwner) {
         this.cancelTripsForVehicleOwner = cancelTripsForVehicleOwner;
-    }
-
-
-
-
-
+    }*/
 
     private Toolbar dashBoardToolbar;
     private CircleImageView nevCircularUserImgView;
