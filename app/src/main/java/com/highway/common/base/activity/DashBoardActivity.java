@@ -30,6 +30,8 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.Ongoing
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -49,6 +51,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardFragmentForDriver dashBoardFragmentForDriver;
     private DashBordFragmentForCustomer dashBordFragmentForCustomer;
     private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
+    private DashBoardActivity dashBoardActivity;
+    private AddNewVehicleFragment addNewVehicleFragment;
+    private AddNewDriverFragment addNewDriverFragment;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -95,7 +100,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private NavigationView navigationView;
     String userRole;
     private MenuItem newBooking, myBooking, addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver,getAllVehicle;
+            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -309,8 +314,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     case "3":
                         if (dashBoardFragmentForDriver == null) {
                             dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();
-                            replaceFragment(dashBoardFragmentForDriver);
                         }
+                        replaceFragment(dashBoardFragmentForDriver);
                         break;
 
                     case "4":
@@ -321,8 +326,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     case "5":
                         if (dashBoardFragmentForVehicleOwner == null) {
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
-                            replaceFragment(dashBoardFragmentForVehicleOwner);
                         }
+                        replaceFragment(dashBoardFragmentForVehicleOwner);
 
                         break;
                 }
@@ -343,6 +348,33 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
+                        if (addNewVehicleFragment == null) {
+                        }
+                        addNewVehicleFragment = AddNewVehicleFragment.newInstance();
+                        replaceFragment(addNewVehicleFragment);
+
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_driver:
+                dashBoardToolbar.setTitle("Add Driver");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+                        if (addNewDriverFragment == null) {
+                        }
+                        addNewDriverFragment = AddNewDriverFragment.newInstance();
+                        replaceFragment(addNewDriverFragment);
 
                         break;
                 }
@@ -474,25 +506,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "2":
 
-                        break;
-                    case "3":
-
-                        break;
-                    case "4":
-
-                        break;
-                    case "5":
-
-                        break;
-                }
-                break;
-
-            case R.id.nav_add_driver:
-                dashBoardToolbar.setTitle("Add Driver");
-                switch (userRole) {
-                    case "1":
-                        break;
-                    case "2":
                         break;
                     case "3":
 

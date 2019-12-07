@@ -1,10 +1,10 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleOwnerModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CompletedTrip {
+public class UpcomingTrip {
 
     @SerializedName("sourceLat")
     @Expose
@@ -18,9 +18,9 @@ public class CompletedTrip {
     @SerializedName("destinationLong")
     @Expose
     private String destinationLong;
-    @SerializedName("driverName")
+    @SerializedName("customerName")
     @Expose
-    private String driverName;
+    private String customerName;
     @SerializedName("vehicleName")
     @Expose
     private String vehicleName;
@@ -78,12 +78,12 @@ public class CompletedTrip {
         this.destinationLong = destinationLong;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getVehicleName() {
