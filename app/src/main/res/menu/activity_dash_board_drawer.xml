@@ -18,6 +18,17 @@
             android:id="@+id/nav_add_vehicle"
             android:icon="@drawable/add_vihicle"
             android:title="@string/menu_add_vehicle" />
+
+        <item
+            android:id="@+id/nav_add_driver"
+            android:icon="@drawable/highway_driver"
+            android:title="@string/menu_add_driver" />
+
+        <item
+            android:id="@+id/nav_add_getAllVehicle"
+            android:icon="@drawable/highway_driver_1"
+            android:title="@string/menu_get_allvehicle" />
+
         <item
             android:id="@+id/nav_wallet"
             android:icon="@drawable/wallet_account"

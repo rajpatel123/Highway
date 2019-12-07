@@ -94,7 +94,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private TextView tvName, tvMobileNo, tvSetting;
     private NavigationView navigationView;
     String userRole;
-    private MenuItem newBooking, myBooking, addVehicle, wallet, notification, rateCard, help, about, share, send, gallery, tCondition, logout;
+    private MenuItem newBooking, myBooking, addVehicle, wallet, notification, rateCard, help,
+            about, share, send, gallery, tCondition, logout, addDriver,getAllVehicle;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -148,7 +149,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         send = menues.findItem(R.id.nav_send);
         gallery = menues.findItem(R.id.nav_gallery);
         tCondition = menues.findItem(R.id.nav_trmCondition);
+        addDriver = menues.findItem(R.id.nav_add_driver);
+        getAllVehicle = menues.findItem(R.id.nav_add_getAllVehicle);
         logout = menues.findItem(R.id.nav_logout);
+
 
     }
 
@@ -192,6 +196,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
+                addDriver.setVisible(false);
+                getAllVehicle.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -208,6 +214,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(false);
+                addDriver.setVisible(false);
+                getAllVehicle.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -224,6 +232,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
+                addDriver.setVisible(false);
+                getAllVehicle.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -240,6 +250,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
+                addDriver.setVisible(true);
+                getAllVehicle.setVisible(true);
                 logout.setVisible(true);
                 break;
         }
@@ -295,12 +307,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(dashBoardFragmentForMillUser);
                         break;
                     case "3":
-
                         if (dashBoardFragmentForDriver == null) {
                             dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();
                             replaceFragment(dashBoardFragmentForDriver);
                         }
-
                         break;
 
                     case "4":
@@ -313,6 +323,26 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                             replaceFragment(dashBoardFragmentForVehicleOwner);
                         }
+
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_vehicle:
+                dashBoardToolbar.setTitle("Add Vehicle");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
 
                         break;
                 }
@@ -337,7 +367,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
                 break;
-
             case R.id.nav_notification:
                 dashBoardToolbar.setTitle("Notification");
                 switch (userRole) {
@@ -454,6 +483,41 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
 
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_driver:
+                dashBoardToolbar.setTitle("Add Driver");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_getAllVehicle:
+                dashBoardToolbar.setTitle("All Vehicle");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
                         break;
                 }
                 break;

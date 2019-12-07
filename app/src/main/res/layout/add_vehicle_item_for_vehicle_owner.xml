@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_left_10"
+        android:paddingRight="@dimen/padding_right_10">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_5"
+            android:paddingLeft="5sp"
+            android:text="Vehicle Name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16"
+            android:textStyle="normal" />
+
+
+        <EditText
+            android:id="@+id/vehicleName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/completed_fragment_item_shape"
+            android:hint="enter vehicle name "
+            android:paddingLeft="5sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_10"
+            android:paddingLeft="5sp"
+            android:text="Vehicle Number "
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16"
+            android:textStyle="normal" />
+
+        <EditText
+            android:id="@+id/vehicleModelNos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/completed_fragment_item_shape"
+            android:hint="enter vehicle number"
+            android:paddingLeft="5sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_10"
+            android:paddingLeft="5sp"
+            android:text="Vehicle Model Number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16"
+            android:textStyle="normal" />
+
+        <EditText
+            android:id="@+id/vehicleNos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/completed_fragment_item_shape"
+            android:hint="enter vehicle model number "
+            android:paddingLeft="5sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_10"
+            android:paddingLeft="5sp"
+            android:text="Description"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16"
+            android:textStyle="normal" />
+
+        <EditText
+            android:id="@+id/vehicleDescription"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_height_100"
+            android:background="@drawable/completed_fragment_item_shape"
+            android:hint=" "
+            android:paddingLeft="5sp" />
+
+
+        <Button
+            android:id="@+id/addNewVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_top_20"
+            android:background="@drawable/btn_shape_draw"
+            android:paddingLeft="@dimen/padding_left_60dp"
+            android:paddingRight="@dimen/padding_right_60dp"
+            android:text="Add New Vehicle "
+            android:textColor="@color/project_yellow_color" />
+    </LinearLayout>
+
+</LinearLayout>
