@@ -13,10 +13,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.highway.R;
-import com.highway.customer.customerActivity.CustomerLoginActivity;
-import com.highway.drivermodule.driverActivity.DriverLoginActivity;
-import com.highway.millmodule.milluserActivity.MillerLoginActivity;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.OwnerLoginActivity;
+import com.highway.customer.customerActivity.LoginActivityForCustomer;
+import com.highway.drivermodule.driverActivity.LoginActivityForDriver;
+import com.highway.millmodule.milluserActivity.LoginActivityForMiller;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.LoginActivityForVehicleOwner;
 
 public class LoginOptionActivity extends AppCompatActivity {
     private LinearLayout customer, driver, miller, owner;
@@ -99,21 +99,21 @@ public class LoginOptionActivity extends AppCompatActivity {
                 }else{
                     switch (userRole){
                         case "2":
-                            intent = new Intent(LoginOptionActivity.this, MillerLoginActivity.class);
+                            intent = new Intent(LoginOptionActivity.this, LoginActivityForMiller.class);
                             startActivity(intent);
                             finish();
                         case "3":
-                            intent = new Intent(LoginOptionActivity.this, DriverLoginActivity.class);
+                            intent = new Intent(LoginOptionActivity.this, LoginActivityForDriver.class);
                             startActivity(intent);
                             finish();
                             break;
                         case "4":
-                            intent = new Intent(LoginOptionActivity.this, CustomerLoginActivity.class);
+                            intent = new Intent(LoginOptionActivity.this, LoginActivityForCustomer.class);
                             startActivity(intent);
                             finish();
                             break;
                         case "5":
-                            intent = new Intent(LoginOptionActivity.this, OwnerLoginActivity.class);
+                            intent = new Intent(LoginOptionActivity.this, LoginActivityForVehicleOwner.class);
                             startActivity(intent);
                             finish();
                             break;

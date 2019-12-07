@@ -255,7 +255,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 dashBoardToolbar.setTitle("My Booking");
                 switch (userRole) {
                     case "1":
-                        /*fragment = CustomerDashBordFragment.newInstance();
+                        /*fragment = DashBordFragmentForCustomer.newInstance();
                         replaceFragment(fragment);*/
                         break;
                     case "2":
@@ -271,7 +271,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(fragment);
                         break;
                     case "5":
-                       /* fragment = CustomerDashBordFragment.newInstance();
+                       /* fragment = DashBordFragmentForCustomer.newInstance();
                           replaceFragment(fragment);*/
                         break;
                 }

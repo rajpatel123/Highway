@@ -19,7 +19,7 @@ import com.highway.R;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.commonretrofit.RestClient;
-import com.highway.customer.customerActivity.CustomerLoginActivity;
+import com.highway.customer.customerActivity.LoginActivityForCustomer;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -65,7 +65,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MobileOtpVerificationActivity.this, CustomerLoginActivity.class);
+                Intent intent = new Intent(MobileOtpVerificationActivity.this, LoginActivityForCustomer.class);
                 startActivity(intent);
                 finish();
             }
@@ -75,7 +75,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
 
     public void timerInOtp() {
 
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timer.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -123,7 +123,6 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<VerifyOtpResponse> call, Response<VerifyOtpResponse> response) {
                         Utils.dismissProgressDialog();
-
                         if (response.body() != null) {
                             if (TextUtils.isEmpty(response.body().getUser().getName())) {
                                 Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
@@ -149,8 +148,6 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();
                                 finish();*/
-
-                                Toast.makeText(MobileOtpVerificationActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -178,7 +175,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
         HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, verifyOtpResponse.getUser().getAddress());
 
         startActivity(intent);
-        Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway ", Toast.LENGTH_SHORT).show();
         finish();
     }
 

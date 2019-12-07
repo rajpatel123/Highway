@@ -22,15 +22,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.highway.R;
-import com.highway.customer.customerFragment.CustomerDashBordFragment;
+import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CancelTrip;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CompletedTrip;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.OngoingTrip;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.UpcomingTrip;
-import com.highway.drivermodule.driverFragment.DriverDashBoardFragment;
-import com.highway.millmodule.milluserFragment.MillUserDashBoardFragment;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehicleDashBoardFragment;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
+import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
+import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -45,10 +45,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private AppBarConfiguration mAppBarConfiguration;
     // for Driver
     private List<CancelTrip> cancelTrips = new ArrayList<>();
-    private MillUserDashBoardFragment millUserDashBoardFragment;
-    private DriverDashBoardFragment driverDashBoardFragment;
-    private CustomerDashBordFragment customerDashBordFragment;
-    private VehicleDashBoardFragment vehicleDashBoardFragment;
+    private DashBoardFragmentForMillUser dashBoardFragmentForMillUser;
+    private DashBoardFragmentForDriver dashBoardFragmentForDriver;
+    private DashBordFragmentForCustomer dashBordFragmentForCustomer;
+    private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
+
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
@@ -85,44 +86,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         this.upcomingTrips = upcomingTrips;
     }
 
-
-    /*// VehicleOwner
-    private List<CompletedTrip> completedTripsForVehicleOwner = new ArrayList<>();
-    private List<OngoingTrip> ongoingTripsForVehicleOwner = new ArrayList<>();
-    private List<UpcomingTrip> upcomingTripsForVehicleOwner = new ArrayList<>();
-    private List<CancelTrip> cancelTripsForVehicleOwner = new ArrayList<>();
-
-    public List<CompletedTrip> getCompletedTripsForVehicleOwner() {
-        return completedTripsForVehicleOwner;
-    }
-
-    public void setCompletedTripsForVehicleOwner(List<CompletedTrip> completedTripsForVehicleOwner) {
-        this.completedTripsForVehicleOwner = completedTripsForVehicleOwner;
-    }
-
-    public List<OngoingTrip> getOngoingTripsForVehicleOwner() {
-        return ongoingTripsForVehicleOwner;
-    }
-
-    public void setOngoingTripsForVehicleOwner(List<OngoingTrip> ongoingTripsForVehicleOwner) {
-        this.ongoingTripsForVehicleOwner = ongoingTripsForVehicleOwner;
-    }
-
-    public List<UpcomingTrip> getUpcomingTripsForVehicleOwner() {
-        return upcomingTripsForVehicleOwner;
-    }
-
-    public void setUpcomingTripsForVehicleOwner(List<UpcomingTrip> upcomingTripsForVehicleOwner) {
-        this.upcomingTripsForVehicleOwner = upcomingTripsForVehicleOwner;
-    }
-
-    public List<CancelTrip> getCancelTripsForVehicleOwner() {
-        return cancelTripsForVehicleOwner;
-    }
-
-    public void setCancelTripsForVehicleOwner(List<CancelTrip> cancelTripsForVehicleOwner) {
-        this.cancelTripsForVehicleOwner = cancelTripsForVehicleOwner;
-    }*/
 
     private Toolbar dashBoardToolbar;
     private CircleImageView nevCircularUserImgView;
@@ -190,8 +153,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
     public void updateNavViewHeader() {
-       /* Intent intent = getIntent();
-        String username = intent.getStringExtra("userName");*/
         image = HighwayPrefs.getString(getApplicationContext(), Constants.IMAGE);
         name = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
         mobNo = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
@@ -326,25 +287,31 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 dashBoardToolbar.setTitle("My Booking");
                 switch (userRole) {
                     case "1":
-                        /*fragment = CustomerDashBordFragment.newInstance();
+                        /*fragment = DashBordFragmentForCustomer.newInstance();
                         replaceFragment(fragment);*/
                         break;
                     case "2":
-                        millUserDashBoardFragment = MillUserDashBoardFragment.newInstance();
-                        replaceFragment(millUserDashBoardFragment);
+                        dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
+                        replaceFragment(dashBoardFragmentForMillUser);
                         break;
                     case "3":
-                        driverDashBoardFragment = DriverDashBoardFragment.newInstance();
-                        replaceFragment(driverDashBoardFragment);
+
+                        if (dashBoardFragmentForDriver == null) {
+                            dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();
+                            replaceFragment(dashBoardFragmentForDriver);
+                        }
+
                         break;
+
                     case "4":
-                        customerDashBordFragment = CustomerDashBordFragment.newInstance();
-                        replaceFragment(customerDashBordFragment);
+                        dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
+                        replaceFragment(dashBordFragmentForCustomer);
                         break;
+
                     case "5":
-                        if (vehicleDashBoardFragment==null){
-                            vehicleDashBoardFragment = VehicleDashBoardFragment.newInstance();
-                            replaceFragment(vehicleDashBoardFragment);
+                        if (dashBoardFragmentForVehicleOwner == null) {
+                            dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
+                            replaceFragment(dashBoardFragmentForVehicleOwner);
                         }
 
                         break;
