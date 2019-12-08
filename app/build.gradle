@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+
+def uatKeystorePropertiesFile = rootProject.file("release_signing.properties")
+def uatKeystoreProperties = new Properties()
+uatKeystoreProperties.load(new FileInputStream(uatKeystorePropertiesFile))
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -13,13 +17,35 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
     dataBinding {
         enabled = true
+    }
+
+
+    signingConfigs {
+        highway {
+            keyAlias uatKeystoreProperties['KEY_ALIAS']
+            keyPassword uatKeystoreProperties['KEY_PASSWORD']
+            storeFile file(uatKeystoreProperties['STORE_FILE'])
+            storePassword uatKeystoreProperties['STORE_PASSWORD']
+            v2SigningEnabled false
+        }
+
     }
     buildTypes {
         release {
             debuggable false
             multiDexEnabled true
+            def uatSigningKey = signingConfigs.highway
+            signingConfig uatSigningKey
+
             minifyEnabled false
             buildConfigField "String", "API_SERVER_IP", "\"http://vrok.in/highway_dev/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

@@ -72,6 +72,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         LocationListener, TaskLoadedCallback, BookingVehicleAdapter.OnClickEvents {
 
 
+    private static final int SELECT_TYPE =4 ;
     Button getDirection;
     private Polyline currentPolyline;
 
@@ -96,7 +97,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
-
+    LinearLayout goodtype;
+    private Button back_button;
     TextView bookTruckTv;
 
     private double sourceLatitude, sourceLongitude;
@@ -133,12 +135,17 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_booking_with_details);
+
+
 
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
+        back_button = findViewById(R.id.back_button);
 
 
+        goodtype = findViewById(R.id.goodtype);
         sourceLL = findViewById(R.id.sourceLL);
         destLL = findViewById(R.id.destLL);
 
@@ -155,7 +162,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         }
 
         if (getSupportActionBar() != null) {
-
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
@@ -180,6 +186,17 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                         .setCountry("IN")
                         .build(BookingWithDetailsActivity.this);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
+            }
+        });
+
+
+        goodtype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(BookingWithDetailsActivity.this, GoodTypeDetailActivity.class);
+                startActivityForResult(intent,SELECT_TYPE);
+                overridePendingTransition( R.anim.slide_up, R.anim.slide_up_out );
             }
         });
 
@@ -239,6 +256,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+
 
 
         }

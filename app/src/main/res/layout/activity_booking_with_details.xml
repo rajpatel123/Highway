@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".customer.customerActivity.BookingActivityWithDetailsActivity">
+    tools:context=".customer.customerActivity.BookingWithDetailsActivity">
 
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="@dimen/margin_38">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_10"
+            android:background="@drawable/back_arrow_icon"
+            app:tintMode="@color/white" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_toEndOf="@+id/back_button"
+            android:text="Booking"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomView">
+        android:layout_above="@+id/bottomView"
+        android:layout_below="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_marginTop="@dimen/margin_20"
+            android:background="@color/white"
             android:elevation="@dimen/_16dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5">
 
             <LinearLayout
                 android:id="@+id/sourceLL"
@@ -26,38 +57,42 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/oval_shape_white"
+                android:background="@drawable/input_round_shape"
                 android:elevation="@dimen/margin_5"
+
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <RelativeLayout
                     android:id="@+id/picupLinear1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:gravity="center">
 
                     <View
                         android:id="@+id/sourceIndicator"
-                        android:layout_width="12px"
+                        android:layout_width="8px"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:background="@color/green"
-                      />
+                        android:background="@color/green" />
 
                     <TextView
                         android:id="@+id/edtSourceLOcation"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:layout_marginStart="5dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="2dp"
                         android:layout_marginEnd="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
                         android:layout_toEndOf="@+id/sourceIndicator"
-                        android:background="@color/white"
+                        android:background="@color/quantum_grey100"
                         android:cursorVisible="false"
                         android:ellipsize="end"
                         android:enabled="true"
+                        android:gravity="center_vertical"
                         android:hint="Enter Pickup location"
                         android:lines="1"
                         android:singleLine="true" />
@@ -68,41 +103,45 @@
 
             <LinearLayout
                 android:id="@+id/destLL"
-
                 android:layout_width="0dp"
+
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/oval_shape_white"
+                android:background="@drawable/input_round_shape"
                 android:elevation="@dimen/margin_5"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:gravity="center">
 
                     <View
                         android:id="@+id/destIndicator"
-                        android:layout_width="12px"
+                        android:layout_width="8px"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:background="@color/red"/>
+                        android:background="@color/red" />
 
                     <TextView
                         android:id="@+id/edtDropLocation"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:layout_marginStart="5dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="2dp"
                         android:layout_marginEnd="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
                         android:layout_toEndOf="@+id/destIndicator"
-                        android:background="@color/white"
+                        android:background="@color/quantum_grey100"
                         android:cursorVisible="false"
+                        android:gravity="center_vertical"
                         android:ellipsize="end"
                         android:enabled="true"
                         android:hint="Enter drop location"
@@ -150,7 +189,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_marginEnd="@dimen/margin_20"
-                android:layout_weight="2" />
+                android:layout_weight="1.3" />
 
 
             <View
@@ -162,16 +201,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_weight="1"
                 android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_10"
                 android:layout_marginEnd="@dimen/margin_20"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
 
@@ -179,13 +219,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pickup Contact : " />
+                        android:text="Pickup Contact : "
+                        android:textSize="12sp" />
 
 
                     <LinearLayout
-                        android:layout_width="@dimen/margin_top_30dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:gravity="end|center_vertical"
                         android:orientation="horizontal">
 
@@ -193,8 +234,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_5"
+                            android:text="8285886155"
                             android:textColor="@color/colorPrimary"
-                            android:text="8285886155" />
+                            android:textSize="12sp" />
 
                         <View
                             android:layout_width="5px"
@@ -207,12 +249,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_5"
                             android:layout_marginEnd="@dimen/margin_5"
+                            android:text="Raj Patel"
+
                             android:textColor="@color/colorPrimary"
-                            android:text="Raj Patel" />
+                            android:textSize="12sp" />
 
 
                     </LinearLayout>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
@@ -222,6 +267,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
 
@@ -229,10 +275,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pickup Contact : " />
+                        android:text="Good Type "
+
+                        android:textSize="12sp" />
 
 
                     <LinearLayout
+                        android:id="@+id/goodtype"
                         android:layout_width="@dimen/margin_top_30dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -243,22 +292,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_5"
+                            android:singleLine="true"
+                            android:text="828588615582858861558285886155828588615582858861558285886155"
+                            android:ellipsize="end"
                             android:textColor="@color/colorPrimary"
-                            android:text="8285886155" />
 
-                        <View
-                            android:layout_width="5px"
-                            android:layout_height="match_parent"
-                            android:layout_margin="@dimen/margin_5"
-                            android:background="@color/black" />
+                            android:textSize="12sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_5"
-                            android:layout_marginEnd="@dimen/margin_5"
-                            android:textColor="@color/colorPrimary"
-                            android:text="Raj Patel" />
+
 
 
                     </LinearLayout>
@@ -269,57 +310,60 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:cardUseCompatPadding="true"
+                android:layout_weight=".9"
                 android:paddingBottom="@dimen/margin_10"
-                android:layout_weight=".9">
+                app:cardUseCompatPadding="true">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_10">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_centerVertical="true"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="30dp"
-                            app:srcCompat="@drawable/money"
-                            android:layout_marginStart="2dp"/>
+                            android:layout_width="30dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="2dp"
+                            app:srcCompat="@drawable/money" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:textSize="@dimen/margin_20"
+                            android:text="CASH"
                             android:textColor="@color/green"
-                            android:textStyle="bold"
-                            android:text="CASH"/>
+                            android:textSize="@dimen/margin_16"
+                            android:textStyle="bold" />
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/login_arrow_icon"
                             android:layout_marginStart="2dp"
-                            android:rotation="90"/>
+                            android:rotation="90"
+                            app:srcCompat="@drawable/login_arrow_icon" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/bookTruckTv"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
-                        android:paddingStart="@dimen/margin_20"
-                        android:paddingEnd="@dimen/margin_20"
-                        android:background="@drawable/btn_shape_draw"
-                        android:textColor="@color/white"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/margin_20"
+                        android:background="@drawable/btn_shape_draw"
                         android:gravity="center"
                         android:maxHeight="@dimen/margin_40"
-                        android:layout_marginEnd="@dimen/margin_20"
-                        android:text="Book TATA ACE"/>
+                        android:paddingStart="@dimen/margin_20"
+                        android:paddingEnd="@dimen/margin_20"
+                        android:text="Book TATA ACE"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
