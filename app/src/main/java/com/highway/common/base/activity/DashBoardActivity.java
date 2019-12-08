@@ -22,15 +22,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.highway.R;
-import com.highway.customer.customerFragment.CustomerDashBordFragment;
+import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CancelTrip;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.CompletedTrip;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.OngoingTrip;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.UpcomingTrip;
-import com.highway.drivermodule.driverFragment.DriverDashBoardFragment;
-import com.highway.millmodule.milluserFragment.MillUserDashBoardFragment;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.VehicleDashBoardFragment;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
+import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
+import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -45,10 +47,14 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private AppBarConfiguration mAppBarConfiguration;
     // for Driver
     private List<CancelTrip> cancelTrips = new ArrayList<>();
-    private MillUserDashBoardFragment millUserDashBoardFragment;
-    private DriverDashBoardFragment driverDashBoardFragment;
-    private CustomerDashBordFragment customerDashBordFragment;
-    private VehicleDashBoardFragment vehicleDashBoardFragment;
+    private DashBoardFragmentForMillUser dashBoardFragmentForMillUser;
+    private DashBoardFragmentForDriver dashBoardFragmentForDriver;
+    private DashBordFragmentForCustomer dashBordFragmentForCustomer;
+    private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
+    private DashBoardActivity dashBoardActivity;
+    private AddNewVehicleFragment addNewVehicleFragment;
+    private AddNewDriverFragment addNewDriverFragment;
+
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
@@ -86,44 +92,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    /*// VehicleOwner
-    private List<CompletedTrip> completedTripsForVehicleOwner = new ArrayList<>();
-    private List<OngoingTrip> ongoingTripsForVehicleOwner = new ArrayList<>();
-    private List<UpcomingTrip> upcomingTripsForVehicleOwner = new ArrayList<>();
-    private List<CancelTrip> cancelTripsForVehicleOwner = new ArrayList<>();
-
-    public List<CompletedTrip> getCompletedTripsForVehicleOwner() {
-        return completedTripsForVehicleOwner;
-    }
-
-    public void setCompletedTripsForVehicleOwner(List<CompletedTrip> completedTripsForVehicleOwner) {
-        this.completedTripsForVehicleOwner = completedTripsForVehicleOwner;
-    }
-
-    public List<OngoingTrip> getOngoingTripsForVehicleOwner() {
-        return ongoingTripsForVehicleOwner;
-    }
-
-    public void setOngoingTripsForVehicleOwner(List<OngoingTrip> ongoingTripsForVehicleOwner) {
-        this.ongoingTripsForVehicleOwner = ongoingTripsForVehicleOwner;
-    }
-
-    public List<UpcomingTrip> getUpcomingTripsForVehicleOwner() {
-        return upcomingTripsForVehicleOwner;
-    }
-
-    public void setUpcomingTripsForVehicleOwner(List<UpcomingTrip> upcomingTripsForVehicleOwner) {
-        this.upcomingTripsForVehicleOwner = upcomingTripsForVehicleOwner;
-    }
-
-    public List<CancelTrip> getCancelTripsForVehicleOwner() {
-        return cancelTripsForVehicleOwner;
-    }
-
-    public void setCancelTripsForVehicleOwner(List<CancelTrip> cancelTripsForVehicleOwner) {
-        this.cancelTripsForVehicleOwner = cancelTripsForVehicleOwner;
-    }*/
-
     private Toolbar dashBoardToolbar;
     private CircleImageView nevCircularUserImgView;
     private TextView nevUserName, nevUserMobNo;
@@ -131,7 +99,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private TextView tvName, tvMobileNo, tvSetting;
     private NavigationView navigationView;
     String userRole;
-    private MenuItem newBooking, myBooking, addVehicle, wallet, notification, rateCard, help, about, share, send, gallery, tCondition, logout;
+    private MenuItem newBooking, myBooking, addVehicle, wallet, notification, rateCard, help,
+            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -185,13 +154,14 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         send = menues.findItem(R.id.nav_send);
         gallery = menues.findItem(R.id.nav_gallery);
         tCondition = menues.findItem(R.id.nav_trmCondition);
+        addDriver = menues.findItem(R.id.nav_add_driver);
+        getAllVehicle = menues.findItem(R.id.nav_add_getAllVehicle);
         logout = menues.findItem(R.id.nav_logout);
+
 
     }
 
     public void updateNavViewHeader() {
-       /* Intent intent = getIntent();
-        String username = intent.getStringExtra("userName");*/
         image = HighwayPrefs.getString(getApplicationContext(), Constants.IMAGE);
         name = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
         mobNo = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
@@ -231,6 +201,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
+                addDriver.setVisible(false);
+                getAllVehicle.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -247,6 +219,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(false);
+                addDriver.setVisible(false);
+                getAllVehicle.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -263,6 +237,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
+                addDriver.setVisible(false);
+                getAllVehicle.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -279,6 +255,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
+                addDriver.setVisible(true);
+                getAllVehicle.setVisible(true);
                 logout.setVisible(true);
                 break;
         }
@@ -326,26 +304,77 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 dashBoardToolbar.setTitle("My Booking");
                 switch (userRole) {
                     case "1":
-                        /*fragment = CustomerDashBordFragment.newInstance();
+                        /*fragment = DashBordFragmentForCustomer.newInstance();
                         replaceFragment(fragment);*/
                         break;
                     case "2":
-                        millUserDashBoardFragment = MillUserDashBoardFragment.newInstance();
-                        replaceFragment(millUserDashBoardFragment);
+                        dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
+                        replaceFragment(dashBoardFragmentForMillUser);
                         break;
                     case "3":
-                        driverDashBoardFragment = DriverDashBoardFragment.newInstance();
-                        replaceFragment(driverDashBoardFragment);
+                        if (dashBoardFragmentForDriver == null) {
+                            dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();
+                        }
+                        replaceFragment(dashBoardFragmentForDriver);
+                        break;
+
+                    case "4":
+                        dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
+                        replaceFragment(dashBordFragmentForCustomer);
+                        break;
+
+                    case "5":
+                        if (dashBoardFragmentForVehicleOwner == null) {
+                            dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
+                        }
+                        replaceFragment(dashBoardFragmentForVehicleOwner);
+
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_vehicle:
+                dashBoardToolbar.setTitle("Add Vehicle");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
                         break;
                     case "4":
-                        customerDashBordFragment = CustomerDashBordFragment.newInstance();
-                        replaceFragment(customerDashBordFragment);
+
                         break;
                     case "5":
-                        if (vehicleDashBoardFragment==null){
-                            vehicleDashBoardFragment = VehicleDashBoardFragment.newInstance();
-                            replaceFragment(vehicleDashBoardFragment);
+                        if (addNewVehicleFragment == null) {
                         }
+                        addNewVehicleFragment = AddNewVehicleFragment.newInstance();
+                        replaceFragment(addNewVehicleFragment);
+
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_driver:
+                dashBoardToolbar.setTitle("Add Driver");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+                        if (addNewDriverFragment == null) {
+                        }
+                        addNewDriverFragment = AddNewDriverFragment.newInstance();
+                        replaceFragment(addNewDriverFragment);
 
                         break;
                 }
@@ -370,7 +399,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
                 break;
-
             case R.id.nav_notification:
                 dashBoardToolbar.setTitle("Notification");
                 switch (userRole) {
@@ -487,6 +515,22 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
 
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_getAllVehicle:
+                dashBoardToolbar.setTitle("All Vehicle");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
                         break;
                 }
                 break;

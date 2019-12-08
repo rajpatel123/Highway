@@ -12,7 +12,6 @@
         android:layout_below="@+id/myBookingViewPager"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:text="Welcome to DashBoard Fragment"
         android:textColor="@color/red"/>
 
     <com.google.android.material.tabs.TabLayout

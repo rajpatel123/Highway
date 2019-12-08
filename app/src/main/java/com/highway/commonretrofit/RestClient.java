@@ -6,8 +6,8 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsRequest;
-import com.highway.common.base.commonModel.customer_diver_owner_Models_class.AllHighwayTripsResponse;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -31,7 +31,7 @@ public class RestClient {
         RetrofitClient.getClient().driverTrips(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
 
-    public static void allVehicleOwnerCompletedTrip(AllHighwayTripsRequest vehicleOwnerCompletedTripRequest, Callback<AllHighwayTripsResponse>vehicleOwnerCompletedTripResponseCallback){
-        RetrofitClient.getClient().vehicleOwnerTrip(vehicleOwnerCompletedTripRequest).enqueue(vehicleOwnerCompletedTripResponseCallback);
+    public static void allVehicleOwnerCompletedTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse>allDriverTripsResponseCallback){
+        RetrofitClient.getClient().vehicleOwnerTrip(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
 }
