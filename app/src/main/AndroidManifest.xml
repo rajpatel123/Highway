@@ -35,7 +35,18 @@
             android:value="@integer/google_play_services_version" /> <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDtk9XiHc-Kt_Y8yL13s5KwevK5P38B8x4" />
+            android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" />
+
+
+        <activity
+            android:name=".customer.customerActivity.WelcomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drivermodule.driverActivity.WelcomeDriverActivity"
+            android:screenOrientation="portrait" />
+  <activity
+            android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".common.base.activity.SplashActivity"
@@ -58,6 +69,12 @@
         <activity
             android:name=".common.base.activity.MobileOtpVerificationActivity"
             android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".customer.customerActivity.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2"/>
         <activity
             android:name=".common.base.BaseActivity"
             android:screenOrientation="portrait" />
