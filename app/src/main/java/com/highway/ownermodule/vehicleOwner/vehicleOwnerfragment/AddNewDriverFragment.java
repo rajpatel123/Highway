@@ -1,5 +1,6 @@
 package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -20,8 +21,10 @@ import com.highway.R;
 public class AddNewDriverFragment extends Fragment {
     RecyclerView addDriverRecyView;
     private Toolbar addDriverToolbar;
-    public EditText edtTxtDriverName,edtTxtDriverMobNo,edtTxtDriverEmailNos,edtTxtDriverAddress,edtTxtDlNumber;
+    public EditText edtTxtDriverName, edtTxtDriverMobNo, edtTxtDriverEmailNos, edtTxtDriverAddress, edtTxtDlNumber;
     public Button btnAddNewDriver;
+    private Activity view;
+
     public AddNewDriverFragment() {
         // Required empty public constructor
     }
@@ -43,7 +46,7 @@ public class AddNewDriverFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_add_new_driver, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_new_driver, container, false);
 
         edtTxtDriverName = view.findViewById(R.id.EdtTxtDriverName);
         edtTxtDriverMobNo = view.findViewById(R.id.EdtTxtDriverMobNo);
@@ -51,10 +54,19 @@ public class AddNewDriverFragment extends Fragment {
         edtTxtDriverAddress = view.findViewById(R.id.EdtTxtEnterDriverAdd);
         edtTxtDlNumber = view.findViewById(R.id.EdtTxtDlNumber);
         btnAddNewDriver = view.findViewById(R.id.BtnAddNewDriver);
+        btnAddNewDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-       return  view;
+                inputDriverDetailsValidation();
+            }
+        });
+        return view;
     }
 
+    public void inputDriverDetailsValidation() {
+
+    }
 
     @Override
     public void onAttach(Context context) {

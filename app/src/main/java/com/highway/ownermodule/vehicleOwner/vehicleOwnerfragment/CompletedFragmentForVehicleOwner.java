@@ -54,7 +54,7 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_vehicle_completed, container, false);
-        completedRecycler = view.findViewById(R.id.CompletedRecyclerView);
+        completedRecycler = view.findViewById(R.id.CompletedRecyclerViewForVehicle);
         swiptorefresh = view.findViewById(R.id.swiptorefresh);
 
 
@@ -79,9 +79,10 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
             this.dashBoardFragmentForVehicleOwner = dashBoardFragmentForVehicleOwner;
             completedTripAdapterForVehicleOwner = new CompletedTripAdapterForVehicleOwner(completedTrips, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-            completedRecycler.setLayoutManager(layoutManager);
-            completedRecycler.setItemAnimator(new DefaultItemAnimator());
-            completedRecycler.setAdapter(completedTripAdapterForVehicleOwner);
+                completedRecycler.setLayoutManager(layoutManager);
+                completedRecycler.setItemAnimator(new DefaultItemAnimator());
+                completedRecycler.setAdapter(completedTripAdapterForVehicleOwner);
+
 
         } else {
             Toast.makeText(dashBoardActivity, "Some thing is wrong", Toast.LENGTH_SHORT).show();

@@ -349,8 +349,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
                         if (addNewVehicleFragment == null) {
+                            addNewVehicleFragment = AddNewVehicleFragment.newInstance();
                         }
-                        addNewVehicleFragment = AddNewVehicleFragment.newInstance();
                         replaceFragment(addNewVehicleFragment);
 
                         break;

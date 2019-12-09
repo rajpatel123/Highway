@@ -115,12 +115,12 @@
         <Button
             android:id="@+id/BtnAddNewDriver"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_top_20"
+            android:layout_marginTop="@dimen/margin_top_30"
             android:background="@drawable/btn_shape_draw"
-            android:paddingLeft="@dimen/padding_left_60dp"
-            android:paddingRight="@dimen/padding_right_60dp"
+            android:paddingLeft="@dimen/padding_left_40"
+            android:paddingRight="@dimen/padding_right_40"
             android:text="Add New Driver "
             android:textColor="@color/project_yellow_color" />
     </LinearLayout>
