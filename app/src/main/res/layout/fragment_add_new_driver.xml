@@ -32,17 +32,17 @@
             android:layout_height="@dimen/margin_35"
             android:background="@drawable/completed_fragment_item_shape"
             android:hint="Enter driver name "
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:paddingLeft="5sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_10"
+            android:inputType="phone"
             android:paddingLeft="5sp"
             android:text="Mobile Number "
             android:textColor="@color/black"
-            android:inputType="phone"
             android:textSize="@dimen/size_20"
             android:textStyle="normal" />
 
@@ -52,6 +52,8 @@
             android:layout_height="@dimen/margin_35"
             android:background="@drawable/completed_fragment_item_shape"
             android:hint="Enter mobile number"
+            android:inputType="phone"
+            android:maxLength="10"
             android:paddingLeft="5sp" />
 
         <TextView
@@ -73,24 +75,70 @@
             android:inputType="textEmailAddress"
             android:paddingLeft="5sp" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_10"
-            android:paddingLeft="5sp"
-            android:text="DL Number  "
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_20"
-            android:textStyle="normal" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/EdtTxtDlNumber"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_10"
+                android:paddingLeft="5sp"
+                android:text="DL Number  "
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_marginRight="@dimen/margin_right_5"
+                android:textSize="@dimen/size_20"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DL Expire Date "
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/margin_top_10"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_20"
+                android:layout_marginRight="@dimen/margin_right_20"
+                android:textStyle="normal"
+                android:paddingLeft="5dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_35"
-            android:background="@drawable/completed_fragment_item_shape"
-            android:hint="Enter Dl number "
-            android:inputType="text"
-            android:paddingLeft="5sp" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/EdtTxtDlNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_35"
+                android:layout_weight="1"
+                android:background="@drawable/completed_fragment_item_shape"
+                android:hint="Enter Dl number "
+                android:inputType="text"
+                android:paddingLeft="5sp" />
+
+                <EditText
+                    android:id="@+id/EdtTxtDlExpireDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_35"
+                    android:background="@drawable/completed_fragment_item_shape"
+                    android:hint="DL expiry date"
+                    android:inputType="date"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5sp"
+                    android:paddingLeft="5dp"
+                     />
+
+                <ImageView
+                    android:id="@+id/ImgDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/calender_image" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -105,10 +153,14 @@
         <EditText
             android:id="@+id/EdtTxtEnterDriverAdd"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_50"
+            android:layout_height="@dimen/margin_height_80"
             android:background="@drawable/completed_fragment_item_shape"
             android:hint="Enter driver address  "
-            android:inputType="textPostalAddress"
+            android:gravity="top|left"
+            android:maxLength="200"
+            android:maxLines="5"
+            android:inputType="textMultiLine"
+            android:text="@string/newline"
             android:paddingLeft="5sp" />
 
 

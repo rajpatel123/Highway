@@ -8,6 +8,10 @@ import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,6 +38,15 @@ public interface ApiInterface {
 
     @POST("http://vrok.in/highway_dev/getAllTripByOwnerId")
     Call<AllHighwayTripsResponse>vehicleOwnerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+
+     // Add New Vehicle
+    @POST("http://highway.vrok.in/index.php/api/Vehicle/addVehicle")
+    Call<AddNewVehicleResponse>addNewVehicleResponseCall(@Body AddNewVehicleRequest addNewVehicleRequest);
+
+    // Add new Driver
+    @POST("http://highway.vrok.in/index.php/api/Login/addDriver")
+    Call<AddNewDriverResponse>addNewDriverResponseCall(@Body AddNewDriverRequest addNewDriverRequest);
+
 
 
 

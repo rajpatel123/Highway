@@ -91,7 +91,11 @@
             android:layout_height="@dimen/margin_height_100"
             android:background="@drawable/completed_fragment_item_shape"
             android:hint=" descripition"
-            android:inputType="textCapWords"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:maxLength="250"
+            android:text="@string/newline"
+            android:maxLines="15"
             android:paddingLeft="5sp" />
 
 

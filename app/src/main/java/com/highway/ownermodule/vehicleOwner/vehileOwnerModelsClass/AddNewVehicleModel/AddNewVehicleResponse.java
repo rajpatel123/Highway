@@ -1,10 +1,9 @@
 package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel;
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AddVehicleResponse {
+public class AddNewVehicleResponse {
 
 @SerializedName("status")
 @Expose
