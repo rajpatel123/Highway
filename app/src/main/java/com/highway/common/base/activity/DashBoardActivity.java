@@ -32,6 +32,7 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.Ongoing
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.millmodule.milluserFragment.MillBookingFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
@@ -56,6 +57,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardActivity dashBoardActivity;
     private AddNewVehicleFragment addNewVehicleFragment;
     private AddNewDriverFragment addNewDriverFragment;
+    private MillBookingFragmentForMillUser millBookingFragmentForMillUser;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -101,7 +103,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private TextView tvName, tvMobileNo, tvSetting;
     private NavigationView navigationView;
     String userRole;
-    private MenuItem newBooking, myBooking, addVehicle, wallet, notification, rateCard, help,
+    private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
             about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle;
     private MenuItem item;
     private Button btnLogOut;
@@ -147,6 +149,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         newBooking = menues.findItem(R.id.nav_new_booking);
         myBooking = menues.findItem(R.id.nav_my_booking);
         addVehicle = menues.findItem(R.id.nav_add_vehicle);
+        millBooking = menues.findItem(R.id.nav_add_millBooking);
         wallet = menues.findItem(R.id.nav_wallet);
         notification = menues.findItem(R.id.nav_notification);
         rateCard = menues.findItem(R.id.nav_rate_card);
@@ -193,6 +196,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "2":                                    //  mill user
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
+                millBooking.setVisible(true);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -211,6 +215,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "3":                                 // Driver
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
+                millBooking.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -229,6 +234,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "4":                                  //  Customer
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
+                millBooking.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(true);
                 notification.setVisible(false);
@@ -247,7 +253,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "5":                              // Owner .. vehicle Owner
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
+                millBooking.setVisible(false);
                 addVehicle.setVisible(true);
+                addDriver.setVisible(true);
+                getAllVehicle.setVisible(true);
                 wallet.setVisible(false);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
@@ -257,8 +266,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
-                addDriver.setVisible(true);
-                getAllVehicle.setVisible(true);
                 logout.setVisible(true);
                 break;
         }
@@ -276,7 +283,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             super.onBackPressed();
         }
 
-       /* // Exit on Double click
+        // Exit on Double click
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
@@ -292,7 +299,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             public void run() {
                 doubleBackToExitPressedOnce = false;
             }
-        }, 2000);*/
+        }, 2000);
     }
 
     @Override
@@ -314,7 +321,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
-        //  1 admin  //  2 mill user   // 3  driver // // 4  customer   // 5 owner
+        //  1 admin  //  2 mill user   // 3  driver  // 4  customer   // 5 owner
         switch (id) {
             case R.id.nav_new_booking:
                 dashBoardToolbar.setTitle("New Booking");
@@ -355,6 +362,32 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 }
                 break;
 
+            case R.id.nav_add_millBooking:
+                dashBoardToolbar.setTitle("Mill Booking");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        if (millBookingFragmentForMillUser == null){
+                            millBookingFragmentForMillUser = MillBookingFragmentForMillUser.newInstance();
+                        }
+                        replaceFragment(millBookingFragmentForMillUser);
+
+                        break;
+
+                    case "3":
+
+                        break;
+
+                    case "4":
+                        break;
+
+                    case "5":
+
+                        break;
+                }
+                break;
+
             case R.id.nav_add_vehicle:
                 dashBoardToolbar.setTitle("Add Vehicle");
                 switch (userRole) {
@@ -374,7 +407,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                             addNewVehicleFragment = AddNewVehicleFragment.newInstance();
                         }
                         replaceFragment(addNewVehicleFragment);
-
                         break;
                 }
                 break;

@@ -46,33 +46,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".common.base.activity.DashBoardActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".common.base.activity.LoginOptionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".millmodule.milluserActivity.LoginActivityForMiller"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".common.base.activity.MobileOtpVerificationActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".common.base.BaseActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".customer.customerActivity.LoginActivityForCustomer"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.LoginActivityForVehicleOwner"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".common.base.activity.RegistrationDetailsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".drivermodule.driverActivity.LoginActivityForDriver"
-            android:screenOrientation="portrait" />
+        <activity android:name=".common.base.activity.DashBoardActivity" android:screenOrientation="portrait" />
+        <activity android:name=".common.base.activity.LoginOptionActivity" android:screenOrientation="portrait" />
+        <activity android:name=".millmodule.milluserActivity.LoginActivityForMiller" android:screenOrientation="portrait" />
+        <activity android:name=".common.base.activity.MobileOtpVerificationActivity" android:screenOrientation="portrait" />
+        <activity android:name=".common.base.BaseActivity" android:screenOrientation="portrait" />
+        <activity android:name=".customer.customerActivity.LoginActivityForCustomer" android:screenOrientation="portrait" />
+        <activity android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.LoginActivityForVehicleOwner" android:screenOrientation="portrait" />
+        <activity android:name=".common.base.activity.RegistrationDetailsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".drivermodule.driverActivity.LoginActivityForDriver" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

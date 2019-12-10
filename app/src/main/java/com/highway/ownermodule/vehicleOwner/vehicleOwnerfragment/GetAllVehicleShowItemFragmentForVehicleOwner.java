@@ -4,30 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.highway.R;
 
-public class GetAllVehicleFragmentForVehicleOwner extends Fragment {
-    Toolbar getAllVehicleToolbar;
-    RecyclerView getAllVehicleRecyclerView;
+public class GetAllVehicleShowItemFragmentForVehicleOwner extends Fragment {
 
-    public GetAllVehicleFragmentForVehicleOwner() {
+
+    public GetAllVehicleShowItemFragmentForVehicleOwner() {
         // Required empty public constructor
     }
 
 
-    public static GetAllVehicleFragmentForVehicleOwner newInstance(String param1, String param2) {
-        GetAllVehicleFragmentForVehicleOwner fragment = new GetAllVehicleFragmentForVehicleOwner();
+    public static GetAllVehicleShowItemFragmentForVehicleOwner newInstance(String param1, String param2) {
+        GetAllVehicleShowItemFragmentForVehicleOwner fragment = new GetAllVehicleShowItemFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -43,17 +37,10 @@ public class GetAllVehicleFragmentForVehicleOwner extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=  inflater.inflate(R.layout.fragment_get_all_vehicle_fragment_for_vehicle_owner, container, false);
-        getAllVehicleRecyclerView = view.findViewById(R.id.GetAllVehicleRecyclerView);
-
-     return view;
+        return inflater.inflate(R.layout.fragment_get_all_vehicle_show_item_fragment_for_vehicle_owner, container, false);
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onAttach(Context context) {

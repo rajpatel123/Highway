@@ -102,6 +102,7 @@ public class LoginOptionActivity extends AppCompatActivity {
                             intent = new Intent(LoginOptionActivity.this, LoginActivityForMiller.class);
                             startActivity(intent);
                             finish();
+                            break;
                         case "3":
                             intent = new Intent(LoginOptionActivity.this, LoginActivityForDriver.class);
                             startActivity(intent);

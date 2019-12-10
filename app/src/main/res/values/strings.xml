@@ -27,7 +27,8 @@
     <string name="menu_add_driver">Add Driver</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_setting">Setting</string>
-    <string name="menu_get_allvehicle">getAll Vehicle</string>
+    <string name="menu_get_allvehicle">GetAll Vehicle</string>
+    <string name="menu_get_millbooking">Mill Booing</string>
     <string name="email">ramashish.bhumca16@gmail.com</string>
     <string name="nav_header_subtitle">Mobile no</string>
 
