@@ -1,19 +1,15 @@
 package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 
@@ -26,7 +22,7 @@ public class GetAllVehicleFragmentForVehicleOwner extends Fragment {
     }
 
 
-    public static GetAllVehicleFragmentForVehicleOwner newInstance(String param1, String param2) {
+    public static GetAllVehicleFragmentForVehicleOwner newInstance() {
         GetAllVehicleFragmentForVehicleOwner fragment = new GetAllVehicleFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);

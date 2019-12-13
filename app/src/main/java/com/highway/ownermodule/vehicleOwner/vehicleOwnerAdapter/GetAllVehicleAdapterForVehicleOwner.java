@@ -36,9 +36,7 @@ public class GetAllVehicleAdapterForVehicleOwner extends RecyclerView.Adapter<Ge
             super(itemView);
             vehicleName = itemView.findViewWithTag(R.id.TxtAviVehicleName);
             vehicleNo = itemView.findViewWithTag(R.id.txtViewVehicleNo);
-            vehicleOwnerName = itemView.findViewWithTag(R.id.txtViewVehicleOwnerName);
-            //vehicleName = itemView.findViewWithTag(R.id.TxtAviVehicleName);
-
+            vehicleOwnerName = itemView.findViewWithTag(R.id.txtViewVehicleModelNo);
 
         }
     }

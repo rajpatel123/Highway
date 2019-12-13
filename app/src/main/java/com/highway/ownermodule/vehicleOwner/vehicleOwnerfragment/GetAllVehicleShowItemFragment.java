@@ -1,7 +1,6 @@
 package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,16 +11,16 @@ import android.view.ViewGroup;
 
 import com.highway.R;
 
-public class GetAllVehicleShowItemFragmentForVehicleOwner extends Fragment {
+public class GetAllVehicleShowItemFragment extends Fragment {
 
 
-    public GetAllVehicleShowItemFragmentForVehicleOwner() {
+    public GetAllVehicleShowItemFragment() {
         // Required empty public constructor
     }
 
 
-    public static GetAllVehicleShowItemFragmentForVehicleOwner newInstance(String param1, String param2) {
-        GetAllVehicleShowItemFragmentForVehicleOwner fragment = new GetAllVehicleShowItemFragmentForVehicleOwner();
+    public static GetAllVehicleShowItemFragment newInstance(String param1, String param2) {
+        GetAllVehicleShowItemFragment fragment = new GetAllVehicleShowItemFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -37,7 +36,7 @@ public class GetAllVehicleShowItemFragmentForVehicleOwner extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_get_all_vehicle_show_item_fragment_for_vehicle_owner, container, false);
+        return inflater.inflate(R.layout.fragment_get_all_vehicle_show_item_fragment, container, false);
     }
 
 

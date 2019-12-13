@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleShowItemFragmentForVehicleOwner">
+    tools:context=".ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleShowItemFragment">
 
 
     <androidx.cardview.widget.CardView
@@ -65,12 +65,12 @@
 
 
                 <TextView
-                    android:id="@+id/txtViewVehicleOwnerName"
+                    android:id="@+id/txtViewVehicleModelNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="@dimen/padding_left_15"
-                    android:text="Ramesh Yadav"
+                    android:text="Vehicle Model number"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16dp" />
 

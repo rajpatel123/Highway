@@ -1,6 +1,36 @@
 <resources>
     <string name="app_name">Highway</string>
 
+        <string name="weight_of_load_items">Weight Of Load Items</string>
+        <string-array name="approx_load_data">
+            <item> choose weights </item>
+            <item>100kg</item>
+            <item>200kg</item>
+            <item>300kg</item>
+            <item>400kg</item>
+            <item>500kg</item>
+            <item>600kg</item>
+            <item>700kg</item>
+            <item>800kg</item>
+            <item>900kg</item>
+            <item>1000kg</item>
+        </string-array>
+
+
+    <string name="goods_types">Goods Types</string>
+    <string-array name="goods_types">
+        <item>  choose godds types      </item>
+        <item>Private Goods</item>
+        <item>Common Resources</item>
+        <item>Club Goods</item>
+        <item>Public Goods </item>
+       <!-- <item>500kg</item>
+        <item>600kg</item>
+        <item>700kg</item>
+        <item>800kg</item>
+        <item>900kg</item>
+        <item>1000kg</item>-->
+    </string-array>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -29,6 +59,7 @@
     <string name="menu_setting">Setting</string>
     <string name="menu_get_allvehicle">GetAll Vehicle</string>
     <string name="menu_get_millbooking">Mill Booing</string>
+    <string name="menu_get_bookload">Book Load</string>
     <string name="email">ramashish.bhumca16@gmail.com</string>
     <string name="nav_header_subtitle">Mobile no</string>
 
@@ -108,4 +139,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
 </resources>

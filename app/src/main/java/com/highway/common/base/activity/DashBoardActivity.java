@@ -32,10 +32,11 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.Ongoing
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
-import com.highway.millmodule.milluserFragment.MillBookingFragmentForMillUser;
+import com.highway.millmodule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -57,7 +58,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardActivity dashBoardActivity;
     private AddNewVehicleFragment addNewVehicleFragment;
     private AddNewDriverFragment addNewDriverFragment;
-    private MillBookingFragmentForMillUser millBookingFragmentForMillUser;
+    private GetAllVehicleFragmentForVehicleOwner getAllVehicleFragmentForVehicleOwner;
+    private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -104,7 +106,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private NavigationView navigationView;
     String userRole;
     private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle;
+            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,bookload;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -161,9 +163,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         tCondition = menues.findItem(R.id.nav_trmCondition);
         addDriver = menues.findItem(R.id.nav_add_driver);
         getAllVehicle = menues.findItem(R.id.nav_add_getAllVehicle);
+        bookload = menues.findItem(R.id.nav_add_bookLoad);
         logout = menues.findItem(R.id.nav_logout);
-
-
     }
 
     public void updateNavViewHeader() {
@@ -196,7 +197,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "2":                                    //  mill user
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
-                millBooking.setVisible(true);
+                millBooking.setVisible(false);
+                bookload.setVisible(true);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -216,6 +218,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
+                bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -235,6 +238,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
+                bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(true);
                 notification.setVisible(false);
@@ -254,6 +258,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
+                bookload.setVisible(false);
                 addVehicle.setVisible(true);
                 addDriver.setVisible(true);
                 getAllVehicle.setVisible(true);
@@ -362,16 +367,16 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 }
                 break;
 
-            case R.id.nav_add_millBooking:
-                dashBoardToolbar.setTitle("Mill Booking");
+            case R.id.nav_add_bookLoad:
+                dashBoardToolbar.setTitle("Book Load");
                 switch (userRole) {
                     case "1":
                         break;
                     case "2":
-                        if (millBookingFragmentForMillUser == null){
-                            millBookingFragmentForMillUser = MillBookingFragmentForMillUser.newInstance();
+                        if (bookLoadFragmentForMillUser == null){
+                            bookLoadFragmentForMillUser = BookLoadFragmentForMillUser.newInstance();
                         }
-                        replaceFragment(millBookingFragmentForMillUser);
+                        replaceFragment(bookLoadFragmentForMillUser);
 
                         break;
 
@@ -574,7 +579,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_add_getAllVehicle:
-                dashBoardToolbar.setTitle("All Vehicle");
+                dashBoardToolbar.setTitle("All Vehicle List");
                 switch (userRole) {
                     case "1":
                         break;
@@ -585,6 +590,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     case "4":
                         break;
                     case "5":
+
+                        if (getAllVehicleFragmentForVehicleOwner == null){
+                            getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
+                        }
+                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
                         break;
                 }
                 break;
