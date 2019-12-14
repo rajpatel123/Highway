@@ -211,7 +211,7 @@ public class AddNewDriverFragment extends Fragment {
 
         VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
         user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
-        vehicleDropDownRequest.setUserId("5");
+        vehicleDropDownRequest.setUserId(user_Id);
 
         RestClient.getVehicleList(vehicleDropDownRequest, new Callback<VehicleDropDownResponse>() {
             @Override

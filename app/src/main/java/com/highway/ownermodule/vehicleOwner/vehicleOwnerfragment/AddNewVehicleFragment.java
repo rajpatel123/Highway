@@ -3,6 +3,7 @@ package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -165,9 +166,9 @@ public class AddNewVehicleFragment extends Fragment {
     public void driverList() {
 
         DriverDropDownRequest driverDropDownRequest = new DriverDropDownRequest();
-
         user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
-        driverDropDownRequest.setUserId("5");
+        Log.d("Id",user_Id);
+        driverDropDownRequest.setUserId(user_Id);
 
         RestClient.getDriverList(driverDropDownRequest, new Callback<DriverDropDownResponse>() {
             @Override
@@ -175,6 +176,8 @@ public class AddNewVehicleFragment extends Fragment {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
                         driverDropDownResponse = response.body();
+
+                        Log.d("data",""+response.body());
                         Data data = driverDropDownResponse.getData();
                         DriverDatum driverDatum = new DriverDatum();
                         driverDatum.setDriverName("---Select Driver Name");
