@@ -14,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.highway.R;
 import com.highway.customer.customerActivity.LoginActivityForCustomer;
+import com.highway.customer.customerActivity.WelcomeActivity;
 import com.highway.drivermodule.driverActivity.LoginActivityForDriver;
+import com.highway.drivermodule.driverActivity.WelcomeDriverActivity;
 import com.highway.millmodule.milluserActivity.LoginActivityForMiller;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.LoginActivityForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity;
 
 public class LoginOptionActivity extends AppCompatActivity {
     private LinearLayout customer, driver, miller, owner;
@@ -104,17 +107,17 @@ public class LoginOptionActivity extends AppCompatActivity {
                             finish();
                             break;
                         case "3":
-                            intent = new Intent(LoginOptionActivity.this, LoginActivityForDriver.class);
+                            intent = new Intent(LoginOptionActivity.this, WelcomeDriverActivity.class);
                             startActivity(intent);
                             finish();
                             break;
                         case "4":
-                            intent = new Intent(LoginOptionActivity.this, LoginActivityForCustomer.class);
+                            intent = new Intent(LoginOptionActivity.this, WelcomeActivity.class);
                             startActivity(intent);
                             finish();
                             break;
                         case "5":
-                            intent = new Intent(LoginOptionActivity.this, LoginActivityForVehicleOwner.class);
+                            intent = new Intent(LoginOptionActivity.this, WelcomeOwnerActivity.class);
                             startActivity(intent);
                             finish();
                             break;

@@ -60,4 +60,14 @@ public class HighwayPrefs {
     }
 
 
+    public static boolean isFirstTimeLaunch(Context context,String key) {
+        getInstance(context);
+        return sharedPreferences.getBoolean(key, true);
+    }
+
+    public static boolean setFirstTimeLaunch(Context context,String key,boolean value) {
+        getInstance(context);
+        return sharedPreferences.edit().putBoolean(key, true).commit();
+    }
+
 }

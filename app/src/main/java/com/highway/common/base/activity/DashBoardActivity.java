@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.highway.R;
+import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
@@ -122,8 +124,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         navAccoringRoleId();// According RoleId Nevigation Icon
         //setOnClickListenerOperation();
 
-        Fragment fragment = NewBookingFragment.newInstance();
-        replaceFragment(fragment);
+
     }
 
 
@@ -216,7 +217,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "3":                                 // Driver
+            case "3":
+
+                // Driver
+                Fragment fragment = DashBoardFragmentForDriver.newInstance();
+                replaceFragment(fragment);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -237,7 +242,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "4":                                  //  Customer
+            case "4":
+                //  Customer
+                Fragment fragment1 = NewBookingFragment.newInstance();
+                replaceFragment(fragment1);
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -259,6 +267,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case "5":                              // Owner .. vehicle Owner
+                Fragment fragment2 = NewBookingFragment.newInstance();
+                replaceFragment(fragment2);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -358,8 +368,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
 
                     case "4":
-                        dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
-                        replaceFragment(dashBordFragmentForCustomer);
+                        if (dashBoardFragmentForVehicleOwner == null) {
+                            dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
+                        }
+                        replaceFragment(dashBoardFragmentForVehicleOwner);
+//                        dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
+//                        replaceFragment(dashBordFragmentForCustomer);
                         break;
 
                     case "5":
@@ -462,6 +476,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                 }
+
+                Intent intent1 = new Intent(this, WebViewActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.nav_notification:
                 dashBoardToolbar.setTitle("Notification");
@@ -524,7 +541,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_about:
+
                 dashBoardToolbar.setTitle("About");
+
                 switch (userRole) {
                     case "1":
                         break;
@@ -541,6 +560,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                 }
+
+                Intent intent = new Intent(this, WebViewActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.nav_share:
@@ -561,6 +583,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                 }
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Hello friends, the best app for medicos is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
                 break;
 
             case R.id.nav_send:
@@ -602,6 +631,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                 }
+                break;
+
+            case R.id.nav_trmCondition:
+                Intent intent2 = new Intent(this, WebViewActivity.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_add_getAllVehicle:

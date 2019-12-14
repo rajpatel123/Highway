@@ -152,7 +152,12 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         recyclerView = findViewById(R.id.vehicleListRV);
         bookTruckTv = findViewById(R.id.bookTruckTv);
 
-
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         initLocations(getIntent());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
