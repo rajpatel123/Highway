@@ -28,6 +28,14 @@
             android:id="@+id/nav_add_getAllVehicle"
             android:icon="@drawable/highway_driver_1"
             android:title="@string/menu_get_allvehicle" />
+        <item
+            android:id="@+id/nav_add_millBooking"
+            android:icon="@drawable/highway_miller"
+            android:title="@string/menu_get_millbooking" />
+        <item
+            android:id="@+id/nav_add_bookLoad"
+            android:icon="@drawable/book_load"
+            android:title="@string/menu_get_bookload" />
 
         <item
             android:id="@+id/nav_wallet"

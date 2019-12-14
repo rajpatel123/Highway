@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".millmodule.milluserFragment.BookLoadFragmentForMillUser">
+
+    <LinearLayout
+        android:id="@+id/linearPickup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/_16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/sourceLatLng"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:background="@drawable/oval_shape_white"
+            android:elevation="@dimen/margin_5"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/picupLinear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <View
+                    android:id="@+id/sourceIndicator"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_margin="@dimen/margin_5"
+                    android:background="@drawable/source_indicator" />
+
+                <TextView
+                    android:id="@+id/edtSourceLocationBookLoad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_toEndOf="@+id/sourceIndicator"
+                    android:background="@color/white"
+                    android:cursorVisible="false"
+                    android:ellipsize="end"
+                    android:enabled="true"
+                    android:hint="Enter source location"
+                    android:singleLine="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/destLatLng"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/oval_shape_white"
+            android:elevation="@dimen/margin_5"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/dropLinear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <View
+                    android:id="@+id/destIndicator"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_margin="@dimen/margin_5"
+                    android:background="@drawable/dest_indicator" />
+
+                <TextView
+                    android:id="@+id/edtDropLocationBookLoad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_toEndOf="@+id/destIndicator"
+                    android:background="@color/white"
+                    android:cursorVisible="false"
+                    android:ellipsize="end"
+                    android:enabled="true"
+                    android:hint="Enter drop location"
+                    android:singleLine="true" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/oval_shape_white"
+            android:elevation="@dimen/margin_5"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/Goods_Types"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_5"
+                    android:text="Goods Types"
+                    android:textSize="@dimen/_16dp"
+                    android:textStyle="normal" />
+
+                <Spinner
+                    android:id="@+id/GoodsTypesSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Goods_Types"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:padding="@dimen/_10dp"
+                    android:entries="@array/goods_types"
+                    android:prompt="@string/goods_types" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/oval_shape_white"
+            android:elevation="@dimen/margin_5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+
+                <TextView
+                    android:id="@+id/totItemWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_5"
+                    android:text="Approx Load Weight"
+                    android:textSize="@dimen/_16dp"
+                    android:textStyle="normal" />
+
+                <Spinner
+                    android:id="@+id/ApproxloadWeightSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/totItemWeight"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:padding="@dimen/_10dp"
+                    android:entries="@array/approx_load_data"
+                    android:prompt="@string/weight_of_load_items" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10dp">
+        <Button
+            android:id="@+id/BtnBookNow"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_shape_draw"
+            android:paddingLeft="@dimen/padding_left_50"
+            android:paddingRight="@dimen/padding_right_50"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:text="Book Now"
+            android:textColor="@color/project_yellow_color" />
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

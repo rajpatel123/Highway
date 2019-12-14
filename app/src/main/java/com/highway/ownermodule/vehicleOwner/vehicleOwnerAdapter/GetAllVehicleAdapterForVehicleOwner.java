@@ -2,9 +2,12 @@ package com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.highway.R;
 
 public class GetAllVehicleAdapterForVehicleOwner extends RecyclerView.Adapter<GetAllVehicleAdapterForVehicleOwner.ViewHolder> {
 
@@ -27,8 +30,14 @@ public class GetAllVehicleAdapterForVehicleOwner extends RecyclerView.Adapter<Ge
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView vehicleName,vehicleNo,vehicleOwnerName;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            vehicleName = itemView.findViewWithTag(R.id.TxtAviVehicleName);
+            vehicleNo = itemView.findViewWithTag(R.id.txtViewVehicleNo);
+            vehicleOwnerName = itemView.findViewWithTag(R.id.txtViewVehicleModelNo);
+
         }
     }
 }

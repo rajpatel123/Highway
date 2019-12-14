@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,10 +52,8 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.utils.Utils;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -101,8 +96,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         // Required empty public constructor
     }
 
-
-    // TODO: Rename and change types and number of parameters
     public static NewBookingFragment newInstance() {
         NewBookingFragment fragment = new NewBookingFragment();
         return fragment;
@@ -114,9 +107,9 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.map_view_fragment, container, false);
+
         edtSourceLOcationEDT = view.findViewById(R.id.edtSourceLOcation);
         edtDropLocation = view.findViewById(R.id.edtDropLocation);
         sourceLL = view.findViewById(R.id.sourceLL);
@@ -229,11 +222,9 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                 }
             }
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-            // TODO: Handle the error.
             Status status = Autocomplete.getStatusFromIntent(data);
             Log.i("TAG", status.getStatusMessage());
         } else if (resultCode == RESULT_CANCELED) {
-            // The user canceled the operation.
         }
 
     }

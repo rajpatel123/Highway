@@ -2,6 +2,7 @@ package com.highway.common.base.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -32,9 +34,11 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.Ongoing
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.millmodule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -56,6 +60,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardActivity dashBoardActivity;
     private AddNewVehicleFragment addNewVehicleFragment;
     private AddNewDriverFragment addNewDriverFragment;
+    private GetAllVehicleFragmentForVehicleOwner getAllVehicleFragmentForVehicleOwner;
+    private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -101,8 +107,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private TextView tvName, tvMobileNo, tvSetting;
     private NavigationView navigationView;
     String userRole;
-    private MenuItem newBooking, myBooking, addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle;
+    private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
+            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,bookload;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -146,6 +152,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         newBooking = menues.findItem(R.id.nav_new_booking);
         myBooking = menues.findItem(R.id.nav_my_booking);
         addVehicle = menues.findItem(R.id.nav_add_vehicle);
+        millBooking = menues.findItem(R.id.nav_add_millBooking);
         wallet = menues.findItem(R.id.nav_wallet);
         notification = menues.findItem(R.id.nav_notification);
         rateCard = menues.findItem(R.id.nav_rate_card);
@@ -157,9 +164,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         tCondition = menues.findItem(R.id.nav_trmCondition);
         addDriver = menues.findItem(R.id.nav_add_driver);
         getAllVehicle = menues.findItem(R.id.nav_add_getAllVehicle);
+        bookload = menues.findItem(R.id.nav_add_bookLoad);
         logout = menues.findItem(R.id.nav_logout);
-
-
     }
 
     public void updateNavViewHeader() {
@@ -192,6 +198,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "2":                                    //  mill user
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
+                millBooking.setVisible(false);
+                bookload.setVisible(true);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -214,6 +222,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 replaceFragment(fragment);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
+                millBooking.setVisible(false);
+                bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -235,6 +245,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 replaceFragment(fragment1);
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
+                millBooking.setVisible(false);
+                bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(true);
                 notification.setVisible(false);
@@ -255,7 +267,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 replaceFragment(fragment2);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
+                millBooking.setVisible(false);
+                bookload.setVisible(false);
                 addVehicle.setVisible(true);
+                addDriver.setVisible(true);
+                getAllVehicle.setVisible(true);
                 wallet.setVisible(false);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
@@ -265,22 +281,40 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 send.setVisible(false);
                 gallery.setVisible(false);
                 tCondition.setVisible(true);
-                addDriver.setVisible(true);
-                getAllVehicle.setVisible(true);
                 logout.setVisible(true);
                 break;
         }
     }
 
-
+    // onBacked pressed
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
+        //  for Nav Drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
+
+        // Exit on Double click
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     @Override
@@ -302,7 +336,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
-        //  1 admin  //  2 mill user   // 3  driver // // 4  customer   // 5 owner
+        //  1 admin  //  2 mill user   // 3  driver  // 4  customer   // 5 owner
         switch (id) {
             case R.id.nav_new_booking:
                 dashBoardToolbar.setTitle("New Booking");
@@ -347,6 +381,32 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 }
                 break;
 
+            case R.id.nav_add_bookLoad:
+                dashBoardToolbar.setTitle("Book Load");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        if (bookLoadFragmentForMillUser == null){
+                            bookLoadFragmentForMillUser = BookLoadFragmentForMillUser.newInstance();
+                        }
+                        replaceFragment(bookLoadFragmentForMillUser);
+
+                        break;
+
+                    case "3":
+
+                        break;
+
+                    case "4":
+                        break;
+
+                    case "5":
+
+                        break;
+                }
+                break;
+
             case R.id.nav_add_vehicle:
                 dashBoardToolbar.setTitle("Add Vehicle");
                 switch (userRole) {
@@ -363,10 +423,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
                         if (addNewVehicleFragment == null) {
+                            addNewVehicleFragment = AddNewVehicleFragment.newInstance();
                         }
-                        addNewVehicleFragment = AddNewVehicleFragment.newInstance();
                         replaceFragment(addNewVehicleFragment);
-
                         break;
                 }
                 break;
@@ -554,7 +613,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_add_getAllVehicle:
-                dashBoardToolbar.setTitle("All Vehicle");
+                dashBoardToolbar.setTitle("All Vehicle List");
                 switch (userRole) {
                     case "1":
                         break;
@@ -565,6 +624,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     case "4":
                         break;
                     case "5":
+
+                        if (getAllVehicleFragmentForVehicleOwner == null){
+                            getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
+                        }
+                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
                         break;
                 }
                 break;
@@ -600,5 +664,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         finish();
 
     }
+
+
+
+
+
 
 }

@@ -104,7 +104,6 @@
                         android:hint="Enter drop location"
                         android:singleLine="true" />
 
-
                 </RelativeLayout>
             </LinearLayout>
 

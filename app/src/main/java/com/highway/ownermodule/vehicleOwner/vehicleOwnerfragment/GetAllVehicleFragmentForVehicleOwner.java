@@ -1,19 +1,15 @@
 package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 
@@ -26,7 +22,7 @@ public class GetAllVehicleFragmentForVehicleOwner extends Fragment {
     }
 
 
-    public static GetAllVehicleFragmentForVehicleOwner newInstance(String param1, String param2) {
+    public static GetAllVehicleFragmentForVehicleOwner newInstance() {
         GetAllVehicleFragmentForVehicleOwner fragment = new GetAllVehicleFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -44,11 +40,6 @@ public class GetAllVehicleFragmentForVehicleOwner extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=  inflater.inflate(R.layout.fragment_get_all_vehicle_fragment_for_vehicle_owner, container, false);
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        getAllVehicleToolbar =  view.findViewById(R.id.GetAllVehicleToolbar);
-        activity.setSupportActionBar(getAllVehicleToolbar);
-
         getAllVehicleRecyclerView = view.findViewById(R.id.GetAllVehicleRecyclerView);
 
      return view;

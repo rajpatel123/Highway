@@ -1,6 +1,36 @@
 <resources>
     <string name="app_name">Highway</string>
 
+        <string name="weight_of_load_items">Weight Of Load Items</string>
+        <string-array name="approx_load_data">
+            <item> choose weights </item>
+            <item>100kg</item>
+            <item>200kg</item>
+            <item>300kg</item>
+            <item>400kg</item>
+            <item>500kg</item>
+            <item>600kg</item>
+            <item>700kg</item>
+            <item>800kg</item>
+            <item>900kg</item>
+            <item>1000kg</item>
+        </string-array>
+
+
+    <string name="goods_types">Goods Types</string>
+    <string-array name="goods_types">
+        <item>  choose godds types      </item>
+        <item>Private Goods</item>
+        <item>Common Resources</item>
+        <item>Club Goods</item>
+        <item>Public Goods </item>
+       <!-- <item>500kg</item>
+        <item>600kg</item>
+        <item>700kg</item>
+        <item>800kg</item>
+        <item>900kg</item>
+        <item>1000kg</item>-->
+    </string-array>
 
 
     <string name="next">NEXT</string>
@@ -28,7 +58,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="preview_description">Image preview will appear here</string>
-
+    <string name="newline">\n</string>
 
     <string name="menu_new_booking">New Booking</string>
     <string name="menu_my_booking">My Booking</string>
@@ -47,7 +77,9 @@
     <string name="menu_add_driver">Add Driver</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_setting">Setting</string>
-    <string name="menu_get_allvehicle">getAll Vehicle</string>
+    <string name="menu_get_allvehicle">GetAll Vehicle</string>
+    <string name="menu_get_millbooking">Mill Booing</string>
+    <string name="menu_get_bookload">Book Load</string>
     <string name="email">ramashish.bhumca16@gmail.com</string>
     <string name="nav_header_subtitle">Mobile no</string>
 
@@ -159,4 +191,8 @@
         <item>@color/dot_dark_screen3</item>
         <item>@color/dot_dark_screen4</item>
     </array>
+
+
+
+
 </resources>
