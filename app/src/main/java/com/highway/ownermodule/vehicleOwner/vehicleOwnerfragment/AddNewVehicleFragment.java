@@ -27,6 +27,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDow
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDatum;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
 import java.util.ArrayList;
@@ -42,10 +44,7 @@ public class AddNewVehicleFragment extends Fragment {
     Toolbar addVehicleToolbar;
     private EditText edtVehicleDescription, edtTxtVehicleNos, edtTxtvehicleModelNos, edtTxtvehicleName;
     private Button btnAddNewVehicle;
-    private String vehicleName;
-    private String vehicleModelNos;
-    private String vehicleNos;
-    private String vehicleDescription;
+    private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,user_Id;
     private Spinner driversSpinner;
     String textEd, txtEnd, isReached;
     String driverText;
@@ -109,8 +108,6 @@ public class AddNewVehicleFragment extends Fragment {
 
                     driverId = driverDropDownResponse.getData().getDriverData().get(position).getDriverId();
                 }
-
-
             }
 
             @Override
@@ -168,6 +165,8 @@ public class AddNewVehicleFragment extends Fragment {
     public void driverList() {
 
         DriverDropDownRequest driverDropDownRequest = new DriverDropDownRequest();
+
+        user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
         driverDropDownRequest.setUserId("5");
 
         RestClient.getDriverList(driverDropDownRequest, new Callback<DriverDropDownResponse>() {
@@ -205,7 +204,6 @@ public class AddNewVehicleFragment extends Fragment {
         });
 
     }
-
 
     public void ValidationAddNewVehicle() {
 

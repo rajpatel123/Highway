@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,16 +24,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.highway.R;
-import com.highway.customer.customerActivity.WebViewActivity;
-import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
-import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
+import com.highway.customer.customerActivity.WebViewActivity;
+import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
+import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
-import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.millmodule.milluserFragment.BookLoadFragmentForMillUser;
+import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
@@ -453,7 +452,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         }
                         addNewDriverFragment = AddNewDriverFragment.newInstance();
                         replaceFragment(addNewDriverFragment);
-
                         break;
                 }
                 break;
@@ -631,11 +629,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                 }
-                break;
-
-            case R.id.nav_trmCondition:
-                Intent intent2 = new Intent(this, WebViewActivity.class);
-                startActivity(intent2);
                 break;
 
             case R.id.nav_add_getAllVehicle:

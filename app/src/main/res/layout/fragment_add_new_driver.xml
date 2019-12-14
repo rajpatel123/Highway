@@ -121,6 +121,8 @@
                 android:background="@drawable/completed_fragment_item_shape"
                 android:hint="Enter Dl number "
                 android:inputType="text"
+                android:maxLines="1"
+                android:maxLength="16"
                 android:paddingLeft="5sp" />
 
             <EditText

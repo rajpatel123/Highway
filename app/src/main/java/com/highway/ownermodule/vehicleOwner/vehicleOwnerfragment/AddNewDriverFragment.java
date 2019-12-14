@@ -30,6 +30,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDo
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDatum;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownResponse;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
 import java.util.ArrayList;
@@ -48,13 +50,12 @@ public class AddNewDriverFragment extends Fragment {
             edtTxtDriverAddress, edtTxtDlNumber, edtTxtDlExpireDate;
     public ImageView imgDatePicker;
     public Button btnAddNewDriver;
-    String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress;
+    String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress ,user_Id;
     private DatePickerDialog datePickerDialog;
     private Activity view;
     private Spinner vehicleSpinners;
     VehicleDropDownResponse vehicleDropDownResponse;
     Data data;
-    private String vehicleText;
     private String vehicleId;
     List<String> vehicleNames;
 
@@ -209,6 +210,7 @@ public class AddNewDriverFragment extends Fragment {
     public void vehicleList() {
 
         VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
+        user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
         vehicleDropDownRequest.setUserId("5");
 
         RestClient.getVehicleList(vehicleDropDownRequest, new Callback<VehicleDropDownResponse>() {
