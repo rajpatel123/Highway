@@ -25,7 +25,6 @@
             android:textSize="@dimen/size_20"
             android:textStyle="normal" />
 
-
         <EditText
             android:id="@+id/EdtTxtDriverName"
             android:layout_width="match_parent"
@@ -34,6 +33,7 @@
             android:hint="Enter driver name "
             android:inputType="textCapWords"
             android:paddingLeft="5sp" />
+
 
         <TextView
             android:layout_width="match_parent"
@@ -83,25 +83,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top_10"
+                android:layout_marginRight="@dimen/margin_right_5"
+                android:layout_weight="1"
+                android:inputType="textCapWords"
+                android:maxLength="16"
+                android:maxLines="1"
                 android:paddingLeft="5sp"
                 android:text="DL Number  "
-                android:layout_weight="1"
                 android:textColor="@color/black"
-                android:layout_marginRight="@dimen/margin_right_5"
                 android:textSize="@dimen/size_20"
                 android:textStyle="normal" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DL Expire Date "
-                android:layout_weight="1"
                 android:layout_marginTop="@dimen/margin_top_10"
+                android:layout_marginRight="@dimen/margin_right_20"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:text="DL Expire Date "
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_20"
-                android:layout_marginRight="@dimen/margin_right_20"
-                android:textStyle="normal"
-                android:paddingLeft="5dp"/>
+                android:textStyle="normal" />
 
 
         </LinearLayout>
@@ -120,30 +123,64 @@
                 android:inputType="text"
                 android:paddingLeft="5sp" />
 
-                <EditText
-                    android:id="@+id/EdtTxtDlExpireDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/margin_35"
-                    android:background="@drawable/completed_fragment_item_shape"
-                    android:hint="DL expiry date"
-                    android:inputType="date"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5sp"
-                    android:paddingLeft="5dp"
-                     />
+            <EditText
+                android:id="@+id/EdtTxtDlExpireDate"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_35"
+                android:layout_marginLeft="5sp"
+                android:layout_weight="1"
+                android:background="@drawable/completed_fragment_item_shape"
+                android:hint="DL expiry date"
+                android:inputType="date"
+                android:paddingLeft="5dp" />
 
-                <ImageView
-                    android:id="@+id/ImgDatePicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/calender_image" />
+            <ImageView
+                android:id="@+id/ImgDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/calender_image" />
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:paddingLeft="5sp"
+                android:text="Vehicle Number "
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_20"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/completed_fragment_item_shape">
+
+                <Spinner
+                    android:id="@+id/VehicleSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_10"
+            android:layout_marginTop="@dimen/margin_5"
             android:paddingLeft="5sp"
             android:text="Address "
             android:textColor="@color/black"
@@ -155,13 +192,13 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_height_80"
             android:background="@drawable/completed_fragment_item_shape"
-            android:hint="Enter driver address  "
             android:gravity="top|left"
+            android:hint="Enter driver address  "
+            android:inputType="textMultiLine"
             android:maxLength="200"
             android:maxLines="5"
-            android:inputType="textMultiLine"
-            android:text="@string/newline"
-            android:paddingLeft="5sp" />
+            android:paddingLeft="5sp"
+            android:text="@string/newline" />
 
 
         <Button

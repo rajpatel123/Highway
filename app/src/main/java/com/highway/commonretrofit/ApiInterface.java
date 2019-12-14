@@ -1,17 +1,21 @@
 package com.highway.commonretrofit;
 
 
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -47,7 +51,12 @@ public interface ApiInterface {
     @POST("http://highway.vrok.in/index.php/api/Login/addDriver")
     Call<AddNewDriverResponse>addNewDriverResponseCall(@Body AddNewDriverRequest addNewDriverRequest);
 
+  // Driver drop down ----spinners
+   @POST("http://highway.vrok.in/index.php/api/vehicle/driverDropdown")
+    Call<DriverDropDownResponse>driverDataResponse(@Body DriverDropDownRequest driverDropDownRequest);
 
-
+   // vehicle drop dowan --spinner for vehicle owners
+    @POST("http://highway.vrok.in/index.php/api/vehicle/vehicleDropdown")
+    Call<VehicleDropDownResponse> vehicleDataResponse(@Body VehicleDropDownRequest vehicleDropDownRequest);      //Call<VehicleDropDownResponse> vehicleData();
 
 }

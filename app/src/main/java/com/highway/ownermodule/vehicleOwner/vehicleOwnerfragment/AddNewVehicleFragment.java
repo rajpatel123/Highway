@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -20,7 +23,14 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.Data;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDatum;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
 import com.highway.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +46,12 @@ public class AddNewVehicleFragment extends Fragment {
     private String vehicleModelNos;
     private String vehicleNos;
     private String vehicleDescription;
-    String textEd,txtEnd,isReached;
+    private Spinner driversSpinner;
+    String textEd, txtEnd, isReached;
+    String driverText;
+    List<String> driverNames;
+    String driverId;
+    DriverDropDownResponse driverDropDownResponse;
 
     public AddNewVehicleFragment() {
         // Required empty public constructor
@@ -65,19 +80,42 @@ public class AddNewVehicleFragment extends Fragment {
         edtTxtvehicleModelNos = view.findViewById(R.id.EdtTxtvehicleModelNos);
         edtTxtVehicleNos = view.findViewById(R.id.EdtTxtVehicleNos);
         btnAddNewVehicle = view.findViewById(R.id.BtnAddNewVehicle);
+        driversSpinner = view.findViewById(R.id.DriversSpinner);
         edtVehicleDescription = view.findViewById(R.id.EdtVehicleDescription);
-
+        driverList();
         clickListener();
 
         return view;
 
     }
 
-    public void clickListener(){
+    public void clickListener() {
         btnAddNewVehicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ValidationAddNewVehicle();
+
+            }
+        });
+
+
+        driversSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (driverDropDownResponse != null && driverDropDownResponse.getData() != null
+                        && driverDropDownResponse.getData().getDriverData() != null
+                        && driverDropDownResponse.getData().getDriverData().size() > 0) {
+
+                    driverId = driverDropDownResponse.getData().getDriverData().get(position).getDriverId();
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -125,6 +163,49 @@ public class AddNewVehicleFragment extends Fragment {
 
         return check;
     }
+
+
+    public void driverList() {
+
+        DriverDropDownRequest driverDropDownRequest = new DriverDropDownRequest();
+        driverDropDownRequest.setUserId("5");
+
+        RestClient.getDriverList(driverDropDownRequest, new Callback<DriverDropDownResponse>() {
+            @Override
+            public void onResponse(Call<DriverDropDownResponse> call, Response<DriverDropDownResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+                        driverDropDownResponse = response.body();
+                        Data data = driverDropDownResponse.getData();
+                        DriverDatum driverDatum = new DriverDatum();
+                        driverDatum.setDriverName("---Select Driver Name");
+                        data.getDriverData().add(0, driverDatum);
+
+                        if (data != null && data.getDriverData().size() > 0) {
+
+
+                            driverNames = new ArrayList<>();
+                            for (DriverDatum driverDatum1 : driverDropDownResponse.getData().getDriverData()) {
+                                driverNames.add(driverDatum1.getDriverName());
+                            }
+
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, driverNames);
+                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            driversSpinner.setAdapter(dataAdapter);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DriverDropDownResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
 
     public void ValidationAddNewVehicle() {
 

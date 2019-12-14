@@ -1,20 +1,23 @@
 package com.highway.commonretrofit;
 
 
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownResponse;
 
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.Callback;
 
 public class RestClient {
@@ -49,5 +52,18 @@ public class RestClient {
         RetrofitClient.getClient().addNewDriverResponseCall(addNewDriverRequest).enqueue(addNewDriverResponseCallback);
     }
 
+    // driver drop dowan ---spinners for owner
+   public static void getDriverList(DriverDropDownRequest driverDropDownRequest , Callback<DriverDropDownResponse>driverDropDownResponseCallback) {
+       RetrofitClient.getClient().driverDataResponse(driverDropDownRequest).enqueue(driverDropDownResponseCallback);
+   }
+
+   // vehicle drop dowan -- spinners for owner
+    public static void getVehicleList(VehicleDropDownRequest vehicleDropDownRequest, Callback<VehicleDropDownResponse>vehicleDropDownResponseCallback){
+        RetrofitClient.getClient().vehicleDataResponse(vehicleDropDownRequest).enqueue(vehicleDropDownResponseCallback);
+    }
+
+   /* public static void getVehicleList(Callback<VehicleDropDownResponse> callback) {
+        RetrofitClient.getClient().vehicleData().enqueue(callback);
+    }*/
 
 }

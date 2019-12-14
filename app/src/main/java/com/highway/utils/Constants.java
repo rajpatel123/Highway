@@ -9,11 +9,7 @@ public class Constants {
     public static final String IMAGE = "image"; // daught
     public static final String EMAIL = "email";
     public static final String USERMOBILE = "userMobile";
-    public static final String CustomerMobile = "customerMobile";
-    public static final String DriverMobile = "driverMobile";
-    public static final String MillerMOBILE = "millerMobile";
-    public static final String OwnerMOBILE = "ownerMobile";
-    public static final String GENDER = "gender";
+   public static final String GENDER = "gender";
     public static final String ROLEID = "roleid";
     public static final String ADDRESS = "address";
     public static final String MillerEmail = "millerEmail";
@@ -22,6 +18,11 @@ public class Constants {
     public static final String CustomerEmail = "customerEmail";
     public static final String OwnerEmail = "ownerEmail";
     public static final String DriverEmail = "driverEmail";
+    public static final String CustomerMobile = "customerMobile";
+    public static final String DriverMobile = "driverMobile";
+    public static final String MillerMOBILE = "millerMobile";
+    public static final String OwnerMOBILE = "ownerMobile";
+
 
 
 }

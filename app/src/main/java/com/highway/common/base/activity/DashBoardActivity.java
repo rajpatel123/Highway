@@ -106,7 +106,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private NavigationView navigationView;
     String userRole;
     private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,bookload;
+            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,getAllDriver,bookload;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -163,6 +163,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         tCondition = menues.findItem(R.id.nav_trmCondition);
         addDriver = menues.findItem(R.id.nav_add_driver);
         getAllVehicle = menues.findItem(R.id.nav_add_getAllVehicle);
+        getAllDriver = menues.findItem(R.id.nav_add_getAllDriver);
         bookload = menues.findItem(R.id.nav_add_bookLoad);
         logout = menues.findItem(R.id.nav_logout);
     }
@@ -211,6 +212,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 tCondition.setVisible(true);
                 addDriver.setVisible(false);
                 getAllVehicle.setVisible(false);
+                getAllDriver.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -231,6 +233,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 tCondition.setVisible(false);
                 addDriver.setVisible(false);
                 getAllVehicle.setVisible(false);
+                getAllDriver.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -251,6 +254,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 tCondition.setVisible(true);
                 addDriver.setVisible(false);
                 getAllVehicle.setVisible(false);
+                getAllDriver.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -261,6 +265,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 bookload.setVisible(false);
                 addVehicle.setVisible(true);
                 addDriver.setVisible(true);
+                getAllDriver.setVisible(true);
                 getAllVehicle.setVisible(true);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -560,6 +565,27 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.nav_send:
                 dashBoardToolbar.setTitle("Send");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        break;
+                }
+                break;
+
+
+            case R.id.nav_add_getAllDriver:
+                dashBoardToolbar.setTitle("All Driver");
                 switch (userRole) {
                     case "1":
                         break;

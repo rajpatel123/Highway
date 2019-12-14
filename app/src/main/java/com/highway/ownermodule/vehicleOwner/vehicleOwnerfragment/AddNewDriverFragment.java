@@ -5,31 +5,36 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
-import com.highway.commonretrofit.RetrofitClient;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.Data;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDatum;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownResponse;
 import com.highway.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,13 +44,19 @@ import retrofit2.Response;
 public class AddNewDriverFragment extends Fragment {
     RecyclerView addDriverRecyView;
     private Toolbar addDriverToolbar;
-    public EditText edtTxtDriverName, edtTxtDriverMobNo, edtTxtDriverEmail, edtTxtDriverAddress, edtTxtDlNumber,
-            edtTxtDlExpireDate;
+    public EditText edtTxtDriverName, edtTxtDriverMobNo, edtTxtDriverEmail,
+            edtTxtDriverAddress, edtTxtDlNumber, edtTxtDlExpireDate;
     public ImageView imgDatePicker;
     public Button btnAddNewDriver;
-    String driverName, driverEmail, driverMobNo, driverDlNo,dlExpireDate, driverAddress;
+    String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress;
     private DatePickerDialog datePickerDialog;
     private Activity view;
+    private Spinner vehicleSpinners;
+    VehicleDropDownResponse vehicleDropDownResponse;
+    Data data;
+    private String vehicleText;
+    private String vehicleId;
+    List<String> vehicleNames;
 
     public AddNewDriverFragment() {
         // Required empty public constructor
@@ -73,28 +84,48 @@ public class AddNewDriverFragment extends Fragment {
         edtTxtDriverName = view.findViewById(R.id.EdtTxtDriverName);
         edtTxtDriverMobNo = view.findViewById(R.id.EdtTxtDriverMobNo);
         edtTxtDriverEmail = view.findViewById(R.id.EdtTxtDriverEmailNos);
-        edtTxtDriverAddress = view.findViewById(R.id.EdtTxtEnterDriverAdd);
         edtTxtDlNumber = view.findViewById(R.id.EdtTxtDlNumber);
         edtTxtDlExpireDate = view.findViewById(R.id.EdtTxtDlExpireDate);
         imgDatePicker = view.findViewById(R.id.ImgDatePicker);
-
+        vehicleSpinners = view.findViewById(R.id.VehicleSpinner);
+        edtTxtDriverAddress = view.findViewById(R.id.EdtTxtEnterDriverAdd);
         btnAddNewDriver = view.findViewById(R.id.BtnAddNewDriver);
-
-       clickListener();
+        vehicleList();
+        clickListener();
         return view;
     }
 
-    public  void clickListener(){
+    public void clickListener() {
 
         btnAddNewDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ValidationAddDriver();
+
             }
         });
 
+
+        vehicleSpinners.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (vehicleDropDownResponse != null && vehicleDropDownResponse.getData()!=null
+                        &&  vehicleDropDownResponse.getData().getVehicleData()!=null
+                        && vehicleDropDownResponse.getData().getVehicleData().size() > 0) {
+
+                    vehicleId = vehicleDropDownResponse.getData().getVehicleData().get(position).getVehicleId();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         imgDatePicker.setOnClickListener(new View.OnClickListener() {
             private int mYear, mMonth, mDay;
+
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -105,14 +136,12 @@ public class AddNewDriverFragment extends Fragment {
                 datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
                         datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
                         //dobDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                         edtTxtDlExpireDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     }
                 }, mYear, mMonth, mDay);
                 datePickerDialog.show();
-
             }
         });
     }
@@ -144,13 +173,6 @@ public class AddNewDriverFragment extends Fragment {
             check = true;
         }
 
-       /* if (driverEmailNo.isEmpty()) {
-            edtTxtDriverEmail.setError("pls Enter email name");
-            return false;
-        } else {
-            edtTxtDriverName.setError(null);
-        }*/
-
         if (driverDlNo.isEmpty() && edtTxtDlNumber.length() != 16) {
             edtTxtDlNumber.setError("pls Enter valid dl number");
             check = false;
@@ -159,7 +181,7 @@ public class AddNewDriverFragment extends Fragment {
             check = true;
         }
 
-        if (dlExpireDate.isEmpty() && edtTxtDlExpireDate.length() != 16) {
+        if (dlExpireDate.isEmpty()) {
             edtTxtDlExpireDate.setError("pls Enter valid dl expiry date in format yy-mm-dd ");
             check = false;
         } else {
@@ -167,8 +189,13 @@ public class AddNewDriverFragment extends Fragment {
             check = true;
         }
 
+       /* if (TextUtils.isEmpty(vehicleSpinners)) {
+            Utils.displayToast(getContext(), "Please select state");
+         check =false;
+        }else{
+        }*/
 
-        if (driverAddress.isEmpty() && edtTxtDriverAddress.length() != 16) {
+        if (driverAddress.isEmpty()) {
             edtTxtDriverAddress.setError("pls Enter valid dl number");
             check = false;
         } else {
@@ -179,9 +206,50 @@ public class AddNewDriverFragment extends Fragment {
 
     }
 
+    public void vehicleList() {
+
+        VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
+        vehicleDropDownRequest.setUserId("5");
+
+        RestClient.getVehicleList(vehicleDropDownRequest, new Callback<VehicleDropDownResponse>() {
+            @Override
+            public void onResponse(Call<VehicleDropDownResponse> call, Response<VehicleDropDownResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+                        vehicleDropDownResponse=response.body();
+                        Data data = vehicleDropDownResponse.getData();
+                        VehicleDatum vehicleDatum = new VehicleDatum();
+                        vehicleDatum.setVehicleName("--Select Vehicle--");
+                        data.getVehicleData().add(0, vehicleDatum);
+
+                        if (data != null && data.getVehicleData().size() > 0) {
+
+                            vehicleNames = new ArrayList<>();
+
+                            for (VehicleDatum vehicleDatum1 : vehicleDropDownResponse.getData().getVehicleData()) {
+                                vehicleNames.add(vehicleDatum1.getVehicleName());
+                            }
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, vehicleNames);
+                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            vehicleSpinners.setAdapter(dataAdapter);
+
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VehicleDropDownResponse> call, Throwable t) {
+                Toast.makeText(view, "Failure", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
 
     public void ValidationAddDriver() {
-        if (inputValidation()){
+        if (inputValidation()) {
 
             AddNewDriverRequest addNewDriverRequest = new AddNewDriverRequest();
             addNewDriverRequest.setDriverName(driverName);
@@ -199,8 +267,8 @@ public class AddNewDriverFragment extends Fragment {
                 public void onResponse(Call<AddNewDriverResponse> call, Response<AddNewDriverResponse> response) {
                     Utils.dismissProgressDialog();
 
-                    if (response.body()!=null){
-                        if (response.body().getStatus()){
+                    if (response.body() != null) {
+                        if (response.body().getStatus()) {
 
                             Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                             startActivity(intent);
@@ -215,15 +283,9 @@ public class AddNewDriverFragment extends Fragment {
                     Toast.makeText(getActivity(), "Add new Driver Failed ", Toast.LENGTH_SHORT).show();
                 }
             });
-
-
-
-
-
-
         }
-
     }
+
 
     @Override
     public void onAttach(Context context) {

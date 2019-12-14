@@ -15,14 +15,19 @@
             android:title="@string/menu_my_booking" />
 
         <item
+            android:id="@+id/nav_add_driver"
+            android:icon="@drawable/highway_driver"
+            android:title="@string/menu_add_driver" />
+
+        <item
             android:id="@+id/nav_add_vehicle"
             android:icon="@drawable/add_vihicle"
             android:title="@string/menu_add_vehicle" />
 
         <item
-            android:id="@+id/nav_add_driver"
+            android:id="@+id/nav_add_getAllDriver"
             android:icon="@drawable/highway_driver"
-            android:title="@string/menu_add_driver" />
+            android:title="@string/menu_get_alldriver" />
 
         <item
             android:id="@+id/nav_add_getAllVehicle"
