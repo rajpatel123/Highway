@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Highway</string>
+<!--
 
     <string name="weight_of_load_items">Weight Of Load Items</string>
     <string-array name="approx_load_data">
@@ -24,13 +25,14 @@
         <item>Common Resources</item>
         <item>Club Goods</item>
         <item>Public Goods </item>
-        <!-- <item>500kg</item>
+        &lt;!&ndash; <item>500kg</item>
         <item>600kg</item>
         <item>700kg</item>
         <item>800kg</item>
         <item>900kg</item>
-        <item>1000kg</item>-->
+        <item>1000kg</item>&ndash;&gt;
     </string-array>
+-->
 
 
     <string name="next">NEXT</string>

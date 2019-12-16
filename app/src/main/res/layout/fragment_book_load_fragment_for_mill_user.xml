@@ -134,10 +134,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/Goods_Types"
-                    android:layout_marginTop="@dimen/_10dp"
                     android:padding="@dimen/_10dp"
-                    android:entries="@array/goods_types"
-                    android:prompt="@string/goods_types" />
+                    android:layout_marginBottom="@dimen/_10dp"/>
+                   <!-- android:entries="@array/goods_types"
+                    android:prompt="@string/goods_types"-->
 
             </RelativeLayout>
         </LinearLayout>
@@ -176,10 +176,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/totItemWeight"
-                    android:layout_marginTop="@dimen/_10dp"
                     android:padding="@dimen/_10dp"
-                    android:entries="@array/approx_load_data"
-                    android:prompt="@string/weight_of_load_items" />
+                    android:layout_marginBottom="@dimen/_10dp"/>
+                    <!--android:entries="@array/approx_load_data"
+                    android:prompt="@string/weight_of_load_items"-->
             </RelativeLayout>
         </LinearLayout>
 

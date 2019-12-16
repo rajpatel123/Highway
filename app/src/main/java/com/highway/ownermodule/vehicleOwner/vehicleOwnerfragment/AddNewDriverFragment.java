@@ -91,7 +91,7 @@ public class AddNewDriverFragment extends Fragment {
         vehicleSpinners = view.findViewById(R.id.VehicleSpinner);
         edtTxtDriverAddress = view.findViewById(R.id.EdtTxtEnterDriverAdd);
         btnAddNewDriver = view.findViewById(R.id.BtnAddNewDriver);
-        vehicleList();
+        vehicleSpinnersList();
         clickListener();
         return view;
     }
@@ -121,6 +121,7 @@ public class AddNewDriverFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(view, "Nothing Show Data", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -207,7 +208,7 @@ public class AddNewDriverFragment extends Fragment {
 
     }
 
-    public void vehicleList() {
+    public void vehicleSpinnersList() {
 
         VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
         user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
@@ -234,8 +235,6 @@ public class AddNewDriverFragment extends Fragment {
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, vehicleNames);
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             vehicleSpinners.setAdapter(dataAdapter);
-
-
                         }
                     }
                 }

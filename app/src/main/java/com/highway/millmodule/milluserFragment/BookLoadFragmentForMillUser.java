@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,16 +39,30 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.commonretrofit.RestClient;
+import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDatum;
+import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
+import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
+import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.Data;
+import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.GoodTypeDatum;
+import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
+import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-public class BookLoadFragmentForMillUser extends Fragment implements AdapterView.OnItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener , LocationListener  {
+public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterView.OnItemSelectedListener,*/
+        OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     int AUTOCOMPLETE_REQUEST_CODE_SOURCE = 1;
     int AUTOCOMPLETE_REQUEST_CODE_DEST = 2;
@@ -67,11 +82,15 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
-    private String sourceName;
-    private String destName;
-    Intent intent;
+    private String sourceName, destName;
+    Spinner spGoodsType, spApproxWeightOfGoods;
+    public String userId;
+    GoodsTypesDropDownResponse goodsTypesDropDownResponse;
+    ApproxLoadDropDownResponse approxLoadDropDownResponse;
+    List<String> goodsTitle;
+    List<String> approxLoadTitle;
+    private String goodsTypeId,approxLoadId;
 
-    Spinner spGoodsType,spApproxWeightOfGoods;
 
     private DashBoardActivity millActivity;
 
@@ -98,20 +117,22 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_book_load_fragment_for_mill_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_load_fragment_for_mill_user, container, false);
 
-        spGoodsType =view.findViewById(R.id.GoodsTypesSpinner);
+        spGoodsType = view.findViewById(R.id.GoodsTypesSpinner);
         spApproxWeightOfGoods = view.findViewById(R.id.ApproxloadWeightSpinner);
         edtSourceLOcationBookLoad = view.findViewById(R.id.edtSourceLocationBookLoad);
         edtDropLocationBookload = view.findViewById(R.id.edtDropLocationBookLoad);
         sourceLatLng = view.findViewById(R.id.sourceLatLng);
         destLatLng = view.findViewById(R.id.destLatLng);
-        btnBookNow    = view.findViewById(R.id.BtnBookNow);
+        btnBookNow = view.findViewById(R.id.BtnBookNow);
 
 
         mapInitialization();
         onClickListener();
-        spinnerOperation();
+        //spinnerOperation();
+        goodsTypesSpinnerOperation();
+      //  approxWeightOfGoodsSpinOperation();
 
         return view;
     }
@@ -122,7 +143,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
         millActivity = (DashBoardActivity) getActivity();
     }
 
-    public void mapInitialization(){
+    public void mapInitialization() {
         Places.initialize(millActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
 
         if (!Places.isInitialized()) {
@@ -130,7 +151,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
         }
     }
 
-    public void onClickListener(){
+    public void onClickListener() {
         sourceLatLng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,14 +198,139 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(),DashBoardActivity.class);
+                Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                 startActivity(intent);
 
                 getActivity().finish();
 
             }
         });
+
+
+        spGoodsType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                if (goodsTypesDropDownResponse != null && goodsTypesDropDownResponse.getData() != null
+                        && goodsTypesDropDownResponse.getData().getGoodTypeData() != null
+                        && goodsTypesDropDownResponse.getData().getGoodTypeData().size() > 0) {
+                    goodsTypeId = goodsTypesDropDownResponse.getData().getGoodTypeData().get(position).getGoodTypeId();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spApproxWeightOfGoods.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (approxLoadDropDownResponse!=null && approxLoadDropDownResponse.getData()!=null
+                && approxLoadDropDownResponse.getData().getApproxLoadData()!=null
+                && approxLoadDropDownResponse.getData().getApproxLoadData().size()>0){
+
+                    approxLoadId = approxLoadDropDownResponse.getData().getApproxLoadData().get(position).getApproxLoadId();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(millActivity, "Nothing shoe approx load", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
     }
+
+
+    public void goodsTypesSpinnerOperation() {
+        GoodsTypeDropDownRequest goodsTypeDropDownRequest = new GoodsTypeDropDownRequest();
+        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        goodsTypeDropDownRequest.setUserId("2");
+        RestClient.getGoodsTypesLIst(goodsTypeDropDownRequest, new Callback<GoodsTypesDropDownResponse>() {
+            @Override
+            public void onResponse(Call<GoodsTypesDropDownResponse> call, Response<GoodsTypesDropDownResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+                        goodsTypesDropDownResponse = response.body();
+                        Data data = goodsTypesDropDownResponse.getData();
+                        GoodTypeDatum goodTypeDatum = new GoodTypeDatum();
+                        goodTypeDatum.setGoodTypeTitle("-- Select Googds Types --");
+                        data.getGoodTypeData().add(0, goodTypeDatum);
+
+                        if (data != null && data.getGoodTypeData().size() > 0) {
+                            goodsTitle = new ArrayList<>();
+                            for (GoodTypeDatum goodTypeDatum1 : goodsTypesDropDownResponse.getData().getGoodTypeData()) {
+                                goodsTitle.add(goodTypeDatum1.getGoodTypeTitle());
+                            }
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, goodsTitle);
+                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spGoodsType.setAdapter(dataAdapter);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GoodsTypesDropDownResponse> call, Throwable t) {
+                Toast.makeText(millActivity, "Failed ! - Nothing itmes Show", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public void approxWeightOfGoodsSpinOperation() {
+
+        ApproxLoadDropDownRequest approxLoadDropDownRequest = new ApproxLoadDropDownRequest();
+        userId = HighwayPrefs.getString(getContext(), Constants.ID);
+        approxLoadDropDownRequest.setUserId("2");
+
+        RestClient.getApproxLoadList(approxLoadDropDownRequest, new Callback<ApproxLoadDropDownResponse>() {
+            @Override
+            public void onResponse(Call<ApproxLoadDropDownResponse> call, Response<ApproxLoadDropDownResponse> response) {
+
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+                        approxLoadDropDownResponse = response.body();
+
+                        com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.Data data = approxLoadDropDownResponse.getData();
+                        ApproxLoadDatum approxLoadDatum = new ApproxLoadDatum();
+                        approxLoadDatum.setApproxLoadTitle("-- Select Approx Load --");
+                       data.getApproxLoadData().add(0,approxLoadDatum);
+
+                        if (data != null && data.getApproxLoadData().size() > 0) {
+                            approxLoadTitle = new ArrayList<>();
+                            for (ApproxLoadDatum approxLoadDatum1 : approxLoadDropDownResponse.getData().getApproxLoadData()) {
+                                approxLoadTitle.add(approxLoadDatum1.getApproxLoadTitle());
+                            }
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, approxLoadTitle);
+                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spApproxWeightOfGoods.setAdapter(dataAdapter);
+                        }
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ApproxLoadDropDownResponse> call, Throwable t) {
+                Toast.makeText(millActivity, "Nothing Show Approx load weight", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+    }
+
 
     @Override
     public void onDetach() {
@@ -205,7 +351,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
 
                 if (!TextUtils.isEmpty(place.getName())) {
                     edtSourceLOcationBookLoad.setText("" + place.getName());
-                    if (mMap != null && place.getLatLng()!= null) {
+                    if (mMap != null && place.getLatLng() != null) {
 
                         LatLng latLng = place.getLatLng();
                         sourceName = place.getName();
@@ -241,7 +387,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
     }
 
 
-    public void spinnerOperation(){
+   /* public void spinnerOperation(){
 
         spGoodsType.setOnItemSelectedListener(this);
         spApproxWeightOfGoods.setOnItemSelectedListener(this);
@@ -277,19 +423,16 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spGoodsType.setAdapter(dataAdapter);
 
-        // creating Adapter for approx load weight
         ArrayAdapter<String> loadWeightAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categOfApproxWeightOfGoods);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spGoodsType.setAdapter(loadWeightAdapter);
         spApproxWeightOfGoods.setAdapter(loadWeightAdapter);
 
-        /*intent.putExtra("data",String.valueOf(spGoodsType.getSelectedItem()));
-        intent.putExtra("data",String.valueOf(spApproxWeightOfGoods.getSelectedItem()));*/
     }
+ */
 
 
-
-    @Override
+ /*   @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
        // Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
@@ -297,9 +440,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements AdapterView
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
+    } */
 
 
     @Override

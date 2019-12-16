@@ -456,6 +456,48 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 }
                 break;
 
+
+            case R.id.nav_add_getAllDriver:
+                dashBoardToolbar.setTitle("All Driver List");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_getAllVehicle:
+                dashBoardToolbar.setTitle("All Vehicle List");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+
+                        if (getAllVehicleFragmentForVehicleOwner == null){
+                            getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
+                        }
+                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
+                        break;
+                }
+                break;
+
             case R.id.nav_wallet:
                 dashBoardToolbar.setTitle("Wallet");
                 switch (userRole) {
@@ -478,6 +520,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 Intent intent1 = new Intent(this, WebViewActivity.class);
                 startActivity(intent1);
                 break;
+
             case R.id.nav_notification:
                 dashBoardToolbar.setTitle("Notification");
                 switch (userRole) {
@@ -537,6 +580,27 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
                 break;
+
+            case R.id.nav_trmCondition:
+                dashBoardToolbar.setTitle("Term & Condition");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        break;
+                }
+                break;
+
 
             case R.id.nav_about:
 
@@ -611,46 +675,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
 
-            case R.id.nav_add_getAllDriver:
-                dashBoardToolbar.setTitle("All Driver");
-                switch (userRole) {
-                    case "1":
-                        break;
-                    case "2":
-
-                        break;
-                    case "3":
-
-                        break;
-                    case "4":
-
-                        break;
-                    case "5":
-
-                        break;
-                }
-                break;
-
-            case R.id.nav_add_getAllVehicle:
-                dashBoardToolbar.setTitle("All Vehicle List");
-                switch (userRole) {
-                    case "1":
-                        break;
-                    case "2":
-                        break;
-                    case "3":
-                        break;
-                    case "4":
-                        break;
-                    case "5":
-
-                        if (getAllVehicleFragmentForVehicleOwner == null){
-                            getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
-                        }
-                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
-                        break;
-                }
-                break;
 
             case R.id.nav_logout:
                 logOut();
