@@ -43,6 +43,7 @@ import com.highway.commonretrofit.RestClient;
 import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDatum;
 import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
+import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.DataModel;
 import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.Data;
 import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.GoodTypeDatum;
 import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -132,7 +133,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
         onClickListener();
         //spinnerOperation();
         goodsTypesSpinnerOperation();
-      //  approxWeightOfGoodsSpinOperation();
+        approxWeightOfGoodsSpinOperation();
 
         return view;
     }
@@ -253,7 +254,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
     public void goodsTypesSpinnerOperation() {
         GoodsTypeDropDownRequest goodsTypeDropDownRequest = new GoodsTypeDropDownRequest();
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
-        goodsTypeDropDownRequest.setUserId("2");
+        goodsTypeDropDownRequest.setUserId(userId);
         RestClient.getGoodsTypesLIst(goodsTypeDropDownRequest, new Callback<GoodsTypesDropDownResponse>() {
             @Override
             public void onResponse(Call<GoodsTypesDropDownResponse> call, Response<GoodsTypesDropDownResponse> response) {
@@ -291,7 +292,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
 
         ApproxLoadDropDownRequest approxLoadDropDownRequest = new ApproxLoadDropDownRequest();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
-        approxLoadDropDownRequest.setUserId("2");
+        approxLoadDropDownRequest.setUserId(userId);
 
         RestClient.getApproxLoadList(approxLoadDropDownRequest, new Callback<ApproxLoadDropDownResponse>() {
             @Override
@@ -301,7 +302,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
                     if (response.body().getStatus()) {
                         approxLoadDropDownResponse = response.body();
 
-                        com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.Data data = approxLoadDropDownResponse.getData();
+                        DataModel data = approxLoadDropDownResponse.getData();
                         ApproxLoadDatum approxLoadDatum = new ApproxLoadDatum();
                         approxLoadDatum.setApproxLoadTitle("-- Select Approx Load --");
                        data.getApproxLoadData().add(0,approxLoadDatum);

@@ -13,12 +13,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.highway.R;
-import com.highway.customer.customerActivity.LoginActivityForCustomer;
-import com.highway.customer.customerActivity.WelcomeActivity;
-import com.highway.drivermodule.driverActivity.LoginActivityForDriver;
+import com.highway.customer.customerActivity.WelcomeActivityForCustomer;
 import com.highway.drivermodule.driverActivity.WelcomeDriverActivity;
 import com.highway.millmodule.milluserActivity.LoginActivityForMiller;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.LoginActivityForVehicleOwner;
+import com.highway.millmodule.milluserActivity.WelcomeActivityForMiller;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity;
 
 public class LoginOptionActivity extends AppCompatActivity {
@@ -102,7 +100,7 @@ public class LoginOptionActivity extends AppCompatActivity {
                 }else{
                     switch (userRole){
                         case "2":
-                            intent = new Intent(LoginOptionActivity.this, LoginActivityForMiller.class);
+                            intent = new Intent(LoginOptionActivity.this, WelcomeActivityForMiller.class);
                             startActivity(intent);
                             finish();
                             break;
@@ -112,7 +110,7 @@ public class LoginOptionActivity extends AppCompatActivity {
                             finish();
                             break;
                         case "4":
-                            intent = new Intent(LoginOptionActivity.this, WelcomeActivity.class);
+                            intent = new Intent(LoginOptionActivity.this, WelcomeActivityForCustomer.class);
                             startActivity(intent);
                             finish();
                             break;

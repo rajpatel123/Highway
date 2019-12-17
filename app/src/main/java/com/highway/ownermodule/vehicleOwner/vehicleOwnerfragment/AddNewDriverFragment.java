@@ -121,7 +121,7 @@ public class AddNewDriverFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(view, "Nothing Show Data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view, "Nothing Show DataModel", Toast.LENGTH_SHORT).show();
 
             }
         });

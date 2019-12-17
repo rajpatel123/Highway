@@ -11,7 +11,7 @@ public class ApproxLoadDropDownResponse {
     private Boolean status;
     @SerializedName("data")
     @Expose
-    private Data data;
+    private DataModel data;
 
     public Boolean getStatus() {
         return status;
@@ -21,11 +21,11 @@ public class ApproxLoadDropDownResponse {
         this.status = status;
     }
 
-    public Data getData() {
+    public DataModel getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(DataModel data) {
         this.data = data;
     }
 

@@ -128,7 +128,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
                 if (notificationManager != null) {
 
-                    notificationManager.notify("My Voice Data", (int) System.currentTimeMillis()
+                    notificationManager.notify("My Voice DataModel", (int) System.currentTimeMillis()
                             /*ID of notification */, notificationBuilder.build());
 
                 }
