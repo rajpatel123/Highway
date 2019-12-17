@@ -11,15 +11,20 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/margin_width_150"
+            android:layout_height="@dimen/margin_height_150"
+            android:src="@drawable/highway11"/>
+
+        <!--<ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
-            android:src="@drawable/ic_travel" />
+            android:src="@drawable/highway11" />-->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/slide_4_title"
+            android:text="@string/slide_4__title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold" />
@@ -30,7 +35,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="@string/slide_4_desc"
+            android:text="@string/slide__4_desc"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />

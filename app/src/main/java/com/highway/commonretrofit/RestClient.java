@@ -18,6 +18,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.GetAllDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.GetAllDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownResponse;
 
@@ -80,6 +82,12 @@ public class RestClient {
    public static void getGoodsTypesLIst(GoodsTypeDropDownRequest goodsTypeDropDownRequest, Callback<GoodsTypesDropDownResponse>goodsTypeResponseCallback){
        RetrofitClient.getClient().goodsTypesResponse(goodsTypeDropDownRequest).enqueue(goodsTypeResponseCallback);
    }
+
+   // getAll driver details
+    public static void getAllDriverDetails(GetAllDriverRequest getAllDriverRequest, Callback<GetAllDriverResponse>getAllDriverResponseCallback){
+       RetrofitClient.getClient().getAllDriverDetailsRes(getAllDriverRequest).enqueue(getAllDriverResponseCallback);
+    }
+
 
 
 }

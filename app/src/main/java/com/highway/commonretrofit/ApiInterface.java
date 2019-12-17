@@ -18,6 +18,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.GetAllDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.GetAllDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownResponse;
 
@@ -70,5 +72,10 @@ public interface ApiInterface {
    // Goods  Types ----Spinners
     @POST("http://highway.vrok.in/index.php/api/trip/goodType")
     Call<GoodsTypesDropDownResponse>goodsTypesResponse(@Body GoodsTypeDropDownRequest goodsTypeDropDownRequest);
+
+    // getAll Driver List for owner;
+
+    @POST("http://highway.vrok.in/index.php/api/login/getAlldriverDetails")
+    Call<GetAllDriverResponse>getAllDriverDetailsRes(@Body GetAllDriverRequest getAllDriverRequest);
 
 }

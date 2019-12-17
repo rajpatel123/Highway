@@ -13,17 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 
-public class GetAllVehicleFragmentForVehicleOwner extends Fragment {
+public class GetAllVehicleListFragmentForVehicleOwner extends Fragment {
     Toolbar getAllVehicleToolbar;
     RecyclerView getAllVehicleRecyclerView;
 
-    public GetAllVehicleFragmentForVehicleOwner() {
+    public GetAllVehicleListFragmentForVehicleOwner() {
         // Required empty public constructor
     }
 
 
-    public static GetAllVehicleFragmentForVehicleOwner newInstance() {
-        GetAllVehicleFragmentForVehicleOwner fragment = new GetAllVehicleFragmentForVehicleOwner();
+    public static GetAllVehicleListFragmentForVehicleOwner newInstance() {
+        GetAllVehicleListFragmentForVehicleOwner fragment = new GetAllVehicleListFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

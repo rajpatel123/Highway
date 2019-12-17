@@ -34,10 +34,12 @@ import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.millmodule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllDriverListAdapterForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverListFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleListFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -59,8 +61,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardActivity dashBoardActivity;
     private AddNewVehicleFragment addNewVehicleFragment;
     private AddNewDriverFragment addNewDriverFragment;
-    private GetAllVehicleFragmentForVehicleOwner getAllVehicleFragmentForVehicleOwner;
+    private GetAllVehicleListFragmentForVehicleOwner getAllVehicleListFragmentForVehicleOwner;
     private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
+    GetAllDriverListFragmentForVehicleOwner getAllDriverListFragmentForVehicleOwner
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -458,7 +461,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
 
             case R.id.nav_add_getAllDriver:
-                dashBoardToolbar.setTitle("All Driver List");
+                dashBoardToolbar.setTitle("All Driver Details");
                 switch (userRole) {
                     case "1":
                         break;
@@ -472,7 +475,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-
+                        if (addNewDriverFragment == null) {
+                        }
+                        addNewDriverFragment = AddNewDriverFragment.newInstance();
+                        replaceFragment(addNewDriverFragment);
                         break;
                 }
                 break;
@@ -490,10 +496,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
 
-                        if (getAllVehicleFragmentForVehicleOwner == null){
-                            getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
+                        if (getAllVehicleListFragmentForVehicleOwner == null){
+                            getAllVehicleListFragmentForVehicleOwner = GetAllVehicleListFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
+                        replaceFragment(getAllVehicleListFragmentForVehicleOwner);
                         break;
                 }
                 break;
