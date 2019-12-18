@@ -45,7 +45,7 @@ public class AddNewVehicleFragment extends Fragment {
     Toolbar addVehicleToolbar;
     private EditText edtVehicleDescription, edtTxtVehicleNos, edtTxtvehicleModelNos, edtTxtvehicleName;
     private Button btnAddNewVehicle;
-    private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,user_Id;
+    private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,userId;
     private Spinner driversSpinner;
     String textEd, txtEnd, isReached;
     String driverText;
@@ -166,9 +166,9 @@ public class AddNewVehicleFragment extends Fragment {
     public void driverList() {
 
         DriverDropDownRequest driverDropDownRequest = new DriverDropDownRequest();
-        user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
-        Log.d("Id",user_Id);
-        driverDropDownRequest.setUserId(user_Id);
+        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        Log.d("Id",userId);
+        driverDropDownRequest.setUserId(userId);
 
         RestClient.getDriverList(driverDropDownRequest, new Callback<DriverDropDownResponse>() {
             @Override
@@ -216,7 +216,8 @@ public class AddNewVehicleFragment extends Fragment {
             addNewVehicleRequest.setVehicleNumber(vehicleNos);
             addNewVehicleRequest.setVehicleModelNo(vehicleModelNos);
             addNewVehicleRequest.setVehicleDescription(vehicleDescription);
-            addNewVehicleRequest.setOwnerId("19");
+            userId = HighwayPrefs.getString(getActivity(),Constants.ID);
+            addNewVehicleRequest.setOwnerId(userId);
 
             Utils.showProgressDialog(getActivity());
             RestClient.addNewVehicle(addNewVehicleRequest, new Callback<AddNewVehicleResponse>() {

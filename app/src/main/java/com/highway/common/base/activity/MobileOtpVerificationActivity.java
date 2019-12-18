@@ -33,6 +33,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
     private Button btnVerify;
     private ImageView backImage;
     private TextView timer;
+    String userId;
 
 
     @Override
@@ -126,8 +127,8 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
                         if (response.body() != null) {
                             if (TextUtils.isEmpty(response.body().getUser().getName())) {
                                 Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
-                                String id = response.body().getUser().getUserId();
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ID, id);
+                                userId = response.body().getUser().getUserId();
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ID, userId);
 
                                 startActivity(intent);
                                 finish();
@@ -166,6 +167,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
         Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
 
         HighwayPrefs.putBoolean(getApplicationContext(), Constants.LOGGED_IN, true);
+        HighwayPrefs.putString(getApplicationContext(),Constants.ID,verifyOtpResponse.getUser().getUserId());
         HighwayPrefs.putString(getApplicationContext(), Constants.NAME, verifyOtpResponse.getUser().getName());
         HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, verifyOtpResponse.getUser().getMobile());
         HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, verifyOtpResponse.getUser().getImage());
@@ -201,6 +203,5 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
             }
         }, 2000);
     }
-
 
 }

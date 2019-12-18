@@ -18,6 +18,8 @@ import com.highway.commonretrofit.RestClient;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.drivermodule.driverAdapter.FragmentTabModeAdapterForDriver;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class DashBoardFragmentForDriver extends Fragment {
     CancelFragmentForDriver cancelFragmentForDriver;
 
     List<Fragment> driverFragmentList = new ArrayList<>();
+    private String userId;
 
     public DashBoardFragmentForDriver() {
         // Required empty public constructor
@@ -160,7 +163,9 @@ public class DashBoardFragmentForDriver extends Fragment {
     public void getDriverCompletedDetail() {
 
         AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
-        allHighwayTripsRequest.setUserId("7");
+        userId = HighwayPrefs.getString(getContext(), Constants.ID);
+        allHighwayTripsRequest.setUserId(userId);
+        /*allHighwayTripsRequest.setUserId("7");*/
 
         Utils.showProgressDialog(getContext());
         RestClient.allDriverTrips(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {

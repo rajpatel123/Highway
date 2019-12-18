@@ -17,6 +17,8 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHigh
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.FragmentTabAdapterForVehicleOwner;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
 
 
     List<Fragment> vehicleOwnerfragmentlist = new ArrayList<>();
+    private String userId;
 
     public DashBoardFragmentForVehicleOwner() {
     }
@@ -146,7 +149,9 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
     public void getVehivleOwnerCompletedDetail() {
 
         AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
-        allHighwayTripsRequest.setUserId("5");
+        userId = HighwayPrefs.getString(getContext(), Constants.ID);
+        allHighwayTripsRequest.setUserId(userId);
+        /*allHighwayTripsRequest.setUserId("5");*/
 
      /*   VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest = new VehicleOwnerCompletedTripRequest();
         vehicleOwnerCompletedTripRequest.setUserId("5");*/

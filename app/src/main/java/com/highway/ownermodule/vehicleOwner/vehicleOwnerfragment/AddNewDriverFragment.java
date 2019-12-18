@@ -50,7 +50,7 @@ public class AddNewDriverFragment extends Fragment {
             edtTxtDriverAddress, edtTxtDlNumber, edtTxtDlExpireDate;
     public ImageView imgDatePicker;
     public Button btnAddNewDriver;
-    String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress ,user_Id;
+    String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress ,userId;
     private DatePickerDialog datePickerDialog;
     private Activity view;
     private Spinner vehicleSpinners;
@@ -211,8 +211,8 @@ public class AddNewDriverFragment extends Fragment {
     public void vehicleSpinnersList() {
 
         VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
-        user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
-        vehicleDropDownRequest.setUserId(user_Id);
+        userId = HighwayPrefs.getString(getActivity(),Constants.ID);
+        vehicleDropDownRequest.setUserId(userId);
 
         RestClient.getVehicleList(vehicleDropDownRequest, new Callback<VehicleDropDownResponse>() {
             @Override
@@ -259,7 +259,8 @@ public class AddNewDriverFragment extends Fragment {
             addNewDriverRequest.setDriverDLNo(driverDlNo);
             addNewDriverRequest.setDlexpiryDate(dlExpireDate);
             addNewDriverRequest.setDriverAddress(driverAddress);
-            addNewDriverRequest.setOwnerId("5");
+            userId  = HighwayPrefs.getString(getActivity(),Constants.ID);
+            addNewDriverRequest.setOwnerId(userId);
 
             Utils.showProgressDialog(getActivity());
 
@@ -267,10 +268,8 @@ public class AddNewDriverFragment extends Fragment {
                 @Override
                 public void onResponse(Call<AddNewDriverResponse> call, Response<AddNewDriverResponse> response) {
                     Utils.dismissProgressDialog();
-
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
-
                             Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                             startActivity(intent);
                             getActivity().finish();

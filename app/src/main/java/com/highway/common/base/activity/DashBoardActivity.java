@@ -63,7 +63,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private AddNewDriverFragment addNewDriverFragment;
     private GetAllVehicleListFragmentForVehicleOwner getAllVehicleListFragmentForVehicleOwner;
     private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
-    GetAllDriverListFragmentForVehicleOwner getAllDriverListFragmentForVehicleOwner
+    GetAllDriverListFragmentForVehicleOwner getAllDriverListFragmentForVehicleOwner;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -475,10 +475,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (addNewDriverFragment == null) {
+                        if (getAllDriverListFragmentForVehicleOwner == null) {
                         }
-                        addNewDriverFragment = AddNewDriverFragment.newInstance();
-                        replaceFragment(addNewDriverFragment);
+                        getAllDriverListFragmentForVehicleOwner = GetAllDriverListFragmentForVehicleOwner.newInstance();
+                        replaceFragment(getAllDriverListFragmentForVehicleOwner);
                         break;
                 }
                 break;

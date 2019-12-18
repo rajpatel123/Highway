@@ -455,7 +455,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                         Utils.dismissProgressDialog();
-                        if (response.body() != null ) {
+                        if (response.body() != null) {
                             if (response.body().getStatus().equalsIgnoreCase("1")) {
 
                                 Intent intent = new Intent(RegistrationDetailsActivity.this, DashBoardActivity.class);
@@ -468,6 +468,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                                 HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getUser().getEmail());
                                 HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, response.body().getUser().getGender());
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, response.body().getUser().getAddress());
+                                HighwayPrefs.getString(getApplicationContext(),Constants.ID);
 
                                 startActivity(intent);
                                 finish();
