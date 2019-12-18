@@ -2,6 +2,7 @@ package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllDriverDetailsListAdapterForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllVehicleDetailsListAdapterForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.Data;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllVehicleDetailsList.DataVehicle;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllVehicleDetailsList.GetAllVehicleDetailsRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllVehicleDetailsList.GetAllVehicleDetailsResponse;
@@ -37,8 +35,6 @@ import retrofit2.Response;
 public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
     Toolbar getAllVehicleToolbar;
     RecyclerView getAllVehicleRecyclerView;
-
-    RecyclerView getAllDriverListRecyc;
 
     List<VehicleDetail> vehicleDetails = new ArrayList<>();
     GetAllVehicleDetailsListFragmentForVehicleOwner getAllVehicleDetailsListFragmentForVehicleOwner;
@@ -85,15 +81,15 @@ public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
             getAllVehicleRecyclerView.setItemAnimator(new DefaultItemAnimator());
             getAllVehicleRecyclerView.setAdapter(getAllVehicleDetailsListAdapterForVehicleOwner);
 
-
-        } else {
-            Toast.makeText(getActivity(), "NO! vehicle data Found!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void getAllVehicle() {
         GetAllVehicleDetailsRequest getAllVehicleDetailsRequest = new GetAllVehicleDetailsRequest();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
+
+        Log.d("UserId",""+userId);
+
         getAllVehicleDetailsRequest.setOwnerId("5");
         /*getAllVehicleDetailsRequest.setOwnerId(userId);*/
 
@@ -107,10 +103,15 @@ public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
                         DataVehicle data = getAllVehicleDetailsResponse.getData();
                         vehicleDetails= data.getVehicleDetails();
 
-                        if (getAllVehicleDetailsListAdapterForVehicleOwner !=null){
-                            getAllVehicleDetailsListAdapterForVehicleOwner.setData(vehicleDetails);
-                            getAllVehicleDetailsListAdapterForVehicleOwner.notifyDataSetChanged();
+                        if (vehicleDetails.size()>0){
+                            if (getAllVehicleDetailsListAdapterForVehicleOwner !=null){
+                                getAllVehicleDetailsListAdapterForVehicleOwner.setData(vehicleDetails);
+                                getAllVehicleDetailsListAdapterForVehicleOwner.notifyDataSetChanged();
+                            }
+                        }else{
+                            Toast.makeText(getActivity(), "No vehicle list found", Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 }
             }
