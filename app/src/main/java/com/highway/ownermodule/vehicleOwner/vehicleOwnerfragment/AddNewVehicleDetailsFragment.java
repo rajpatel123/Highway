@@ -39,13 +39,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddNewVehicleFragment extends Fragment {
+public class AddNewVehicleDetailsFragment extends Fragment {
 
     RecyclerView addVehicleRecycView;
     Toolbar addVehicleToolbar;
     private EditText edtVehicleDescription, edtTxtVehicleNos, edtTxtvehicleModelNos, edtTxtvehicleName;
     private Button btnAddNewVehicle;
-    private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,userId;
+    private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,user_Id;
     private Spinner driversSpinner;
     String textEd, txtEnd, isReached;
     String driverText;
@@ -53,13 +53,13 @@ public class AddNewVehicleFragment extends Fragment {
     String driverId;
     DriverDropDownResponse driverDropDownResponse;
 
-    public AddNewVehicleFragment() {
+    public AddNewVehicleDetailsFragment() {
         // Required empty public constructor
     }
 
 
-    public static AddNewVehicleFragment newInstance() {
-        AddNewVehicleFragment fragment = new AddNewVehicleFragment();
+    public static AddNewVehicleDetailsFragment newInstance() {
+        AddNewVehicleDetailsFragment fragment = new AddNewVehicleDetailsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -166,9 +166,9 @@ public class AddNewVehicleFragment extends Fragment {
     public void driverList() {
 
         DriverDropDownRequest driverDropDownRequest = new DriverDropDownRequest();
-        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
-        Log.d("Id",userId);
-        driverDropDownRequest.setUserId(userId);
+        user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
+        Log.d("Id",user_Id);
+        driverDropDownRequest.setUserId(user_Id);
 
         RestClient.getDriverList(driverDropDownRequest, new Callback<DriverDropDownResponse>() {
             @Override
@@ -180,7 +180,7 @@ public class AddNewVehicleFragment extends Fragment {
                         Log.d("data",""+response.body());
                         Data data = driverDropDownResponse.getData();
                         DriverDatum driverDatum = new DriverDatum();
-                        driverDatum.setDriverName("---Select Driver Name");
+                        driverDatum.setDriverName("---Select Driver Name---");
                         data.getDriverData().add(0, driverDatum);
 
                         if (data != null && data.getDriverData().size() > 0) {
@@ -216,8 +216,9 @@ public class AddNewVehicleFragment extends Fragment {
             addNewVehicleRequest.setVehicleNumber(vehicleNos);
             addNewVehicleRequest.setVehicleModelNo(vehicleModelNos);
             addNewVehicleRequest.setVehicleDescription(vehicleDescription);
-            userId = HighwayPrefs.getString(getActivity(),Constants.ID);
-            addNewVehicleRequest.setOwnerId(userId);
+            user_Id= HighwayPrefs.getString(getActivity(),Constants.ID);
+            /*addNewVehicleRequest.setOwnerId("19");*/
+            addNewVehicleRequest.setOwnerId(user_Id);
 
             Utils.showProgressDialog(getActivity());
             RestClient.addNewVehicle(addNewVehicleRequest, new Callback<AddNewVehicleResponse>() {

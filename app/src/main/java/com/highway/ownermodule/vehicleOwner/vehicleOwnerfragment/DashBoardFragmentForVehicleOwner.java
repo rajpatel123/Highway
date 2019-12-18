@@ -150,10 +150,10 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
 
         AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
-        allHighwayTripsRequest.setUserId(userId);
-        /*allHighwayTripsRequest.setUserId("5");*/
+       /* allHighwayTripsRequest.setUserId(userId);*/
+        allHighwayTripsRequest.setUserId("5");
 
-     /*   VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest = new VehicleOwnerCompletedTripRequest();
+     /* VehicleOwnerCompletedTripRequest vehicleOwnerCompletedTripRequest = new VehicleOwnerCompletedTripRequest();
         vehicleOwnerCompletedTripRequest.setUserId("5");*/
 
         Utils.showProgressDialog(getContext());

@@ -43,14 +43,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class AddNewDriverFragment extends Fragment {
+public class AddNewDriverDetailsFragment extends Fragment {
     RecyclerView addDriverRecyView;
     private Toolbar addDriverToolbar;
     public EditText edtTxtDriverName, edtTxtDriverMobNo, edtTxtDriverEmail,
             edtTxtDriverAddress, edtTxtDlNumber, edtTxtDlExpireDate;
     public ImageView imgDatePicker;
     public Button btnAddNewDriver;
-    String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress ,userId;
+    String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress ,user_Id;
     private DatePickerDialog datePickerDialog;
     private Activity view;
     private Spinner vehicleSpinners;
@@ -58,13 +58,14 @@ public class AddNewDriverFragment extends Fragment {
     Data data;
     private String vehicleId;
     List<String> vehicleNames;
+    private String userId;
 
-    public AddNewDriverFragment() {
+    public AddNewDriverDetailsFragment() {
         // Required empty public constructor
     }
 
-    public static AddNewDriverFragment newInstance() {
-        AddNewDriverFragment fragment = new AddNewDriverFragment();
+    public static AddNewDriverDetailsFragment newInstance() {
+        AddNewDriverDetailsFragment fragment = new AddNewDriverDetailsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -211,8 +212,9 @@ public class AddNewDriverFragment extends Fragment {
     public void vehicleSpinnersList() {
 
         VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
-        userId = HighwayPrefs.getString(getActivity(),Constants.ID);
-        vehicleDropDownRequest.setUserId(userId);
+        user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
+        /*vehicleDropDownRequest.setUserId(user_Id);*/
+        vehicleDropDownRequest.setUserId("5");
 
         RestClient.getVehicleList(vehicleDropDownRequest, new Callback<VehicleDropDownResponse>() {
             @Override
@@ -259,7 +261,8 @@ public class AddNewDriverFragment extends Fragment {
             addNewDriverRequest.setDriverDLNo(driverDlNo);
             addNewDriverRequest.setDlexpiryDate(dlExpireDate);
             addNewDriverRequest.setDriverAddress(driverAddress);
-            userId  = HighwayPrefs.getString(getActivity(),Constants.ID);
+            userId = HighwayPrefs.getString(getActivity(),Constants.ID);
+            /*addNewDriverRequest.setOwnerId("5");*/
             addNewDriverRequest.setOwnerId(userId);
 
             Utils.showProgressDialog(getActivity());
@@ -268,8 +271,10 @@ public class AddNewDriverFragment extends Fragment {
                 @Override
                 public void onResponse(Call<AddNewDriverResponse> call, Response<AddNewDriverResponse> response) {
                     Utils.dismissProgressDialog();
+
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
+
                             Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                             startActivity(intent);
                             getActivity().finish();

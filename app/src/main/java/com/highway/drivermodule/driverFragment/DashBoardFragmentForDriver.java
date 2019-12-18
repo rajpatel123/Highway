@@ -164,8 +164,8 @@ public class DashBoardFragmentForDriver extends Fragment {
 
         AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
-        allHighwayTripsRequest.setUserId(userId);
-        /*allHighwayTripsRequest.setUserId("7");*/
+        /*allHighwayTripsRequest.setUserId(userId);*/
+        allHighwayTripsRequest.setUserId("7");
 
         Utils.showProgressDialog(getContext());
         RestClient.allDriverTrips(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {

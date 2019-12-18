@@ -66,11 +66,9 @@ public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
         View view = inflater.inflate(R.layout.fragment_get_all_driver_list_fragment_for_vehicle_owner, container, false);
         getAllDriverListRecyc = view.findViewById(R.id.getAllDriverListRecy);
 
-
-        getAllDriverList();
         recyclerOperation();
 
-
+        getAllDriverList();
 
         return view;
     }
@@ -79,7 +77,8 @@ public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
     public void getAllDriverList(){
         GetAllDriverRequest getAllDriverRequest = new GetAllDriverRequest();
         userId  = HighwayPrefs.getString(getActivity(), Constants.ID);
-        getAllDriverRequest.setOwnerId(userId);
+        getAllDriverRequest.setOwnerId("5");
+       /* getAllDriverRequest.setOwnerId(userId);*/
 
         RestClient.getAllDriverDetails(getAllDriverRequest, new Callback<GetAllDriverResponse>() {
             @Override
@@ -104,6 +103,7 @@ public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
 
             }
         });
+
     }
 
 
@@ -114,8 +114,9 @@ public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
             getAllDriverListRecyc.setLayoutManager(layoutManager);
             getAllDriverListRecyc.setItemAnimator(new DefaultItemAnimator());
             getAllDriverListRecyc.setAdapter(getAllDriverListAdapterForVehicleOwner);
+
         }else{
-            Toast.makeText(getActivity(), "No Driver data found by this user id ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Some thing is wrong", Toast.LENGTH_SHORT).show();
         }
 
     }
