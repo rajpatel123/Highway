@@ -11,13 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.GetAllDriverRequest;
+import com.highway.customer.customerActivity.VehicleList;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllVehicleDetailsList.VehicleDetail;
 
 import java.util.List;
 
-public class GetAllVehicleListAdapterForVehicleOwner extends RecyclerView.Adapter<GetAllVehicleListAdapterForVehicleOwner.ViewHolder> {
+public class GetAllVehicleDetailsListAdapterForVehicleOwner extends RecyclerView.Adapter<GetAllVehicleDetailsListAdapterForVehicleOwner.ViewHolder> {
 
+    List<VehicleDetail>vehicleDetails;
+    Context context;
 
+    public GetAllVehicleDetailsListAdapterForVehicleOwner(List<VehicleDetail> vehicleDetails1, Context context1) {
+        this.context = context1;
+        this.vehicleDetails = vehicleDetails1;
+    }
 
     @NonNull
     @Override
@@ -25,21 +32,30 @@ public class GetAllVehicleListAdapterForVehicleOwner extends RecyclerView.Adapte
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_get_all_vehicle_list_item_fragment, parent, false);
         return new ViewHolder(itemView);
-
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
-
+        VehicleDetail vehicleDetail = vehicleDetails.get(position);
+        holder.tv1VehicleName.setText(""+ vehicleDetail.getVehicleName());
+        holder.tv2VehicleNo.setText(""+vehicleDetail.getVehicleNumber());
+        holder.tv3VehicleModelNo.setText(""+ vehicleDetail.getVehicleModelNo());
+        holder.tv4DriverName.setText(""+ vehicleDetail.getDriverName());
+        holder.tv5VehicleDescription.setText(""+ vehicleDetail.getVehicleDescription());
+        // load vihicle img
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return vehicleDetails.size();
     }
+
+    public void setData(List<VehicleDetail> vehicleDetails) {
+
+        this.vehicleDetails = vehicleDetails;
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tv1VehicleName, tv2VehicleNo, tv3VehicleModelNo, tv4DriverName, tv5VehicleDescription;

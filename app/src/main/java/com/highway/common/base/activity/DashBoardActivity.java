@@ -37,8 +37,8 @@ import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverDetailsFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleDetailsFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverListFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleListFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverDetailsListFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleDetailsListFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -60,9 +60,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardActivity dashBoardActivity;
     private AddNewVehicleDetailsFragment addNewVehicleDetailsFragment;
     private AddNewDriverDetailsFragment addNewDriverDetailsFragment;
-    private GetAllVehicleListFragmentForVehicleOwner getAllVehicleListFragmentForVehicleOwner;
+    private GetAllVehicleDetailsListFragmentForVehicleOwner getAllVehicleDetailsListFragmentForVehicleOwner;
     private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
-    GetAllDriverListFragmentForVehicleOwner getAllDriverListFragmentForVehicleOwner;
+    GetAllDriverDetailsListFragmentForVehicleOwner getAllDriverDetailsListFragmentForVehicleOwner;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -474,10 +474,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (getAllDriverListFragmentForVehicleOwner == null) {
+                        if (getAllDriverDetailsListFragmentForVehicleOwner == null) {
+                            getAllDriverDetailsListFragmentForVehicleOwner = GetAllDriverDetailsListFragmentForVehicleOwner.newInstance();
                         }
-                        getAllDriverListFragmentForVehicleOwner = GetAllDriverListFragmentForVehicleOwner.newInstance();
-                        replaceFragment(getAllDriverListFragmentForVehicleOwner);
+                        replaceFragment(getAllDriverDetailsListFragmentForVehicleOwner);
                         break;
                 }
                 break;
@@ -495,10 +495,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
 
-                        if (getAllVehicleListFragmentForVehicleOwner == null){
-                            getAllVehicleListFragmentForVehicleOwner = GetAllVehicleListFragmentForVehicleOwner.newInstance();
+                        if (getAllVehicleDetailsListFragmentForVehicleOwner == null){
+                            getAllVehicleDetailsListFragmentForVehicleOwner = GetAllVehicleDetailsListFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllVehicleListFragmentForVehicleOwner);
+                        replaceFragment(getAllVehicleDetailsListFragmentForVehicleOwner);
                         break;
                 }
                 break;

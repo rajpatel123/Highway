@@ -1,5 +1,5 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

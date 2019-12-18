@@ -1,20 +1,29 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllVehicleDetailsList;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DriverDetail {
+public class VehicleDetail {
 
+    @SerializedName("VehicleName")
+    @Expose
+    private String vehicleName;
+    @SerializedName("VehicleNumber")
+    @Expose
+    private String vehicleNumber;
+    @SerializedName("VehicleModelNo")
+    @Expose
+    private Object vehicleModelNo;
+    @SerializedName("VehicleDescription")
+    @Expose
+    private String vehicleDescription;
     @SerializedName("DriverId")
     @Expose
     private String driverId;
     @SerializedName("DriverName")
     @Expose
     private String driverName;
-    @SerializedName("Name")
-    @Expose
-    private String name;
     @SerializedName("Mobile")
     @Expose
     private String mobile;
@@ -36,15 +45,38 @@ public class DriverDetail {
     @SerializedName("Longitude")
     @Expose
     private String longitude;
-    @SerializedName("VehicleName")
-    @Expose
-    private String vehicleName;
-    @SerializedName("VehicleNumber")
-    @Expose
-    private String vehicleNumber;
-    @SerializedName("VehicleModelNo")
-    @Expose
-    private Object vehicleModelNo;
+
+    public String getVehicleName() {
+        return vehicleName;
+    }
+
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
+    }
+
+    public String getVehicleNumber() {
+        return vehicleNumber;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
+
+    public Object getVehicleModelNo() {
+        return vehicleModelNo;
+    }
+
+    public void setVehicleModelNo(Object vehicleModelNo) {
+        this.vehicleModelNo = vehicleModelNo;
+    }
+
+    public String getVehicleDescription() {
+        return vehicleDescription;
+    }
+
+    public void setVehicleDescription(String vehicleDescription) {
+        this.vehicleDescription = vehicleDescription;
+    }
 
     public String getDriverId() {
         return driverId;
@@ -60,14 +92,6 @@ public class DriverDetail {
 
     public void setDriverName(String driverName) {
         this.driverName = driverName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMobile() {
@@ -124,30 +148,6 @@ public class DriverDetail {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
-    }
-
-    public String getVehicleName() {
-        return vehicleName;
-    }
-
-    public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
-    }
-
-    public String getVehicleNumber() {
-        return vehicleNumber;
-    }
-
-    public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
-    }
-
-    public Object getVehicleModelNo() {
-        return vehicleModelNo;
-    }
-
-    public void setVehicleModelNo(Object vehicleModelNo) {
-        this.vehicleModelNo = vehicleModelNo;
     }
 
 }

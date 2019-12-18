@@ -14,13 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllDriverListAdapterForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.UpcomingTripAdapterForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.Data;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.DriverDetail;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.GetAllDriverRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.GetAllDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllDriverDetailsListAdapterForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.Data;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.DriverDetail;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverResponse;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
@@ -31,23 +29,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
+public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
 
     RecyclerView getAllDriverListRecyc;
 
     List<DriverDetail>driverDetails = new ArrayList<>();
-    GetAllDriverListAdapterForVehicleOwner getAllDriverListAdapterForVehicleOwner;
+    GetAllDriverDetailsListAdapterForVehicleOwner getAllDriverDetailsListAdapterForVehicleOwner;
     String userId;
     GetAllDriverResponse getAllDriverResponse;
 
 
-    public GetAllDriverListFragmentForVehicleOwner() {
+    public GetAllDriverDetailsListFragmentForVehicleOwner() {
         // Required empty public constructor
     }
 
 
-    public static GetAllDriverListFragmentForVehicleOwner newInstance() {
-        GetAllDriverListFragmentForVehicleOwner fragment = new GetAllDriverListFragmentForVehicleOwner();
+    public static GetAllDriverDetailsListFragmentForVehicleOwner newInstance() {
+        GetAllDriverDetailsListFragmentForVehicleOwner fragment = new GetAllDriverDetailsListFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -63,7 +61,7 @@ public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_get_all_driver_list_fragment_for_vehicle_owner, container, false);
+        View view = inflater.inflate(R.layout.fragment_get_all_driver_details_list_fragment_for_vehicle_owner, container, false);
         getAllDriverListRecyc = view.findViewById(R.id.getAllDriverListRecy);
 
         recyclerOperation();
@@ -89,9 +87,9 @@ public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
                         Data data = getAllDriverResponse.getData();
                         driverDetails= data.getDriverDetails();
 
-                       if (getAllDriverListAdapterForVehicleOwner!=null){
-                           getAllDriverListAdapterForVehicleOwner.setData(driverDetails);
-                           getAllDriverListAdapterForVehicleOwner.notifyDataSetChanged();
+                       if (getAllDriverDetailsListAdapterForVehicleOwner !=null){
+                           getAllDriverDetailsListAdapterForVehicleOwner.setData(driverDetails);
+                           getAllDriverDetailsListAdapterForVehicleOwner.notifyDataSetChanged();
                        }
                     }
                 }
@@ -109,11 +107,11 @@ public class GetAllDriverListFragmentForVehicleOwner extends Fragment {
 
     public void recyclerOperation(){
         if (driverDetails !=null && driverDetails.size()>0){
-            getAllDriverListAdapterForVehicleOwner = new GetAllDriverListAdapterForVehicleOwner(driverDetails,getContext());
+            getAllDriverDetailsListAdapterForVehicleOwner = new GetAllDriverDetailsListAdapterForVehicleOwner(driverDetails,getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             getAllDriverListRecyc.setLayoutManager(layoutManager);
             getAllDriverListRecyc.setItemAnimator(new DefaultItemAnimator());
-            getAllDriverListRecyc.setAdapter(getAllDriverListAdapterForVehicleOwner);
+            getAllDriverListRecyc.setAdapter(getAllDriverDetailsListAdapterForVehicleOwner);
 
         }else{
             Toast.makeText(getActivity(), "Some thing is wrong", Toast.LENGTH_SHORT).show();

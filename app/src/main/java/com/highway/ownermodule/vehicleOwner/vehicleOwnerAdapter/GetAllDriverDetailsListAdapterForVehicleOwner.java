@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverList.DriverDetail;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.DriverDetail;
 
 import java.util.List;
 
-public class GetAllDriverListAdapterForVehicleOwner extends RecyclerView.Adapter<GetAllDriverListAdapterForVehicleOwner.ViewHolder> {
+public class GetAllDriverDetailsListAdapterForVehicleOwner extends RecyclerView.Adapter<GetAllDriverDetailsListAdapterForVehicleOwner.ViewHolder> {
 
    List<DriverDetail>driverDetails;
    Context context;
 
 
-   public GetAllDriverListAdapterForVehicleOwner(List<DriverDetail>driverDetails,Context context){
+   public GetAllDriverDetailsListAdapterForVehicleOwner(List<DriverDetail>driverDetails, Context context){
        this.driverDetails = driverDetails;
        this.context = context;
    }
