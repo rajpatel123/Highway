@@ -205,7 +205,7 @@
             <Button
                 android:id="@+id/btnNext"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/margin_40"
                 android:layout_marginTop="@dimen/margin_top_30"
                 android:background="@drawable/btn_shape_draw"
                 android:paddingLeft="@dimen/padding_left_50"

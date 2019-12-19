@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,20 +24,21 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.highway.R;
-import com.highway.customer.customerActivity.WebViewActivity;
-import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
-import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
+import com.highway.customer.customerActivity.WebViewActivity;
+import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
+import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
-import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.millmodule.milluserFragment.BookLoadFragmentForMillUser;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverFragment;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleFragment;
+import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverDetailsFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleDetailsFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverDetailsListFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleDetailsListFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -58,10 +58,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBordFragmentForCustomer dashBordFragmentForCustomer;
     private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
     private DashBoardActivity dashBoardActivity;
-    private AddNewVehicleFragment addNewVehicleFragment;
-    private AddNewDriverFragment addNewDriverFragment;
-    private GetAllVehicleFragmentForVehicleOwner getAllVehicleFragmentForVehicleOwner;
+    private AddNewVehicleDetailsFragment addNewVehicleDetailsFragment;
+    private AddNewDriverDetailsFragment addNewDriverDetailsFragment;
+    private GetAllVehicleDetailsListFragmentForVehicleOwner getAllVehicleDetailsListFragmentForVehicleOwner;
     private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
+    GetAllDriverDetailsListFragmentForVehicleOwner getAllDriverDetailsListFragmentForVehicleOwner;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -108,7 +109,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private NavigationView navigationView;
     String userRole;
     private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,bookload;
+            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,getAllDriver,bookload;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -164,6 +165,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         tCondition = menues.findItem(R.id.nav_trmCondition);
         addDriver = menues.findItem(R.id.nav_add_driver);
         getAllVehicle = menues.findItem(R.id.nav_add_getAllVehicle);
+        getAllDriver = menues.findItem(R.id.nav_add_getAllDriver);
         bookload = menues.findItem(R.id.nav_add_bookLoad);
         logout = menues.findItem(R.id.nav_logout);
     }
@@ -212,6 +214,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 tCondition.setVisible(true);
                 addDriver.setVisible(false);
                 getAllVehicle.setVisible(false);
+                getAllDriver.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -236,6 +239,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 tCondition.setVisible(false);
                 addDriver.setVisible(false);
                 getAllVehicle.setVisible(false);
+                getAllDriver.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -259,6 +263,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 tCondition.setVisible(true);
                 addDriver.setVisible(false);
                 getAllVehicle.setVisible(false);
+                getAllDriver.setVisible(false);
                 logout.setVisible(true);
                 break;
 
@@ -271,6 +276,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 bookload.setVisible(false);
                 addVehicle.setVisible(true);
                 addDriver.setVisible(true);
+                getAllDriver.setVisible(true);
                 getAllVehicle.setVisible(true);
                 wallet.setVisible(false);
                 notification.setVisible(false);
@@ -422,10 +428,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (addNewVehicleFragment == null) {
-                            addNewVehicleFragment = AddNewVehicleFragment.newInstance();
+                        if (addNewVehicleDetailsFragment == null) {
+                            addNewVehicleDetailsFragment = AddNewVehicleDetailsFragment.newInstance();
                         }
-                        replaceFragment(addNewVehicleFragment);
+                        replaceFragment(addNewVehicleDetailsFragment);
                         break;
                 }
                 break;
@@ -444,11 +450,55 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (addNewDriverFragment == null) {
+                        if (addNewDriverDetailsFragment == null) {
                         }
-                        addNewDriverFragment = AddNewDriverFragment.newInstance();
-                        replaceFragment(addNewDriverFragment);
+                        addNewDriverDetailsFragment = AddNewDriverDetailsFragment.newInstance();
+                        replaceFragment(addNewDriverDetailsFragment);
+                        break;
+                }
+                break;
 
+
+            case R.id.nav_add_getAllDriver:
+                dashBoardToolbar.setTitle("All Driver Details");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+                        if (getAllDriverDetailsListFragmentForVehicleOwner == null) {
+                            getAllDriverDetailsListFragmentForVehicleOwner = GetAllDriverDetailsListFragmentForVehicleOwner.newInstance();
+                        }
+                        replaceFragment(getAllDriverDetailsListFragmentForVehicleOwner);
+                        break;
+                }
+                break;
+
+            case R.id.nav_add_getAllVehicle:
+                dashBoardToolbar.setTitle("All Vehicle List");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+
+                        if (getAllVehicleDetailsListFragmentForVehicleOwner == null){
+                            getAllVehicleDetailsListFragmentForVehicleOwner = GetAllVehicleDetailsListFragmentForVehicleOwner.newInstance();
+                        }
+                        replaceFragment(getAllVehicleDetailsListFragmentForVehicleOwner);
                         break;
                 }
                 break;
@@ -475,6 +525,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 Intent intent1 = new Intent(this, WebViewActivity.class);
                 startActivity(intent1);
                 break;
+
             case R.id.nav_notification:
                 dashBoardToolbar.setTitle("Notification");
                 switch (userRole) {
@@ -534,6 +585,27 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
                 break;
+
+            case R.id.nav_trmCondition:
+                dashBoardToolbar.setTitle("Term & Condition");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        break;
+                }
+                break;
+
 
             case R.id.nav_about:
 
@@ -607,31 +679,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 }
                 break;
 
-            case R.id.nav_trmCondition:
-                Intent intent2 = new Intent(this, WebViewActivity.class);
-                startActivity(intent2);
-                break;
 
-            case R.id.nav_add_getAllVehicle:
-                dashBoardToolbar.setTitle("All Vehicle List");
-                switch (userRole) {
-                    case "1":
-                        break;
-                    case "2":
-                        break;
-                    case "3":
-                        break;
-                    case "4":
-                        break;
-                    case "5":
-
-                        if (getAllVehicleFragmentForVehicleOwner == null){
-                            getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
-                        }
-                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
-                        break;
-                }
-                break;
 
             case R.id.nav_logout:
                 logOut();

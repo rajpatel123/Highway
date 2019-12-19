@@ -31,8 +31,7 @@ public class UpcomingTripAdapterForVehicleOwner extends RecyclerView.Adapter<Upc
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_recycler_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recycler_item, parent, false);
         return new ViewHolder(itemView);
     }
 

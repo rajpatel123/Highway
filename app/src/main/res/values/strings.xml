@@ -1,20 +1,21 @@
 <resources>
     <string name="app_name">Highway</string>
+<!--
 
-        <string name="weight_of_load_items">Weight Of Load Items</string>
-        <string-array name="approx_load_data">
-            <item> choose weights </item>
-            <item>100kg</item>
-            <item>200kg</item>
-            <item>300kg</item>
-            <item>400kg</item>
-            <item>500kg</item>
-            <item>600kg</item>
-            <item>700kg</item>
-            <item>800kg</item>
-            <item>900kg</item>
-            <item>1000kg</item>
-        </string-array>
+    <string name="weight_of_load_items">Weight Of Load Items</string>
+    <string-array name="approx_load_data">
+        <item> choose weights </item>
+        <item>100kg</item>
+        <item>200kg</item>
+        <item>300kg</item>
+        <item>400kg</item>
+        <item>500kg</item>
+        <item>600kg</item>
+        <item>700kg</item>
+        <item>800kg</item>
+        <item>900kg</item>
+        <item>1000kg</item>
+    </string-array>
 
 
     <string name="goods_types">Goods Types</string>
@@ -24,13 +25,14 @@
         <item>Common Resources</item>
         <item>Club Goods</item>
         <item>Public Goods </item>
-       <!-- <item>500kg</item>
+        &lt;!&ndash; <item>500kg</item>
         <item>600kg</item>
         <item>700kg</item>
         <item>800kg</item>
         <item>900kg</item>
-        <item>1000kg</item>-->
+        <item>1000kg</item>&ndash;&gt;
     </string-array>
+-->
 
 
     <string name="next">NEXT</string>
@@ -41,13 +43,17 @@
     <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
 
     <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2__title">Highway Tickets</string>
     <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+    <string name="slide_2__desc">Book Highway tickets for your family and friends!</string>
 
     <string name="slide_3_title">Great Discounts</string>
     <string name="slide_3_desc">Best discounts on every single service we offer!</string>
 
     <string name="slide_4_title">World Travel</string>
+    <string name="slide_4__title">Highway Travel</string>
     <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+    <string name="slide__4_desc">Book tickets of any transportation and travel in our country!</string>
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
@@ -78,6 +84,7 @@
     <string name="menu_logout">Logout</string>
     <string name="menu_setting">Setting</string>
     <string name="menu_get_allvehicle">GetAll Vehicle</string>
+    <string name="menu_get_alldriver">GetAll Driver</string>
     <string name="menu_get_millbooking">Mill Booing</string>
     <string name="menu_get_bookload">Book Load</string>
     <string name="email">ramashish.bhumca16@gmail.com</string>

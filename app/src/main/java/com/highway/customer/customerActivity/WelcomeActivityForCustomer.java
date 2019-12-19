@@ -20,11 +20,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.highway.R;
-import com.highway.common.base.activity.LoginOptionActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivityForCustomer extends AppCompatActivity {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -123,7 +122,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         HighwayPrefs.setFirstTimeLaunch(this, Constants.IS_FIRST_TIME_LAUNCH_CUSTOMER,false);
-        startActivity(new Intent(WelcomeActivity.this, LoginActivityForCustomer.class));
+        startActivity(new Intent(WelcomeActivityForCustomer.this, LoginActivityForCustomer.class));
         finish();
     }
 
