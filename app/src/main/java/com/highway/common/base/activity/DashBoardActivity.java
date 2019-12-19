@@ -587,7 +587,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_trmCondition:
-                dashBoardToolbar.setTitle("Term & Condition");
+               // dashBoardToolbar.setTitle("Term & Condition");  // term and condition
                 switch (userRole) {
                     case "1":
                         break;
@@ -602,7 +602,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
                         Intent intent = new Intent(DashBoardActivity.this, WebViewActivity.class);
-                        //intent.putExtra("title", "Terms & Conditions");
+                        intent.putExtra("title", "Terms & Conditions");
                         startActivity(intent);
                         break;
                 }
