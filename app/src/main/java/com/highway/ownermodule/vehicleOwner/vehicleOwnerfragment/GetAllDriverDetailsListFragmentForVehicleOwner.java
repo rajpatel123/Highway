@@ -64,6 +64,9 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
         View view = inflater.inflate(R.layout.fragment_get_all_driver_details_list_fragment_for_vehicle_owner, container, false);
         getAllDriverListRecyc = view.findViewById(R.id.getAllDriverListRecy);
 
+        getAllDriverDetailsListAdapterForVehicleOwner = new GetAllDriverDetailsListAdapterForVehicleOwner(driverDetails,getContext());
+
+
         recyclerOperation();
 
         getAllDriverList();
@@ -107,7 +110,6 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
 
     public void recyclerOperation(){
         if (driverDetails !=null && driverDetails.size()>0){
-            getAllDriverDetailsListAdapterForVehicleOwner = new GetAllDriverDetailsListAdapterForVehicleOwner(driverDetails,getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             getAllDriverListRecyc.setLayoutManager(layoutManager);
             getAllDriverListRecyc.setItemAnimator(new DefaultItemAnimator());
