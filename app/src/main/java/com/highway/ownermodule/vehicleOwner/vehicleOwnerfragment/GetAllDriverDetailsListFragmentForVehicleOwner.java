@@ -33,7 +33,7 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
 
     RecyclerView getAllDriverListRecyc;
 
-    List<DriverDetail>driverDetails = new ArrayList<>();
+    List<DriverDetail> driverDetails = new ArrayList<>();
     GetAllDriverDetailsListAdapterForVehicleOwner getAllDriverDetailsListAdapterForVehicleOwner;
     String userId;
     GetAllDriverResponse getAllDriverResponse;
@@ -64,6 +64,7 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
         View view = inflater.inflate(R.layout.fragment_get_all_driver_details_list_fragment_for_vehicle_owner, container, false);
         getAllDriverListRecyc = view.findViewById(R.id.getAllDriverListRecy);
 
+      //  Adapter yhi  initialize krna tha kyunki starting me driverDetails data nhi hoga aur     recyclerOperation();  me check ga hai ki size 0 se greater ho tbhi set kre  iski vjh se hi jb api response ata hai to adapter null mil jata hai 
         getAllDriverDetailsListAdapterForVehicleOwner = new GetAllDriverDetailsListAdapterForVehicleOwner(driverDetails,getContext());
 
 
