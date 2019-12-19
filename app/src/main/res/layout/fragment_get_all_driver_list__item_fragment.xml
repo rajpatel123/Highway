@@ -5,13 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverList_Item_fragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="@dimen/margin_left_10"
-        android:paddingRight="@dimen/padding_right_10">
+        android:paddingRight="@dimen/padding_right_10"
+        android:elevation="@dimen/_10dp"
+        android:layout_marginTop="@dimen/margin_top_15"
+        android:paddingBottom="@dimen/margin_bottom_20">
 
         <TextView
             android:layout_width="match_parent"
@@ -26,7 +28,7 @@
         <TextView
             android:id="@+id/TxtDriverName"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_35"
+            android:layout_height="@dimen/margin_30"
             android:background="@drawable/completed_fragment_item_shape"
             android:hint="Enter driver name "
             android:inputType="textCapWords"
@@ -47,7 +49,7 @@
         <TextView
             android:id="@+id/TxtDriverMobNo"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_35"
+            android:layout_height="@dimen/margin_30"
             android:background="@drawable/completed_fragment_item_shape"
             android:hint="Enter mobile number"
             android:inputType="phone"
@@ -67,7 +69,7 @@
         <TextView
             android:id="@+id/TxtDriverEmailNos"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_35"
+            android:layout_height="@dimen/margin_30"
             android:background="@drawable/completed_fragment_item_shape"
             android:hint="Enter email id  "
             android:inputType="textEmailAddress"
@@ -114,7 +116,7 @@
             <TextView
                 android:id="@+id/TxtDlNumber"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_35"
+                android:layout_height="@dimen/margin_30"
                 android:layout_weight="1"
                 android:background="@drawable/completed_fragment_item_shape"
                 android:hint="Enter Dl number "
@@ -126,7 +128,7 @@
             <TextView
                 android:id="@+id/TxtDlExpireDate"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_35"
+                android:layout_height="@dimen/margin_30"
                 android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:background="@drawable/completed_fragment_item_shape"
@@ -154,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
                 android:paddingLeft="5sp"
-                android:text="Vehicle Number "
+                android:text="Vehicle Name "
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_20"
                 android:textStyle="normal" />
@@ -164,10 +166,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/completed_fragment_item_shape">
 
-                <Spinner
-                    android:id="@+id/SpVehicleNumber"
+                <TextView
+                    android:id="@+id/TxtVehicleNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="@dimen/margin_30"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"

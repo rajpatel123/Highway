@@ -9,16 +9,17 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_200"
+        android:layout_height="wrap_content"
         android:elevation="@dimen/_10dp"
-        card_view:cardBackgroundColor="@color/cardviewbackground"
         card_view:cardCornerRadius="2dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">
+        <!--card_view:cardBackgroundColor="@color/cardviewbackground"-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10dp"
             android:layout_gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -41,75 +42,189 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    >
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/padding_left_15"
+                            android:paddingTop="@dimen/margin_5"
+                            android:paddingRight="@dimen/margin_5"
+                            android:paddingBottom="@dimen/margin_5"
+                            android:text="Vehicle Name "
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/TxtViewVehicleName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/padding_left_15"
+                            android:paddingTop="@dimen/margin_5"
+                            android:paddingRight="@dimen/margin_5"
+                            android:paddingBottom="@dimen/margin_5"
+                            android:background="@drawable/completed_fragment_item_shape"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16dp" />
+                    </LinearLayout>
+
+                    <!-- <TextView
+
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         android:paddingLeft="@dimen/padding_left_15"
+                         android:paddingTop="@dimen/margin_5"
+                         android:paddingRight="@dimen/margin_5"
+                         android:paddingBottom="@dimen/margin_5"
+                         android:text="Vehicle Number "
+                         android:textColor="@color/black"
+                         android:textSize="@dimen/_16dp" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical">
 
                     <TextView
-                        android:id="@+id/TxtViewVehicleName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingLeft="@dimen/padding_left_15"
-                        android:paddingRight="@dimen/margin_5"
                         android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
-                        android:text="Vehicle Name "
+                        android:text="Vehicle Number "
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
 
                     <TextView
                         android:id="@+id/txtViewVehicleNo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingLeft="@dimen/padding_left_15"
-                        android:paddingRight="@dimen/margin_5"
+                        android:paddingLeft="@dimen/padding_left_10"
                         android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
-                        android:text="Vehicle Number "
+                        android:background="@drawable/completed_fragment_item_shape"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/txtViewVehicleModelNo"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="@dimen/padding_left_15"
-                    android:paddingRight="@dimen/margin_5"
-                    android:paddingTop="@dimen/margin_5"
-                    android:paddingBottom="@dimen/margin_5"
-                    android:text="Vehicle Model number"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16dp" />
+                    android:padding="@dimen/margin_5"
+                    android:layout_gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/TxtViewDriverName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="@dimen/padding_left_15"
-                    android:paddingRight="@dimen/margin_5"
-                    android:paddingTop="@dimen/margin_5"
-                    android:paddingBottom="@dimen/margin_5"
-                    android:text="Driver Name "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_15"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:text="Vehicle Model No."
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+                    <TextView
+                        android:id="@+id/txtViewVehicleModelNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_10"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:background="@drawable/completed_fragment_item_shape"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/TxtViewVehicleDescription"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="@dimen/padding_left_15"
-                    android:paddingRight="@dimen/margin_5"
-                    android:paddingTop="@dimen/margin_5"
-                    android:paddingBottom="@dimen/margin_5"
-                    android:text="Vehicle Description "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16dp" />
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_15"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:text="Driver Name "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+
+                    <TextView
+                        android:id="@+id/TxtViewDriverName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_10"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:background="@drawable/completed_fragment_item_shape"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_15"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:text="Vehicle Description "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+
+                    <TextView
+                        android:id="@+id/TxtViewVehicleDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_50"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_10"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:background="@drawable/completed_fragment_item_shape"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+                </LinearLayout>
 
 
                 <!-- <LinearLayout

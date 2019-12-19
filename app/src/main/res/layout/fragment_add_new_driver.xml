@@ -156,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
                 android:paddingLeft="5sp"
-                android:text="Vehicle Number "
+                android:text="Vehicle Name "
                 android:textColor="@color/black"
                 android:textSize="@dimen/size_20"
                 android:textStyle="normal" />

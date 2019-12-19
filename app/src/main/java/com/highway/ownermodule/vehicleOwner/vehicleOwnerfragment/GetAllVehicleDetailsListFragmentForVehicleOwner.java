@@ -67,6 +67,8 @@ public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
         View view = inflater.inflate(R.layout.fragment_get_all_vehicle_details_list_fragment_for_vehicle_owner, container, false);
         getAllVehicleRecyclerView = view.findViewById(R.id.GetAllVehicleRecyclerView);
 
+        getAllVehicleDetailsListAdapterForVehicleOwner = new GetAllVehicleDetailsListAdapterForVehicleOwner(vehicleDetails, getContext());
+
         recyclerOperation();
         getAllVehicle();
         return view;
@@ -75,7 +77,6 @@ public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
     public void recyclerOperation() {
 
         if (vehicleDetails != null && vehicleDetails.size() > 0) {
-            getAllVehicleDetailsListAdapterForVehicleOwner = new GetAllVehicleDetailsListAdapterForVehicleOwner(vehicleDetails, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             getAllVehicleRecyclerView.setLayoutManager(layoutManager);
             getAllVehicleRecyclerView.setItemAnimator(new DefaultItemAnimator());

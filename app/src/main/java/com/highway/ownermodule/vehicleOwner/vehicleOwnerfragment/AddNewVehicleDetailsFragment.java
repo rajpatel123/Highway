@@ -202,7 +202,6 @@ public class AddNewVehicleDetailsFragment extends Fragment {
             @Override
             public void onFailure(Call<DriverDropDownResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
-
             }
         });
 

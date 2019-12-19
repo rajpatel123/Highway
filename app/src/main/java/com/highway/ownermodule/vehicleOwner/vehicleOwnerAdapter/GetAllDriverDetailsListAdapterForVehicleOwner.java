@@ -43,7 +43,8 @@ public class GetAllDriverDetailsListAdapterForVehicleOwner extends RecyclerView.
        holder.tv3TxtDriverEmailNos.setText(""+ driverDetail.getEmail());
        holder.tv4TxtDlNumber.setText(""+ driverDetail.getDLNumber());
        holder.tv5TxtDlExpireDate.setText(""+ driverDetail.getExpiryDate());
-       holder.tv6TxtDriverAdd.setText(""+ driverDetail.getAddress());
+       holder.tv6VehicleNumber.setText(""+ driverDetail.getVehicleNumber());
+       holder.tv7TxtDriverAdd.setText(""+ driverDetail.getAddress());
        //holder.spVehicleNumber.setTe
 
     }
@@ -58,7 +59,7 @@ public class GetAllDriverDetailsListAdapterForVehicleOwner extends RecyclerView.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv1DriverName, tv2DriverMobNo,tv3TxtDriverEmailNos,tv4TxtDlNumber,tv5TxtDlExpireDate,tv6TxtDriverAdd;
+        private TextView tv1DriverName, tv2DriverMobNo,tv3TxtDriverEmailNos,tv4TxtDlNumber,tv5TxtDlExpireDate,tv6VehicleNumber,tv7TxtDriverAdd;
        private Spinner spVehicleNumber;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,8 +69,8 @@ public class GetAllDriverDetailsListAdapterForVehicleOwner extends RecyclerView.
             tv3TxtDriverEmailNos = itemView.findViewById(R.id.TxtDriverEmailNos);
             tv4TxtDlNumber = itemView.findViewById(R.id.TxtDlNumber);
             tv5TxtDlExpireDate = itemView.findViewById(R.id.TxtDlExpireDate);
-            tv6TxtDriverAdd = itemView.findViewById(R.id.TxtDriverAdd);
-            spVehicleNumber = itemView.findViewById(R.id.SpVehicleNumber);
+            tv6VehicleNumber = itemView.findViewById(R.id.TxtVehicleNumber);
+            tv7TxtDriverAdd = itemView.findViewById(R.id.TxtDriverAdd);
         }
     }
 }
