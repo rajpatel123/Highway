@@ -67,13 +67,17 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
       //  Adapter yhi  initialize krna tha kyunki starting me driverDetails data nhi hoga aur     recyclerOperation();  me check ga hai ki size 0 se greater ho tbhi set kre  iski vjh se hi jb api response ata hai to adapter null mil jata hai 
         getAllDriverDetailsListAdapterForVehicleOwner = new GetAllDriverDetailsListAdapterForVehicleOwner(driverDetails,getContext());
 
-        recyclerOperation();
-
         getAllDriverList();
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        recyclerOperation();
+
+    }
 
     public void getAllDriverList(){
         GetAllDriverRequest getAllDriverRequest = new GetAllDriverRequest();
@@ -117,9 +121,9 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
             getAllDriverListRecyc.setItemAnimator(new DefaultItemAnimator());
             getAllDriverListRecyc.setAdapter(getAllDriverDetailsListAdapterForVehicleOwner);
 
-        }else{
-            Toast.makeText(getActivity(), "Some thing is wrong", Toast.LENGTH_SHORT).show();
-        }
+        }/*else{
+            Toast.makeText(getActivity(), "Some thing is wrong", Toast.LENGTH_SHORT).show();*//*
+        }*/
 
     }
 

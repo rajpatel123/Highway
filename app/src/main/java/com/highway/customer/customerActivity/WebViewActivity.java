@@ -11,14 +11,34 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.highway.R;
 import com.highway.utils.Utils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static android.view.View.GONE;
 
 
 public class WebViewActivity extends AppCompatActivity {
+
+    private static final String TAG = "WebViewActivity";
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.dataWebView)
+    WebView mWebView;
+    @BindView(R.id.rlNetworkUI)
+    RelativeLayout rlNetworkUI;
+    @BindView(R.id.rlWebView)
+    RelativeLayout rlWebView;
+
+    String title;
+
+/*
     private static final String TAG = "WebViewActivity";
 
     ProgressBar progressBar;
@@ -26,24 +46,22 @@ public class WebViewActivity extends AppCompatActivity {
     RelativeLayout rlNetworkUI;
     RelativeLayout rlWebView;
 
-    String title;
+    String title;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview_layout);
 
-        mWebView = findViewById(R.id.dataWebView);
-        progressBar = findViewById(R.id.progressBar);
-        rlNetworkUI = findViewById(R.id.rlNetworkUI);
-        rlWebView = findViewById(R.id.rlWebView);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         title = getIntent().getStringExtra("title");
-        getSupportActionBar().setTitle("Terms & Conditions");
+        getSupportActionBar()/*.setTitle("Terms & Conditions")*/;
         try {
             initComponent();
         } catch (Exception e) {
@@ -86,49 +104,50 @@ public class WebViewActivity extends AppCompatActivity {
         rlNetworkUI.setVisibility(View.GONE);
 
         progressBar.setVisibility(View.VISIBLE);
-        mWebView.loadUrl("http://13.234.161.7/termsncondition.php");
-//        switch (title) {
-//            case "Terms & Conditions":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://13.234.161.7/termsncondition.php");
-//                break;
-//
-//            case "Privacy Policy":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://13.234.161.7/privacy-policy.php");
-//                break;
-//
-//            case "Read More":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://www.readingrockets.org/article/reading-information");
-//                break;
-//            case "condition":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
-//                break;
-//
-//            case "FAQ":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://13.234.161.7/dnafaq.php");
-//                break;
-//            case "Report":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
-//                break;
-//
-//            case "About Us":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
-//                break;
-//
-//
-//            case "Contact Us":
-//                progressBar.setVisibility(View.VISIBLE);
-//                mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
-//                break;
-//
-//        }
+        mWebView.loadUrl("http://highway.vrok.in/privacypolicy/terms");
+        switch (title) {
+            case "Terms & Conditions":
+                progressBar.setVisibility(View.VISIBLE);
+                mWebView.loadUrl("http://highway.vrok.in/privacypolicy/terms");
+                break;
+
+            case "Privacy Policy":
+                progressBar.setVisibility(View.VISIBLE);
+                mWebView.loadUrl("http://highway.vrok.in/privacypolicy");
+                break;
+
+            case "Read More":
+               // progressBar.setVisibility(View.VISIBLE);
+               // mWebView.loadUrl("http://www.readingrockets.org/article/reading-information");
+                break;
+            case "condition":
+               // progressBar.setVisibility(View.VISIBLE);
+                //mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
+                break;
+
+            case "FAQ":
+              //  progressBar.setVisibility(View.VISIBLE);
+               // mWebView.loadUrl("http://13.234.161.7/dnafaq.php");
+                break;
+            case "Report":
+               // progressBar.setVisibility(View.VISIBLE);
+              //  mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
+                break;
+
+            case "About Us":
+               // progressBar.setVisibility(View.VISIBLE);
+               // mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
+                break;
+
+
+            case "Contact Us":
+             //  progressBar.setVisibility(View.VISIBLE);
+              // mWebView.loadUrl("http://reddyenterprise.com/education/termsncondition.php");
+                break;
+
+        }
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -158,5 +177,43 @@ public class WebViewActivity extends AppCompatActivity {
             progressBar.setVisibility(GONE);
         }
     }
+
+
+
+
+/*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
+            mWebView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public class myWebClient extends WebViewClient {
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            progressBar.setVisibility(View.VISIBLE);
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            progressBar.setVisibility(GONE);
+        }
+    }
+    */
+
+
+
+
 }
 

@@ -20,6 +20,9 @@ private String vehicleModelNo;
 @SerializedName("vehicleDescription")
 @Expose
 private String vehicleDescription;
+@SerializedName("driverId")
+@Expose
+private String driverId;
 
 public String getOwnerId() {
 return ownerId;
@@ -59,6 +62,14 @@ return vehicleDescription;
 
 public void setVehicleDescription(String vehicleDescription) {
 this.vehicleDescription = vehicleDescription;
+}
+
+public String getDriverId() {
+return driverId;
+}
+
+public void setDriverId(String driverId) {
+this.driverId = driverId;
 }
 
 }

@@ -1,6 +1,5 @@
 package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner;
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +26,9 @@ private String driverAddress;
 @SerializedName("dlexpiryDate")
 @Expose
 private String dlexpiryDate;
+@SerializedName("vehicleId")
+@Expose
+private String vehicleId;
 
 public String getOwnerId() {
 return ownerId;
@@ -82,6 +84,14 @@ return dlexpiryDate;
 
 public void setDlexpiryDate(String dlexpiryDate) {
 this.dlexpiryDate = dlexpiryDate;
+}
+
+public String getVehicleId() {
+return vehicleId;
+}
+
+public void setVehicleId(String vehicleId) {
+this.vehicleId = vehicleId;
 }
 
 }

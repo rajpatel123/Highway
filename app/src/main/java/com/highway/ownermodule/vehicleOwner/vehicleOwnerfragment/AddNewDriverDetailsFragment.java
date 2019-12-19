@@ -261,6 +261,7 @@ public class AddNewDriverDetailsFragment extends Fragment {
             addNewDriverRequest.setDriverDLNo(driverDlNo);
             addNewDriverRequest.setDlexpiryDate(dlExpireDate);
             addNewDriverRequest.setDriverAddress(driverAddress);
+            addNewDriverRequest.setVehicleId(vehicleId);
             userId = HighwayPrefs.getString(getActivity(),Constants.ID);
             /*addNewDriverRequest.setOwnerId("5");*/
             addNewDriverRequest.setOwnerId(userId);
@@ -274,11 +275,13 @@ public class AddNewDriverDetailsFragment extends Fragment {
 
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
+                           // if (response.body().getId()) {
+                                Intent intent = new Intent(getActivity(), DashBoardActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                                Toast.makeText(getActivity(), "Add new Driver SuccessFully", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(getActivity(), DashBoardActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
-                            Toast.makeText(getActivity(), "Add new Driver SuccessFully", Toast.LENGTH_SHORT).show();
+                           // }
                         }
                     }
                 }

@@ -25,8 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".customer.customerActivity.GoodTypeDetailActivity"></activity>
-        <activity android:name=".customer.customerActivity.BookingWithDetailsActivity" android:screenOrientation="portrait" />
+
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -36,20 +35,21 @@
             android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" />
 
 
-        <activity android:name=".customer.customerActivity.WelcomeActivityForCustomer" android:screenOrientation="portrait" />
-        <activity android:name=".millmodule.milluserActivity.WelcomeActivityForMiller" android:screenOrientation="portrait" />
-        <activity android:name=".drivermodule.driverActivity.WelcomeDriverActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity" android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".common.base.activity.SplashActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".common.base.activity.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".customer.customerActivity.WebViewActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".customer.customerActivity.GoodTypeDetailActivity"></activity>
+        <activity android:name=".customer.customerActivity.BookingWithDetailsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".customer.customerActivity.WelcomeActivityForCustomer" android:screenOrientation="portrait" />
+        <activity android:name=".millmodule.milluserActivity.WelcomeActivityForMiller" android:screenOrientation="portrait" />
+        <activity android:name=".drivermodule.driverActivity.WelcomeDriverActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity" android:screenOrientation="portrait" />
 
         <activity android:name=".common.base.activity.DashBoardActivity" android:screenOrientation="portrait" />
         <activity android:name=".common.base.activity.LoginOptionActivity" android:screenOrientation="portrait" />

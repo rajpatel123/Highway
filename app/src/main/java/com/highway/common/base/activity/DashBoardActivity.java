@@ -601,7 +601,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-
+                        Intent intent = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        //intent.putExtra("title", "Terms & Conditions");
+                        startActivity(intent);
                         break;
                 }
                 break;

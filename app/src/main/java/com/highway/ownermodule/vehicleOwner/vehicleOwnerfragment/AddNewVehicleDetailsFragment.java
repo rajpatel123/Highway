@@ -215,6 +215,7 @@ public class AddNewVehicleDetailsFragment extends Fragment {
             addNewVehicleRequest.setVehicleNumber(vehicleNos);
             addNewVehicleRequest.setVehicleModelNo(vehicleModelNos);
             addNewVehicleRequest.setVehicleDescription(vehicleDescription);
+            addNewVehicleRequest.setDriverId(driverId);
             user_Id= HighwayPrefs.getString(getActivity(),Constants.ID);
             /*addNewVehicleRequest.setOwnerId("19");*/
             addNewVehicleRequest.setOwnerId(user_Id);
@@ -226,6 +227,7 @@ public class AddNewVehicleDetailsFragment extends Fragment {
                     Utils.dismissProgressDialog();
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
+                            //if (response.body().getId())
                             Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                             startActivity(intent);
                             getActivity().finish();

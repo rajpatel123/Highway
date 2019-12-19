@@ -69,9 +69,15 @@ public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
 
         getAllVehicleDetailsListAdapterForVehicleOwner = new GetAllVehicleDetailsListAdapterForVehicleOwner(vehicleDetails, getContext());
 
-        recyclerOperation();
         getAllVehicle();
         return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recyclerOperation();
     }
 
     public void recyclerOperation() {
