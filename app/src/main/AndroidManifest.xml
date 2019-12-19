@@ -44,7 +44,7 @@
         <activity
             android:name=".drivermodule.driverActivity.WelcomeDriverActivity"
             android:screenOrientation="portrait" />
-  <activity
+   <activity
             android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity"
             android:screenOrientation="portrait" />
 
