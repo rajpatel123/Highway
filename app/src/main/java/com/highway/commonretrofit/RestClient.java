@@ -8,22 +8,22 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
-import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
-import com.highway.millmodule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
-import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
-import com.highway.millmodule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewDriverThroughVehicleOwner.AddNewDriverResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllVehicleDetailsList.GetAllVehicleDetailsRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllVehicleDetailsList.GetAllVehicleDetailsResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.VehicleDropDown_Spinners.VehicleDropDownResponse;
+import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
+import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
+import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
+import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddNewVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddNewVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -47,9 +47,14 @@ public class RestClient {
         RetrofitClient.getClient().driverTrips(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
 
-    public static void allVehicleOwnerCompletedTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse>allDriverTripsResponseCallback){
+    public static void allVehicleOwnerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse>allDriverTripsResponseCallback){
         RetrofitClient.getClient().vehicleOwnerTrip(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
+
+    public static void  allMillerTrip(AllHighwayTripsRequest allHighwayTripsRequest ,Callback<AllHighwayTripsResponse> allDriverTripsResponseCallback){
+        RetrofitClient.getClient().millerTrip(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
+    }
+
     // Add new vehicle
     public static void addNewVehicle(AddNewVehicleRequest addNewVehicleRequest, Callback<AddNewVehicleResponse>addNewVehicleResponseCallback){
         RetrofitClient.getClient().addNewVehicleResponseCall(addNewVehicleRequest).enqueue(addNewVehicleResponseCallback);

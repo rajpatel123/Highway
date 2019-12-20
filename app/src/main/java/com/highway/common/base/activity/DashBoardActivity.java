@@ -32,8 +32,8 @@ import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
-import com.highway.millmodule.milluserFragment.BookLoadFragmentForMillUser;
-import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
+import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverDetailsFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleDetailsFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
@@ -198,12 +198,14 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case "2":                                    //  mill user
+                Fragment fragment2 = NewBookingFragment.newInstance();
+                replaceFragment(fragment2);
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
                 bookload.setVisible(true);
                 addVehicle.setVisible(false);
-                wallet.setVisible(false);
+                wallet.setVisible(true);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
                 help.setVisible(false);
@@ -218,11 +220,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "3":
-
-                // Driver
-                Fragment fragment = DashBoardFragmentForDriver.newInstance();
-                replaceFragment(fragment);
+            case "3":                                              // Driver
+                Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
+                replaceFragment(fragment3);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -243,10 +243,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "4":
-                //  Customer
-                Fragment fragment1 = NewBookingFragment.newInstance();
-                replaceFragment(fragment1);
+            case "4":                                   //  Customer
+                Fragment fragment4 = NewBookingFragment.newInstance();
+                replaceFragment(fragment4);
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -268,8 +267,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case "5":                              // Owner .. vehicle Owner
-                Fragment fragment2 = NewBookingFragment.newInstance();
-                replaceFragment(fragment2);
+                Fragment fragment5 = NewBookingFragment.newInstance();
+                replaceFragment(fragment5);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -358,9 +357,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(fragment);*/
                         break;
                     case "2":
-                        dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
+                        if (dashBoardFragmentForMillUser==null){
+                            dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
+                        }
                         replaceFragment(dashBoardFragmentForMillUser);
                         break;
+
                     case "3":
                         if (dashBoardFragmentForDriver == null) {
                             dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();

@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllDriverDetailsListAdapterForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.Data;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.DriverDetail;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.Data;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.DriverDetail;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverResponse;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 

@@ -47,13 +47,13 @@
         <activity android:name=".customer.customerActivity.GoodTypeDetailActivity"></activity>
         <activity android:name=".customer.customerActivity.BookingWithDetailsActivity" android:screenOrientation="portrait" />
         <activity android:name=".customer.customerActivity.WelcomeActivityForCustomer" android:screenOrientation="portrait" />
-        <activity android:name=".millmodule.milluserActivity.WelcomeActivityForMiller" android:screenOrientation="portrait" />
+        <activity android:name=".millUserModule.milluserActivity.WelcomeActivityForMiller" android:screenOrientation="portrait" />
         <activity android:name=".drivermodule.driverActivity.WelcomeDriverActivity" android:screenOrientation="portrait" />
         <activity android:name=".ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity" android:screenOrientation="portrait" />
 
         <activity android:name=".common.base.activity.DashBoardActivity" android:screenOrientation="portrait" />
         <activity android:name=".common.base.activity.LoginOptionActivity" android:screenOrientation="portrait" />
-        <activity android:name=".millmodule.milluserActivity.LoginActivityForMiller" android:screenOrientation="portrait" />
+        <activity android:name=".millUserModule.milluserActivity.LoginActivityForMiller" android:screenOrientation="portrait" />
         <activity android:name=".common.base.activity.MobileOtpVerificationActivity" android:screenOrientation="portrait" />
         <activity android:name=".common.base.BaseActivity" android:screenOrientation="portrait" />
         <activity android:name=".customer.customerActivity.LoginActivityForCustomer" android:screenOrientation="portrait" />
