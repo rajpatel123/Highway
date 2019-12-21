@@ -113,6 +113,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
+    WebViewActivity webViewActivity;
 
 
     @Override
@@ -589,23 +590,29 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_trmCondition:
-               // dashBoardToolbar.setTitle("Term & Condition");  // term and condition
+              // dashBoardToolbar.setTitle("Term & Condition");  // term and condition
                 switch (userRole) {
                     case "1":
                         break;
                     case "2":
-
+                        Intent intent2 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent2.putExtra("title", "Terms & Conditions");
+                        startActivity(intent2);
                         break;
                     case "3":
-
+                        Intent intent3 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent3.putExtra("title", "Terms & Conditions");
+                        startActivity(intent3);
                         break;
                     case "4":
-
+                        Intent intent4 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent4.putExtra("title", "Terms & Conditions");
+                        startActivity(intent4);
                         break;
                     case "5":
-                        Intent intent = new Intent(DashBoardActivity.this, WebViewActivity.class);
-                        intent.putExtra("title", "Terms & Conditions");
-                        startActivity(intent);
+                        Intent intent5 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent5.putExtra("title", "Terms & Conditions");
+                        startActivity(intent5);
                         break;
                 }
                 break;

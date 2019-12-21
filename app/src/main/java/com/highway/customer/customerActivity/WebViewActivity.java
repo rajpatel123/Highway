@@ -29,7 +29,7 @@ import static android.view.View.GONE;
 
 public class WebViewActivity extends AppCompatActivity {
 
-   /* private static final String TAG = "WebViewActivity";
+    private static final String TAG = "WebViewActivity";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.progressBar)
@@ -41,9 +41,9 @@ public class WebViewActivity extends AppCompatActivity {
     @BindView(R.id.rlWebView)
     RelativeLayout rlWebView;
 
-    String title;*/
+    String title;
 
-    private static final String TAG = "WebViewActivity";
+  /*  private static final String TAG = "WebViewActivity";
     Toolbar toolbar;
     ProgressBar progressBar;
     WebView mWebView;
@@ -51,37 +51,35 @@ public class WebViewActivity extends AppCompatActivity {
     RelativeLayout rlWebView;
     ImageView imgWebBackArrow;
 
-    String title;
+    String title;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview_layout);
 
-        mWebView = findViewById(R.id.dataWebView);
+      /*  mWebView = findViewById(R.id.dataWebView);
         progressBar = findViewById(R.id.progressBar);
         rlNetworkUI = findViewById(R.id.rlNetworkUI);
         rlWebView = findViewById(R.id.rlWebView);
-        imgWebBackArrow = findViewById(R.id.WebBackArrow);
+        imgWebBackArrow = findViewById(R.id.WebBackArrow);*/
 
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+       setSupportActionBar(toolbar);
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         title = getIntent().getStringExtra("title");
-        getSupportActionBar()/*.setTitle("Terms & Conditions")*/;
+        getSupportActionBar().setTitle("Terms & Conditions");
         try {
             initComponent();
         } catch (Exception e) {
             e.printStackTrace();
             //   String additionalDetail = null;
         }
-
-
-        onClickBackArrow();
     }
 
     @Override
@@ -94,12 +92,11 @@ public class WebViewActivity extends AppCompatActivity {
 
         mWebView.setWebViewClient(new myWebClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
-
-
-        // getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(title);
         if (!Utils.isInternetConnected(this)) {
             rlWebView.setVisibility(GONE);
             rlNetworkUI.setVisibility(View.VISIBLE);
+
 //            rlNetworkUI.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
@@ -192,19 +189,7 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
 
-   public void onClickBackArrow(){
-        imgWebBackArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WebViewActivity.this, DashBoardActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-   }
-
-
-    // onBacked pressed
+  /*  // onBacked pressed
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -227,6 +212,6 @@ public class WebViewActivity extends AppCompatActivity {
         }, 2000);
     }
 
-
+*/
 }
 

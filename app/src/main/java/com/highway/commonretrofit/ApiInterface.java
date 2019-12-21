@@ -71,16 +71,15 @@ public interface ApiInterface {
     @POST("http://highway.vrok.in/index.php/api/vehicle/vehicleDropdown")
     Call<VehicleDropDownResponse> vehicleDataResponse(@Body VehicleDropDownRequest vehicleDropDownRequest);      //Call<VehicleDropDownResponse> vehicleData();
 
-    // Approx load spinners -- for miller Book load
-    @POST("http://highway.vrok.in/index.php/api/trip/goodType")
-    Call<ApproxLoadDropDownResponse> approxLoadResponse(@Body ApproxLoadDropDownRequest approxLoadDropDownRequest);
-
-   // Goods  Types ----Spinners
+    // Goods  Types ----Spinners
     @POST("http://highway.vrok.in/index.php/api/trip/goodType")
     Call<GoodsTypesDropDownResponse>goodsTypesResponse(@Body GoodsTypeDropDownRequest goodsTypeDropDownRequest);
 
-    // getAll Driver List for owner;
+    // Approx load spinners -- for miller Book load
+    @POST("http://highway.vrok.in/index.php/api/trip/approxLoad")
+    Call<ApproxLoadDropDownResponse> approxLoadResponse(@Body ApproxLoadDropDownRequest approxLoadDropDownRequest);
 
+    // getAll Driver List for owner;
     @POST("http://highway.vrok.in/index.php/api/login/getAlldriverDetails")
     Call<GetAllDriverResponse>getAllDriverDetailsRes(@Body GetAllDriverRequest getAllDriverRequest);
 
