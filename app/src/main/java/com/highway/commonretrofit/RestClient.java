@@ -42,18 +42,23 @@ public class RestClient {
     public static void regDetails(RegistrationRequest registrationDetailsRequest, Callback<RegistrationResponse>registrationDetailsResponseCallback){
         RetrofitClient.getClient().regDetailsResponseCall(registrationDetailsRequest).enqueue(registrationDetailsResponseCallback);
     }
-
+ // driver trip
     public static void  allDriverTrips(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse>allDriverTripsResponseCallback){
         RetrofitClient.getClient().driverTrips(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
-
+// vehicle owner trip
     public static void allVehicleOwnerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse>allDriverTripsResponseCallback){
         RetrofitClient.getClient().vehicleOwnerTrip(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
-
+ //   mill user trip
     public static void  allMillerTrip(AllHighwayTripsRequest allHighwayTripsRequest ,Callback<AllHighwayTripsResponse> allDriverTripsResponseCallback){
         RetrofitClient.getClient().millerTrip(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
     }
+
+   // Customer trip
+   public static void allCustomerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse>allHighwayTripsResponseCallback){
+        RetrofitClient.getClient().customerTrip(allHighwayTripsRequest).enqueue(allHighwayTripsResponseCallback);
+   }
 
     // Add new vehicle
     public static void addNewVehicle(AddNewVehicleRequest addNewVehicleRequest, Callback<AddNewVehicleResponse>addNewVehicleResponseCallback){

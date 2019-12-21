@@ -54,6 +54,10 @@ public interface ApiInterface {
     @POST("http://vrok.in/highway_dev/getAllTripByOwnerId")
     Call<AllHighwayTripsResponse>millerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
 
+    // Customer all trip
+    @POST("http://vrok.in/highway_dev/getAllTripByCustomerId")
+    Call<AllHighwayTripsResponse>customerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+
 
      // Add New Vehicle
     @POST("http://highway.vrok.in/index.php/api/Vehicle/addVehicle")
@@ -85,5 +89,6 @@ public interface ApiInterface {
 
     @POST("http://highway.vrok.in/index.php/api/Vehicle/getAllVehicleDetails")
     Call<GetAllVehicleDetailsResponse>getVehicleResponse(@Body GetAllVehicleDetailsRequest getAllVehicleDetailsRequest);
+
 
 }

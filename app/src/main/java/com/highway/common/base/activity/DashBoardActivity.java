@@ -525,8 +525,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
 
-                Intent intent1 = new Intent(this, WebViewActivity.class);
-                startActivity(intent1);
+               /* Intent intent1 = new Intent(this, WebViewActivity.class);
+                startActivity(intent1);*/
                 break;
 
             case R.id.nav_notification:
@@ -620,8 +620,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.nav_about:
 
-                dashBoardToolbar.setTitle("About");
-
+              //  dashBoardToolbar.setTitle("About");
                 switch (userRole) {
                     case "1":
                         break;
@@ -638,36 +637,32 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                 }
-
                 Intent intent = new Intent(this, WebViewActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.nav_share:
-                dashBoardToolbar.setTitle("Share");
+             //   dashBoardToolbar.setTitle("Share");
                 switch (userRole) {
                     case "1":
                         break;
                     case "2":
-
                         break;
                     case "3":
-
                         break;
                     case "4":
-
                         break;
                     case "5":
 
                         break;
                 }
-
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hello friends, the best app for medicos is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
+                        "Hello friends, the best app for Heighway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
                 sendIntent.setType("text/plain");
-                startActivity(sendIntent);
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
                 break;
 
             case R.id.nav_send:

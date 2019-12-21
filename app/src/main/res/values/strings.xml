@@ -40,6 +40,7 @@
     <string name="start">GOT IT</string>
 
     <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1__title">Welcome Food!</string>
     <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
 
     <string name="slide_2_title">Movie Tickets</string>

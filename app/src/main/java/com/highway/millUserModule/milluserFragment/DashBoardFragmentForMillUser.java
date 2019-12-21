@@ -182,8 +182,6 @@ public class DashBoardFragmentForMillUser extends Fragment {
 
     }
 
-
-
     public void updateAllMillerFragment() {
         completedFragmentForMillUser.millerCompletedUpdatedTripList(dashBoardActivity.getCompletedTrips());
         onGoingFragmentForMillUser.millerOnGoingdUpdatedTripList(dashBoardActivity.getOngoingTrips());
