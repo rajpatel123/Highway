@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Highway</string>
-<!--
+    <!--
 
     <string name="weight_of_load_items">Weight Of Load Items</string>
     <string-array name="approx_load_data">
@@ -199,8 +199,6 @@
         <item>@color/dot_dark_screen3</item>
         <item>@color/dot_dark_screen4</item>
     </array>
-
-
 
 
 </resources>
