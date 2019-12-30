@@ -258,14 +258,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             destLongitude = intent.getDoubleExtra("destLongitude", destLongitude);
             edtSourceLOcationEDT.setText("" + sourceName);
             edtDropLocation.setText("" + destName);
-
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-
-
-
         }
-
     }
 
 
@@ -439,25 +434,25 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
+///**********************
     @Override
     public void onLocationChanged(Location location) {
-//        mLastLocation = location;
-//        if (mCurrLocationMarker != null) {
-//            mCurrLocationMarker.remove();
-//        }
-//
-//        //Place current location marker
-//        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//
-//        //move map camera
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
-//
-//        //stop location updates
-//        if (mGoogleApiClient != null) {
-//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-//        }
+      /*  mLastLocation = location;
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
+
+        //Place current location marker
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }*/
 
     }
 
