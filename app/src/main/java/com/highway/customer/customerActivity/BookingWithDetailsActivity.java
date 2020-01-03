@@ -259,7 +259,11 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             edtSourceLOcationEDT.setText("" + sourceName);
             edtDropLocation.setText("" + destName);
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+           // mCurrLocationMarker = mMap.addMarker(markerOptions1);
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+//            mCurrLocationMarker = mMap.addMarker(markerOptions2);
         }
     }
 
@@ -578,7 +582,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
-
 
         for (Vehicle vehicle :vehicleList){
             vehicle.setSelected(false);

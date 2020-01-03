@@ -322,10 +322,11 @@
                     android:layout_marginEnd="@dimen/margin_10">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:gravity="center_vertical"
+                        android:paddingBottom="@dimen/_10dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -335,6 +336,7 @@
                             app:srcCompat="@drawable/money" />
 
                         <TextView
+                            android:id="@+id/CashTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -344,18 +346,45 @@
                             android:textStyle="bold" />
 
                         <ImageView
+                            android:id="@+id/ImgCashindicator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
                             android:rotation="90"
                             app:srcCompat="@drawable/login_arrow_icon" />
+
+                        <TextView
+                            android:id="@+id/bookTruckLatterTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/margin_10"
+                            android:background="@drawable/btn_shape_draw"
+                            android:gravity="center"
+                            android:maxHeight="@dimen/margin_40"
+                            android:paddingStart="@dimen/_10dp"
+                            android:paddingEnd="@dimen/_10dp"
+                            android:text="BOOK LATTER"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/bookTruckTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="@dimen/margin_2"
+                            android:background="@drawable/btn_shape_draw"
+                            android:gravity="center"
+                            android:maxHeight="@dimen/margin_40"
+                            android:paddingStart="@dimen/margin_20"
+                            android:paddingEnd="@dimen/margin_20"
+                            android:text="BOOK TATA ACE"
+                            android:textColor="@color/white" />
+
                     </LinearLayout>
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/bookTruckTv"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
-                        android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/margin_20"
                         android:background="@drawable/btn_shape_draw"
                         android:gravity="center"
@@ -363,7 +392,7 @@
                         android:paddingStart="@dimen/margin_20"
                         android:paddingEnd="@dimen/margin_20"
                         android:text="Book TATA ACE"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white" />-->
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
