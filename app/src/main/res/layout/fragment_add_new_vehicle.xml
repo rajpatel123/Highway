@@ -76,38 +76,38 @@
             android:paddingLeft="5sp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_10dp"-->
+<!--            android:orientation="vertical">-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top_10"
-                android:paddingLeft="5sp"
-                android:text="Driver Name"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_20"
-                android:textStyle="normal" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_top_10"-->
+<!--                android:paddingLeft="5sp"-->
+<!--                android:text="Driver Name"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="@dimen/size_20"-->
+<!--                android:textStyle="normal" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/completed_fragment_item_shape">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/completed_fragment_item_shape">-->
 
-                <Spinner
-                    android:id="@+id/DriversSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="4dp" />
+<!--                <Spinner-->
+<!--                    android:id="@+id/DriversSpinner"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginStart="4dp"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:layout_marginEnd="4dp"-->
+<!--                    android:layout_marginBottom="4dp" />-->
 
-            </LinearLayout>
-        </LinearLayout>
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
 
 
         <TextView

@@ -70,6 +70,7 @@
     <string name="menu_new_booking">New Booking</string>
     <string name="menu_my_booking">My Booking</string>
     <string name="menu_add_vehicle">Add Vehicle</string>
+    <string name="menu_assign_driver_to_vehicle">Assign D2V</string>
     <string name="men_track_your_booking">Track Your Booking</string>
     <string name="menu_rate_card">Rate Card</string>
     <string name="menu_wallet">Wallet</string>

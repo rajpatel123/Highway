@@ -89,10 +89,10 @@ public class AddNewDriverDetailsFragment extends Fragment {
         edtTxtDlNumber = view.findViewById(R.id.EdtTxtDlNumber);
         edtTxtDlExpireDate = view.findViewById(R.id.EdtTxtDlExpireDate);
         imgDatePicker = view.findViewById(R.id.ImgDatePicker);
-        vehicleSpinners = view.findViewById(R.id.VehicleSpinner);
+      //  vehicleSpinners = view.findViewById(R.id.VehicleSpinner);
         edtTxtDriverAddress = view.findViewById(R.id.EdtTxtEnterDriverAdd);
         btnAddNewDriver = view.findViewById(R.id.BtnAddNewDriver);
-        vehicleSpinnersList();
+      //  vehicleSpinnersList();
         clickListener();
         return view;
     }
@@ -107,25 +107,6 @@ public class AddNewDriverDetailsFragment extends Fragment {
             }
         });
 
-
-        vehicleSpinners.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (vehicleDropDownResponse != null && vehicleDropDownResponse.getData()!=null
-                        &&  vehicleDropDownResponse.getData().getVehicleData()!=null
-                        && vehicleDropDownResponse.getData().getVehicleData().size() > 0) {
-
-                    vehicleId = vehicleDropDownResponse.getData().getVehicleData().get(position).getVehicleId();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(view, "Nothing Show DataModel", Toast.LENGTH_SHORT).show();
-
-            }
-        });
         imgDatePicker.setOnClickListener(new View.OnClickListener() {
             private int mYear, mMonth, mDay;
 
@@ -147,6 +128,30 @@ public class AddNewDriverDetailsFragment extends Fragment {
                 datePickerDialog.show();
             }
         });
+
+
+
+//
+//      /*  vehicleSpinners.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                if (vehicleDropDownResponse != null && vehicleDropDownResponse.getData()!=null
+//                        &&  vehicleDropDownResponse.getData().getVehicleData()!=null
+//                        && vehicleDropDownResponse.getData().getVehicleData().size() > 0) {
+//
+//                    vehicleId = vehicleDropDownResponse.getData().getVehicleData().get(position).getVehicleId();
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                Toast.makeText(view, "Nothing Show DataModel", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });*/
+
+
     }
 
 
@@ -213,8 +218,8 @@ public class AddNewDriverDetailsFragment extends Fragment {
 
         VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
         user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
-        /*vehicleDropDownRequest.setUserId(user_Id);*/
-        vehicleDropDownRequest.setUserId("5");
+        vehicleDropDownRequest.setUserId(user_Id);
+       /* vehicleDropDownRequest.setUserId("5");*/
 
         RestClient.getVehicleList(vehicleDropDownRequest, new Callback<VehicleDropDownResponse>() {
             @Override
@@ -261,7 +266,7 @@ public class AddNewDriverDetailsFragment extends Fragment {
             addNewDriverRequest.setDriverDLNo(driverDlNo);
             addNewDriverRequest.setDlexpiryDate(dlExpireDate);
             addNewDriverRequest.setDriverAddress(driverAddress);
-            addNewDriverRequest.setVehicleId(vehicleId);
+          //  addNewDriverRequest.setVehicleId(vehicleId);
             userId = HighwayPrefs.getString(getActivity(),Constants.ID);
             /*addNewDriverRequest.setOwnerId("5");*/
             addNewDriverRequest.setOwnerId(userId);

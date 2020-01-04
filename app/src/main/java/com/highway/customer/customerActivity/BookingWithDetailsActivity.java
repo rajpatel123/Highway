@@ -99,7 +99,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     LinearLayout destLL;
     LinearLayout goodtype;
     private Button back_button;
-    TextView bookTruckTv;
+    public  TextView bookTruckTv;
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
@@ -138,8 +138,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         setContentView(R.layout.activity_booking_with_details);
 
-
-
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
         back_button = findViewById(R.id.back_button);
@@ -158,6 +156,15 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 finish();
             }
         });
+
+          bookTruckTv.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+
+              }
+          });
+
+
         initLocations(getIntent());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -441,7 +448,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 ///**********************
     @Override
     public void onLocationChanged(Location location) {
-      /*  mLastLocation = location;
+        mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
@@ -456,8 +463,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }*/
-
+        }
     }
 
 
@@ -579,17 +585,15 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     @Override
     public void onCLickTruck(int position) {
-
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
 
         for (Vehicle vehicle :vehicleList){
             vehicle.setSelected(false);
         }
-
-
-
     }
+
+
 
 
     private void showInfoDialog(Vehicle vehicle) {
@@ -638,8 +642,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         if (!isFinishing() && !dialog.isShowing())
             dialog.show();
-
-
     }
+
 
 }

@@ -80,9 +80,9 @@ public class AddNewVehicleDetailsFragment extends Fragment {
         edtTxtvehicleModelNos = view.findViewById(R.id.EdtTxtvehicleModelNos);
         edtTxtVehicleNos = view.findViewById(R.id.EdtTxtVehicleNos);
         btnAddNewVehicle = view.findViewById(R.id.BtnAddNewVehicle);
-        driversSpinner = view.findViewById(R.id.DriversSpinner);
+       // driversSpinner = view.findViewById(R.id.DriversSpinner);
         edtVehicleDescription = view.findViewById(R.id.EdtVehicleDescription);
-        driverList();
+      //  driverList();
         clickListener();
 
         return view;
@@ -99,23 +99,23 @@ public class AddNewVehicleDetailsFragment extends Fragment {
         });
 
 
-        driversSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (driverDropDownResponse != null && driverDropDownResponse.getData() != null
-                        && driverDropDownResponse.getData().getDriverData() != null
-                        && driverDropDownResponse.getData().getDriverData().size() > 0) {
-
-                    driverId = driverDropDownResponse.getData().getDriverData().get(position).getDriverId();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        driversSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                if (driverDropDownResponse != null && driverDropDownResponse.getData() != null
+//                        && driverDropDownResponse.getData().getDriverData() != null
+//                        && driverDropDownResponse.getData().getDriverData().size() > 0) {
+//
+//                    driverId = driverDropDownResponse.getData().getDriverData().get(position).getDriverId();
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
     }
 
@@ -215,7 +215,7 @@ public class AddNewVehicleDetailsFragment extends Fragment {
             addNewVehicleRequest.setVehicleNumber(vehicleNos);
             addNewVehicleRequest.setVehicleModelNo(vehicleModelNos);
             addNewVehicleRequest.setVehicleDescription(vehicleDescription);
-            addNewVehicleRequest.setDriverId(driverId);
+           //  addNewVehicleRequest.setDriverId(driverId);
             user_Id= HighwayPrefs.getString(getActivity(),Constants.ID);
             /*addNewVehicleRequest.setOwnerId("19");*/
             addNewVehicleRequest.setOwnerId(user_Id);

@@ -109,7 +109,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private NavigationView navigationView;
     String userRole;
     private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,getAllDriver,bookload;
+            about, share, send, gallery, tCondition, logout, addDriver,assignD2V, getAllVehicle,getAllDriver,bookload;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -154,6 +154,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         newBooking = menues.findItem(R.id.nav_new_booking);
         myBooking = menues.findItem(R.id.nav_my_booking);
         addVehicle = menues.findItem(R.id.nav_add_vehicle);
+        assignD2V = menues.findItem(R.id.nav_assign_D2V);
         millBooking = menues.findItem(R.id.nav_add_millBooking);
         wallet = menues.findItem(R.id.nav_wallet);
         notification = menues.findItem(R.id.nav_notification);
@@ -206,6 +207,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 millBooking.setVisible(false);
                 bookload.setVisible(true);
                 addVehicle.setVisible(false);
+                assignD2V.setVisible(false);
                 wallet.setVisible(true);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
@@ -227,6 +229,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
+                assignD2V.setVisible(false);
                 bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
@@ -250,9 +253,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
+                assignD2V.setVisible(false);
                 bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(true);
+                assignD2V.setVisible(false);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
                 help.setVisible(false);
@@ -276,6 +281,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 bookload.setVisible(false);
                 addVehicle.setVisible(true);
                 addDriver.setVisible(true);
+                assignD2V.setVisible(true);
                 getAllDriver.setVisible(true);
                 getAllVehicle.setVisible(true);
                 wallet.setVisible(false);
