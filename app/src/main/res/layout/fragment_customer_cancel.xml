@@ -6,7 +6,7 @@
     tools:context=".customers.customerFragment.CustomerCancelFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Cancled_RecyclerView"
+        android:id="@+id/CanRecyclerForCustomer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>

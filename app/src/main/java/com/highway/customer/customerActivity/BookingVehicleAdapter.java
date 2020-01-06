@@ -55,7 +55,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             public void onClick(View v) {
                 if (onClickEvents != null) {
                     onClickEvents.onCLickInfo(holder.getAdapterPosition());
-
                 }
             }
         });

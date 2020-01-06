@@ -6,10 +6,10 @@
     tools:context=".milluser.MillUserOnGoingFragment">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_ongoing_fragment" />
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/onGoingRecyForMillUser"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">\
+  </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

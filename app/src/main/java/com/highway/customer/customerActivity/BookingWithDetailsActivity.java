@@ -99,7 +99,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     LinearLayout destLL;
     LinearLayout goodtype;
     private Button back_button;
-    TextView bookTruckTv;
+    public  TextView bookTruckTv;
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
@@ -138,8 +138,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         setContentView(R.layout.activity_booking_with_details);
 
-
-
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
         back_button = findViewById(R.id.back_button);
@@ -158,6 +156,15 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 finish();
             }
         });
+
+          bookTruckTv.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                    
+              }
+          });
+
+
         initLocations(getIntent());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -258,14 +265,13 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             destLongitude = intent.getDoubleExtra("destLongitude", destLongitude);
             edtSourceLOcationEDT.setText("" + sourceName);
             edtDropLocation.setText("" + destName);
-
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+           // mCurrLocationMarker = mMap.addMarker(markerOptions1);
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-
-
-
+            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+//            mCurrLocationMarker = mMap.addMarker(markerOptions2);
         }
-
     }
 
 
@@ -439,26 +445,25 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
+///**********************
     @Override
     public void onLocationChanged(Location location) {
-//        mLastLocation = location;
-//        if (mCurrLocationMarker != null) {
-//            mCurrLocationMarker.remove();
-//        }
-//
-//        //Place current location marker
-//        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//
-//        //move map camera
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
-//
-//        //stop location updates
-//        if (mGoogleApiClient != null) {
-//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-//        }
+        mLastLocation = location;
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
 
+        //Place current location marker
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
     }
 
 
@@ -580,18 +585,15 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     @Override
     public void onCLickTruck(int position) {
-
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
-
 
         for (Vehicle vehicle :vehicleList){
             vehicle.setSelected(false);
         }
-
-
-
     }
+
+
 
 
     private void showInfoDialog(Vehicle vehicle) {
@@ -640,8 +642,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         if (!isFinishing() && !dialog.isShowing())
             dialog.show();
-
-
     }
+
 
 }

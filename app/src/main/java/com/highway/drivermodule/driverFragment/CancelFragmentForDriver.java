@@ -26,7 +26,7 @@ public class CancelFragmentForDriver extends Fragment {
     private RecyclerView recyclerViewForDriver;
     CancelTripAdapterForDriver cancelTripAdapterForDriver;
     DashBoardActivity dashBoardActivity;
-    public Context context;
+    Context context;
 
 
     public CancelFragmentForDriver() {

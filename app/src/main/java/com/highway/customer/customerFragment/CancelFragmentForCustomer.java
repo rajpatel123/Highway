@@ -5,16 +5,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
+import com.highway.customer.customerAdapter.CancleTripAdapterForCustomer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CancelFragmentForCustomer extends Fragment {
-    private RecyclerView cancleRecycler;
-
+    private RecyclerView canRecyclerForCustomer;
+    DashBoardActivity dashBoardActivity;
+    CancleTripAdapterForCustomer cancleTripAdapterForCustomer;
+    List<CancelTrip>cancelTrips = new ArrayList<>();
+    Context context;
 
     public CancelFragmentForCustomer() {
         // Required empty public constructor
@@ -40,9 +52,7 @@ public class CancelFragmentForCustomer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_customer_cancel, container, false);
-
-        cancleRecycler = view.findViewById(R.id.Cancled_RecyclerView);
-       // prepareList();
+        canRecyclerForCustomer = view.findViewById(R.id.CanRecyclerForCustomer);
         return view;
     }
 
@@ -50,12 +60,25 @@ public class CancelFragmentForCustomer extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        dashBoardActivity = (DashBoardActivity) getActivity();
 
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public void cancelUpdatedTripListForCustomer(List<CancelTrip>cancelTrips){
+        if (cancelTrips!=null && cancelTrips.size()>0){
+            cancleTripAdapterForCustomer = new CancleTripAdapterForCustomer(cancelTrips, getContext());
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+            canRecyclerForCustomer.setLayoutManager(layoutManager);
+            canRecyclerForCustomer.setItemAnimator(new DefaultItemAnimator());
+            canRecyclerForCustomer.setAdapter(cancleTripAdapterForCustomer);
+        }else{
+            Toast.makeText(dashBoardActivity, "No cancel trip data for customer !", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

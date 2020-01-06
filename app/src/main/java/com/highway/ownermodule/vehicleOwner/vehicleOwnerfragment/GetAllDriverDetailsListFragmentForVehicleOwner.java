@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllDriverDetailsListAdapterForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.Data;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.DriverDetail;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.GetAllDriverDetailsList.GetAllDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.Data;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.DriverDetail;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverResponse;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
@@ -67,14 +67,17 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
       //  Adapter yhi  initialize krna tha kyunki starting me driverDetails data nhi hoga aur     recyclerOperation();  me check ga hai ki size 0 se greater ho tbhi set kre  iski vjh se hi jb api response ata hai to adapter null mil jata hai
         getAllDriverDetailsListAdapterForVehicleOwner = new GetAllDriverDetailsListAdapterForVehicleOwner(driverDetails,getContext());
 
-
-        recyclerOperation();
-
         getAllDriverList();
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        recyclerOperation();
+
+    }
 
     public void getAllDriverList(){
         GetAllDriverRequest getAllDriverRequest = new GetAllDriverRequest();
@@ -94,6 +97,8 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
                        if (getAllDriverDetailsListAdapterForVehicleOwner !=null){
                            getAllDriverDetailsListAdapterForVehicleOwner.setData(driverDetails);
                            getAllDriverDetailsListAdapterForVehicleOwner.notifyDataSetChanged();
+                       }else{
+                           Toast.makeText(getActivity(), "No Driver list found", Toast.LENGTH_SHORT).show();
                        }
                     }
                 }
@@ -116,9 +121,9 @@ public class GetAllDriverDetailsListFragmentForVehicleOwner extends Fragment {
             getAllDriverListRecyc.setItemAnimator(new DefaultItemAnimator());
             getAllDriverListRecyc.setAdapter(getAllDriverDetailsListAdapterForVehicleOwner);
 
-        }else{
-            Toast.makeText(getActivity(), "Some thing is wrong", Toast.LENGTH_SHORT).show();
-        }
+        }/*else{
+            Toast.makeText(getActivity(), "Some thing is wrong", Toast.LENGTH_SHORT).show();*//*
+        }*/
 
     }
 

@@ -32,10 +32,11 @@ import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
-import com.highway.millmodule.milluserFragment.BookLoadFragmentForMillUser;
-import com.highway.millmodule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
+import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverDetailsFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleDetailsFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.Assign_D2V_FragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverDetailsListFragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleDetailsListFragmentForVehicleOwner;
@@ -60,6 +61,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardActivity dashBoardActivity;
     private AddNewVehicleDetailsFragment addNewVehicleDetailsFragment;
     private AddNewDriverDetailsFragment addNewDriverDetailsFragment;
+    private Assign_D2V_FragmentForVehicleOwner assign_d2V_fragmentForVehicleOwner;
     private GetAllVehicleDetailsListFragmentForVehicleOwner getAllVehicleDetailsListFragmentForVehicleOwner;
     private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
     GetAllDriverDetailsListFragmentForVehicleOwner getAllDriverDetailsListFragmentForVehicleOwner;
@@ -108,11 +110,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private TextView tvName, tvMobileNo, tvSetting;
     private NavigationView navigationView;
     String userRole;
-    private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver, getAllVehicle,getAllDriver,bookload;
+    private MenuItem newBooking, myBooking, millBooking, addVehicle, wallet, notification, rateCard, help,
+            about, share, send, gallery, tCondition, logout, addDriver, assignD2V, getAllVehicle, getAllDriver, bookload;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
+    WebViewActivity webViewActivity;
 
 
     @Override
@@ -153,6 +156,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         newBooking = menues.findItem(R.id.nav_new_booking);
         myBooking = menues.findItem(R.id.nav_my_booking);
         addVehicle = menues.findItem(R.id.nav_add_vehicle);
+        assignD2V = menues.findItem(R.id.nav_assign_D2V);
         millBooking = menues.findItem(R.id.nav_add_millBooking);
         wallet = menues.findItem(R.id.nav_wallet);
         notification = menues.findItem(R.id.nav_notification);
@@ -198,12 +202,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case "2":                                    //  mill user
+                Fragment fragment2 = NewBookingFragment.newInstance();
+                replaceFragment(fragment2);
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
                 bookload.setVisible(true);
                 addVehicle.setVisible(false);
-                wallet.setVisible(false);
+                assignD2V.setVisible(false);
+                wallet.setVisible(true);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
                 help.setVisible(false);
@@ -218,14 +225,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "3":
-
-                // Driver
-                Fragment fragment = DashBoardFragmentForDriver.newInstance();
-                replaceFragment(fragment);
+            case "3":                                              // Driver
+                Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
+                replaceFragment(fragment3);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
+                assignD2V.setVisible(false);
                 bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(false);
@@ -243,16 +249,17 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 logout.setVisible(true);
                 break;
 
-            case "4":
-                //  Customer
-                Fragment fragment1 = NewBookingFragment.newInstance();
-                replaceFragment(fragment1);
+            case "4":                                   //  Customer
+                Fragment fragment4 = NewBookingFragment.newInstance();
+                replaceFragment(fragment4);
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
+                assignD2V.setVisible(false);
                 bookload.setVisible(false);
                 addVehicle.setVisible(false);
                 wallet.setVisible(true);
+                assignD2V.setVisible(false);
                 notification.setVisible(false);
                 rateCard.setVisible(false);
                 help.setVisible(false);
@@ -268,14 +275,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case "5":                              // Owner .. vehicle Owner
-                Fragment fragment2 = NewBookingFragment.newInstance();
-                replaceFragment(fragment2);
+                Fragment fragment5 = NewBookingFragment.newInstance();
+                replaceFragment(fragment5);
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
                 bookload.setVisible(false);
                 addVehicle.setVisible(true);
                 addDriver.setVisible(true);
+                assignD2V.setVisible(true);
                 getAllDriver.setVisible(true);
                 getAllVehicle.setVisible(true);
                 wallet.setVisible(false);
@@ -294,6 +302,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     // onBacked pressed
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         //  for Nav Drawer
@@ -358,9 +367,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(fragment);*/
                         break;
                     case "2":
-                        dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
+                        if (dashBoardFragmentForMillUser == null) {
+                            dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
+                        }
                         replaceFragment(dashBoardFragmentForMillUser);
                         break;
+
                     case "3":
                         if (dashBoardFragmentForDriver == null) {
                             dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();
@@ -393,7 +405,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     case "1":
                         break;
                     case "2":
-                        if (bookLoadFragmentForMillUser == null){
+                        if (bookLoadFragmentForMillUser == null) {
                             bookLoadFragmentForMillUser = BookLoadFragmentForMillUser.newInstance();
                         }
                         replaceFragment(bookLoadFragmentForMillUser);
@@ -458,6 +470,28 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 }
                 break;
 
+            case R.id.nav_assign_D2V:
+                dashBoardToolbar.setTitle("Assign D2V");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        if (assign_d2V_fragmentForVehicleOwner == null) {
+                        }
+                        assign_d2V_fragmentForVehicleOwner = Assign_D2V_FragmentForVehicleOwner.newInstance();
+                        replaceFragment(assign_d2V_fragmentForVehicleOwner);
+                        break;
+                }
+                break;
 
             case R.id.nav_add_getAllDriver:
                 dashBoardToolbar.setTitle("All Driver Details");
@@ -495,7 +529,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
 
-                        if (getAllVehicleDetailsListFragmentForVehicleOwner == null){
+                        if (getAllVehicleDetailsListFragmentForVehicleOwner == null) {
                             getAllVehicleDetailsListFragmentForVehicleOwner = GetAllVehicleDetailsListFragmentForVehicleOwner.newInstance();
                         }
                         replaceFragment(getAllVehicleDetailsListFragmentForVehicleOwner);
@@ -522,8 +556,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
 
-                Intent intent1 = new Intent(this, WebViewActivity.class);
-                startActivity(intent1);
+               /* Intent intent1 = new Intent(this, WebViewActivity.class);
+                startActivity(intent1);*/
                 break;
 
             case R.id.nav_notification:
@@ -587,21 +621,29 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_trmCondition:
-                dashBoardToolbar.setTitle("Term & Condition");
+                // dashBoardToolbar.setTitle("Term & Condition");  // term and condition
                 switch (userRole) {
                     case "1":
                         break;
                     case "2":
-
+                        Intent intent2 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent2.putExtra("title", "Terms & Conditions");
+                        startActivity(intent2);
                         break;
                     case "3":
-
+                        Intent intent3 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent3.putExtra("title", "Terms & Conditions");
+                        startActivity(intent3);
                         break;
                     case "4":
-
+                        Intent intent4 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent4.putExtra("title", "Terms & Conditions");
+                        startActivity(intent4);
                         break;
                     case "5":
-
+                        Intent intent5 = new Intent(DashBoardActivity.this, WebViewActivity.class);
+                        intent5.putExtra("title", "Terms & Conditions");
+                        startActivity(intent5);
                         break;
                 }
                 break;
@@ -609,8 +651,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.nav_about:
 
-                dashBoardToolbar.setTitle("About");
-
+                //  dashBoardToolbar.setTitle("About");
                 switch (userRole) {
                     case "1":
                         break;
@@ -627,36 +668,32 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                 }
-
                 Intent intent = new Intent(this, WebViewActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.nav_share:
-                dashBoardToolbar.setTitle("Share");
+                //   dashBoardToolbar.setTitle("Share");
                 switch (userRole) {
                     case "1":
                         break;
                     case "2":
-
                         break;
                     case "3":
-
                         break;
                     case "4":
-
                         break;
                     case "5":
 
                         break;
                 }
-
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hello friends, the best app for medicos is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
+                        "Hello friends, the best app for Heighway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
                 sendIntent.setType("text/plain");
-                startActivity(sendIntent);
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
                 break;
 
             case R.id.nav_send:
@@ -678,7 +715,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
                 break;
-
 
 
             case R.id.nav_logout:
@@ -712,10 +748,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         finish();
 
     }
-
-
-
-
 
 
 }

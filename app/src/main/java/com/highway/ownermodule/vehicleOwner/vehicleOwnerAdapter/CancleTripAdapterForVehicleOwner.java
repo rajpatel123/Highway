@@ -38,6 +38,7 @@ public class CancleTripAdapterForVehicleOwner extends RecyclerView.Adapter<Cancl
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
        CancelTrip cancelTrip = cancelTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(cancelTrip.getSourceLat()),Double.parseDouble(cancelTrip.getSourceLong()));

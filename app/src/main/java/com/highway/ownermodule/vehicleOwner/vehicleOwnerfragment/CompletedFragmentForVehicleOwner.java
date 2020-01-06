@@ -79,9 +79,9 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
             this.dashBoardFragmentForVehicleOwner = dashBoardFragmentForVehicleOwner;
             completedTripAdapterForVehicleOwner = new CompletedTripAdapterForVehicleOwner(completedTrips, getContext());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-                completedRecycler.setLayoutManager(layoutManager);
-                completedRecycler.setItemAnimator(new DefaultItemAnimator());
-                completedRecycler.setAdapter(completedTripAdapterForVehicleOwner);
+            completedRecycler.setLayoutManager(layoutManager);
+            completedRecycler.setItemAnimator(new DefaultItemAnimator());
+            completedRecycler.setAdapter(completedTripAdapterForVehicleOwner);
 
 
         } else {

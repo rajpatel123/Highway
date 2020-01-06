@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Highway</string>
-<!--
+    <!--
 
     <string name="weight_of_load_items">Weight Of Load Items</string>
     <string-array name="approx_load_data">
@@ -40,6 +40,7 @@
     <string name="start">GOT IT</string>
 
     <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1__title">Welcome Food!</string>
     <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
 
     <string name="slide_2_title">Movie Tickets</string>
@@ -69,6 +70,7 @@
     <string name="menu_new_booking">New Booking</string>
     <string name="menu_my_booking">My Booking</string>
     <string name="menu_add_vehicle">Add Vehicle</string>
+    <string name="menu_assign_driver_to_vehicle">Assign D2V</string>
     <string name="men_track_your_booking">Track Your Booking</string>
     <string name="menu_rate_card">Rate Card</string>
     <string name="menu_wallet">Wallet</string>
@@ -142,6 +144,7 @@
     <string name="permission_denied_explanation">Location access denied</string>
     <string name="settings">Enable Location</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="vehicle_name_type"> Vehicle Name Type</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -200,6 +203,14 @@
     </array>
 
 
+    <string name="radio_button1">Wrong/Inappropriate Vehicle</string>
+    <string name="radio_button2">My reason is not listed</string>
+    <string name="radio_button3">Driver Asked me to cancel</string>
+    <string name="radio_button4">Driver is unprofessional</string>
+    <string name="radio_button5">Changed my mind</string>
+    <string name="radio_button6">Driver said he will be late</string>
+    <string name="radio_button7">Unable to connect driver</string>
+    <string name="radio_button8">Expacted a shorter arival time</string>
 
 
 </resources>

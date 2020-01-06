@@ -3,7 +3,6 @@ package com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,12 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.AddNewVehicleModel.AddNewVehicleResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.Data;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDatum;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.DriverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.Data;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleDatum;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -47,11 +47,16 @@ public class AddNewVehicleDetailsFragment extends Fragment {
     private Button btnAddNewVehicle;
     private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,user_Id;
     private Spinner driversSpinner;
+    public  Spinner vehiclesTypeSpinner;
     String textEd, txtEnd, isReached;
     String driverText;
+    private Spinner vehicleSpinners;
     List<String> driverNames;
+    List<String> vehicleNames;
     String driverId;
+    String vehicleTypeId;
     DriverDropDownResponse driverDropDownResponse;
+    VehicleTypeDropDowanResponse vehicleTypeDropDowanResponse;
 
     public AddNewVehicleDetailsFragment() {
         // Required empty public constructor
@@ -76,13 +81,13 @@ public class AddNewVehicleDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_new_vehicle, container, false);
 
-        edtTxtvehicleName = view.findViewById(R.id.EdtTxtvehicleName);
+        //edtTxtvehicleName = view.findViewById(R.id.EdtTxtvehicleName);
         edtTxtvehicleModelNos = view.findViewById(R.id.EdtTxtvehicleModelNos);
         edtTxtVehicleNos = view.findViewById(R.id.EdtTxtVehicleNos);
         btnAddNewVehicle = view.findViewById(R.id.BtnAddNewVehicle);
-        driversSpinner = view.findViewById(R.id.DriversSpinner);
+        vehiclesTypeSpinner = view.findViewById(R.id.VehicleTypeSpinner);
         edtVehicleDescription = view.findViewById(R.id.EdtVehicleDescription);
-        driverList();
+        vehicleSpinnersList();
         clickListener();
 
         return view;
@@ -98,43 +103,46 @@ public class AddNewVehicleDetailsFragment extends Fragment {
             }
         });
 
-
-        driversSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        vehiclesTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (driverDropDownResponse != null && driverDropDownResponse.getData() != null
-                        && driverDropDownResponse.getData().getDriverData() != null
-                        && driverDropDownResponse.getData().getDriverData().size() > 0) {
+                if (vehicleTypeDropDowanResponse != null && vehicleTypeDropDowanResponse.getData()!=null
+                        &&  vehicleTypeDropDowanResponse.getData().getVehicleData()!=null
+                        && vehicleTypeDropDowanResponse.getData().getVehicleData().size() > 0) {
 
-                    driverId = driverDropDownResponse.getData().getDriverData().get(position).getDriverId();
+                    vehicleTypeId = vehicleTypeDropDowanResponse.getData().getVehicleData().get(position).getVehicleTypeId();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getActivity(), "Nothing Show DataModel", Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
+
 
     }
 
     public boolean inputValidation() {
         boolean check = false;
 
-        vehicleName = edtTxtvehicleName.getText().toString().trim();
+        //vehicleName = edtTxtvehicleName.getText().toString().trim();
         vehicleModelNos = edtTxtvehicleModelNos.getText().toString().trim();
         vehicleNos = edtTxtVehicleNos.getText().toString().trim();
         vehicleDescription = edtVehicleDescription.getText().toString().trim();
 
-        if (vehicleName.isEmpty() && edtTxtvehicleName.length() != 3) {
+       /* if (vehicleName.isEmpty() && edtTxtvehicleName.length() != 3) {
             edtTxtvehicleName.setError("pls enter valid vehicle name.. max length 3");
             check = false;
         } else {
             edtTxtvehicleName.setError(null);
             check = true;
         }
-
+*/
         if (vehicleNos.isEmpty() && edtTxtVehicleNos.length() != 3) {
             edtTxtVehicleNos.setError("pls enter valid vehicle number.. max length 3");
             check = false;
@@ -162,71 +170,65 @@ public class AddNewVehicleDetailsFragment extends Fragment {
         return check;
     }
 
+    public void vehicleSpinnersList() {
 
-    public void driverList() {
+        VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest  = new VehicleTypeDropDowanRequest();
+        user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
+        vehicleTypeDropDowanRequest.setUserId(user_Id);
+        /* vehicleDropDownRequest.setUserId("5");*/
 
-        DriverDropDownRequest driverDropDownRequest = new DriverDropDownRequest();
-        user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
-        Log.d("Id",user_Id);
-        driverDropDownRequest.setUserId(user_Id);
-
-        RestClient.getDriverList(driverDropDownRequest, new Callback<DriverDropDownResponse>() {
+        RestClient.getVehicleTypeList(vehicleTypeDropDowanRequest, new Callback<VehicleTypeDropDowanResponse>() {
             @Override
-            public void onResponse(Call<DriverDropDownResponse> call, Response<DriverDropDownResponse> response) {
+            public void onResponse(Call<VehicleTypeDropDowanResponse> call, Response<VehicleTypeDropDowanResponse> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-                        driverDropDownResponse = response.body();
+                        vehicleTypeDropDowanResponse=response.body();
+                        Data data = vehicleTypeDropDowanResponse.getData();
+                        VehicleDatum vehicleDatum = new VehicleDatum();
+                        vehicleDatum.setVehicleName("-- Select Vehicle Type --");
+                        data.getVehicleData().add(0, vehicleDatum);
 
-                        Log.d("data",""+response.body());
-                        Data data = driverDropDownResponse.getData();
-                        DriverDatum driverDatum = new DriverDatum();
-                        driverDatum.setDriverName("---Select Driver Name---");
-                        data.getDriverData().add(0, driverDatum);
+                        if (data != null && data.getVehicleData().size() > 0) {
 
-                        if (data != null && data.getDriverData().size() > 0) {
+                            vehicleNames = new ArrayList<>();
 
-
-                            driverNames = new ArrayList<>();
-                            for (DriverDatum driverDatum1 : driverDropDownResponse.getData().getDriverData()) {
-                                driverNames.add(driverDatum1.getDriverName());
+                            for (VehicleDatum vehicleDatum1 : vehicleTypeDropDowanResponse.getData().getVehicleData()) {
+                                vehicleNames.add(vehicleDatum1.getVehicleName());
                             }
-
-                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, driverNames);
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, vehicleNames);
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            driversSpinner.setAdapter(dataAdapter);
+                            vehiclesTypeSpinner.setAdapter(dataAdapter);
                         }
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<DriverDropDownResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<VehicleTypeDropDowanResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "Failure", Toast.LENGTH_SHORT).show();
 
             }
         });
-
     }
 
     public void ValidationAddNewVehicle() {
 
         if (inputValidation()) {
-            AddNewVehicleRequest addNewVehicleRequest = new AddNewVehicleRequest();
-            addNewVehicleRequest.setVehicleName(vehicleName);
-            addNewVehicleRequest.setVehicleNumber(vehicleNos);
-            addNewVehicleRequest.setVehicleModelNo(vehicleModelNos);
-            addNewVehicleRequest.setVehicleDescription(vehicleDescription);
+            AddVehicleRequest addVehicleRequest = new AddVehicleRequest();
+            addVehicleRequest.setVehicleNumber(vehicleNos);
+            addVehicleRequest.setVehicleModelNo(vehicleModelNos);
+            addVehicleRequest.setVehicleDescription(vehicleDescription);
+            addVehicleRequest.setVehicleTypeId(vehicleTypeId);
             user_Id= HighwayPrefs.getString(getActivity(),Constants.ID);
-            /*addNewVehicleRequest.setOwnerId("19");*/
-            addNewVehicleRequest.setOwnerId(user_Id);
-
+            addVehicleRequest.setOwnerId(user_Id);
             Utils.showProgressDialog(getActivity());
-            RestClient.addNewVehicle(addNewVehicleRequest, new Callback<AddNewVehicleResponse>() {
+            RestClient.addNewVehicle(addVehicleRequest, new Callback<AddVehicleResponse>() {
                 @Override
-                public void onResponse(Call<AddNewVehicleResponse> call, Response<AddNewVehicleResponse> response) {
+                public void onResponse(Call<AddVehicleResponse> call, Response<AddVehicleResponse> response) {
                     Utils.dismissProgressDialog();
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
+                            //if (response.body().getId())
                             Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                             startActivity(intent);
                             getActivity().finish();
@@ -236,7 +238,7 @@ public class AddNewVehicleDetailsFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<AddNewVehicleResponse> call, Throwable t) {
+                public void onFailure(Call<AddVehicleResponse> call, Throwable t) {
                     Toast.makeText(getActivity(), "Faield Add Vehicle", Toast.LENGTH_SHORT).show();
                 }
             });

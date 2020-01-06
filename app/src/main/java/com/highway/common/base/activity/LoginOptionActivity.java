@@ -15,8 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.highway.R;
 import com.highway.customer.customerActivity.WelcomeActivityForCustomer;
 import com.highway.drivermodule.driverActivity.WelcomeDriverActivity;
-import com.highway.millmodule.milluserActivity.LoginActivityForMiller;
-import com.highway.millmodule.milluserActivity.WelcomeActivityForMiller;
+import com.highway.millUserModule.milluserActivity.WelcomeActivityForMiller;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity;
 
 public class LoginOptionActivity extends AppCompatActivity {
