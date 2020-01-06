@@ -14,8 +14,10 @@ import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDrop
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddNewVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddNewVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner.AssignD2VRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner.AssignD2VResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverRequest;
@@ -24,6 +26,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -61,7 +65,7 @@ public interface ApiInterface {
 
      // Add New Vehicle
     @POST("http://highway.vrok.in/index.php/api/Vehicle/addVehicle")
-    Call<AddNewVehicleResponse>addNewVehicleResponseCall(@Body AddNewVehicleRequest addNewVehicleRequest);
+    Call<AddVehicleResponse>addVehicleResponseCall(@Body AddVehicleRequest addVehicleRequest);
 
     // Add new Driver
     @POST("http://highway.vrok.in/index.php/api/Login/addDriver")
@@ -71,9 +75,17 @@ public interface ApiInterface {
    @POST("http://highway.vrok.in/index.php/api/vehicle/driverDropdown")
     Call<DriverDropDownResponse>driverDataResponse(@Body DriverDropDownRequest driverDropDownRequest);
 
-   // vehicle drop dowan --spinner for vehicle owners
+   // vehicle drop dowan --spinner for vehicle owners for Add new Vehicle
+    @POST("http://highway.vrok.in/api/Vehicle/vehicleTypeDropdown")
+    Call<VehicleTypeDropDowanResponse>vehicleTypeDropDowanResp(@Body VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest);
+
+
     @POST("http://highway.vrok.in/index.php/api/vehicle/vehicleDropdown")
     Call<VehicleDropDownResponse> vehicleDataResponse(@Body VehicleDropDownRequest vehicleDropDownRequest);      //Call<VehicleDropDownResponse> vehicleData();
+
+    // Assign Driver 2 vehicle
+    @POST("http://highway.vrok.in/api/Vehicle/assignDriverToVehicle")
+    Call<AssignD2VResponse>assignD2VReq(@Body AssignD2VRequest assignD2VRequest);
 
     // Goods  Types ----Spinners
     @POST("http://highway.vrok.in/index.php/api/trip/goodType")

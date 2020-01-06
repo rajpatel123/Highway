@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -89,7 +88,7 @@ public class AddNewDriverDetailsFragment extends Fragment {
         edtTxtDlNumber = view.findViewById(R.id.EdtTxtDlNumber);
         edtTxtDlExpireDate = view.findViewById(R.id.EdtTxtDlExpireDate);
         imgDatePicker = view.findViewById(R.id.ImgDatePicker);
-      //  vehicleSpinners = view.findViewById(R.id.VehicleSpinner);
+       // vehicleSpinners = view.findViewById(R.id.VehicleSpinner);
         edtTxtDriverAddress = view.findViewById(R.id.EdtTxtEnterDriverAdd);
         btnAddNewDriver = view.findViewById(R.id.BtnAddNewDriver);
       //  vehicleSpinnersList();

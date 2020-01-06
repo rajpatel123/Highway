@@ -36,6 +36,7 @@ import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverDetailsFragment;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleDetailsFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.Assign_D2V_FragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverDetailsListFragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleDetailsListFragmentForVehicleOwner;
@@ -60,6 +61,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBoardActivity dashBoardActivity;
     private AddNewVehicleDetailsFragment addNewVehicleDetailsFragment;
     private AddNewDriverDetailsFragment addNewDriverDetailsFragment;
+    private Assign_D2V_FragmentForVehicleOwner assign_d2V_fragmentForVehicleOwner;
     private GetAllVehicleDetailsListFragmentForVehicleOwner getAllVehicleDetailsListFragmentForVehicleOwner;
     private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
     GetAllDriverDetailsListFragmentForVehicleOwner getAllDriverDetailsListFragmentForVehicleOwner;
@@ -108,8 +110,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private TextView tvName, tvMobileNo, tvSetting;
     private NavigationView navigationView;
     String userRole;
-    private MenuItem newBooking, myBooking, millBooking,addVehicle, wallet, notification, rateCard, help,
-            about, share, send, gallery, tCondition, logout, addDriver,assignD2V, getAllVehicle,getAllDriver,bookload;
+    private MenuItem newBooking, myBooking, millBooking, addVehicle, wallet, notification, rateCard, help,
+            about, share, send, gallery, tCondition, logout, addDriver, assignD2V, getAllVehicle, getAllDriver, bookload;
     private MenuItem item;
     private Button btnLogOut;
     Intent intent;
@@ -300,6 +302,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     // onBacked pressed
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         //  for Nav Drawer
@@ -364,7 +367,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(fragment);*/
                         break;
                     case "2":
-                        if (dashBoardFragmentForMillUser==null){
+                        if (dashBoardFragmentForMillUser == null) {
                             dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
                         }
                         replaceFragment(dashBoardFragmentForMillUser);
@@ -402,7 +405,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     case "1":
                         break;
                     case "2":
-                        if (bookLoadFragmentForMillUser == null){
+                        if (bookLoadFragmentForMillUser == null) {
                             bookLoadFragmentForMillUser = BookLoadFragmentForMillUser.newInstance();
                         }
                         replaceFragment(bookLoadFragmentForMillUser);
@@ -467,6 +470,28 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 }
                 break;
 
+            case R.id.nav_assign_D2V:
+                dashBoardToolbar.setTitle("Assign D2V");
+                switch (userRole) {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        if (assign_d2V_fragmentForVehicleOwner == null) {
+                        }
+                        assign_d2V_fragmentForVehicleOwner = Assign_D2V_FragmentForVehicleOwner.newInstance();
+                        replaceFragment(assign_d2V_fragmentForVehicleOwner);
+                        break;
+                }
+                break;
 
             case R.id.nav_add_getAllDriver:
                 dashBoardToolbar.setTitle("All Driver Details");
@@ -504,7 +529,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
 
-                        if (getAllVehicleDetailsListFragmentForVehicleOwner == null){
+                        if (getAllVehicleDetailsListFragmentForVehicleOwner == null) {
                             getAllVehicleDetailsListFragmentForVehicleOwner = GetAllVehicleDetailsListFragmentForVehicleOwner.newInstance();
                         }
                         replaceFragment(getAllVehicleDetailsListFragmentForVehicleOwner);
@@ -596,7 +621,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_trmCondition:
-              // dashBoardToolbar.setTitle("Term & Condition");  // term and condition
+                // dashBoardToolbar.setTitle("Term & Condition");  // term and condition
                 switch (userRole) {
                     case "1":
                         break;
@@ -626,7 +651,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case R.id.nav_about:
 
-              //  dashBoardToolbar.setTitle("About");
+                //  dashBoardToolbar.setTitle("About");
                 switch (userRole) {
                     case "1":
                         break;
@@ -648,7 +673,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_share:
-             //   dashBoardToolbar.setTitle("Share");
+                //   dashBoardToolbar.setTitle("Share");
                 switch (userRole) {
                     case "1":
                         break;
@@ -692,7 +717,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
 
-
             case R.id.nav_logout:
                 logOut();
         }
@@ -724,10 +748,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         finish();
 
     }
-
-
-
-
 
 
 }

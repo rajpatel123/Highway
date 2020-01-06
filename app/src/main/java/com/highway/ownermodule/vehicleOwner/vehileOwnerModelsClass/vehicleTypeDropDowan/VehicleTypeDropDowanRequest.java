@@ -1,9 +1,9 @@
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleDropDownRequest {
+public class VehicleTypeDropDowanRequest {
 
 @SerializedName("user_id")
 @Expose

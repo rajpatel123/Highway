@@ -1,10 +1,9 @@
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel;
-
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AddNewVehicleResponse {
+public class AssignD2VResponse {
 
 @SerializedName("status")
 @Expose

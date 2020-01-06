@@ -14,8 +14,10 @@ import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDrop
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddNewVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddNewVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner.AssignD2VRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner.AssignD2VResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverRequest;
@@ -24,6 +26,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -61,8 +65,8 @@ public class RestClient {
    }
 
     // Add new vehicle
-    public static void addNewVehicle(AddNewVehicleRequest addNewVehicleRequest, Callback<AddNewVehicleResponse>addNewVehicleResponseCallback){
-        RetrofitClient.getClient().addNewVehicleResponseCall(addNewVehicleRequest).enqueue(addNewVehicleResponseCallback);
+    public static void addNewVehicle(AddVehicleRequest addVehicleRequest, Callback<AddVehicleResponse>addVehicleResponseCallback){
+        RetrofitClient.getClient().addVehicleResponseCall(addVehicleRequest).enqueue(addVehicleResponseCallback);
     }
     //add new Driver
 
@@ -75,13 +79,18 @@ public class RestClient {
        RetrofitClient.getClient().driverDataResponse(driverDropDownRequest).enqueue(driverDropDownResponseCallback);
    }
 
-   // vehicle drop dowan -- spinners for owner
-    public static void getVehicleList(VehicleDropDownRequest vehicleDropDownRequest, Callback<VehicleDropDownResponse>vehicleDropDownResponseCallback){
+   // vehicle Type drop dowan -- spinners for owner for add new vehicle
+    public  static void getVehicleTypeList(VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest, Callback<VehicleTypeDropDowanResponse>vehicleTypeDropDowanResponseCallback){
+        RetrofitClient.getClient().vehicleTypeDropDowanResp(vehicleTypeDropDowanRequest).enqueue(vehicleTypeDropDowanResponseCallback);
+    }
+
+    // vehicle list spinner in AssignD2s
+   public static void getVehicleList(VehicleDropDownRequest vehicleDropDownRequest, Callback<VehicleDropDownResponse>vehicleDropDownResponseCallback){
         RetrofitClient.getClient().vehicleDataResponse(vehicleDropDownRequest).enqueue(vehicleDropDownResponseCallback);
     }
 
-   /* public static void getVehicleList(Callback<VehicleDropDownResponse> callback) {
-        RetrofitClient.getClient().vehicleData().enqueue(callback);
+  /*  public static void getVehicleList(Callback<VehicleDropDownResponse> callback) {
+        RetrofitClient.getClient().vehicleData().enqueue(callback);   // ByPart
     }*/
 
    // Approx Load spinners
@@ -90,7 +99,6 @@ public class RestClient {
    }
 
    // Goods types Spinners
-
    public static void getGoodsTypesLIst(GoodsTypeDropDownRequest goodsTypeDropDownRequest, Callback<GoodsTypesDropDownResponse>goodsTypeResponseCallback){
        RetrofitClient.getClient().goodsTypesResponse(goodsTypeDropDownRequest).enqueue(goodsTypeResponseCallback);
    }
@@ -105,5 +113,8 @@ public class RestClient {
        RetrofitClient.getClient().getVehicleResponse(getAllVehicleDetailsRequest).enqueue(getAllVehicleDetailsResponseCallback);
     }
 
-
+    // Assign Driver 2 vehicle
+        public  static void assign_D2V(AssignD2VRequest assignD2VRequest , Callback<AssignD2VResponse> assignD2VResponseCallback){
+       RetrofitClient.getClient().assignD2VReq(assignD2VRequest).enqueue(assignD2VResponseCallback);
+        }
 }

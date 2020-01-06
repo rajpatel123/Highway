@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Data {
+public class DataModel {
 
     @SerializedName("driver_data")
     @Expose

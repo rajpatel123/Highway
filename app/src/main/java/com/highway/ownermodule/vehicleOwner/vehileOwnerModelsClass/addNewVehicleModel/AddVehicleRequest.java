@@ -3,14 +3,14 @@ package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicl
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AddNewVehicleRequest {
+public class AddVehicleRequest {
 
 @SerializedName("owner_id")
 @Expose
 private String ownerId;
-@SerializedName("vehicleName")
+@SerializedName("vehicle_type_id")
 @Expose
-private String vehicleName;
+private String vehicleTypeId;
 @SerializedName("vehicleNumber")
 @Expose
 private String vehicleNumber;
@@ -20,9 +20,6 @@ private String vehicleModelNo;
 @SerializedName("vehicleDescription")
 @Expose
 private String vehicleDescription;
-@SerializedName("driverId")
-@Expose
-private String driverId;
 
 public String getOwnerId() {
 return ownerId;
@@ -32,12 +29,12 @@ public void setOwnerId(String ownerId) {
 this.ownerId = ownerId;
 }
 
-public String getVehicleName() {
-return vehicleName;
+public String getVehicleTypeId() {
+return vehicleTypeId;
 }
 
-public void setVehicleName(String vehicleName) {
-this.vehicleName = vehicleName;
+public void setVehicleTypeId(String vehicleTypeId) {
+this.vehicleTypeId = vehicleTypeId;
 }
 
 public String getVehicleNumber() {
@@ -62,14 +59,6 @@ return vehicleDescription;
 
 public void setVehicleDescription(String vehicleDescription) {
 this.vehicleDescription = vehicleDescription;
-}
-
-public String getDriverId() {
-return driverId;
-}
-
-public void setDriverId(String driverId) {
-this.driverId = driverId;
 }
 
 }
