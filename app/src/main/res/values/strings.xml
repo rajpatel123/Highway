@@ -203,4 +203,14 @@
     </array>
 
 
+    <string name="radio_button1">Wrong/Inappropriate Vehicle</string>
+    <string name="radio_button2">My reason is not listed</string>
+    <string name="radio_button3">Driver Asked me to cancel</string>
+    <string name="radio_button4">Driver is unprofessional</string>
+    <string name="radio_button5">Changed my mind</string>
+    <string name="radio_button6">Driver said he will be late</string>
+    <string name="radio_button7">Unable to connect driver</string>
+    <string name="radio_button8">Expacted a shorter arival time</string>
+
+
 </resources>

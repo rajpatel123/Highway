@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity"></activity>
+        <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason"></activity>
+        <activity android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -84,7 +84,7 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
         btnAssignD2V = view.findViewById(R.id.BtnAssignD2V);
 
 
-        getdriverListSpinner();
+        //getdriverListSpinner();
         getVehicleListSpinner();
 
         clickListener();
