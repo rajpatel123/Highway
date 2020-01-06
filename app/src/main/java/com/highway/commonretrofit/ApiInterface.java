@@ -16,16 +16,16 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverT
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner.AssignD2VRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner.AssignD2VResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.assignD2V_Model.AssignD2VRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.assignD2V_Model.AssignD2VResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
 
@@ -71,21 +71,22 @@ public interface ApiInterface {
     @POST("http://highway.vrok.in/index.php/api/Login/addDriver")
     Call<AddNewDriverResponse>addNewDriverResponseCall(@Body AddNewDriverRequest addNewDriverRequest);
 
-  // Driver drop down ----spinners
-   @POST("http://highway.vrok.in/index.php/api/vehicle/driverDropdown")
-    Call<DriverDropDownResponse>driverDataResponse(@Body DriverDropDownRequest driverDropDownRequest);
-
-   // vehicle drop dowan --spinner for vehicle owners for Add new Vehicle
+   // vehicle type drop dowan --spinner for vehicle owners for Add new Vehicle
     @POST("http://highway.vrok.in/api/Vehicle/vehicleTypeDropdown")
     Call<VehicleTypeDropDowanResponse>vehicleTypeDropDowanResp(@Body VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest);
 
+    // Driver drop down ----spinners
+    @POST("http://highway.vrok.in/index.php/api/vehicle/driverDropdown")
+    Call<DriverDropDownResponse>driverDataResponse(@Body DriverDropDownRequest driverDropDownRequest);
 
+    //vehicle drop dowan --spinner for AssignD2V
     @POST("http://highway.vrok.in/index.php/api/vehicle/vehicleDropdown")
-    Call<VehicleDropDownResponse> vehicleDataResponse(@Body VehicleDropDownRequest vehicleDropDownRequest);      //Call<VehicleDropDownResponse> vehicleData();
+    Call<VehicleDropDowanResponse> vehicleDataResponse(@Body VehicleDropDowanRequest vehicleDropDownRequest);
 
     // Assign Driver 2 vehicle
     @POST("http://highway.vrok.in/api/Vehicle/assignDriverToVehicle")
     Call<AssignD2VResponse>assignD2VReq(@Body AssignD2VRequest assignD2VRequest);
+
 
     // Goods  Types ----Spinners
     @POST("http://highway.vrok.in/index.php/api/trip/goodType")
@@ -101,6 +102,5 @@ public interface ApiInterface {
 
     @POST("http://highway.vrok.in/index.php/api/Vehicle/getAllVehicleDetails")
     Call<GetAllVehicleDetailsResponse>getVehicleResponse(@Body GetAllVehicleDetailsRequest getAllVehicleDetailsRequest);
-
 
 }

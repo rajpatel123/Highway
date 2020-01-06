@@ -25,10 +25,6 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.Data;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDatum;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDropDown_Spinners.VehicleDropDownResponse;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -53,8 +49,6 @@ public class AddNewDriverDetailsFragment extends Fragment {
     private DatePickerDialog datePickerDialog;
     private Activity view;
     private Spinner vehicleSpinners;
-    VehicleDropDownResponse vehicleDropDownResponse;
-    Data data;
     private String vehicleId;
     List<String> vehicleNames;
     private String userId;
@@ -129,28 +123,6 @@ public class AddNewDriverDetailsFragment extends Fragment {
         });
 
 
-
-//
-//      /*  vehicleSpinners.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//                if (vehicleDropDownResponse != null && vehicleDropDownResponse.getData()!=null
-//                        &&  vehicleDropDownResponse.getData().getVehicleData()!=null
-//                        && vehicleDropDownResponse.getData().getVehicleData().size() > 0) {
-//
-//                    vehicleId = vehicleDropDownResponse.getData().getVehicleData().get(position).getVehicleId();
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                Toast.makeText(view, "Nothing Show DataModel", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });*/
-
-
     }
 
 
@@ -213,46 +185,6 @@ public class AddNewDriverDetailsFragment extends Fragment {
 
     }
 
-    public void vehicleSpinnersList() {
-
-        VehicleDropDownRequest vehicleDropDownRequest = new VehicleDropDownRequest();
-        user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
-        vehicleDropDownRequest.setUserId(user_Id);
-       /* vehicleDropDownRequest.setUserId("5");*/
-
-        RestClient.getVehicleList(vehicleDropDownRequest, new Callback<VehicleDropDownResponse>() {
-            @Override
-            public void onResponse(Call<VehicleDropDownResponse> call, Response<VehicleDropDownResponse> response) {
-                if (response.body() != null) {
-                    if (response.body().getStatus()) {
-                        vehicleDropDownResponse=response.body();
-                        Data data = vehicleDropDownResponse.getData();
-                        VehicleDatum vehicleDatum = new VehicleDatum();
-                        vehicleDatum.setVehicleName("--Select Vehicle--");
-                        data.getVehicleData().add(0, vehicleDatum);
-
-                        if (data != null && data.getVehicleData().size() > 0) {
-
-                            vehicleNames = new ArrayList<>();
-
-                            for (VehicleDatum vehicleDatum1 : vehicleDropDownResponse.getData().getVehicleData()) {
-                                vehicleNames.add(vehicleDatum1.getVehicleName());
-                            }
-                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, vehicleNames);
-                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            vehicleSpinners.setAdapter(dataAdapter);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<VehicleDropDownResponse> call, Throwable t) {
-                Toast.makeText(view, "Failure", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
 
 
     public void ValidationAddDriver() {

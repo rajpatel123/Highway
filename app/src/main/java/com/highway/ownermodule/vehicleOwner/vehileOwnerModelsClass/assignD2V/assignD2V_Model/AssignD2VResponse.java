@@ -1,4 +1,4 @@
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V_Spinner;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.assignD2V_Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

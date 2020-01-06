@@ -144,6 +144,7 @@
     <string name="permission_denied_explanation">Location access denied</string>
     <string name="settings">Enable Location</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="vehicle_name_type"> Vehicle Name Type</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>

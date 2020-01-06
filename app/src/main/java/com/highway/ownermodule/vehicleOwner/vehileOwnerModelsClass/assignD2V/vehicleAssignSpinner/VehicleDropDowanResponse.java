@@ -1,17 +1,17 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.driverDropDown_Spinners;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DriverDropDownResponse {
+public class VehicleDropDowanResponse {
 
     @SerializedName("status")
     @Expose
     private Boolean status;
     @SerializedName("data")
     @Expose
-    private DataModel data;
+    private DataV data;
 
     public Boolean getStatus() {
         return status;
@@ -21,11 +21,11 @@ public class DriverDropDownResponse {
         this.status = status;
     }
 
-    public DataModel getData() {
+    public DataV getData() {
         return data;
     }
 
-    public void setData(DataModel data) {
+    public void setData(DataV data) {
         this.data = data;
     }
 
