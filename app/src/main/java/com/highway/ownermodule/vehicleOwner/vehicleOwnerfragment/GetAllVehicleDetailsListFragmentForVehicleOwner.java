@@ -118,14 +118,13 @@ public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
                         }else{
                             Toast.makeText(getActivity(), "No vehicle list found", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<GetAllVehicleDetailsResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "No vehicle list found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
 

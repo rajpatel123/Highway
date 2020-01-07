@@ -296,7 +296,6 @@
                             android:singleLine="true"
                             android:text="Home Shifting"
                             android:textColor="@color/colorPrimary"
-
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>

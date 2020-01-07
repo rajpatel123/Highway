@@ -160,7 +160,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
           bookTruckTv.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                    
+
+                 Intent intent = new Intent(getApplicationContext(),TripBookingActivity.class);
+                 startActivity(intent);
+                 finish();
               }
           });
 

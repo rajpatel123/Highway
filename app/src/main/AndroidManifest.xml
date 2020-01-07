@@ -25,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason"></activity>
+        <activity android:name=".customer.customerActivity.DropActivity"></activity>
+        <activity android:name=".customer.customerActivity.TripBookingActivity" />
+        <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason" />
         <activity android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity" />
 
         <meta-data

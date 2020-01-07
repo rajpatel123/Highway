@@ -168,7 +168,6 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                             for (DriverDatum driverDatum1 : driverDropDownResponse.getData().getDriverData()) {
                                 driverNames.add(driverDatum1.getDriverName());
                             }
-
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, driverNames);
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             driversSpinner.setAdapter(dataAdapter);
