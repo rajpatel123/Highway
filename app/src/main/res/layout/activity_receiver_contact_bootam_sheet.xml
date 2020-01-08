@@ -1,37 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/darkwhite"
     tools:context=".customer.customerActivity.ReceiverContactBootamSheetActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_top_10"
+        android:layout_marginEnd="@dimen/margin_right_10"
+        android:layout_marginStart="@dimen/margin_right_10"
+        android:background="@drawable/conform_booking_backgound"
+        android:orientation="vertical"
+        android:padding="5dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_marginTop="8dp"
-        android:text="@string/action_receiver_contact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        style="@style/ActionItem" />
+        <TextView
+            android:id="@+id/textView"
+            style="@style/ActionItem"
+            android:layout_marginTop="8dp"
+            android:text="@string/action_receiver_contact"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:text="@string/action_upload"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        style="@style/ActionItem"
-        />
-    <TextView
-        android:id="@+id/textView3"
-        android:text="@string/action_copy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        style="@style/ActionItem"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/ActionItem"
+            android:text="@string/driver_on_the_way_to_pickup"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtTv1"
+            style="@style/ActionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+        </com.google.android.material.textfield.TextInputEditText>
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtTv2"
+            style="@style/ActionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTv1">
+        </com.google.android.material.textfield.TextInputEditText>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_2"
+            android:background="@drawable/rounded_btn_shape"
+            android:gravity="center"
+            android:maxHeight="@dimen/margin_height_50"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingBottom="@dimen/padding_bottom_15"
+            android:text="Conform Book "
+            android:layout_marginTop="@dimen/margin_top_30"
+            android:layout_marginBottom="@dimen/margin_bottom_15"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_20"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTv2"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
