@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".customer.customerActivity.DropActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -22,29 +23,40 @@
             android:elevation="@dimen/_10dp"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/back_arrow_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:paddingLeft="@dimen/_10dp"
+                android:paddingRight="@dimen/_10dp"
                 android:text="Drop at"
-                android:textStyle="bold"
-                android:textSize="@dimen/size_16"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_16"
+                android:textStyle="bold" />
 
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:background="@color/darkwhite" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -58,7 +70,7 @@
                 android:background="@color/white"
                 android:elevation="@dimen/_16dp"
                 android:orientation="horizontal"
-                android:padding="@dimen/margin_5"/>
+                android:padding="@dimen/margin_5" />
 
             <LinearLayout
                 android:id="@+id/linearPickup"
@@ -101,191 +113,156 @@
                             android:cursorVisible="false"
                             android:ellipsize="end"
                             android:enabled="true"
-                            android:hint="Drop location"
+                            android:hint="Jpr Technosoft llp,B67,B Block noida sec 65 "
                             android:paddingLeft="@dimen/_10dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:textColor="@color/black" />
                     </RelativeLayout>
                 </LinearLayout>
 
-
             </LinearLayout>
-
-            <fragment
-                android:id="@+id/map"
-                class="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center" />
+            <!--
+                        <fragment
+                            android:id="@+id/map"
+                            class="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center" />-->
 
 
         </FrameLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/bottomView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            app:cardCornerRadius="@dimen/_10dp"
-            android:layout_alignParentBottom="true">
+    </LinearLayout>
 
-            <!--<View
-                android:layout_width="@dimen/margin_top_30dp"
-                android:layout_height="8px"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_5"
-                android:background="@color/green" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:layout_weight="3"
+            android:background="@drawable/conform_booking_backgound"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/cardview_back_ground"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginEnd="@dimen/_10dp"
                 android:orientation="vertical">
 
-                <View
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_5"
-                    android:background="@color/email_gray" />
+                    android:layout_height="wrap_content"
+                    android:text="Driver will Call this contect while deliver"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_25"
+                android:layout_marginTop="@dimen/margin_top_15"
+                android:layout_marginEnd="@dimen/margin_30">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_5"
+                        android:text="8285886155"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_5"
+                        android:text="Mohan Kumar"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/margin_20"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="end|center_vertical">
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/margin_5"
-                                android:layout_weight="1"
-                                android:text="8285886155"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-
-                            <EditText
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginStart="@dimen/margin_5"
-                                android:layout_marginEnd="@dimen/margin_5"
-                                android:background="@drawable/edit_text_back_ground"
-                                android:gravity="end|center_vertical"
-                                android:inputType="textCapWords"
-                                android:paddingTop="@dimen/padding_8"
-                                android:paddingBottom="@dimen/padding_8"
-                                android:paddingRight="@dimen/padding_right_20"
-                                android:paddingLeft="@dimen/padding_right_20"
-                                android:text="Edit"
-                                android:textColor="@color/greenmoney"
-                                android:textSize="13sp" />
-
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_5"
-                            android:layout_weight="1"
-                            android:text="Mohan Kumar"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
-
-                    </LinearLayout>
-
-                   <!-- <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2px"
-                        android:layout_margin="@dimen/margin_5"
-                        android:background="@color/quantum_grey" />-->
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:layout_marginEnd="@dimen/margin_5"
+                        android:background="@drawable/edit_text_back_ground"
+                        android:inputType="textCapWords"
+                        android:paddingLeft="@dimen/padding_right_20"
+                        android:paddingTop="@dimen/padding_8"
+                        android:paddingRight="@dimen/padding_right_20"
+                        android:paddingBottom="@dimen/padding_8"
+                        android:text="Edit"
+                        android:textColor="@color/greenmoney"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight=".7"
-                    android:paddingBottom="@dimen/margin_10"
-                    android:layout_marginTop="20dp"
-                    app:cardUseCompatPadding="true">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/margin_10"
-                        android:layout_marginEnd="@dimen/margin_10">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingBottom="@dimen/_10dp">
-
-
-                            <!--<TextView
-                                android:id="@+id/bookTruckTv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="35dp"
-                                android:layout_marginLeft="@dimen/margin_2"
-                                android:background="@drawable/btn_shape_draw"
-                                android:gravity="center"
-                                android:maxHeight="@dimen/margin_40"
-                                android:paddingStart="@dimen/margin_20"
-                                android:paddingEnd="@dimen/margin_20"
-                                android:text="BOOK TATA ACE"
-                                android:textColor="@color/white" />-->
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/bookTruckTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:layout_marginLeft="@dimen/margin_2"
-                            android:background="@drawable/rounded_btn_shape"
-                            android:gravity="center"
-                            android:maxHeight="@dimen/margin_40"
-                            android:paddingStart="@dimen/margin_20"
-                            android:paddingEnd="@dimen/margin_20"
-                            android:text="Conform Booking "
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/size_20"
-                            android:textStyle="bold"/>
-
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginEnd="@dimen/margin_30"
+                android:gravity="center">
 
+
+                <TextView
+                    android:id="@+id/bookTruckTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_2"
+                    android:background="@drawable/rounded_btn_shape"
+                    android:gravity="center"
+                    android:maxHeight="@dimen/margin_height_50"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingBottom="@dimen/padding_bottom_15"
+                    android:text="Conform Book "
+                    android:layout_marginTop="@dimen/margin_top_20"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_20"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
