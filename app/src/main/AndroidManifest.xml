@@ -26,11 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".customer.customerActivity.ReceiverContactBootamSheetActivity"></activity>
         <activity android:name=".customer.customerActivity.DropActivity" />
-         <activity android:name=".customer.customerActivity.TripBookingActivity" />
+        <activity android:name=".customer.customerActivity.TripBookingActivity" />
         <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason" />
         <activity android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity" />
-
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -39,9 +39,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" /> <!-- <activity -->
         <activity
-            android:name=".TryActivity"
+            android:name=".common.base.activity.SplashActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -180,7 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_25"
-                android:layout_marginTop="@dimen/margin_top_15"
+                android:layout_marginTop="@dimen/margin_top_20"
                 android:layout_marginEnd="@dimen/margin_30">
 
                 <LinearLayout

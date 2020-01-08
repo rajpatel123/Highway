@@ -123,6 +123,13 @@
     <string name="driver_will_call_this_contect_while_delivery">Driver will call this contect while delivery</string>
     <string name="enter_otp_on_phone">Enter the otp send on your phone</string>
     <string name="search">Search</string>
+
+    <string name="app_name_bootom_sheet">Bottom Sheet Dialog Fragment</string>
+    <string name="action_share">Share</string>
+    <string name="action_receiver_contact">Receiver Contact</string>
+    <string name="action_diver_will_call">Driver will call the contact while delivery</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_print">Print</string>
     <string name="bangalore_international_airport_pvt_ltd">Bangalore international airport pvt ltd</string>
     <string name="add_another_drop_location">Add another drop location</string>
     <string name="Pune_Airport">Pune Airport</string>
