@@ -8,6 +8,8 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataRequest;
+import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -103,4 +105,7 @@ public interface ApiInterface {
     @POST("http://highway.vrok.in/index.php/api/Vehicle/getAllVehicleDetails")
     Call<GetAllVehicleDetailsResponse>getVehicleResponse(@Body GetAllVehicleDetailsRequest getAllVehicleDetailsRequest);
 
+    //Goods type Data Booking With details Activity
+    @POST("http://highway.vrok.in/api/Trip/dropdownGoodType")
+    Call<GoodsTypeDataResponse>goodsTypeDataResponse(@Body GoodsTypeDataRequest goodsTypeDataRequest);
 }

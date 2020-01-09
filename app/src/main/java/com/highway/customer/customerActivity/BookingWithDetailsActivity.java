@@ -18,9 +18,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,19 +63,34 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.highway.R;
 import com.highway.Vehicle;
+import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerFragment.ReceiverBottomSheetFragment;
+import com.highway.customer.customerModelClass.spinnerGoodsType.GoodTypeDatum;
+import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataRequest;
+import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataResponse;
+import com.highway.customer.customerModelClass.spinnerGoodsType.TypeData;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
+import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.Data;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleDatum;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BookingWithDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, TaskLoadedCallback, BookingVehicleAdapter.OnClickEvents {
 
 
-    private static final int SELECT_TYPE =4 ;
+    private static final int SELECT_TYPE = 4;
     Button getDirection;
     private Polyline currentPolyline;
 
@@ -99,15 +117,20 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     LinearLayout destLL;
     LinearLayout goodtype;
     private Button back_button;
-    public  TextView bookTruckTv;
+    public TextView bookTruckTv;
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
     private String sourceName;
     private String destName;
+    public Spinner goodsTypeSpinner;
+    List<String> goodsNames;
 
     List<Vehicle> vehicleList = new ArrayList<>();
     private BookingVehicleAdapter bookingVehicleAdapter;
+    String user_Id;
+    String goodsTypeId;
+    GoodsTypeDataResponse goodsTypeDataResponse;
 
 
     public static void start(Activity activity,
@@ -141,14 +164,13 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
         back_button = findViewById(R.id.back_button);
-
-
         goodtype = findViewById(R.id.goodtype);
         sourceLL = findViewById(R.id.sourceLL);
         destLL = findViewById(R.id.destLL);
 
         recyclerView = findViewById(R.id.vehicleListRV);
         bookTruckTv = findViewById(R.id.bookTruckTv);
+        goodsTypeSpinner = findViewById(R.id.goodsTypeSpinner);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,17 +178,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 finish();
             }
         });
-
-          bookTruckTv.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-
-                 Intent intent = new Intent(getApplicationContext(),TripBookingActivity.class);
-                 startActivity(intent);
-                 finish();
-              }
-          });
-
 
         initLocations(getIntent());
 
@@ -190,45 +201,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
         }
 
-        sourceLL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
-
-                Intent intent = new Autocomplete.IntentBuilder(
-                        AutocompleteActivityMode.FULLSCREEN, fields)
-                        .setCountry("IN")
-                        .build(BookingWithDetailsActivity.this);
-                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
-            }
-        });
-
-
-        goodtype.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(BookingWithDetailsActivity.this, GoodTypeDetailActivity.class);
-                startActivityForResult(intent,SELECT_TYPE);
-                overridePendingTransition( R.anim.slide_up, R.anim.slide_up_out );
-            }
-        });
-
-
-        destLL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
-
-                Intent intent = new Autocomplete.IntentBuilder(
-                        AutocompleteActivityMode.FULLSCREEN, fields)
-                        .setCountry("IN")
-                        .build(BookingWithDetailsActivity.this);
-                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
-            }
-        });
+        clicklistener();
+        getGoodsTypeSpinner();
 
 
         for (int i = 0; i < 8; i++) {
@@ -258,6 +233,127 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     }
 
+
+    public void clicklistener() {
+ /*bookTruckTv.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+
+                 Intent intent = new Intent(getApplicationContext(),TripBookingActivity.class);
+                 startActivity(intent);
+                 finish();
+              }
+          });*/
+        sourceLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+
+                Intent intent = new Autocomplete.IntentBuilder(
+                        AutocompleteActivityMode.FULLSCREEN, fields)
+                        .setCountry("IN")
+                        .build(BookingWithDetailsActivity.this);
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
+            }
+        });
+
+
+        destLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+
+                Intent intent = new Autocomplete.IntentBuilder(
+                        AutocompleteActivityMode.FULLSCREEN, fields)
+                        .setCountry("IN")
+                        .build(BookingWithDetailsActivity.this);
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
+            }
+        });
+
+ /*goodtype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(BookingWithDetailsActivity.this, GoodTypeDetailActivity.class);
+                startActivityForResult(intent,SELECT_TYPE);
+                overridePendingTransition( R.anim.slide_up, R.anim.slide_up_out );
+            }
+        });*/
+
+        goodsTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (goodsTypeDataResponse != null && goodsTypeDataResponse.getTypeData() != null
+                        && goodsTypeDataResponse.getTypeData().getGoodTypeData() != null
+                        && goodsTypeDataResponse.getTypeData().getGoodTypeData().size() > 0) {
+                    goodsTypeId = goodsTypeDataResponse.getTypeData().getGoodTypeData().get(position).getGoodsTypeId();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Nothing Show GoodsType", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getGoodsTypeSpinner() {
+
+        GoodsTypeDataRequest goodsTypeDataRequest = new GoodsTypeDataRequest();
+        user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+        goodsTypeDataRequest.setUserId(user_Id);
+
+        RestClient.goodsTypeDataWithBooking(goodsTypeDataRequest, new Callback<GoodsTypeDataResponse>() {
+            @Override
+            public void onResponse(Call<GoodsTypeDataResponse> call, Response<GoodsTypeDataResponse> response) {
+
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+
+                        goodsTypeDataResponse = response.body();
+                        TypeData typeData = goodsTypeDataResponse.getTypeData();
+                        GoodTypeDatum goodTypeDatum = new GoodTypeDatum();
+                        goodTypeDatum.setGoodsTypeTitle("-- Select Goods Type --");
+                        typeData.getGoodTypeData().add(0, goodTypeDatum);
+
+                        if (typeData != null && typeData.getGoodTypeData().size() > 0) {
+
+                            goodsNames = new ArrayList<>();
+
+                            for (GoodTypeDatum goodTypeDatum1 : goodsTypeDataResponse.getTypeData().getGoodTypeData()) {
+                                goodsNames.add(goodTypeDatum1.getGoodsTypeTitle());
+                            }
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, goodsNames);
+                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            goodsTypeSpinner.setAdapter(dataAdapter);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GoodsTypeDataResponse> call, Throwable t) {
+                Toast.makeText(BookingWithDetailsActivity.this, "failure!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    public void showBottomSheet(View view) {
+        ReceiverBottomSheetFragment receiverBottomSheetFragment =
+                ReceiverBottomSheetFragment.newInstance().newInstance();
+        receiverBottomSheetFragment.show(getSupportFragmentManager(),
+                ReceiverBottomSheetFragment.TAG);
+    }
+
     private void initLocations(Intent intent) {
         if (intent != null) {
             sourceName = intent.getStringExtra("sourceName");
@@ -270,7 +366,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             edtDropLocation.setText("" + destName);
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
-           // mCurrLocationMarker = mMap.addMarker(markerOptions1);
+            // mCurrLocationMarker = mMap.addMarker(markerOptions1);
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
 //            mCurrLocationMarker = mMap.addMarker(markerOptions2);
@@ -448,7 +544,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-///**********************
+
+    ///**********************
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
@@ -591,12 +688,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
 
-        for (Vehicle vehicle :vehicleList){
+        for (Vehicle vehicle : vehicleList) {
             vehicle.setSelected(false);
         }
     }
-
-
 
 
     private void showInfoDialog(Vehicle vehicle) {

@@ -26,7 +26,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".customer.customerActivity.ReceiverContactBootamSheetActivity"></activity>
         <activity android:name=".customer.customerActivity.DropActivity" />
         <activity android:name=".customer.customerActivity.TripBookingActivity" />
         <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason" />

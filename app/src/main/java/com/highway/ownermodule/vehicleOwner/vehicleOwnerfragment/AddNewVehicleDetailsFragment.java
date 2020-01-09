@@ -50,7 +50,6 @@ public class AddNewVehicleDetailsFragment extends Fragment {
     public  Spinner vehiclesTypeSpinner;
     String textEd, txtEnd, isReached;
     String driverText;
-    private Spinner vehicleSpinners;
     List<String> driverNames;
     List<String> vehicleNames;
     String driverId;

@@ -8,6 +8,8 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataRequest;
+import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -117,4 +119,10 @@ public class RestClient {
         public  static void assign_D2V(AssignD2VRequest assignD2VRequest , Callback<AssignD2VResponse> assignD2VResponseCallback){
        RetrofitClient.getClient().assignD2VReq(assignD2VRequest).enqueue(assignD2VResponseCallback);
         }
+
+      //Goods type Data Booking With details Activity
+      public  static void goodsTypeDataWithBooking(GoodsTypeDataRequest goodsTypeDataRequest , Callback<GoodsTypeDataResponse>goodsTypeDataResponseCallback){
+       RetrofitClient.getClient().goodsTypeDataResponse(goodsTypeDataRequest).enqueue(goodsTypeDataResponseCallback);
+      }
+
 }

@@ -288,7 +288,7 @@
                         android:gravity="end|center_vertical"
                         android:orientation="horizontal">
 
-                        <TextView
+                       <!-- <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_5"
@@ -296,7 +296,14 @@
                             android:singleLine="true"
                             android:text="Home Shifting"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="13sp" />
+                            android:textSize="13sp" />-->
+
+                        <Spinner
+                            android:id="@+id/goodsTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+
                     </LinearLayout>
                 </LinearLayout>
                 <View
@@ -372,6 +379,7 @@
                             android:layout_marginLeft="@dimen/margin_2"
                             android:background="@drawable/btn_shape_draw"
                             android:gravity="center"
+                            android:onClick="showBottomSheet"
                             android:maxHeight="@dimen/margin_40"
                             android:paddingStart="@dimen/margin_20"
                             android:paddingEnd="@dimen/margin_20"
