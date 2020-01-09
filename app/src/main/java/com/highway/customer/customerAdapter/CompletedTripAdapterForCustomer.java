@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.GoodTypeDatum;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -26,6 +27,8 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
         this.completedTrips = completedTrips1;
         this.context = context;
     }
+
+
 
     @NonNull
     @Override

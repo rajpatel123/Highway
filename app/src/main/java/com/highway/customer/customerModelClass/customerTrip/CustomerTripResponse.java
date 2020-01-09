@@ -1,5 +1,5 @@
 
-package com.highway.customer.customerModelClass;
+package com.highway.customer.customerModelClass.customerTrip;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

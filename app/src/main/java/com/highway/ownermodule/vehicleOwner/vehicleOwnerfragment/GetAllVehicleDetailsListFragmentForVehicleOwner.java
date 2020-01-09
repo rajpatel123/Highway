@@ -106,6 +106,7 @@ public class GetAllVehicleDetailsListFragmentForVehicleOwner extends Fragment {
 
                 if (response.body()!=null){
                     if (response.body().getStatus()){
+
                         getAllVehicleDetailsResponse = response.body();
                         DataVehicle data = getAllVehicleDetailsResponse.getData();
                         vehicleDetails= data.getVehicleDetails();

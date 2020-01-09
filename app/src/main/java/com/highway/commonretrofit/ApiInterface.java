@@ -8,8 +8,8 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
-import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataRequest;
-import com.highway.customer.customerModelClass.spinnerGoodsType.GoodsTypeDataResponse;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.SelectUrGoodsTypeDataRequest;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.SelectUrGoodsTypeDataResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -106,6 +106,6 @@ public interface ApiInterface {
     Call<GetAllVehicleDetailsResponse>getVehicleResponse(@Body GetAllVehicleDetailsRequest getAllVehicleDetailsRequest);
 
     //Goods type Data Booking With details Activity
-    @POST("http://highway.vrok.in/api/Trip/dropdownGoodType")
-    Call<GoodsTypeDataResponse>goodsTypeDataResponse(@Body GoodsTypeDataRequest goodsTypeDataRequest);
+    @POST("http://highway.vrok.in/api/Trip/selectYourGoodType")
+     Call<SelectUrGoodsTypeDataResponse>SELECT_UR_GOODS_TYPE_DATA_RESPONSE_CALL(@Body SelectUrGoodsTypeDataRequest selectUrGoodsTypeDataRequest);
 }

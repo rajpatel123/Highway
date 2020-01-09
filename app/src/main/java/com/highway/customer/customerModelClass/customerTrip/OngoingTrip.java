@@ -1,10 +1,10 @@
 
-package com.highway.customer.customerModelClass;
+package com.highway.customer.customerModelClass.customerTrip;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CancelTrip {
+public class OngoingTrip {
 
     @SerializedName("sourceLat")
     @Expose

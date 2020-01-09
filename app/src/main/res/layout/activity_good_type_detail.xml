@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".customer.customerActivity.GoodTypeDetailActivity">
-
+    tools:context=".customer.customerActivity.GoodsTypeDetailActivity">
 
    <com.google.android.material.appbar.AppBarLayout
        android:id="@+id/appBarLayout"
@@ -28,7 +27,7 @@
 
 
    <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/typeList"
+       android:id="@+id/goodTypeList"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        />

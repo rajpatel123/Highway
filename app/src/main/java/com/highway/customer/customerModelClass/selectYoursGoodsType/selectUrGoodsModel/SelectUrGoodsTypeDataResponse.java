@@ -1,10 +1,10 @@
 
-package com.highway.customer.customerModelClass.spinnerGoodsType;
+package com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GoodsTypeDataResponse {
+public class SelectUrGoodsTypeDataResponse {
 
     @SerializedName("status")
     @Expose

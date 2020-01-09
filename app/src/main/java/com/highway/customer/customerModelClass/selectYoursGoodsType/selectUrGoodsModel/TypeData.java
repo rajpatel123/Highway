@@ -1,5 +1,5 @@
 
-package com.highway.customer.customerModelClass.spinnerGoodsType;
+package com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
