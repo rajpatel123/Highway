@@ -1,13 +1,19 @@
 package com.highway.customer.customerFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.loader.content.CursorLoader;
 
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +75,24 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.i(TAG, "onActivityResult()");
+        if (requestCode == PICK_CONTACT) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri contactsData = data.getData();
+                CursorLoader loader = new CursorLoader(getActivity(), contactsData, null, null, null, null);
+                Cursor c = loader.loadInBackground();
+                if (c.moveToFirst()) {
+                    Log.i(TAG, "Contacts ID: " + c.getString(c.getColumnIndex(ContactsContract.Contacts._ID)));
+                    Log.i(TAG, "Contacts Name: " + c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+                    Log.i(TAG, "Contacts Phone Number: " + c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
+                }
+            }
+        }
+    }
 
     @Override
     public void onAttach(Context context) {

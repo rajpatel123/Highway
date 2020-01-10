@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerAdapter.GoodsTypeAdapter;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodTypeDatum;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.TypeData;
-import com.highway.customer.customerAdapter.GoodsTypeAdapter;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.DataVehicle;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
@@ -89,12 +88,11 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
                     if (response.body().getStatus()) {
 
                         goodsTypeDataResponse = response.body();
-                        typeData = goodsTypeDataResponse.getTypeData();
 
                         if (goodTypeDatumList.size()>0){
                             if (goodsTypeAdapter !=null){
                                 goodTypeDatumList = typeData.getGoodTypeData();
-                                goodsTypeAdapter.setData((GoodsTypeDataResponse) goodTypeDatumList);
+                                goodsTypeAdapter.setData(goodsTypeDataResponse);
                                 goodsTypeAdapter.notifyDataSetChanged();
 
                                /* goodsTypeDataResponse = response.body();

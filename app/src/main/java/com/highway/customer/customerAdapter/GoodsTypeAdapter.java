@@ -49,8 +49,8 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
         holder.goodsTypeTv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onGoodTypeSelect!=null){
-                    onGoodTypeSelect.onSelectGoodType(goodTypeDatum.getGoodsTypeId(),goodTypeDatum.getGoodsTypeTitle());
+                if (onGoodTypeSelect != null) {
+                    onGoodTypeSelect.onSelectGoodType(goodTypeDatum.getGoodsTypeId(), goodTypeDatum.getGoodsTypeTitle());
                 }
             }
         });
@@ -60,9 +60,9 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
     @Override
     public int getItemCount() {
         if (goodsTypeDataResponse != null
-                && goodsTypeDataResponse.getTypeData()!=null &&
-                goodsTypeDataResponse.getTypeData().getGoodTypeData()!=null
-                && goodsTypeDataResponse.getTypeData().getGoodTypeData().size()>0) {
+                && goodsTypeDataResponse.getTypeData() != null &&
+                goodsTypeDataResponse.getTypeData().getGoodTypeData() != null
+                && goodsTypeDataResponse.getTypeData().getGoodTypeData().size() > 0) {
             return goodsTypeDataResponse.getTypeData().getGoodTypeData().size();
         } else {
             return 0;
@@ -84,7 +84,7 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
     }
 
 
-    public interface  OnGoodTypeSelect{
+    public interface OnGoodTypeSelect {
         void onSelectGoodType(String id, String type);
     }
 }
