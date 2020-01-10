@@ -1,6 +1,7 @@
 package com.highway.customer.customerActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -13,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
-import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.GoodTypeDatum;
-import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.SelectUrGoodsTypeDataRequest;
-import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.SelectUrGoodsTypeDataResponse;
-import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.TypeData;
-import com.highway.customer.customerModelClass.selectYoursGoodsType.selectYoursGoodsTypeAdapter.GoodsTypeAdapter;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.GetAllVehicleDetailsListAdapterForVehicleOwner;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodTypeDatum;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.TypeData;
+import com.highway.customer.customerAdapter.GoodsTypeAdapter;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.DataVehicle;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GoodsTypeDetailActivity extends AppCompatActivity {
+public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsTypeAdapter.OnGoodTypeSelect {
 
 
     @BindView(R.id.toolbar)
@@ -42,18 +42,9 @@ public class GoodsTypeDetailActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewGoodsTypeList;
     GoodsTypeAdapter goodsTypeAdapter;
-    GoodsTypeDetailActivity goodsTypeDetailActivity;
-
-    public List<GoodTypeDatum> getGoodTypeDatumList() {
-        return goodTypeDatumList;
-    }
-    public void setGoodTypeDatumList(List<GoodTypeDatum> goodTypeDatumList) {
-        this.goodTypeDatumList = goodTypeDatumList;
-    }
-
     List<GoodTypeDatum> goodTypeDatumList = new ArrayList<>();
     Context context;
-    SelectUrGoodsTypeDataResponse selectUrGoodsTypeDataResponse;
+    GoodsTypeDataResponse goodsTypeDataResponse;
     TypeData typeData;
 
     @Override
@@ -72,8 +63,8 @@ public class GoodsTypeDetailActivity extends AppCompatActivity {
         }
         getSupportActionBar().setTitle("Select your goods type");
 
-        goodsTypeAdapter = new GoodsTypeAdapter(goodTypeDatumList, getApplicationContext());
-
+        // goodsTypeAdapter = new GoodsTypeAdapter(goodTypeDatumList, getApplicationContext());
+        showGoodTypeRV();
         getGoodsTypeList();
 
     }
@@ -83,46 +74,42 @@ public class GoodsTypeDetailActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //getGoodsTypeList();
-        goodsTypeRecy();
     }
 
     public void getGoodsTypeList() {
 
-        SelectUrGoodsTypeDataRequest selectUrGoodsTypeDataRequest = new SelectUrGoodsTypeDataRequest();
+        GoodsTypeDataRequest goodsTypeDataRequest = new GoodsTypeDataRequest();
         user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-        selectUrGoodsTypeDataRequest.setUserId(user_Id);
+        goodsTypeDataRequest.setUserId(user_Id);
 
-        RestClient.selectUrGoodsType(selectUrGoodsTypeDataRequest, new Callback<SelectUrGoodsTypeDataResponse>() {
+        RestClient.selectUrGoodsType(goodsTypeDataRequest, new Callback<GoodsTypeDataResponse>() {
             @Override
-            public void onResponse(Call<SelectUrGoodsTypeDataResponse> call, Response<SelectUrGoodsTypeDataResponse> response) {
+            public void onResponse(Call<GoodsTypeDataResponse> call, Response<GoodsTypeDataResponse> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
 
-                        selectUrGoodsTypeDataResponse = response.body();
-                        typeData = selectUrGoodsTypeDataResponse.getTypeData();
-                        goodTypeDatumList = typeData.getGoodTypeData();
+                        goodsTypeDataResponse = response.body();
+                        typeData = goodsTypeDataResponse.getTypeData();
 
                         if (goodTypeDatumList.size()>0){
                             if (goodsTypeAdapter !=null){
-                                goodsTypeAdapter.setData(goodTypeDatumList);
+                                goodTypeDatumList = typeData.getGoodTypeData();
+                                goodsTypeAdapter.setData((GoodsTypeDataResponse) goodTypeDatumList);
                                 goodsTypeAdapter.notifyDataSetChanged();
-                            }
-                        }else{
-                            Toast.makeText(getApplicationContext(), "No goods type data found", Toast.LENGTH_SHORT).show();
-                        }
 
-                        /*SelectUrGoodsTypeDataResponse selectUrGoodsTypeDataResponse = response.body();
-                        if (selectUrGoodsTypeDataResponse.getTypeData().getGoodTypeData()!=null && selectUrGoodsTypeDataResponse.getTypeData().getGoodTypeData().size()>0){
-                            goodsTypeRecy(); *//*goodsTypeDetailActivity.setGoodTypeDatumList(goodTypeDatumList);*//*
-                        }*/
+                               /* goodsTypeDataResponse = response.body();
+                                goodsTypeAdapter.setData(goodsTypeDataResponse);
+                                goodsTypeAdapter.notifyDataSetChanged();*/
+                            }
+                        }
                     }
-                }/*else{
-                    Toast.makeText(goodsTypeDetailActivity, "response failed", Toast.LENGTH_SHORT).show();
-                }*/
+                }
+
             }
 
+
             @Override
-            public void onFailure(Call<SelectUrGoodsTypeDataResponse> call, Throwable t) {
+            public void onFailure(Call<GoodsTypeDataResponse> call, Throwable t) {
                 Toast.makeText(GoodsTypeDetailActivity.this, "Failure", Toast.LENGTH_SHORT).show();
 
             }
@@ -130,10 +117,9 @@ public class GoodsTypeDetailActivity extends AppCompatActivity {
 
     }
 
-    public void goodsTypeRecy() {
-       List<GoodTypeDatum> goodTypeData = new ArrayList<>();
-        if (goodTypeData != null && goodTypeData.size() > 0) {
-          //   goodsTypeAdapter = new GoodsTypeAdapter(goodTypeData, getApplicationContext());
+    public void showGoodTypeRV() {
+        if (goodsTypeDataResponse != null) {
+            goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(), this);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerViewGoodsTypeList.setLayoutManager(layoutManager);
             recyclerViewGoodsTypeList.setItemAnimator(new DefaultItemAnimator());
@@ -146,12 +132,19 @@ public class GoodsTypeDetailActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         onBackPressed();
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onSelectGoodType(String id, String type) {
+        Intent data = new Intent();
+        data.putExtra("id", id);
+        data.putExtra("type", type);
+        setResult(RESULT_OK, data);
+        finish();
+
+    }
 }

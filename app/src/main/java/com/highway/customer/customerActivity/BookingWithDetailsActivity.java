@@ -101,15 +101,15 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
-    LinearLayout goodtype;
+    TextView goodtype;
     private Button back_button;
-    public TextView bookTruckTv,phoneNoTv,nameTv;
+    public TextView bookTruckTv, phoneNoTv, nameTv;
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
     private String sourceName;
     private String destName;
-    public String userName,userMobNo;
+    public String userName, userMobNo;
     public Spinner goodsTypeSpinner;
     List<String> goodsNames;
 
@@ -117,6 +117,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     private BookingVehicleAdapter bookingVehicleAdapter;
     String user_Id;
     String goodsTypeId;
+    private String gdTypeId, gdTypeText;
 //    GoodsTypeDataResponse goodsTypeDataResponse;
 
 
@@ -165,7 +166,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         phoneNoTv.setText(userMobNo);
         nameTv.setText(userName);
-
 
 
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -281,67 +281,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                           }
                       });*/
 
-
-       /* goodsTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (goodsTypeDataResponse != null && goodsTypeDataResponse.getTypeData() != null
-                        && goodsTypeDataResponse.getTypeData().getGoodTypeData() != null
-                        && goodsTypeDataResponse.getTypeData().getGoodTypeData().size() > 0) {
-                    goodsTypeId = goodsTypeDataResponse.getTypeData().getGoodTypeData().get(position).getGoodsTypeId();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Nothing Show GoodsType", Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
-
-//    public void getGoodsTypeSpinner() {
-//
-//        GoodsTypeDataRequest goodsTypeDataRequest = new GoodsTypeDataRequest();
-//        user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-//        goodsTypeDataRequest.setUserId(user_Id);
-//
-//        RestClient.goodsTypeDataWithBooking(goodsTypeDataRequest, new Callback<GoodsTypeDataResponse>() {
-//            @Override
-//            public void onResponse(Call<GoodsTypeDataResponse> call, Response<GoodsTypeDataResponse> response) {
-//
-//                if (response.body() != null) {
-//                    if (response.body().getStatus()) {
-//
-//                        goodsTypeDataResponse = response.body();
-//                        TypeData typeData = goodsTypeDataResponse.getTypeData();
-//                        GoodTypeDatum goodTypeDatum = new GoodTypeDatum();
-//                        goodTypeDatum.setGoodsTypeTitle("-- Select Goods Type --");
-//                        typeData.getGoodTypeData().add(0, goodTypeDatum);
-//
-//                        if (typeData != null && typeData.getGoodTypeData().size() > 0) {
-//
-//                            goodsNames = new ArrayList<>();
-//
-//                            for (GoodTypeDatum goodTypeDatum1 : goodsTypeDataResponse.getTypeData().getGoodTypeData()) {
-//                                goodsNames.add(goodTypeDatum1.getGoodsTypeTitle());
-//                            }
-//                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, goodsNames);
-//                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                            goodsTypeSpinner.setAdapter(dataAdapter);
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GoodsTypeDataResponse> call, Throwable t) {
-//                Toast.makeText(BookingWithDetailsActivity.this, "failure!", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//    }
-
 
     public void showBottomSheet(View view) {
         ReceiverBottomSheetFragment receiverBottomSheetFragment =
@@ -419,6 +359,11 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                     }
 
                 }
+            } else if (requestCode == SELECT_TYPE) {
+                gdTypeId = data.getStringExtra("id");
+                gdTypeText = data.getStringExtra("type");
+                goodtype.setText(gdTypeText);
+                goodtype.setText(gdTypeId);
             }
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
             // TODO: Handle the error.

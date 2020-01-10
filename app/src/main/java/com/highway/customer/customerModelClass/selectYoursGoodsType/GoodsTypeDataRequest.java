@@ -1,10 +1,10 @@
-package com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel;
+package com.highway.customer.customerModelClass.selectYoursGoodsType;
 
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SelectUrGoodsTypeDataRequest {
+public class GoodsTypeDataRequest {
 
 @SerializedName("user_id")
 @Expose

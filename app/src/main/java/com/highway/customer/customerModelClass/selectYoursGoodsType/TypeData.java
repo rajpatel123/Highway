@@ -1,9 +1,10 @@
 
-package com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel;
+package com.highway.customer.customerModelClass.selectYoursGoodsType;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodTypeDatum;
 
 public class TypeData {
 

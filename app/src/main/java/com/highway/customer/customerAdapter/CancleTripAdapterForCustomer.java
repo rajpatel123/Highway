@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
-import com.highway.customer.customerModelClass.selectYoursGoodsType.selectUrGoodsModel.GoodTypeDatum;
 import com.highway.utils.Utils;
 
 import java.util.List;
