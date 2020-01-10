@@ -61,8 +61,8 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
 
         }
         getSupportActionBar().setTitle("Select your goods type");
-
-        // goodsTypeAdapter = new GoodsTypeAdapter(goodTypeDatumList, getApplicationContext());
+        // As you wish make Adapter or not
+     //   goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(),this::onSelectGoodType);
         showGoodTypeRV();
         getGoodsTypeList();
 
@@ -86,25 +86,16 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
             public void onResponse(Call<GoodsTypeDataResponse> call, Response<GoodsTypeDataResponse> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-
                         goodsTypeDataResponse = response.body();
-
-                        if (goodTypeDatumList.size()>0){
-                            if (goodsTypeAdapter !=null){
-                                goodTypeDatumList = typeData.getGoodTypeData();
-                                goodsTypeAdapter.setData(goodsTypeDataResponse);
-                                goodsTypeAdapter.notifyDataSetChanged();
-
-                               /* goodsTypeDataResponse = response.body();
-                                goodsTypeAdapter.setData(goodsTypeDataResponse);
-                                goodsTypeAdapter.notifyDataSetChanged();*/
-                            }
-                        }
+                        goodsTypeAdapter.setData(goodsTypeDataResponse);
+                        goodsTypeAdapter.notifyDataSetChanged();
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(), "response failed", Toast.LENGTH_SHORT).show();
                 }
 
-            }
 
+            }
 
             @Override
             public void onFailure(Call<GoodsTypeDataResponse> call, Throwable t) {
@@ -116,17 +107,12 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
     }
 
     public void showGoodTypeRV() {
-        if (goodsTypeDataResponse != null) {
-            goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(), this);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-            recyclerViewGoodsTypeList.setLayoutManager(layoutManager);
-            recyclerViewGoodsTypeList.setItemAnimator(new DefaultItemAnimator());
-            recyclerViewGoodsTypeList.setAdapter(goodsTypeAdapter);
+        goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(), this::onSelectGoodType);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerViewGoodsTypeList.setLayoutManager(layoutManager);
+        recyclerViewGoodsTypeList.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewGoodsTypeList.setAdapter(goodsTypeAdapter);
 
-        } else {
-            Toast.makeText(getApplicationContext(), "No data  for goodsType !", Toast.LENGTH_SHORT).show();
-
-        }
     }
 
 

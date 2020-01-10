@@ -363,10 +363,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 gdTypeId = data.getStringExtra("id");
                 gdTypeText = data.getStringExtra("type");
                 goodtype.setText(gdTypeText);
-                goodtype.setText(gdTypeId);
+                //goodtype.setText(gdTypeId);
             }
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-            // TODO: Handle the error.
             Status status = Autocomplete.getStatusFromIntent(data);
             Log.i("TAG", status.getStatusMessage());
         } else if (resultCode == RESULT_CANCELED) {
@@ -508,18 +507,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     public boolean checkLocationPermission() {
@@ -527,15 +514,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-                //Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -562,8 +543,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted. Do the
-                    // contacts-related task you need to do.
+
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
@@ -571,19 +551,15 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                         if (mGoogleApiClient == null) {
                             buildGoogleApiClient();
                         }
-                        // mMap.setMyLocationEnabled(true);
                     }
 
                 } else {
 
-                    // Permission denied, Disable the functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
 
-            // other 'case' lines to check for other permissions this app might request.
-            // You can add here other case statements according to your requirement.
         }
     }
 

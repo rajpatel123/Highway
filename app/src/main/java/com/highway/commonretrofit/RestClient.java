@@ -10,6 +10,8 @@ import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
+import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
+import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -123,5 +125,9 @@ public class RestClient {
       //Goods type Data Booking With details Activity
       public static void selectUrGoodsType(GoodsTypeDataRequest goodsTypeDataRequest, Callback<GoodsTypeDataResponse>selectUrGoodsTypeDataResponseCallback){
        RetrofitClient.getClient().SELECT_UR_GOODS_TYPE_DATA_RESPONSE_CALL(goodsTypeDataRequest).enqueue(selectUrGoodsTypeDataResponseCallback);
+      }
+
+      public static void updateReceiverNameOrNumber(UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest, Callback<UpdateReceiverPhoneNoAndNameResponse>updateReceiverPhoneNoAndNameResponseCallback){
+       RetrofitClient.getClient().UPDATE_RECEIVER_PHONE_NO_AND_NAME_RESPONSE_CALL(updateReceiverPhoneNoAndNameRequest).enqueue(updateReceiverPhoneNoAndNameResponseCallback);
       }
 }

@@ -127,7 +127,7 @@
 
     <string name="app_name_bootom_sheet">Bottom Sheet Dialog Fragment</string>
     <string name="action_share">Share</string>
-    <string name="action_receiver_contact">Receiver Contact</string>
+    <string name="action_receiver_contact">Receiver Contact Number.</string>
     <string name="action_diver_will_call">Driver will call the contact while delivery</string>
     <string name="action_copy">Copy</string>
     <string name="action_print">Print</string>

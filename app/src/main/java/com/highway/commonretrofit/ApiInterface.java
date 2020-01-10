@@ -10,6 +10,8 @@ import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
+import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
+import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -108,4 +110,10 @@ public interface ApiInterface {
     //Goods type Data Booking With details Activity
     @POST("http://highway.vrok.in/api/Trip/selectYourGoodType")
      Call<GoodsTypeDataResponse>SELECT_UR_GOODS_TYPE_DATA_RESPONSE_CALL(@Body GoodsTypeDataRequest goodsTypeDataRequest);
+
+    // Add receiver mob no and name
+
+    @POST("http://highway.vrok.in/api/Login/updateReceiver")
+    Call<UpdateReceiverPhoneNoAndNameResponse>UPDATE_RECEIVER_PHONE_NO_AND_NAME_RESPONSE_CALL(@Body UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest);
+
 }
