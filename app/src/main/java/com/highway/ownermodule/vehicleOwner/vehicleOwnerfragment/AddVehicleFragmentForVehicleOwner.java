@@ -21,8 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.AddVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.addVehicle.AddVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.addVehicle.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.DimansionData;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.DimansionSizeDatum;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.VehicleDiamensionSizeRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.VehicleDiamensionSizeResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.Data;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleDatum;
@@ -44,20 +48,22 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     RecyclerView addVehicleRecycView;
     Toolbar addVehicleToolbar;
     private EditText edtVehicleDescription, edtTxtVehicleNos, edtTxtvehicleModelNos, edtTxtvehicleName,
-            edtTxtVehileLoadCapicity,edtTxtVehicleSize;
+            edtTxtVehileLoadCapicity, edtTxtVehicleSize;
     private Button btnAddNewVehicle;
-    private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,user_Id;
-    public  String vehileLoadCapicity,vehicleSize;
+    private String vehicleName, vehicleModelNos, vehicleNos, vehicleDescription, user_Id;
+    public String vehileLoadCapicity, vehicleSize;
     private Spinner driversSpinner;
-    public  Spinner vehiclesTypeSpinner;
+    public Spinner vehiclesTypeSpinner, vehicleLoadCapicitySpinner, vehicleDiamensionSizeSpinner;
     String textEd, txtEnd, isReached;
     String driverText;
     List<String> driverNames;
     List<String> vehicleNames;
+    List<String> dimensionSize;
     String driverId;
-    String vehicleTypeId;
+    String vehicleTypeId, dimensionSizeId;
     DriverDropDownResponse driverDropDownResponse;
     VehicleTypeDropDowanResponse vehicleTypeDropDowanResponse;
+    VehicleDiamensionSizeResponse vehicleDiamensionSizeResponse;
 
     public AddVehicleFragmentForVehicleOwner() {
         // Required empty public constructor
@@ -82,15 +88,20 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_new_vehicle, container, false);
 
-        //edtTxtvehicleName = view.findViewById(R.id.EdtTxtvehicleName);
+
         edtTxtvehicleModelNos = view.findViewById(R.id.EdtTxtvehicleModelNos);
         edtTxtVehicleNos = view.findViewById(R.id.EdtTxtVehicleNos);
         btnAddNewVehicle = view.findViewById(R.id.BtnAddNewVehicle);
         vehiclesTypeSpinner = view.findViewById(R.id.VehicleTypeSpinner);
+        vehicleLoadCapicitySpinner = view.findViewById(R.id.VehicleLoadCapicitySpinner);
+        vehicleDiamensionSizeSpinner = view.findViewById(R.id.VehicleDimnSizeSpinner);
         edtVehicleDescription = view.findViewById(R.id.EdtVehicleDescription);
-        edtTxtVehileLoadCapicity = view.findViewById(R.id.EdtTxtVehileLoadCapicity);
-        edtTxtVehicleSize = view.findViewById(R.id.EdtTxtVehicleSize);
+        //edtTxtvehicleName = view.findViewById(R.id.EdtTxtvehicleName);
+        // edtTxtVehileLoadCapicity = view.findViewById(R.id.EdtTxtVehileLoadCapicity);
+        // edtTxtVehicleSize = view.findViewById(R.id.EdtTxtVehicleSize);
+
         vehicleSpinnersList();
+        vehicleDiamensionSizeList();
         clickListener();
 
         return view;
@@ -98,20 +109,14 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     }
 
     public void clickListener() {
-        btnAddNewVehicle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ValidationAddNewVehicle();
 
-            }
-        });
 
         vehiclesTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (vehicleTypeDropDowanResponse != null && vehicleTypeDropDowanResponse.getData()!=null
-                        &&  vehicleTypeDropDowanResponse.getData().getVehicleData()!=null
+                if (vehicleTypeDropDowanResponse != null && vehicleTypeDropDowanResponse.getData() != null
+                        && vehicleTypeDropDowanResponse.getData().getVehicleData() != null
                         && vehicleTypeDropDowanResponse.getData().getVehicleData().size() > 0) {
 
                     vehicleTypeId = vehicleTypeDropDowanResponse.getData().getVehicleData().get(position).getVehicleTypeId();
@@ -125,7 +130,34 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
             }
         });
 
+        vehicleDiamensionSizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (vehicleDiamensionSizeResponse != null && vehicleDiamensionSizeResponse.getDimansionData() != null
+                        && vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData() != null
+                        && vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().size() > 0) {
+
+                    dimensionSizeId = vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().get(position).getVehicleLoadCapacityId();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        btnAddNewVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ValidationAddNewVehicle();
+
+            }
+        });
 
 
     }
@@ -133,21 +165,15 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     public boolean inputValidation() {
         boolean check = false;
 
-        //vehicleName = edtTxtvehicleName.getText().toString().trim();
+
         vehicleModelNos = edtTxtvehicleModelNos.getText().toString().trim();
         vehicleNos = edtTxtVehicleNos.getText().toString().trim();
         vehicleDescription = edtVehicleDescription.getText().toString().trim();
-        vehileLoadCapicity = edtTxtVehileLoadCapicity.getText().toString().trim();
-        vehicleSize = edtTxtVehicleSize.getText().toString().trim();
+        //vehicleName = edtTxtvehicleName.getText().toString().trim();
+        // vehileLoadCapicity = edtTxtVehileLoadCapicity.getText().toString().trim();
+        // vehicleSize = edtTxtVehicleSize.getText().toString().trim();
 
-       /* if (vehicleName.isEmpty() && edtTxtvehicleName.length() != 3) {
-            edtTxtvehicleName.setError("pls enter valid vehicle name.. max length 3");
-            check = false;
-        } else {
-            edtTxtvehicleName.setError(null);
-            check = true;
-        }
-*/
+
         if (vehicleNos.isEmpty() && edtTxtVehicleNos.length() != 3) {
             edtTxtVehicleNos.setError("pls enter valid vehicle number.. max length 3");
             check = false;
@@ -161,6 +187,24 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
             check = false;
         } else {
             edtTxtvehicleModelNos.setError(null);
+            check = true;
+        }
+
+        if (vehicleDescription.isEmpty() && edtVehicleDescription.length() <= 10) {
+            edtVehicleDescription.setError("pls enter valid vehicle description");
+            check = false;
+        } else {
+            edtVehicleDescription.setError(null);
+            check = true;
+        }
+
+        return check;
+
+        /* if (vehicleName.isEmpty() && edtTxtvehicleName.length() != 3) {
+            edtTxtvehicleName.setError("pls enter valid vehicle name.. max length 3");
+            check = false;
+        } else {
+            edtTxtvehicleName.setError(null);
             check = true;
         }
 
@@ -178,22 +222,14 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
             edtTxtVehicleSize.setError(null);
             check = true;
         }
+         */
 
-        if (vehicleDescription.isEmpty() && edtVehicleDescription.length()<=10) {
-            edtVehicleDescription.setError("pls enter valid vehicle description");
-            check = false;
-        } else {
-            edtVehicleDescription.setError(null);
-            check = true;
-        }
-
-        return check;
     }
 
     public void vehicleSpinnersList() {
 
-        VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest  = new VehicleTypeDropDowanRequest();
-        user_Id = HighwayPrefs.getString(getActivity(),Constants.ID);
+        VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest = new VehicleTypeDropDowanRequest();
+        user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
         vehicleTypeDropDowanRequest.setUserId(user_Id);
         /* vehicleDropDownRequest.setUserId("5");*/
 
@@ -202,7 +238,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
             public void onResponse(Call<VehicleTypeDropDowanResponse> call, Response<VehicleTypeDropDowanResponse> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-                        vehicleTypeDropDowanResponse=response.body();
+                        vehicleTypeDropDowanResponse = response.body();
                         Data data = vehicleTypeDropDowanResponse.getData();
                         VehicleDatum vehicleDatum = new VehicleDatum();
                         vehicleDatum.setVehicleName("-- Select Vehicle Type --");
@@ -231,6 +267,48 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
         });
     }
 
+
+    public void vehicleDiamensionSizeList() {
+        VehicleDiamensionSizeRequest vehicleDiamensionSizeRequest = new VehicleDiamensionSizeRequest();
+        user_Id = HighwayPrefs.getString(getContext(), Constants.ID);
+        vehicleDiamensionSizeRequest.setUserId(user_Id);
+
+        RestClient.vehicleDiamension(vehicleDiamensionSizeRequest, new Callback<VehicleDiamensionSizeResponse>() {
+
+            @Override
+            public void onResponse(Call<VehicleDiamensionSizeResponse> call, Response<VehicleDiamensionSizeResponse> response) {
+
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+                        vehicleDiamensionSizeResponse = response.body();
+
+                        DimansionData dimansionData = vehicleDiamensionSizeResponse.getDimansionData();
+                        DimansionSizeDatum dimansionSizeDatum = new DimansionSizeDatum();
+                        dimansionSizeDatum.setVehicleLoadingCapacity("-- Select Dimension Size  --");
+                        dimansionData.getDimansionSizeData().add(0, dimansionSizeDatum);
+
+                        if (dimansionData != null && dimansionData.getDimansionSizeData().size() > 0) {
+                            dimensionSize = new ArrayList<>();
+                            for (DimansionSizeDatum dimansionSizeDatum1 : vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData()) {
+                                dimensionSize.add(dimansionSizeDatum1.getVehicleLoadingCapacity());
+                            }
+                        }
+                    }
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dimensionSize);
+                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    vehicleDiamensionSizeSpinner.setAdapter(dataAdapter);
+                }
+            }
+
+        @Override
+        public void onFailure (Call<VehicleDiamensionSizeResponse > call, Throwable t){
+            Toast.makeText(getActivity(), "Dimension size respose failed", Toast.LENGTH_SHORT).show();
+
+        }
+    });
+}
+
+
     public void ValidationAddNewVehicle() {
 
         if (inputValidation()) {
@@ -241,7 +319,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
             addVehicleRequest.setVehicleSize(vehicleSize);
             addVehicleRequest.setVehicleDescription(vehicleDescription);
             addVehicleRequest.setVehicleTypeId(vehicleTypeId);
-            user_Id= HighwayPrefs.getString(getActivity(),Constants.ID);
+            user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
             addVehicleRequest.setOwnerId(user_Id);
             if (Utils.isInternetConnected(getActivity())) {
 

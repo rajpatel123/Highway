@@ -1,4 +1,4 @@
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.addVehicle;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
