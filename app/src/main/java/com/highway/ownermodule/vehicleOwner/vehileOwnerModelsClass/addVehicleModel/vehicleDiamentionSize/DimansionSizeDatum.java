@@ -6,27 +6,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class DimansionSizeDatum {
 
-    @SerializedName("vehicleLoadCapacityId")
+    @SerializedName("vehicleDimensionSizeID")
     @Expose
-    private String vehicleLoadCapacityId;
-    @SerializedName("vehicleLoadingCapacity")
+    private String vehicleDimensionSizeID;
+    @SerializedName("vehicleDimensionSize")
     @Expose
-    private String vehicleLoadingCapacity;
+    private String vehicleDimensionSize;
 
-    public String getVehicleLoadCapacityId() {
-        return vehicleLoadCapacityId;
+    public String getVehicleDimensionSizeID() {
+        return vehicleDimensionSizeID;
     }
 
-    public void setVehicleLoadCapacityId(String vehicleLoadCapacityId) {
-        this.vehicleLoadCapacityId = vehicleLoadCapacityId;
+    public void setVehicleDimensionSizeID(String vehicleDimensionSizeID) {
+        this.vehicleDimensionSizeID = vehicleDimensionSizeID;
     }
 
-    public String getVehicleLoadingCapacity() {
-        return vehicleLoadingCapacity;
+    public String getVehicleDimensionSize() {
+        return vehicleDimensionSize;
     }
 
-    public void setVehicleLoadingCapacity(String vehicleLoadingCapacity) {
-        this.vehicleLoadingCapacity = vehicleLoadingCapacity;
+    public void setVehicleDimensionSize(String vehicleDimensionSize) {
+        this.vehicleDimensionSize = vehicleDimensionSize;
     }
 
 }

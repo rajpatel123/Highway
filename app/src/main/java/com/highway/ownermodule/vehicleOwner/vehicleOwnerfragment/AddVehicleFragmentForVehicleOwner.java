@@ -140,7 +140,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
                         && vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData() != null
                         && vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().size() > 0) {
 
-                    dimensionSizeId = vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().get(position).getVehicleLoadCapacityId();
+                    dimensionSizeId = vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().get(position).getVehicleDimensionSizeID();
                 }
             }
 
@@ -284,13 +284,13 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
 
                         DimansionData dimansionData = vehicleDiamensionSizeResponse.getDimansionData();
                         DimansionSizeDatum dimansionSizeDatum = new DimansionSizeDatum();
-                        dimansionSizeDatum.setVehicleLoadingCapacity("-- Select Dimension Size  --");
+                        dimansionSizeDatum.setVehicleDimensionSize("-- Select Dimension Size  --");
                         dimansionData.getDimansionSizeData().add(0, dimansionSizeDatum);
 
                         if (dimansionData != null && dimansionData.getDimansionSizeData().size() > 0) {
                             dimensionSize = new ArrayList<>();
                             for (DimansionSizeDatum dimansionSizeDatum1 : vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData()) {
-                                dimensionSize.add(dimansionSizeDatum1.getVehicleLoadingCapacity());
+                                dimensionSize.add(dimansionSizeDatum1.getVehicleDimensionSize());
                             }
                         }
                     }
