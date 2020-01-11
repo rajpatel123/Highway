@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -29,7 +28,6 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -38,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class AddNewDriverDetailsFragment extends Fragment {
+public class AddDriverFragmentForVehicleOwner extends Fragment {
     RecyclerView addDriverRecyView;
     private Toolbar addDriverToolbar;
     public EditText edtTxtDriverName, edtTxtDriverMobNo, edtTxtDriverEmail,
@@ -53,12 +51,12 @@ public class AddNewDriverDetailsFragment extends Fragment {
     List<String> vehicleNames;
     private String userId;
 
-    public AddNewDriverDetailsFragment() {
+    public AddDriverFragmentForVehicleOwner() {
         // Required empty public constructor
     }
 
-    public static AddNewDriverDetailsFragment newInstance() {
-        AddNewDriverDetailsFragment fragment = new AddNewDriverDetailsFragment();
+    public static AddDriverFragmentForVehicleOwner newInstance() {
+        AddDriverFragmentForVehicleOwner fragment = new AddDriverFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -199,7 +197,6 @@ public class AddNewDriverDetailsFragment extends Fragment {
             addNewDriverRequest.setDriverAddress(driverAddress);
           //  addNewDriverRequest.setVehicleId(vehicleId);
             userId = HighwayPrefs.getString(getActivity(),Constants.ID);
-            /*addNewDriverRequest.setOwnerId("5");*/
             addNewDriverRequest.setOwnerId(userId);
 
             Utils.showProgressDialog(getActivity());

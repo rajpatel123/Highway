@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.DriverDetail;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriver.DriverDetail;
 
 import java.util.List;
 
-public class GetAllDriverDetailsListAdapterForVehicleOwner extends RecyclerView.Adapter<GetAllDriverDetailsListAdapterForVehicleOwner.ViewHolder> {
+public class GetAllDriverAdapterForVehicleOwner extends RecyclerView.Adapter<GetAllDriverAdapterForVehicleOwner.ViewHolder> {
 
    List<DriverDetail>driverDetails;
    Context context;
 
 
-   public GetAllDriverDetailsListAdapterForVehicleOwner(List<DriverDetail>driverDetails, Context context){
+   public GetAllDriverAdapterForVehicleOwner(List<DriverDetail>driverDetails, Context context){
        this.driverDetails = driverDetails;
        this.context = context;
    }
@@ -30,7 +30,7 @@ public class GetAllDriverDetailsListAdapterForVehicleOwner extends RecyclerView.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_get_all_driver_list__item_fragment, parent, false);
+                .inflate(R.layout.fragment_get_all_driver__item_fragment, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -45,6 +45,7 @@ public class GetAllDriverDetailsListAdapterForVehicleOwner extends RecyclerView.
        holder.tv5TxtDlExpireDate.setText(""+ driverDetail.getExpiryDate());
        holder.tv6VehicleNumber.setText(""+ driverDetail.getVehicleNumber());
        holder.tv7TxtDriverAdd.setText(""+ driverDetail.getAddress());
+
        //holder.spVehicleNumber.setTe
 
     }

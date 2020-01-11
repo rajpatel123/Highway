@@ -1,9 +1,9 @@
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetAllDriverRequest {
+public class GetAllVehicleRequest {
 
 @SerializedName("ownerId")
 @Expose

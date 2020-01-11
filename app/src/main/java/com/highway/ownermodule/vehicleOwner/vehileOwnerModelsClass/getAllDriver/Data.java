@@ -1,5 +1,5 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriver;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

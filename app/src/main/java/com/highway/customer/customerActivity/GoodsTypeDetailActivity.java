@@ -61,8 +61,8 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
 
         }
         getSupportActionBar().setTitle("Select your goods type");
-        // As you wish make Adapter or not
-     //   goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(),this::onSelectGoodType);
+        // As you wish make Adapter or not asked sir .............
+        goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(),this::onSelectGoodType);
         showGoodTypeRV();
         getGoodsTypeList();
 
@@ -107,7 +107,7 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
     }
 
     public void showGoodTypeRV() {
-        goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(), this::onSelectGoodType);
+        //goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(), this::onSelectGoodType); // aaccording to sir initialize above ...................
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewGoodsTypeList.setLayoutManager(layoutManager);
         recyclerViewGoodsTypeList.setItemAnimator(new DefaultItemAnimator());

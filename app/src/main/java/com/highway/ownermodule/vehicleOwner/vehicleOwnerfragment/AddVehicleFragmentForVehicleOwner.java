@@ -21,8 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.AddVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.AddVehicleResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.Data;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleDatum;
@@ -39,13 +39,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddNewVehicleDetailsFragment extends Fragment {
+public class AddVehicleFragmentForVehicleOwner extends Fragment {
 
     RecyclerView addVehicleRecycView;
     Toolbar addVehicleToolbar;
-    private EditText edtVehicleDescription, edtTxtVehicleNos, edtTxtvehicleModelNos, edtTxtvehicleName;
+    private EditText edtVehicleDescription, edtTxtVehicleNos, edtTxtvehicleModelNos, edtTxtvehicleName,
+            edtTxtVehileLoadCapicity,edtTxtVehicleSize;
     private Button btnAddNewVehicle;
     private String vehicleName,vehicleModelNos,vehicleNos,vehicleDescription,user_Id;
+    public  String vehileLoadCapicity,vehicleSize;
     private Spinner driversSpinner;
     public  Spinner vehiclesTypeSpinner;
     String textEd, txtEnd, isReached;
@@ -57,13 +59,13 @@ public class AddNewVehicleDetailsFragment extends Fragment {
     DriverDropDownResponse driverDropDownResponse;
     VehicleTypeDropDowanResponse vehicleTypeDropDowanResponse;
 
-    public AddNewVehicleDetailsFragment() {
+    public AddVehicleFragmentForVehicleOwner() {
         // Required empty public constructor
     }
 
 
-    public static AddNewVehicleDetailsFragment newInstance() {
-        AddNewVehicleDetailsFragment fragment = new AddNewVehicleDetailsFragment();
+    public static AddVehicleFragmentForVehicleOwner newInstance() {
+        AddVehicleFragmentForVehicleOwner fragment = new AddVehicleFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -86,6 +88,8 @@ public class AddNewVehicleDetailsFragment extends Fragment {
         btnAddNewVehicle = view.findViewById(R.id.BtnAddNewVehicle);
         vehiclesTypeSpinner = view.findViewById(R.id.VehicleTypeSpinner);
         edtVehicleDescription = view.findViewById(R.id.EdtVehicleDescription);
+        edtTxtVehileLoadCapicity = view.findViewById(R.id.EdtTxtVehileLoadCapicity);
+        edtTxtVehicleSize = view.findViewById(R.id.EdtTxtVehicleSize);
         vehicleSpinnersList();
         clickListener();
 
@@ -133,6 +137,8 @@ public class AddNewVehicleDetailsFragment extends Fragment {
         vehicleModelNos = edtTxtvehicleModelNos.getText().toString().trim();
         vehicleNos = edtTxtVehicleNos.getText().toString().trim();
         vehicleDescription = edtVehicleDescription.getText().toString().trim();
+        vehileLoadCapicity = edtTxtVehileLoadCapicity.getText().toString().trim();
+        vehicleSize = edtTxtVehicleSize.getText().toString().trim();
 
        /* if (vehicleName.isEmpty() && edtTxtvehicleName.length() != 3) {
             edtTxtvehicleName.setError("pls enter valid vehicle name.. max length 3");
@@ -158,8 +164,23 @@ public class AddNewVehicleDetailsFragment extends Fragment {
             check = true;
         }
 
-        if (vehicleDescription.isEmpty() && edtVehicleDescription.length() != 10) {
-            edtVehicleDescription.setError("pls enter valid vehicle name max length 3");
+        if (vehileLoadCapicity.isEmpty()){
+            edtTxtVehileLoadCapicity.setError("pls enter loading capicity");
+            check= false;
+        }else {
+            edtTxtVehileLoadCapicity.setError(null);
+            check = true;
+        }
+        if (vehicleSize.isEmpty()){
+            edtTxtVehicleSize.setError("pls enter valid vehicle size in length X weidhth X height ");
+            check= false;
+        }else {
+            edtTxtVehicleSize.setError(null);
+            check = true;
+        }
+
+        if (vehicleDescription.isEmpty() && edtVehicleDescription.length()<=10) {
+            edtVehicleDescription.setError("pls enter valid vehicle description");
             check = false;
         } else {
             edtVehicleDescription.setError(null);
@@ -216,31 +237,36 @@ public class AddNewVehicleDetailsFragment extends Fragment {
             AddVehicleRequest addVehicleRequest = new AddVehicleRequest();
             addVehicleRequest.setVehicleNumber(vehicleNos);
             addVehicleRequest.setVehicleModelNo(vehicleModelNos);
+            addVehicleRequest.setVehicleCapacity(vehileLoadCapicity);
+            addVehicleRequest.setVehicleSize(vehicleSize);
             addVehicleRequest.setVehicleDescription(vehicleDescription);
             addVehicleRequest.setVehicleTypeId(vehicleTypeId);
             user_Id= HighwayPrefs.getString(getActivity(),Constants.ID);
             addVehicleRequest.setOwnerId(user_Id);
-            Utils.showProgressDialog(getActivity());
-            RestClient.addNewVehicle(addVehicleRequest, new Callback<AddVehicleResponse>() {
-                @Override
-                public void onResponse(Call<AddVehicleResponse> call, Response<AddVehicleResponse> response) {
-                    Utils.dismissProgressDialog();
-                    if (response.body() != null) {
-                        if (response.body().getStatus()) {
-                            //if (response.body().getId())
-                            Intent intent = new Intent(getActivity(), DashBoardActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
-                            Toast.makeText(getActivity(), "New vehicle added Successfully", Toast.LENGTH_SHORT).show();
+            if (Utils.isInternetConnected(getActivity())) {
+
+                Utils.showProgressDialog(getActivity());
+                RestClient.addNewVehicle(addVehicleRequest, new Callback<AddVehicleResponse>() {
+                    @Override
+                    public void onResponse(Call<AddVehicleResponse> call, Response<AddVehicleResponse> response) {
+                        Utils.dismissProgressDialog();
+                        if (response.body() != null) {
+                            if (response.body().getStatus()) {
+                                //if (response.body().getId())
+                                Intent intent = new Intent(getActivity(), DashBoardActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                                Toast.makeText(getActivity(), "Vehicle added Successfully", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<AddVehicleResponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Faield Add Vehicle", Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<AddVehicleResponse> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Faield Add Vehicle", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
     }
 

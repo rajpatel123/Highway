@@ -40,61 +40,70 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_gravity="center_vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_15"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:text="Driver Name "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="@dimen/padding_left_15"
-                            android:paddingTop="@dimen/margin_5"
-                            android:paddingRight="@dimen/margin_5"
-                            android:paddingBottom="@dimen/margin_5"
-                            android:text="Vehicle Name "
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/Tv1DriverName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_10"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:background="@drawable/completed_fragment_item_shape"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/TxtViewVehicleName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="@dimen/padding_left_15"
-                            android:paddingTop="@dimen/margin_5"
-                            android:paddingRight="@dimen/margin_5"
-                            android:paddingBottom="@dimen/margin_5"
-                            android:background="@drawable/completed_fragment_item_shape"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16dp" />
-                    </LinearLayout>
 
-                    <!-- <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical">
 
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_weight="1"
-                         android:paddingLeft="@dimen/padding_left_15"
-                         android:paddingTop="@dimen/margin_5"
-                         android:paddingRight="@dimen/margin_5"
-                         android:paddingBottom="@dimen/margin_5"
-                         android:text="Vehicle Number "
-                         android:textColor="@color/black"
-                         android:textSize="@dimen/_16dp" />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_15"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:text="Vehicle Name "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+
+                    <TextView
+                        android:id="@+id/Tv2VehicleName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_10"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:background="@drawable/completed_fragment_item_shape"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -116,7 +125,7 @@
                         android:textSize="@dimen/_16dp" />
 
                     <TextView
-                        android:id="@+id/txtViewVehicleNo"
+                        android:id="@+id/Tv3VehicleNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -148,7 +157,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                     <TextView
-                        android:id="@+id/txtViewVehicleModelNo"
+                        android:id="@+id/Tv4VehicleModelNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -176,12 +185,45 @@
                         android:paddingTop="@dimen/margin_5"
                         android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
-                        android:text="Driver Name "
+                        android:text="Vehicle Loading Capicity"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
 
                     <TextView
-                        android:id="@+id/TxtViewDriverName"
+                        android:id="@+id/Tv5VehicleLoadCapicity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_10"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:layout_gravity="center"
+                        android:background="@drawable/completed_fragment_item_shape"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/padding_left_15"
+                        android:paddingTop="@dimen/margin_5"
+                        android:paddingRight="@dimen/margin_5"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:text="Vehicle Size "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16dp" />
+
+                    <TextView
+                        android:id="@+id/Tv6VehicleSize"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -193,6 +235,8 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
+
+
 
 
                 <LinearLayout
@@ -214,7 +258,7 @@
                         android:textSize="@dimen/_16dp" />
 
                     <TextView
-                        android:id="@+id/TxtViewVehicleDescription"
+                        android:id="@+id/Tv7VehicleDescription"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_50"
                         android:layout_weight="1"
@@ -275,5 +319,5 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@color/darkwhite"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="10dp" />
 </LinearLayout>

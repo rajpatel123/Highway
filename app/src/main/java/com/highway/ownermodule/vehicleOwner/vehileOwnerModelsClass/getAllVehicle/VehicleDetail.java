@@ -1,5 +1,5 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -14,37 +14,43 @@ public class VehicleDetail {
     private String vehicleNumber;
     @SerializedName("VehicleModelNo")
     @Expose
-    private Object vehicleModelNo;
+    private String vehicleModelNo;
     @SerializedName("VehicleDescription")
     @Expose
     private String vehicleDescription;
+    @SerializedName("VehicleCapacity")
+    @Expose
+    private String vehicleCapacity;
+    @SerializedName("VehicleSize")
+    @Expose
+    private String vehicleSize;
     @SerializedName("DriverId")
     @Expose
-    private String driverId;
+    private Object driverId;
     @SerializedName("DriverName")
     @Expose
-    private String driverName;
+    private Object driverName;
     @SerializedName("Mobile")
     @Expose
-    private String mobile;
+    private Object mobile;
     @SerializedName("Email")
     @Expose
-    private String email;
+    private Object email;
     @SerializedName("DLNumber")
     @Expose
-    private String dLNumber;
+    private Object dLNumber;
     @SerializedName("ExpiryDate")
     @Expose
-    private String expiryDate;
+    private Object expiryDate;
     @SerializedName("Address")
     @Expose
-    private String address;
+    private Object address;
     @SerializedName("Latitude")
     @Expose
-    private String latitude;
+    private Object latitude;
     @SerializedName("Longitude")
     @Expose
-    private String longitude;
+    private Object longitude;
 
     public String getVehicleName() {
         return vehicleName;
@@ -62,11 +68,11 @@ public class VehicleDetail {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public Object getVehicleModelNo() {
+    public String getVehicleModelNo() {
         return vehicleModelNo;
     }
 
-    public void setVehicleModelNo(Object vehicleModelNo) {
+    public void setVehicleModelNo(String vehicleModelNo) {
         this.vehicleModelNo = vehicleModelNo;
     }
 
@@ -78,75 +84,91 @@ public class VehicleDetail {
         this.vehicleDescription = vehicleDescription;
     }
 
-    public String getDriverId() {
+    public String getVehicleCapacity() {
+        return vehicleCapacity;
+    }
+
+    public void setVehicleCapacity(String vehicleCapacity) {
+        this.vehicleCapacity = vehicleCapacity;
+    }
+
+    public String getVehicleSize() {
+        return vehicleSize;
+    }
+
+    public void setVehicleSize(String vehicleSize) {
+        this.vehicleSize = vehicleSize;
+    }
+
+    public Object getDriverId() {
         return driverId;
     }
 
-    public void setDriverId(String driverId) {
+    public void setDriverId(Object driverId) {
         this.driverId = driverId;
     }
 
-    public String getDriverName() {
+    public Object getDriverName() {
         return driverName;
     }
 
-    public void setDriverName(String driverName) {
+    public void setDriverName(Object driverName) {
         this.driverName = driverName;
     }
 
-    public String getMobile() {
+    public Object getMobile() {
         return mobile;
     }
 
-    public void setMobile(String mobile) {
+    public void setMobile(Object mobile) {
         this.mobile = mobile;
     }
 
-    public String getEmail() {
+    public Object getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(Object email) {
         this.email = email;
     }
 
-    public String getDLNumber() {
+    public Object getDLNumber() {
         return dLNumber;
     }
 
-    public void setDLNumber(String dLNumber) {
+    public void setDLNumber(Object dLNumber) {
         this.dLNumber = dLNumber;
     }
 
-    public String getExpiryDate() {
+    public Object getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(String expiryDate) {
+    public void setExpiryDate(Object expiryDate) {
         this.expiryDate = expiryDate;
     }
 
-    public String getAddress() {
+    public Object getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Object address) {
         this.address = address;
     }
 
-    public String getLatitude() {
+    public Object getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Object latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Object getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Object longitude) {
         this.longitude = longitude;
     }
 

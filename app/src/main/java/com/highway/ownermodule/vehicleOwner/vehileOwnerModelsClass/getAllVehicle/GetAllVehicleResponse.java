@@ -1,10 +1,10 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetAllVehicleDetailsResponse {
+public class GetAllVehicleResponse {
 
     @SerializedName("status")
     @Expose

@@ -83,8 +83,7 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
         vehiclesSpinner = view.findViewById(R.id.vehicleTypeSpinner);
         btnAssignD2V = view.findViewById(R.id.BtnAssignD2V);
 
-
-        //getdriverListSpinner();
+        getdriverListSpinner();
         getVehicleListSpinner();
 
         clickListener();
@@ -93,12 +92,6 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
     }
 
     public void clickListener() {
-        btnAssignD2V.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignD2V();
-            }
-        });
 
         driversSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,14 +100,13 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                 if (driverDropDownResponse != null && driverDropDownResponse.getData() != null
                         && driverDropDownResponse.getData().getDriverData() != null
                         && driverDropDownResponse.getData().getDriverData().size() > 0) {
-
                     driverId = driverDropDownResponse.getData().getDriverData().get(position).getDriverId();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getActivity(), "NO! Item  in this fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "NO! Item  in this driver spinner", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -134,8 +126,17 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getActivity(), "Nothing Show DataModel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No! item in the vehicle spinner", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+
+
+        btnAssignD2V.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                assignD2V();
             }
         });
     }
@@ -156,6 +157,7 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                         driverDropDownResponse = response.body();
 
                         Log.d("data", "" + response.body());
+
                         DataModel data = driverDropDownResponse.getData();
                         DriverDatum driverDatum = new DriverDatum();
                         driverDatum.setDriverName("--- Select Driver Name ---");
@@ -163,11 +165,11 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
 
                         if (data != null && data.getDriverData().size() > 0) {
 
-
                             driverNames = new ArrayList<>();
                             for (DriverDatum driverDatum1 : driverDropDownResponse.getData().getDriverData()) {
                                 driverNames.add(driverDatum1.getDriverName());
                             }
+
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, driverNames);
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             driversSpinner.setAdapter(dataAdapter);
@@ -251,8 +253,8 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
 
-                        Intent intent = new Intent(getActivity(), DashBoardActivity.class);
-                        startActivity(intent);
+                        /*Intent intent = new Intent(getActivity(), DashBoardActivity.class);
+                        startActivity(intent);*/
                         getActivity().finish();
                         Toast.makeText(getActivity(), "Assign Driver to Vehicle SuccessFully", Toast.LENGTH_SHORT).show();
                     }
@@ -261,7 +263,7 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
 
             @Override
             public void onFailure(Call<AssignD2VResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Assign failure", Toast.LENGTH_SHORT).show();
             }
         });
 
