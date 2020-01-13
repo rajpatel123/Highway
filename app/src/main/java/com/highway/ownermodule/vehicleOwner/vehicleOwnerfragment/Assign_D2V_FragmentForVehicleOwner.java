@@ -14,20 +14,23 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
+import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.assignD2V_Model.AssignD2VRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.assignD2V_Model.AssignD2VResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DataModel;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDatum;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.DataV;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDatum;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleData;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDataName;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleDatum;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -54,6 +57,7 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
     String driverId;
     VehicleDropDowanResponse vehicleDropDownResponse;
     String vehicleId;
+    DashBoardActivity dashBoardActivity;
 
     public Assign_D2V_FragmentForVehicleOwner() {
         // Required empty public constructor
@@ -116,11 +120,11 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (vehicleDropDownResponse != null && vehicleDropDownResponse.getData() != null
-                        && vehicleDropDownResponse.getData().getVehicleData() != null
-                        && vehicleDropDownResponse.getData().getVehicleData().size() > 0) {
+                if (vehicleDropDownResponse != null && vehicleDropDownResponse.getVehicleData() != null
+                        && vehicleDropDownResponse.getVehicleData().getVehicleDataName() != null
+                        && vehicleDropDownResponse.getVehicleData().getVehicleDataName().size() > 0) {
 
-                    vehicleId = vehicleDropDownResponse.getData().getVehicleData().get(position).getVehicleId();
+                    vehicleId = vehicleDropDownResponse.getVehicleData().getVehicleDataName().get(position).getVehicleId();
                 }
             }
 
@@ -130,7 +134,6 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
 
             }
         });
-
 
 
         btnAssignD2V.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +169,7 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                         if (data != null && data.getDriverData().size() > 0) {
 
                             driverNames = new ArrayList<>();
+
                             for (DriverDatum driverDatum1 : driverDropDownResponse.getData().getDriverData()) {
                                 driverNames.add(driverDatum1.getDriverName());
                             }
@@ -202,16 +206,17 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                         vehicleDropDownResponse = response.body();
 
                         Log.d("data", "" + response.body());
-                        DataV data = vehicleDropDownResponse.getData();
-                        VehicleDatum vehicleDatum = new VehicleDatum();
-                        vehicleDatum.setVehicleName("--- Select Vehicle Name ---");
-                        data.getVehicleData().add(0, vehicleDatum);
 
-                        if (data != null && data.getVehicleData().size() > 0) {
+                        VehicleData vehicleData = vehicleDropDownResponse.getVehicleData();
+                        VehicleDataName vehicleDataName = new VehicleDataName();
+                        vehicleDataName.setVehicleName("--- Select Vehicle Name ---");
+                        vehicleData.getVehicleDataName().add(0, vehicleDataName);
+
+                        if (vehicleData != null && vehicleData.getVehicleDataName().size() > 0) {
 
                             vehicleNames = new ArrayList<>();
-                            for (VehicleDatum vehicleDatum1 : vehicleDropDownResponse.getData().getVehicleData()) {
-                                vehicleNames.add(vehicleDatum1.getVehicleName());
+                            for (VehicleDataName vehicleDataName1 : vehicleDropDownResponse.getVehicleData().getVehicleDataName()) {
+                                vehicleNames.add(vehicleDataName1.getVehicleName());
                             }
 
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, vehicleNames);
@@ -253,17 +258,17 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
 
-                        /*Intent intent = new Intent(getActivity(), DashBoardActivity.class);
-                        startActivity(intent);*/
+                        Intent intent = new Intent(getActivity(), DashBoardActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getActivity(), "Assign Driver to  Vehicle   SuccessFully", Toast.LENGTH_SHORT).show();
                         getActivity().finish();
-                        Toast.makeText(getActivity(), "Assign Driver to Vehicle SuccessFully", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<AssignD2VResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "Assign failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Response failed!  Assign D2V", Toast.LENGTH_SHORT).show();
             }
         });
 

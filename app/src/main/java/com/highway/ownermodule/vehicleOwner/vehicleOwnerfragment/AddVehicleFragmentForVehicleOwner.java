@@ -21,12 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.addVehicle.AddVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.addVehicle.AddVehicleResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.DimansionData;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.DimansionSizeDatum;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.VehicleDiamensionSizeRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize.VehicleDiamensionSizeResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicle.AddVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicle.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.LoadCacpacitySizeDatum;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.LoadCapicityData;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.VehicleLoadCapicityRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.VehicleLoadCapicityResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.DimansionData;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.DimansionSizeDatum;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.VehicleDiamensionSizeRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.VehicleDiamensionSizeResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.Data;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleDatum;
@@ -53,17 +57,19 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     private String vehicleName, vehicleModelNos, vehicleNos, vehicleDescription, user_Id;
     public String vehileLoadCapicity, vehicleSize;
     private Spinner driversSpinner;
-    public Spinner vehiclesTypeSpinner, vehicleLoadCapicitySpinner, vehicleDiamensionSizeSpinner;
+    public Spinner vehiclesTypeSpinner, vehicleDiamensionSizeSpinner, vehicleLoadCapicitySpinner;
     String textEd, txtEnd, isReached;
     String driverText;
     List<String> driverNames;
     List<String> vehicleNames;
     List<String> dimensionSize;
+    ArrayList<String> loadCapity;
     String driverId;
-    String vehicleTypeId, dimensionSizeId;
+    String vehicleTypeId, vehicleDimensionSizeId , vehicleLoadCapityId;
     DriverDropDownResponse driverDropDownResponse;
     VehicleTypeDropDowanResponse vehicleTypeDropDowanResponse;
     VehicleDiamensionSizeResponse vehicleDiamensionSizeResponse;
+    VehicleLoadCapicityResponse vehicleLoadCapicityResponse;
 
     public AddVehicleFragmentForVehicleOwner() {
         // Required empty public constructor
@@ -100,8 +106,9 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
         // edtTxtVehileLoadCapicity = view.findViewById(R.id.EdtTxtVehileLoadCapicity);
         // edtTxtVehicleSize = view.findViewById(R.id.EdtTxtVehicleSize);
 
-        vehicleSpinnersList();
-        vehicleDiamensionSizeList();
+        getVehicleSpinnersList();
+        getVehicleDiamensionSizeList();
+        getVehicleLoadCapicityList();
         clickListener();
 
         return view;
@@ -140,7 +147,27 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
                         && vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData() != null
                         && vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().size() > 0) {
 
-                    dimensionSizeId = vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().get(position).getVehicleDimensionSizeID();
+                    vehicleDimensionSizeId = vehicleDiamensionSizeResponse.getDimansionData().getDimansionSizeData().get(position).getVehicleDimensionSizeID();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        vehicleLoadCapicitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (vehicleLoadCapicityResponse != null && vehicleLoadCapicityResponse.getLoadCapicityData() != null
+                        && vehicleLoadCapicityResponse.getLoadCapicityData().getLoadCacpacitySizeData() != null
+                        && vehicleLoadCapicityResponse.getLoadCapicityData().getLoadCacpacitySizeData().size() > 0) {
+
+                    vehicleLoadCapityId = vehicleLoadCapicityResponse.getLoadCapicityData().getLoadCacpacitySizeData().get(position).getVehicleLoadCapacityId();
                 }
             }
 
@@ -226,7 +253,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
 
     }
 
-    public void vehicleSpinnersList() {
+    public void getVehicleSpinnersList() {
 
         VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest = new VehicleTypeDropDowanRequest();
         user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
@@ -268,7 +295,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     }
 
 
-    public void vehicleDiamensionSizeList() {
+    public void getVehicleDiamensionSizeList() {
         VehicleDiamensionSizeRequest vehicleDiamensionSizeRequest = new VehicleDiamensionSizeRequest();
         user_Id = HighwayPrefs.getString(getContext(), Constants.ID);
         vehicleDiamensionSizeRequest.setUserId(user_Id);
@@ -300,13 +327,57 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
                 }
             }
 
-        @Override
-        public void onFailure (Call<VehicleDiamensionSizeResponse > call, Throwable t){
-            Toast.makeText(getActivity(), "Dimension size respose failed", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onFailure(Call<VehicleDiamensionSizeResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "Dimension size respose failed", Toast.LENGTH_SHORT).show();
 
-        }
-    });
-}
+            }
+        });
+
+    }
+
+
+    public void getVehicleLoadCapicityList() {
+        VehicleLoadCapicityRequest vehicleLoadCapicityRequest = new VehicleLoadCapicityRequest();
+        user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
+        vehicleLoadCapicityRequest.setUserId(user_Id);
+
+        RestClient.vehicleLoadCapicity(vehicleLoadCapicityRequest, new Callback<VehicleLoadCapicityResponse>() {
+            @Override
+            public void onResponse(Call<VehicleLoadCapicityResponse> call, Response<VehicleLoadCapicityResponse> response) {
+
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+
+                        vehicleLoadCapicityResponse = response.body();
+                        LoadCapicityData loadCapicityData = vehicleLoadCapicityResponse.getLoadCapicityData();
+                        LoadCacpacitySizeDatum loadCacpacitySizeDatum = new LoadCacpacitySizeDatum();
+                        loadCacpacitySizeDatum.setVehicleLoadingCapacity("-- Vehicle loading Capicity -- ");
+                        loadCapicityData.getLoadCacpacitySizeData().add(0, loadCacpacitySizeDatum);
+
+                        if (loadCapicityData != null && loadCapicityData.getLoadCacpacitySizeData().size() > 0) {
+
+                            loadCapity = new ArrayList<>();
+                            for (LoadCacpacitySizeDatum loadCacpacitySizeDatum1 : vehicleLoadCapicityResponse.getLoadCapicityData().getLoadCacpacitySizeData()) {
+                                loadCapity.add(loadCacpacitySizeDatum1.getVehicleLoadingCapacity());
+                            }
+                        }
+                    }
+
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, loadCapity);
+                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    vehicleLoadCapicitySpinner.setAdapter(dataAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VehicleLoadCapicityResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "Response Failed! vehicle loading capicity", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
 
 
     public void ValidationAddNewVehicle() {
@@ -315,10 +386,10 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
             AddVehicleRequest addVehicleRequest = new AddVehicleRequest();
             addVehicleRequest.setVehicleNumber(vehicleNos);
             addVehicleRequest.setVehicleModelNo(vehicleModelNos);
-            addVehicleRequest.setVehicleCapacity(vehileLoadCapicity);
-            addVehicleRequest.setVehicleSize(vehicleSize);
-            addVehicleRequest.setVehicleDescription(vehicleDescription);
             addVehicleRequest.setVehicleTypeId(vehicleTypeId);
+            addVehicleRequest.setVehicleCapacityId(vehicleLoadCapityId);
+            addVehicleRequest.setVehicleDimensionSizeId(vehicleDimensionSizeId);
+            addVehicleRequest.setVehicleDescription(vehicleDescription);
             user_Id = HighwayPrefs.getString(getActivity(), Constants.ID);
             addVehicleRequest.setOwnerId(user_Id);
             if (Utils.isInternetConnected(getActivity())) {
@@ -341,7 +412,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
 
                     @Override
                     public void onFailure(Call<AddVehicleResponse> call, Throwable t) {
-                        Toast.makeText(getActivity(), "Faield Add Vehicle", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Response Faield!  Add Vehicle", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -71,7 +71,7 @@ public class GetAllVehicleAdapterForVehicleOwner extends RecyclerView.Adapter<Ge
             tv5VehicleLoadCapicity = itemView.findViewById(R.id.Tv5VehicleLoadCapicity);
             tv6VehicleSize = itemView.findViewById(R.id.Tv6VehicleSize);
             tv7VehicleDescription = itemView.findViewById(R.id.Tv7VehicleDescription);
-            img1VehicleImg = itemView.findViewById(R.id.VehicleImageView);
+           // img1VehicleImg = itemView.findViewById(R.id.VehicleImageView);
         }
     }
 }

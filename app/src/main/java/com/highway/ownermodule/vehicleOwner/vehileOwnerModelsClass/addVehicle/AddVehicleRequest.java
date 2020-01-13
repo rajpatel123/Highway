@@ -1,4 +1,4 @@
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.addVehicle;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicle;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -20,12 +20,12 @@ private String vehicleDescription;
 @SerializedName("vehicleModelNo")
 @Expose
 private String vehicleModelNo;
-@SerializedName("vehicleCapacity")
+@SerializedName("vehicleCapacityId")
 @Expose
-private String vehicleCapacity;
-@SerializedName("vehicleSize")
+private String vehicleCapacityId;
+@SerializedName("vehicleDimensionSizeId")
 @Expose
-private String vehicleSize;
+private String vehicleDimensionSizeId;
 
 public String getOwnerId() {
 return ownerId;
@@ -67,20 +67,20 @@ public void setVehicleModelNo(String vehicleModelNo) {
 this.vehicleModelNo = vehicleModelNo;
 }
 
-public String getVehicleCapacity() {
-return vehicleCapacity;
+public String getVehicleCapacityId() {
+return vehicleCapacityId;
 }
 
-public void setVehicleCapacity(String vehicleCapacity) {
-this.vehicleCapacity = vehicleCapacity;
+public void setVehicleCapacityId(String vehicleCapacityId) {
+this.vehicleCapacityId = vehicleCapacityId;
 }
 
-public String getVehicleSize() {
-return vehicleSize;
+public String getVehicleDimensionSizeId() {
+return vehicleDimensionSizeId;
 }
 
-public void setVehicleSize(String vehicleSize) {
-this.vehicleSize = vehicleSize;
+public void setVehicleDimensionSizeId(String vehicleDimensionSizeId) {
+this.vehicleDimensionSizeId = vehicleDimensionSizeId;
 }
 
 }

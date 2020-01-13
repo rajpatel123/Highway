@@ -9,9 +9,9 @@ public class VehicleDropDowanResponse {
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("data")
+    @SerializedName("vehicleData")
     @Expose
-    private DataV data;
+    private VehicleData vehicleData;
 
     public Boolean getStatus() {
         return status;
@@ -21,12 +21,12 @@ public class VehicleDropDowanResponse {
         this.status = status;
     }
 
-    public DataV getData() {
-        return data;
+    public VehicleData getVehicleData() {
+        return vehicleData;
     }
 
-    public void setData(DataV data) {
-        this.data = data;
+    public void setVehicleData(VehicleData vehicleData) {
+        this.vehicleData = vehicleData;
     }
 
 }

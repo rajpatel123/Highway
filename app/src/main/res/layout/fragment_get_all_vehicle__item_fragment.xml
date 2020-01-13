@@ -20,10 +20,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_10dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_5"
             android:layout_gravity="center">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+           <!-- <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/VehicleImageView"
                 civ_border_color="@color/yellow"
                 civ_border_overlay="true"
@@ -32,7 +33,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/margin_left_5"
-                android:src="@drawable/circularimg" />
+                android:src="@drawable/circularimg" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,6 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -69,7 +71,6 @@
                         android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
                         android:background="@drawable/completed_fragment_item_shape"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
@@ -78,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -102,7 +104,6 @@
                         android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
                         android:background="@drawable/completed_fragment_item_shape"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
@@ -110,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -134,7 +136,6 @@
                         android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
                         android:background="@drawable/completed_fragment_item_shape"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
@@ -143,6 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/margin_5"
+                    android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -166,7 +168,6 @@
                         android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
                         android:background="@drawable/completed_fragment_item_shape"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
@@ -175,6 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -200,7 +202,6 @@
                         android:paddingBottom="@dimen/margin_5"
                         android:layout_gravity="center"
                         android:background="@drawable/completed_fragment_item_shape"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
@@ -208,6 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -232,7 +234,6 @@
                         android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
                         android:background="@drawable/completed_fragment_item_shape"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
@@ -243,6 +244,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -267,7 +269,6 @@
                         android:paddingRight="@dimen/margin_5"
                         android:paddingBottom="@dimen/margin_5"
                         android:background="@drawable/completed_fragment_item_shape"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_16dp" />
                 </LinearLayout>
 
@@ -319,5 +320,5 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@color/darkwhite"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="5dp" />
 </LinearLayout>

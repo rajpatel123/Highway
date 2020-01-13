@@ -4,7 +4,7 @@ package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.ve
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleDatum {
+public class VehicleDataName {
 
     @SerializedName("VehicleId")
     @Expose

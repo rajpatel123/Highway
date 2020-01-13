@@ -1,5 +1,5 @@
 
-package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicleModel.vehicleDiamentionSize;
+package com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
