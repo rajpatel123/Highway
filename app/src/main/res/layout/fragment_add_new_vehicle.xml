@@ -52,7 +52,7 @@
                 android:textStyle="normal" />
 
             <EditText
-                android:id="@+id/EdtTxtvehicleModelNos"
+                android:id="@+id/EdtTxtVehicleNos"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_35"
                 android:background="@drawable/completed_fragment_item_shape"
@@ -71,7 +71,7 @@
                 android:textStyle="normal" />
 
             <EditText
-                android:id="@+id/EdtTxtVehicleNos"
+                android:id="@+id/EdtTxtvehicleModelNos"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_35"
                 android:background="@drawable/completed_fragment_item_shape"

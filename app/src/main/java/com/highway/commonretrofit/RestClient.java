@@ -20,8 +20,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverT
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicle.AddVehicleRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicle.AddVehicleResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleAssignDropDowanRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleAssignDropDowanResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.VehicleLoadCapicityRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.VehicleLoadCapicityResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.VehicleDiamensionSizeRequest;
@@ -95,8 +95,8 @@ public class RestClient {
     }
 
     // vehicle list spinner in AssignD2s /////////////////////////////////////
-   public static void getVehicleList(VehicleDropDowanRequest vehicleDropDownRequest, Callback<VehicleDropDowanResponse>vehicleDropDownResponseCallback){
-        RetrofitClient.getClient().vehicleDataResponse(vehicleDropDownRequest).enqueue(vehicleDropDownResponseCallback);
+   public static void getVehicleAssignList(VehicleAssignDropDowanRequest vehicleAssignDropDowanRequest, Callback<VehicleAssignDropDowanResponse>vehicleAssignDropDowanResponseCallback){
+        RetrofitClient.getClient().VEHICLE_ASSIGN_DROP_DOWAN_RESPONSE_CALL(vehicleAssignDropDowanRequest).enqueue(vehicleAssignDropDowanResponseCallback);
     }
 
   /*  public static void getVehicleList(Callback<VehicleDropDownResponse> callback) {

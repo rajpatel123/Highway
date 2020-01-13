@@ -6,27 +6,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class VehicleDataName {
 
-    @SerializedName("VehicleId")
+    @SerializedName("VehicleNameWithNumberId")
     @Expose
-    private String vehicleId;
-    @SerializedName("VehicleName")
+    private String vehicleNameWithNumberId;
+    @SerializedName("VehicleNameWithNumber")
     @Expose
-    private String vehicleName;
+    private String vehicleNameWithNumber;
 
-    public String getVehicleId() {
-        return vehicleId;
+    public String getVehicleNameWithNumberId() {
+        return vehicleNameWithNumberId;
     }
 
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
+    public void setVehicleNameWithNumberId(String vehicleNameWithNumberId) {
+        this.vehicleNameWithNumberId = vehicleNameWithNumberId;
     }
 
-    public String getVehicleName() {
-        return vehicleName;
+    public String getVehicleNameWithNumber() {
+        return vehicleNameWithNumber;
     }
 
-    public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
+    public void setVehicleNameWithNumber(String vehicleNameWithNumber) {
+        this.vehicleNameWithNumber = vehicleNameWithNumber;
     }
 
 }

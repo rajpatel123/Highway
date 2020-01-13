@@ -94,14 +94,14 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_new_vehicle, container, false);
 
-
-        edtTxtvehicleModelNos = view.findViewById(R.id.EdtTxtvehicleModelNos);
         edtTxtVehicleNos = view.findViewById(R.id.EdtTxtVehicleNos);
-        btnAddNewVehicle = view.findViewById(R.id.BtnAddNewVehicle);
+        edtTxtvehicleModelNos = view.findViewById(R.id.EdtTxtvehicleModelNos);
         vehiclesTypeSpinner = view.findViewById(R.id.VehicleTypeSpinner);
         vehicleLoadCapicitySpinner = view.findViewById(R.id.VehicleLoadCapicitySpinner);
         vehicleDiamensionSizeSpinner = view.findViewById(R.id.VehicleDimnSizeSpinner);
         edtVehicleDescription = view.findViewById(R.id.EdtVehicleDescription);
+        btnAddNewVehicle = view.findViewById(R.id.BtnAddNewVehicle);
+
         //edtTxtvehicleName = view.findViewById(R.id.EdtTxtvehicleName);
         // edtTxtVehileLoadCapicity = view.findViewById(R.id.EdtTxtVehileLoadCapicity);
         // edtTxtVehicleSize = view.findViewById(R.id.EdtTxtVehicleSize);
