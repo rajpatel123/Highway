@@ -272,7 +272,6 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
             }
         });
 
-
     }
 
 
