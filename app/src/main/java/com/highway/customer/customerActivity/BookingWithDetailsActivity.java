@@ -113,6 +113,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public Spinner goodsTypeSpinner;
     List<String> goodsNames;
 
+    TextView vehicleVameTv, vehicleCapicityTv, vehicleSizeTv;
+    ImageView vehileBookImg;
+    TextView info1, info2, info3, info4, info5, info6;
+
     List<Vehicle> vehicleList = new ArrayList<>();
     private BookingVehicleAdapter bookingVehicleAdapter;
     String user_Id;
@@ -620,25 +624,25 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         dialogBuilder.setView(dialogView);
 
         final android.app.AlertDialog dialog = dialogBuilder.create();
-        TextView nameTv = dialogView.findViewById(R.id.truckName);
-        ImageView vihicleImg = dialogView.findViewById(R.id.vehicleImg);
-        TextView capacityTv = dialogView.findViewById(R.id.capacity);
-        TextView sizeTV = dialogView.findViewById(R.id.sizeTV);
+        vehicleVameTv = dialogView.findViewById(R.id.truckName);
+        vehileBookImg = dialogView.findViewById(R.id.vehicleImg);
+        vehicleCapicityTv = dialogView.findViewById(R.id.capacity);
+        vehicleSizeTv = dialogView.findViewById(R.id.sizeTV);
 
         TextView okay = dialogView.findViewById(R.id.done);
 
-        capacityTv.setText(vehicle.getCapacity());
-        sizeTV.setText(vehicle.getCapacity());
+        vehicleCapicityTv.setText(vehicle.getCapacity());
+        vehicleSizeTv.setText(vehicle.getCapacity());
 
 
-        TextView info1 = dialogView.findViewById(R.id.info1);
-        TextView info2 = dialogView.findViewById(R.id.info2);
-        TextView info3 = dialogView.findViewById(R.id.info3);
-        TextView info4 = dialogView.findViewById(R.id.info4);
-        TextView info5 = dialogView.findViewById(R.id.info6);
-        TextView info6 = dialogView.findViewById(R.id.info5);
+        info1 = dialogView.findViewById(R.id.info1);
+        info2 = dialogView.findViewById(R.id.info2);
+        info3 = dialogView.findViewById(R.id.info3);
+        info4 = dialogView.findViewById(R.id.info4);
+        info5 = dialogView.findViewById(R.id.info6);
+        info6 = dialogView.findViewById(R.id.info5);
 
-        nameTv.setText(vehicle.getvName());
+        vehicleVameTv.setText(vehicle.getvName());
         info1.setText(vehicle.getInfo1());
         info2.setText(vehicle.getInfo2());
         info3.setText(vehicle.getInfo3());
@@ -646,7 +650,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info5.setText(vehicle.getInfo5());
         info6.setText(vehicle.getInfo6());
 
-        vihicleImg.setBackgroundResource(R.drawable.truck);
+        vehileBookImg.setBackgroundResource(R.drawable.truck);
 
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
