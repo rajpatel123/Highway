@@ -34,7 +34,7 @@ public class GetAllDriverList_Item_fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_get_all_driver_list__item_fragment, container, false);
+        View view =  inflater.inflate(R.layout.fragment_get_all_driver__item_fragment, container, false);
 
 
 

@@ -110,14 +110,27 @@
     <string name="expand">Expand Sheet</string>
     <string name="Rs_one">"\u20B9" 15.0</string>
     <string name="Rs_one1">"\u20B9" 645.00</string>
+    <string name="Rs_one999">"\u20B9" 999.00</string>
+    <string name="trip_heading">"Trip#CRN68086794</string>
+    <string name="driver_on_the_way_to_pickup">"Driver on the way to pickup"</string>
+    <string name="driver_will_call_this_contact_while_delivery">"Driver while call this contact while delivery"</string>
+    <string name="support">"Support"</string>
     <string name="invalid_mobile">Please Enter Valid Phone!!!</string>
     <string name="valid_phone">Enter 10 Number Phone!!!</string>
     <string name="invalid_email">Please Enter Valid Email!!</string>
     <string name="invalid_username">Please Enter Valid Username!!</string>
     <string name="resend_otp">RESEND OTP</string>
     <string name="User_Mob">User mobile no</string>
+    <string name="driver_will_call_this_contect_while_delivery">Driver will call this contect while delivery</string>
     <string name="enter_otp_on_phone">Enter the otp send on your phone</string>
     <string name="search">Search</string>
+
+    <string name="app_name_bootom_sheet">Bottom Sheet Dialog Fragment</string>
+    <string name="action_share">Share</string>
+    <string name="action_receiver_contact">Receiver Contact Number.</string>
+    <string name="action_diver_will_call">Driver will call the contact while delivery</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_print">Print</string>
     <string name="bangalore_international_airport_pvt_ltd">Bangalore international airport pvt ltd</string>
     <string name="add_another_drop_location">Add another drop location</string>
     <string name="Pune_Airport">Pune Airport</string>

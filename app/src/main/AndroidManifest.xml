@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.highway">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -9,6 +10,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -25,7 +29,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason"></activity>
+        <activity android:name=".customer.customerActivity.GoodTypeDetailsRecyclerItemActivity"></activity>
+        <activity android:name=".customer.customerActivity.DropActivity" />
+        <activity android:name=".customer.customerActivity.TripBookingActivity" />
+        <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason" />
         <activity android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity" />
 
         <meta-data
@@ -33,8 +40,7 @@
             android:value="@integer/google_play_services_version" /> <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" />
-
+            android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" /> <!-- <activity -->
         <activity
             android:name=".common.base.activity.SplashActivity"
             android:screenOrientation="portrait">
@@ -47,7 +53,7 @@
         <activity
             android:name=".customer.customerActivity.WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".customer.customerActivity.GoodTypeDetailActivity" />
+        <activity android:name=".customer.customerActivity.GoodsTypeDetailActivity" />
         <activity
             android:name=".customer.customerActivity.BookingWithDetailsActivity"
             android:screenOrientation="portrait" />

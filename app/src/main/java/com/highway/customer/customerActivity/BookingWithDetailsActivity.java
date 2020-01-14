@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,8 +61,11 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.highway.R;
 import com.highway.Vehicle;
+import com.highway.customer.customerFragment.ReceiverBottomSheetFragment;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +76,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         LocationListener, TaskLoadedCallback, BookingVehicleAdapter.OnClickEvents {
 
 
-    private static final int SELECT_TYPE =4 ;
+    private static final int SELECT_TYPE = 4;
     Button getDirection;
     private Polyline currentPolyline;
 
@@ -97,17 +101,28 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
-    LinearLayout goodtype;
+    TextView goodtype;
     private Button back_button;
-    public  TextView bookTruckTv;
+    public TextView bookTruckTv, phoneNoTv, nameTv;
 
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
     private String sourceName;
     private String destName;
+    public String userName, userMobNo;
+    public Spinner goodsTypeSpinner;
+    List<String> goodsNames;
+
+    TextView vehicleVameTv, vehicleCapicityTv, vehicleSizeTv;
+    ImageView vehileBookImg;
+    TextView info1, info2, info3, info4, info5, info6;
 
     List<Vehicle> vehicleList = new ArrayList<>();
     private BookingVehicleAdapter bookingVehicleAdapter;
+    String user_Id;
+    String goodsTypeId;
+    private String gdTypeId, gdTypeText;
+//    GoodsTypeDataResponse goodsTypeDataResponse;
 
 
     public static void start(Activity activity,
@@ -141,14 +156,21 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         edtSourceLOcationEDT = findViewById(R.id.edtSourceLOcation);
         edtDropLocation = findViewById(R.id.edtDropLocation);
         back_button = findViewById(R.id.back_button);
-
-
         goodtype = findViewById(R.id.goodtype);
         sourceLL = findViewById(R.id.sourceLL);
         destLL = findViewById(R.id.destLL);
 
         recyclerView = findViewById(R.id.vehicleListRV);
         bookTruckTv = findViewById(R.id.bookTruckTv);
+        phoneNoTv = findViewById(R.id.TvPhoneNo);
+        nameTv = findViewById(R.id.TvUserName);
+
+        userName = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
+        userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
+
+        phoneNoTv.setText(userMobNo);
+        nameTv.setText(userName);
+
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,14 +178,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 finish();
             }
         });
-
-          bookTruckTv.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                    
-              }
-          });
-
 
         initLocations(getIntent());
 
@@ -202,17 +216,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         });
 
 
-        goodtype.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(BookingWithDetailsActivity.this, GoodTypeDetailActivity.class);
-                startActivityForResult(intent,SELECT_TYPE);
-                overridePendingTransition( R.anim.slide_up, R.anim.slide_up_out );
-            }
-        });
-
-
         destLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,6 +229,21 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
             }
         });
+
+
+        goodtype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(BookingWithDetailsActivity.this, GoodsTypeDetailActivity.class);
+                startActivityForResult(intent, SELECT_TYPE);
+                overridePendingTransition(R.anim.slide_up, R.anim.slide_up_out);
+            }
+        });
+
+
+        //  clicklistener();
+        //  getGoodsTypeSpinner();
 
 
         for (int i = 0; i < 8; i++) {
@@ -255,6 +273,27 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     }
 
+
+    public void clicklistener() {
+             /*bookTruckTv.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+
+                             Intent intent = new Intent(getApplicationContext(),TripBookingActivity.class);
+                             startActivity(intent);
+                             finish();
+                          }
+                      });*/
+
+    }
+
+    public void showBottomSheet(View view) {
+        ReceiverBottomSheetFragment receiverBottomSheetFragment =
+                ReceiverBottomSheetFragment.newInstance().newInstance();
+        receiverBottomSheetFragment.show(getSupportFragmentManager(),
+                ReceiverBottomSheetFragment.TAG);
+    }
+
     private void initLocations(Intent intent) {
         if (intent != null) {
             sourceName = intent.getStringExtra("sourceName");
@@ -267,7 +306,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             edtDropLocation.setText("" + destName);
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
-           // mCurrLocationMarker = mMap.addMarker(markerOptions1);
+            // mCurrLocationMarker = mMap.addMarker(markerOptions1);
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
 //            mCurrLocationMarker = mMap.addMarker(markerOptions2);
@@ -324,9 +363,13 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                     }
 
                 }
+            } else if (requestCode == SELECT_TYPE) {
+                gdTypeId = data.getStringExtra("id");
+                gdTypeText = data.getStringExtra("type");
+                goodtype.setText(gdTypeText);
+                //goodtype.setText(gdTypeId);
             }
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-            // TODO: Handle the error.
             Status status = Autocomplete.getStatusFromIntent(data);
             Log.i("TAG", status.getStatusMessage());
         } else if (resultCode == RESULT_CANCELED) {
@@ -445,7 +488,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-///**********************
+
+    ///**********************
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
@@ -467,18 +511,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     public boolean checkLocationPermission() {
@@ -486,15 +518,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-                //Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -521,8 +547,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted. Do the
-                    // contacts-related task you need to do.
+
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
@@ -530,19 +555,15 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                         if (mGoogleApiClient == null) {
                             buildGoogleApiClient();
                         }
-                        // mMap.setMyLocationEnabled(true);
                     }
 
                 } else {
 
-                    // Permission denied, Disable the functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
 
-            // other 'case' lines to check for other permissions this app might request.
-            // You can add here other case statements according to your requirement.
         }
     }
 
@@ -588,12 +609,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
 
-        for (Vehicle vehicle :vehicleList){
+        for (Vehicle vehicle : vehicleList) {
             vehicle.setSelected(false);
         }
     }
-
-
 
 
     private void showInfoDialog(Vehicle vehicle) {
@@ -605,25 +624,25 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         dialogBuilder.setView(dialogView);
 
         final android.app.AlertDialog dialog = dialogBuilder.create();
-        TextView nameTv = dialogView.findViewById(R.id.truckName);
-        ImageView vihicleImg = dialogView.findViewById(R.id.vehicleImg);
-        TextView capacityTv = dialogView.findViewById(R.id.capacity);
-        TextView sizeTV = dialogView.findViewById(R.id.sizeTV);
+        vehicleVameTv = dialogView.findViewById(R.id.truckName);
+        vehileBookImg = dialogView.findViewById(R.id.vehicleImg);
+        vehicleCapicityTv = dialogView.findViewById(R.id.capacity);
+        vehicleSizeTv = dialogView.findViewById(R.id.sizeTV);
 
         TextView okay = dialogView.findViewById(R.id.done);
 
-        capacityTv.setText(vehicle.getCapacity());
-        sizeTV.setText(vehicle.getCapacity());
+        vehicleCapicityTv.setText(vehicle.getCapacity());
+        vehicleSizeTv.setText(vehicle.getCapacity());
 
 
-        TextView info1 = dialogView.findViewById(R.id.info1);
-        TextView info2 = dialogView.findViewById(R.id.info2);
-        TextView info3 = dialogView.findViewById(R.id.info3);
-        TextView info4 = dialogView.findViewById(R.id.info4);
-        TextView info5 = dialogView.findViewById(R.id.info6);
-        TextView info6 = dialogView.findViewById(R.id.info5);
+        info1 = dialogView.findViewById(R.id.info1);
+        info2 = dialogView.findViewById(R.id.info2);
+        info3 = dialogView.findViewById(R.id.info3);
+        info4 = dialogView.findViewById(R.id.info4);
+        info5 = dialogView.findViewById(R.id.info6);
+        info6 = dialogView.findViewById(R.id.info5);
 
-        nameTv.setText(vehicle.getvName());
+        vehicleVameTv.setText(vehicle.getvName());
         info1.setText(vehicle.getInfo1());
         info2.setText(vehicle.getInfo2());
         info3.setText(vehicle.getInfo3());
@@ -631,7 +650,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info5.setText(vehicle.getInfo5());
         info6.setText(vehicle.getInfo6());
 
-        vihicleImg.setBackgroundResource(R.drawable.truck);
+        vehileBookImg.setBackgroundResource(R.drawable.truck);
 
         okay.setOnClickListener(new View.OnClickListener() {
             @Override

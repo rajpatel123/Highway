@@ -34,12 +34,12 @@ import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewDriverDetailsFragment;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddNewVehicleDetailsFragment;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddVehicleFragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.Assign_D2V_FragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverDetailsListFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleDetailsListFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverFragmentForVehicleOwner;
+import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -59,12 +59,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private DashBordFragmentForCustomer dashBordFragmentForCustomer;
     private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
     private DashBoardActivity dashBoardActivity;
-    private AddNewVehicleDetailsFragment addNewVehicleDetailsFragment;
-    private AddNewDriverDetailsFragment addNewDriverDetailsFragment;
+    private AddVehicleFragmentForVehicleOwner addVehicleFragmentForVehicleOwner;
+    private AddDriverFragmentForVehicleOwner addDriverFragmentForVehicleOwner;
     private Assign_D2V_FragmentForVehicleOwner assign_d2V_fragmentForVehicleOwner;
-    private GetAllVehicleDetailsListFragmentForVehicleOwner getAllVehicleDetailsListFragmentForVehicleOwner;
+    private GetAllVehicleFragmentForVehicleOwner getAllVehicleFragmentForVehicleOwner;
     private BookLoadFragmentForMillUser bookLoadFragmentForMillUser;
-    GetAllDriverDetailsListFragmentForVehicleOwner getAllDriverDetailsListFragmentForVehicleOwner;
+    GetAllDriverFragmentForVehicleOwner getAllDriverFragmentForVehicleOwner;
 
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
@@ -440,10 +440,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (addNewVehicleDetailsFragment == null) {
-                            addNewVehicleDetailsFragment = AddNewVehicleDetailsFragment.newInstance();
+                        if (addVehicleFragmentForVehicleOwner == null) {
+                            addVehicleFragmentForVehicleOwner = AddVehicleFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(addNewVehicleDetailsFragment);
+                        replaceFragment(addVehicleFragmentForVehicleOwner);
                         break;
                 }
                 break;
@@ -462,10 +462,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (addNewDriverDetailsFragment == null) {
+                        if (addDriverFragmentForVehicleOwner == null) {
                         }
-                        addNewDriverDetailsFragment = AddNewDriverDetailsFragment.newInstance();
-                        replaceFragment(addNewDriverDetailsFragment);
+                        addDriverFragmentForVehicleOwner = AddDriverFragmentForVehicleOwner.newInstance();
+                        replaceFragment(addDriverFragmentForVehicleOwner);
                         break;
                 }
                 break;
@@ -508,10 +508,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (getAllDriverDetailsListFragmentForVehicleOwner == null) {
-                            getAllDriverDetailsListFragmentForVehicleOwner = GetAllDriverDetailsListFragmentForVehicleOwner.newInstance();
+                        if (getAllDriverFragmentForVehicleOwner == null) {
+                            getAllDriverFragmentForVehicleOwner = GetAllDriverFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllDriverDetailsListFragmentForVehicleOwner);
+                        replaceFragment(getAllDriverFragmentForVehicleOwner);
                         break;
                 }
                 break;
@@ -529,10 +529,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                     case "5":
 
-                        if (getAllVehicleDetailsListFragmentForVehicleOwner == null) {
-                            getAllVehicleDetailsListFragmentForVehicleOwner = GetAllVehicleDetailsListFragmentForVehicleOwner.newInstance();
+                        if (getAllVehicleFragmentForVehicleOwner == null) {
+                            getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllVehicleDetailsListFragmentForVehicleOwner);
+                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
                         break;
                 }
                 break;

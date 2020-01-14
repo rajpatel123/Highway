@@ -36,7 +36,7 @@ public class GetAllVehicleItem_ListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_get_all_vehicle_list_item_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_get_all_vehicle__item_fragment, container, false);
 
 
 

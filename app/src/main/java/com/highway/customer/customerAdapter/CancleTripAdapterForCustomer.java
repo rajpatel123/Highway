@@ -26,6 +26,8 @@ public class CancleTripAdapterForCustomer extends RecyclerView.Adapter<CancleTri
         this.context = context1;
     }
 
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

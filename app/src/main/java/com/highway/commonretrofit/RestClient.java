@@ -8,24 +8,32 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
+import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
+import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
+import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewVehicleModel.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicle.AddVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addVehicle.AddVehicleResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleAssignDropDowanRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleAssignDropDowanResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.VehicleLoadCapicityRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehiceLoadCapicity.VehicleLoadCapicityResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.VehicleDiamensionSizeRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.VehicleDiamensionSizeResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.assignD2V_Model.AssignD2VRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.assignD2V_Model.AssignD2VResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.driverAssignSpinner.DriverDropDownResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.assignD2V.vehicleAssignSpinner.VehicleDropDowanResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriverDetailsList.GetAllDriverResponse;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsRequest;
-import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicleDetailsList.GetAllVehicleDetailsResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriver.GetAllDriverRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllDriver.GetAllDriverResponse;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle.GetAllVehicleRequest;
+import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle.GetAllVehicleResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
 
@@ -68,6 +76,8 @@ public class RestClient {
     public static void addNewVehicle(AddVehicleRequest addVehicleRequest, Callback<AddVehicleResponse>addVehicleResponseCallback){
         RetrofitClient.getClient().addVehicleResponseCall(addVehicleRequest).enqueue(addVehicleResponseCallback);
     }
+
+
     //add new Driver
 
     public static  void addNewDriver(AddNewDriverRequest addNewDriverRequest, Callback<AddNewDriverResponse>addNewDriverResponseCallback){
@@ -84,9 +94,9 @@ public class RestClient {
         RetrofitClient.getClient().vehicleTypeDropDowanResp(vehicleTypeDropDowanRequest).enqueue(vehicleTypeDropDowanResponseCallback);
     }
 
-    // vehicle list spinner in AssignD2s
-   public static void getVehicleList(VehicleDropDowanRequest vehicleDropDownRequest, Callback<VehicleDropDowanResponse>vehicleDropDownResponseCallback){
-        RetrofitClient.getClient().vehicleDataResponse(vehicleDropDownRequest).enqueue(vehicleDropDownResponseCallback);
+    // vehicle list spinner in AssignD2s /////////////////////////////////////
+   public static void getVehicleAssignList(VehicleAssignDropDowanRequest vehicleAssignDropDowanRequest, Callback<VehicleAssignDropDowanResponse>vehicleAssignDropDowanResponseCallback){
+        RetrofitClient.getClient().VEHICLE_ASSIGN_DROP_DOWAN_RESPONSE_CALL(vehicleAssignDropDowanRequest).enqueue(vehicleAssignDropDowanResponseCallback);
     }
 
   /*  public static void getVehicleList(Callback<VehicleDropDownResponse> callback) {
@@ -98,7 +108,7 @@ public class RestClient {
        RetrofitClient.getClient().approxLoadResponse(approxLoadDropDownRequest).enqueue(approxLoadResponseCallback);
    }
 
-   // Goods types Spinners
+   // Goods types Spinners in miller module ...book load
    public static void getGoodsTypesLIst(GoodsTypeDropDownRequest goodsTypeDropDownRequest, Callback<GoodsTypesDropDownResponse>goodsTypeResponseCallback){
        RetrofitClient.getClient().goodsTypesResponse(goodsTypeDropDownRequest).enqueue(goodsTypeResponseCallback);
    }
@@ -109,12 +119,34 @@ public class RestClient {
     }
 
    // getAll Vehicle details
-    public static void getAllVehicleDetails(GetAllVehicleDetailsRequest getAllVehicleDetailsRequest, Callback<GetAllVehicleDetailsResponse>getAllVehicleDetailsResponseCallback){
-       RetrofitClient.getClient().getVehicleResponse(getAllVehicleDetailsRequest).enqueue(getAllVehicleDetailsResponseCallback);
+    public static void getAllVehicleDetails(GetAllVehicleRequest getAllVehicleRequest, Callback<GetAllVehicleResponse>getAllVehicleResponseCallback){
+       RetrofitClient.getClient().getVehicleResponse(getAllVehicleRequest).enqueue(getAllVehicleResponseCallback);
     }
 
     // Assign Driver 2 vehicle
         public  static void assign_D2V(AssignD2VRequest assignD2VRequest , Callback<AssignD2VResponse> assignD2VResponseCallback){
        RetrofitClient.getClient().assignD2VReq(assignD2VRequest).enqueue(assignD2VResponseCallback);
         }
+
+      //Goods type DataVehicle Booking With details Activity
+      public static void selectUrGoodsType(GoodsTypeDataRequest goodsTypeDataRequest, Callback<GoodsTypeDataResponse>selectUrGoodsTypeDataResponseCallback){
+       RetrofitClient.getClient().SELECT_UR_GOODS_TYPE_DATA_RESPONSE_CALL(goodsTypeDataRequest).enqueue(selectUrGoodsTypeDataResponseCallback);
+      }
+
+       // update receiver no
+      public static void updateReceiverNameOrNumber(UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest, Callback<UpdateReceiverPhoneNoAndNameResponse>updateReceiverPhoneNoAndNameResponseCallback){
+       RetrofitClient.getClient().UPDATE_RECEIVER_PHONE_NO_AND_NAME_RESPONSE_CALL(updateReceiverPhoneNoAndNameRequest).enqueue(updateReceiverPhoneNoAndNameResponseCallback);
+      }
+
+      //Vehicle diamention size
+    public static void vehicleDiamension(VehicleDiamensionSizeRequest vehicleDiamensionSizeRequest, Callback<VehicleDiamensionSizeResponse>vehicleDiamensionSizeResponseCallback){
+       RetrofitClient.getClient().VEHICLE_DIAMENSION_SIZE_RESPONSE_CALL(vehicleDiamensionSizeRequest).enqueue(vehicleDiamensionSizeResponseCallback);
+    }
+
+     // vehicle load capicirty through vehicle ownwer
+    public static void  vehicleLoadCapicity(VehicleLoadCapicityRequest vehicleLoadCapicityRequest, Callback<VehicleLoadCapicityResponse>vehicleLoadCapicityResponseCallback){
+       RetrofitClient.getClient().VEHICLE_LOAD_CAPICITY_RESPONSE_CALL(vehicleLoadCapicityRequest).enqueue(vehicleLoadCapicityResponseCallback);
+    }
+
+
 }

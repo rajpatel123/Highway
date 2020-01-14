@@ -203,7 +203,6 @@ public class DashBoardFragmentForDriver extends Fragment {
                 Toast.makeText(dashBoardActivity, " Failure", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     public void updateAllFragment() {
