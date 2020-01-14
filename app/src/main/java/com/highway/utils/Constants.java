@@ -23,10 +23,12 @@ public class Constants {
     public static final String MillerMOBILE = "millerMobile";
     public static final String OwnerMOBILE = "ownerMobile";
 
-
-
     public static final String IS_FIRST_TIME_LAUNCH_CUSTOMER = "first_launch_customer";
     public static final String IS_FIRST_TIME_LAUNCH_DRIVER = "first_launch_driver";
     public static final String IS_FIRST_TIME_LAUNCH_OWNER = "first_launch_owner";
     public static final String IS_FIRST_TIME_LAUNCH_MILL_USER = "first_launch_mill";
+
+    public static final String RECEIVERPHONENO = "receiverPhoneNumber";
+    public static final String RECEIVERNAME = "receiverNAME";
+
 }
