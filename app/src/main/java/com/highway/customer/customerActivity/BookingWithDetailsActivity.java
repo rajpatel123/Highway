@@ -241,10 +241,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             }
         });
 
-
-        //  clicklistener();
         //  getGoodsTypeSpinner();
-
+        clicklistener();
 
         for (int i = 0; i < 8; i++) {
             Vehicle vehicle = new Vehicle();
@@ -275,24 +273,20 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
 
     public void clicklistener() {
-             /*bookTruckTv.setOnClickListener(new View.OnClickListener() {
-                          @Override
-                          public void onClick(View view) {
+        bookTruckTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                             Intent intent = new Intent(getApplicationContext(),TripBookingActivity.class);
-                             startActivity(intent);
-                             finish();
-                          }
-                      });*/
+                ReceiverBottomSheetFragment receiverBottomSheetFragment =
+                        ReceiverBottomSheetFragment.newInstance().newInstance();
+                receiverBottomSheetFragment.show(getSupportFragmentManager(),
+                        ReceiverBottomSheetFragment.TAG);
+
+            }
+        });
 
     }
 
-    public void showBottomSheet(View view) {
-        ReceiverBottomSheetFragment receiverBottomSheetFragment =
-                ReceiverBottomSheetFragment.newInstance().newInstance();
-        receiverBottomSheetFragment.show(getSupportFragmentManager(),
-                ReceiverBottomSheetFragment.TAG);
-    }
 
     private void initLocations(Intent intent) {
         if (intent != null) {

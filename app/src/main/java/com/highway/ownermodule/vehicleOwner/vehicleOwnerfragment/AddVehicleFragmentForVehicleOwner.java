@@ -380,7 +380,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     }
 
 
-    public void ValidationAddNewVehicle() {
+    public void ValidationAddNewVehicle()   {
 
         if (inputValidation()) {
             AddVehicleRequest addVehicleRequest = new AddVehicleRequest();

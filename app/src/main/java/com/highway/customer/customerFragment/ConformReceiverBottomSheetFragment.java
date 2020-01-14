@@ -9,12 +9,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.highway.R;
 
 public class ConformReceiverBottomSheetFragment extends Fragment {
 
     public static final Object TAG =  "ActionBottomDialog";
+
+    ReceiverBottomSheetFragment receiverBottomSheetFragment;
+    LinearLayout receiverLayout;
+
+    public TextView  conformMObNumTv ,editTV,cnfReceiverNameTv,cnfBookTv;
+
 
     public ConformReceiverBottomSheetFragment() {
     }
@@ -36,7 +44,15 @@ public class ConformReceiverBottomSheetFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_conform_receiver_bottom_sheet, container, false);
+        View view=  inflater.inflate(R.layout.fragment_conform_receiver_bottom_sheet, container, false);
+
+        conformMObNumTv = view.findViewById(R.id.conformMObNumTv);
+        editTV = view.findViewById(R.id.EditTV);
+        cnfReceiverNameTv = view.findViewById(R.id.ConformReceiverNameTv3);
+        cnfBookTv = view.findViewById(R.id.conformBookTv);
+
+        return view;
+
     }
 
 

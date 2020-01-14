@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
@@ -52,6 +53,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
     LinearLayout receiverLayOut;
     private Object supportFragmentManager;
     ReceiverBottomSheetFragment receiverBottomSheetFragment;
+    LinearLayout recLayout;
 
     public ReceiverBottomSheetFragment() {
 
@@ -81,7 +83,8 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
         edtTextName = view.findViewById(R.id.user_name);
         imageView = view.findViewById(R.id.phoneImg);
         updateReceiverNameTv = view.findViewById(R.id.UpdateTV);
-        receiverLayOut = view.findViewById(R.id.receiverLayOut);
+        recLayout = view.findViewById(R.id.receiverLayOut);
+
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +176,6 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
 
     public void updateReceiverName(){
         if (inputValidationReceiverDetial()){
-
             UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest = new UpdateReceiverPhoneNoAndNameRequest();
             updateReceiverPhoneNoAndNameRequest.setReceiverMobile(receiverPhoneNo);
             updateReceiverPhoneNoAndNameRequest.setReceiverName(receiverName);
@@ -201,11 +203,22 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     public void conformShowBottomSheet(){
-        receiverLayOut.setVisibility(View.GONE);
-        ConformReceiverBottomSheetFragment conformReceiverBottomSheetFragment =
-                ConformReceiverBottomSheetFragment.newInstance().newInstance();
-        conformReceiverBottomSheetFragment.show(getActivity().getSupportFragmentManager(),
-                ConformReceiverBottomSheetFragment.TAG);
+        recLayout.setVisibility(View.GONE);
+        View dialogView = getLayoutInflater().inflate(R.layout.fragment_conform_receiver_bottom_sheet, null);
+        BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+        dialog.setContentView(dialogView);
+        dialog.show();
+
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
