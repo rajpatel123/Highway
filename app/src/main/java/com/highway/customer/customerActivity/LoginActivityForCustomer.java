@@ -83,6 +83,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
                         if (response.body() != null) {
                             if (response.code()==200) {
                                 Intent intent = new Intent(LoginActivityForCustomer.this,MobileOtpVerificationActivity.class);
+
                                 HighwayPrefs.putString(LoginActivityForCustomer.this, Constants.USERMOBILE, phone_number);
 
                                 /*HighwayPrefs.putString(LoginActivityForCustomer.this,Constants.ID,"4");

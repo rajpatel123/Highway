@@ -24,9 +24,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerActivity.LoginActivityForCustomer;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
 import com.highway.utils.Constants;
@@ -46,12 +48,13 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
     private static final int PICK_CONTACT = 1;
     private static final int RESULT_PICK_CONTACT = 1;
     String receiverPhoneNo = null;
-    String receiverName ;
+    String receiverName;
     TextView updateReceiverNameTv;
     private String userId;
     LinearLayout receiverLayOut;
     private Object supportFragmentManager;
     ReceiverBottomSheetFragment receiverBottomSheetFragment;
+    LinearLayout recLayout;
 
     public ReceiverBottomSheetFragment() {
 
@@ -81,7 +84,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
         edtTextName = view.findViewById(R.id.user_name);
         imageView = view.findViewById(R.id.phoneImg);
         updateReceiverNameTv = view.findViewById(R.id.UpdateTV);
-        receiverLayOut = view.findViewById(R.id.receiverLayOut);
+        recLayout = view.findViewById(R.id.receiverLayOut);
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +103,6 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
         });
 
 
-
         return view;
     }
 
@@ -110,12 +112,12 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i(TAG, "onActivityResult()");
         if (requestCode == PICK_CONTACT) {
-            switch (resultCode ) {
+            switch (resultCode) {
                 case RESULT_OK:
                     contactPicked(data);
             }
 
-        }else {
+        } else {
             Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
         }
 
@@ -136,7 +138,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
             receiverPhoneNo = cursor.getString(phoneIndex);
             edtTextMobNo.setText(receiverPhoneNo);
 
-            receiverName= cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            receiverName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
             edtTextName.setText(receiverName);
 
         } catch (Exception e) {
@@ -145,7 +147,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
         }
     }
 
-    public boolean inputValidationReceiverDetial(){
+    public boolean inputValidationReceiverDetial() {
         boolean check = true;
 
         /*receiverPhoneNo = edtTextMobNo.getText().toString().trim();
@@ -167,13 +169,12 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
             check = true;
         }
 
-       return check;
+        return check;
     }
 
 
-    public void updateReceiverName(){
-        if (inputValidationReceiverDetial()){
-
+    public void updateReceiverName() {
+        if (inputValidationReceiverDetial()) {
             UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest = new UpdateReceiverPhoneNoAndNameRequest();
             updateReceiverPhoneNoAndNameRequest.setReceiverMobile(receiverPhoneNo);
             updateReceiverPhoneNoAndNameRequest.setReceiverName(receiverName);
@@ -183,8 +184,8 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
             RestClient.updateReceiverNameOrNumber(updateReceiverPhoneNoAndNameRequest, new Callback<UpdateReceiverPhoneNoAndNameResponse>() {
                 @Override
                 public void onResponse(Call<UpdateReceiverPhoneNoAndNameResponse> call, Response<UpdateReceiverPhoneNoAndNameResponse> response) {
-                    if (response.body()!=null){
-                        if (response.body().getStatus()){
+                    if (response.body() != null) {
+                        if (response.body().getStatus()) {
 
                             conformShowBottomSheet();
                         }
@@ -200,12 +201,19 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
         }
     }
 
-    public void conformShowBottomSheet(){
-        receiverLayOut.setVisibility(View.GONE);
-        ConformReceiverBottomSheetFragment conformReceiverBottomSheetFragment =
-                ConformReceiverBottomSheetFragment.newInstance().newInstance();
-        conformReceiverBottomSheetFragment.show(getActivity().getSupportFragmentManager(),
-                ConformReceiverBottomSheetFragment.TAG);
+    public void conformShowBottomSheet() {
+
+        recLayout.setVisibility(View.GONE);
+
+        HighwayPrefs.putString(getActivity(), Constants.RECEIVERPHONENO, receiverPhoneNo);
+        HighwayPrefs.putString(getActivity(), Constants.RECEIVERNAME, receiverName);
+
+        View dialogView = getLayoutInflater().inflate(R.layout.fragment_conform_receiver_bottom_sheet, null);
+        BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+        dialog.setContentView(dialogView);
+        dialog.show();
+
+
     }
 
     @Override
