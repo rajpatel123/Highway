@@ -8,10 +8,14 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -146,6 +150,15 @@ public class RestClient {
      // vehicle load capicirty through vehicle ownwer
     public static void  vehicleLoadCapicity(VehicleLoadCapicityRequest vehicleLoadCapicityRequest, Callback<VehicleLoadCapicityResponse>vehicleLoadCapicityResponseCallback){
        RetrofitClient.getClient().VEHICLE_LOAD_CAPICITY_RESPONSE_CALL(vehicleLoadCapicityRequest).enqueue(vehicleLoadCapicityResponseCallback);
+    }
+
+    // Booking vehicle list through customer
+    public static void getBookingVehicleList(BookingVehicleListRequest bookingVehicleListRequest, Callback<BookingVehicleListResponse>bookingVehicleListResponseCallback){
+       RetrofitClient.getClient().BOOKING_VEHICLE_LIST_RESPONSE_CALL(bookingVehicleListRequest).enqueue(bookingVehicleListResponseCallback);
+    }
+
+    public static void vehicleInfo(VehicleInfoRequest vehicleInfoRequest, Callback<VehicleInfoResponse>vehicleInfoResponseCallback){
+       RetrofitClient.getClient().VEHICLE_INFO_RESPONSE_CALL(vehicleInfoRequest).enqueue(vehicleInfoResponseCallback);
     }
 
 

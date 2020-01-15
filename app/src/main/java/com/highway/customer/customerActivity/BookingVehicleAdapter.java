@@ -11,21 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.Vehicle;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
+import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
 import com.highway.utils.Utils;
-
-import java.util.List;
 
 public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAdapter.ViewHolder> {
     private Context context;
-    private List<Vehicle> vehicles;
-    private OnClickEvents onClickEvents;
 
-    public BookingVehicleAdapter(Context context, List<Vehicle> vehicles) {
-        this.context = context;
-        this.vehicles = vehicles;
+    OnClickEvents onClickEvents;
+    BookingVehicleListResponse bookingVehicleListResponse;
+
+    public BookingVehicleAdapter( BookingVehicleListResponse bookingVehicleListResponse1 ,Context context1 ,OnClickEvents onClickEvents1) {
+        this.context = context1;
+        this.bookingVehicleListResponse = bookingVehicleListResponse1;
+        this.onClickEvents = onClickEvents1;
     }
-
 
     @NonNull
     @Override
@@ -39,12 +39,12 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Vehicle vehicle = vehicles.get(position);
-        holder.tataAceTv1.setText(vehicle.getvName());
-        holder.timeTv2.setText(vehicle.getDuration());
-        holder.faireChargeTv3.setText(vehicle.getFare());
+        VehicleList vehicleList = bookingVehicleListResponse.getVehicleData().getVehicleList().get(position);
 
-        if (vehicle.isSelected()){
+        holder.tataAceTv1.setText(""+vehicleList.getVehicleName());
+        holder.faireChargeTv3.setText(""+vehicleList.getVehicleFare());
+
+        if (vehicleList.isSelected()){
             Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
         }else{
             Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
@@ -59,7 +59,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             }
         });
 
-
         holder.vehicleIcons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,25 +69,30 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             }
         });
 
-
-        //holder.truckImg1
-
     }
 
     @Override
     public int getItemCount() {
-        if (vehicles != null && vehicles.size() > 0) {
-            return vehicles.size();
-        } else {
-            return 0;
-        }
+       if (bookingVehicleListResponse!=null
+               && bookingVehicleListResponse.getVehicleData().getVehicleList()!=null
+       && bookingVehicleListResponse.getVehicleData().getVehicleList().size()>0){
+           return bookingVehicleListResponse.getVehicleData().getVehicleList().size();
+       }else {
+           return 0;
+       }
     }
 
     public void setOnClickEvents(OnClickEvents onClickEvents) {
         this.onClickEvents = onClickEvents;
     }
 
+    public void setData(BookingVehicleListResponse bookingVehicleListResponse) {
+        this.bookingVehicleListResponse = bookingVehicleListResponse;
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         TextView tataAceTv1, timeTv2, faireChargeTv3;
         ImageView vehicleIcons, infoImg;
 
@@ -106,5 +110,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         void onCLickInfo(int position);
 
         void onCLickTruck(int position);
+
     }
 }

@@ -6,417 +6,421 @@
     android:layout_height="match_parent"
     tools:context=".customer.customerActivity.BookingWithDetailsActivity">
 
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:minHeight="@dimen/margin_38">
 
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/margin_10"
-            android:background="@drawable/back_arrow_icon"
-            app:tintMode="@color/white" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_toEndOf="@+id/back_button"
-            android:text="Booking"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-
-    </RelativeLayout>
-
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomView"
-        android:layout_below="@+id/toolbar">
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="@dimen/margin_38">
+
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_10"
+                android:background="@drawable/back_arrow_icon"
+                app:tintMode="@color/white" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_toEndOf="@+id/back_button"
+                android:text="Booking"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@color/white"
-            android:elevation="@dimen/_16dp"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_5">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/sourceLL"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/input_round_shape"
-                android:elevation="@dimen/margin_5"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottomView"
+                android:layout_below="@+id/toolbar">
 
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:id="@+id/picupLinear1"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:gravity="center">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/white"
+                    android:elevation="@dimen/_16dp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_5">
 
-                    <View
-                        android:id="@+id/sourceIndicator"
-                        android:layout_width="8px"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:background="@color/green" />
+                    <LinearLayout
+                        android:id="@+id/sourceLL"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_round_shape"
+                        android:elevation="@dimen/margin_5"
 
-                    <TextView
-                        android:id="@+id/edtSourceLOcation"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="2dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:layout_toEndOf="@+id/sourceIndicator"
-                        android:background="@color/quantum_grey100"
-                        android:cursorVisible="false"
-                        android:ellipsize="end"
-                        android:enabled="true"
-                        android:gravity="center_vertical"
-                        android:hint="Enter Pickup location"
-                        android:lines="1"
-                        android:singleLine="true" />
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:id="@+id/picupLinear1"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <View
+                                android:id="@+id/sourceIndicator"
+                                android:layout_width="8px"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:background="@color/green" />
+
+                            <TextView
+                                android:id="@+id/edtSourceLOcation"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:layout_toEndOf="@+id/sourceIndicator"
+                                android:background="@color/quantum_grey100"
+                                android:cursorVisible="false"
+                                android:ellipsize="end"
+                                android:enabled="true"
+                                android:gravity="center_vertical"
+                                android:hint="Enter Pickup location"
+                                android:lines="1"
+                                android:paddingStart="5dp"
+                                android:paddingEnd="2dp"
+                                android:singleLine="true" />
 
 
-                </RelativeLayout>
-            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/destLL"
-                android:layout_width="0dp"
+                    <LinearLayout
+                        android:id="@+id/destLL"
+                        android:layout_width="0dp"
 
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/input_round_shape"
-                android:elevation="@dimen/margin_5"
-                android:gravity="center"
-                android:orientation="horizontal">
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_round_shape"
+                        android:elevation="@dimen/margin_5"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                <RelativeLayout
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <View
+                                android:id="@+id/destIndicator"
+                                android:layout_width="8px"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:background="@color/red" />
+
+                            <TextView
+                                android:id="@+id/edtDropLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:layout_toEndOf="@+id/destIndicator"
+                                android:background="@color/quantum_grey100"
+                                android:cursorVisible="false"
+                                android:ellipsize="end"
+                                android:enabled="true"
+                                android:gravity="center_vertical"
+                                android:hint="Enter drop location"
+                                android:paddingStart="5dp"
+                                android:paddingEnd="2dp"
+                                android:singleLine="true" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <fragment
+                    android:id="@+id/map"
+                    class="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:gravity="center">
-
-                    <View
-                        android:id="@+id/destIndicator"
-                        android:layout_width="8px"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:background="@color/red" />
-
-                    <TextView
-                        android:id="@+id/edtDropLocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:layout_toEndOf="@+id/destIndicator"
-                        android:background="@color/quantum_grey100"
-                        android:cursorVisible="false"
-                        android:ellipsize="end"
-                        android:enabled="true"
-                        android:gravity="center_vertical"
-                        android:hint="Enter drop location"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="2dp"
-                        android:singleLine="true" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
 
 
-                </RelativeLayout>
-            </LinearLayout>
+            </FrameLayout>
 
 
         </LinearLayout>
 
-        <fragment
-            android:id="@+id/map"
-            class="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
-
-
-    </FrameLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/bottomView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <View
-            android:layout_width="@dimen/margin_top_30dp"
-            android:layout_height="8px"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/margin_5"
-            android:background="@color/green" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_10"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/vehicleListRV"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginEnd="@dimen/margin_20"
-                android:layout_weight="1.8" />
-
-
             <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_5"
-                android:background="@color/email_gray" />
-
+                android:layout_width="@dimen/margin_top_30dp"
+                android:layout_height="8px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@color/green" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_height="300dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/vehicleListRV"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Pickup Contact : "
-                        android:textSize="12sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end|end|right"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/TvPhoneNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_5"
-                            android:text="8285886155"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="13sp" />
-
-                        <View
-                            android:layout_width="5px"
-                            android:layout_height="match_parent"
-                            android:layout_margin="@dimen/margin_5"
-                            android:background="@color/black" />
-
-                        <TextView
-                            android:id="@+id/TvUserName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_5"
-                            android:layout_marginEnd="@dimen/margin_5"
-                            android:text="Raj Patel"
-                            android:layout_gravity="center"
-                            android:gravity="end"
-                            android:inputType="textCapWords"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_weight="1.8" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:layout_margin="@dimen/margin_5"
-                    android:background="@color/quantum_grey" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="@dimen/margin_5"
+                    android:background="@color/email_gray" />
 
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Good Type "
-                        android:textSize="12sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="@dimen/margin_top_30dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="end|center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/goodtype"
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_5"
-                            android:ellipsize="end"
-                            android:singleLine="true"
-                            android:text="Home Shifting"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="13sp" />
-
-                       <!-- <Spinner
-                            android:id="@+id/goodsTypeSpinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="4dp"
-                            android:layout_marginBottom="4dp"
-                            android:textColor="@color/colorPrimary"
-                            android:ellipsize="end"/>-->
-                    </LinearLayout>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:layout_margin="@dimen/margin_5"
-                    android:background="@color/quantum_grey" />
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".7"
-                android:paddingBottom="@dimen/margin_10"
-                app:cardUseCompatPadding="true">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_10"
-                    android:layout_marginEnd="@dimen/margin_10">
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:gravity="center_vertical"
-                        android:paddingBottom="@dimen/_10dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="25dp"
-                            android:layout_marginStart="2dp"
-                            app:srcCompat="@drawable/money" />
 
                         <TextView
-                            android:id="@+id/CashTv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                           android:paddingLeft="@dimen/_10dp"
+                            android:layout_weight="1"
+                            android:text="Pickup Contact : "
+                            android:textSize="12sp" />
+
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="CASH"
-                            android:textColor="@color/green"
-                            android:textSize="@dimen/margin_16"
-                            android:textStyle="bold" />
+                            android:layout_weight="1"
+                            android:gravity="end|end|right"
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/ImgCashindicator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="2dp"
-                            android:rotation="90"
-                            app:srcCompat="@drawable/login_arrow_icon" />
+                            <TextView
+                                android:id="@+id/TvPhoneNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_5"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text="8285886155"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="13sp" />
 
-                        <TextView
-                            android:id="@+id/bookTruckLatterTv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/margin_10"
-                            android:background="@drawable/btn_shape_draw"
-                            android:gravity="center"
-                            android:maxHeight="@dimen/margin_40"
-                            android:paddingStart="@dimen/_10dp"
-                            android:paddingEnd="@dimen/_10dp"
-                            android:text="BOOK LATTER"
-                            android:textColor="@color/white" />
+                            <View
+                                android:layout_width="5px"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/margin_5"
+                                android:background="@color/black" />
 
-                        <TextView
-                            android:id="@+id/bookTruckTv"
-                            android:layout_width="match_parent"
-                            android:layout_height="35dp"
-                            android:layout_marginLeft="@dimen/margin_2"
-                            android:background="@drawable/btn_shape_draw"
-                            android:gravity="center"
-                            android:maxHeight="@dimen/margin_40"
-                            android:paddingStart="@dimen/margin_20"
-                            android:paddingEnd="@dimen/margin_20"
-                            android:text="BOOK TATA ACE"
-                            android:textColor="@color/white" />
-<!--                            android:onClick="showBottomSheet"-->
+                            <TextView
+                                android:id="@+id/TvUserName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/margin_5"
+                                android:layout_marginEnd="@dimen/margin_5"
+                                android:gravity="end"
+                                android:inputType="textCapWords"
+                                android:text="Raj Patel"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="13sp" />
 
-
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <!--<TextView
-                        android:id="@+id/bookTruckTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginEnd="@dimen/margin_20"
-                        android:background="@drawable/btn_shape_draw"
-                        android:gravity="center"
-                        android:layout_alignParentRight="true"
-                        android:maxHeight="@dimen/margin_40"
-                        android:paddingStart="@dimen/margin_20"
-                        android:paddingEnd="@dimen/margin_20"
-                        android:text="Book TATA ACE"
-                        android:textColor="@color/white" />-->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:layout_margin="@dimen/margin_5"
+                        android:background="@color/quantum_grey" />
 
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/_10dp"
+                            android:text="Good Type "
+                            android:textSize="12sp" />
+
+
+                        <LinearLayout
+                            android:layout_width="@dimen/margin_top_30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="end|center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/goodtype"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_5"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="Home Shifting"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="13sp" />
+
+                            <!-- <Spinner
+                                 android:id="@+id/goodsTypeSpinner"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:layout_marginStart="4dp"
+                                 android:layout_marginTop="4dp"
+                                 android:layout_marginEnd="4dp"
+                                 android:layout_marginBottom="4dp"
+                                 android:textColor="@color/colorPrimary"
+                                 android:ellipsize="end"/>-->
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:layout_margin="@dimen/margin_5"
+                        android:background="@color/quantum_grey" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/padding_5"
+                        android:layout_marginEnd="@dimen/padding_5">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/_10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="2dp"
+                                app:srcCompat="@drawable/money" />
+
+                            <TextView
+                                android:id="@+id/CashTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="CASH"
+                                android:textColor="@color/green"
+                                android:textSize="@dimen/margin_16"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/ImgCashindicator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:rotation="90"
+                                app:srcCompat="@drawable/login_arrow_icon" />
+
+                            <TextView
+                                android:id="@+id/bookTruckLatterTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/margin_10"
+                                android:background="@drawable/btn_shape_draw"
+                                android:gravity="center"
+                                android:maxHeight="@dimen/margin_40"
+                                android:paddingStart="@dimen/_10dp"
+                                android:paddingEnd="@dimen/_10dp"
+                                android:text="BOOK LATTER"
+                                android:textColor="@color/white" />
+
+                            <TextView
+                                android:id="@+id/bookTruckTv"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="@dimen/margin_2"
+                                android:background="@drawable/btn_shape_draw"
+                                android:gravity="center"
+                                android:maxHeight="@dimen/margin_40"
+                                android:text="BooK Tata Ace"
+                                android:textColor="@color/white" />
+                            <!--                            android:onClick="showBottomSheet"-->
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
+
+    </LinearLayout>
 
 </RelativeLayout>
