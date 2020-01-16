@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfo;
 import com.highway.utils.Utils;
+
+import java.util.List;
 
 public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAdapter.ViewHolder> {
     private Context context;
@@ -21,11 +24,12 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
     OnClickEvents onClickEvents;
     BookingVehicleListResponse bookingVehicleListResponse;
 
-    public BookingVehicleAdapter( BookingVehicleListResponse bookingVehicleListResponse1 ,Context context1 ,OnClickEvents onClickEvents1) {
+    public BookingVehicleAdapter(BookingVehicleListResponse bookingVehicleListResponse1, Context context1, OnClickEvents onClickEvents1) {
         this.context = context1;
         this.bookingVehicleListResponse = bookingVehicleListResponse1;
         this.onClickEvents = onClickEvents1;
     }
+
 
     @NonNull
     @Override
