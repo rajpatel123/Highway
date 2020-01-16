@@ -60,6 +60,7 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         }
+
         getSupportActionBar().setTitle("Select your goods type");
         // As you wish make Adapter or not asked sir .............
         goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(),this::onSelectGoodType);
@@ -86,9 +87,11 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
             public void onResponse(Call<GoodsTypeDataResponse> call, Response<GoodsTypeDataResponse> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
+
                         goodsTypeDataResponse = response.body();
                         goodsTypeAdapter.setData(goodsTypeDataResponse);
                         goodsTypeAdapter.notifyDataSetChanged();
+
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "response failed", Toast.LENGTH_SHORT).show();

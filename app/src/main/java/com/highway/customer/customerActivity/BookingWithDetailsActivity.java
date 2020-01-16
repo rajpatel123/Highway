@@ -61,7 +61,15 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.highway.R;
 import com.highway.Vehicle;
+import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerFragment.ReceiverBottomSheetFragment;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
+import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
+import com.highway.customer.customerModelClass.vehicleInfo.Data;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfo;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
@@ -70,6 +78,10 @@ import com.highway.utils.HighwayPrefs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BookingWithDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -110,19 +122,20 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     private String sourceName;
     private String destName;
     public String userName, userMobNo;
-    public Spinner goodsTypeSpinner;
-    List<String> goodsNames;
 
-    TextView vehicleVameTv, vehicleCapicityTv, vehicleSizeTv;
+    TextView vehicleNameTv, vehicleCapicityTv, vehicleSizeTv;
     ImageView vehileBookImg;
     TextView info1, info2, info3, info4, info5, info6;
 
-    List<Vehicle> vehicleList = new ArrayList<>();
-    private BookingVehicleAdapter bookingVehicleAdapter;
+    List<VehicleList> vehicleList = new ArrayList<>();
+    List<VehicleInfo> vehicleInfoList = new ArrayList<>();
+
+    BookingVehicleAdapter bookingVehicleAdapter;
+    BookingVehicleListResponse bookingVehicleListResponse;
+    VehicleInfoResponse vehicleInfoResponse;
+    private boolean isSelected;
     String user_Id;
-    String goodsTypeId;
     private String gdTypeId, gdTypeText;
-//    GoodsTypeDataResponse goodsTypeDataResponse;
 
 
     public static void start(Activity activity,
@@ -230,7 +243,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             }
         });
 
-
         goodtype.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,36 +253,11 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             }
         });
 
-        //  getGoodsTypeSpinner();
         clicklistener();
-
-        for (int i = 0; i < 8; i++) {
-            Vehicle vehicle = new Vehicle();
-            vehicle.setvName("TATA ACE");
-            vehicle.setDuration("26 min");
-            vehicle.setFare("398.00");
-            vehicle.setIcon(R.drawable.truck);
-            vehicle.setCapacity("580Kg");
-            vehicle.setInfo1("In given fare 60 mins free loading & unloading time");
-            vehicle.setInfo2("Addition loading & unloading will be charged @INR 2/min");
-            vehicle.setInfo3("Fare may change in case of route or location will be changed");
-            vehicle.setInfo4("Fare does not include toll charges if any");
-            vehicle.setInfo5("Parking charges willbe paid by customer");
-            vehicle.setInfo6("We do not allow overloading");
-
-            vehicleList.add(vehicle);
-        }
-
-        bookingVehicleAdapter = new BookingVehicleAdapter(this, vehicleList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        bookingVehicleAdapter.setOnClickEvents(this);
-        recyclerView.setAdapter(bookingVehicleAdapter);
-
+        showBookingVehicleListRv();
+        getBookingVehicle();
 
     }
-
 
     public void clicklistener() {
         bookTruckTv.setOnClickListener(new View.OnClickListener() {
@@ -287,7 +274,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     }
 
-
     private void initLocations(Intent intent) {
         if (intent != null) {
             sourceName = intent.getStringExtra("sourceName");
@@ -300,10 +286,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             edtDropLocation.setText("" + destName);
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
-            // mCurrLocationMarker = mMap.addMarker(markerOptions1);
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
-//            mCurrLocationMarker = mMap.addMarker(markerOptions2);
         }
     }
 
@@ -594,22 +578,59 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     @Override
     public void onCLickInfo(int position) {
-        if (vehicleList != null && vehicleList.size() > 0)
-            showInfoDialog(vehicleList.get(position));
+        if (vehicleInfoList != null && vehicleInfoList.size() > 0)
+            showInfoDialog(vehicleInfoList.get(position));
     }
 
     @Override
     public void onCLickTruck(int position) {
         if (vehicleList != null && vehicleList.size() > 0)
-            bookTruckTv.setText("BOOK " + vehicleList.get(position).getvName());
+            bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
 
-        for (Vehicle vehicle : vehicleList) {
-            vehicle.setSelected(false);
-        }
+
     }
 
 
-    private void showInfoDialog(Vehicle vehicle) {
+
+    public void getBookingVehicle() {
+
+        BookingVehicleListRequest bookingVehicleListRequest = new BookingVehicleListRequest();
+
+        user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+        bookingVehicleListRequest.setUserId(user_Id);
+
+        RestClient.getBookingVehicleList(bookingVehicleListRequest, new Callback<BookingVehicleListResponse>() {
+            @Override
+            public void onResponse(Call<BookingVehicleListResponse> call, Response<BookingVehicleListResponse> response) {
+
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+
+                        bookingVehicleListResponse = response.body();
+                        bookingVehicleAdapter.setData(bookingVehicleListResponse);
+                        bookingVehicleAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<BookingVehicleListResponse> call, Throwable t) {
+                Toast.makeText(BookingWithDetailsActivity.this, "Booking Vehicle list Response failed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    public void showBookingVehicleListRv() {
+            bookingVehicleAdapter = new BookingVehicleAdapter( bookingVehicleListResponse, getApplicationContext(),this);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            bookingVehicleAdapter.setOnClickEvents(this);
+            recyclerView.setAdapter(bookingVehicleAdapter);
+    }
+
+
+    private void showInfoDialog(VehicleInfo vehicleInfo) {
 
         final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
         // ...Irrelevant code for customizing the buttons and titl
@@ -618,16 +639,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         dialogBuilder.setView(dialogView);
 
         final android.app.AlertDialog dialog = dialogBuilder.create();
-        vehicleVameTv = dialogView.findViewById(R.id.truckName);
+        vehicleNameTv = dialogView.findViewById(R.id.truckName);
         vehileBookImg = dialogView.findViewById(R.id.vehicleImg);
         vehicleCapicityTv = dialogView.findViewById(R.id.capacity);
         vehicleSizeTv = dialogView.findViewById(R.id.sizeTV);
-
-        TextView okay = dialogView.findViewById(R.id.done);
-
-        vehicleCapicityTv.setText(vehicle.getCapacity());
-        vehicleSizeTv.setText(vehicle.getCapacity());
-
 
         info1 = dialogView.findViewById(R.id.info1);
         info2 = dialogView.findViewById(R.id.info2);
@@ -635,14 +650,42 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info4 = dialogView.findViewById(R.id.info4);
         info5 = dialogView.findViewById(R.id.info6);
         info6 = dialogView.findViewById(R.id.info5);
+        TextView okay = dialogView.findViewById(R.id.done);
 
-        vehicleVameTv.setText(vehicle.getvName());
-        info1.setText(vehicle.getInfo1());
-        info2.setText(vehicle.getInfo2());
-        info3.setText(vehicle.getInfo3());
-        info4.setText(vehicle.getInfo4());
-        info5.setText(vehicle.getInfo5());
-        info6.setText(vehicle.getInfo6());
+        VehicleInfoRequest vehicleInfoRequest = new VehicleInfoRequest();
+        user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+        vehicleInfoRequest.setUserId(user_Id);
+
+        RestClient.vehicleInfo(vehicleInfoRequest, new Callback<VehicleInfoResponse>() {
+            @Override
+            public void onResponse(Call<VehicleInfoResponse> call, Response<VehicleInfoResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+
+                        vehicleInfoResponse = response.body();
+                        Data data = vehicleInfoResponse.getData();
+                        VehicleInfo vehicleInfo1 = new VehicleInfo();
+
+                        vehicleNameTv.setText(vehicleInfo1.getVehicleName());
+                        vehicleCapicityTv.setText((Integer) vehicleInfo1.getVehicleCapacity());
+                        vehicleSizeTv.setText((Integer) vehicleInfo1.getVehicleSize());
+                        info1.setText(vehicleInfo1.getVInfo1());
+                        info2.setText(vehicleInfo1.getVInfo2());
+                        info3.setText(vehicleInfo1.getVInfo3());
+                        info4.setText(vehicleInfo1.getVInfo4());
+                        info5.setText(vehicleInfo1.getVInfo5());
+                        info6.setText(vehicleInfo1.getVInfo6());
+                        data.getVehicleInfo().add(0, vehicleInfo1);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VehicleInfoResponse> call, Throwable t) {
+                Toast.makeText(BookingWithDetailsActivity.this, "response info failed ", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         vehileBookImg.setBackgroundResource(R.drawable.truck);
 
@@ -657,5 +700,39 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             dialog.show();
     }
 
+
+//    public static float distance(float lat1, float lng1, float lat2, float lng2) {
+//        double earthRadius = 6371000; //meters
+//        double dLat = Math.toRadians(lat2 - lat1);
+//        double dLng = Math.toRadians(lng2 - lng1);
+//        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+//                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+//                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//        float dist = (float) (earthRadius * c);
+//
+//        return dist;
+//    }
+
+    private double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
 
 }

@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.highway.R;
 
-public class VehicleList extends AppCompatActivity {
+public class VehicleListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

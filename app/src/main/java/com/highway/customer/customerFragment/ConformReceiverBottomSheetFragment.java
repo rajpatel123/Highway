@@ -12,11 +12,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
-public class ConformReceiverBottomSheetFragment extends Fragment {
+public class ConformReceiverBottomSheetFragment extends BottomSheetDialogFragment {
 
     public static final Object TAG =  "ActionBottomDialog";
 
@@ -61,7 +62,6 @@ public class ConformReceiverBottomSheetFragment extends Fragment {
     public void getCnfPhoneName(){
         receiverUserMobNo = HighwayPrefs.getString(getActivity(), Constants.RECEIVERPHONENO);
         receiverUserName = HighwayPrefs.getString(getActivity(), Constants.RECEIVERNAME);
-
         confReceiverMObNumTv.setText(receiverUserMobNo);
         cnfReceiverNameTv.setText(receiverUserName);
 

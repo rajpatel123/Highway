@@ -8,10 +8,14 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -95,7 +99,6 @@ public interface ApiInterface {
     @POST("http://highway.vrok.in/api/Vehicle/assignDriverToVehicle")
     Call<AssignD2VResponse>assignD2VReq(@Body AssignD2VRequest assignD2VRequest);
 
-
     // Goods  Types in miller module ..book load ----Spinners
     @POST("http://highway.vrok.in/index.php/api/trip/goodType")
     Call<GoodsTypesDropDownResponse>goodsTypesResponse(@Body GoodsTypeDropDownRequest goodsTypeDropDownRequest);
@@ -126,4 +129,13 @@ public interface ApiInterface {
     // vehicle load capicity through vehicle owner
     @POST("http://highway.vrok.in/api/Vehicle/vehicleLoadingCapicity")
     Call<VehicleLoadCapicityResponse>VEHICLE_LOAD_CAPICITY_RESPONSE_CALL(@Body VehicleLoadCapicityRequest vehicleLoadCapicityRequest);
+
+  // Booking vehicle List
+   @POST("http://dev.thehighways.in/api/Vehicle/bookingVehicleList")
+    Call<BookingVehicleListResponse>BOOKING_VEHICLE_LIST_RESPONSE_CALL(@Body BookingVehicleListRequest bookingVehicleListRequest);
+
+   // Vehicle Info
+   @POST("http://highway.vrok.in/api/Vehicle/getVehicleinfo")
+    Call<VehicleInfoResponse>VEHICLE_INFO_RESPONSE_CALL(@Body VehicleInfoRequest vehicleInfoRequest);
+
 }
