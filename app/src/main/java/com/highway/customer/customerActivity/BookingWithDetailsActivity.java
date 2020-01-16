@@ -582,12 +582,18 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public void onCLickInfo(int position) {
         if (vehicleList != null && vehicleList.size() > 0)
             showInfoDialog(vehicleInfoList.get(position));
+
+
+
     }
 
     @Override
     public void onCLickTruck(int position) {
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
+        for (VehicleList  vehicle : vehicleList) {
+            vehicle.setSelected(false);
+        }
 
 
     }

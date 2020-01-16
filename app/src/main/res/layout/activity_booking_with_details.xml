@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,7 +44,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="45"
             android:orientation="vertical">
 
             <FrameLayout
@@ -182,7 +182,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="55"
             android:orientation="vertical">
 
             <View
@@ -194,7 +194,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="225dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -238,7 +238,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                           android:paddingLeft="@dimen/_10dp"
+                            android:paddingLeft="@dimen/_10dp"
                             android:layout_weight="1"
                             android:text="Pickup Contact : "
                             android:textSize="12sp" />
@@ -401,7 +401,7 @@
                             <TextView
                                 android:id="@+id/bookTruckTv"
                                 android:layout_width="match_parent"
-                                android:layout_height="35dp"
+                                android:layout_height="40dp"
                                 android:layout_marginLeft="@dimen/margin_2"
                                 android:background="@drawable/btn_shape_draw"
                                 android:gravity="center"
@@ -423,4 +423,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
