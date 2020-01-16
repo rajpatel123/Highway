@@ -57,7 +57,6 @@ public interface ApiInterface {
     @POST("http://vrok.in/highway_dev/signup") // Registration Details
     Call<RegistrationResponse>regDetailsResponseCall(@Body RegistrationRequest registrationDetailsRequest);
 
-
     // Driver All Trips
     @POST("http://vrok.in/highway_dev/getAllTripByDriverId")
     Call<AllHighwayTripsResponse> driverTrips(@Body AllHighwayTripsRequest allHighwayTripsRequest);
@@ -76,58 +75,58 @@ public interface ApiInterface {
 
 
      // Add New Vehicle
-    @POST("http://highway.vrok.in/index.php/api/Vehicle/addVehicle")
+    @POST("http://dev.thehighways.in/index.php/api/Vehicle/addVehicle")
     Call<AddVehicleResponse>addVehicleResponseCall(@Body AddVehicleRequest addVehicleRequest);
 
     // Add new Driver
-    @POST("http://highway.vrok.in/index.php/api/Login/addDriver")
+    @POST("http://dev.thehighways.in/index.php/api/Login/addDriver")
     Call<AddNewDriverResponse>addNewDriverResponseCall(@Body AddNewDriverRequest addNewDriverRequest);
 
    // vehicle type drop dowan --spinner for vehicle owners for Add new Vehicle
-    @POST("http://highway.vrok.in/api/Vehicle/vehicleTypeDropdown")
+    @POST("http://dev.thehighways.in/api/Vehicle/vehicleTypeDropdown")
     Call<VehicleTypeDropDowanResponse>vehicleTypeDropDowanResp(@Body VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest);
 
     // Driver drop down ----spinners
-    @POST("http://highway.vrok.in/index.php/api/vehicle/driverDropdown")
+    @POST("http://dev.thehighways.in/index.php/api/vehicle/driverDropdown")
     Call<DriverDropDownResponse>driverDataResponse(@Body DriverDropDownRequest driverDropDownRequest);
 
     //vehicle drop dowan --spinner for AssignD2V
-    @POST("http://highway.vrok.in/index.php/api/vehicle/vehicleAssignDropdown")
+    @POST("http://dev.thehighways.in/index.php/api/vehicle/vehicleAssignDropdown")
     Call<VehicleAssignDropDowanResponse> VEHICLE_ASSIGN_DROP_DOWAN_RESPONSE_CALL(@Body VehicleAssignDropDowanRequest vehicleAssignDropDowanRequest);
 
     // Assign Driver 2 vehicle
-    @POST("http://highway.vrok.in/api/Vehicle/assignDriverToVehicle")
+    @POST("http://dev.thehighways.in/api/Vehicle/assignDriverToVehicle")
     Call<AssignD2VResponse>assignD2VReq(@Body AssignD2VRequest assignD2VRequest);
 
     // Goods  Types in miller module ..book load ----Spinners
-    @POST("http://highway.vrok.in/index.php/api/trip/goodType")
+    @POST("http://dev.thehighways.in/index.php/api/trip/goodType")
     Call<GoodsTypesDropDownResponse>goodsTypesResponse(@Body GoodsTypeDropDownRequest goodsTypeDropDownRequest);
 
     // Approx load spinners -- for miller Book load
-    @POST("http://highway.vrok.in/index.php/api/trip/approxLoad")
+    @POST("http://dev.thehighways.in/index.php/api/trip/approxLoad")
     Call<ApproxLoadDropDownResponse> approxLoadResponse(@Body ApproxLoadDropDownRequest approxLoadDropDownRequest);
 
     // getAll Driver List for owner;
-    @POST("http://highway.vrok.in/index.php/api/login/getAlldriverDetails")
+    @POST("http://dev.thehighways.in/index.php/api/login/getAlldriverDetails")
     Call<GetAllDriverResponse>getAllDriverDetailsRes(@Body GetAllDriverRequest getAllDriverRequest);
 
-    @POST("http://highway.vrok.in/index.php/api/Vehicle/getAllVehicleDetails")
+    @POST("http://dev.thehighways.in/index.php/api/Vehicle/getAllVehicleDetails")
     Call<GetAllVehicleResponse>getVehicleResponse(@Body GetAllVehicleRequest getAllVehicleRequest);
 
     //Goods type DataVehicle Booking With details Activity
-    @POST("http://highway.vrok.in/api/Trip/selectYourGoodType")
+    @POST("http://dev.thehighways.in/api/Trip/selectYourGoodType")
      Call<GoodsTypeDataResponse>SELECT_UR_GOODS_TYPE_DATA_RESPONSE_CALL(@Body GoodsTypeDataRequest goodsTypeDataRequest);
 
     // Add receiver mob no and name
-    @POST("http://highway.vrok.in/api/Login/updateReceiver")
+    @POST("http://dev.thehighways.in/api/Login/updateReceiver")
     Call<UpdateReceiverPhoneNoAndNameResponse>UPDATE_RECEIVER_PHONE_NO_AND_NAME_RESPONSE_CALL(@Body UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest);
 
        /// vehicle diamension size in add vehicle through vehicle owner
-    @POST("http://highway.vrok.in/api/Vehicle/vehicleDimensionSize")
+    @POST("http://dev.thehighways.in/api/Vehicle/vehicleDimensionSize")
     Call<VehicleDiamensionSizeResponse>VEHICLE_DIAMENSION_SIZE_RESPONSE_CALL(@Body VehicleDiamensionSizeRequest vehicleDiamensionSizeRequest);
 
     // vehicle load capicity through vehicle owner
-    @POST("http://highway.vrok.in/api/Vehicle/vehicleLoadingCapicity")
+    @POST("http://dev.thehighways.in/api/Vehicle/vehicleLoadingCapicity")
     Call<VehicleLoadCapicityResponse>VEHICLE_LOAD_CAPICITY_RESPONSE_CALL(@Body VehicleLoadCapicityRequest vehicleLoadCapicityRequest);
 
   // Booking vehicle List
@@ -135,7 +134,7 @@ public interface ApiInterface {
     Call<BookingVehicleListResponse>BOOKING_VEHICLE_LIST_RESPONSE_CALL(@Body BookingVehicleListRequest bookingVehicleListRequest);
 
    // Vehicle Info
-   @POST("http://highway.vrok.in/api/Vehicle/getVehicleinfo")
+   @POST("http://dev.thehighways.in/api/Vehicle/getVehicleinfo")
     Call<VehicleInfoResponse>VEHICLE_INFO_RESPONSE_CALL(@Body VehicleInfoRequest vehicleInfoRequest);
 
 }

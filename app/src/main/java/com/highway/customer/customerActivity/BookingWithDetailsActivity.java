@@ -185,12 +185,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         nameTv.setText(userName);
 
 
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
 
         initLocations(getIntent());
 
@@ -260,6 +255,14 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     }
 
     public void clicklistener() {
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         bookTruckTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -517,8 +520,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
@@ -578,7 +580,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     @Override
     public void onCLickInfo(int position) {
-        if (vehicleInfoList != null && vehicleInfoList.size() > 0)
+        if (vehicleList != null && vehicleList.size() > 0)
             showInfoDialog(vehicleInfoList.get(position));
     }
 
@@ -589,7 +591,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
 
     }
-
 
 
     public void getBookingVehicle() {
@@ -621,12 +622,14 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     }
 
     public void showBookingVehicleListRv() {
-            bookingVehicleAdapter = new BookingVehicleAdapter( bookingVehicleListResponse, getApplicationContext(),this);
+
+            bookingVehicleAdapter = new BookingVehicleAdapter(bookingVehicleListResponse,getApplicationContext(),this);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             bookingVehicleAdapter.setOnClickEvents(this);
             recyclerView.setAdapter(bookingVehicleAdapter);
+
     }
 
 
