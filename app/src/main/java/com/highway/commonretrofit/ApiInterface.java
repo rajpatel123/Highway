@@ -1,6 +1,5 @@
 package com.highway.commonretrofit;
 
-
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
