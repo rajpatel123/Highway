@@ -654,18 +654,23 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
                         vehicleInfoResponse = response.body();
                         Data data = vehicleInfoResponse.getData();
-                        VehicleInfo vehicleInfo1 = new VehicleInfo();
 
-                        vehicleNameTv.setText(vehicleInfo1.getVehicleName());
-                        vehicleCapicityTv.setText((Integer) vehicleInfo1.getVehicleCapacity());
-                        vehicleSizeTv.setText((Integer) vehicleInfo1.getVehicleSize());
-                        info1.setText(vehicleInfo1.getVInfo1());
-                        info2.setText(vehicleInfo1.getVInfo2());
-                        info3.setText(vehicleInfo1.getVInfo3());
-                        info4.setText(vehicleInfo1.getVInfo4());
-                        info5.setText(vehicleInfo1.getVInfo5());
-                        info6.setText(vehicleInfo1.getVInfo6());
-                        data.getVehicleInfo().add(0, vehicleInfo1);
+                        if (bookingVehicleListResponse != null
+                                && bookingVehicleListResponse.getVehicleData().getVehicleList() != null
+                                && bookingVehicleListResponse.getVehicleData().getVehicleList().size() > 0) {
+
+                            vehicleNameTv.setText(vehicleInfo.getVehicleName());
+                            vehicleCapicityTv.setText((Integer) vehicleInfo.getVehicleCapacity());
+                            vehicleSizeTv.setText((Integer) vehicleInfo.getVehicleSize());
+                            info1.setText(vehicleInfo.getVInfo1());
+                            info2.setText(vehicleInfo.getVInfo2());
+                            info3.setText(vehicleInfo.getVInfo3());
+                            info4.setText(vehicleInfo.getVInfo4());
+                            info5.setText(vehicleInfo.getVInfo5());
+                            info6.setText(vehicleInfo.getVInfo6());
+                            data.getVehicleInfo().add(0, vehicleInfo);
+
+                        }
                     }
                 }
             }
