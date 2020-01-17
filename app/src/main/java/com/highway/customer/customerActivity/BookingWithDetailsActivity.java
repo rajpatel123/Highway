@@ -88,55 +88,44 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         LocationListener, TaskLoadedCallback, BookingVehicleAdapter.OnClickEvents {
 
 
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int SELECT_TYPE = 4;
+    public TextView bookTruckTv, phoneNoTv, nameTv;
+    public String userName, userMobNo;
     Button getDirection;
-    private Polyline currentPolyline;
-
     MarkerOptions markerOptions1;
     MarkerOptions markerOptions2;
-
     List<Marker> markers = new ArrayList<>();
-
     RecyclerView recyclerView;
-
     int AUTOCOMPLETE_REQUEST_CODE_SOURCE = 1;
     int AUTOCOMPLETE_REQUEST_CODE_DEST = 2;
-
-    private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-
-
     TextView edtSourceLOcationEDT;
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
     TextView goodtype;
+    TextView vehicleNameTv, vehicleCapicityTv, vehicleSizeTv;
+    ImageView vehileBookImg;
+    TextView info1, info2, info3, info4, info5, info6;
+    List<VehicleList> vehicleList = new ArrayList<>();
+    List<VehicleInfo> vehicleInfoList = new ArrayList<>();
+    BookingVehicleAdapter bookingVehicleAdapter;
+    BookingVehicleListResponse bookingVehicleListResponse;
+    VehicleInfoResponse vehicleInfoResponse;
+    String user_Id;
+    private Polyline currentPolyline;
+    private GoogleMap mMap;
     private Button back_button;
-    public TextView bookTruckTv, phoneNoTv, nameTv;
-
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
     private String sourceName;
     private String destName;
-    public String userName, userMobNo;
-
-    TextView vehicleNameTv, vehicleCapicityTv, vehicleSizeTv;
-    ImageView vehileBookImg;
-    TextView info1, info2, info3, info4, info5, info6;
-
-    List<VehicleList> vehicleList = new ArrayList<>();
-    List<VehicleInfo> vehicleInfoList = new ArrayList<>();
-
-    BookingVehicleAdapter bookingVehicleAdapter;
-    BookingVehicleListResponse bookingVehicleListResponse;
-    VehicleInfoResponse vehicleInfoResponse;
     private boolean isSelected;
-    String user_Id;
     private String gdTypeId, gdTypeText;
-
 
     public static void start(Activity activity,
                              String sourceName,
@@ -158,7 +147,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         activity.startActivity(intent);
 
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,8 +171,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         phoneNoTv.setText(userMobNo);
         nameTv.setText(userName);
-
-
 
 
         initLocations(getIntent());
@@ -294,7 +280,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -379,7 +364,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         return bitmap;
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -491,9 +475,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         }
     }
 
-
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -583,15 +564,14 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (vehicleList != null && vehicleList.size() > 0)
             showInfoDialog(vehicleInfoList.get(position));
 
-
-
     }
 
     @Override
     public void onCLickTruck(int position) {
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
-        for (VehicleList  vehicle : vehicleList) {
+
+        for (VehicleList vehicle : vehicleList) {
             vehicle.setSelected(false);
         }
 
@@ -619,6 +599,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<BookingVehicleListResponse> call, Throwable t) {
                 Toast.makeText(BookingWithDetailsActivity.this, "Booking Vehicle list Response failed", Toast.LENGTH_SHORT).show();
@@ -629,12 +610,12 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     public void showBookingVehicleListRv() {
 
-            bookingVehicleAdapter = new BookingVehicleAdapter(bookingVehicleListResponse,getApplicationContext(),this);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true);
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            bookingVehicleAdapter.setOnClickEvents(this);
-            recyclerView.setAdapter(bookingVehicleAdapter);
+        bookingVehicleAdapter = new BookingVehicleAdapter(bookingVehicleListResponse, getApplicationContext(), this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        bookingVehicleAdapter.setOnClickEvents(this);
+        recyclerView.setAdapter(bookingVehicleAdapter);
 
     }
 
@@ -691,7 +672,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
             @Override
             public void onFailure(Call<VehicleInfoResponse> call, Throwable t) {
-                Toast.makeText(BookingWithDetailsActivity.this, "response info failed ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BookingWithDetailsActivity.this, " info response failed ", Toast.LENGTH_SHORT).show();
 
             }
         });

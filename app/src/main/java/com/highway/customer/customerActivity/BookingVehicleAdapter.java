@@ -79,8 +79,8 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
     public int getItemCount() {
        if (bookingVehicleListResponse!=null
                && bookingVehicleListResponse.getVehicleData().getVehicleList()!=null
-       && bookingVehicleListResponse.getVehicleData().getVehicleList().size()>0){
-           return bookingVehicleListResponse.getVehicleData().getVehicleList().size();
+               && bookingVehicleListResponse.getVehicleData().getVehicleList().size()>0){
+            return bookingVehicleListResponse.getVehicleData().getVehicleList().size();
        }else {
            return 0;
        }
@@ -112,7 +112,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
     public interface OnClickEvents {
         void onCLickInfo(int position);
-
         void onCLickTruck(int position);
 
     }
