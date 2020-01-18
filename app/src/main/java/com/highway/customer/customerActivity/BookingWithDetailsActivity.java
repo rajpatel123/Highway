@@ -75,6 +75,7 @@ import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -93,6 +94,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public TextView bookTruckTv, phoneNoTv, nameTv;
     public String userName, userMobNo;
     Button getDirection;
+    int distance;
     MarkerOptions markerOptions1;
     MarkerOptions markerOptions2;
     List<Marker> markers = new ArrayList<>();
@@ -107,6 +109,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
+
     TextView goodtype;
     TextView vehicleNameTv, vehicleCapicityTv, vehicleSizeTv;
     ImageView vehileBookImg;
@@ -277,7 +280,80 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+
+            distance();
         }
+    }
+
+    /* both method r working But not chnge parameter   dist = dist * 60 * 1.1515 */
+    private double distance() {
+        // 1st method
+      /*  Location startPoint = new Location("sourceName");
+        startPoint.setLatitude(sourceLatitude);
+        startPoint.setLongitude(sourceLongitude);
+
+        Location endPoint = new Location("destName");
+        endPoint.setLatitude(destLatitude);
+        endPoint.setLongitude(destLongitude);
+        distance = (int) startPoint.distanceTo(endPoint) / 1000;
+
+        Toast.makeText(this, "" + String.valueOf(distance), Toast.LENGTH_SHORT).show();
+
+        return distance;
+          *//*  2nd method
+
+            double theta = sourceLatitude - sourceLongitude;
+            double dist = Math.sin(deg2rad(sourceLatitude))
+                    * Math.sin(deg2rad(sourceLongitude))
+                    + Math.cos(deg2rad(sourceLatitude))
+                    * Math.cos(deg2rad(sourceLongitude))
+                    * Math.cos(deg2rad(theta));
+            dist = Math.acos(dist);
+            dist = rad2deg(dist);
+            dist = dist * 60 * 1.1515;
+
+           Toast.makeText(this, ""+dist, Toast.LENGTH_SHORT).show();
+
+            return (dist);*/
+
+        // 3rd method
+        int Radius = 6371;// radius of earth in Km
+        double lat1 = sourceLatitude;
+        double lat2 = sourceLongitude;
+        double lon1 = sourceLatitude;
+        double lon2 = sourceLongitude;
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult = Radius * c;
+        double km = valueResult / 1;
+        DecimalFormat newFormat = new DecimalFormat("####");
+        int kmInDec = Integer.valueOf(newFormat.format(km));
+
+        double meter = valueResult * 1000;
+        int meterInDec = Integer.valueOf(newFormat.format(meter));
+
+        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec + " Meter   " + meterInDec);
+
+        Toast.makeText(this, "" + kmInDec, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + meterInDec, Toast.LENGTH_SHORT).show();
+
+        return Radius * c;
+
+    }
+
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 
     @Override
@@ -473,6 +549,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+
+
     }
 
     public boolean checkLocationPermission() {
@@ -571,10 +649,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (vehicleList != null && vehicleList.size() > 0)
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
 
-        for (VehicleList vehicle : vehicleList) {
-            vehicle.setSelected(false);
-        }
-
+//        for (VehicleList vehicle : vehicleList) {
+//            vehicle.setSelected(false);
+//        }
 
     }
 
@@ -623,7 +700,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     private void showInfoDialog(VehicleInfo vehicleInfo) {
 
         final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
-        // ...Irrelevant code for customizing the buttons and titl
+
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.fare_info, null);
         dialogBuilder.setView(dialogView);
@@ -669,7 +746,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                             info5.setText(vehicleInfo.getVInfo5());
                             info6.setText(vehicleInfo.getVInfo6());
                             data.getVehicleInfo().add(0, vehicleInfo);
-
                         }
                     }
                 }
@@ -682,7 +758,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             }
         });
 
-        vehileBookImg.setBackgroundResource(R.drawable.truck);
+        //vehileBookImg.setBackgroundResource(R.drawable.truck);
 
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -695,39 +771,5 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             dialog.show();
     }
 
-
-//    public static float distance(float lat1, float lng1, float lat2, float lng2) {
-//        double earthRadius = 6371000; //meters
-//        double dLat = Math.toRadians(lat2 - lat1);
-//        double dLng = Math.toRadians(lng2 - lng1);
-//        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-//                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-//                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
-//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//        float dist = (float) (earthRadius * c);
-//
-//        return dist;
-//    }
-
-    private double distance(double lat1, double lon1, double lat2, double lon2) {
-        double theta = lon1 - lon2;
-        double dist = Math.sin(deg2rad(lat1))
-                * Math.sin(deg2rad(lat2))
-                + Math.cos(deg2rad(lat1))
-                * Math.cos(deg2rad(lat2))
-                * Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515;
-        return (dist);
-    }
-
-    private double deg2rad(double deg) {
-        return (deg * Math.PI / 180.0);
-    }
-
-    private double rad2deg(double rad) {
-        return (rad * 180.0 / Math.PI);
-    }
 
 }

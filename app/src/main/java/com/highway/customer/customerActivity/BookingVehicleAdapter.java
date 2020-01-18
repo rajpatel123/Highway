@@ -72,7 +72,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
                 }
             }
         });
-
     }
 
     @Override
