@@ -46,7 +46,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         VehicleList vehicleList = bookingVehicleListResponse.getVehicleData().getVehicleList().get(position);
 
         holder.tataAceTv1.setText(""+vehicleList.getVehicleName());
-        holder.faireChargeTv3.setText("u20B9"+vehicleList.getVehicleFare());
+        holder.faireChargeTv3.setText("\u20B9"+vehicleList.getVehicleFare());
 
         if (vehicleList.isSelected()){
             Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
