@@ -54,8 +54,8 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
         phone_number = CustomerPhoneNo.getText().toString();
 
-        if (phone_number.isEmpty() && CustomerPhoneNo.length()==10) {
-            CustomerPhoneNo.setError(" enter a valid phone number ");
+        if (phone_number.isEmpty() || CustomerPhoneNo.length()<10) {
+            CustomerPhoneNo.setError(" Enter a valid phone number ");
             check = false;
         } else {
             CustomerPhoneNo.setError(null);
@@ -83,16 +83,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
                         if (response.body() != null) {
                             if (response.code()==200) {
                                 Intent intent = new Intent(LoginActivityForCustomer.this,MobileOtpVerificationActivity.class);
-
                                 HighwayPrefs.putString(LoginActivityForCustomer.this, Constants.USERMOBILE, phone_number);
-
-                                /*HighwayPrefs.putString(LoginActivityForCustomer.this,Constants.ID,"4");
-                                HighwayPrefs.putString(LoginActivityForCustomer.this,Constants.NAME,"Ramashish");
-                                HighwayPrefs.putString(LoginActivityForCustomer.this,Constants.CustomerEmail,"prit@gmail.com");
-                                HighwayPrefs.putString(LoginActivityForCustomer.this,Constants.MillerGender,"Male");
-                                HighwayPrefs.putString(LoginActivityForCustomer.this,Constants.ROLEID,"4");
-                                HighwayPrefs.putBoolean(LoginActivityForCustomer.this,Constants.User_statuss,true);*/
-
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(LoginActivityForCustomer.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();

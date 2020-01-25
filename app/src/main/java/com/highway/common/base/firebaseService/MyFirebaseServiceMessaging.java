@@ -13,6 +13,7 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -137,7 +138,17 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
             }
         }
 
+
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+
+        Log.d("Token:",""+s);
+
     }
+
+
+}
 
 
 

@@ -47,13 +47,13 @@ android {
             signingConfig uatSigningKey
 
             minifyEnabled false
-            buildConfigField "String", "API_SERVER_IP", "\"http://vrok.in/highway_dev/\""
+            buildConfigField "String", "API_SERVER_IP", "\"http://dev.thehighways.in/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
             multiDexEnabled true
-            buildConfigField "String", "API_SERVER_IP", "\"http://vrok.in/highway_dev/\""
+            buildConfigField "String", "API_SERVER_IP", "\"http://dev.thehighways.in/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -66,7 +66,6 @@ android {
 
 
 dependencies {
-
 
     // Add the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
@@ -119,6 +118,7 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:1.0.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     /*implementation 'com.google.firebase:firebase-core:10.2.1'*/
+
     implementation 'com.google.android.material:material:1.0.0'
 
 }

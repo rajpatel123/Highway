@@ -1,6 +1,7 @@
 package com.highway.common.base.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -20,6 +21,8 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerActivity.LoginActivityForCustomer;
+import com.highway.interfaces.SmsListener;
+import com.highway.reciever.SmsReceiver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -28,30 +31,34 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MobileOtpVerificationActivity extends AppCompatActivity {
+public class MobileOtpVerificationActivity extends AppCompatActivity implements SmsListener {
     private EditText verifyPin;
     private Button btnVerify;
     private ImageView backImage;
-    private TextView timer;
+    private TextView resend;
+    private TextView mobileNumberTV,changeNumberTv;
     String userId;
 
+
+    SmsReceiver smsReceiver = new SmsReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_otp_verification);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         verifyPin = findViewById(R.id.verifyPin_edittext);
-        backImage = findViewById(R.id.back_arrow_OTP);
         btnVerify = findViewById(R.id.verifyPin_btn);
-        timer = findViewById(R.id.timmer_textview);
-
+        resend = findViewById(R.id.resend);
+        mobileNumberTV = findViewById(R.id.mobileNumber);
+        changeNumberTv = findViewById(R.id.changeNumber);
 
         timerInOtp();                          // time count dowan of otp
-        backArrowOperationOnOtpVerifypage();
+
+        mobileNumberTV.setText(HighwayPrefs.getString(this,Constants.USERMOBILE));
+
+        smsReceiver.bindListener(this);
+
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,30 +67,29 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
         });
 
 
-    }
 
-    public void backArrowOperationOnOtpVerifypage() {
-        backImage.setOnClickListener(new View.OnClickListener() {
+        changeNumberTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MobileOtpVerificationActivity.this, LoginActivityForCustomer.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(MobileOtpVerificationActivity.this,LoginActivityForCustomer.class);
                 startActivity(intent);
                 finish();
             }
         });
 
+
     }
+
 
     public void timerInOtp() {
 
         new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
-                timer.setText("Resend otp");
+                resend.setEnabled(true);
             }
 
         }.start();
@@ -108,12 +114,6 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
             VerifyOtpRequest verifyOtpRequest = new VerifyOtpRequest();
             verifyOtpRequest.setOtp(otpNumber);
             verifyOtpRequest.setMobile(usermobileNumber);
-
-           /* VerifyOtpResponse verifyOtpResponse = new VerifyOtpResponse();
-            verifyOtpResponse.setEmail("fhd@fhjdfh.fnd");
-            verifyOtpResponse.setImage("");
-            verifyOtpResponse.setMobile("4657247345");*/
-            //gotoDashboardAfterLogin(verifyOtpResponse);
 
             if (Utils.isInternetConnected(this)) {
 
@@ -167,7 +167,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
         Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
 
         HighwayPrefs.putBoolean(getApplicationContext(), Constants.LOGGED_IN, true);
-        HighwayPrefs.putString(getApplicationContext(),Constants.ID,verifyOtpResponse.getUser().getUserId());
+        HighwayPrefs.putString(getApplicationContext(), Constants.ID, verifyOtpResponse.getUser().getUserId());
         HighwayPrefs.putString(getApplicationContext(), Constants.NAME, verifyOtpResponse.getUser().getName());
         HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, verifyOtpResponse.getUser().getMobile());
         HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, verifyOtpResponse.getUser().getImage());
@@ -187,6 +187,8 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
+            if (smsReceiver!=null)
+                unregisterReceiver(smsReceiver);
             super.onBackPressed();
             return;
         }
@@ -204,4 +206,10 @@ public class MobileOtpVerificationActivity extends AppCompatActivity {
         }, 2000);
     }
 
+    @Override
+    public void messageReceived(String messageText) {
+        verifyPin.setText(messageText);
+        verifyPinOperation();
+
+    }
 }

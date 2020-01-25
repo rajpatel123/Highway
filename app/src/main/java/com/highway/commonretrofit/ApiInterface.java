@@ -47,93 +47,93 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
-    @POST("http://vrok.in/highway_dev/login_register")  // mobile logon
+    @POST("api/Login/login_register")  // mobile logon
     Call<ResponseBody> loginResponseCall(@Body LoginRegisterRequest loginRequest);
 
-    @POST("http://vrok.in/highway_dev/otp_verify") // otp verification
+    @POST("api/Login/otp_verify") // otp verification
     Call<VerifyOtpResponse> verifyOtpResponseCall(@Body VerifyOtpRequest verifyOtpRequest);
 
-    @POST("http://vrok.in/highway_dev/signup") // Registration Details
+    @POST("api/Login/signup") // Registration Details
     Call<RegistrationResponse>regDetailsResponseCall(@Body RegistrationRequest registrationDetailsRequest);
 
     // Driver All Trips
-    @POST("http://vrok.in/highway_dev/getAllTripByDriverId")
+    @POST("api/Trip/getAllTripByUserId")
     Call<AllHighwayTripsResponse> driverTrips(@Body AllHighwayTripsRequest allHighwayTripsRequest);
 
     // Vehicle Owner trip details
-    @POST("http://vrok.in/highway_dev/getAllTripByOwnerId")
+    @POST("api/Trip/getAllTripByUserId")
     Call<AllHighwayTripsResponse>vehicleOwnerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
 
     // Miller all trips details
-    @POST("http://vrok.in/highway_dev/getAllTripByOwnerId")
+    @POST("api/Trip/getAllTripByUserId")
     Call<AllHighwayTripsResponse>millerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
 
     // Customer all trip
-    @POST("http://vrok.in/highway_dev/getAllTripByCustomerId")
+    @POST("api/Trip/getAllTripByUserId")
     Call<AllHighwayTripsResponse>customerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
 
 
      // Add New Vehicle
-    @POST("http://dev.thehighways.in/index.php/api/Vehicle/addVehicle")
+    @POST("index.php/api/Vehicle/addVehicle")
     Call<AddVehicleResponse>addVehicleResponseCall(@Body AddVehicleRequest addVehicleRequest);
 
     // Add new Driver
-    @POST("http://dev.thehighways.in/index.php/api/Login/addDriver")
+    @POST("index.php/api/Login/addDriver")
     Call<AddNewDriverResponse>addNewDriverResponseCall(@Body AddNewDriverRequest addNewDriverRequest);
 
    // vehicle type drop dowan --spinner for vehicle owners for Add new Vehicle
-    @POST("http://dev.thehighways.in/api/Vehicle/vehicleTypeDropdown")
+    @POST("api/Vehicle/vehicleTypeDropdown")
     Call<VehicleTypeDropDowanResponse>vehicleTypeDropDowanResp(@Body VehicleTypeDropDowanRequest vehicleTypeDropDowanRequest);
 
     // Driver drop down ----spinners
-    @POST("http://dev.thehighways.in/index.php/api/vehicle/driverDropdown")
+    @POST("index.php/api/vehicle/driverDropdown")
     Call<DriverDropDownResponse>driverDataResponse(@Body DriverDropDownRequest driverDropDownRequest);
 
     //vehicle drop dowan --spinner for AssignD2V
-    @POST("http://dev.thehighways.in/index.php/api/vehicle/vehicleAssignDropdown")
+    @POST("index.php/api/vehicle/vehicleAssignDropdown")
     Call<VehicleAssignDropDowanResponse> VEHICLE_ASSIGN_DROP_DOWAN_RESPONSE_CALL(@Body VehicleAssignDropDowanRequest vehicleAssignDropDowanRequest);
 
     // Assign Driver 2 vehicle
-    @POST("http://dev.thehighways.in/api/Vehicle/assignDriverToVehicle")
+    @POST("api/Vehicle/assignDriverToVehicle")
     Call<AssignD2VResponse>assignD2VReq(@Body AssignD2VRequest assignD2VRequest);
 
     // Goods  Types in miller module ..book load ----Spinners
-    @POST("http://dev.thehighways.in/index.php/api/trip/goodType")
+    @POST("index.php/api/trip/goodType")
     Call<GoodsTypesDropDownResponse>goodsTypesResponse(@Body GoodsTypeDropDownRequest goodsTypeDropDownRequest);
 
     // Approx load spinners -- for miller Book load
-    @POST("http://dev.thehighways.in/index.php/api/trip/approxLoad")
+    @POST("index.php/api/trip/approxLoad")
     Call<ApproxLoadDropDownResponse> approxLoadResponse(@Body ApproxLoadDropDownRequest approxLoadDropDownRequest);
 
     // getAll Driver List for owner;
-    @POST("http://dev.thehighways.in/index.php/api/login/getAlldriverDetails")
+    @POST("index.php/api/login/getAlldriverDetails")
     Call<GetAllDriverResponse>getAllDriverDetailsRes(@Body GetAllDriverRequest getAllDriverRequest);
 
-    @POST("http://dev.thehighways.in/index.php/api/Vehicle/getAllVehicleDetails")
+    @POST("index.php/api/Vehicle/getAllVehicleDetails")
     Call<GetAllVehicleResponse>getVehicleResponse(@Body GetAllVehicleRequest getAllVehicleRequest);
 
     //Goods type DataVehicle Booking With details Activity
-    @POST("http://dev.thehighways.in/api/Trip/selectYourGoodType")
+    @POST("api/Trip/selectYourGoodType")
      Call<GoodsTypeDataResponse>SELECT_UR_GOODS_TYPE_DATA_RESPONSE_CALL(@Body GoodsTypeDataRequest goodsTypeDataRequest);
 
     // Add receiver mob no and name
-    @POST("http://dev.thehighways.in/api/Login/updateReceiver")
+    @POST("api/Login/updateReceiver")
     Call<UpdateReceiverPhoneNoAndNameResponse>UPDATE_RECEIVER_PHONE_NO_AND_NAME_RESPONSE_CALL(@Body UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest);
 
        /// vehicle diamension size in add vehicle through vehicle owner
-    @POST("http://dev.thehighways.in/api/Vehicle/vehicleDimensionSize")
+    @POST("api/Vehicle/vehicleDimensionSize")
     Call<VehicleDiamensionSizeResponse>VEHICLE_DIAMENSION_SIZE_RESPONSE_CALL(@Body VehicleDiamensionSizeRequest vehicleDiamensionSizeRequest);
 
     // vehicle load capicity through vehicle owner
-    @POST("http://dev.thehighways.in/api/Vehicle/vehicleLoadingCapicity")
+    @POST("api/Vehicle/vehicleLoadingCapicity")
     Call<VehicleLoadCapicityResponse>VEHICLE_LOAD_CAPICITY_RESPONSE_CALL(@Body VehicleLoadCapicityRequest vehicleLoadCapicityRequest);
 
   // Booking vehicle List
-   @POST("http://dev.thehighways.in/api/Vehicle/bookingVehicleList")
+   @POST("api/Vehicle/bookingVehicleList")
     Call<BookingVehicleListResponse>BOOKING_VEHICLE_LIST_RESPONSE_CALL(@Body BookingVehicleListRequest bookingVehicleListRequest);
 
    // Vehicle Info
-   @POST("http://dev.thehighways.in/api/Vehicle/getVehicleinfo")
+   @POST("api/Vehicle/getVehicleinfo")
     Call<VehicleInfoResponse>VEHICLE_INFO_RESPONSE_CALL(@Body VehicleInfoRequest vehicleInfoRequest);
 
 }
