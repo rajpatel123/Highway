@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +59,7 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.highway.R;
-import com.highway.Vehicle;
+import com.highway.common.base.HighwayApplication;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerFragment.ReceiverBottomSheetFragment;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
@@ -130,22 +129,17 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     private boolean isSelected;
     private String gdTypeId, gdTypeText;
 
-    public static void start(Activity activity,
-                             String sourceName,
-                             double sourceLatitude,
-                             double sourceLongitude,
-                             String destName,
-                             double destLatitude,
-                             double destLongitude) {
+    public static void start(Activity activity) {
 
 
         Intent intent = new Intent(activity, BookingWithDetailsActivity.class);
-        intent.putExtra("sourceName", sourceName);
-        intent.putExtra("sourceLatitude", sourceLatitude);
-        intent.putExtra("sourceLongitude", sourceLongitude);
-        intent.putExtra("destName", destName);
-        intent.putExtra("destLatitude", destLatitude);
-        intent.putExtra("destLongitude", destLongitude);
+
+        intent.putExtra("sourceName", HighwayApplication.getInstance().getBookingHTripReq().getSourceAddress());
+        intent.putExtra("sourceLatitude", HighwayApplication.getInstance().getBookingHTripReq().getSourceLat());
+        intent.putExtra("sourceLongitude", HighwayApplication.getInstance().getBookingHTripReq().getSourceLong());
+        intent.putExtra("destName", HighwayApplication.getInstance().getBookingHTripReq().getDestAddress());
+        intent.putExtra("destLatitude", HighwayApplication.getInstance().getBookingHTripReq().getDestLat());
+        intent.putExtra("destLongitude", HighwayApplication.getInstance().getBookingHTripReq().getDestLong());
 
         activity.startActivity(intent);
 
@@ -168,6 +162,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         bookTruckTv = findViewById(R.id.bookTruckTv);
         phoneNoTv = findViewById(R.id.TvPhoneNo);
         nameTv = findViewById(R.id.TvUserName);
+
 
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.NAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
@@ -256,10 +251,16 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             @Override
             public void onClick(View view) {
 
-                ReceiverBottomSheetFragment receiverBottomSheetFragment =
-                        ReceiverBottomSheetFragment.newInstance().newInstance();
-                receiverBottomSheetFragment.show(getSupportFragmentManager(),
-                        ReceiverBottomSheetFragment.TAG);
+
+                if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getVahicalId()) && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getGoodsTypeId())) {
+                    ReceiverBottomSheetFragment receiverBottomSheetFragment =
+                            ReceiverBottomSheetFragment.newInstance().newInstance();
+                    receiverBottomSheetFragment.show(getSupportFragmentManager(),
+                            ReceiverBottomSheetFragment.TAG);
+                } else {
+                    Toast.makeText(BookingWithDetailsActivity.this, "Please select vehicle and goods type", Toast.LENGTH_LONG).show();
+                }
+
 
             }
         });
@@ -277,9 +278,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             edtSourceLOcationEDT.setText("" + sourceName);
             edtDropLocation.setText("" + destName);
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
-            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
             distance();
         }
@@ -407,6 +408,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 }
             } else if (requestCode == SELECT_TYPE) {
                 gdTypeId = data.getStringExtra("id");
+                HighwayApplication.getInstance().getBookingHTripReq().setGoodsTypeId(gdTypeId);
                 gdTypeText = data.getStringExtra("type");
                 goodtype.setText(gdTypeText);
                 //goodtype.setText(gdTypeId);
@@ -645,13 +647,12 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     }
 
     @Override
-    public void onCLickTruck(int position) {
-        if (vehicleList != null && vehicleList.size() > 0)
+    public void onCLickTruck(int position, String fare) {
+        if (vehicleList != null && vehicleList.size() > 0) {
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
-
-//        for (VehicleList vehicle : vehicleList) {
-//            vehicle.setSelected(false);
-//        }
+            HighwayApplication.getInstance().getBookingHTripReq().setVahicalId(vehicleList.get(position).getVehicleId());
+            HighwayApplication.getInstance().getBookingHTripReq().setTripFare(fare);
+        }
 
     }
 
@@ -661,6 +662,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         BookingVehicleListRequest bookingVehicleListRequest = new BookingVehicleListRequest();
 
         user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+
+        HighwayApplication.getInstance().getBookingHTripReq().setUserId(user_Id);
         bookingVehicleListRequest.setUserId(user_Id);
 
         RestClient.getBookingVehicleList(bookingVehicleListRequest, new Callback<BookingVehicleListResponse>() {
@@ -672,6 +675,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
                         bookingVehicleListResponse = response.body();
                         bookingVehicleAdapter.setData(bookingVehicleListResponse);
+                        vehicleList = bookingVehicleListResponse.getVehicleData().getVehicleList();
+                        bookingVehicleAdapter.setOnClickEvents(BookingWithDetailsActivity.this);
                         bookingVehicleAdapter.notifyDataSetChanged();
                     }
                 }

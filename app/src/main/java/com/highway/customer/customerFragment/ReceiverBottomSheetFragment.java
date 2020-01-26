@@ -27,7 +27,10 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerActivity.BookingWithDetailsActivity;
+import com.highway.customer.customerActivity.ConfirmBookingActivity;
 import com.highway.customer.customerActivity.LoginActivityForCustomer;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
@@ -150,11 +153,11 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
     public boolean inputValidationReceiverDetial() {
         boolean check = true;
 
-        /*receiverPhoneNo = edtTextMobNo.getText().toString().trim();
-        receiverName = edtTextName.getText().toString().trim();*/
+        receiverPhoneNo = edtTextMobNo.getText().toString().trim();
+        receiverName = edtTextName.getText().toString().trim();
 
         if (receiverPhoneNo.isEmpty()/*&& edtTextMobNo.length()>=10 || edtTextMobNo.length()<=13*/) {
-            edtTextMobNo.setError("enter a valid mob no");
+            edtTextMobNo.setError("Enter a valid mobile no");
             return false;
         } else {
             edtTextMobNo.setError(null);
@@ -162,7 +165,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
         }
 
         if (receiverName.isEmpty()) {
-            edtTextName.setError("enter areceiver name");
+            edtTextName.setError("Enter a receiver name");
             check = false;
         } else {
             edtTextName.setError(null);
@@ -181,40 +184,31 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
             userId = HighwayPrefs.getString(getActivity(), Constants.ID);
             updateReceiverPhoneNoAndNameRequest.setUserId(userId);
 
+            HighwayPrefs.putString(getActivity(),Constants.RECEIVERNAME,receiverName);
+            HighwayPrefs.putString(getActivity(),Constants.RECEIVERPHONENO,receiverPhoneNo);
+
             RestClient.updateReceiverNameOrNumber(updateReceiverPhoneNoAndNameRequest, new Callback<UpdateReceiverPhoneNoAndNameResponse>() {
                 @Override
                 public void onResponse(Call<UpdateReceiverPhoneNoAndNameResponse> call, Response<UpdateReceiverPhoneNoAndNameResponse> response) {
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
+                            HighwayApplication.getInstance().getBookingHTripReq().setTripRecevirId(""+response.body().getId());
+                            ConfirmBookingActivity.start((BookingWithDetailsActivity) getActivity());
 
-                            conformShowBottomSheet();
                         }
                     }
                 }
 
                 @Override
                 public void onFailure(Call<UpdateReceiverPhoneNoAndNameResponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Failed update receiver mobNo and name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Failed update receiver mobile and name", Toast.LENGTH_SHORT).show();
 
                 }
             });
         }
     }
 
-    public void conformShowBottomSheet() {
 
-        recLayout.setVisibility(View.GONE);
-
-        HighwayPrefs.putString(getActivity(), Constants.RECEIVERPHONENO, receiverPhoneNo);
-        HighwayPrefs.putString(getActivity(), Constants.RECEIVERNAME, receiverName);
-
-        View dialogView = getLayoutInflater().inflate(R.layout.fragment_conform_receiver_bottom_sheet, null);
-        BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
-        dialog.setContentView(dialogView);
-        dialog.show();
-
-
-    }
 
     @Override
     public void onAttach(Context context) {

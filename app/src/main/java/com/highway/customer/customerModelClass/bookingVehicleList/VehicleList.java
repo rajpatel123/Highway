@@ -11,13 +11,13 @@ public class VehicleList {
     private String vehicleId;
     @SerializedName("VehicleTypeId")
     @Expose
-    private Object vehicleTypeId;
+    private String vehicleTypeId;
     @SerializedName("VehicleName")
     @Expose
-    private Object vehicleName;
+    private String vehicleName;
     @SerializedName("VehicleFare")
     @Expose
-    private Object vehicleFare;
+    private String vehicleFare;
 
     public String getVehicleId() {
         return vehicleId;
@@ -31,23 +31,23 @@ public class VehicleList {
         return vehicleTypeId;
     }
 
-    public void setVehicleTypeId(Object vehicleTypeId) {
+    public void setVehicleTypeId(String vehicleTypeId) {
         this.vehicleTypeId = vehicleTypeId;
     }
 
-    public Object getVehicleName() {
+    public String getVehicleName() {
         return vehicleName;
     }
 
-    public void setVehicleName(Object vehicleName) {
+    public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
     }
 
-    public Object getVehicleFare() {
+    public String getVehicleFare() {
         return vehicleFare;
     }
 
-    public void setVehicleFare(Object vehicleFare) {
+    public void setVehicleFare(String vehicleFare) {
         this.vehicleFare = vehicleFare;
     }
 

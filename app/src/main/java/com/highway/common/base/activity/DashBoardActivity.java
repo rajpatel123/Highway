@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,12 +23,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
+import com.highway.commonretrofit.RestClient;
+import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
@@ -44,10 +51,18 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -127,6 +142,42 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         updateNavViewHeader();
         navAccoringRoleId();// According RoleId Nevigation Icon
         //setOnClickListenerOperation();
+
+
+
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String newToken = instanceIdResult.getToken();
+
+                RegisterForPushModel obj = new RegisterForPushModel();
+                    obj.setUserId(HighwayPrefs.getString(DashBoardActivity.this, Constants.ID));
+                    obj.setTokenId(newToken);
+
+                RestClient.registerForPush(obj, new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+
+                            if (response.code()==200 &&  response.body()!=null){
+                                Log.d("New Token Updated", response.body().string().toString());
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+
+                Log.e("newToken", newToken);
+            }
+        });
+
 
 
     }

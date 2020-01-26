@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.customerActivity.BookingWithDetailsActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="@dimen/margin_38">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_10"
+            android:background="@drawable/back_arrow_icon"
+            app:tintMode="@color/white" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_toEndOf="@+id/back_button"
+            android:text="Drop Location"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/dropAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_weight="45"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomView"
+            android:layout_below="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@color/white"
+                android:elevation="@dimen/_16dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_5">
+
+                <LinearLayout
+                    android:id="@+id/sourceLL"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/input_round_shape"
+                    android:elevation="@dimen/margin_5"
+
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/picupLinear1"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <View
+                            android:id="@+id/sourceIndicator"
+                            android:layout_width="8px"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:background="@color/green" />
+
+                        <TextView
+                            android:id="@+id/edtDropLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:layout_toEndOf="@+id/sourceIndicator"
+                            android:background="@color/quantum_grey100"
+                            android:cursorVisible="false"
+                            android:ellipsize="end"
+                            android:enabled="true"
+                            android:gravity="center_vertical"
+                            android:hint="Enter Pickup location"
+                            android:lines="1"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="2dp"
+                            android:singleLine="true" />
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/dropAdd"
+        android:layout_gravity="center" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:padding="@dimen/margin_20">
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Driver will contact on this number before delivery" />
+
+
+        <LinearLayout
+            android:id="@+id/details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/message"
+            android:layout_marginTop="@dimen/margin_15"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone : 8285886155"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/TvUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reciever Name : Raj"
+                android:textColor="@color/black" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/editLL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/message"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_15"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/editTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="21dp"
+                android:text="Edit"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+
+
+
+        <Button
+            android:id="@+id/confirmBooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm Booking"
+            android:layout_marginTop="@dimen/margin_20"
+            android:textColor="@color/white"
+            android:layout_below="@+id/details"
+            android:background="@drawable/rounded_btn_shape"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

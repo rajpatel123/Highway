@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfo;
 import com.highway.utils.Utils;
-
-import java.util.List;
 
 public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAdapter.ViewHolder> {
     private Context context;
@@ -67,7 +64,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             @Override
             public void onClick(View v) {
                 if (onClickEvents != null) {
-                    onClickEvents.onCLickTruck(holder.getAdapterPosition());
+                    onClickEvents.onCLickTruck(holder.getAdapterPosition(),vehicleList.getVehicleFare());
 
                 }
             }
@@ -111,7 +108,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
     public interface OnClickEvents {
         void onCLickInfo(int position);
-        void onCLickTruck(int position);
+        void onCLickTruck(int position, String vehicleFare);
 
     }
 }

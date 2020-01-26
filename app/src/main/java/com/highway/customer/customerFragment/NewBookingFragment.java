@@ -48,7 +48,9 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripReq;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.utils.Utils;
 
@@ -184,7 +186,11 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                 Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
 
                 if (!TextUtils.isEmpty(place.getName())) {
-                    edtSourceLOcationEDT.setText("" + place.getName());
+                    if (TextUtils.isEmpty(place.getAddress())) {
+                        edtSourceLOcationEDT.setText("" + place.getName());
+                    } else {
+                        edtSourceLOcationEDT.setText("" + place.getAddress());
+                    }
                     if (mMap != null && place.getLatLng() != null) {
 
 
@@ -194,6 +200,10 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         sourceLongitude = latLng.longitude;
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
                         mMap.moveCamera(cameraUpdate);
+
+                        if (sourceLatitude > 0 && destLatitude>0)
+                            openBookingActivity();
+
                     }
 
                 }
@@ -202,9 +212,12 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                 Place placeDest = Autocomplete.getPlaceFromIntent(data);
 
                 if (!TextUtils.isEmpty(placeDest.getName())) {
-                    Log.i("TAG", "Place: " + placeDest.getName() + ", " + placeDest.getId());
 
-                    edtDropLocation.setText("" + placeDest.getName());
+                    if (TextUtils.isEmpty(placeDest.getAddress())) {
+                        edtDropLocation.setText("" + placeDest.getName());
+                    } else {
+                        edtDropLocation.setText("" + placeDest.getAddress());
+                    }
                     if (mMap != null && placeDest.getLatLng() != null) {
 
 
@@ -214,8 +227,8 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         destName = placeDest.getName();
                         destLatitude = latLng.latitude;
                         destLongitude = latLng.longitude;
-
-                        openBookingActivity();
+                        if (sourceLatitude > 0 && destLatitude>0)
+                            openBookingActivity();
 
                     }
 
@@ -230,8 +243,18 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     }
 
     private void openBookingActivity() {
+        HighwayApplication.getInstance().setBookingHTripReq(new BookingHTripReq());
         if (!TextUtils.isEmpty(sourceName) && !TextUtils.isEmpty(destName)) {
-            BookingWithDetailsActivity.start(mActivity, sourceName, sourceLatitude, sourceLongitude, destName, destLatitude, destLongitude);
+            HighwayApplication.getInstance().getBookingHTripReq().setSourceAddress(sourceName);
+            HighwayApplication.getInstance().getBookingHTripReq().setSourceLat(sourceLatitude);
+            HighwayApplication.getInstance().getBookingHTripReq().setSourceLong(sourceLongitude);
+            HighwayApplication.getInstance().getBookingHTripReq().setDestAddress(destName);
+            HighwayApplication.getInstance().getBookingHTripReq().setDestLat(destLatitude);
+            HighwayApplication.getInstance().getBookingHTripReq().setDestLong(destLongitude);
+
+            BookingWithDetailsActivity.start(mActivity);
+
+
         }
 
 
@@ -268,7 +291,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+//        mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(18.0f);
 
@@ -338,10 +361,10 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
 
-        sourceName = Utils.getAddress(mActivity,latLng);
+        sourceName = Utils.getAddress(mActivity, latLng);
         sourceLatitude = latLng.latitude;
         sourceLongitude = latLng.longitude;
-        edtSourceLOcationEDT.setText(""+sourceName);
+        edtSourceLOcationEDT.setText("" + sourceName);
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -353,7 +376,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         }
 
     }
-
 
 
     /**

@@ -45,7 +45,6 @@ android {
             multiDexEnabled true
             def uatSigningKey = signingConfigs.highway
             signingConfig uatSigningKey
-
             minifyEnabled false
             buildConfigField "String", "API_SERVER_IP", "\"http://dev.thehighways.in/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

@@ -1,6 +1,8 @@
 package com.highway.commonretrofit;
 
 
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripReq;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResp;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
@@ -8,6 +10,7 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.common.base.commonModel.registration.RegistrationRequest;
 import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
@@ -40,6 +43,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle.GetAllVehicleResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
+
+import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -86,6 +91,11 @@ public class RestClient {
 
     public static  void addNewDriver(AddNewDriverRequest addNewDriverRequest, Callback<AddNewDriverResponse>addNewDriverResponseCallback){
         RetrofitClient.getClient().addNewDriverResponseCall(addNewDriverRequest).enqueue(addNewDriverResponseCallback);
+    }
+
+
+    public static  void registerForPush(RegisterForPushModel obj, Callback<ResponseBody> addNewDriverResponseCallback){
+        RetrofitClient.getClient().registerForPush(obj).enqueue(addNewDriverResponseCallback);
     }
 
     // driver drop dowan ---spinners for owner
@@ -159,6 +169,12 @@ public class RestClient {
 
     public static void vehicleInfo(VehicleInfoRequest vehicleInfoRequest, Callback<VehicleInfoResponse>vehicleInfoResponseCallback){
        RetrofitClient.getClient().VEHICLE_INFO_RESPONSE_CALL(vehicleInfoRequest).enqueue(vehicleInfoResponseCallback);
+    }
+
+
+
+    public static void confirmBooking(BookingHTripReq bookingHTripReq, Callback<BookingHTripResp> bookingHTripRespCallback){
+       RetrofitClient.getClient().confirmBooking(bookingHTripReq).enqueue(bookingHTripRespCallback);
     }
 
 
