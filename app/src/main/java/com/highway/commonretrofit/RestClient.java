@@ -44,8 +44,6 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
 
-import org.json.JSONObject;
-
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
 

@@ -77,7 +77,6 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
             }
         });
 
-
     }
 
 

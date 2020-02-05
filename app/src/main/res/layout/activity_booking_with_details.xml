@@ -409,7 +409,7 @@
                                 android:background="@drawable/btn_shape_draw"
                                 android:gravity="center"
                                 android:maxHeight="@dimen/margin_40"
-                                android:text="BooK Tata Ace"
+                                android:text="BOOK NOW"
                                 android:textColor="@color/white" />
                             <!--                            android:onClick="showBottomSheet"-->
 
