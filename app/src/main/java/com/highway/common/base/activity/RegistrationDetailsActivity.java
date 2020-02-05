@@ -514,5 +514,4 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         }, 2000);
     }
 
-
 }

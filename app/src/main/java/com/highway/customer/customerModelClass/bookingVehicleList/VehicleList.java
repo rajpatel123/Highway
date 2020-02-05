@@ -18,6 +18,10 @@ public class VehicleList {
     @SerializedName("VehicleFare")
     @Expose
     private String vehicleFare;
+    @SerializedName("v_info")
+    @Expose
+    private VInfo vInfo;
+    private boolean selected;
 
     public String getVehicleId() {
         return vehicleId;
@@ -27,7 +31,7 @@ public class VehicleList {
         this.vehicleId = vehicleId;
     }
 
-    public Object getVehicleTypeId() {
+    public String getVehicleTypeId() {
         return vehicleTypeId;
     }
 
@@ -51,15 +55,19 @@ public class VehicleList {
         this.vehicleFare = vehicleFare;
     }
 
+    public VInfo getVInfo() {
+        return vInfo;
+    }
+
+    public void setVInfo(VInfo vInfo) {
+        this.vInfo = vInfo;
+    }
 
     public boolean isSelected() {
-        return isSelected;
+        return selected;
     }
 
     public void setSelected(boolean selected) {
-        isSelected = selected;
+        this.selected = selected;
     }
-
-    private boolean isSelected;
-
 }

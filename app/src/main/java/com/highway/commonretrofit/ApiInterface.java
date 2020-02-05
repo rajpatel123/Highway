@@ -43,8 +43,6 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimens
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
 
-import org.json.JSONObject;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -79,7 +77,6 @@ public interface ApiInterface {
     // Customer all trip
     @POST("api/Trip/getAllTripByUserId")
     Call<AllHighwayTripsResponse> customerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
-
 
     // Add New Vehicle
     @POST("index.php/api/Vehicle/addVehicle")
@@ -147,7 +144,6 @@ public interface ApiInterface {
     // Register for pushnotification
     @POST("api/Notification/registerPushNotification")
     Call<ResponseBody> registerForPush(@Body RegisterForPushModel vehicleInfoRequest);
-
 
     // Booking Request
     @POST("api/Booking/confirmBookingApi")

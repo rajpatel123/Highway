@@ -64,17 +64,15 @@ import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerFragment.ReceiverBottomSheetFragment;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
+import com.highway.customer.customerModelClass.bookingVehicleList.VInfo;
 import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
-import com.highway.customer.customerModelClass.vehicleInfo.Data;
 import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfo;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
 import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -115,6 +113,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     TextView info1, info2, info3, info4, info5, info6;
     List<VehicleList> vehicleList = new ArrayList<>();
     List<VehicleInfo> vehicleInfoList = new ArrayList<>();
+    List<VInfo> vInfoList = new ArrayList<>();
     BookingVehicleAdapter bookingVehicleAdapter;
     BookingVehicleListResponse bookingVehicleListResponse;
     VehicleInfoResponse vehicleInfoResponse;
@@ -251,7 +250,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             @Override
             public void onClick(View view) {
 
-
                 if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getVahicalId()) && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getGoodsTypeId())) {
                     ReceiverBottomSheetFragment receiverBottomSheetFragment =
                             ReceiverBottomSheetFragment.newInstance().newInstance();
@@ -260,8 +258,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 } else {
                     Toast.makeText(BookingWithDetailsActivity.this, "Please select vehicle and goods type", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
 
@@ -289,7 +285,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     /* both method r working But not chnge parameter   dist = dist * 60 * 1.1515 */
     private double distance() {
         // 1st method
-      /*  Location startPoint = new Location("sourceName");
+        Location startPoint = new Location("sourceName");
         startPoint.setLatitude(sourceLatitude);
         startPoint.setLongitude(sourceLongitude);
 
@@ -298,10 +294,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         endPoint.setLongitude(destLongitude);
         distance = (int) startPoint.distanceTo(endPoint) / 1000;
 
-        Toast.makeText(this, "" + String.valueOf(distance), Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "" + String.valueOf(distance) +"km" ,Toast.LENGTH_SHORT).show();
         return distance;
-          *//*  2nd method
+
+          /*  2nd method
 
             double theta = sourceLatitude - sourceLongitude;
             double dist = Math.sin(deg2rad(sourceLatitude))
@@ -315,7 +311,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
            Toast.makeText(this, ""+dist, Toast.LENGTH_SHORT).show();
 
-            return (dist);*/
+            return (dist);
 
         // 3rd method
         int Radius = 6371;// radius of earth in Km
@@ -344,6 +340,8 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         Toast.makeText(this, "" + meterInDec, Toast.LENGTH_SHORT).show();
 
         return Radius * c;
+        */
+
 
     }
 
@@ -604,7 +602,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 }
                 return;
             }
-
         }
     }
 
@@ -641,8 +638,12 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     @Override
     public void onCLickInfo(int position) {
-        if (vehicleList != null && vehicleList.size() > 0)
-            showInfoDialog(vehicleInfoList.get(position));
+       /* if (vehicleList != null && vehicleList.size() > 0)
+            showInfoDialog(vehicleInfoList.get(position));  */
+
+             if (bookingVehicleListResponse.getVehicleData().getVehicleList()!= null
+                     && bookingVehicleListResponse.getVehicleData().getVehicleList().size()> 0)
+            showInfoDialog(bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).getVInfo());
 
     }
 
@@ -698,11 +699,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         bookingVehicleAdapter.setOnClickEvents(this);
         recyclerView.setAdapter(bookingVehicleAdapter);
-
     }
 
-
-    private void showInfoDialog(VehicleInfo vehicleInfo) {
+    private void showInfoDialog(VInfo vInfo) {
 
         final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
 
@@ -724,45 +723,16 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info6 = dialogView.findViewById(R.id.info5);
         TextView okay = dialogView.findViewById(R.id.done);
 
-        VehicleInfoRequest vehicleInfoRequest = new VehicleInfoRequest();
-        user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-        vehicleInfoRequest.setUserId(user_Id);
-
-        RestClient.vehicleInfo(vehicleInfoRequest, new Callback<VehicleInfoResponse>() {
-            @Override
-            public void onResponse(Call<VehicleInfoResponse> call, Response<VehicleInfoResponse> response) {
-                if (response.body() != null) {
-                    if (response.body().getStatus()) {
-
-                        vehicleInfoResponse = response.body();
-                        Data data = vehicleInfoResponse.getData();
-
-                        if (bookingVehicleListResponse != null
-                                && bookingVehicleListResponse.getVehicleData().getVehicleList() != null
-                                && bookingVehicleListResponse.getVehicleData().getVehicleList().size() > 0) {
-
-                            vehicleNameTv.setText(vehicleInfo.getVehicleName());
-                            vehicleCapicityTv.setText((Integer) vehicleInfo.getVehicleCapacity());
-                            vehicleSizeTv.setText((Integer) vehicleInfo.getVehicleSize());
-                            info1.setText(vehicleInfo.getVInfo1());
-                            info2.setText(vehicleInfo.getVInfo2());
-                            info3.setText(vehicleInfo.getVInfo3());
-                            info4.setText(vehicleInfo.getVInfo4());
-                            info5.setText(vehicleInfo.getVInfo5());
-                            info6.setText(vehicleInfo.getVInfo6());
-                            data.getVehicleInfo().add(0, vehicleInfo);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<VehicleInfoResponse> call, Throwable t) {
-                Toast.makeText(BookingWithDetailsActivity.this, " info response failed ", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
+        vehicleNameTv.setText(vInfo.getVehicleName());
+        vehicleCapicityTv.setText(vInfo.getVehicleCapacity());
+        vehicleSizeTv.setText(vInfo.getVehicleSize());
+        info1.setText(vInfo.getInfo1());
+        info2.setText(vInfo.getInfo2());
+        info3.setText(vInfo.getInfo3());
+        info4.setText(vInfo.getInfo4());
+        info5.setText(vInfo.getInfo5());
+        info6.setText(vInfo.getInfo6());
+       // vehicleData.getVehicleList().add(0, vInfo);
         //vehileBookImg.setBackgroundResource(R.drawable.truck);
 
         okay.setOnClickListener(new View.OnClickListener() {
@@ -775,6 +745,5 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (!isFinishing() && !dialog.isShowing())
             dialog.show();
     }
-
 
 }
