@@ -108,7 +108,6 @@
             android:name=".drivermodule.driverActivity.LoginActivityForDriver"
             android:screenOrientation="portrait" />
 
-
         <service
             android:name=".common.base.firebaseService.MyFirebaseServiceMessaging">
         <intent-filter>

@@ -229,6 +229,9 @@
     <string name="and">and</string>
     <string name="privacy">privacy  policy</string>
     <string name="otp_sent">One Time Password(OTP) has been sent to above number</string>
+    <string name="reject">Reject</string>
+    <string name="drop_at">Drop At</string>
+    <string name="pick_up_location">PickUp Location</string>
 
 
 </resources>
