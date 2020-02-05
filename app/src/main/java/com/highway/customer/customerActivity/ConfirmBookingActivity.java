@@ -89,7 +89,8 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
     private Button back_button;
     private Button confirmBooking;
     private double sourceLatitude, sourceLongitude;
-    private double destLatitude, destLongitude;
+    private double destLatitude;
+    private double destLongitude;
     private String sourceName;
     private String destName;
     private boolean isSelected;
@@ -315,7 +316,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
 
         //stop location updates
         if (mGoogleApiClient != null) {

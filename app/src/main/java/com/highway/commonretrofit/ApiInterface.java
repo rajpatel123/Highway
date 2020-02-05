@@ -145,8 +145,8 @@ public interface ApiInterface {
     @POST("api/Notification/registerPushNotification")
     Call<ResponseBody> registerForPush(@Body RegisterForPushModel vehicleInfoRequest);
 
-    // Booking Request
+    // conform booking Request
     @POST("api/Booking/confirmBookingApi")
-    Call<BookingHTripResp> confirmBooking(@Body BookingHTripReq bookingHTripReq);
+    Call<BookingHTripResp> BOOKING_H_TRIP_RESPONSE_CALL(@Body BookingHTripReq bookingHTripReq);
 
 }

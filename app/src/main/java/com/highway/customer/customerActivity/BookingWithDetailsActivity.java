@@ -250,7 +250,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             @Override
             public void onClick(View view) {
 
-                if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getVahicalId()) && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getGoodsTypeId())) {
+                if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getVehicleTypeId()) && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getGoodsTypeId())) {
                     ReceiverBottomSheetFragment receiverBottomSheetFragment =
                             ReceiverBottomSheetFragment.newInstance().newInstance();
                     receiverBottomSheetFragment.show(getSupportFragmentManager(),
@@ -651,7 +651,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public void onCLickTruck(int position, String fare) {
         if (vehicleList != null && vehicleList.size() > 0) {
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
-            HighwayApplication.getInstance().getBookingHTripReq().setVahicalId(vehicleList.get(position).getVehicleId());
+            HighwayApplication.getInstance().getBookingHTripReq().setVehicleTypeId(vehicleList.get(position).getVehicleId());
             HighwayApplication.getInstance().getBookingHTripReq().setTripFare(fare);
         }
 
@@ -733,6 +733,12 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info5.setText(vInfo.getInfo5());
         info6.setText(vInfo.getInfo6());
        // vehicleData.getVehicleList().add(0, vInfo);
+
+
+
+
+
+
         //vehileBookImg.setBackgroundResource(R.drawable.truck);
 
         okay.setOnClickListener(new View.OnClickListener() {

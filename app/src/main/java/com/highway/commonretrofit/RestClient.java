@@ -168,11 +168,9 @@ public class RestClient {
     public static void vehicleInfo(VehicleInfoRequest vehicleInfoRequest, Callback<VehicleInfoResponse>vehicleInfoResponseCallback){
        RetrofitClient.getClient().VEHICLE_INFO_RESPONSE_CALL(vehicleInfoRequest).enqueue(vehicleInfoResponseCallback);
     }
-
-
-
+    // conform booking
     public static void confirmBooking(BookingHTripReq bookingHTripReq, Callback<BookingHTripResp> bookingHTripRespCallback){
-       RetrofitClient.getClient().confirmBooking(bookingHTripReq).enqueue(bookingHTripRespCallback);
+       RetrofitClient.getClient().BOOKING_H_TRIP_RESPONSE_CALL(bookingHTripReq).enqueue(bookingHTripRespCallback);
     }
 
 

@@ -253,11 +253,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             HighwayApplication.getInstance().getBookingHTripReq().setDestLong(destLongitude);
 
             BookingWithDetailsActivity.start(mActivity);
-
-
         }
-
-
     }
 
     public Bitmap createCustomMarker(@DrawableRes int resource) {

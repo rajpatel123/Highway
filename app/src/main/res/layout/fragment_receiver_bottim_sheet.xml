@@ -112,9 +112,7 @@
                 android:inputType="textPersonName"
                 android:maxLength="20"
                 android:maxLines="1"
-                 /> android:textSize="@dimen/size_20"
-
-
+                 /> <!--android:textSize="@dimen/size_20"-->
         </com.google.android.material.textfield.TextInputLayout>
 
 

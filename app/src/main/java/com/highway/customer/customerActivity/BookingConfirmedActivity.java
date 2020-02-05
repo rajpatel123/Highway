@@ -297,7 +297,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
 
         //stop location updates
         if (mGoogleApiClient != null) {
