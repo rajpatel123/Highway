@@ -156,10 +156,8 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
+                Intent intent = new Intent(getApplicationContext(),CalcelOrderActivityWithReason.class);
+                startActivity(intent);
             }
         });
     }

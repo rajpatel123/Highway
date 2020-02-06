@@ -1,9 +1,8 @@
-package com.highway.services.
+package com.highway.common.base.firebaseService;
 
 /**
  * Created by santhosh@appoets.com on 21-05-2018.
  */
-
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -31,7 +30,7 @@ import com.highway.services.MyJobService;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     int notificationId = 0;
     private static final String TAG = "MyFirebaseMsgService";
     public static final String INTENT_FILTER = "INTENT_FILTER"+ BuildConfig.APPLICATION_ID;
@@ -96,7 +95,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // [START dispatch_job]
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
         Job myJob = dispatcher.newJobBuilder()
-                .setService(MyJobService.class)
+               // .setService(MyJobService.class)
                 .setTag("my-job-tag")
                 .build();
         dispatcher.schedule(myJob);
@@ -189,7 +188,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private int getNotificationIcon(NotificationCompat.Builder notificationBuilder) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notificationBuilder.setColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
-            return R.drawable.ic_stat_ic_notification;
+            return R.drawable.notification_image;
         } else {
             return R.mipmap.ic_launcher;
         }
