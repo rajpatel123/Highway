@@ -2,21 +2,21 @@ package com.highway.common.base;
 
 import android.app.Application;
 
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripReq;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 
 public class HighwayApplication extends Application {
 
 
     static HighwayApplication instance = null;
-    public BookingHTripReq getBookingHTripReq() {
-        return bookingHTripReq;
+    public BookingHTripRequest getBookingHTripRequest() {
+        return bookingHTripRequest;
     }
 
-    public void setBookingHTripReq(BookingHTripReq bookingHTripReq) {
-        this.bookingHTripReq = bookingHTripReq;
+    public void setBookingHTripRequest(BookingHTripRequest bookingHTripRequest) {
+        this.bookingHTripRequest = bookingHTripRequest;
     }
 
-    BookingHTripReq bookingHTripReq = new BookingHTripReq();
+    BookingHTripRequest bookingHTripRequest = new BookingHTripRequest();
 
 
     @Override
@@ -32,8 +32,8 @@ public class HighwayApplication extends Application {
 
 
 
-    public BookingHTripReq getBookingObject(){
-        return bookingHTripReq;
+    public BookingHTripRequest getBookingObject(){
+        return bookingHTripRequest;
     }
 
 

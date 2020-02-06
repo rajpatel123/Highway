@@ -47,7 +47,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResp;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
@@ -153,19 +153,19 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
         confirmBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RestClient.confirmBooking(HighwayApplication.getInstance().getBookingHTripReq(), new Callback<BookingHTripResp>() {
+                RestClient.confirmBooking(HighwayApplication.getInstance().getBookingHTripRequest(), new Callback<BookingHTripResponse>() {
                     @Override
-                    public void onResponse(Call<BookingHTripResp> call, Response<BookingHTripResp> response) {
+                    public void onResponse(Call<BookingHTripResponse> call, Response<BookingHTripResponse> response) {
                         if (response.code() == 200 && response.body() != null) {
 
-                            BookingHTripResp resp = response.body();
+                            BookingHTripResponse resp = response.body();
                             if (resp != null && resp.getId() != null)
                                 BookingConfirmedActivity.start(ConfirmBookingActivity.this, resp.getId());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<BookingHTripResp> call, Throwable t) {
+                    public void onFailure(Call<BookingHTripResponse> call, Throwable t) {
 
                     }
                 });
@@ -185,9 +185,9 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
     }
 
     private void initLocations(Intent intent) {
-        destName = HighwayApplication.getInstance().getBookingHTripReq().getDestAddress();
-        destLatitude = HighwayApplication.getInstance().getBookingHTripReq().getDestLat();
-        destLongitude = HighwayApplication.getInstance().getBookingHTripReq().getDestLong();
+        destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
+        destLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLat();
+        destLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLong();
         edtDropLocation.setText("" + destName);
 
         markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="colorPrimary">#FFB400</color><!-- <color name="colorPrimary">#008577</color>-->
     <color name="colorPrimaryDark">#FFB400</color> <!--<color name="colorPrimaryDark">#00574B</color>-->
     <color name="colorAccent">#FFB400</color> <!-- <color name="colorAccent">#D81B60</color>-->
@@ -98,6 +98,9 @@
     <color name="phone_Background_color">#ff8105</color>
     <color name="project_color">#2389ee</color>
     <color name="red_money">#E91E63</color>
-
+    <!--
+    <item android:drawable="@color/SelectedColor" android:state_pressed="true"></item>
+    <item android:drawable="@color/SelectedColor" android:state_selected="true"></item>
+    <item android:drawable="@color/DefultColor"></item>-->
 
 </resources>

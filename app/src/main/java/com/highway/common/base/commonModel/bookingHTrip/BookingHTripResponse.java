@@ -3,7 +3,7 @@ package com.highway.common.base.commonModel.bookingHTrip;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BookingHTripResp {
+public class BookingHTripResponse {
 
 @SerializedName("status")
 @Expose

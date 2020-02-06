@@ -2,12 +2,15 @@ package com.highway.customer.customerActivity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -73,6 +76,8 @@ import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
+import android.graphics.PorterDuff.Mode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -127,18 +132,20 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     private String destName;
     private boolean isSelected;
     private String gdTypeId, gdTypeText;
+    private boolean userclicked;
+    private Paint paint;
 
     public static void start(Activity activity) {
 
 
         Intent intent = new Intent(activity, BookingWithDetailsActivity.class);
 
-        intent.putExtra("sourceName", HighwayApplication.getInstance().getBookingHTripReq().getSourceAddress());
-        intent.putExtra("sourceLatitude", HighwayApplication.getInstance().getBookingHTripReq().getSourceLat());
-        intent.putExtra("sourceLongitude", HighwayApplication.getInstance().getBookingHTripReq().getSourceLong());
-        intent.putExtra("destName", HighwayApplication.getInstance().getBookingHTripReq().getDestAddress());
-        intent.putExtra("destLatitude", HighwayApplication.getInstance().getBookingHTripReq().getDestLat());
-        intent.putExtra("destLongitude", HighwayApplication.getInstance().getBookingHTripReq().getDestLong());
+        intent.putExtra("sourceName", HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
+        intent.putExtra("sourceLatitude", HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat());
+        intent.putExtra("sourceLongitude", HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong());
+        intent.putExtra("destName", HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
+        intent.putExtra("destLatitude", HighwayApplication.getInstance().getBookingHTripRequest().getDestLat());
+        intent.putExtra("destLongitude", HighwayApplication.getInstance().getBookingHTripRequest().getDestLong());
 
         activity.startActivity(intent);
 
@@ -250,7 +257,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             @Override
             public void onClick(View view) {
 
-                if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getVehicleTypeId()) && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripReq().getGoodsTypeId())) {
+                if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId()) && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getGoodsTypeId())) {
                     ReceiverBottomSheetFragment receiverBottomSheetFragment =
                             ReceiverBottomSheetFragment.newInstance().newInstance();
                     receiverBottomSheetFragment.show(getSupportFragmentManager(),
@@ -294,7 +301,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         endPoint.setLongitude(destLongitude);
         distance = (int) startPoint.distanceTo(endPoint) / 1000;
 
-        Toast.makeText(this, "" + String.valueOf(distance) +"km" ,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + String.valueOf(distance) + " " + " km ", Toast.LENGTH_SHORT).show();
         return distance;
 
           /*  2nd method
@@ -406,7 +413,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 }
             } else if (requestCode == SELECT_TYPE) {
                 gdTypeId = data.getStringExtra("id");
-                HighwayApplication.getInstance().getBookingHTripReq().setGoodsTypeId(gdTypeId);
+                HighwayApplication.getInstance().getBookingHTripRequest().setGoodsTypeId(gdTypeId);
                 gdTypeText = data.getStringExtra("type");
                 goodtype.setText(gdTypeText);
                 //goodtype.setText(gdTypeId);
@@ -638,23 +645,32 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
     @Override
     public void onCLickInfo(int position) {
+
        /* if (vehicleList != null && vehicleList.size() > 0)
             showInfoDialog(vehicleInfoList.get(position));  */
 
-             if (bookingVehicleListResponse.getVehicleData().getVehicleList()!= null
-                     && bookingVehicleListResponse.getVehicleData().getVehicleList().size()> 0)
+        if (bookingVehicleListResponse.getVehicleData().getVehicleList() != null
+                && bookingVehicleListResponse.getVehicleData().getVehicleList().size() > 0)
             showInfoDialog(bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).getVInfo());
 
     }
 
     @Override
     public void onCLickTruck(int position, String fare) {
+
+        /*if (userclicked) {
+            paint.setColor(Color.GREEN);
+        } else {
+            paint.setColor(Color.BLACK);
+        }*/
+
+
         if (vehicleList != null && vehicleList.size() > 0) {
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
-            HighwayApplication.getInstance().getBookingHTripReq().setVehicleTypeId(vehicleList.get(position).getVehicleId());
-            HighwayApplication.getInstance().getBookingHTripReq().setTripFare(fare);
-        }
+            HighwayApplication.getInstance().getBookingHTripRequest().setVehicleTypeId(vehicleList.get(position).getVehicleId());
+            HighwayApplication.getInstance().getBookingHTripRequest().setTripFare(fare);
 
+        }
     }
 
 
@@ -664,7 +680,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
         user_Id = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
 
-        HighwayApplication.getInstance().getBookingHTripReq().setUserId(user_Id);
+        HighwayApplication.getInstance().getBookingHTripRequest().setUserId(user_Id);
         bookingVehicleListRequest.setUserId(user_Id);
 
         RestClient.getBookingVehicleList(bookingVehicleListRequest, new Callback<BookingVehicleListResponse>() {
@@ -732,11 +748,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info4.setText(vInfo.getInfo4());
         info5.setText(vInfo.getInfo5());
         info6.setText(vInfo.getInfo6());
-       // vehicleData.getVehicleList().add(0, vInfo);
-
-
-
-
+        // vehicleData.getVehicleList().add(0, vInfo);
 
 
         //vehileBookImg.setBackgroundResource(R.drawable.truck);

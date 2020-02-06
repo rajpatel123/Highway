@@ -1,7 +1,7 @@
 package com.highway.commonretrofit;
 
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripReq;
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResp;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
@@ -147,6 +147,6 @@ public interface ApiInterface {
 
     // conform booking Request
     @POST("api/Booking/confirmBookingApi")
-    Call<BookingHTripResp> BOOKING_H_TRIP_RESPONSE_CALL(@Body BookingHTripReq bookingHTripReq);
+    Call<BookingHTripResponse> BOOKING_H_TRIP_RESPONSE_CALL(@Body BookingHTripRequest bookingHTripRequest);
 
 }
