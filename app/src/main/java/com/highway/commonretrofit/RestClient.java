@@ -1,8 +1,8 @@
 package com.highway.commonretrofit;
 
 
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripReq;
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResp;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
@@ -168,11 +168,9 @@ public class RestClient {
     public static void vehicleInfo(VehicleInfoRequest vehicleInfoRequest, Callback<VehicleInfoResponse>vehicleInfoResponseCallback){
        RetrofitClient.getClient().VEHICLE_INFO_RESPONSE_CALL(vehicleInfoRequest).enqueue(vehicleInfoResponseCallback);
     }
-
-
-
-    public static void confirmBooking(BookingHTripReq bookingHTripReq, Callback<BookingHTripResp> bookingHTripRespCallback){
-       RetrofitClient.getClient().confirmBooking(bookingHTripReq).enqueue(bookingHTripRespCallback);
+    // conform booking
+    public static void confirmBooking(BookingHTripRequest bookingHTripRequest, Callback<BookingHTripResponse> bookingHTripRespCallback){
+       RetrofitClient.getClient().BOOKING_H_TRIP_RESPONSE_CALL(bookingHTripRequest).enqueue(bookingHTripRespCallback);
     }
 
 

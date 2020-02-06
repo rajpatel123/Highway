@@ -1,13 +1,17 @@
 package com.highway.customer.customerActivity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
@@ -15,11 +19,19 @@ import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicle
 import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
 import com.highway.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAdapter.ViewHolder> {
     private Context context;
 
     OnClickEvents onClickEvents;
     BookingVehicleListResponse bookingVehicleListResponse;
+    List<ImageView> imageViewList = new ArrayList<>();
+    List<View>itemViewList = new ArrayList<>();
+
+    public int previousPosition = -1;
+    public SingleViewItemBinding previousView;
 
     public BookingVehicleAdapter(BookingVehicleListResponse bookingVehicleListResponse1, Context context1, OnClickEvents onClickEvents1) {
         this.context = context1;
@@ -34,12 +46,13 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.activity_vehicle_list, parent, false);
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+       // holder.tv1.setText(android_versionnames[position]);
         VehicleList vehicleList = bookingVehicleListResponse.getVehicleData().getVehicleList().get(position);
 
         holder.tataAceTv1.setText(""+vehicleList.getVehicleName());
@@ -60,15 +73,26 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             }
         });
 
+
         holder.vehicleIcons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onClickEvents != null) {
                     onClickEvents.onCLickTruck(holder.getAdapterPosition(),vehicleList.getVehicleFare());
 
+                    if (vehicleList.isSelected()){
+
+                        holder.itemView.setBackgroundColor(Color.parseColor("#8DFFFFFF"));
+                    }else {
+                        holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    }
                 }
+                   // holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.blue));
+
             }
+
         });
+
     }
 
     @Override

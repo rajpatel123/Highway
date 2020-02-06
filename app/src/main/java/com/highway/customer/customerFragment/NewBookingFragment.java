@@ -50,7 +50,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripReq;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.utils.Utils;
 
@@ -243,21 +243,17 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     }
 
     private void openBookingActivity() {
-        HighwayApplication.getInstance().setBookingHTripReq(new BookingHTripReq());
+        HighwayApplication.getInstance().setBookingHTripRequest(new BookingHTripRequest());
         if (!TextUtils.isEmpty(sourceName) && !TextUtils.isEmpty(destName)) {
-            HighwayApplication.getInstance().getBookingHTripReq().setSourceAddress(sourceName);
-            HighwayApplication.getInstance().getBookingHTripReq().setSourceLat(sourceLatitude);
-            HighwayApplication.getInstance().getBookingHTripReq().setSourceLong(sourceLongitude);
-            HighwayApplication.getInstance().getBookingHTripReq().setDestAddress(destName);
-            HighwayApplication.getInstance().getBookingHTripReq().setDestLat(destLatitude);
-            HighwayApplication.getInstance().getBookingHTripReq().setDestLong(destLongitude);
+            HighwayApplication.getInstance().getBookingHTripRequest().setSourceAddress(sourceName);
+            HighwayApplication.getInstance().getBookingHTripRequest().setSourceLat(sourceLatitude);
+            HighwayApplication.getInstance().getBookingHTripRequest().setSourceLong(sourceLongitude);
+            HighwayApplication.getInstance().getBookingHTripRequest().setDestAddress(destName);
+            HighwayApplication.getInstance().getBookingHTripRequest().setDestLat(destLatitude);
+            HighwayApplication.getInstance().getBookingHTripRequest().setDestLong(destLongitude);
 
             BookingWithDetailsActivity.start(mActivity);
-
-
         }
-
-
     }
 
     public Bitmap createCustomMarker(@DrawableRes int resource) {

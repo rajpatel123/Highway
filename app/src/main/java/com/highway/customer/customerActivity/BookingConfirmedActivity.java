@@ -129,9 +129,9 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
                 getSupportActionBar().setTitle("TRIP " + getIntent().getStringExtra("tripId"));
         }
 
-        sourceTV.setText(HighwayApplication.getInstance().getBookingHTripReq().getSourceAddress());
-        destTV.setText(HighwayApplication.getInstance().getBookingHTripReq().getDestAddress());
-        fareValue.setText(HighwayApplication.getInstance().getBookingHTripReq().getTripFare());
+        sourceTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
+        destTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
+        fareValue.setText(HighwayApplication.getInstance().getBookingHTripRequest().getTripFare());
 
         initLocations(getIntent());
 
@@ -147,22 +147,35 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         }
 
 
-        // clicklistener();
+        clicklistener();
 
+    }
+
+    public void clicklistener(){
+
+        cancelTripTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+            }
+        });
     }
 
 
     private void initLocations(Intent intent) {
-        destName = HighwayApplication.getInstance().getBookingHTripReq().getDestAddress();
-        sourceName = HighwayApplication.getInstance().getBookingHTripReq().getSourceAddress();
+        destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
+        sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
 
 
-        destLatitude = HighwayApplication.getInstance().getBookingHTripReq().getDestLat();
-        destLongitude = HighwayApplication.getInstance().getBookingHTripReq().getDestLong();
+        destLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLat();
+        destLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLong();
 
 
-        sourceLatitude = HighwayApplication.getInstance().getBookingHTripReq().getSourceLat();
-        sourceLongitude = HighwayApplication.getInstance().getBookingHTripReq().getSourceLong();
+        sourceLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat();
+        sourceLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong();
 
         sourceTV.setText("" + sourceName);
 
@@ -297,7 +310,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
 
         //stop location updates
         if (mGoogleApiClient != null) {

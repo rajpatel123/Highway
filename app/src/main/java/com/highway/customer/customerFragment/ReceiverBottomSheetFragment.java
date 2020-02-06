@@ -1,17 +1,10 @@
 package com.highway.customer.customerFragment;
 
-import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.loader.content.CursorLoader;
 
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -24,14 +17,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.customer.customerActivity.ConfirmBookingActivity;
-import com.highway.customer.customerActivity.LoginActivityForCustomer;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
 import com.highway.utils.Constants;
@@ -178,9 +169,11 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
 
     public void updateReceiverName() {
         if (inputValidationReceiverDetial()) {
+
             UpdateReceiverPhoneNoAndNameRequest updateReceiverPhoneNoAndNameRequest = new UpdateReceiverPhoneNoAndNameRequest();
             updateReceiverPhoneNoAndNameRequest.setReceiverMobile(receiverPhoneNo);
             updateReceiverPhoneNoAndNameRequest.setReceiverName(receiverName);
+
             userId = HighwayPrefs.getString(getActivity(), Constants.ID);
             updateReceiverPhoneNoAndNameRequest.setUserId(userId);
 
@@ -190,11 +183,12 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
             RestClient.updateReceiverNameOrNumber(updateReceiverPhoneNoAndNameRequest, new Callback<UpdateReceiverPhoneNoAndNameResponse>() {
                 @Override
                 public void onResponse(Call<UpdateReceiverPhoneNoAndNameResponse> call, Response<UpdateReceiverPhoneNoAndNameResponse> response) {
+
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
-                            HighwayApplication.getInstance().getBookingHTripReq().setTripRecevirId(""+response.body().getId());
-                            ConfirmBookingActivity.start((BookingWithDetailsActivity) getActivity());
 
+                            HighwayApplication.getInstance().getBookingHTripRequest().setTripRecevirId(""+response.body().getId());
+                            ConfirmBookingActivity.start((BookingWithDetailsActivity) getActivity());
                         }
                     }
                 }
@@ -202,7 +196,6 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
                 @Override
                 public void onFailure(Call<UpdateReceiverPhoneNoAndNameResponse> call, Throwable t) {
                     Toast.makeText(getActivity(), "Failed update receiver mobile and name", Toast.LENGTH_SHORT).show();
-
                 }
             });
         }
