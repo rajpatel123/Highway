@@ -1,6 +1,11 @@
 package com.highway.common.base.activity;
 
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -8,7 +13,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +30,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -39,6 +45,7 @@ import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
+import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
@@ -50,9 +57,6 @@ import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFr
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -144,6 +148,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         //setOnClickListenerOperation();
 
 
+        // Create an IntentFilter instance.
+        IntentFilter intentFilter = new IntentFilter();
+        // Add network connectivity change action.
+        intentFilter.addAction("com.new.call");
+
+        // Set broadcast receiver priority.
+        intentFilter.setPriority(100);
+        registerReceiver(listener, intentFilter);
+        //showDialog(this);
 
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, new OnSuccessListener<InstanceIdResult>() {
@@ -152,15 +165,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 String newToken = instanceIdResult.getToken();
 
                 RegisterForPushModel obj = new RegisterForPushModel();
-                    obj.setUserId(HighwayPrefs.getString(DashBoardActivity.this, Constants.ID));
-                    obj.setTokenId(newToken);
+                obj.setUserId(HighwayPrefs.getString(DashBoardActivity.this, Constants.ID));
+                obj.setTokenId(newToken);
 
                 RestClient.registerForPush(obj, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
 
-                            if (response.code()==200 &&  response.body()!=null){
+                            if (response.code() == 200 && response.body() != null) {
                                 Log.d("New Token Updated", response.body().string().toString());
                             }
                         } catch (IOException e) {
@@ -177,7 +190,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 Log.e("newToken", newToken);
             }
         });
-
 
 
     }
@@ -277,8 +289,16 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case "3":                                              // Driver
-                Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
-                replaceFragment(fragment3);
+
+                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
+                    Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
+                    replaceFragment(fragment3);
+                } else {
+                    Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
+                    replaceFragment(fragment3);
+                }
+
+
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -801,4 +821,53 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
+    public void showDialog(DashBoardActivity activity) {
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.new_trip_request);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        FrameLayout mDialogNo = dialog.findViewById(R.id.accept);
+        mDialogNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        FrameLayout mDialogOk = dialog.findViewById(R.id.reject);
+        mDialogOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Okay", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private BroadcastReceiver listener = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String data = intent.getStringExtra("data");
+
+            Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
+
+        }
+    };
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            unregisterReceiver(listener);
+        }
+    }
 }
+
+
+

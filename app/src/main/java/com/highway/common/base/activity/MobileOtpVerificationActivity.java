@@ -149,6 +149,9 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                                 Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();
                                 finish();*/
                             }
+                        }else{
+                            Toast.makeText(MobileOtpVerificationActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+
                         }
                     }
 
@@ -169,6 +172,8 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         HighwayPrefs.putString(getApplicationContext(), Constants.ID, verifyOtpResponse.getUser().getUserId());
         HighwayPrefs.putString(getApplicationContext(), Constants.NAME, verifyOtpResponse.getUser().getName());
         HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, verifyOtpResponse.getUser().getMobile());
+        HighwayPrefs.putString(getApplicationContext(), Constants.User_statuss, verifyOtpResponse.getUser().getUserStatus());
+
         HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, verifyOtpResponse.getUser().getImage());
         HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, verifyOtpResponse.getUser().getEmail());
         HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, verifyOtpResponse.getUser().getGender());
