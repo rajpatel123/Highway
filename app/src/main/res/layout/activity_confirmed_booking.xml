@@ -28,8 +28,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBarLayout"
-        android:layout_above="@+id/bottomSheet">
+        android:layout_above="@+id/bottomSheet"
+        android:layout_below="@+id/appBarLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,8 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ellipsize="end"
-                    android:paddingLeft="@dimen/_10dp"
                     android:lines="1"
+                    android:paddingLeft="@dimen/_10dp"
                     android:text="GaurGaurGaurGaurGaurGaurGaurGaurGaurGaur City 2" />
 
             </LinearLayout>
@@ -103,7 +103,9 @@
             android:id="@+id/details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="@dimen/_10dp">
 
             <ImageView
                 android:id="@+id/imgIV"
@@ -114,11 +116,11 @@
 
             <LinearLayout
                 android:id="@+id/driverInfo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/message"
+                android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/callActionIV"
-                android:layout_marginStart="@dimen/_10dp"
                 android:layout_toEndOf="@+id/imgIV"
                 android:orientation="vertical">
 
@@ -127,8 +129,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tata Ace - UP 73 BV 8987"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/driverName"
@@ -138,15 +140,29 @@
                     android:text="Searching for driver...."
                     android:textColor="@color/quantum_grey700" />
 
-                <TextView
-                    android:id="@+id/bookingInfoForDriverAllocation"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:textSize="12sp"
-                    android:text="Booking will get cancelled if not allocated in 9:57"
-                    android:textColor="@color/red" />
+                    android:orientation="horizontal">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:text="Booking will get cancelled if not allocated in  "
+                            android:textColor="@color/red"
+                            android:textSize="12sp" />
+
+
+                    <TextView
+                        android:id="@+id/bookingInfoForDriverAllocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="10:00"
+                        android:textColor="@color/red"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -154,10 +170,10 @@
                 android:id="@+id/callActionIV"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:visibility="gone"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/_10dp"
                 android:tint="@color/colorAccent"
-                android:layout_alignParentEnd="true"
+                android:visibility="gone"
                 app:srcCompat="@drawable/phone_call" />
         </RelativeLayout>
 
@@ -176,8 +192,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/detailViewLine"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginStart="@dimen/margin_20">
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_10">
 
             <ImageView
                 android:id="@+id/cashIV"
@@ -203,8 +219,8 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@+id/fareDetails"
-            android:layout_marginTop="@dimen/margin_10"
             android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_10"
             android:layout_marginEnd="@dimen/margin_20"
             android:background="@color/quantum_grey" />
 
@@ -222,9 +238,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:text="CANCEL BOOKING"
                 android:textColor="@color/red"
-                android:textStyle="bold"
-                android:text="CANCEL BOOKING" />
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="0dp"
@@ -238,9 +254,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="INFO"
                 android:textColor="@color/black"
-                android:text="INFO" />
+                android:textStyle="bold" />
 
         </LinearLayout>
     </RelativeLayout>

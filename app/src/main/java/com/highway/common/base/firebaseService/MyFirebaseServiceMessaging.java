@@ -3,6 +3,7 @@ package com.highway.common.base.firebaseService;
 /**
  * Created by santhosh@appoets.com on 21-05-2018.
  */
+
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -95,7 +96,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         // [START dispatch_job]
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
         Job myJob = dispatcher.newJobBuilder()
-               // .setService(MyJobService.class)
+                //.setService(MyJobService.class)
                 .setTag("my-job-tag")
                 .build();
         dispatcher.schedule(myJob);
@@ -188,7 +189,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     private int getNotificationIcon(NotificationCompat.Builder notificationBuilder) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notificationBuilder.setColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
-            return R.drawable.notification_image;
+            return R.drawable.ic_stat_ic_notification;
         } else {
             return R.mipmap.ic_launcher;
         }

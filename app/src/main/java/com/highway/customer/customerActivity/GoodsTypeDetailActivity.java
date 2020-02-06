@@ -91,19 +91,15 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
                         goodsTypeDataResponse = response.body();
                         goodsTypeAdapter.setData(goodsTypeDataResponse);
                         goodsTypeAdapter.notifyDataSetChanged();
-
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "response failed", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<GoodsTypeDataResponse> call, Throwable t) {
                 Toast.makeText(GoodsTypeDetailActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -115,7 +111,6 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
         recyclerViewGoodsTypeList.setLayoutManager(layoutManager);
         recyclerViewGoodsTypeList.setItemAnimator(new DefaultItemAnimator());
         recyclerViewGoodsTypeList.setAdapter(goodsTypeAdapter);
-
     }
 
 

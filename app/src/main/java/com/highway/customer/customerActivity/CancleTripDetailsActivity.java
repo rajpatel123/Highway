@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.highway.R;
 
-public class CalcelOrderActivityWithReason extends AppCompatActivity {
+public class CancleTripDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calcel_with_reason);
+        setContentView(R.layout.activity_cancle_trip_details);
     }
 }

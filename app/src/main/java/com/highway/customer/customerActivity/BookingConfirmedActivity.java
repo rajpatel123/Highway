@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,8 @@ import com.highway.utils.HighwayPrefs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class BookingConfirmedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -79,7 +82,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
 
 
     private Toolbar toolbar;
-    private TextView sourceTV, destTV, driverName, vehicleName, bookingInfoForDriverAllocation, fareValue, cancelTripTV, infoTV;
+    private TextView sourceTV, destTV, driverName, vehicleName, bookingInfoForDriverAllocationTime, fareValue, cancelTripTV, infoTV;
     private ImageView imgTruckIV, callActionIV;
     TextView goodtype;
     private Polyline currentPolyline;
@@ -110,7 +113,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         destTV = findViewById(R.id.destTV);
         driverName = findViewById(R.id.driverName);
         vehicleName = findViewById(R.id.vehicleName);
-        bookingInfoForDriverAllocation = findViewById(R.id.bookingInfoForDriverAllocation);
+        bookingInfoForDriverAllocationTime = findViewById(R.id.bookingInfoForDriverAllocation);
         fareValue = findViewById(R.id.fareValue);
         callActionIV = findViewById(R.id.callActionIV);
         cancelTripTV = findViewById(R.id.cancelTripTV);
@@ -148,19 +151,42 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
 
 
         clicklistener();
+        bookingTimer();
 
     }
 
     public void clicklistener(){
-
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),CalcelOrderActivityWithReason.class);
+                Intent intent = new Intent(getApplicationContext(), CancelOrderActivityWithReason.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
+
+    public  void bookingTimer(){
+
+            new CountDownTimer(60*10*1000, 1000) {
+
+
+                public void onTick(long millisUntilFinished) {
+                   // String text = String.format(Locale.getDefault(), "%02d min: %02d sec",
+                    String text = String.format(Locale.getDefault(), "%02d: %02d",
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60);
+                    bookingInfoForDriverAllocationTime.setText(text);
+                   // bookingInfoForDriverAllocationTime.setText(""+ millisUntilFinished / 1000);
+                }
+
+                public void onFinish() {
+                    bookingInfoForDriverAllocationTime.setText("No Driver Allocation");
+                }
+
+            }.start();
+    }
+
 
 
     private void initLocations(Intent intent) {
