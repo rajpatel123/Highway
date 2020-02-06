@@ -1,4 +1,4 @@
-package com.highway.services.
+package com.highway.common.base.firebaseService;
 
 /**
  * Created by santhosh@appoets.com on 21-05-2018.
@@ -31,7 +31,7 @@ import com.highway.services.MyJobService;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     int notificationId = 0;
     private static final String TAG = "MyFirebaseMsgService";
     public static final String INTENT_FILTER = "INTENT_FILTER"+ BuildConfig.APPLICATION_ID;
@@ -92,16 +92,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     /**
      * Schedule a job using FirebaseJobDispatcher.
      */
-    private void scheduleJob() {
-        // [START dispatch_job]
-        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
-        Job myJob = dispatcher.newJobBuilder()
-                .setService(MyJobService.class)
-                .setTag("my-job-tag")
-                .build();
-        dispatcher.schedule(myJob);
-        // [END dispatch_job]
-    }
+//    private void scheduleJob() {
+//        // [START dispatch_job]
+//        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
+//        Job myJob = dispatcher.newJobBuilder()
+//                .setService(MyJobService.class)
+//                .setTag("my-job-tag")
+//                .build();
+//        dispatcher.schedule(myJob);
+//        // [END dispatch_job]
+//    }
 
     /**
      * Handle time allotted to BroadcastReceivers.
