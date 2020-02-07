@@ -346,7 +346,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                 Toast.makeText(this, userRadioDiver.getText().toString(), Toast.LENGTH_SHORT).show();
                 break;
 
-
             case R.id.radio_MillUser:
                 if (checked)
                     userRadioMillUser.setText("MillUser"); // MillUser
@@ -481,7 +480,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                             }
                         }
                     }
-
                     @Override
                     public void onFailure(Call<RegistrationResponse> call, Throwable t) {
                         Toast.makeText(RegistrationDetailsActivity.this, "Failure", Toast.LENGTH_SHORT).show();

@@ -50,7 +50,10 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
+import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonRequest;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -59,6 +62,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BookingConfirmedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -97,6 +104,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
     private boolean isSelected;
     private String gdTypeId, gdTypeText;
     BookingVehicleListResponse bookingVehicleListResponse;
+    private String tripId;
 
 
     public static void start(ConfirmBookingActivity activity, String tripId) {
@@ -162,7 +170,8 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CancelOrderActivityWithReason.class);
+                Intent intent = new Intent(getApplicationContext(), CancelOrderTripActivityWithReason.class);
+              //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
                 startActivity(intent);
                 finish();
             }
@@ -173,6 +182,8 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(),BookingInfoDetailsActivity.class);
+               // asked by sir not sure
+                HighwayPrefs.putString(getApplicationContext(),Constants.BOOKINGTRIPID,tripId);
                 startActivity(intent);
                 finish();
             }
@@ -412,17 +423,6 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
 
         }
     };
-
-
-
-
-
-
-
-
-
-
-
 
 
 

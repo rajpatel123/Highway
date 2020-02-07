@@ -29,5 +29,7 @@ public class Constants {
 
     public static final String RECEIVERPHONENO = "receiverPhoneNumber";
     public static final String RECEIVERNAME = "receiverNAME";
+    public static final String BOOKINGTRIPID = "bookingTripId";
+
 
 }

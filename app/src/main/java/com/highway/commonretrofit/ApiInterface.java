@@ -12,6 +12,10 @@ import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonRequest;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerRequest;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
@@ -148,5 +152,14 @@ public interface ApiInterface {
     // conform booking Request
     @POST("api/Booking/confirmBookingApi")
     Call<BookingHTripResponse> BOOKING_H_TRIP_RESPONSE_CALL(@Body BookingHTripRequest bookingHTripRequest);
+
+    //cancle reason
+    @POST("api/Booking/cancelTripReason")
+    Call<CancelTripReasonResponse>CANCEL_TRIP_REASON_RESPONSE_CALL (@Body CancelTripReasonRequest cancelTripReasonRequest);
+
+    //cancle trip by customer
+    @POST("api/Booking/cancelTripByCustomer")
+    Call<CancelTripByCustomerResponse>CANCEL_TRIP_BY_CUSTOMER_RESPONSE_CALL(@Body CancelTripByCustomerRequest cancelTripByCustomerRequest);
+
 
 }

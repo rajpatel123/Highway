@@ -57,7 +57,6 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         }
         getSupportActionBar().setTitle("Select your goods type");
         // As you wish make Adapter or not asked sir .............
@@ -123,7 +122,7 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
         Intent data = new Intent();
         data.putExtra("id", id);
         data.putExtra("type", type);
-        setResult(RESULT_OK, data);
+        //setResult(RESULT_OK, data);
         finish();
 
     }
