@@ -33,7 +33,6 @@ import retrofit2.Response;
 
 public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsTypeAdapter.OnGoodTypeSelect {
 
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private String title;
@@ -60,7 +59,6 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         }
-
         getSupportActionBar().setTitle("Select your goods type");
         // As you wish make Adapter or not asked sir .............
         goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(),this::onSelectGoodType);

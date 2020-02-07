@@ -50,6 +50,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -95,6 +96,8 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
     private String destName;
     private boolean isSelected;
     private String gdTypeId, gdTypeText;
+    BookingVehicleListResponse bookingVehicleListResponse;
+
 
     public static void start(ConfirmBookingActivity activity, String tripId) {
         Intent intent = new Intent(activity, BookingConfirmedActivity.class);
@@ -164,29 +167,35 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
                 finish();
             }
         });
+
+        infoTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),BookingInfoDetailsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public  void bookingTimer(){
 
             new CountDownTimer(60*10*1000, 1000) {
 
-
                 public void onTick(long millisUntilFinished) {
-                   // String text = String.format(Locale.getDefault(), "%02d min: %02d sec",
                     String text = String.format(Locale.getDefault(), "%02d: %02d",
                             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
                             TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60);
                     bookingInfoForDriverAllocationTime.setText(text);
                    // bookingInfoForDriverAllocationTime.setText(""+ millisUntilFinished / 1000);
                 }
-
                 public void onFinish() {
                     bookingInfoForDriverAllocationTime.setText("No Driver Allocation");
                 }
 
             }.start();
     }
-
 
 
     private void initLocations(Intent intent) {
@@ -397,12 +406,25 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
     }
 
-
     BroadcastReceiver repDetailReciever = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
         }
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

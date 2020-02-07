@@ -76,7 +76,6 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView goodsTypeTv1;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             goodsTypeTv1 = itemView.findViewById(R.id.TvGoodsType);

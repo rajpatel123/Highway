@@ -19,8 +19,7 @@ import com.highway.R;
 public class CancelOrderActivityWithReason extends AppCompatActivity {
 
     public Toolbar canToolbar;
-    public RadioButton
-            canReasonRdBtn1, canReasonRdBtn2, canReasonRdBtn3, canReasonRdBtn4, canReasonRdBtn5, canReasonRdBtn6, canReasonRdBtn7, canReasonRdBtn8;
+    public RadioButton canReasonRdBtn1, canReasonRdBtn2, canReasonRdBtn3, canReasonRdBtn4, canReasonRdBtn5, canReasonRdBtn6, canReasonRdBtn7, canReasonRdBtn8;
     /*canResnRdBtn1WrngInappropriateVehicle, canResnRdBtn2MyReasonIsNotListed, canResnRdBtn3DriverAskedMeToCancel,
     canResnRdBtn4DriverIsUnprofession, canResnRdBtn5ChangedMyMind, canResnRdBtn6DriverSaidHeWillBeLate, canResnRdBtn7UnableToConnectDriver,
     canResnRdBtn8UnExpactedShorterArivalTime;*/
@@ -36,7 +35,7 @@ public class CancelOrderActivityWithReason extends AppCompatActivity {
         setContentView(R.layout.activity_calcel_with_reason);
 
         initview();
-        cancleRadioGroSelection();
+        //cancleRadioGroSelection();
         cancleTripOPeration();
 
         setSupportActionBar(canToolbar);
@@ -48,21 +47,20 @@ public class CancelOrderActivityWithReason extends AppCompatActivity {
     }
 
     public void initview() {
-
         canToolbar = findViewById(R.id.CanResonToolbar);
-
-        canReasonRdBtn1 = findViewById(R.id.radioButton1);
+      /*  canReasonRdBtn1 = findViewById(R.id.radioButton1);
         canReasonRdBtn2 = findViewById(R.id.radioButton2);
         canReasonRdBtn3 = findViewById(R.id.radioButton3);
         canReasonRdBtn4 = findViewById(R.id.radioButton4);
         canReasonRdBtn5 = findViewById(R.id.radioButton5);
         canReasonRdBtn6 = findViewById(R.id.radioButton6);
         canReasonRdBtn7 = findViewById(R.id.radioButton7);
-        canReasonRdBtn8 = findViewById(R.id.radioButton8);
+        canReasonRdBtn8 = findViewById(R.id.radioButton8);*/
         cancleReasonRadioGroup = findViewById(R.id.cancleReasonRadioGroup);
         canReasonEdtTxt = findViewById(R.id.CanResnEdtTxt);
         canBtn = findViewById(R.id.BtnOrderCancle);
     }
+
 // 1St method
 //    public void canReasonRdBtnOperation(View view){
 //        boolean checked = ((RadioButton) view).isChecked();
@@ -124,7 +122,6 @@ public class CancelOrderActivityWithReason extends AppCompatActivity {
 //                canReasonRadioId = canReasonRdBtn8.getText().toString().trim();
 //                Toast.makeText(this, canReasonRdBtn8.getText().toString(), Toast.LENGTH_SHORT).show();
 //                break;
-//
 //        }
 //
 //    }
@@ -143,7 +140,7 @@ public class CancelOrderActivityWithReason extends AppCompatActivity {
         });
     }
 
-    public void cancleTripOPeration(){
+    public void cancleTripOPeration() {
         canBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,13 +154,6 @@ public class CancelOrderActivityWithReason extends AppCompatActivity {
         /*Intent intent = getIntent();
         String selectedRadioValue = intent.getStringExtra("selectedRadioValue");*/
     }
-
-
-
-
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
