@@ -2,22 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="@dimen/_10dp"
     android:layout_marginLeft="@dimen/_10dp"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
 
     <RadioGroup
         android:id="@+id/cancleReasonRadioGroup"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"/>
 
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/cancelReasonText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="reason containt"
-        />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="cancle Reason Text"
+        android:textColor="@color/new_black"/>
 
-    </RadioGroup>
+
 </LinearLayout>

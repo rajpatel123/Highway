@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +20,13 @@ public class CancelledTripReasonAdapter extends RecyclerView.Adapter<CancelledTr
     Context context;
     CancelTripReasonResponse cancelTripReasonResponse;
     OnCancelReasonTypeSelect onCancelReasonTypeSelect;
+    private RadioGroup lastCheckedRadioGroup = null;
+    //CancelledTripReasonAdapter cancelledTripReasonAdapter;
 
-    public CancelledTripReasonAdapter(CancelTripReasonResponse cancelTripReasonResponse1, Context context1, OnCancelReasonTypeSelect onCancelReasonTypeSelect1) {
+    public CancelledTripReasonAdapter(CancelTripReasonResponse cancelTripReasonResponse1, Context context1/*, OnCancelReasonTypeSelect onCancelReasonTypeSelect1*/) {
         this.cancelTripReasonResponse = cancelTripReasonResponse1;
         this.context = context1;
-        this.onCancelReasonTypeSelect = onCancelReasonTypeSelect1;
+        //this.onCancelReasonTypeSelect = onCancelReasonTypeSelect1;
     }
 
     @NonNull
@@ -36,16 +40,22 @@ public class CancelledTripReasonAdapter extends RecyclerView.Adapter<CancelledTr
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CancelTripReson cancelTripReson = cancelTripReasonResponse.getCancelTripReson().get(position);
-        holder.canRsnRdBtn.setText("" + cancelTripReson.getCancelReason());
 
-        holder.canRsnRdBtn.setOnClickListener(new View.OnClickListener() {
+       holder.canRsnTxtView.setText(cancelTripReson.getCancelReason());
+
+        int id = (position+1)*1;
+        RadioButton rb = new RadioButton(CancelledTripReasonAdapter.this.context);
+        rb.setId(id++);
+        holder.cancleReasonRadioGroup.addView(rb);
+
+       /* holder.canRsnRdBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onCancelReasonTypeSelect != null) {
                     onCancelReasonTypeSelect.onSelectedReasonType(cancelTripReson.getCancelId(), cancelTripReson.getCancelReason());
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -64,13 +74,32 @@ public class CancelledTripReasonAdapter extends RecyclerView.Adapter<CancelledTr
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private RadioButton canRsnRdBtn;
         private RadioGroup cancleReasonRadioGroup;
-
+        public TextView canRsnTxtView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            canRsnRdBtn = itemView.findViewById(R.id.radioButton1);
-            //  cancleReasonRadioGroup = itemView.findViewById(R.id.cancleReasonRadioGroup);
+
+           cancleReasonRadioGroup = itemView.findViewById(R.id.cancleReasonRadioGroup);
+            canRsnTxtView = itemView.findViewById(R.id.cancelReasonText);
+
+            cancleReasonRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                    if (lastCheckedRadioGroup != null
+                            && lastCheckedRadioGroup.getCheckedRadioButtonId() != radioGroup.getCheckedRadioButtonId()
+                            && lastCheckedRadioGroup.getCheckedRadioButtonId() != -1) {
+                        lastCheckedRadioGroup.clearCheck();
+
+                        Toast.makeText(CancelledTripReasonAdapter.this.context,
+                                "cancelled reason clicked " + radioGroup.getCheckedRadioButtonId(), Toast.LENGTH_SHORT).show();
+
+                    }
+                    lastCheckedRadioGroup = radioGroup;
+
+                }
+            });
+
         }
     }
 

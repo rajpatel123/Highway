@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CancelOrderTripActivityWithReason extends AppCompatActivity implements CancelledTripReasonAdapter.OnCancelReasonTypeSelect {
+public class CancelOrderTripActivityWithReason extends AppCompatActivity /*implements CancelledTripReasonAdapter.OnCancelReasonTypeSelect*/ {
 
     public Toolbar canToolbar;
     public EditText canReasonEdtTxt;
@@ -69,7 +70,7 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity impleme
         getSupportActionBar().setTitle("Cancle Reason");
 
         inputValidation();
-       // cancleRadioGroSelection();
+        // cancleRadioGroSelection();
         //cancleTripOPeration();
         showCanRsnTypeRV();
         getCanReasonData();
@@ -77,17 +78,6 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity impleme
 
     }
 
-    public boolean inputValidation() {
-        cmntRsnEdtTxt = canReasonEdtTxt.getText().toString().trim();
-
-        if (cmntRsnEdtTxt.isEmpty()) {
-            canReasonEdtTxt.setError("pls enter the reason comment");
-            return false;
-        } else {
-            canReasonEdtTxt.setError(null);
-        }
-        return true;
-    }
 
     // 2nd method
     public void cancleRadioGroSelection() {
@@ -104,7 +94,8 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity impleme
     }
 
     public void showCanRsnTypeRV() {
-        cancelledTripReasonAdapter = new CancelledTripReasonAdapter(cancelTripReasonResponse, getApplicationContext(), this::onSelectedReasonType); // aaccording to sir initialize above ...................
+
+        cancelledTripReasonAdapter = new CancelledTripReasonAdapter(cancelTripReasonResponse,/* getApplicationContext(),*/ this/*::onSelectedReasonType*/); // aaccording to sir initialize above ...................
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         canRsnTypeRecyler.setLayoutManager(layoutManager);
         canRsnTypeRecyler.setItemAnimator(new DefaultItemAnimator());
@@ -136,6 +127,17 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity impleme
         });
     }
 
+    public boolean inputValidation() {
+        cmntRsnEdtTxt = canReasonEdtTxt.getText().toString().trim();
+
+        if (cmntRsnEdtTxt.isEmpty()) {
+            canReasonEdtTxt.setError("pls enter the reason comment");
+            return false;
+        } else {
+            canReasonEdtTxt.setError(null);
+        }
+        return true;
+    }
 
     public void cancelledTripOperation() {
 
@@ -178,7 +180,7 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity impleme
     }
 
 
-    @Override
+    // @Override
     public void onSelectedReasonType(String id, String type) {
         Intent data = new Intent();
         data.putExtra("id", id);
