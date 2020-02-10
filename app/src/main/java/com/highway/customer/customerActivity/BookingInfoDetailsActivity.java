@@ -1,33 +1,53 @@
 package com.highway.customer.customerActivity;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.customer.customerModelClass.bookingVehicleList.VInfo;
+import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerAdapter.BookingVehicleInfoAdapter;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoResponse;
+import com.highway.customer.customerModelClass.vehicleInfo.VehicleTypeInfo;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BookingInfoDetailsActivity extends AppCompatActivity {
+
     public Toolbar bookInfoToolbar;
-    TextView bookVehicleNameTv, bookbookVehicleCapicityTv, bookVehicleSizeTv;
-    ImageView bookVehileBookImg;
-    TextView bookInfo1, bookInfo2, bookInfo3, bookInfo4, bookInfo5, bookInfo6, done;
+    TextView done;
+    public RecyclerView bookInfoRecycler;
+    public BookingVehicleInfoAdapter bookingVehicleInfoAdapter;
+    public BookingVehicleInfoResponse bookingVehicleInfoResponse;
+    private String userId,viechelId;
+    List<VehicleTypeInfo>vehicleTypeInfos =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_info_details);
 
+        viechelId =  HighwayPrefs.getString(getApplicationContext(), "vechicleId");
+        Log.i("vichelid",viechelId);
         initView();
-        clickliostiner();
 
     }
 
@@ -40,31 +60,61 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
     public void initView() {
 
         bookInfoToolbar = findViewById(R.id.bookInfoToolbar);
-        bookVehicleNameTv = findViewById(R.id.truckName);
-        bookVehileBookImg = findViewById(R.id.vehicleImg);
-        bookbookVehicleCapicityTv = findViewById(R.id.capacity);
-        bookVehicleSizeTv = findViewById(R.id.sizeTV);
-        bookInfo1 = findViewById(R.id.Bookinfo1);
-        bookInfo2 = findViewById(R.id.Bookinfo2);
-        bookInfo3 = findViewById(R.id.Bookinfo3);
-        bookInfo4 = findViewById(R.id.Bookinfo4);
-        bookInfo5 = findViewById(R.id.Bookinfo5);
-        bookInfo6 = findViewById(R.id.Bookinfo6);
+        bookInfoRecycler = findViewById(R.id.BookingInfoRecycler);
         done = findViewById(R.id.done);
 
         setSupportActionBar(bookInfoToolbar);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         getSupportActionBar().setTitle("Booking Info Details");
 
+        clicklistiner();
+        showInfoRV();
+        getInfo();
+
+    }
+
+
+    public void showInfoRV() {
 
 
     }
 
-    public void clickliostiner() {
+
+    public void getInfo() {
+
+        userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+        BookingVehicleInfoRequest bookingVehicleInfoRequest = new BookingVehicleInfoRequest();
+        bookingVehicleInfoRequest.setUserId(userId);
+        bookingVehicleInfoRequest.setVehicleTypeId(viechelId);
+        RestClient.getInfo(bookingVehicleInfoRequest, new Callback<BookingVehicleInfoResponse>() {
+            @Override
+            public void onResponse(Call<BookingVehicleInfoResponse> call, Response<BookingVehicleInfoResponse> response) {
+                if (response.body() != null) {
+                        List<VehicleTypeInfo>vehicleTypeInfos = response.body().getVehicleTypeInfo();
+                        bookingVehicleInfoAdapter = new BookingVehicleInfoAdapter(vehicleTypeInfos,getApplicationContext());
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                        bookInfoRecycler.setLayoutManager(layoutManager);
+                        bookInfoRecycler.setItemAnimator(new DefaultItemAnimator());
+                        bookInfoRecycler.setAdapter(bookingVehicleInfoAdapter);
+                         }
+                else{
+                    Toast.makeText(BookingInfoDetailsActivity.this, "error", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BookingVehicleInfoResponse> call, Throwable t) {
+                Toast.makeText(BookingInfoDetailsActivity.this, "Failure booking Vehicle info", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    public void clicklistiner() {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

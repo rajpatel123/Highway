@@ -21,8 +21,8 @@ import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDat
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -173,21 +173,24 @@ public class RestClient {
         RetrofitClient.getClient().BOOKING_VEHICLE_LIST_RESPONSE_CALL(bookingVehicleListRequest).enqueue(bookingVehicleListResponseCallback);
     }
 
-    public static void vehicleInfo(VehicleInfoRequest vehicleInfoRequest, Callback<VehicleInfoResponse> vehicleInfoResponseCallback) {
-        RetrofitClient.getClient().VEHICLE_INFO_RESPONSE_CALL(vehicleInfoRequest).enqueue(vehicleInfoResponseCallback);
-    }
-
     // conform booking
     public static void confirmBooking(BookingHTripRequest bookingHTripRequest, Callback<BookingHTripResponse> bookingHTripRespCallback) {
         RetrofitClient.getClient().BOOKING_H_TRIP_RESPONSE_CALL(bookingHTripRequest).enqueue(bookingHTripRespCallback);
     }
 
+    // cancel reason type
     public static void getCancleReason(CancelTripReasonRequest cancelTripReasonRequest, Callback<CancelTripReasonResponse> cancelTripReasonResponseCallback) {
         RetrofitClient.getClient().CANCEL_TRIP_REASON_RESPONSE_CALL(cancelTripReasonRequest).enqueue(cancelTripReasonResponseCallback);
     }
 
+    // cancel trip
     public static void getCancelledTripByCust(CancelTripByCustomerRequest cancelTripByCustomerRequest, Callback<CancelTripByCustomerResponse> cancelTripByCustomerResponseCallback) {
         RetrofitClient.getClient().CANCEL_TRIP_BY_CUSTOMER_RESPONSE_CALL(cancelTripByCustomerRequest).enqueue(cancelTripByCustomerResponseCallback);
+    }
+
+    // booking vehicle info
+    public static void getInfo(BookingVehicleInfoRequest bookingVehicleInfoRequest, Callback<BookingVehicleInfoResponse> bookingVehicleInfoResponseCallback) {
+        RetrofitClient.getClient().BOOKING_VEHICLE_INFO_RESPONSE_CALL(bookingVehicleInfoRequest).enqueue(bookingVehicleInfoResponseCallback);
     }
 
 }

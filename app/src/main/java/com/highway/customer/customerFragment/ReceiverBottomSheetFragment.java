@@ -22,7 +22,7 @@ import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
-import com.highway.customer.customerActivity.ConfirmBookingActivity;
+import com.highway.customer.customerActivity.ConformBookingActivity;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
 import com.highway.utils.Constants;
@@ -188,7 +188,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
                         if (response.body().getStatus()) {
 
                             HighwayApplication.getInstance().getBookingHTripRequest().setTripRecevirId(""+response.body().getId());
-                            ConfirmBookingActivity.start((BookingWithDetailsActivity) getActivity());
+                            ConformBookingActivity.start((BookingWithDetailsActivity) getActivity());
                         }
                     }
                 }

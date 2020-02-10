@@ -12,6 +12,7 @@ public class CancelTripReson {
     @SerializedName("cancelReason")
     @Expose
     private String cancelReason;
+    private boolean selected;
 
     public String getCancelId() {
         return cancelId;
@@ -28,5 +29,15 @@ public class CancelTripReson {
     public void setCancelReason(String cancelReason) {
         this.cancelReason = cancelReason;
     }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+
 
 }

@@ -18,7 +18,6 @@ public class HighwayApplication extends Application {
 
     BookingHTripRequest bookingHTripRequest = new BookingHTripRequest();
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,9 +31,6 @@ public class HighwayApplication extends Application {
 
 
 
-    public BookingHTripRequest getBookingObject(){
-        return bookingHTripRequest;
-    }
 
 
 }

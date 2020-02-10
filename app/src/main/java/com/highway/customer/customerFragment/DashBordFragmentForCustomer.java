@@ -141,8 +141,7 @@ public class DashBordFragmentForCustomer extends Fragment {
 
         AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
-        /* allHighwayTripsRequest.setUserId(userId);*/
-        allHighwayTripsRequest.setUserId("5");
+        allHighwayTripsRequest.setUserId(userId);
 
         RestClient.allCustomerTrip(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {
             @Override

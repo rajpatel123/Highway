@@ -1,15 +1,9 @@
 package com.highway.customer.customerActivity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,36 +12,47 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerAdapter.CancelledTripReasonAdapter;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonRequest;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReson;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerRequest;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CancelOrderTripActivityWithReason extends AppCompatActivity
-        /*implements CancelledTripReasonAdapter.OnCancelReasonTypeSelect*/ {
+        {
 
+    private static final String TAG = "CancelOrderTripActivityWithReason";
     public Toolbar canToolbar;
     public EditText canReasonEdtTxt;
     public Button canBtn;
-    public String canReasonRadioId;
     public RadioGroup cancleReasonRadioGroup;
-    public RadioButton canRsnRdBtn;
     public String selectedRadioValue;
     public String cmntRsnEdtTxt;
     public RecyclerView canRsnTypeRecyler;
     public CancelledTripReasonAdapter cancelledTripReasonAdapter;
     public CancelTripReasonResponse cancelTripReasonResponse;
-    public String userId;
+    public String userId, bookId;
+            String cancelreasonid;
+    Intent resultIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,7 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
         setContentView(R.layout.activity_calcel_order_trip_with_reason);
 
         initview();
+        clicklistener();
     }
 
     public void initview() {
@@ -71,37 +77,21 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
         getSupportActionBar().setTitle("Cancle Reason");
 
         inputValidation();
-        // cancleRadioGroSelection();
-        //cancleTripOPeration();
+        //  cancleRadioGroSelection();
         showCanRsnTypeRV();
         getCanReasonData();
-        //cancelledTripOperation();
+
+        bookId = getIntent().getStringExtra("tripId");
+        //cancelResnId = getIntent().getStringExtra("cancelReasonId");
 
     }
 
-
-    // 2nd method
-    public void cancleRadioGroSelection() {
-        cancleReasonRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton canclereasonRdId = (RadioButton) group.findViewById(checkedId);
-                if (null != canclereasonRdId) {
-                    selectedRadioValue = canclereasonRdId.getText().toString();
-                    Toast.makeText(CancelOrderTripActivityWithReason.this, canclereasonRdId.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
     public void showCanRsnTypeRV() {
 
-        cancelledTripReasonAdapter = new CancelledTripReasonAdapter(cancelTripReasonResponse,/* getApplicationContext(),*/ this/*::onSelectedReasonType*/); // aaccording to sir initialize above ...................
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        canRsnTypeRecyler.setLayoutManager(layoutManager);
-        canRsnTypeRecyler.setItemAnimator(new DefaultItemAnimator());
-        canRsnTypeRecyler.setAdapter(cancelledTripReasonAdapter);
     }
+
+
 
     public void getCanReasonData() {
         CancelTripReasonRequest cancelTripReasonRequest = new CancelTripReasonRequest();
@@ -112,9 +102,24 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
             public void onResponse(Call<CancelTripReasonResponse> call, Response<CancelTripReasonResponse> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-                        cancelTripReasonResponse = response.body();
-                        cancelledTripReasonAdapter.setData(cancelTripReasonResponse);
+
+                        List<CancelTripReson>cancelTripResons = response.body().getCancelTripReson();
+
+                        cancelledTripReasonAdapter = new CancelledTripReasonAdapter(cancelTripResons,getApplicationContext());
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                        canRsnTypeRecyler.setLayoutManager(layoutManager);
+                        canRsnTypeRecyler.setItemAnimator(new DefaultItemAnimator());
+                        canRsnTypeRecyler.setAdapter(cancelledTripReasonAdapter);
+
+                        cancelledTripReasonAdapter.setData(new CancelledTripReasonAdapter.OnCancelReasonTypeSelect() {
+                            @Override
+                            public void onSelectedReasonType(String id, String type) {
+                                cancelreasonid = id;
+                                Log.i("reasonid",cancelreasonid);
+                            }
+                        });
                         cancelledTripReasonAdapter.notifyDataSetChanged();
+
                     }
                 } else {
                     Toast.makeText(CancelOrderTripActivityWithReason.this, "getting cancle reason response Failde", Toast.LENGTH_SHORT).show();
@@ -137,16 +142,31 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
         } else {
             canReasonEdtTxt.setError(null);
         }
+
+        if (cancelreasonid.isEmpty()){
+            Toast.makeText(this, "pls select cancle reason", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
+
+    public void clicklistener(){
+        canBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelledTripOperation();
+
+            }
+        });
+    }
     public void cancelledTripOperation() {
 
         if (inputValidation()) {
 
             CancelTripByCustomerRequest cancelTripByCustomerRequest = new CancelTripByCustomerRequest();
-            cancelTripByCustomerRequest.setCancelBookId("tripId");
-            cancelTripByCustomerRequest.setCancelReasonId(selectedRadioValue);
+            cancelTripByCustomerRequest.setCancelBookId(bookId);
+            cancelTripByCustomerRequest.setCancelReasonId(cancelreasonid);
             cancelTripByCustomerRequest.setCancelReasonComment(cmntRsnEdtTxt);
             userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
             cancelTripByCustomerRequest.setUserId(userId);
@@ -156,11 +176,14 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
                 public void onResponse(Call<CancelTripByCustomerResponse> call, Response<CancelTripByCustomerResponse> response) {
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
-                            Intent intent = new Intent(getApplicationContext(), DashBoardActivity.class);
-                            // Daught
-                            HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-                            startActivity(intent);
+                            resultIntent = new Intent(getApplicationContext(), DashBoardActivity.class);
+                            Toast.makeText(CancelOrderTripActivityWithReason.this, "booking Cancled success", Toast.LENGTH_SHORT).show();
+                            startActivity(resultIntent);
                             finish();
+                                 /* resultIntent = new Intent();
+                                resultIntent.putExtra("isCancelled", true);
+                                setResult(Activity.RESULT_OK, resultIntent);
+                                finish();*/
                         }
                     }
                 }
@@ -176,18 +199,17 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        onBackPressed();
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("isCancelled", false);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 
 
-    // @Override
+   /* // @Override
     public void onSelectedReasonType(String id, String type) {
-        Intent data = new Intent();
-        data.putExtra("id", id);
-        data.putExtra("type", type);
-        setResult(RESULT_OK, data);
-        finish();
+       cancelResnId=id;
+    }*/
 
-    }
 }

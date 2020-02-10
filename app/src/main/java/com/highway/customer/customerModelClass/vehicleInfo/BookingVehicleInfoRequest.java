@@ -1,17 +1,16 @@
 package com.highway.customer.customerModelClass.vehicleInfo;
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleInfoRequest {
+public class BookingVehicleInfoRequest {
 
-@SerializedName("user_id")
+@SerializedName("userId")
 @Expose
 private String userId;
-@SerializedName("vehicle_id")
+@SerializedName("vehicleTypeId")
 @Expose
-private String vehicleId;
+private String vehicleTypeId;
 
 public String getUserId() {
 return userId;
@@ -21,12 +20,12 @@ public void setUserId(String userId) {
 this.userId = userId;
 }
 
-public String getVehicleId() {
-return vehicleId;
+public String getVehicleTypeId() {
+return vehicleTypeId;
 }
 
-public void setVehicleId(String vehicleId) {
-this.vehicleId = vehicleId;
+public void setVehicleTypeId(String vehicleTypeId) {
+this.vehicleTypeId = vehicleTypeId;
 }
 
 }

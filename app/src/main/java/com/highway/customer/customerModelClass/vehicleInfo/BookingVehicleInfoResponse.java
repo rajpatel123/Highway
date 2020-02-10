@@ -1,17 +1,18 @@
 
 package com.highway.customer.customerModelClass.vehicleInfo;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleInfoResponse {
+public class BookingVehicleInfoResponse {
 
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("data")
+    @SerializedName("vehicle_type_info")
     @Expose
-    private Data data;
+    private List<VehicleTypeInfo> vehicleTypeInfo = null;
 
     public Boolean getStatus() {
         return status;
@@ -21,12 +22,12 @@ public class VehicleInfoResponse {
         this.status = status;
     }
 
-    public Data getData() {
-        return data;
+    public List<VehicleTypeInfo> getVehicleTypeInfo() {
+        return vehicleTypeInfo;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setVehicleTypeInfo(List<VehicleTypeInfo> vehicleTypeInfo) {
+        this.vehicleTypeInfo = vehicleTypeInfo;
     }
 
 }

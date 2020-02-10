@@ -20,8 +20,8 @@ import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDat
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -141,10 +141,6 @@ public interface ApiInterface {
     @POST("api/Vehicle/bookingVehicleList")
     Call<BookingVehicleListResponse> BOOKING_VEHICLE_LIST_RESPONSE_CALL(@Body BookingVehicleListRequest bookingVehicleListRequest);
 
-    // Vehicle Info
-    @POST("api/Vehicle/getVehicleinfo")
-    Call<VehicleInfoResponse> VEHICLE_INFO_RESPONSE_CALL(@Body VehicleInfoRequest vehicleInfoRequest);
-
     // Register for pushnotification
     @POST("api/Notification/registerPushNotification")
     Call<ResponseBody> registerForPush(@Body RegisterForPushModel vehicleInfoRequest);
@@ -161,5 +157,8 @@ public interface ApiInterface {
     @POST("api/Booking/cancelTripByCustomer")
     Call<CancelTripByCustomerResponse>CANCEL_TRIP_BY_CUSTOMER_RESPONSE_CALL(@Body CancelTripByCustomerRequest cancelTripByCustomerRequest);
 
+    // Vehicle Info
+    @POST("api/Booking/bookingInfoForCustomer")
+    Call<BookingVehicleInfoResponse> BOOKING_VEHICLE_INFO_RESPONSE_CALL(@Body BookingVehicleInfoRequest bookingVehicleInfoRequest);
 
 }
