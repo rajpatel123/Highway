@@ -162,8 +162,7 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
             @Override
             public void onResponse(Call<AllHighwayTripsResponse> call, Response<AllHighwayTripsResponse> response) {
                 Utils.dismissProgressDialog();
-
-                if (response.body() != null) {
+                if (response.body() != null && response.body().getStatus()!=null ) {
                     if (response.body().getStatus()) {
                         AllHighwayTripsResponse allHighwayTripsResponse = response.body();
                         if (allHighwayTripsResponse != null) {

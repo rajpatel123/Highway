@@ -73,13 +73,13 @@ public class RestClient {
     }
 
     // vehicle owner trip
-    public static void allVehicleOwnerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allDriverTripsResponseCallback) {
-        RetrofitClient.getClient().vehicleOwnerTrip(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
+    public static void allVehicleOwnerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allHighwayTripsResponseCallback) {
+        RetrofitClient.getClient().vehicleOwnerTrip(allHighwayTripsRequest).enqueue(allHighwayTripsResponseCallback);
     }
 
     //   mill user trip
-    public static void allMillerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allDriverTripsResponseCallback) {
-        RetrofitClient.getClient().millerTrip(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
+    public static void allMillerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allHighwayTripsResponseCallback) {
+        RetrofitClient.getClient().millerTrip(allHighwayTripsRequest).enqueue(allHighwayTripsResponseCallback);
     }
 
     // Customer trip
