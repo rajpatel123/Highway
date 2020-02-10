@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -37,10 +36,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CancelOrderTripActivityWithReason extends AppCompatActivity
+public class CancelOrderTripWithReasonActivity extends AppCompatActivity
         {
 
-    private static final String TAG = "CancelOrderTripActivityWithReason";
+    private static final String TAG = "CancelOrderTripWithReasonActivity";
     public Toolbar canToolbar;
     public EditText canReasonEdtTxt;
     public Button canBtn;
@@ -122,13 +121,13 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
 
                     }
                 } else {
-                    Toast.makeText(CancelOrderTripActivityWithReason.this, "getting cancle reason response Failde", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CancelOrderTripWithReasonActivity.this, "getting cancle reason response Failde", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CancelTripReasonResponse> call, Throwable t) {
-                Toast.makeText(CancelOrderTripActivityWithReason.this, "Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CancelOrderTripWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -177,7 +176,7 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
                             resultIntent = new Intent(getApplicationContext(), DashBoardActivity.class);
-                            Toast.makeText(CancelOrderTripActivityWithReason.this, "booking Cancled success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CancelOrderTripWithReasonActivity.this, "booking Cancled success", Toast.LENGTH_SHORT).show();
                             startActivity(resultIntent);
                             finish();
                                  /* resultIntent = new Intent();
@@ -190,7 +189,7 @@ public class CancelOrderTripActivityWithReason extends AppCompatActivity
 
                 @Override
                 public void onFailure(Call<CancelTripByCustomerResponse> call, Throwable t) {
-                    Toast.makeText(CancelOrderTripActivityWithReason.this, "Failure", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CancelOrderTripWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 }
             });
         }

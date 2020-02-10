@@ -178,7 +178,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CancelOrderTripActivityWithReason.class);
+                Intent intent = new Intent(getApplicationContext(), CancelOrderTripWithReasonActivity.class);
               //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
                 intent.putExtra("tripId", bookTripId);
                 intent.putExtra("vTypeId",vehicleTypeId);
@@ -243,6 +243,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         marker.draw(canvas);
 
         return bitmap;
+
     }
 
     @Override
@@ -451,9 +452,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         Button done = dialogView.findViewById(R.id.btn_done);
 
 
-
-
-
         TextView text_cancel = dialogView.findViewById(R.id.text_cancel);
         text_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -473,6 +471,10 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         super.onActivityResult(requestCode, resultCode, data);
             if (requestCode==RESULT_OK){
                 if (data.hasExtra("isCancelled")&& data.getBooleanExtra("isCancelled",false)){
+                    finish();
+                }
+
+                if (data.hasExtra("isVehicleInfo") && data.getBooleanExtra("isVehicleInfo",false)){
                     finish();
                 }
             }

@@ -1,5 +1,7 @@
 package com.highway.customer.customerActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,17 +53,13 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        onBackPressed();
-        return super.onOptionsItemSelected(item);
-    }
+
 
     public void initView() {
 
         bookInfoToolbar = findViewById(R.id.bookInfoToolbar);
         bookInfoRecycler = findViewById(R.id.BookingInfoRecycler);
-        done = findViewById(R.id.done);
+        //done = findViewById(R.id.done);
 
         setSupportActionBar(bookInfoToolbar);
         if (getSupportActionBar() != null) {
@@ -70,7 +68,7 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
         }
         getSupportActionBar().setTitle("Booking Info Details");
 
-        clicklistiner();
+       // clicklistiner();
         showInfoRV();
         getInfo();
 
@@ -78,7 +76,6 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
 
 
     public void showInfoRV() {
-
 
     }
 
@@ -93,13 +90,16 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BookingVehicleInfoResponse> call, Response<BookingVehicleInfoResponse> response) {
                 if (response.body() != null) {
-                        List<VehicleTypeInfo>vehicleTypeInfos = response.body().getVehicleTypeInfo();
-                        bookingVehicleInfoAdapter = new BookingVehicleInfoAdapter(vehicleTypeInfos,getApplicationContext());
+                    if (response.body().getStatus()) {
+
+                        List<VehicleTypeInfo> vehicleTypeInfos = response.body().getVehicleTypeInfo();
+                        bookingVehicleInfoAdapter = new BookingVehicleInfoAdapter(vehicleTypeInfos, getApplicationContext());
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                         bookInfoRecycler.setLayoutManager(layoutManager);
                         bookInfoRecycler.setItemAnimator(new DefaultItemAnimator());
                         bookInfoRecycler.setAdapter(bookingVehicleInfoAdapter);
-                         }
+                    }
+                }
                 else{
                     Toast.makeText(BookingInfoDetailsActivity.this, "error", Toast.LENGTH_SHORT).show();
                 }
@@ -122,6 +122,18 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //onBackPressed();
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("isVehicleInfo", false);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
 }
