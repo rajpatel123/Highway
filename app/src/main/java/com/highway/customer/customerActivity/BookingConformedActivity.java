@@ -99,7 +99,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private boolean isSelected;
     private String gdTypeId, gdTypeText;
     BookingVehicleListResponse bookingVehicleListResponse;
-    private String tripId,userRecvNO,userMobileNO;
+    private String tripId, userRecvNO, userMobileNO;
     public String bookTripId;
     private String vehicleTypeId;
     public boolean timeUp;
@@ -108,7 +108,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     public static void start(ConformBookingActivity activity, String tripId, String vTypeId) {
         Intent intent = new Intent(activity, BookingConformedActivity.class);
         intent.putExtra("tripId", tripId);
-        intent.putExtra("vTypeId",vTypeId);
+        intent.putExtra("vTypeId", vTypeId);
         activity.startActivity(intent);
 
     }
@@ -139,12 +139,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
             if (getIntent().hasExtra("tripId")) {
-                bookTripId= getIntent().getStringExtra("tripId");
+                bookTripId = getIntent().getStringExtra("tripId");
                 vehicleTypeId = getIntent().getStringExtra("vTypeId");  //vehicle type id
                 getSupportActionBar().setTitle("TRIP " + bookTripId);
+                HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
 
-                HighwayPrefs.putString(getApplicationContext(),"vechicleId",vehicleTypeId);
-                //getSupportActionBar().setTitle("TRIP " + getIntent().getStringExtra("tripId"));  // learn
             }
         }
 
@@ -173,16 +172,15 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     }
 
 
-
-    public void clicklistener(){
+    public void clicklistener() {
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CancelOrderTripWithReasonActivity.class);
-              //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
+                //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
                 intent.putExtra("tripId", bookTripId);
-                intent.putExtra("vTypeId",vehicleTypeId);
-                startActivityForResult(intent,1000);
+                intent.putExtra("vTypeId", vehicleTypeId);
+                startActivityForResult(intent, 1000);
 
             }
         });
@@ -191,8 +189,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(),BookingInfoDetailsActivity.class);
-               // asked by sir not sure
+                Intent intent = new Intent(getApplicationContext(), BookingInfoDetailsActivity.class);
+                // asked by sir not sure
 //                HighwayPrefs.putString(getApplicationContext(),Constants.BOOKINGTRIPID,tripId);
 //                HighwayPrefs.putString(getApplicationContext(),Constants.USERMOBILE,userMobileNO);
 //                HighwayPrefs.putString(getApplicationContext(),RECEIVERPHONENO,userRecvNO);
@@ -419,9 +417,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     };
 
 
-    public  void bookingTimer(){
+    public void bookingTimer() {
 
-        new CountDownTimer(60*10*1000, 1000) {
+        new CountDownTimer(60 * 10 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",
@@ -460,23 +458,21 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
             }
         });
-
-
     }
-
 
     //by sir notes
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode==RESULT_OK){
-                if (data.hasExtra("isCancelled")&& data.getBooleanExtra("isCancelled",false)){
-                    finish();
-                }
+        if (requestCode == RESULT_OK) {
 
-                if (data.hasExtra("isVehicleInfo") && data.getBooleanExtra("isVehicleInfo",false)){
-                    finish();
-                }
+            if (data.hasExtra("isCancelled") && data.getBooleanExtra("isCancelled", false)) {
+                finish();
             }
+
+            if (data.hasExtra("isVehicleInfo") && data.getBooleanExtra("isVehicleInfo", false)) {
+                finish();
+            }
+        }
     }
 }

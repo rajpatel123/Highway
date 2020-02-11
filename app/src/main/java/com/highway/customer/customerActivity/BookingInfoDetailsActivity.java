@@ -53,8 +53,6 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
 
     }
 
-
-
     public void initView() {
 
         bookInfoToolbar = findViewById(R.id.bookInfoToolbar);
@@ -67,18 +65,17 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         getSupportActionBar().setTitle("Booking Info Details");
+        bookInfoToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
        // clicklistiner();
-        showInfoRV();
         getInfo();
 
     }
-
-
-    public void showInfoRV() {
-
-    }
-
 
     public void getInfo() {
 
@@ -131,9 +128,9 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
         resultIntent.putExtra("isVehicleInfo", false);
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
-        return super.onOptionsItemSelected(item);
+        super.onOptionsItemSelected(item);
+        return true;
     }
-
 
 
 }

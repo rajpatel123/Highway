@@ -36,8 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CancelOrderTripWithReasonActivity extends AppCompatActivity
-        {
+public class CancelOrderTripWithReasonActivity extends AppCompatActivity {
 
     private static final String TAG = "CancelOrderTripWithReasonActivity";
     public Toolbar canToolbar;
@@ -50,7 +49,7 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity
     public CancelledTripReasonAdapter cancelledTripReasonAdapter;
     public CancelTripReasonResponse cancelTripReasonResponse;
     public String userId, bookId;
-            String cancelreasonid;
+    String cancelreasonid;
     Intent resultIntent;
 
     @Override
@@ -63,6 +62,7 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity
     }
 
     public void initview() {
+
         canToolbar = findViewById(R.id.CanResonToolbar);
         canRsnTypeRecyler = findViewById(R.id.cancleReasonRecyc);
         canReasonEdtTxt = findViewById(R.id.CanResnEdtTxt);
@@ -75,22 +75,20 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity
         }
         getSupportActionBar().setTitle("Cancle Reason");
 
+
+
         inputValidation();
-        //  cancleRadioGroSelection();
+        // cancleRadioGroSelection();
         showCanRsnTypeRV();
         getCanReasonData();
 
         bookId = getIntent().getStringExtra("tripId");
         //cancelResnId = getIntent().getStringExtra("cancelReasonId");
-
     }
 
 
     public void showCanRsnTypeRV() {
-
     }
-
-
 
     public void getCanReasonData() {
         CancelTripReasonRequest cancelTripReasonRequest = new CancelTripReasonRequest();
@@ -175,10 +173,12 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity
                 public void onResponse(Call<CancelTripByCustomerResponse> call, Response<CancelTripByCustomerResponse> response) {
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
+
                             resultIntent = new Intent(getApplicationContext(), DashBoardActivity.class);
                             Toast.makeText(CancelOrderTripWithReasonActivity.this, "booking Cancled success", Toast.LENGTH_SHORT).show();
                             startActivity(resultIntent);
                             finish();
+
                                  /* resultIntent = new Intent();
                                 resultIntent.putExtra("isCancelled", true);
                                 setResult(Activity.RESULT_OK, resultIntent);
@@ -186,7 +186,6 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity
                         }
                     }
                 }
-
                 @Override
                 public void onFailure(Call<CancelTripByCustomerResponse> call, Throwable t) {
                     Toast.makeText(CancelOrderTripWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();

@@ -39,7 +39,6 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
         CompletedTrip completedTrip = completedTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
