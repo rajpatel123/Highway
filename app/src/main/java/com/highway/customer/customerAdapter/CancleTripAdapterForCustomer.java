@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.utils.Utils;
 
 import java.util.List;
 
 public class CancleTripAdapterForCustomer extends RecyclerView.Adapter<CancleTripAdapterForCustomer.ViewHolder> {
+
     Context context;
     List<CancelTrip>cancelTrips;
 
@@ -51,6 +52,7 @@ public class CancleTripAdapterForCustomer extends RecyclerView.Adapter<CancleTri
         holder.tv5DestTime.setText("" + cancelTrip.getDropTime());
         holder.tv6VehicleName.setText("" + cancelTrip.getVehicleName());
         holder.tv7FairCharge.setText("" + cancelTrip.getVehicleName());
+
         // img
     }
 

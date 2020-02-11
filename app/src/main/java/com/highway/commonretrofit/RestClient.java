@@ -3,8 +3,8 @@ package com.highway.commonretrofit;
 
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
@@ -68,23 +68,23 @@ public class RestClient {
     }
 
     // driver trip
-    public static void allDriverTrips(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allDriverTripsResponseCallback) {
-        RetrofitClient.getClient().driverTrips(allHighwayTripsRequest).enqueue(allDriverTripsResponseCallback);
+    public static void allDriverTrips(GetAllTripByUserIdRequest getAllTripByUserIdRequest, Callback<GetAllTripByUserIdResponse> allDriverTripsResponseCallback) {
+        RetrofitClient.getClient().driverTrips(getAllTripByUserIdRequest).enqueue(allDriverTripsResponseCallback);
     }
 
     // vehicle owner trip
-    public static void allVehicleOwnerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allHighwayTripsResponseByOwnerCallback) {
-        RetrofitClient.getClient().vehicleOwnerTrip(allHighwayTripsRequest).enqueue(allHighwayTripsResponseByOwnerCallback);
+    public static void allVehicleOwnerTrip(GetAllTripByUserIdRequest getAllTripByUserIdRequest, Callback<GetAllTripByUserIdResponse> allHighwayTripsResponseByOwnerCallback) {
+        RetrofitClient.getClient().vehicleOwnerTrip(getAllTripByUserIdRequest).enqueue(allHighwayTripsResponseByOwnerCallback);
     }
 
     //   mill user trip
-    public static void allMillerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allHighwayTripsResponseByMillerCallback) {
-        RetrofitClient.getClient().millerTrip(allHighwayTripsRequest).enqueue(allHighwayTripsResponseByMillerCallback);
+    public static void allMillerTrip(GetAllTripByUserIdRequest getAllTripByUserIdRequest, Callback<GetAllTripByUserIdResponse> allHighwayTripsResponseByMillerCallback) {
+        RetrofitClient.getClient().millerTrip(getAllTripByUserIdRequest).enqueue(allHighwayTripsResponseByMillerCallback);
     }
 
     // Customer trip
-    public static void allCustomerTrip(AllHighwayTripsRequest allHighwayTripsRequest, Callback<AllHighwayTripsResponse> allHighwayTripsResponseByCustomerCallback) {
-        RetrofitClient.getClient().customerTrip(allHighwayTripsRequest).enqueue(allHighwayTripsResponseByCustomerCallback);
+    public static void allCustomerTrip(GetAllTripByUserIdRequest getAllTripByUserIdRequest, Callback<GetAllTripByUserIdResponse> allHighwayTripsResponseByCustomerCallback) {
+        RetrofitClient.getClient().customerTrip(getAllTripByUserIdRequest).enqueue(allHighwayTripsResponseByCustomerCallback);
     }
 
     // Add new vehicle

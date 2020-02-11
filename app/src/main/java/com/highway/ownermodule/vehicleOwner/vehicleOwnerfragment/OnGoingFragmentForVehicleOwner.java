@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.OnGoingTripAdapterForVehicleOwner;
 
 import java.util.ArrayList;

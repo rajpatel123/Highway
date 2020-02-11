@@ -2,8 +2,8 @@ package com.highway.commonretrofit;
 
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
@@ -68,19 +68,19 @@ public interface ApiInterface {
 
     // Driver All Trips
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> driverTrips(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> driverTrips(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Vehicle Owner trip details
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> vehicleOwnerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> vehicleOwnerTrip(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Miller all trips details
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> millerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> millerTrip(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Customer all trip
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> customerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> customerTrip(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Add New Vehicle
     @POST("index.php/api/Vehicle/addVehicle")

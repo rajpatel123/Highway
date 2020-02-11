@@ -14,9 +14,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
 import com.highway.commonretrofit.RestClient;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
 import com.highway.drivermodule.driverAdapter.FragmentTabModeAdapterForDriver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -162,31 +162,31 @@ public class DashBoardFragmentForDriver extends Fragment {
 
     public void getDriverCompletedDetail() {
 
-        AllHighwayTripsRequest allHighwayTripsRequest = new AllHighwayTripsRequest();
+        GetAllTripByUserIdRequest getAllTripByUserIdRequest = new GetAllTripByUserIdRequest();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
         /*allHighwayTripsRequest.setUserId(userId);*/
-        allHighwayTripsRequest.setUserId("7");
+        getAllTripByUserIdRequest.setUserId(userId);
 
         Utils.showProgressDialog(getContext());
-        RestClient.allDriverTrips(allHighwayTripsRequest, new Callback<AllHighwayTripsResponse>() {
+        RestClient.allDriverTrips(getAllTripByUserIdRequest, new Callback<GetAllTripByUserIdResponse>() {
             @Override
-            public void onResponse(Call<AllHighwayTripsResponse> call, Response<AllHighwayTripsResponse> response) {
+            public void onResponse(Call<GetAllTripByUserIdResponse> call, Response<GetAllTripByUserIdResponse> response) {
                 Utils.dismissProgressDialog();
                 if (response.body() != null && response.body().getStatus()!=null    )   {
                     if (response.body().getStatus()) {
-                        AllHighwayTripsResponse allHighwayTripsResponse = response.body();
-                        if (allHighwayTripsResponse != null) {
-                            if (allHighwayTripsResponse.getCancelTrips() != null && allHighwayTripsResponse.getCancelTrips().size() > 0) {
-                                dashBoardActivity.setCancelTrips(allHighwayTripsResponse.getCancelTrips());
+                        GetAllTripByUserIdResponse getAllTripByUserIdResponse = response.body();
+                        if (getAllTripByUserIdResponse != null) {
+                            if (getAllTripByUserIdResponse.getCancelTrips() != null && getAllTripByUserIdResponse.getCancelTrips().size() > 0) {
+                                dashBoardActivity.setCancelTrips(getAllTripByUserIdResponse.getCancelTrips());
                             }
-                            if (allHighwayTripsResponse.getCompletedTrips() != null && allHighwayTripsResponse.getCompletedTrips().size() > 0) {
-                                dashBoardActivity.setCompletedTrips(allHighwayTripsResponse.getCompletedTrips());
+                            if (getAllTripByUserIdResponse.getCompletedTrips() != null && getAllTripByUserIdResponse.getCompletedTrips().size() > 0) {
+                                dashBoardActivity.setCompletedTrips(getAllTripByUserIdResponse.getCompletedTrips());
                             }
-                            if (allHighwayTripsResponse.getOngoingTrips() != null && allHighwayTripsResponse.getOngoingTrips().size() > 0) {
-                                dashBoardActivity.setOngoingTrips(allHighwayTripsResponse.getOngoingTrips());
+                            if (getAllTripByUserIdResponse.getOngoingTrips() != null && getAllTripByUserIdResponse.getOngoingTrips().size() > 0) {
+                                dashBoardActivity.setOngoingTrips(getAllTripByUserIdResponse.getOngoingTrips());
                             }
-                            if (allHighwayTripsResponse.getUpcomingTrips() != null && allHighwayTripsResponse.getUpcomingTrips().size() > 0) {
-                                dashBoardActivity.setUpcomingTrips(allHighwayTripsResponse.getUpcomingTrips());
+                            if (getAllTripByUserIdResponse.getUpcomingTrips() != null && getAllTripByUserIdResponse.getUpcomingTrips().size() > 0) {
+                                dashBoardActivity.setUpcomingTrips(getAllTripByUserIdResponse.getUpcomingTrips());
                             }
                             updateAllFragment();
                         }
@@ -199,7 +199,7 @@ public class DashBoardFragmentForDriver extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<AllHighwayTripsResponse> call, Throwable t) {
+            public void onFailure(Call<GetAllTripByUserIdResponse> call, Throwable t) {
                 Toast.makeText(dashBoardActivity, " Failure", Toast.LENGTH_SHORT).show();
             }
         });

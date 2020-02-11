@@ -8,15 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CompletedTripAdapterForMillUser extends RecyclerView.Adapter<CompletedTripAdapterForMillUser.ViewHolder> {

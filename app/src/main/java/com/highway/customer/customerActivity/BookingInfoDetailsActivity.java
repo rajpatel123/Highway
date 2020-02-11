@@ -38,8 +38,10 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
     TextView done;
     public RecyclerView bookInfoRecycler;
     public BookingVehicleInfoAdapter bookingVehicleInfoAdapter;
+
     public BookingVehicleInfoResponse bookingVehicleInfoResponse;
     private String userId,viechelId;
+
     List<VehicleTypeInfo>vehicleTypeInfos =new ArrayList<>();
 
     @Override

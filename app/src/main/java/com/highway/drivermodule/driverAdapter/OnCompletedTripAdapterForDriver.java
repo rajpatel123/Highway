@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.utils.Utils;
 
-import java.text.BreakIterator;
 import java.util.List;
 
 public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnCompletedTripAdapterForDriver.MyViewHolder> {

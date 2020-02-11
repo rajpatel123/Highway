@@ -15,7 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.CompletedTripAdapterForVehicleOwner;
 
 import java.util.ArrayList;
