@@ -38,7 +38,7 @@ public class OnGoingTripAdapterForMiller extends RecyclerView.Adapter<OnGoingTri
         OngoingTrip ongoingTrip = ongoingTrips.get(position);
 
         LatLng sourceAddressLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()),Double.parseDouble(ongoingTrip.getSourceLong()));
-        LatLng destAddressLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()),Double.parseDouble(ongoingTrip.getDestinationLong()));
+        LatLng destAddressLatLng = new LatLng(Double.parseDouble(ongoingTrip.getDestinationLat()),Double.parseDouble(ongoingTrip.getDestinationLong()));
         holder.tv1CompleteDate.setText(""+ongoingTrip.getEndDate());
         holder.tv2SourceAddress.setText(""+ Utils.getAddress(context,sourceAddressLatLng));
         holder.tv4DestAddress.setText("" +Utils.getAddress(context,destAddressLatLng));

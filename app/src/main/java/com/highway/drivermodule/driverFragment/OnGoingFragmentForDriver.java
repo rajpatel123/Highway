@@ -27,9 +27,7 @@ public class OnGoingFragmentForDriver extends Fragment {
     DashBoardActivity dashBoardActivity;
     OnGoingTripAdapterForDriver onGoingTripAdapterForDriver;
 
-    public OnGoingFragmentForDriver() {
-        // Required empty public constructor
-    }
+    public OnGoingFragmentForDriver() {}
 
     public static OnGoingFragmentForDriver newInstance() {
         OnGoingFragmentForDriver fragment = new OnGoingFragmentForDriver();
@@ -76,7 +74,6 @@ public class OnGoingFragmentForDriver extends Fragment {
             Toast.makeText(dashBoardActivity, "Something is wrong of Ongoing trip list for Driver", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
 
 

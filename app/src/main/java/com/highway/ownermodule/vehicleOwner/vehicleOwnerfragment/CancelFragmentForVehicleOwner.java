@@ -78,7 +78,7 @@ public class CancelFragmentForVehicleOwner extends Fragment {
             cancleRecycler.setAdapter(cancleTripAdapterForVehicleOwner);
 
         }else{
-            Toast.makeText(dashBoardActivity, "Some thing is wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "No !, Data for cancel trip for Vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 

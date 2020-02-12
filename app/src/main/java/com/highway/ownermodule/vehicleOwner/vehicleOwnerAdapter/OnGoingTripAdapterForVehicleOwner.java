@@ -41,7 +41,7 @@ public class OnGoingTripAdapterForVehicleOwner extends RecyclerView.Adapter<OnGo
         OngoingTrip ongoingTrip = ongoingTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()),Double.parseDouble(ongoingTrip.getSourceLong()));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()),Double.parseDouble(ongoingTrip.getDestinationLong()));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getDestinationLat()),Double.parseDouble(ongoingTrip.getDestinationLong()));
 
         holder.tv1CompleteDate.setText(""+ongoingTrip.getEndDate());
         holder.tv2SourceAddress.setText(""+ Utils.getAddress(context,sourceAddLatLng));

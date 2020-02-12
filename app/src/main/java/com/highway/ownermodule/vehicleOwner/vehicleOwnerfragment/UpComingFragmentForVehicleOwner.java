@@ -67,7 +67,6 @@ public class UpComingFragmentForVehicleOwner extends Fragment {
         super.onDetach();
     }
 
-
     public  void vehicleUpcomingUpdatedTripList(List<UpcomingTrip>upcomingTrips){
         if (upcomingTrips !=null && upcomingTrips.size()>0){
             upcomingTripAdapterForVehicleOwner = new UpcomingTripAdapterForVehicleOwner(upcomingTrips,getContext());
@@ -77,7 +76,7 @@ public class UpComingFragmentForVehicleOwner extends Fragment {
             vehicleUpcomingRecycler.setAdapter(upcomingTripAdapterForVehicleOwner);
 
         }else{
-            Toast.makeText(dashBoardActivity, "Some thing is wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "Some thing is wrong in Upcoming trip Vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 
