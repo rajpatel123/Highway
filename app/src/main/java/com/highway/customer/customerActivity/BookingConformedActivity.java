@@ -196,9 +196,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 //                HighwayPrefs.putString(getApplicationContext(),Constants.BOOKINGTRIPID,tripId);
 //                HighwayPrefs.putString(getApplicationContext(),Constants.USERMOBILE,userMobileNO);
 //                HighwayPrefs.putString(getApplicationContext(),RECEIVERPHONENO,userRecvNO);
-
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }
