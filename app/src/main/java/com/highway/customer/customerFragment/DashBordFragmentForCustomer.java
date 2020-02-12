@@ -28,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashBordFragmentForCustomer extends Fragment {
+
     private TabLayout myBookingTabLayout;
     private ViewPager myBookingViewPager;
     CancelFragmentForCustomer cancelFragmentForCustomer;
@@ -39,7 +40,6 @@ public class DashBordFragmentForCustomer extends Fragment {
 
     List<Fragment> customerfragmentList = new ArrayList<>();
     private String userId;
-
 
     public static DashBordFragmentForCustomer newInstance() {
         DashBordFragmentForCustomer fragment = new DashBordFragmentForCustomer();

@@ -41,7 +41,7 @@ public class UpcomingTripAdapterForVehicleOwner extends RecyclerView.Adapter<Upc
         UpcomingTrip upcomingTrip = upcomingTrips.get(position);
 
         LatLng sourceAddressLatlng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
-        LatLng destAddressLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
+        LatLng destAddressLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
 
         holder.tv2SourceAddress.setText("" + Utils.getAddress(context, sourceAddressLatlng));
         holder.tv4DestAddress.setText("" + Utils.getAddress(context, destAddressLatLng));
