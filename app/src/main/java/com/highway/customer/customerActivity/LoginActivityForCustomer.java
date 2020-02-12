@@ -92,6 +92,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Utils.dismissProgressDialog();
                         Toast.makeText(LoginActivityForCustomer.this, "Login failed", Toast.LENGTH_SHORT).show();
 
                     }

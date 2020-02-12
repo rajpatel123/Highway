@@ -33,12 +33,18 @@ public class SplashActivity extends AppCompatActivity {
         splashScreenHandler();
 
     }
-    public void splashScreenHandler(){
+
+    public void splashScreenHandler() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (HighwayPrefs.getBoolean(SplashActivity.this, Constants.LOGGED_IN)) {
                     Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+//                    String data = getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+//                    Log.e(getClass().getSimpleName(), data);
+                    i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, bundle);
                     startActivity(i);
                     finish();
                 } else {
@@ -47,6 +53,6 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 }

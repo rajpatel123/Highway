@@ -141,10 +141,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-
+//        intent = getIntent();
         nevigationInitView();
         updateNavViewHeader();
-        navAccoringRoleId();// According RoleId Nevigation Icon
+        navAccoringRoleId();// According RoleId Navigation Icon
         //setOnClickListenerOperation();
 
 
@@ -294,7 +294,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
                     replaceFragment(fragment3);
                 } else {
-                    Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
+                    Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, getIntent().getBundleExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+                    fragment3.setArguments(bundle);
                     replaceFragment(fragment3);
                 }
 

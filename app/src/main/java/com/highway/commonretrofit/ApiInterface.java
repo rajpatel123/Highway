@@ -18,6 +18,8 @@ import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceive
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
 import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
 import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -148,5 +150,11 @@ public interface ApiInterface {
     // conform booking Request
     @POST("api/Booking/confirmBookingApi")
     Call<BookingHTripResponse> BOOKING_H_TRIP_RESPONSE_CALL(@Body BookingHTripRequest bookingHTripRequest);
+
+    // accept/reject booking trip by driver
+    @POST("api/Booking/acceptBookTrip")
+    Call<BookingAcceptRejectResponse> ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(@Body BookingAcceptRejectData bookingAcceptReject);
+
+
 
 }

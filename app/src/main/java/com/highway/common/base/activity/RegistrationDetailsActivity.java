@@ -464,6 +464,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                                 HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());
                                 HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getUser().getMobile());
                                 HighwayPrefs.putString(getApplicationContext(), Constants.User_statuss, response.body().getUser().getUserStatus());
+                                System.out.println("User Status signup" + response.body().getUser().getUserStatus());
                                 /* use our requirement  */
                                 HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, response.body().getUser().getImage());
                                 HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getUser().getEmail());
