@@ -15,6 +15,7 @@ import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.UpcomingTrip;
 import com.highway.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UpcomingTripAdapterForVehicleOwner extends RecyclerView.Adapter<UpcomingTripAdapterForVehicleOwner.ViewHolder> {
