@@ -20,10 +20,6 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
     // List<GoodTypeDatum> goodTypeDatumList;
     GoodsTypeDataResponse goodsTypeDataResponse;
 
-  /*  public GoodsTypeAdapter(List<GoodTypeDatum> goodTypeDatumList1, Context context1) {
-        this.context = context1;
-        this.goodTypeDatumList = goodTypeDatumList1;
-    }*/
 
     public GoodsTypeAdapter(GoodsTypeDataResponse goodsTypeDataResponses1, Context context1, OnGoodTypeSelect onGoodTypeSelect) {
         this.context = context1;
@@ -54,7 +50,6 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
                 }
             }
         });
-
     }
 
     @Override
@@ -76,7 +71,6 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView goodsTypeTv1;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             goodsTypeTv1 = itemView.findViewById(R.id.TvGoodsType);

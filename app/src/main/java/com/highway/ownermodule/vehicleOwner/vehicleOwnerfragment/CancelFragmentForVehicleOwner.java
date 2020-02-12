@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.CancleTripAdapterForVehicleOwner;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class CancelFragmentForVehicleOwner extends Fragment {
             cancleRecycler.setAdapter(cancleTripAdapterForVehicleOwner);
 
         }else{
-            Toast.makeText(dashBoardActivity, "Some thing is wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "No !, Data for cancel trip for Vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 

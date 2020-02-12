@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.customer.customerAdapter.CompletedTripAdapterForCustomer;
-import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 
 import java.util.ArrayList;
 import java.util.List;

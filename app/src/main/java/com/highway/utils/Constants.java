@@ -29,6 +29,9 @@ public class Constants {
 
     public static final String RECEIVERPHONENO = "receiverPhoneNumber";
     public static final String RECEIVERNAME = "receiverNAME";
+    public static final String BOOKINGTRIPID = "bookingTripId";
+    public static final String VEHICLETYPEID = "vehicleTypeId";
+
 
     public static final String PUSH_NEW_BOOKING_TRIP_DATA_KEY = "PUSH_NEW_BOOKING_TRIP_DATA_KEY";
 

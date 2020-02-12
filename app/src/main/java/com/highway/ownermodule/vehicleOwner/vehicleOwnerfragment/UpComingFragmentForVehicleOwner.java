@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.UpcomingTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.UpcomingTripAdapterForVehicleOwner;
 
 
@@ -67,7 +67,6 @@ public class UpComingFragmentForVehicleOwner extends Fragment {
         super.onDetach();
     }
 
-
     public  void vehicleUpcomingUpdatedTripList(List<UpcomingTrip>upcomingTrips){
         if (upcomingTrips !=null && upcomingTrips.size()>0){
             upcomingTripAdapterForVehicleOwner = new UpcomingTripAdapterForVehicleOwner(upcomingTrips,getContext());
@@ -77,7 +76,7 @@ public class UpComingFragmentForVehicleOwner extends Fragment {
             vehicleUpcomingRecycler.setAdapter(upcomingTripAdapterForVehicleOwner);
 
         }else{
-            Toast.makeText(dashBoardActivity, "Some thing is wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "Some thing is wrong in Upcoming trip Vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 

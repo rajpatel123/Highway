@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -21,11 +21,11 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
     Context context;
     List<CompletedTrip>completedTrips;
 
-    public CompletedTripAdapterForCustomer(List<CompletedTrip>completedTrips1 , Context context){
-        this.completedTrips = completedTrips1;
+
+    public CompletedTripAdapterForCustomer(List<CompletedTrip> completedTrips, Context context) {
+        this.completedTrips = completedTrips;
         this.context = context;
     }
-
 
 
     @NonNull
@@ -39,11 +39,10 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
         CompletedTrip completedTrip = completedTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()), Double.parseDouble(completedTrip.getDestinationLong()));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(completedTrip.getDestinationLat()), Double.parseDouble(completedTrip.getDestinationLong()));
 
         holder.tv1CompleteDate.setText(""+ completedTrip.getEndDate());
         holder.tv2SourceAddress.setText(" " + Utils.getAddress(context, sourceAddLatLng));

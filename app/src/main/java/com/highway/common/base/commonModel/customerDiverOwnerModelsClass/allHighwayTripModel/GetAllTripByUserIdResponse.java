@@ -1,18 +1,15 @@
 
-package com.highway.common.base.commonModel.customerDiverOwnerModelsClass;
+package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AllHighwayTripsResponse {
+public class GetAllTripByUserIdResponse {
 
-    @SerializedName("Status")
+    @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("Message")
-    @Expose
-    private String message;
     @SerializedName("upcomingTrips")
     @Expose
     private List<UpcomingTrip> upcomingTrips = null;
@@ -32,14 +29,6 @@ public class AllHighwayTripsResponse {
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public List<UpcomingTrip> getUpcomingTrips() {

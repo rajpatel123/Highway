@@ -2,7 +2,6 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.drivermodule.driverAdapter.OnGoingTripAdapterForDriver;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +27,7 @@ public class OnGoingFragmentForDriver extends Fragment {
     DashBoardActivity dashBoardActivity;
     OnGoingTripAdapterForDriver onGoingTripAdapterForDriver;
 
-    public OnGoingFragmentForDriver() {
-        // Required empty public constructor
-    }
+    public OnGoingFragmentForDriver() {}
 
     public static OnGoingFragmentForDriver newInstance() {
         OnGoingFragmentForDriver fragment = new OnGoingFragmentForDriver();
@@ -77,7 +74,6 @@ public class OnGoingFragmentForDriver extends Fragment {
             Toast.makeText(dashBoardActivity, "Something is wrong of Ongoing trip list for Driver", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
 
 

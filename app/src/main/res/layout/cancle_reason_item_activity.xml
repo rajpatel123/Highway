@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="@dimen/_10dp"
+    android:orientation="horizontal">
+
+
+<!--    <RadioGroup-->
+<!--        android:id="@+id/cancleReasonRadioGroup"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="4dp"-->
+<!--        android:layout_marginStart="8dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/cancelReasonText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="cancle Reason Text"-->
+<!--        android:textColor="@color/new_black"/>-->
+
+<!--    <RadioGroup-->
+<!--        android:id="@+id/cancleReasonRadioGroup"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="4dp"-->
+<!--        android:layout_marginStart="8dp"/>-->
+
+  <!--  <RadioButton
+        android:id="@+id/cancelReasonBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="cancle Reason Text"
+        android:textColor="@color/new_black"/>
+-->
+
+
+
+    <LinearLayout
+        android:id="@+id/linearlayoutclick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/CancelRsnTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancle Reason Text"
+            android:textStyle="normal"
+            android:textColor="@color/black_primary"
+            android:padding="@dimen/padding_8"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/darkwhite"/>
+    </LinearLayout>
+
+
+</LinearLayout>

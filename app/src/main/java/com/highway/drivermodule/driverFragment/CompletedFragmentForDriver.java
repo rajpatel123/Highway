@@ -2,7 +2,6 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.drivermodule.driverAdapter.OnCompletedTripAdapterForDriver;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
 
 import java.util.ArrayList;
 import java.util.List;

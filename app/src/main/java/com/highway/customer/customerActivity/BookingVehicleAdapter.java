@@ -88,11 +88,8 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
                     }
                 }
                    // holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.blue));
-
             }
-
         });
-
     }
 
     @Override

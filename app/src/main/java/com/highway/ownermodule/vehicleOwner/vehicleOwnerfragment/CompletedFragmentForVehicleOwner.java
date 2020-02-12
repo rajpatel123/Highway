@@ -15,7 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.CompletedTripAdapterForVehicleOwner;
 
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
 
 
         } else {
-            Toast.makeText(dashBoardActivity, "Some thing is wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "Some thing is wrong in completed trips for vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 

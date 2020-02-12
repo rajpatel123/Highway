@@ -2,8 +2,8 @@ package com.highway.commonretrofit;
 
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsRequest;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.AllHighwayTripsResponse;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
@@ -12,14 +12,18 @@ import com.highway.common.base.commonModel.registration.RegistrationResponse;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonRequest;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerRequest;
+import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoRequest;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
+import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -66,19 +70,19 @@ public interface ApiInterface {
 
     // Driver All Trips
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> driverTrips(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> driverTrips(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Vehicle Owner trip details
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> vehicleOwnerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> vehicleOwnerTrip(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Miller all trips details
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> millerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> millerTrip(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Customer all trip
     @POST("api/Trip/getAllTripByUserId")
-    Call<AllHighwayTripsResponse> customerTrip(@Body AllHighwayTripsRequest allHighwayTripsRequest);
+    Call<GetAllTripByUserIdResponse> customerTrip(@Body GetAllTripByUserIdRequest getAllTripByUserIdRequest);
 
     // Add New Vehicle
     @POST("index.php/api/Vehicle/addVehicle")
@@ -139,10 +143,6 @@ public interface ApiInterface {
     @POST("api/Vehicle/bookingVehicleList")
     Call<BookingVehicleListResponse> BOOKING_VEHICLE_LIST_RESPONSE_CALL(@Body BookingVehicleListRequest bookingVehicleListRequest);
 
-    // Vehicle Info
-    @POST("api/Vehicle/getVehicleinfo")
-    Call<VehicleInfoResponse> VEHICLE_INFO_RESPONSE_CALL(@Body VehicleInfoRequest vehicleInfoRequest);
-
     // Register for pushnotification
     @POST("api/Notification/registerPushNotification")
     Call<ResponseBody> registerForPush(@Body RegisterForPushModel vehicleInfoRequest);
@@ -150,6 +150,18 @@ public interface ApiInterface {
     // conform booking Request
     @POST("api/Booking/confirmBookingApi")
     Call<BookingHTripResponse> BOOKING_H_TRIP_RESPONSE_CALL(@Body BookingHTripRequest bookingHTripRequest);
+
+    //cancle reason
+    @POST("api/Booking/cancelTripReason")
+    Call<CancelTripReasonResponse>CANCEL_TRIP_REASON_RESPONSE_CALL (@Body CancelTripReasonRequest cancelTripReasonRequest);
+
+    //cancle trip by customer
+    @POST("api/Booking/cancelTripByCustomer")
+    Call<CancelTripByCustomerResponse>CANCEL_TRIP_BY_CUSTOMER_RESPONSE_CALL(@Body CancelTripByCustomerRequest cancelTripByCustomerRequest);
+
+    // Vehicle Info
+    @POST("api/Booking/bookingInfoForCustomer")
+    Call<BookingVehicleInfoResponse> BOOKING_VEHICLE_INFO_RESPONSE_CALL(@Body BookingVehicleInfoRequest bookingVehicleInfoRequest);
 
     // accept/reject booking trip by driver
     @POST("api/Booking/acceptBookTrip")

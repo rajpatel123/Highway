@@ -8,15 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CompletedTripAdapterForMillUser extends RecyclerView.Adapter<CompletedTripAdapterForMillUser.ViewHolder> {
@@ -40,7 +38,7 @@ public class CompletedTripAdapterForMillUser extends RecyclerView.Adapter<Comple
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CompletedTrip completedTrip = completedTrips.get(position);
         LatLng sourceAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
-        LatLng destAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getDestinationLong()));
+        LatLng destAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getDestinationLat()),Double.parseDouble(completedTrip.getDestinationLong()));
         holder.tv1CompleteDate.setText(""+completedTrip.getEndDate());
         holder.tv2SourceAddress.setText(""+ Utils.getAddress(context,sourceAddressLatLng));
         holder.tv4DestAddress.setText("" +Utils.getAddress(context,destAddressLatLng));

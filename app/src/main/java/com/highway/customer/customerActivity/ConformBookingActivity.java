@@ -60,7 +60,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ConfirmBookingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class ConformBookingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, TaskLoadedCallback {
 
@@ -97,7 +97,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
     private String gdTypeId, gdTypeText;
 
     public static void start(BookingWithDetailsActivity activity) {
-        Intent intent = new Intent(activity, ConfirmBookingActivity.class);
+        Intent intent = new Intent(activity, ConformBookingActivity.class);
         activity.startActivity(intent);
 
     }
@@ -159,8 +159,9 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
                         if (response.code() == 200 && response.body() != null) {
 
                             BookingHTripResponse resp = response.body();
-                            if (resp != null && resp.getId() != null)
-                                BookingConfirmedActivity.start(ConfirmBookingActivity.this, resp.getId());
+                            if (resp != null && resp.getBookIdCode() != null && resp.getBookId()!=null)
+                                BookingConformedActivity.start(ConformBookingActivity.this, resp.getBookIdCode(), resp.getBookId(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId());
                         }
                     }
 

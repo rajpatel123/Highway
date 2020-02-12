@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,14 +50,19 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
+import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
-public class BookingConfirmedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+import static com.highway.utils.Constants.RECEIVERPHONENO;
+
+public class BookingConformedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, TaskLoadedCallback {
 
@@ -79,7 +85,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
 
 
     private Toolbar toolbar;
-    private TextView sourceTV, destTV, driverName, vehicleName, bookingInfoForDriverAllocation, fareValue, cancelTripTV, infoTV;
+    private TextView sourceTV, destTV, driverName, vehicleName, bookingInfoForDriverAllocationTime, fareValue, cancelTripTV, infoTV;
     private ImageView imgTruckIV, callActionIV;
     TextView goodtype;
     private Polyline currentPolyline;
@@ -92,10 +98,17 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
     private String destName;
     private boolean isSelected;
     private String gdTypeId, gdTypeText;
+    BookingVehicleListResponse bookingVehicleListResponse;
+    private String tripId, userRecvNO, userMobileNO;
+    public String bookTripIdCode,bookId,vehicleTypeId;
+    public boolean timeUp;
 
-    public static void start(ConfirmBookingActivity activity, String tripId) {
-        Intent intent = new Intent(activity, BookingConfirmedActivity.class);
-        intent.putExtra("tripId", tripId);
+
+    public static void start(ConformBookingActivity activity, String bookTripIdCode, String bookId, String vTypeId) {
+        Intent intent = new Intent(activity, BookingConformedActivity.class);
+        intent.putExtra("bookTripIdCode", bookTripIdCode);
+        intent.putExtra("bookId", bookId);
+        intent.putExtra("vTypeId", vTypeId);
         activity.startActivity(intent);
 
     }
@@ -110,7 +123,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         destTV = findViewById(R.id.destTV);
         driverName = findViewById(R.id.driverName);
         vehicleName = findViewById(R.id.vehicleName);
-        bookingInfoForDriverAllocation = findViewById(R.id.bookingInfoForDriverAllocation);
+        bookingInfoForDriverAllocationTime = findViewById(R.id.bookingInfoForDriverAllocation);
         fareValue = findViewById(R.id.fareValue);
         callActionIV = findViewById(R.id.callActionIV);
         cancelTripTV = findViewById(R.id.cancelTripTV);
@@ -118,16 +131,23 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         toolbar = findViewById(R.id.toolbar);
 
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
-        userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERPHONENO);
+        userMobNo = HighwayPrefs.getString(getApplicationContext(), RECEIVERPHONENO);
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-            if (getIntent().hasExtra("tripId"))
-                getSupportActionBar().setTitle("TRIP " + getIntent().getStringExtra("tripId"));
+            if (getIntent().hasExtra("bookTripIdCode")) {
+                bookTripIdCode = getIntent().getStringExtra("bookTripIdCode");
+                bookId = getIntent().getStringExtra("bookId");
+                vehicleTypeId = getIntent().getStringExtra("vTypeId");  //vehicle type id
+                getSupportActionBar().setTitle("TRIP " + bookTripIdCode);
+                HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
+
+            }
         }
+
 
         sourceTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
         destTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
@@ -148,18 +168,37 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
 
 
         clicklistener();
+        bookingTimer();
 
     }
 
-    public void clicklistener(){
 
+    public void clicklistener() {
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CancelOrderTripWithReasonActivity.class);
+                //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
+                intent.putExtra("bookTripIdCode", bookTripIdCode);
+                intent.putExtra("bookId",bookId);
+                intent.putExtra("vTypeId", vehicleTypeId);
+                startActivityForResult(intent, 1000);
 
+            }
+        });
 
+        infoTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent = new Intent(getApplicationContext(), BookingInfoDetailsActivity.class);
+                // asked by sir not sure
+//                HighwayPrefs.putString(getApplicationContext(),Constants.BOOKINGTRIPID,tripId);
+//                HighwayPrefs.putString(getApplicationContext(),Constants.USERMOBILE,userMobileNO);
+//                HighwayPrefs.putString(getApplicationContext(),RECEIVERPHONENO,userRecvNO);
 
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -169,10 +208,8 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
         sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
 
-
         destLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLat();
         destLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLong();
-
 
         sourceLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat();
         sourceLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong();
@@ -206,6 +243,7 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         marker.draw(canvas);
 
         return bitmap;
+
     }
 
     @Override
@@ -373,7 +411,6 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
     }
 
-
     BroadcastReceiver repDetailReciever = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -381,4 +418,63 @@ public class BookingConfirmedActivity extends AppCompatActivity implements OnMap
         }
     };
 
+
+    public void bookingTimer() {
+
+        new CountDownTimer(60 * 10 * 1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                String text = String.format(Locale.getDefault(), "%02d: %02d",
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60);
+                bookingInfoForDriverAllocationTime.setText(text);
+            }
+
+            public void onFinish() {
+                bookingInfoForDriverAllocationTime.setText("Time up!");
+                timeUp = true;
+                showAlertDiolog("");
+            }
+
+        }.start();
+    }
+
+    private void showAlertDiolog(String message) {
+
+
+        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.activity_show_alert_dialog_driver_not_responding, null);
+        dialogBuilder.setView(dialogView);
+
+        final android.app.AlertDialog dialog = dialogBuilder.create();
+        Button done = dialogView.findViewById(R.id.btn_done);
+
+
+        TextView text_cancel = dialogView.findViewById(R.id.text_cancel);
+        text_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
+    }
+
+    //by sir notes
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_OK) {
+
+            if (data.hasExtra("isCancelled") && data.getBooleanExtra("isCancelled", false)) {
+                finish();
+            }
+
+            if (data.hasExtra("isVehicleInfo") && data.getBooleanExtra("isVehicleInfo", false)) {
+                finish();
+            }
+        }
+    }
 }

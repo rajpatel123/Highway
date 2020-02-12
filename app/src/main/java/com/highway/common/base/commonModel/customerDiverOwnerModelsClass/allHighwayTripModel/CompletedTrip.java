@@ -1,5 +1,5 @@
 
-package com.highway.common.base.commonModel.customerDiverOwnerModelsClass;
+package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -18,9 +18,12 @@ public class CompletedTrip {
     @SerializedName("destinationLong")
     @Expose
     private String destinationLong;
-    @SerializedName("customerName")
+    @SerializedName("name")
     @Expose
-    private String customerName;
+    private String name;
+    @SerializedName("role")
+    @Expose
+    private String role;
     @SerializedName("vehicleName")
     @Expose
     private String vehicleName;
@@ -33,6 +36,9 @@ public class CompletedTrip {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("tripType")
+    @Expose
+    private String tripType;
     @SerializedName("startDate")
     @Expose
     private String startDate;
@@ -78,12 +84,20 @@ public class CompletedTrip {
         this.destinationLong = destinationLong;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getVehicleName() {
@@ -116,6 +130,14 @@ public class CompletedTrip {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
     }
 
     public String getStartDate() {

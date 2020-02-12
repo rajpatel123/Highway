@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CompletedTrip;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -26,7 +25,6 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
     public OnGoingTripAdapterForCustomer(List<OngoingTrip> ongoingTrips, Context context) {
         this.context = context;
         this.ongoingTrips = ongoingTrips;
-
     }
 
     @NonNull
@@ -43,7 +41,7 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
         OngoingTrip ongoingTrip = ongoingTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()), Double.parseDouble(ongoingTrip.getSourceLong()));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()), Double.parseDouble(ongoingTrip.getDestinationLong()));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getDestinationLat()), Double.parseDouble(ongoingTrip.getDestinationLong()));
 
         holder.tv1CompleteDate.setText("" + ongoingTrip.getEndDate());
         holder.tv2SourceAddress.setText(" " + Utils.getAddress(context, sourceAddLatLng));

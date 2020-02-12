@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.CancelTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.utils.Utils;
 
 
@@ -42,7 +42,7 @@ public class CancleTripAdapterForVehicleOwner extends RecyclerView.Adapter<Cancl
        CancelTrip cancelTrip = cancelTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(cancelTrip.getSourceLat()),Double.parseDouble(cancelTrip.getSourceLong()));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(cancelTrip.getSourceLat()),Double.parseDouble(cancelTrip.getDestinationLong()));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(cancelTrip.getDestinationLat()),Double.parseDouble(cancelTrip.getDestinationLong()));
 
         holder.tv1CompleteDate.setText(""+cancelTrip.getEndDate());
         holder.tv2SourceAddress.setText(""+ Utils.getAddress(context,sourceAddLatLng));

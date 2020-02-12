@@ -2,14 +2,12 @@ package com.highway.customer.customerActivity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.location.Location;
 import android.os.Build;
@@ -69,14 +67,10 @@ import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicle
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.bookingVehicleList.VInfo;
 import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfo;
-import com.highway.customer.customerModelClass.vehicleInfo.VehicleInfoResponse;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
-
-import android.graphics.PorterDuff.Mode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -117,11 +111,9 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     ImageView vehileBookImg;
     TextView info1, info2, info3, info4, info5, info6;
     List<VehicleList> vehicleList = new ArrayList<>();
-    List<VehicleInfo> vehicleInfoList = new ArrayList<>();
     List<VInfo> vInfoList = new ArrayList<>();
     BookingVehicleAdapter bookingVehicleAdapter;
     BookingVehicleListResponse bookingVehicleListResponse;
-    VehicleInfoResponse vehicleInfoResponse;
     String user_Id;
     private Polyline currentPolyline;
     private GoogleMap mMap;
@@ -131,7 +123,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     private String sourceName;
     private String destName;
     private boolean isSelected;
-    private String gdTypeId, gdTypeText;
+    private String gdTypeId, gdTypeText, vehicleTypId;
     private boolean userclicked;
     private Paint paint;
 
@@ -257,11 +249,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             @Override
             public void onClick(View view) {
 
-                if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId()) && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getGoodsTypeId())) {
-                    ReceiverBottomSheetFragment receiverBottomSheetFragment =
-                            ReceiverBottomSheetFragment.newInstance().newInstance();
-                    receiverBottomSheetFragment.show(getSupportFragmentManager(),
-                            ReceiverBottomSheetFragment.TAG);
+                if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId())
+                        && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getGoodsTypeId())) {
+                    ReceiverBottomSheetFragment receiverBottomSheetFragment = ReceiverBottomSheetFragment.newInstance().newInstance();
+                    receiverBottomSheetFragment.show(getSupportFragmentManager(), ReceiverBottomSheetFragment.TAG);
                 } else {
                     Toast.makeText(BookingWithDetailsActivity.this, "Please select vehicle and goods type", Toast.LENGTH_LONG).show();
                 }
@@ -286,6 +277,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
             distance();
+
         }
     }
 
@@ -658,21 +650,12 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     @Override
     public void onCLickTruck(int position, String fare) {
 
-        /*if (userclicked) {
-            paint.setColor(Color.GREEN);
-        } else {
-            paint.setColor(Color.BLACK);
-        }*/
-
-
         if (vehicleList != null && vehicleList.size() > 0) {
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
             HighwayApplication.getInstance().getBookingHTripRequest().setVehicleTypeId(vehicleList.get(position).getVehicleId());
             HighwayApplication.getInstance().getBookingHTripRequest().setTripFare(fare);
-
         }
     }
-
 
     public void getBookingVehicle() {
 

@@ -12,9 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
@@ -33,23 +32,38 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-
-        <activity android:name=".customer.customerActivity.GoodTypeDetailsRecyclerItemActivity"></activity>
-        <activity android:name=".customer.customerActivity.DropActivity" />
-        <activity android:name=".customer.customerActivity.TripBookingActivity" />
-        <activity android:name=".customer.customerActivity.CalcelOrderActivityWithReason" />
-        <activity android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity" />
+        <activity
+            android:name=".customer.customerActivity.BookingInfoDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.customerActivity.GoodTypeDetailsRecyclerItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.customerActivity.DropActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.customerActivity.TripBookingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.customerActivity.CancelOrderTripWithReasonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" /> <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" /> <!-- <activity -->
+            android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" />
+
         <activity
             android:name=".common.base.activity.SplashActivity"
             android:screenOrientation="portrait">
+
+            <!-- <activity android:name=".customer.customerActivity.CancelOrderTripWithReasonActivity" android:screenOrientation="portrait"> -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,17 +73,20 @@
         <activity
             android:name=".customer.customerActivity.WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".customer.customerActivity.GoodsTypeDetailActivity" />
+        <activity
+            android:name=".customer.customerActivity.GoodsTypeDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".customer.customerActivity.BookingWithDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".customer.customerActivity.WelcomeActivityForCustomer"
             android:screenOrientation="portrait" />
-        <activity android:name=".customer.customerActivity.ConfirmBookingActivity"
+        <activity
+            android:name=".customer.customerActivity.ConformBookingActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".customer.customerActivity.BookingConfirmedActivity"
+        <activity
+            android:name=".customer.customerActivity.BookingConformedActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".millUserModule.milluserActivity.WelcomeActivityForMiller"
@@ -108,23 +125,16 @@
             android:name=".drivermodule.driverActivity.LoginActivityForDriver"
             android:screenOrientation="portrait" />
 
-        <service
-            android:name=".common.base.firebaseService.MyFirebaseServiceMessaging">
-        <intent-filter>
-            <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-        </intent-filter>
-    </service>
-
-
-        <!--Recievers-->
-        <receiver
-            android:name=".reciever.SmsReceiver">
+        <service android:name=".common.base.firebaseService.MyFirebaseServiceMessaging">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service> <!-- Recievers -->
+        <receiver android:name=".reciever.SmsReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
-        <!--Recievers-->
     </application>
 
 </manifest>

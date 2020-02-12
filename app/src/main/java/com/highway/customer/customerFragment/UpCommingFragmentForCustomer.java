@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.UpcomingTrip;
-import com.highway.customer.customerAdapter.OnGoingTripAdapterForCustomer;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.UpcomingTrip;
 import com.highway.customer.customerAdapter.UpComingTripAdapterForCustomer;
 
 import java.util.ArrayList;

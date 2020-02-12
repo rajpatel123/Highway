@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/BookVehicleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TATA ACE"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/BookVehicleImg"
+                android:layout_width="@dimen/margin_Top80"
+                android:layout_height="@dimen/margin_Top80"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/truck" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/green" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20"
+                android:text="Loading Capacity" />
+
+
+            <TextView
+                android:id="@+id/VehicleCapacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:text="560Kg" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@color/green" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20"
+                android:text="Vehicle Size" />
+
+
+            <TextView
+                android:id="@+id/VehicleSizeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:text="270 x 500" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@color/green" />
+
+
+        <TextView
+            android:id="@+id/Bookinfo1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:padding="@dimen/margin_10"
+            android:text="1"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/Bookinfo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:padding="@dimen/margin_10"
+            android:text="2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/Bookinfo3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:padding="@dimen/margin_10"
+            android:text="3"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/Bookinfo4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:padding="@dimen/margin_10"
+            android:text="4"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/Bookinfo5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:padding="@dimen/margin_10"
+            android:text="5"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/Bookinfo6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:padding="@dimen/margin_10"
+            android:text="6"
+            android:textSize="12sp" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

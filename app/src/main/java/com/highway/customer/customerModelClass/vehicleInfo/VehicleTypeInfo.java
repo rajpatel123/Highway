@@ -4,20 +4,20 @@ package com.highway.customer.customerModelClass.vehicleInfo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleInfo {
+public class VehicleTypeInfo {
 
-    @SerializedName("VehicleId")
+    @SerializedName("VehicleTypeId")
     @Expose
-    private String vehicleId;
-    @SerializedName("VehicleName")
+    private String vehicleTypeId;
+    @SerializedName("VehicleTypeName")
     @Expose
-    private String vehicleName;
+    private String vehicleTypeName;
     @SerializedName("VehicleCapacity")
     @Expose
-    private Object vehicleCapacity;
+    private String vehicleCapacity;
     @SerializedName("VehicleSize")
     @Expose
-    private Object vehicleSize;
+    private String vehicleSize;
     @SerializedName("v_info1")
     @Expose
     private String vInfo1;
@@ -36,36 +36,39 @@ public class VehicleInfo {
     @SerializedName("v_info6")
     @Expose
     private String vInfo6;
+    @SerializedName("v_info7")
+    @Expose
+    private String vInfo7;
 
-    public String getVehicleId() {
-        return vehicleId;
+    public String getVehicleTypeId() {
+        return vehicleTypeId;
     }
 
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
+    public void setVehicleTypeId(String vehicleTypeId) {
+        this.vehicleTypeId = vehicleTypeId;
     }
 
-    public String getVehicleName() {
-        return vehicleName;
+    public String getVehicleTypeName() {
+        return vehicleTypeName;
     }
 
-    public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
+    public void setVehicleTypeName(String vehicleTypeName) {
+        this.vehicleTypeName = vehicleTypeName;
     }
 
-    public Object getVehicleCapacity() {
+    public String getVehicleCapacity() {
         return vehicleCapacity;
     }
 
-    public void setVehicleCapacity(Object vehicleCapacity) {
+    public void setVehicleCapacity(String vehicleCapacity) {
         this.vehicleCapacity = vehicleCapacity;
     }
 
-    public Object getVehicleSize() {
+    public String getVehicleSize() {
         return vehicleSize;
     }
 
-    public void setVehicleSize(Object vehicleSize) {
+    public void setVehicleSize(String vehicleSize) {
         this.vehicleSize = vehicleSize;
     }
 
@@ -115,6 +118,14 @@ public class VehicleInfo {
 
     public void setVInfo6(String vInfo6) {
         this.vInfo6 = vInfo6;
+    }
+
+    public String getVInfo7() {
+        return vInfo7;
+    }
+
+    public void setVInfo7(String vInfo7) {
+        this.vInfo7 = vInfo7;
     }
 
 }

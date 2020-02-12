@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.OngoingTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class OnGoingTripAdapterForDriver extends RecyclerView.Adapter<OnGoingTri
         OngoingTrip ongoingTrip = ongoingTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()), Double.parseDouble(ongoingTrip.getSourceLong()));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getSourceLat()), Double.parseDouble(ongoingTrip.getDestinationLong()));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(ongoingTrip.getDestinationLat()), Double.parseDouble(ongoingTrip.getDestinationLong()));
         holder.tv1CompleteDate.setText(" " + ongoingTrip.getEndDate());
         holder.tv2SourceAddress.setText(" " + Utils.getAddress(context, sourceAddLatLng));
         holder.tv4DestAddress.setText(" " + Utils.getAddress(context, destAddLatLng));

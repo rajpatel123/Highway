@@ -33,7 +33,6 @@ import retrofit2.Response;
 
 public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsTypeAdapter.OnGoodTypeSelect {
 
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private String title;
@@ -58,9 +57,7 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         }
-
         getSupportActionBar().setTitle("Select your goods type");
         // As you wish make Adapter or not asked sir .............
         goodsTypeAdapter = new GoodsTypeAdapter(goodsTypeDataResponse, getApplicationContext(),this::onSelectGoodType);
@@ -91,19 +88,15 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
                         goodsTypeDataResponse = response.body();
                         goodsTypeAdapter.setData(goodsTypeDataResponse);
                         goodsTypeAdapter.notifyDataSetChanged();
-
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "response failed", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<GoodsTypeDataResponse> call, Throwable t) {
                 Toast.makeText(GoodsTypeDetailActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -115,7 +108,6 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
         recyclerViewGoodsTypeList.setLayoutManager(layoutManager);
         recyclerViewGoodsTypeList.setItemAnimator(new DefaultItemAnimator());
         recyclerViewGoodsTypeList.setAdapter(goodsTypeAdapter);
-
     }
 
 

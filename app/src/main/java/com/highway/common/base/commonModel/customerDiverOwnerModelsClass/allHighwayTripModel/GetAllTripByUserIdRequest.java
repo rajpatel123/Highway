@@ -1,10 +1,9 @@
-package com.highway.common.base.commonModel.customerDiverOwnerModelsClass;
-
+package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AllHighwayTripsRequest {
+public class GetAllTripByUserIdRequest {
 
 @SerializedName("User_Id")
 @Expose
