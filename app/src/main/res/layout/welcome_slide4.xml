@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <!--android:background="@color/bg_screen4">-->
 
     <LinearLayout
@@ -11,23 +12,12 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/margin_width_150"
-            android:layout_height="@dimen/margin_height_150"
-            android:src="@drawable/highway11"/>
+
 
         <!--<ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
             android:src="@drawable/highway11" />-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/slide_4__title"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/slide_title"
-            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,6 +30,11 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/slide_desc" />
 
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/highway11"/>
     </LinearLayout>
 
 </RelativeLayout>

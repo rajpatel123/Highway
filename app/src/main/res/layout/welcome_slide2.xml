@@ -10,20 +10,6 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="@dimen/img_width_height"
-            android:layout_height="@dimen/img_width_height"
-            android:src="@drawable/highway1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/slide_2__title"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/slide_title"
-            android:textStyle="bold" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +20,15 @@
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="@dimen/slide_desc" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/highway1" />
+
+
+
+
 
     </LinearLayout>
 
