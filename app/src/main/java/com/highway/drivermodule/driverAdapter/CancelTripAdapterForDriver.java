@@ -51,8 +51,6 @@ public class CancelTripAdapterForDriver extends RecyclerView.Adapter<CancelTripA
         holder.tv6VehicleName.setText("" + cancelTrip.getVehicleName());
         holder.tv7FairCharge.setText("" + cancelTrip.getVehicleName());
         // img
-
-
     }
 
     @Override
@@ -76,8 +74,6 @@ public class CancelTripAdapterForDriver extends RecyclerView.Adapter<CancelTripA
             img2DestIndicator = itemView.findViewById(R.id.Img2DestIndicator);
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
-
-
         }
     }
 }

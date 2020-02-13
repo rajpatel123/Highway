@@ -65,13 +65,13 @@ public class DashBordFragmentForCustomer extends Fragment {
 
         upCommingFragmentForCustomer = new UpCommingFragmentForCustomer();
         onGoingFragmentForCustomer = new OnGoingFragmentForCustomer();
-        pendingFragmentForCustomer = new PendingFragmentForCustomer();
+       // pendingFragmentForCustomer = new PendingFragmentForCustomer();
         completedFragmentForCustomer = new CompletedFragmentForCustomer();
         cancelFragmentForCustomer = new CancelFragmentForCustomer();
 
         customerfragmentList.add(upCommingFragmentForCustomer);
         customerfragmentList.add(onGoingFragmentForCustomer);
-        customerfragmentList.add(pendingFragmentForCustomer);
+        //customerfragmentList.add(pendingFragmentForCustomer);
         customerfragmentList.add(completedFragmentForCustomer);
         customerfragmentList.add(cancelFragmentForCustomer);
 

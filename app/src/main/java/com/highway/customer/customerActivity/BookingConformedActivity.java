@@ -353,8 +353,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
-
-
     }
 
 
@@ -434,7 +432,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 timeUp = true;
                 showAlertDiolog("");
             }
-
         }.start();
     }
 
@@ -450,13 +447,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         final android.app.AlertDialog dialog = dialogBuilder.create();
         Button done = dialogView.findViewById(R.id.btn_done);
 
-
         TextView text_cancel = dialogView.findViewById(R.id.text_cancel);
         text_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
             }
         });
     }

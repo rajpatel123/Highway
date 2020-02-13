@@ -73,13 +73,13 @@ public class DashBoardFragmentForDriver extends Fragment {
 
         upComingFragmentForDriver = new UpComingFragmentForDriver();
         onGoingFragmentForDriver = new OnGoingFragmentForDriver();
-        pendingFragmentForDriver = new PendingFragmentForDriver();
+     //   pendingFragmentForDriver = new PendingFragmentForDriver();
         completedFragmentForDriver = new CompletedFragmentForDriver();
         cancelFragmentForDriver = new CancelFragmentForDriver();
 
         driverFragmentList.add(upComingFragmentForDriver);
         driverFragmentList.add(onGoingFragmentForDriver);
-        driverFragmentList.add(pendingFragmentForDriver);
+    //    driverFragmentList.add(pendingFragmentForDriver);
         driverFragmentList.add(completedFragmentForDriver);
         driverFragmentList.add(cancelFragmentForDriver);
 
