@@ -57,7 +57,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         VehicleList vehicleList = bookingVehicleListResponse.getVehicleData().getVehicleList().get(position);
 
         holder.tataAceTv1.setText(""+vehicleList.getVehicleName());
-        HighwayPrefs.putString(context,"bookVehicleName",vehicleList.getVehicleName());
         holder.faireChargeTv3.setText("\u20B9"+vehicleList.getVehicleFare());
 
         if (vehicleList.isSelected()){
