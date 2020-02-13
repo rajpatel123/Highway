@@ -5,6 +5,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +18,26 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
+import com.highway.commonretrofit.RestClient;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-public class IncomingRequestFragmentForDriver extends Fragment {
+public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener {
     private Button btnReject;
     private Button btnAccept;
     private TextView lblCount;
@@ -71,7 +81,7 @@ public class IncomingRequestFragmentForDriver extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            Log.e(getClass().getSimpleName(), getArguments().getString(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, "Default"));
         }
     }
 
@@ -164,6 +174,37 @@ public class IncomingRequestFragmentForDriver extends Fragment {
         animator.start();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnReject:
+
+
+                break;
+
+            case R.id.btnAccept:
+
+                break;
+        }
+    }
+
+    private void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData){
+        RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
+            @Override
+            public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
+                if (response.code() == 200 && response.body() != null) {
+
+                    BookingAcceptRejectResponse resp = response.body();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookingAcceptRejectResponse> call, Throwable t) {
+
+            }
+        });
+    }
 
 //    public void getDistance(LatLng source, LatLng destination) {
 //        GoogleDirection.withServerKey(BuildConfig.google_map_key)

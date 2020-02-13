@@ -85,7 +85,7 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
 
 
         } else {
-            Toast.makeText(dashBoardActivity, "Some thing is wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "Some thing is wrong in completed trips for vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 

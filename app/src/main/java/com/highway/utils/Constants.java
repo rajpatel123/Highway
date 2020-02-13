@@ -8,7 +8,7 @@ public class Constants {
     public static final String IMAGE = "image"; // daught
     public static final String EMAIL = "email";
     public static final String USERMOBILE = "userMobile";
-   public static final String GENDER = "gender";
+    public static final String GENDER = "gender";
     public static final String ROLEID = "roleid";
     public static final String ADDRESS = "address";
     public static final String MillerEmail = "millerEmail";
@@ -32,5 +32,16 @@ public class Constants {
     public static final String BOOKINGTRIPID = "bookingTripId";
     public static final String VEHICLETYPEID = "vehicleTypeId";
 
+
+    public static final String PUSH_NEW_BOOKING_TRIP_DATA_KEY = "PUSH_NEW_BOOKING_TRIP_DATA_KEY";
+
+
+    public static final String NOTIFICATION_TYPE_TRIP_ACCEPTED = "TRIP_ACCEPTED";
+    public static final String NOTIFICATION_TYPE_TRIP_REJECTED = "TRIP_REJECTED";
+    public static final String NOTIFICATION_TYPE_TRIP_START = "TRIP_START";
+    public static final String NOTIFICATION_TYPE_TRIP_END = "TRIP_END";
+    public static final String NOTIFICATION_TYPE_TRIP_CANCEL = "TRIP_CANCEL";
+    public static final String NOTIFICATION_TYPE_TRIP_NEW = "TRIP_NEW";
+    public static final String NOTIFICATION_TYPE_TRIP_NORESPONCE = "TRIP_NORESPONCE";
 
 }

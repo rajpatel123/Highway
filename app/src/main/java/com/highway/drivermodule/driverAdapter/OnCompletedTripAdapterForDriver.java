@@ -45,7 +45,7 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
         CompletedTrip completedTrip = completedTrips.get(position);
 
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getDestinationLong()));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(completedTrip.getDestinationLat()),Double.parseDouble(completedTrip.getDestinationLong()));
         holder.tv1CompleteDate.setText(" " + completedTrip.getEndDate());
         holder.tv2SourceAddress.setText(" " + Utils.getAddress(context, sourceAddLatLng));
         holder.tv4DestAddress.setText(" " + Utils.getAddress(context, destAddLatLng));

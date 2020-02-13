@@ -36,7 +36,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     private Button btnVerify;
     private ImageView backImage;
     private TextView resend;
-    private TextView mobileNumberTV,changeNumberTv;
+    private TextView mobileNumberTV, changeNumberTv;
     String userId;
 
 
@@ -55,7 +55,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
 
         timerInOtp();                          // time count dowan of otp
 
-        mobileNumberTV.setText(HighwayPrefs.getString(this,Constants.USERMOBILE));
+        mobileNumberTV.setText(HighwayPrefs.getString(this, Constants.USERMOBILE));
 
         smsReceiver.bindListener(this);
 
@@ -67,11 +67,10 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         });
 
 
-
         changeNumberTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MobileOtpVerificationActivity.this,LoginActivityForCustomer.class);
+                Intent intent = new Intent(MobileOtpVerificationActivity.this, LoginActivityForCustomer.class);
                 startActivity(intent);
                 finish();
             }
@@ -149,7 +148,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                                 Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();
                                 finish();*/
                             }
-                        }else{
+                        } else {
                             Toast.makeText(MobileOtpVerificationActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
 
                         }
@@ -173,6 +172,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         HighwayPrefs.putString(getApplicationContext(), Constants.NAME, verifyOtpResponse.getUser().getName());
         HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, verifyOtpResponse.getUser().getMobile());
         HighwayPrefs.putString(getApplicationContext(), Constants.User_statuss, verifyOtpResponse.getUser().getUserStatus());
+        System.out.println("User Status otp_verify" + verifyOtpResponse.getUser().getUserStatus());
 
         HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, verifyOtpResponse.getUser().getImage());
         HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, verifyOtpResponse.getUser().getEmail());
@@ -191,7 +191,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            if (smsReceiver!=null)
+            if (smsReceiver != null)
                 unregisterReceiver(smsReceiver);
             super.onBackPressed();
             return;

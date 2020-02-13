@@ -1,9 +1,10 @@
-package com.highway.common.base.commonModel.bookingHTrip;
+package com.highway.drivermodule.driverModelClass;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BookingHTripResponse {
+public class BookingAcceptRejectResponse {
+
 
     @SerializedName("status")
     @Expose
@@ -11,12 +12,9 @@ public class BookingHTripResponse {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("bookIdCode")
+    @SerializedName("driverVehicleDetails")
     @Expose
-    private String bookIdCode;
-    @SerializedName("bookId")
-    @Expose
-    private String bookId;
+    private DriverVehicleDetails driverVehicleDetails;
 
     public Boolean getStatus() {
         return status;
@@ -34,20 +32,11 @@ public class BookingHTripResponse {
         this.message = message;
     }
 
-    public String getBookIdCode() {
-        return bookIdCode;
+    public DriverVehicleDetails getDriverVehicleDetails() {
+        return driverVehicleDetails;
     }
 
-    public void setBookIdCode(String bookIdCode) {
-        this.bookIdCode = bookIdCode;
+    public void setDriverVehicleDetails(DriverVehicleDetails driverVehicleDetails) {
+        this.driverVehicleDetails = driverVehicleDetails;
     }
-
-    public String getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
-    }
-
 }

@@ -100,14 +100,14 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private String gdTypeId, gdTypeText;
     BookingVehicleListResponse bookingVehicleListResponse;
     private String tripId, userRecvNO, userMobileNO;
-    public String bookTripId;
-    private String vehicleTypeId;
+    public String bookTripIdCode,bookId,vehicleTypeId;
     public boolean timeUp;
 
 
-    public static void start(ConformBookingActivity activity, String tripId, String vTypeId) {
+    public static void start(ConformBookingActivity activity, String bookTripIdCode, String bookId, String vTypeId) {
         Intent intent = new Intent(activity, BookingConformedActivity.class);
-        intent.putExtra("tripId", tripId);
+        intent.putExtra("bookTripIdCode", bookTripIdCode);
+        intent.putExtra("bookId", bookId);
         intent.putExtra("vTypeId", vTypeId);
         activity.startActivity(intent);
 
@@ -138,10 +138,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-            if (getIntent().hasExtra("tripId")) {
-                bookTripId = getIntent().getStringExtra("tripId");
+            if (getIntent().hasExtra("bookTripIdCode")) {
+                bookTripIdCode = getIntent().getStringExtra("bookTripIdCode");
+                bookId = getIntent().getStringExtra("bookId");
                 vehicleTypeId = getIntent().getStringExtra("vTypeId");  //vehicle type id
-                getSupportActionBar().setTitle("TRIP " + bookTripId);
+                getSupportActionBar().setTitle("TRIP " + bookTripIdCode);
                 HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
 
             }
@@ -178,7 +179,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CancelOrderTripWithReasonActivity.class);
                 //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
-                intent.putExtra("tripId", bookTripId);
+                intent.putExtra("bookTripIdCode", bookTripIdCode);
+                intent.putExtra("bookId",bookId);
                 intent.putExtra("vTypeId", vehicleTypeId);
                 startActivityForResult(intent, 1000);
 
@@ -194,9 +196,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 //                HighwayPrefs.putString(getApplicationContext(),Constants.BOOKINGTRIPID,tripId);
 //                HighwayPrefs.putString(getApplicationContext(),Constants.USERMOBILE,userMobileNO);
 //                HighwayPrefs.putString(getApplicationContext(),RECEIVERPHONENO,userRecvNO);
-
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }

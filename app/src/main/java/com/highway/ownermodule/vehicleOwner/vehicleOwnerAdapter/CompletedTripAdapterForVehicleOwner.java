@@ -41,7 +41,7 @@ public class CompletedTripAdapterForVehicleOwner extends RecyclerView.Adapter<Co
         CompletedTrip completedTrip = completedTrips.get(position);
          // for Address finding
         LatLng sourceAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
-        LatLng destAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getDestinationLong()));
+        LatLng destAddressLatLng = new LatLng(Double.parseDouble(completedTrip.getDestinationLat()),Double.parseDouble(completedTrip.getDestinationLong()));
 
         holder.tv1CompleteDate.setText(""+completedTrip.getEndDate());
         holder.tv2SourceAddress.setText(""+Utils.getAddress(context,sourceAddressLatLng));

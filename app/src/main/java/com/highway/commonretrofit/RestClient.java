@@ -21,6 +21,8 @@ import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDat
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameResponse;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
 import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
 import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
@@ -177,6 +179,11 @@ public class RestClient {
     public static void confirmBooking(BookingHTripRequest bookingHTripRequest, Callback<BookingHTripResponse> bookingHTripRespCallback) {
         RetrofitClient.getClient().BOOKING_H_TRIP_RESPONSE_CALL(bookingHTripRequest).enqueue(bookingHTripRespCallback);
     }
+    // accept/reject booking by driver
+    public static void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, Callback<BookingAcceptRejectResponse> acceptRejectResponseCallback){
+        RetrofitClient.getClient().ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(acceptRejectData).enqueue(acceptRejectResponseCallback);
+    }
+
 
     // cancel reason type
     public static void getCancleReason(CancelTripReasonRequest cancelTripReasonRequest, Callback<CancelTripReasonResponse> cancelTripReasonResponseCallback) {

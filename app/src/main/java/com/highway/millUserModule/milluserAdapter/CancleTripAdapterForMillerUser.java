@@ -44,7 +44,7 @@ public class CancleTripAdapterForMillerUser extends RecyclerView.Adapter<CancleT
          CancelTrip cancelTrip = cancelTrips.get(position);
 
         sourceAddLatLng = new LatLng(Double.parseDouble(cancelTrip.getSourceLat()),Double.parseDouble(cancelTrip.getSourceLong()));
-        destAddLatLng = new LatLng(Double.parseDouble(cancelTrip.getSourceLat()),Double.parseDouble(cancelTrip.getDestinationLong()));
+        destAddLatLng = new LatLng(Double.parseDouble(cancelTrip.getDestinationLat()),Double.parseDouble(cancelTrip.getDestinationLong()));
 
         holder.tv1CompleteDate.setText(""+cancelTrip.getEndDate());
         holder.tv2SourceAddress.setText(""+ Utils.getAddress(context,sourceAddLatLng));

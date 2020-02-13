@@ -41,7 +41,7 @@ public class UpComingTripAdapterForMillUser extends RecyclerView.Adapter<UpComin
         UpcomingTrip upcomingTrip = upcomingTrips.get(position);
 
         LatLng sourceAddressLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()),Double.parseDouble(upcomingTrip.getSourceLong()));
-        LatLng destAddressLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()),Double.parseDouble(upcomingTrip.getDestinationLong()));
+        LatLng destAddressLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()),Double.parseDouble(upcomingTrip.getDestinationLong()));
         holder.tv1CompleteDate.setText(""+upcomingTrip.getEndDate());
         holder.tv2SourceAddress.setText(""+ Utils.getAddress(context,sourceAddressLatLng));
         holder.tv4DestAddress.setText("" +Utils.getAddress(context,destAddressLatLng));

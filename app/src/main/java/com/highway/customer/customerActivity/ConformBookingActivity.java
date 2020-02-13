@@ -159,8 +159,8 @@ public class ConformBookingActivity extends AppCompatActivity implements OnMapRe
                         if (response.code() == 200 && response.body() != null) {
 
                             BookingHTripResponse resp = response.body();
-                            if (resp != null && resp.getId() != null)
-                                BookingConformedActivity.start(ConformBookingActivity.this, resp.getId(),
+                            if (resp != null && resp.getBookIdCode() != null && resp.getBookId()!=null)
+                                BookingConformedActivity.start(ConformBookingActivity.this, resp.getBookIdCode(), resp.getBookId(),
                                         HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId());
                         }
                     }

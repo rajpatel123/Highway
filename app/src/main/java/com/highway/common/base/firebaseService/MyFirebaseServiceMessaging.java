@@ -28,21 +28,25 @@ import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.services.MyJobService;
+import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     int notificationId = 0;
     private static final String TAG = "MyFirebaseMsgService";
-    public static final String INTENT_FILTER = "INTENT_FILTER"+ BuildConfig.APPLICATION_ID;
+    public static final String INTENT_FILTER = "INTENT_FILTER" + BuildConfig.APPLICATION_ID;
 
     @Override
     public void onNewToken(String s) {
         @SuppressLint("HardwareIds")
         String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        Log.d("DEVICE_ID: " , deviceId);
-        Log.d("FCM_TOKEN",s);
+        Log.d("DEVICE_ID: ", deviceId);
+        Log.d("FCM_TOKEN", s);
 
         HighwayPrefs.putString(this, "device_token", s);
         HighwayPrefs.putString(this, "device_id", deviceId);
@@ -54,16 +58,12 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
     // [START receive_message]
-
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        Intent intent = new Intent(INTENT_FILTER);
-        sendBroadcast(intent);
+//        Intent intent = new Intent(INTENT_FILTER);
+//        sendBroadcast(intent);
 
         // [START_EXCLUDE]
         // There are two types of messages data messages and notification messages. Data messages are handled
@@ -81,7 +81,13 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-            sendNotification(remoteMessage.getData().get("message"));
+//            sendNotification(remoteMessage.getData().get("message"));
+            try {
+                JSONObject json = new JSONObject(remoteMessage.getData());
+                handleDataMessage(json);
+            } catch (Exception e) {
+                Log.e("Exception: ", e.getMessage());
+            }
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -117,30 +123,29 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
      */
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private void sendNotification(String messageBody) {
 
         if (!Utilities.isAppIsInBackground(getApplicationContext())) {
             // app is in foreground, broadcast the push message
             Utilities.printV(TAG, "foreground");
-        }
-        else
-        {
-            Utilities.printV(TAG,"background");
+        } else {
+            Utilities.printV(TAG, "background");
             // app is in background, show the notification in notification tray
-            if(messageBody.equalsIgnoreCase("New Incoming Ride")){
-
-                Intent mainIntent = new Intent(this, DashBoardActivity.class);
-                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(mainIntent);
-            }
+//            if (messageBody.equalsIgnoreCase("New Incoming Ride")) {
+//
+//                Intent mainIntent = new Intent(this, DashBoardActivity.class);
+//                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, messageBody);
+//                startActivity(mainIntent);
+//            }
         }
 
 
         Intent intent = new Intent(getApplicationContext(), DashBoardActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, messageBody);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "PUSH");
@@ -183,7 +188,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        notificationManager.notify(0, notification);
+        notificationManager.notify(notifyID, notification);
     }
 
     private int getNotificationIcon(NotificationCompat.Builder notificationBuilder) {
@@ -224,5 +229,48 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
         notificationManager.notify(notificationId++ *//* ID of notification *//*, notificationBuilder.build());
     }*/
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void handleDataMessage(JSONObject json) {
+        try {
+//            JSONObject data = json.getJSONObject("");
+            switch (json.getString("type")) {
+
+                case Constants.NOTIFICATION_TYPE_TRIP_NEW:
+                    String mobile = json.getString("mobile");
+                    String message = json.getString("message");
+                    String destination = json.getString("destination");
+                    String tripId = json.getString("tripId");
+                    String source = json.getString("source");
+                    String type = json.getString("type");
+                    String customer = json.getString("customer");
+                    System.out.println(mobile + message + destination + tripId + source + type + customer);
+                    sendNotification(mobile);
+                    break;
+
+                case Constants.NOTIFICATION_TYPE_TRIP_CANCEL:
+                    break;
+
+                case Constants.NOTIFICATION_TYPE_TRIP_START:
+                    break;
+
+                case Constants.NOTIFICATION_TYPE_TRIP_END:
+                    break;
+
+                case Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED:
+                    break;
+
+                case Constants.NOTIFICATION_TYPE_TRIP_REJECTED:
+                    break;
+
+                case Constants.NOTIFICATION_TYPE_TRIP_NORESPONCE:
+                    break;
+            }
+        } catch (JSONException e) {
+            Log.e("Json Exception: ", e.getMessage());
+        } catch (Exception e) {
+            Log.e("Exception: ", e.getMessage());
+        }
+    }
 
 }

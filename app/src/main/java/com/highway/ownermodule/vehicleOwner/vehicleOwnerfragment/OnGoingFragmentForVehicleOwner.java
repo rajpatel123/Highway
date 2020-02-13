@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -78,6 +79,8 @@ public class OnGoingFragmentForVehicleOwner extends Fragment {
             vehicleOngoingRecycler.setLayoutManager(layoutManager);
             vehicleOngoingRecycler.setItemAnimator(new DefaultItemAnimator());
             vehicleOngoingRecycler.setAdapter(onGoingTripAdapterForVehicleOwner);
+        }else {
+            Toast.makeText(getActivity(), "No! trip found in Ongoing trips for Vehicle owner", Toast.LENGTH_SHORT).show();
         }
       }
 

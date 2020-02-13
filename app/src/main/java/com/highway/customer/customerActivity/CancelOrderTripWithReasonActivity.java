@@ -48,7 +48,7 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity {
     public RecyclerView canRsnTypeRecyler;
     public CancelledTripReasonAdapter cancelledTripReasonAdapter;
     public CancelTripReasonResponse cancelTripReasonResponse;
-    public String userId, bookId;
+    public String userId, bookId,bookTripIdCode,vTypeId;
     String cancelreasonid;
     Intent resultIntent;
 
@@ -82,7 +82,10 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity {
         showCanRsnTypeRV();
         getCanReasonData();
 
-        bookId = getIntent().getStringExtra("tripId");
+        bookId = getIntent().getStringExtra("bookId");
+        bookTripIdCode = getIntent().getStringExtra("bookTripIdCode");
+        vTypeId = getIntent().getStringExtra("");
+
         //cancelResnId = getIntent().getStringExtra("cancelReasonId");
     }
 
