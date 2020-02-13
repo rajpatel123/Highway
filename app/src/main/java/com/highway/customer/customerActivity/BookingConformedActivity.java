@@ -133,6 +133,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), RECEIVERPHONENO);
+        String bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
+        vehicleName.setText(bookVehicleName);
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
