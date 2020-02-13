@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -177,7 +178,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CancelOrderTripWithReasonActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CancelOrderTripByCustomerWithReasonActivity.class);
                 //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
                 intent.putExtra("bookTripIdCode", bookTripIdCode);
                 intent.putExtra("bookId",bookId);
@@ -470,5 +471,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 finish();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 }

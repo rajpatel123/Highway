@@ -36,9 +36,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CancelOrderTripWithReasonActivity extends AppCompatActivity {
+public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivity {
 
-    private static final String TAG = "CancelOrderTripWithReasonActivity";
+    private static final String TAG = "CancelOrderTripByCustomerWithReasonActivity";
     public Toolbar canToolbar;
     public EditText canReasonEdtTxt;
     public Button canBtn;
@@ -122,18 +122,19 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity {
 
                     }
                 } else {
-                    Toast.makeText(CancelOrderTripWithReasonActivity.this, "getting cancle reason response Failde", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CancelOrderTripByCustomerWithReasonActivity.this, "getting cancle reason response Failde", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CancelTripReasonResponse> call, Throwable t) {
-                Toast.makeText(CancelOrderTripWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CancelOrderTripByCustomerWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public boolean inputValidation() {
+
         cmntRsnEdtTxt = canReasonEdtTxt.getText().toString().trim();
 
         if (cmntRsnEdtTxt.isEmpty()) {
@@ -178,7 +179,7 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity {
                         if (response.body().getStatus()) {
 
                             resultIntent = new Intent(getApplicationContext(), DashBoardActivity.class);
-                            Toast.makeText(CancelOrderTripWithReasonActivity.this, "booking Cancled success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CancelOrderTripByCustomerWithReasonActivity.this, "booking Cancled success", Toast.LENGTH_SHORT).show();
                             startActivity(resultIntent);
                             finish();
 
@@ -191,7 +192,7 @@ public class CancelOrderTripWithReasonActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(Call<CancelTripByCustomerResponse> call, Throwable t) {
-                    Toast.makeText(CancelOrderTripWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CancelOrderTripByCustomerWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 }
             });
         }
