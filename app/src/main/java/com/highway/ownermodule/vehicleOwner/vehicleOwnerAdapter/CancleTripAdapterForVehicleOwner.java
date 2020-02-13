@@ -50,7 +50,7 @@ public class CancleTripAdapterForVehicleOwner extends RecyclerView.Adapter<Cancl
         holder.tv3SourceTime.setText(""+cancelTrip.getPickupTime());
         holder.tv5DestTime.setText(""+cancelTrip.getDropTime());
         holder.tv6VehicleName.setText(""+cancelTrip.getVehicleName());
-        holder.tv7FairCharge.setText(""+cancelTrip.getVehicleName());
+        holder.tv7FairCharge.setText(""+cancelTrip.getFare());
 
 
     }

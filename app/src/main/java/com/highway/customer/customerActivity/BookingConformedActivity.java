@@ -300,7 +300,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             mMap.setMyLocationEnabled(true);
         }
 
-
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -385,7 +384,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         }
     }
 
-
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
@@ -437,7 +435,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     }
 
     private void showAlertDiolog(String message) {
-
 
         final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
 

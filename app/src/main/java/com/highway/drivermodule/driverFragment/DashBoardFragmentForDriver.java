@@ -87,7 +87,7 @@ public class DashBoardFragmentForDriver extends Fragment {
                 getSupportFragmentManager(), driverFragmentList);
 
         driverViewPager.setAdapter(fragmentTabModeAdapterForDriver);
-        driverViewPager.setOffscreenPageLimit(5);
+        driverViewPager.setOffscreenPageLimit(4);
         driverTabLayout.setupWithViewPager(driverViewPager);
 
         driverTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {

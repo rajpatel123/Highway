@@ -62,8 +62,6 @@ public class OnGoingFragmentForVehicleOwner extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         dashBoardActivity = (DashBoardActivity) getActivity();
-
-
     }
 
     @Override

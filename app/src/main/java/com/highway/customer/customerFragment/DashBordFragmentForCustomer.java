@@ -79,7 +79,7 @@ public class DashBordFragmentForCustomer extends Fragment {
                 getSupportFragmentManager(), customerfragmentList);
 
         myBookingViewPager.setAdapter(fragmentAdapter);
-        myBookingViewPager.setOffscreenPageLimit(5);
+        myBookingViewPager.setOffscreenPageLimit(4);
         myBookingTabLayout.setupWithViewPager(myBookingViewPager);
 
         myBookingTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {

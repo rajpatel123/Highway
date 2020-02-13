@@ -53,7 +53,7 @@ public class UpComingTripAdapterForDriver extends RecyclerView.Adapter<UpComingT
         holder.tv3SourceTime.setText("" + upcomingTrip.getPickupTime());
         holder.tv5DestTime.setText("" + upcomingTrip.getDropTime());
         holder.tv6VehicleName.setText("" + upcomingTrip.getVehicleName());
-        holder.tv7FairCharge.setText("" + upcomingTrip.getVehicleName());
+        holder.tv7FairCharge.setText("" + upcomingTrip.getFare());
 
 
     }

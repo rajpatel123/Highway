@@ -50,7 +50,7 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
         holder.tv3SourceTime.setText("" + completedTrip.getPickupTime());
         holder.tv5DestTime.setText("" + completedTrip.getDropTime());
         holder.tv6VehicleName.setText("" + completedTrip.getVehicleName());
-        holder.tv7FairCharge.setText("" + completedTrip.getVehicleName());
+        holder.tv7FairCharge.setText("" + completedTrip.getFare());
         // img
 
     }
