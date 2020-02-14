@@ -52,7 +52,7 @@ public class CancleTripAdapterForMillerUser extends RecyclerView.Adapter<CancleT
         holder.tv3SourceTime.setText(""+cancelTrip.getPickupTime());
         holder.tv5DestTime.setText(""+cancelTrip.getDropTime());
         holder.tv6VehicleName.setText(""+cancelTrip.getVehicleName());
-        holder.tv7FairCharge.setText(""+cancelTrip.getVehicleName());
+        holder.tv7FairCharge.setText(""+cancelTrip.getFare());
         // load img
 
 

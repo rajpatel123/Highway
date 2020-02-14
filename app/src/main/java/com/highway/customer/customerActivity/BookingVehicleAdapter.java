@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
+import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
 import java.util.ArrayList;

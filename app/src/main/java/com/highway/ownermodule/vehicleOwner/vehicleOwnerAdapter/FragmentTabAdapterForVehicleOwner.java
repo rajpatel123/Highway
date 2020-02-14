@@ -42,8 +42,8 @@ public class FragmentTabAdapterForVehicleOwner extends FragmentPagerAdapter {
             return "UPCOMING";
         }else if (vehicleOwnerfragment.get(position)instanceof OnGoingFragmentForVehicleOwner){
             return "ONGOING";
-        }else if (vehicleOwnerfragment.get(position)instanceof PendingFragmentForVehicleOwner){
-            return "PENDING";
+        /*}else if (vehicleOwnerfragment.get(position)instanceof PendingFragmentForVehicleOwner){
+            return "PENDING";*/
         }else if (vehicleOwnerfragment.get(position)instanceof CompletedFragmentForVehicleOwner){
             return "COMPLETED";
         }if (vehicleOwnerfragment.get(position)instanceof CancelFragmentForVehicleOwner){

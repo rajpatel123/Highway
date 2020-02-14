@@ -2,6 +2,7 @@ package com.highway.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 public class HighwayPrefs {
     private static final String KENT_SECURITY_PREFS = "HFCSecurity";

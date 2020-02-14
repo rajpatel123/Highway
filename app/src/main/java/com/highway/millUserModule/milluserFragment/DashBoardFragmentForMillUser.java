@@ -69,13 +69,13 @@ public class DashBoardFragmentForMillUser extends Fragment {
 
         upComingFragmentForMillUser = new UpComingFragmentForMillUser();
         onGoingFragmentForMillUser = new OnGoingFragmentForMillUser();
-        pendingFragmentForMillUser = new PendingFragmentForMillUser();
+      //  pendingFragmentForMillUser = new PendingFragmentForMillUser();
         completedFragmentForMillUser = new CompletedFragmentForMillUser();
         cancelFragmentForMillUser = new CancelFragmentForMillUser();
 
         milluserfragmentlist.add(upComingFragmentForMillUser);
         milluserfragmentlist.add(onGoingFragmentForMillUser);
-        milluserfragmentlist.add(pendingFragmentForMillUser);
+       // milluserfragmentlist.add(pendingFragmentForMillUser);
         milluserfragmentlist.add(completedFragmentForMillUser);
         milluserfragmentlist.add(cancelFragmentForMillUser);
 
@@ -84,7 +84,7 @@ public class DashBoardFragmentForMillUser extends Fragment {
 
         millUserViewPager.setAdapter(fragmentTabModeAdapterForMiller);
         millUsertabMode.setupWithViewPager(millUserViewPager);
-        millUserViewPager.setOffscreenPageLimit(5);
+        millUserViewPager.setOffscreenPageLimit(4);
 
         millUsertabMode.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override

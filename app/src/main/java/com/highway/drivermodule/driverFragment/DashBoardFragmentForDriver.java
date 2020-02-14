@@ -73,13 +73,13 @@ public class DashBoardFragmentForDriver extends Fragment {
 
         upComingFragmentForDriver = new UpComingFragmentForDriver();
         onGoingFragmentForDriver = new OnGoingFragmentForDriver();
-        pendingFragmentForDriver = new PendingFragmentForDriver();
+     //   pendingFragmentForDriver = new PendingFragmentForDriver();
         completedFragmentForDriver = new CompletedFragmentForDriver();
         cancelFragmentForDriver = new CancelFragmentForDriver();
 
         driverFragmentList.add(upComingFragmentForDriver);
         driverFragmentList.add(onGoingFragmentForDriver);
-        driverFragmentList.add(pendingFragmentForDriver);
+    //    driverFragmentList.add(pendingFragmentForDriver);
         driverFragmentList.add(completedFragmentForDriver);
         driverFragmentList.add(cancelFragmentForDriver);
 
@@ -87,7 +87,7 @@ public class DashBoardFragmentForDriver extends Fragment {
                 getSupportFragmentManager(), driverFragmentList);
 
         driverViewPager.setAdapter(fragmentTabModeAdapterForDriver);
-        driverViewPager.setOffscreenPageLimit(5);
+        driverViewPager.setOffscreenPageLimit(4);
         driverTabLayout.setupWithViewPager(driverViewPager);
 
         driverTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
