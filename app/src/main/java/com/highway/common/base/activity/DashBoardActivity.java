@@ -45,6 +45,7 @@ import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
+import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
@@ -134,6 +135,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private Button btnLogOut;
     Intent intent;
     WebViewActivity webViewActivity;
+    private int notificationType = 0;
 
 
     @Override
@@ -141,6 +143,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
+        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
         nevigationInitView();
         updateNavViewHeader();
         navAccoringRoleId();// According RoleId Navigation Icon
@@ -289,7 +292,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "3":                                              // Driver
 
-                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
+//                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
+                if (notificationType == 0) {
                     Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
                     replaceFragment(fragment3);
                 } else {
