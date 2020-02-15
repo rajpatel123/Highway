@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -132,6 +133,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), RECEIVERPHONENO);
+        String bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
+        vehicleName.setText(bookVehicleName);
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -177,7 +180,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CancelOrderTripWithReasonActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CancelOrderTripByCustomerWithReasonActivity.class);
                 //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
                 intent.putExtra("bookTripIdCode", bookTripIdCode);
                 intent.putExtra("bookId",bookId);
@@ -299,7 +302,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             mMap.setMyLocationEnabled(true);
         }
 
-
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -353,8 +355,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
-
-
     }
 
 
@@ -385,7 +385,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         }
     }
-
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
@@ -434,12 +433,10 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 timeUp = true;
                 showAlertDiolog("");
             }
-
         }.start();
     }
 
     private void showAlertDiolog(String message) {
-
 
         final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
 
@@ -450,13 +447,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         final android.app.AlertDialog dialog = dialogBuilder.create();
         Button done = dialogView.findViewById(R.id.btn_done);
 
-
         TextView text_cancel = dialogView.findViewById(R.id.text_cancel);
         text_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
             }
         });
     }
@@ -475,5 +470,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 finish();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 }

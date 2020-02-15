@@ -189,6 +189,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
 
                             HighwayApplication.getInstance().getBookingHTripRequest().setTripRecevirId(""+response.body().getId());
                             ConformBookingActivity.start((BookingWithDetailsActivity) getActivity());
+                            getActivity().finish();
                         }
                     }
                 }

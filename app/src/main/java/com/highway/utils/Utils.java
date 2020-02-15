@@ -30,6 +30,8 @@ import java.util.Locale;
 public class Utils {
 
 
+    public static String address;
+
     public static boolean hideKeyBoard(Activity activity) {
         try {
 
@@ -218,8 +220,13 @@ public class Utils {
             geocoder = new Geocoder(mActivity, Locale.getDefault());
 
             try {
-                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 3); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+                if (addresses!=null && addresses.size()>0){
+
+                    address = addresses.get(0).getAddressLine(0);
+                }
+                 // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 
                 if (!TextUtils.isEmpty(address)){
                     return address;

@@ -49,7 +49,7 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
         holder.tv3SourceTime.setText("" + ongoingTrip.getPickupTime());
         holder.tv5DestTime.setText("" + ongoingTrip.getDropTime());
         holder.tv6VehicleName.setText("" + ongoingTrip.getVehicleName());
-        holder.tv7FairCharge.setText("" + ongoingTrip.getVehicleName());
+        holder.tv7FairCharge.setText("" + ongoingTrip.getFare());
         // img
     }
 

@@ -42,8 +42,8 @@ public class FragmentTabModeAdapterForDriver extends FragmentPagerAdapter {
             return "UPCOMING";
         }else if (driverfragmentlist.get(position)instanceof OnGoingFragmentForDriver){
             return "ONGOING";
-        }else if (driverfragmentlist.get(position)instanceof PendingFragmentForDriver){
-            return "PENDING";
+       /* }else if (driverfragmentlist.get(position)instanceof PendingFragmentForDriver){
+            return "PENDING";*/
         }else if (driverfragmentlist.get(position)instanceof CompletedFragmentForDriver){
             return "COMPLETED";
         }if (driverfragmentlist.get(position)instanceof CancelFragmentForDriver){

@@ -34,7 +34,6 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
     private ViewPager vehicleOwnerViewPager;
 
 
-
     DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
     DashBoardActivity dashBoardActivity;
     UpComingFragmentForVehicleOwner upComingFragmentForVehicleOwner;
@@ -73,13 +72,13 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
 
         upComingFragmentForVehicleOwner = new UpComingFragmentForVehicleOwner();
         onGoingFragmentForVehicleOwner = new OnGoingFragmentForVehicleOwner();
-        pendingFragmentForVehicleOwner = new PendingFragmentForVehicleOwner();
+        //  pendingFragmentForVehicleOwner = new PendingFragmentForVehicleOwner();
         completedFragmentForVehicleOwner = new CompletedFragmentForVehicleOwner();
         cancelFragmentForVehicleOwner = new CancelFragmentForVehicleOwner();
 
         vehicleOwnerfragmentlist.add(upComingFragmentForVehicleOwner);
         vehicleOwnerfragmentlist.add(onGoingFragmentForVehicleOwner);
-        vehicleOwnerfragmentlist.add(pendingFragmentForVehicleOwner);
+        // vehicleOwnerfragmentlist.add(pendingFragmentForVehicleOwner);
         vehicleOwnerfragmentlist.add(completedFragmentForVehicleOwner);
         vehicleOwnerfragmentlist.add(cancelFragmentForVehicleOwner);
 
@@ -87,7 +86,7 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
                 .getSupportFragmentManager(), vehicleOwnerfragmentlist);
 
         vehicleOwnerViewPager.setAdapter(fragmentTabAdapterForVehicleOwner);
-        vehicleOwnerViewPager.setOffscreenPageLimit(5);
+        vehicleOwnerViewPager.setOffscreenPageLimit(4);
         vehicleOwnerTabMode.setupWithViewPager(vehicleOwnerViewPager);
 
         vehicleOwnerTabMode.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
@@ -158,9 +157,9 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
             @Override
             public void onResponse(Call<GetAllTripByUserIdResponse> call, Response<GetAllTripByUserIdResponse> response) {
                 Utils.dismissProgressDialog();
-                if (response.body() != null && response.body().getStatus()!=null ) {
+                if (response.body() != null && response.body().getStatus() != null) {
                     if (response.body().getStatus()) {
-                        GetAllTripByUserIdResponse getAllTripByUserIdResponse= response.body();
+                        GetAllTripByUserIdResponse getAllTripByUserIdResponse = response.body();
                         if (getAllTripByUserIdResponse != null) {
                             if (getAllTripByUserIdResponse.getCompletedTrips() != null && getAllTripByUserIdResponse.getCompletedTrips().size() > 0) {
                                 dashBoardActivity.setCompletedTrips(getAllTripByUserIdResponse.getCompletedTrips());

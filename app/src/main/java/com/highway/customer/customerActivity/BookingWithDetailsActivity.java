@@ -654,6 +654,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
             bookTruckTv.setText("BOOK " + vehicleList.get(position).getVehicleName());
             HighwayApplication.getInstance().getBookingHTripRequest().setVehicleTypeId(vehicleList.get(position).getVehicleId());
             HighwayApplication.getInstance().getBookingHTripRequest().setTripFare(fare);
+            HighwayPrefs.putString(getApplicationContext(),"bookVehicleName",vehicleList.get(position).getVehicleName()); // send vehicle name on booking conformed
         }
     }
 

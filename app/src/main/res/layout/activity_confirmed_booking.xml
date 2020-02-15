@@ -128,7 +128,7 @@
                     android:id="@+id/vehicleName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tata Ace - UP 73 BV 8987"
+                    android:text=" Tata Ace - UP 73 BV 8987"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 

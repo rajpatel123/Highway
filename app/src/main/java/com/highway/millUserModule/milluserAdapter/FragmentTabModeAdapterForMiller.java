@@ -41,8 +41,8 @@ public class FragmentTabModeAdapterForMiller extends FragmentPagerAdapter {
             return "UPCOMING";
         }else if (milluserfragment.get(position)instanceof OnGoingFragmentForMillUser){
             return "ONGOING";
-        }else if (milluserfragment.get(position)instanceof PendingFragmentForMillUser){
-            return "PENDING";
+        /*}else if (milluserfragment.get(position)instanceof PendingFragmentForMillUser){
+            return "PENDING";*/
         }else if(milluserfragment.get(position)instanceof CompletedFragmentForMillUser){
             return "COMPLETED";
         }if (milluserfragment.get(position)instanceof CancelFragmentForMillUser){

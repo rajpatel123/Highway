@@ -42,8 +42,8 @@ public class FragmentTabModeAdapterForCustomer extends FragmentPagerAdapter {
             return "UPCOMING";
         }else if (customerfragments.get(position)instanceof OnGoingFragmentForCustomer){
             return "ONGOING";
-        }else if (customerfragments.get(position)instanceof PendingFragmentForCustomer){
-            return "PENDING";
+       /* }else if (customerfragments.get(position)instanceof PendingFragmentForCustomer){
+            return "PENDING";*/
         }else if (customerfragments.get(position)instanceof CompletedFragmentForCustomer){
             return "COMPLETED";
         }if (customerfragments.get(position)instanceof CancelFragmentForCustomer){
