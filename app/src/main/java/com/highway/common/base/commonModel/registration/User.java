@@ -6,30 +6,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    @SerializedName("Id")
+    @SerializedName("User_Id")
     @Expose
-    private String id;
+    private String userId;
     @SerializedName("Name")
     @Expose
     private String name;
     @SerializedName("Mobile")
     @Expose
     private String mobile;
-    @SerializedName("Image")
-    @Expose
-    private String image;
     @SerializedName("Email")
     @Expose
     private String email;
-    @SerializedName("Gender")
-    @Expose
-    private String gender;
     @SerializedName("Role_Id")
     @Expose
     private String roleId;
-    @SerializedName("Address")
-    @Expose
-    private String address;
     @SerializedName("User_Status")
     @Expose
     private String userStatus;
@@ -38,14 +29,14 @@ public class User {
     private String otpStatus;
     @SerializedName("isBoolean")
     @Expose
-    private Object isBoolean;
+    private String isBoolean;
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -64,14 +55,6 @@ public class User {
         this.mobile = mobile;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -80,28 +63,12 @@ public class User {
         this.email = email;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getRoleId() {
         return roleId;
     }
 
     public void setRoleId(String roleId) {
         this.roleId = roleId;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getUserStatus() {
@@ -120,11 +87,11 @@ public class User {
         this.otpStatus = otpStatus;
     }
 
-    public Object getIsBoolean() {
+    public String getIsBoolean() {
         return isBoolean;
     }
 
-    public void setIsBoolean(Object isBoolean) {
+    public void setIsBoolean(String isBoolean) {
         this.isBoolean = isBoolean;
     }
 

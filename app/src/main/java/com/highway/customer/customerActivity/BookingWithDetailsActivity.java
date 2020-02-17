@@ -341,7 +341,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         return Radius * c;
         */
 
-
     }
 
 

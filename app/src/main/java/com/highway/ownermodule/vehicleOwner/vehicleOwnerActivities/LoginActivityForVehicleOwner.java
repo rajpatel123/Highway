@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.highway.R;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
+import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.commonretrofit.RestClient;
+import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
@@ -31,6 +33,7 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
     private Button btnOwnerOtp;
     String phone_number;
     private int backpress;
+    private String OwnerLoginRoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
 
         ownerPhoneNo = findViewById(R.id.edtTxtOwnerMobNo);
         btnOwnerOtp = findViewById(R.id.btnSendOwnerOtp);
+
+        OwnerLoginRoleId = getIntent().getStringExtra("ownerRoleId") ;
 
         btnOwnerOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,14 +74,17 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
 
         if (inputOwnerValidate()){
 
-            LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-            loginRegisterRequest.setMobile(phone_number);
+           /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
+            loginRegisterRequest.setMobile(phone_number);*/
+            LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
+            loginReqUpdated.setMobile(phone_number);
+            loginReqUpdated.setRoleId(OwnerLoginRoleId);
 
             if (Utils.isInternetConnected(this)) {
 
                 Utils.showProgressDialog(this);
 
-                RestClient.loginUser(loginRegisterRequest, new Callback<ResponseBody>() {
+                RestClient.loginUser(loginReqUpdated, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Utils.dismissProgressDialog();
@@ -84,13 +92,15 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
                             if (response.code() ==200) {
                                 Intent intent = new Intent(LoginActivityForVehicleOwner.this, MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(LoginActivityForVehicleOwner.this, USERMOBILE, phone_number);
-                                /*
-                                HighwayPrefs.putString(LoginActivityForVehicleOwner.this, Constants.ID,"5");
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, OwnerLoginRoleId);
+
+                                /* HighwayPrefs.putString(LoginActivityForVehicleOwner.this, Constants.ID,"5");
                                 HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.NAME,"Nitin");
                                 HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.OwnerEmail,"prit@gmail.com");
                                 HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.MillerGender,"Male");
                                 HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.ROLEID,"5");
                                 HighwayPrefs.putBoolean(LoginActivityForVehicleOwner.this,Constants.User_statuss,true);*/
+
                                 startActivity(intent);
                                 finish();
 

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.highway.R;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
+import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.commonretrofit.RestClient;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -29,6 +30,7 @@ public class LoginActivityForMiller extends AppCompatActivity {
     private Button btnMillerOtp;
     String phone_number;
     private int backpress;
+    private String millerLoginRoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class LoginActivityForMiller extends AppCompatActivity {
 
         millerPhoneNo = findViewById(R.id.edtTxtMillerMobNo);
         btnMillerOtp = findViewById(R.id.btnSendMillerOtp);
+
+        millerLoginRoleId = getIntent().getStringExtra("millerRoleId");
+
 
 
         btnMillerOtp.setOnClickListener(new View.OnClickListener() {
@@ -67,14 +72,18 @@ public class LoginActivityForMiller extends AppCompatActivity {
 
         if (inputMillerVatidation()){
 
-            LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-            loginRegisterRequest.setMobile(phone_number);
+           /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
+            loginRegisterRequest.setMobile(phone_number);*/
+
+            LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
+            loginReqUpdated.setMobile(phone_number);
+            loginReqUpdated.setRoleId(millerLoginRoleId);
 
             if (Utils.isInternetConnected(this)) {
 
                 Utils.showProgressDialog(this);
 
-                RestClient.loginUser(loginRegisterRequest, new Callback<ResponseBody>() {
+                RestClient.loginUser(loginReqUpdated, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Utils.dismissProgressDialog();
@@ -83,14 +92,7 @@ public class LoginActivityForMiller extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivityForMiller.this, MobileOtpVerificationActivity.class);
 
                                 HighwayPrefs.putString(LoginActivityForMiller.this, Constants.USERMOBILE, phone_number);
-                                /********************/
-                              /* *//* HighwayPrefs.putString(LoginActivityForMiller.this,Constants.MillerMOBILE,"9471444622");*//*
-                                HighwayPrefs.putString(LoginActivityForMiller.this,Constants.ID,"2");
-                                HighwayPrefs.putString(LoginActivityForMiller.this,Constants.NAME,"Vikash");
-                                HighwayPrefs.putString(LoginActivityForMiller.this,Constants.MillerEmail,"prit@gmail.com");
-                                HighwayPrefs.putString(LoginActivityForMiller.this,Constants.MillerGender,"Male");
-                                HighwayPrefs.putString(LoginActivityForMiller.this,Constants.ROLEID,"2");
-                                HighwayPrefs.putBoolean(LoginActivityForMiller.this,Constants.User_statuss,true);*/
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, millerLoginRoleId);
 
                                 startActivity(intent);
                                 finish();

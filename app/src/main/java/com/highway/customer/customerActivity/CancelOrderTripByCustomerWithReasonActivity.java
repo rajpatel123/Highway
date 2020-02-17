@@ -84,7 +84,7 @@ public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivi
 
         bookId = getIntent().getStringExtra("bookId");
         bookTripIdCode = getIntent().getStringExtra("bookTripIdCode");
-        vTypeId = getIntent().getStringExtra("");
+        vTypeId = getIntent().getStringExtra("vTypeId");
 
         //cancelResnId = getIntent().getStringExtra("cancelReasonId");
     }

@@ -5,11 +5,11 @@ import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
-import com.highway.common.base.commonModel.login.LoginRegisterRequest;
+import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
-import com.highway.common.base.commonModel.registration.RegistrationRequest;
-import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.common.base.commonModel.registration.RegistrationReqUpdated;
+import com.highway.common.base.commonModel.registration.RegistrationRespUpdated;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
@@ -54,9 +54,14 @@ import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
 public class RestClient {
-    // login mob no
+   /* // login mob no
     public static void loginUser(LoginRegisterRequest loginRegisterRequest, Callback<ResponseBody> callback) {
         RetrofitClient.getClient().loginResponseCall(loginRegisterRequest).enqueue(callback);
+    }*/
+
+    // login mob no
+    public static void loginUser(LoginReqUpdated loginReqUpdated, Callback<ResponseBody> callback) {
+        RetrofitClient.getClient().loginResponseCall(loginReqUpdated).enqueue(callback);
     }
 
     // verify otp mobile
@@ -65,8 +70,8 @@ public class RestClient {
     }
 
     // registration details
-    public static void regDetails(RegistrationRequest registrationDetailsRequest, Callback<RegistrationResponse> registrationDetailsResponseCallback) {
-        RetrofitClient.getClient().regDetailsResponseCall(registrationDetailsRequest).enqueue(registrationDetailsResponseCallback);
+    public static void regDetails(RegistrationReqUpdated registrationReqUpdated, Callback<RegistrationRespUpdated> registrationRespUpdatedCallback) {
+        RetrofitClient.getClient().regDetailsResponseCall(registrationReqUpdated).enqueue(registrationRespUpdatedCallback);
     }
 
     // driver trip

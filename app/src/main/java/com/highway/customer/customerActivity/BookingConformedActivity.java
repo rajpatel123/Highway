@@ -117,7 +117,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_confirmed_booking);
 
         sourceTV = findViewById(R.id.sourceTV);
@@ -150,7 +149,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
             }
         }
-
 
         sourceTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
         destTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
