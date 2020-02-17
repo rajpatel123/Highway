@@ -24,8 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.highway.R;
-import com.highway.common.base.commonModel.registration.RegistrationRequest;
-import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.common.base.commonModel.registration.RegistrationReqUpdated;
+import com.highway.common.base.commonModel.registration.RegistrationRespUpdated;
 import com.highway.commonretrofit.RestClient;
 import com.highway.utils.CameraUtils;
 import com.highway.utils.Constants;
@@ -87,6 +87,10 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
     private static String imageStoragePath;
     private String base64UserImg;
+    private String customerRoleId;
+    private String driverRoleId;
+    private String millerRoleId;
+    private String ownerRoleID;
 
 
     @Override
@@ -110,28 +114,15 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         regToolbar.setTitle("");
         regToolbar.setSubtitle("");
 
-
         imgDetailbackArrow = findViewById(R.id.regBackArrow);
         imgDetailProfile = findViewById(R.id.regUserImg);
 
         edtTxtUserName = findViewById(R.id.edtTxtInputUserName);
         edtTxtUserEmail = findViewById(R.id.edtTxtInputUserEmail);
-        edtTxtUserAddress = findViewById(R.id.edtTxtInputUserAddress);
-
-       /* imgCalenderDatePicker = findViewById(R.id.dobCalenderPicker);
-        edtTxtUserDobDate = findViewById(R.id.edtTxtInputUserDOB);
-        // calenderDatePicker.setEnabled(false);
-
-        userRadioMale = findViewById(R.id.radio_Male);
-        userRadioFemale = findViewById(R.id.radio_female);*/
-        userRadioDiver = findViewById(R.id.radio_Driver);
-        userRadioCustomer = findViewById(R.id.radio_Customer);
-        userRadioMillUser = findViewById(R.id.radio_MillUser);
-        userRadioOwner = findViewById(R.id.radio_Owner);
         btnSubmit = findViewById(R.id.btnSubmitDetails);
 
-        /* radiogroup_Gender = (RadioGroup) findViewById(R.id.radiogroup_Gender);*/
-        radioGroup_RoleUser = (RadioGroup) findViewById(R.id.radiogroup_Role);
+
+
     }
 
     public void setOnClickListener() {
@@ -328,51 +319,11 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         });
     }
 
-    public void onUserRadioButtonClicked(View v) {
-        boolean checked = ((RadioButton) v).isChecked();
-        switch (v.getId()) {
-            //  1 Admin  //  2 Mill user   // 3  Driver // // 4  Customer   // 5 Owner
-            case R.id.radio_Customer:
-                if (checked)
-                    userRadioCustomer.setText("Customer");   // Customer
-                userRole = userRadioCustomer.getText().toString().trim();
-                Toast.makeText(this, userRadioCustomer.getText().toString(), Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.radio_Driver:
-                if (checked)
-                    userRadioDiver.setText("Driver");       // userRadioDiver.setText("Driver");
-                userRole = userRadioDiver.getText().toString().trim();
-                Toast.makeText(this, userRadioDiver.getText().toString(), Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.radio_MillUser:
-                if (checked)
-                    userRadioMillUser.setText("MillUser"); // MillUser
-                userRole = userRadioMillUser.getText().toString().trim();
-                Toast.makeText(this, userRadioMillUser.getText().toString(), Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.radio_Owner:
-                if (checked)
-                    userRadioOwner.setText("VehicleOwner");  // VehicleOwner
-                userRole = userRadioOwner.getText().toString().trim();
-                Toast.makeText(this, userRadioOwner.getText().toString(), Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
 
     public boolean inputValidation() {
 
         userName = edtTxtUserName.getText().toString().trim();
         userEmail = edtTxtUserEmail.getText().toString().trim();
-        /* userDobDate = edtTxtUserDobDate.getText().toString().trim();*/
-        userAddress = edtTxtUserAddress.getText().toString().trim();
-
-       /* if (TextUtils.isEmpty(base64UserImg)) {
-            Toast.makeText(this, "Pls capture the user image", Toast.LENGTH_SHORT).show();
-            return false;
-        }*/
 
         if (userName.isEmpty()) {
             edtTxtUserName.setError("enter a valid email address");
@@ -393,19 +344,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             return false;
         }
 
-       /* if (userDobDate.isEmpty()) {
-            edtTxtUserDobDate.setError("enter a valid D.O.B");
-            return false;
-        } else {
-            edtTxtUserDobDate.setError(null);
-        }*/
-
-        if (userAddress.isEmpty()) {
-            edtTxtUserAddress.setError("pls enter Address");
-            return false;
-        } else {
-            edtTxtUserAddress.setError(null);
-        }
         return true;
     }
 
@@ -424,65 +362,45 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
         if (inputValidation()) {
 
-            RegistrationRequest registrationDetailsRequest = new RegistrationRequest();
-            registrationDetailsRequest.setName(userName);
-            registrationDetailsRequest.setEmail(userEmail);
-            /* registrationDetailsRequest.setDob(userDobDate);*/
-            /*registrationDetailsRequest.setGender(gender);*/
-            registrationDetailsRequest.setAddress(userAddress);
-            /* registrationDetailsRequest.setBase64File(base64UserImg); */  // img uploading
+            RegistrationReqUpdated registrationReqUpdated = new RegistrationReqUpdated();
+            registrationReqUpdated.setName(userName);
+            registrationReqUpdated.setEmail(userEmail);
             userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-            registrationDetailsRequest.setUserId(userId);
-
-            if (userRole.equalsIgnoreCase("Customer")) {
-                registrationDetailsRequest.setRoleId("4");
-
-            } else if (userRole.equalsIgnoreCase("Driver")) {
-                registrationDetailsRequest.setRoleId("3");
-
-            } else if (userRole.equalsIgnoreCase("MillUser")) {
-                registrationDetailsRequest.setRoleId("2");
-
-            } else if (userRole.equalsIgnoreCase("VehicleOwner")) {
-                registrationDetailsRequest.setRoleId("5");
-            }
+            registrationReqUpdated.setUserId(userId);
 
             if (Utils.isInternetConnected(this)) {
                 Utils.showProgressDialog(getApplicationContext());
 
-                RestClient.regDetails(registrationDetailsRequest, new Callback<RegistrationResponse>() {
+                RestClient.regDetails(registrationReqUpdated, new Callback<RegistrationRespUpdated>() {
                     @Override
-                    public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                    public void onResponse(Call<RegistrationRespUpdated> call, Response<RegistrationRespUpdated> response) {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
-                            if (response.body().getStatus().equalsIgnoreCase("1")) {
-
-                                Intent intent = new Intent(RegistrationDetailsActivity.this, DashBoardActivity.class);
-
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getUser().getRoleId());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getUser().getMobile());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.User_statuss, response.body().getUser().getUserStatus());
-                                System.out.println("User Status signup" + response.body().getUser().getUserStatus());
-                                /* use our requirement  */
-                                HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, response.body().getUser().getImage());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getUser().getEmail());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.GENDER, response.body().getUser().getGender());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, response.body().getUser().getAddress());
-                                HighwayPrefs.getString(getApplicationContext(),Constants.ID);
-
-                                startActivity(intent);
-                                finish();
-
-                            } else if (response.body().getStatus().equalsIgnoreCase("0")) {
+                            if (response.body().getStatus()) {
+                                if (response.body().getUser().getUserStatus().equalsIgnoreCase("1")) {
+                                    Intent intent = new Intent(RegistrationDetailsActivity.this, DashBoardActivity.class);
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getUser().getRoleId());
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getUser().getMobile());
+                                    HighlwayPrefs.putString(getApplicationContext(), Constants.User_statuss, response.body().getUser().getUserStatus());
+                                    System.out.println("User Status signup" + response.body().getUser().getUserStatus());
+                                    /* use our requirement  */
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getUser().getEmail());
+                                    HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            } else if (response.body().getUser().getUserStatus().equalsIgnoreCase("0")) {
                                 Toast.makeText(RegistrationDetailsActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
+
                             } else {
                                 Toast.makeText(RegistrationDetailsActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
+
                     @Override
-                    public void onFailure(Call<RegistrationResponse> call, Throwable t) {
+                    public void onFailure(Call<RegistrationRespUpdated> call, Throwable t) {
                         Toast.makeText(RegistrationDetailsActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                     }
                 });

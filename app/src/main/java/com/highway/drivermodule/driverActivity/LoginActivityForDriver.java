@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.highway.R;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
+import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.commonretrofit.RestClient;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -28,6 +29,7 @@ public class LoginActivityForDriver extends AppCompatActivity {
     private EditText edtDriverMobNo;
     private Button sendOtp;
     String phone_number;
+    public String driverLoginRoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,9 @@ public class LoginActivityForDriver extends AppCompatActivity {
 
         edtDriverMobNo = findViewById(R.id.edtTxtDriverMobNo);
         sendOtp = findViewById(R.id.btnSendDriverOtp);
+
+      //  driverLoginRoleId = getIntent().getStringExtra("driverRoleId");
+        driverLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"driverRoleId");
 
         sendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,14 +71,17 @@ public class LoginActivityForDriver extends AppCompatActivity {
 
         if (inputValidation()) {
 
-            LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-            loginRegisterRequest.setMobile(phone_number);
+           /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
+            loginRegisterRequest.setMobile(phone_number);*/
+            LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
+            loginReqUpdated.setMobile(phone_number);
+            loginReqUpdated.setRoleId(driverLoginRoleId);
 
             if (Utils.isInternetConnected(this)) {
 
                 Utils.showProgressDialog(getApplicationContext());
 
-                RestClient.loginUser(loginRegisterRequest, new Callback<ResponseBody>() {
+                RestClient.loginUser(loginReqUpdated, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Utils.dismissProgressDialog();
@@ -82,13 +90,7 @@ public class LoginActivityForDriver extends AppCompatActivity {
                             if (response.code() ==200) {
                                 Intent intent = new Intent(LoginActivityForDriver.this, MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(LoginActivityForDriver.this, Constants.USERMOBILE, phone_number);
-                               /*
-                                HighwayPrefs.putString(LoginActivityForDriver.this,Constants.ID,"3");
-                                HighwayPrefs.putString(LoginActivityForDriver.this,Constants.NAME,"Santosh");
-                                HighwayPrefs.putString(LoginActivityForDriver.this,Constants.DriverEmail,"prit@gmail.com");
-                                HighwayPrefs.putString(LoginActivityForDriver.this,Constants.MillerGender,"Male");
-                                HighwayPrefs.putString(LoginActivityForDriver.this,Constants.ROLEID,"3");
-                                HighwayPrefs.putBoolean(LoginActivityForDriver.this,Constants.User_statuss,true);*/
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, driverLoginRoleId);
 
                                 startActivity(intent);
                                 finish();

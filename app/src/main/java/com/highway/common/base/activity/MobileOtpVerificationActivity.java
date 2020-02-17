@@ -32,6 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MobileOtpVerificationActivity extends AppCompatActivity implements SmsListener {
+
     private EditText verifyPin;
     private Button btnVerify;
     private ImageView backImage;
@@ -52,6 +53,8 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         resend = findViewById(R.id.resend);
         mobileNumberTV = findViewById(R.id.mobileNumber);
         changeNumberTv = findViewById(R.id.changeNumber);
+
+
 
         timerInOtp();                          // time count dowan of otp
 
@@ -115,7 +118,6 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
 
             if (Utils.isInternetConnected(this)) {
 
-
                 Utils.showProgressDialog(this);
 
                 RestClient.otpVerify(verifyOtpRequest, new Callback<VerifyOtpResponse>() {
@@ -165,6 +167,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     }
 
     private void gotoDashboardAfterLogin(VerifyOtpResponse verifyOtpResponse) {
+
         Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
 
         HighwayPrefs.putBoolean(getApplicationContext(), Constants.LOGGED_IN, true);
@@ -172,6 +175,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         HighwayPrefs.putString(getApplicationContext(), Constants.NAME, verifyOtpResponse.getUser().getName());
         HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, verifyOtpResponse.getUser().getMobile());
         HighwayPrefs.putString(getApplicationContext(), Constants.User_statuss, verifyOtpResponse.getUser().getUserStatus());
+
         System.out.println("User Status otp_verify" + verifyOtpResponse.getUser().getUserStatus());
 
         HighwayPrefs.putString(getApplicationContext(), Constants.IMAGE, verifyOtpResponse.getUser().getImage());

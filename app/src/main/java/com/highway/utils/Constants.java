@@ -44,4 +44,5 @@ public class Constants {
     public static final String NOTIFICATION_TYPE_TRIP_NEW = "TRIP_NEW";
     public static final String NOTIFICATION_TYPE_TRIP_NORESPONCE = "TRIP_NORESPONCE";
 
+    public static final String UserRole = "userRole";
 }
