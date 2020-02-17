@@ -110,7 +110,8 @@ public class LoginOptionActivity extends AppCompatActivity {
 
                         case "3":
                             intent = new Intent(LoginOptionActivity.this, WelcomeDriverActivity.class);
-                            intent.putExtra("driverRoleId", userRoleId);
+                          //  intent.putExtra("driverRoleId", userRoleId);
+                            HighwayPrefs.putString(getApplicationContext(),"driverRoleId",userRoleId);
                             startActivity(intent);
                             finish();
                             break;
@@ -125,7 +126,7 @@ public class LoginOptionActivity extends AppCompatActivity {
 
                         case "5":
                             intent = new Intent(LoginOptionActivity.this, WelcomeOwnerActivity.class);
-                            intent.putExtra("ownerRoleId", userRoleId);
+                         //   intent.putExtra("ownerRoleId", userRoleId);
                             HighwayPrefs.putString(getApplicationContext(),"ownerRoleId",userRoleId);
                             startActivity(intent);
                             finish();
