@@ -1,7 +1,9 @@
 package com.highway.drivermodule.driverFragment;
 
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,12 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.activity.RegistrationDetailsActivity;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.commonretrofit.RestClient;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.utils.CameraUtils;
 import com.highway.utils.Constants;
 
 import java.util.ArrayList;
@@ -196,6 +200,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                     BookingAcceptRejectResponse resp = response.body();
 
+
                 }
             }
 
@@ -204,6 +209,18 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
             }
         });
+    }
+
+    private void rejectTripAlert(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Booking Rejected!")
+                .setMessage(message)
+                .setPositiveButton("OKAY", (dialog, which) -> {
+
+                })/*
+                .setNegativeButton("CANCEL", (dialog, which) -> {
+
+                })*/.show();
     }
 
 //    public void getDistance(LatLng source, LatLng destination) {

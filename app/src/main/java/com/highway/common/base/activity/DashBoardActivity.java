@@ -129,6 +129,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private Button btnLogOut;
     Intent intent;
     WebViewActivity webViewActivity;
+    private int notificationType = 0;
 
 
     @Override
@@ -136,6 +137,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
+        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
         nevigationInitView();
         updateNavViewHeader();
         navAccoringRoleId();// According RoleId Navigation Icon
@@ -284,7 +286,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "3":                                              // Driver
 
-                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
+//                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
+                if (notificationType == 0) {
                     Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
                     replaceFragment(fragment3);
                 } else {
