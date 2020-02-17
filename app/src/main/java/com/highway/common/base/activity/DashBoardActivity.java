@@ -156,6 +156,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         navAccoringRoleId();// According RoleId Navigation Icon
         //setOnClickListenerOperation();
 
+        String token=HighwayPrefs.getString(this, "device_token");
+        System.out.println("asdf fcm --- : "+token);
 
         // Create an IntentFilter instance.
         IntentFilter intentFilter = new IntentFilter();
@@ -300,7 +302,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "3":                                              // Driver
 
 //                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
-                if (pushData != null) {
+//                if (pushData != null) {
                     if (notificationType == 0) {
                         Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
                         replaceFragment(fragment3);
@@ -311,7 +313,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         fragment3.setArguments(bundle);
                         replaceFragment(fragment3);
                     }
-                }
+//                }
 
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);

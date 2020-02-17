@@ -47,7 +47,8 @@ public class SplashActivity extends AppCompatActivity {
                     }
 //                    String data = getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
 //                    Log.e(getClass().getSimpleName(), data);
-
+                    String token=HighwayPrefs.getString(SplashActivity.this, "device_token");
+                    System.out.println("asdf fcm --- : "+token);
                     startActivity(i);
                     finish();
                 } else {
