@@ -377,18 +377,24 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
-                                Intent intent = new Intent(RegistrationDetailsActivity.this, DashBoardActivity.class);
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getUser().getRoleId());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getUser().getMobile());
-                                HighwayPrefs.putString(getApplicationContext(), Constants.User_statuss, response.body().getUser().getUserStatus());
-                                System.out.println("User Status signup" + response.body().getUser().getUserStatus());
-                                /* use our requirement  */
-                                HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getUser().getEmail());
-                                HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-                                startActivity(intent);
-                                finish();
+                                if (response.body().getUser().getUserStatus().equalsIgnoreCase("1")) {
+                                    Intent intent = new Intent(RegistrationDetailsActivity.this, DashBoardActivity.class);
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getUser().getRoleId());
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getUser().getMobile());
+                                    HighlwayPrefs.putString(getApplicationContext(), Constants.User_statuss, response.body().getUser().getUserStatus());
+                                    System.out.println("User Status signup" + response.body().getUser().getUserStatus());
+                                    /* use our requirement  */
+                                    HighwayPrefs.putString(getApplicationContext(), Constants.EMAIL, response.body().getUser().getEmail());
+                                    HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            } else if (response.body().getUser().getUserStatus().equalsIgnoreCase("0")) {
+                                Toast.makeText(RegistrationDetailsActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
 
+                            } else {
+                                Toast.makeText(RegistrationDetailsActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

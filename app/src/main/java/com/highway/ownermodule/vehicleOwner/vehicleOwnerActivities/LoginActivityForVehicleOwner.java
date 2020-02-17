@@ -43,7 +43,8 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
         ownerPhoneNo = findViewById(R.id.edtTxtOwnerMobNo);
         btnOwnerOtp = findViewById(R.id.btnSendOwnerOtp);
 
-        OwnerLoginRoleId = getIntent().getStringExtra("ownerRoleId") ;
+      //  OwnerLoginRoleId = getIntent().getStringExtra("ownerRoleId") ;
+        OwnerLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"ownerRoleId");
 
         btnOwnerOtp.setOnClickListener(new View.OnClickListener() {
             @Override

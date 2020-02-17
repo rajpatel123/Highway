@@ -40,7 +40,8 @@ public class LoginActivityForMiller extends AppCompatActivity {
         millerPhoneNo = findViewById(R.id.edtTxtMillerMobNo);
         btnMillerOtp = findViewById(R.id.btnSendMillerOtp);
 
-        millerLoginRoleId = getIntent().getStringExtra("millerRoleId");
+       // millerLoginRoleId = getIntent().getStringExtra("millerRoleId");
+        millerLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"millerRoleId");
 
 
 

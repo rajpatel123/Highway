@@ -39,8 +39,8 @@ public class LoginActivityForDriver extends AppCompatActivity {
         edtDriverMobNo = findViewById(R.id.edtTxtDriverMobNo);
         sendOtp = findViewById(R.id.btnSendDriverOtp);
 
-        driverLoginRoleId = getIntent().getStringExtra("driverRoleId");
-
+      //  driverLoginRoleId = getIntent().getStringExtra("driverRoleId");
+        driverLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"driverRoleId");
 
         sendOtp.setOnClickListener(new View.OnClickListener() {
             @Override

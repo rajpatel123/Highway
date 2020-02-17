@@ -126,6 +126,7 @@ public class LoginOptionActivity extends AppCompatActivity {
                         case "5":
                             intent = new Intent(LoginOptionActivity.this, WelcomeOwnerActivity.class);
                             intent.putExtra("ownerRoleId", userRoleId);
+                            HighwayPrefs.putString(getApplicationContext(),"ownerRoleId",userRoleId);
                             startActivity(intent);
                             finish();
                             break;
