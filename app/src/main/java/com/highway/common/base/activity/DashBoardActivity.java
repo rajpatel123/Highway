@@ -30,10 +30,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
@@ -55,6 +53,7 @@ import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.Assign_D2V_Frag
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverFragmentForVehicleOwner;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
@@ -146,18 +145,22 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
 //        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
-        try {
-            pushData = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (getIntent().getExtras() != null) {
+            try {
+                pushData = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
         }
-        nevigationInitView();
+
+        navigationInitView();
         updateNavViewHeader();
-        navAccoringRoleId();// According RoleId Navigation Icon
+        navAccordingRoleId();// According RoleId Navigation Icon
         //setOnClickListenerOperation();
 
-        String token=HighwayPrefs.getString(this, "device_token");
-        System.out.println("asdf fcm --- : "+token);
+        String token = HighwayPrefs.getString(this, "device_token");
+        System.out.println("asdf fcm --- : " + token);
 
         // Create an IntentFilter instance.
         IntentFilter intentFilter = new IntentFilter();
@@ -169,44 +172,38 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         registerReceiver(listener, intentFilter);
         //showDialog(this);
 
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, instanceIdResult -> {
+            String newToken = instanceIdResult.getToken();
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                String newToken = instanceIdResult.getToken();
+            RegisterForPushModel obj = new RegisterForPushModel();
+            obj.setUserId(HighwayPrefs.getString(DashBoardActivity.this, Constants.ID));
+            obj.setTokenId(newToken);
 
-                RegisterForPushModel obj = new RegisterForPushModel();
-                obj.setUserId(HighwayPrefs.getString(DashBoardActivity.this, Constants.ID));
-                obj.setTokenId(newToken);
+            RestClient.registerForPush(obj, new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
 
-                RestClient.registerForPush(obj, new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        try {
-
-                            if (response.code() == 200 && response.body() != null) {
-                                Log.d("New Token Updated", response.body().string().toString());
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        if (response.code() == 200 && response.body() != null) {
+                            Log.d("New Token Updated", response.body().string().toString());
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                    }
-                });
+                }
+            });
 
-                Log.e("newToken", newToken);
-            }
+            Log.e("newToken", newToken);
         });
-
 
     }
 
-
-    public void nevigationInitView() {
+    public void navigationInitView() {
         dashBoardToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(dashBoardToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -268,7 +265,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
-    public void navAccoringRoleId() {
+    public void navAccordingRoleId() {
         userRole = HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID);
         switch (userRole) {
 
@@ -302,17 +299,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "3":                                              // Driver
 
 //                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
-//                if (pushData != null) {
-                    if (notificationType == 0) {
-                        Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
-                        replaceFragment(fragment3);
-                    } else {
-                        Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
-                        Bundle bundle = new Bundle();
-                        bundle.putBundle(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, getIntent().getBundleExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
-                        fragment3.setArguments(bundle);
-                        replaceFragment(fragment3);
-                    }
+                if (pushData == null) {
+//                if (notificationType == 0) {
+                    Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
+                    replaceFragment(fragment3);
+                } else {
+
+                    Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, pushData);
+                    fragment3.setArguments(bundle);
+                    replaceFragment(fragment3);
+                }
 //                }
 
                 newBooking.setVisible(false);
