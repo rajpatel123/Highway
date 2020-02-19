@@ -28,6 +28,7 @@ import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.services.MyJobService;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
@@ -141,10 +142,10 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 //            }
         }
 
-
+        NotificationPushData data = BaseUtil.objectFromString(messageBody, NotificationPushData.class);
         Intent intent = new Intent(getApplicationContext(), DashBoardActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, messageBody);
+        intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 
@@ -245,7 +246,8 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                     String type = json.getString("type");
                     String customer = json.getString("customer");
                     System.out.println(mobile + message + destination + tripId + source + type + customer);
-                    sendNotification(mobile);
+                    NotificationPushData data = BaseUtil.objectFromString(message, NotificationPushData.class);
+                    sendNotification(json.toString());
                     break;
 
                 case Constants.NOTIFICATION_TYPE_TRIP_CANCEL:

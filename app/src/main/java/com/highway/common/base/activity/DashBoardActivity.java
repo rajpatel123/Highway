@@ -39,6 +39,7 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHigh
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.UpcomingTrip;
+import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
@@ -88,15 +89,19 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
+
     public List<CancelTrip> getCancelTrips() {
         return cancelTrips;
     }
+
     public void setCancelTrips(List<CancelTrip> cancelTrips) {
         this.cancelTrips = cancelTrips;
     }
+
     public List<CompletedTrip> getCompletedTrips() {
         return completedTrips;
     }
+
     public void setCompletedTrips(List<CompletedTrip> completedTrips) {
         this.completedTrips = completedTrips;
     }
@@ -104,9 +109,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public List<OngoingTrip> getOngoingTrips() {
         return ongoingTrips;
     }
+
     public void setOngoingTrips(List<OngoingTrip> ongoingTrips) {
         this.ongoingTrips = ongoingTrips;
     }
+
     public List<UpcomingTrip> getUpcomingTrips() {
         return upcomingTrips;
     }
@@ -130,19 +137,27 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     Intent intent;
     WebViewActivity webViewActivity;
     private int notificationType = 0;
-
+    private NotificationPushData pushData;
+    private String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
-        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
+//        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
+        try {
+            pushData = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         nevigationInitView();
         updateNavViewHeader();
         navAccoringRoleId();// According RoleId Navigation Icon
         //setOnClickListenerOperation();
 
+        String token=HighwayPrefs.getString(this, "device_token");
+        System.out.println("asdf fcm --- : "+token);
 
         // Create an IntentFilter instance.
         IntentFilter intentFilter = new IntentFilter();
@@ -287,17 +302,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "3":                                              // Driver
 
 //                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
-                if (notificationType == 0) {
-                    Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
-                    replaceFragment(fragment3);
-                } else {
-                    Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
-                    Bundle bundle = new Bundle();
-                    bundle.putBundle(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, getIntent().getBundleExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
-                    fragment3.setArguments(bundle);
-                    replaceFragment(fragment3);
-                }
-
+//                if (pushData != null) {
+                    if (notificationType == 0) {
+                        Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
+                        replaceFragment(fragment3);
+                    } else {
+                        Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
+                        Bundle bundle = new Bundle();
+                        bundle.putBundle(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, getIntent().getBundleExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+                        fragment3.setArguments(bundle);
+                        replaceFragment(fragment3);
+                    }
+//                }
 
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
