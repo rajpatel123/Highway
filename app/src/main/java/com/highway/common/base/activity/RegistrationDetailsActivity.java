@@ -111,6 +111,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         regToolbar = findViewById(R.id.regToolbar);
         setSupportActionBar(regToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         regToolbar.setTitle("");
         regToolbar.setSubtitle("");
 
@@ -136,7 +137,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
             }
         });
 
-
         imgDetailProfile.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -148,8 +148,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
 
@@ -406,7 +404,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                 });
             }
         }
-
     }
 
     // onBacked pressed registration
