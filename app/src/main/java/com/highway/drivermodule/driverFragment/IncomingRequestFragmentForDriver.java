@@ -24,13 +24,17 @@ import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.activity.RegistrationDetailsActivity;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
+import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.CameraUtils;
 import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
+import com.highway.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,8 @@ import retrofit2.Response;
 
 
 public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener {
+
+    private String TAG = getClass().getSimpleName();
     private Button btnReject;
     private Button btnAccept;
     private TextView lblCount;
@@ -68,7 +74,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     CancelTripAdapterForDriver cancelTripAdapterForDriver;
     DashBoardActivity dashBoardActivity;
     private int time_to_left = 60;
-
+    private NotificationPushData pushData;
+    private String userId;
 
     public IncomingRequestFragmentForDriver() {
         // Required empty public constructor
@@ -85,7 +92,12 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Log.e(getClass().getSimpleName(), getArguments().getString(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, "Default"));
+            try {
+                pushData = getArguments().getParcelable(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
         }
     }
 
@@ -105,7 +117,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         lblLocationDistance = view.findViewById(R.id.lblLocationDistance);
         pickupAddressLayout = view.findViewById(R.id.pickup_address_layout);
         dropAddressLayout = view.findViewById(R.id.drop_address_layout);
-
+        context = getActivity();
         mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
         init();
         return view;
@@ -158,6 +170,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         };
 
         countDownTimer.start();
+        userId = HighwayPrefs.getString(getContext(), Constants.ID);
     }
 
 
@@ -182,26 +195,35 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnReject:
-
-
-
-
+                if (Utils.isInternetConnected(context)) {
+                    Utils.showProgressDialog(context);
+                    acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED));
+                }
                 break;
 
             case R.id.btnAccept:
-
-
-
+                if (Utils.isInternetConnected(context)) {
+                    Utils.showProgressDialog(context);
+                    acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED));
+                }
                 break;
         }
     }
 
-    private void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData){
+    private BookingAcceptRejectData getAcceptRejectBookingTripParams(String acceptReject) {
+        BookingAcceptRejectData acceptRejectData = new BookingAcceptRejectData();
+        acceptRejectData.setTripId(pushData.getTripId());
+        acceptRejectData.setUserId(userId);
+        acceptRejectData.setAcceptReject(acceptReject);
+        return acceptRejectData;
+    }
+
+    private void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData) {
         RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
             @Override
             public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-
+                    Utils.dismissProgressDialog();
                     BookingAcceptRejectResponse resp = response.body();
 
 
@@ -210,6 +232,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
             @Override
             public void onFailure(Call<BookingAcceptRejectResponse> call, Throwable t) {
+                Utils.dismissProgressDialog();
 
             }
         });

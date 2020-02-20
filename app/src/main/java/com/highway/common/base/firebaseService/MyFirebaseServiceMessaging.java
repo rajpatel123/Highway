@@ -38,7 +38,7 @@ import org.json.JSONObject;
 
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     int notificationId = 0;
-    private static final String TAG = "MyFirebaseMsgService";
+    private final String TAG = getClass().getSimpleName();
     public static final String INTENT_FILTER = "INTENT_FILTER" + BuildConfig.APPLICATION_ID;
 
     @Override
