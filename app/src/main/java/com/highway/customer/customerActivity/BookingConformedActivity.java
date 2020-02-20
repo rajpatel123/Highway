@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -29,6 +30,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -50,6 +52,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.highway.R;
+import com.highway.broadCastReceiver.MySenderBroadCast;
+import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.common.base.HighwayApplication;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.helper.TaskLoadedCallback;
@@ -101,8 +105,21 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private String gdTypeId, gdTypeText;
     BookingVehicleListResponse bookingVehicleListResponse;
     private String tripId, userRecvNO, userMobileNO;
-    public String bookTripIdCode,bookId,vehicleTypeId;
+    public String bookTripIdCode, bookId, vehicleTypeId;
     public boolean timeUp;
+    String bookVehicleName;
+    public TextView rejTV, acptTripTv;
+
+    MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
+
+  // USING BROADCAST RECEIVER
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String data= intent.getStringExtra("key");
+            acptTripTv.setText(data);
+        }
+    };
 
 
     public static void start(ConformBookingActivity activity, String bookTripIdCode, String bookId, String vTypeId) {
@@ -113,6 +130,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         activity.startActivity(intent);
 
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,10 +147,13 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         cancelTripTV = findViewById(R.id.cancelTripTV);
         infoTV = findViewById(R.id.tripInfo);
         toolbar = findViewById(R.id.toolbar);
+        // Using Broadcast for Customer
+        rejTV = findViewById(R.id.TripRejectedTv);
+        acptTripTv = findViewById(R.id.TripAcceptTv);
 
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), RECEIVERPHONENO);
-        String bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
+        bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
         vehicleName.setText(bookVehicleName);
 
         setSupportActionBar(toolbar);
@@ -168,11 +189,43 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         }
 
 
+        IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
+        registerReceiver(mySenderBroadCast,intentFilter);
+
+
         clicklistener();
         bookingTimer();
 
     }
+// USING BROAD CAST RECEIVER
+    public void broadCastMessage(View view) {
+        Intent serviceIntent = new Intent(this, MyIntentService.class);
+        serviceIntent.putExtra("key","Inital Value");
+        startService(serviceIntent);
 
+    }
+    // USING BROAD CAST RECEIVER --- registered
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter(MyIntentService.MY_SERVICE_INTENT);
+        LocalBroadcastManager.getInstance(getApplicationContext())
+                .registerReceiver(mReceiver,intentFilter);
+    }
+//   // USING BROAD CAST RECEIVER --- Unregistered
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(getApplicationContext())
+                .unregisterReceiver(mReceiver);
+    }
+
+    //   // USING BROAD CAST RECEIVER --- Unregistered
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mySenderBroadCast);
+    }
 
     public void clicklistener() {
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +234,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 Intent intent = new Intent(getApplicationContext(), CancelOrderTripByCustomerWithReasonActivity.class);
                 //  userId = HighwayPrefs.putString(getApplicationContext(),Constants.ID);
                 intent.putExtra("bookTripIdCode", bookTripIdCode);
-                intent.putExtra("bookId",bookId);
+                intent.putExtra("bookId", bookId);
                 intent.putExtra("vTypeId", vehicleTypeId);
                 startActivityForResult(intent, 1000);
 
