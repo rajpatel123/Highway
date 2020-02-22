@@ -189,7 +189,7 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
     }
 
     public void updateAllVehicleOwnerFragment() {
-        completedFragmentForVehicleOwner.completedUpdatedTripList(dashBoardActivity.getCompletedTrips(), this);
+        completedFragmentForVehicleOwner.vehiclecompletedUpdatedTripList(dashBoardActivity.getCompletedTrips());
         onGoingFragmentForVehicleOwner.vehicleOnGoingUpdateList(dashBoardActivity.getOngoingTrips());
         cancelFragmentForVehicleOwner.vehicleCancleUpdatedTripList(dashBoardActivity.getCancelTrips());
         upComingFragmentForVehicleOwner.vehicleUpcomingUpdatedTripList(dashBoardActivity.getUpcomingTrips());

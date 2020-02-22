@@ -106,7 +106,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     BookingVehicleListResponse bookingVehicleListResponse;
     private String tripId, userRecvNO, userMobileNO;
     public String bookTripIdCode, bookId, vehicleTypeId;
-    public boolean timeUp;
+    boolean timeUp;
     String bookVehicleName;
     public TextView rejTV, acptTripTv;
 
@@ -188,10 +188,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-
         IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
         registerReceiver(mySenderBroadCast,intentFilter);
-
 
         clicklistener();
         bookingTimer();
@@ -212,7 +210,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         LocalBroadcastManager.getInstance(getApplicationContext())
                 .registerReceiver(mReceiver,intentFilter);
     }
-//   // USING BROAD CAST RECEIVER --- Unregistered
+// USING BROAD CAST RECEIVER --- Unregistered
     @Override
     protected void onStop() {
         super.onStop();
@@ -220,7 +218,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 .unregisterReceiver(mReceiver);
     }
 
-    //   // USING BROAD CAST RECEIVER --- Unregistered
+// USING BROAD CAST RECEIVER --- Unregistered
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -460,29 +458,23 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
     }
 
-    BroadcastReceiver repDetailReciever = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-        }
-    };
-
-
     public void bookingTimer() {
 
-        new CountDownTimer(60 * 10 * 1000, 1000) {
+        new CountDownTimer(60 * 1 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60);
                 bookingInfoForDriverAllocationTime.setText(text);
+
             }
 
             public void onFinish() {
                 bookingInfoForDriverAllocationTime.setText("Time up!");
                 timeUp = true;
                 showAlertDiolog("");
+
             }
         }.start();
     }

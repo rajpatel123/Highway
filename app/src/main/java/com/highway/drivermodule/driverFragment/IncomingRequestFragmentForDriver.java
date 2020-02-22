@@ -86,8 +86,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 String intentExtra =   intent.getStringExtra("om.highway.EXTRA_DATA");
                 btnAccept.setText("inner BroadCast Receiver" +intentExtra);
             }
-
-
         }
     };
 
@@ -162,15 +160,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             }
         });
 
-
-
-
         return view;
     }
-
-
-
-
 
     @Override
     public void onAttach(Context context) {
