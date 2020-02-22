@@ -17,13 +17,16 @@ import com.highway.customer.customerActivity.WelcomeActivityForCustomer;
 import com.highway.drivermodule.driverActivity.WelcomeDriverActivity;
 import com.highway.millUserModule.milluserActivity.WelcomeActivityForMiller;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 
 public class LoginOptionActivity extends AppCompatActivity {
+
     private LinearLayout customer, driver, miller, owner;
     private ImageView imgCustomer, imgDriver,imgMiller, imgOwner;
     private TextView tvCustomer,tvMiller,tvOwner,tvDriver;
     private Button  btnNext;
-    private String userRole;
+    private String userRoleId;
     Intent intent;
 
     @Override
@@ -60,7 +63,7 @@ public class LoginOptionActivity extends AppCompatActivity {
         miller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userRole="2";
+                userRoleId="2";
                 updateSelectionView(miller);
             }
         });
@@ -68,16 +71,15 @@ public class LoginOptionActivity extends AppCompatActivity {
         driver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userRole="3";
+                userRoleId="3";
                 updateSelectionView(driver);
-
             }
         });
 
         customer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userRole = "4";
+                userRoleId = "4";
                 updateSelectionView(customer);
             }
         });
@@ -85,7 +87,7 @@ public class LoginOptionActivity extends AppCompatActivity {
         owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userRole= "5";
+                userRoleId= "5";
                 updateSelectionView(owner);
             }
         });
@@ -93,28 +95,39 @@ public class LoginOptionActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(userRole)){
+
+                if (TextUtils.isEmpty(userRoleId)){
                     Toast.makeText(LoginOptionActivity.this, "Pls select user role", Toast.LENGTH_SHORT).show();
 
                 }else{
-                    switch (userRole){
+                    switch (userRoleId){
                         case "2":
                             intent = new Intent(LoginOptionActivity.this, WelcomeActivityForMiller.class);
+                            HighwayPrefs.putString(getApplicationContext(), "millerRoleId" ,userRoleId);
                             startActivity(intent);
                             finish();
                             break;
+
                         case "3":
                             intent = new Intent(LoginOptionActivity.this, WelcomeDriverActivity.class);
+                          //  intent.putExtra("driverRoleId", userRoleId);
+                            HighwayPrefs.putString(getApplicationContext(),"driverRoleId",userRoleId);
                             startActivity(intent);
                             finish();
                             break;
+
                         case "4":
                             intent = new Intent(LoginOptionActivity.this, WelcomeActivityForCustomer.class);
+                           // intent.putExtra("customerRoleId", userRoleId);
+                            HighwayPrefs.putString(getApplicationContext(),"customerRoleId",userRoleId);
                             startActivity(intent);
                             finish();
                             break;
+
                         case "5":
                             intent = new Intent(LoginOptionActivity.this, WelcomeOwnerActivity.class);
+                         //   intent.putExtra("ownerRoleId", userRoleId);
+                            HighwayPrefs.putString(getApplicationContext(),"ownerRoleId",userRoleId);
                             startActivity(intent);
                             finish();
                             break;

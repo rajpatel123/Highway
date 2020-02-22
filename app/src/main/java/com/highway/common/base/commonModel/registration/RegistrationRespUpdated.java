@@ -4,23 +4,23 @@ package com.highway.common.base.commonModel.registration;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RegistrationResponse {
+public class RegistrationRespUpdated {
 
-    @SerializedName("Status")
+    @SerializedName("status")
     @Expose
-    private String status;
-    @SerializedName("Message")
+    private Boolean status;
+    @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("user")
     @Expose
     private User user;
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

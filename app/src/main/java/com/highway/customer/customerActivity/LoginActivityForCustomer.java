@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.highway.R;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
+import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.commonretrofit.RestClient;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -30,6 +31,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
     private Button btnSendOtp;
     String phone_number;
     private int backpress;
+    private String customerLogInId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
         CustomerPhoneNo = findViewById(R.id.edtTxtMobNo);
         btnSendOtp = findViewById(R.id.btnSendOtp);
+
+        //customerLogInId = getIntent().getStringExtra("customerRoleId");
+
 
 
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
@@ -69,14 +74,18 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
         if (validateInput()){
 
-            LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-            loginRegisterRequest.setMobile(phone_number);
+           /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
+            loginRegisterRequest.setMobile(phone_number);*/
+            customerLogInId = HighwayPrefs.getString(getApplicationContext(),"customerRoleId");
+            LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
+            loginReqUpdated.setMobile(phone_number);
+            loginReqUpdated.setRoleId(customerLogInId);
 
             if (Utils.isInternetConnected(this)) {
 
                 Utils.showProgressDialog(this);
 
-                RestClient.loginUser(loginRegisterRequest, new Callback<ResponseBody>() {
+                RestClient.loginUser(loginReqUpdated, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Utils.dismissProgressDialog();
@@ -84,6 +93,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
                             if (response.code()==200) {
                                 Intent intent = new Intent(LoginActivityForCustomer.this,MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(LoginActivityForCustomer.this, Constants.USERMOBILE, phone_number);
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, customerLogInId);
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(LoginActivityForCustomer.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();

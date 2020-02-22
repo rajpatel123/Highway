@@ -4,11 +4,11 @@ import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
-import com.highway.common.base.commonModel.login.LoginRegisterRequest;
+import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
-import com.highway.common.base.commonModel.registration.RegistrationRequest;
-import com.highway.common.base.commonModel.registration.RegistrationResponse;
+import com.highway.common.base.commonModel.registration.RegistrationReqUpdated;
+import com.highway.common.base.commonModel.registration.RegistrationRespUpdated;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListRequest;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
@@ -55,10 +55,10 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
-
+    // mobile logon
     @POST("api/Login/login_register")
-        // mobile logon
-    Call<ResponseBody> loginResponseCall(@Body LoginRegisterRequest loginRequest);
+    /*Call<ResponseBody> loginResponseCall(@Body LoginRegisterRequest loginRequest);*/
+    Call<ResponseBody> loginResponseCall(@Body LoginReqUpdated loginReqUpdated);
 
     @POST("api/Login/otp_verify")
         // otp verification
@@ -66,7 +66,7 @@ public interface ApiInterface {
 
     @POST("api/Login/signup")
         // Registration Details
-    Call<RegistrationResponse> regDetailsResponseCall(@Body RegistrationRequest registrationDetailsRequest);
+    Call<RegistrationRespUpdated> regDetailsResponseCall(@Body RegistrationReqUpdated registrationReqUpdated);
 
     // Driver All Trips
     @POST("api/Trip/getAllTripByUserId")
@@ -166,7 +166,5 @@ public interface ApiInterface {
     // accept/reject booking trip by driver
     @POST("api/Booking/acceptBookTrip")
     Call<BookingAcceptRejectResponse> ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(@Body BookingAcceptRejectData bookingAcceptReject);
-
-
 
 }

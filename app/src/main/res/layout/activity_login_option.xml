@@ -102,7 +102,6 @@
                             android:layout_gravity="center"
                             android:padding="@dimen/padding_5"
                             android:src="@drawable/highway_miller"
-                            android:textSize="@dimen/size_15"
                             android:textStyle="bold" />
 
                         <TextView
@@ -110,9 +109,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:paddingLeft="@dimen/padding_left_15"
-                            android:paddingRight="@dimen/padding_left_15"
-                            android:text=" Miller "
+                            android:text=" Goods Provider "
                             android:textAllCaps="true"
                             android:textColor="@color/Black" />
                     </LinearLayout>

@@ -33,10 +33,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_10"
             android:elevation="@dimen/margin_3"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -45,7 +45,6 @@
                 android:layout_margin="@dimen/_10dp"
                 android:background="@drawable/rounded_corner_shape"
                 android:elevation="@dimen/margin_3"
-
                 android:orientation="horizontal"
                 android:padding="@dimen/_10dp">
 
@@ -78,7 +77,45 @@
 
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/margin_3"
+                    android:layout_margin="@dimen/_10dp"
+                    android:layout_alignParentBottom="true">
+
+                    <TextView
+                        android:id="@+id/TripRejectedTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/rounded_corner_shape"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:onClick="broadCastMessage"
+                        android:padding="@dimen/_11sdp"
+                        android:text="Rejected" />
+
+                    <TextView
+                        android:id="@+id/TripAcceptTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/_11sdp"
+                        android:textColor="@color/black"
+                        android:onClick="broadCastMessage"
+                        android:background="@drawable/rounded_corner_shape"
+                        android:layout_weight="1"
+                        android:text="Accept" />
+                </LinearLayout>
+            </RelativeLayout>
+
         </LinearLayout>
+
 
         <fragment
             android:id="@+id/map"
@@ -103,9 +140,9 @@
             android:id="@+id/details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="@dimen/_10dp">
+            android:layout_marginBottom="20dp">
 
             <ImageView
                 android:id="@+id/imgIV"
@@ -145,13 +182,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:text="Booking will get cancelled if not allocated in  "
-                            android:textColor="@color/red"
-                            android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="Booking will get cancelled if not allocated in  "
+                        android:textColor="@color/red"
+                        android:textSize="12sp" />
 
 
                     <TextView
@@ -160,8 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
                         android:text="10:00"
-                        android:textColor="@color/red"
-                        />
+                        android:textColor="@color/red" />
                 </LinearLayout>
 
             </LinearLayout>

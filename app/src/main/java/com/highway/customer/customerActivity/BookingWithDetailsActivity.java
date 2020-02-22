@@ -341,7 +341,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         return Radius * c;
         */
 
-
     }
 
 
@@ -673,7 +672,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
 
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-
                         bookingVehicleListResponse = response.body();
                         bookingVehicleAdapter.setData(bookingVehicleListResponse);
                         vehicleList = bookingVehicleListResponse.getVehicleData().getVehicleList();
@@ -733,8 +731,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         info5.setText(vInfo.getInfo5());
         info6.setText(vInfo.getInfo6());
         // vehicleData.getVehicleList().add(0, vInfo);
-
-
         //vehileBookImg.setBackgroundResource(R.drawable.truck);
 
         okay.setOnClickListener(new View.OnClickListener() {

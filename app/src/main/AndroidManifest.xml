@@ -32,6 +32,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".broadCastReceiver.MyIntentService"
+            android:exported="false"></service>
+
         <activity
             android:name=".customer.customerActivity.BookingInfoDetailsActivity"
             android:screenOrientation="portrait" />

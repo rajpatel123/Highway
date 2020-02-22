@@ -1,8 +1,13 @@
 package com.highway.drivermodule.driverFragment;
 
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -18,15 +23,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
-import com.highway.common.base.HighwayApplication;
+import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
+import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
+import com.highway.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,19 +46,21 @@ import retrofit2.Response;
 
 
 public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener {
-    private Button btnReject;
-    private Button btnAccept;
-    private TextView lblCount;
-    private CircleImageView imgUser;
-    private TextView lblUserName;
-    private RatingBar ratingUser;
-    private TextView pickupAddress;
-    private TextView dropAddress;
-    private TextView lblLocationDistance;
-    private LinearLayout pickupAddressLayout;
-    private LinearLayout dropAddressLayout;
 
-    private TextView lblCarType;
+    public String TAG = getClass().getSimpleName();
+    public Button btnReject;
+    public Button btnAccept;
+    public TextView lblCount;
+    public CircleImageView imgUser;
+    public TextView lblUserName;
+    public RatingBar ratingUser;
+    public TextView pickupAddress;
+    public TextView dropAddress;
+    public TextView lblLocationDistance;
+    public LinearLayout pickupAddressLayout;
+    public LinearLayout dropAddressLayout;
+
+    public TextView lblCarType;
 
     Integer arrivalTime = 0;
     MediaPlayer mPlayer;
@@ -59,12 +69,27 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     Context context;
     CountDownTimer countDownTimer;
 
-    private List<CancelTrip> cancelTrips = new ArrayList<>();
-    private RecyclerView recyclerViewForDriver;
+    public List<CancelTrip> cancelTrips = new ArrayList<>();
+    public RecyclerView recyclerViewForDriver;
     CancelTripAdapterForDriver cancelTripAdapterForDriver;
     DashBoardActivity dashBoardActivity;
-    private int time_to_left = 60;
+    public int time_to_left = 60;
+    public NotificationPushData pushData;
+    public String userId;
 
+    MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
+
+    private BroadcastReceiver mInnerReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if ("com.highway.broadCastReceiver.ACTION_SEND".equals(intent.getAction())){
+                String intentExtra =   intent.getStringExtra("om.highway.EXTRA_DATA");
+                btnAccept.setText("inner BroadCast Receiver" +intentExtra);
+            }
+
+
+        }
+    };
 
     public IncomingRequestFragmentForDriver() {
         // Required empty public constructor
@@ -81,14 +106,37 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Log.e(getClass().getSimpleName(), getArguments().getString(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, "Default"));
+            try {
+                pushData = getArguments().getParcelable(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
         }
+
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        getActivity().registerReceiver(mySenderBroadCast,intentFilter);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter("com.highway.broadCastReceiver.ACTION_SEND");
+        getActivity().registerReceiver(mInnerReceiver,intentFilter);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mySenderBroadCast);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
-
 
         btnReject = view.findViewById(R.id.btnReject);
         btnAccept = view.findViewById(R.id.btnAccept);
@@ -101,11 +149,28 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         lblLocationDistance = view.findViewById(R.id.lblLocationDistance);
         pickupAddressLayout = view.findViewById(R.id.pickup_address_layout);
         dropAddressLayout = view.findViewById(R.id.drop_address_layout);
-
+        context = getActivity();
         mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
         init();
+
+        btnAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent("com.highway.broadCastReceiver.ACTION_SEND");
+                intent.putExtra("om.highway.EXTRA_DATA","Driver trip accepted");
+                 getActivity().sendBroadcast(intent);
+            }
+        });
+
+
+
+
         return view;
     }
+
+
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -154,10 +219,11 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         };
 
         countDownTimer.start();
+        userId = HighwayPrefs.getString(getContext(), Constants.ID);
     }
 
 
-    private void setTvZoomInOutAnimation(final TextView textView) {
+    public void setTvZoomInOutAnimation(final TextView textView) {
         final float startSize = 20;
         final float endSize = 13;
         final int animationDuration = 900; // Animation duration in ms
@@ -178,32 +244,59 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnReject:
-
-
+                if (Utils.isInternetConnected(context)) {
+                    Utils.showProgressDialog(context);
+                    acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED));
+                }
                 break;
 
             case R.id.btnAccept:
-
+                if (Utils.isInternetConnected(context)) {
+                    Utils.showProgressDialog(context);
+                    acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED));
+                }
                 break;
         }
     }
 
-    private void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData){
+    public BookingAcceptRejectData getAcceptRejectBookingTripParams(String acceptReject) {
+        BookingAcceptRejectData acceptRejectData = new BookingAcceptRejectData();
+        acceptRejectData.setTripId(pushData.getTripId());
+        acceptRejectData.setUserId(userId);
+        acceptRejectData.setAcceptReject(acceptReject);
+        return acceptRejectData;
+    }
+
+    public void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData) {
         RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
             @Override
             public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-
+                    Utils.dismissProgressDialog();
                     BookingAcceptRejectResponse resp = response.body();
+
 
                 }
             }
 
             @Override
             public void onFailure(Call<BookingAcceptRejectResponse> call, Throwable t) {
+                Utils.dismissProgressDialog();
 
             }
         });
+    }
+
+    public void rejectTripAlert(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Booking Rejected!")
+                .setMessage(message)
+                .setPositiveButton("OKAY", (dialog, which) -> {
+
+                })/*
+                .setNegativeButton("CANCEL", (dialog, which) -> {
+
+                })*/.show();
     }
 
 //    public void getDistance(LatLng source, LatLng destination) {
@@ -233,6 +326,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public void onDestroyView() {
         super.onDestroyView();
         stopMediaPlayer();
+        getActivity().unregisterReceiver(mInnerReceiver);  /// broadcastReceiver
     }
 
 

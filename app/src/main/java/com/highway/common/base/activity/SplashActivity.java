@@ -13,7 +13,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.highway.R;
+import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
@@ -22,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private Handler handler;
     private static int SPLASH_TIME_OUT = 1000;
-
+    private String TAG = getClass().getSimpleName();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -40,11 +42,15 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if (HighwayPrefs.getBoolean(SplashActivity.this, Constants.LOGGED_IN)) {
                     Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+                    if (getIntent().getExtras() != null) {
+                        NotificationPushData data = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+                        i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
+                        Log.e(TAG, BaseUtil.jsonFromModel(data));
+                    }
 //                    String data = getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
 //                    Log.e(getClass().getSimpleName(), data);
-                    i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, bundle);
+                    String token = HighwayPrefs.getString(SplashActivity.this, "device_token");
+                    System.out.println("asdf fcm --- : " + token);
                     startActivity(i);
                     finish();
                 } else {
