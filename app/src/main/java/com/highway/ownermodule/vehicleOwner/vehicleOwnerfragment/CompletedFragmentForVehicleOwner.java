@@ -16,11 +16,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.CompletedTripAdapterForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.OnGoingTripAdapterForVehicleOwner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,7 +34,7 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
     }
 
 
-    public static CompletedFragmentForVehicleOwner newInstance(String param1, String param2) {
+    public static CompletedFragmentForVehicleOwner newInstance() {
         CompletedFragmentForVehicleOwner fragment = new CompletedFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -72,7 +69,6 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 
     public void vehiclecompletedUpdatedTripList(List<CompletedTrip> completedTrips) {
