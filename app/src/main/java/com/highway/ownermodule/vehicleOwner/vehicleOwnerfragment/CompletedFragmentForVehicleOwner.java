@@ -29,9 +29,7 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
     CompletedTripAdapterForVehicleOwner completedTripAdapterForVehicleOwner;
     SwipeRefreshLayout swiptorefresh;
 
-    public CompletedFragmentForVehicleOwner() {
-
-    }
+    public CompletedFragmentForVehicleOwner() { }
 
 
     public static CompletedFragmentForVehicleOwner newInstance() {
@@ -44,9 +42,7 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        if (getArguments() != null) {  }
     }
 
     @Override
@@ -55,8 +51,8 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
         completedRecycler = view.findViewById(R.id.CompletedRecyclerViewForVehicle);
         swiptorefresh = view.findViewById(R.id.swiptorefresh);
 
-
         return view;
+
     }
 
     @Override

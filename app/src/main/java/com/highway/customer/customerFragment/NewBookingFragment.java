@@ -1,6 +1,7 @@
 package com.highway.customer.customerFragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +87,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     private String sourceName;
     private String destName;
     private DashBoardActivity mActivity;
+    View mapView;
 
 
     @Override
@@ -201,7 +204,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
                         mMap.moveCamera(cameraUpdate);
 
-                        if (sourceLatitude > 0 && destLatitude>0)
+                        if (sourceLatitude > 0 && destLatitude > 0)
                             openBookingActivity();
 
                     }
@@ -220,14 +223,12 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                     }
                     if (mMap != null && placeDest.getLatLng() != null) {
 
-
                         LatLng latLng = placeDest.getLatLng();
-
 
                         destName = placeDest.getName();
                         destLatitude = latLng.latitude;
                         destLongitude = latLng.longitude;
-                        if (sourceLatitude > 0 && destLatitude>0)
+                        if (sourceLatitude > 0 && destLatitude > 0)
                             openBookingActivity();
 
                     }
@@ -287,10 +288,27 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-//        mMap.getUiSettings().setZoomControlsEnabled(true);
+        // mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(18.0f);
+///////////////////////////////////////////////////////////// Asked by sir
+        if (mapView != null && mapView.findViewById(Integer.parseInt("1")) != null) {
+            View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            layoutParams.setMargins(0, 180, 180, 0);
+/*
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 30);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 50);
 
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, 50);
+            layoutParams.addRule(RelativeLayout.ALIGN_END, 50);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT ,50);
+            layoutParams.setMargins(30, 50, 50, 40);*/
+        }
 
         try {
             mMap.setMapStyle(
@@ -299,6 +317,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             e.printStackTrace();
             // Oops, looks like the map style resource couldn't be found!
         }
+
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

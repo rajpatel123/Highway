@@ -55,13 +55,10 @@ public class SplashActivity extends AppCompatActivity {
             String[] PERMISSIONS = {Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE};
             if (!hasPermissions(this, PERMISSIONS)) {
                 ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST );
-                // q=true;
             } else {
-                //Do here
                 splashScreenHandler();
             }
         } else {
-            //Do here
             splashScreenHandler();
         }
 
