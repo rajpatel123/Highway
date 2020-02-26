@@ -52,7 +52,9 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if (Build.VERSION.SDK_INT >= 23) {
-            String[] PERMISSIONS = {Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE};
+            String[] PERMISSIONS = {Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.RECEIVE_SMS,
+                    Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS,Manifest.permission.READ_CONTACTS};
             if (!hasPermissions(this, PERMISSIONS)) {
                 ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST );
             } else {

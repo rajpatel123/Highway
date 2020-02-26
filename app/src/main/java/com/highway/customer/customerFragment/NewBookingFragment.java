@@ -252,8 +252,8 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             HighwayApplication.getInstance().getBookingHTripRequest().setDestAddress(destName);
             HighwayApplication.getInstance().getBookingHTripRequest().setDestLat(destLatitude);
             HighwayApplication.getInstance().getBookingHTripRequest().setDestLong(destLongitude);
-
             BookingWithDetailsActivity.start(mActivity);
+            getActivity().finish();  //
         }
     }
 
