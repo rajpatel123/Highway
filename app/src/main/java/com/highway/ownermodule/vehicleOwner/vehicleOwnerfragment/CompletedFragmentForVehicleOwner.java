@@ -18,25 +18,21 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerAdapter.CompletedTripAdapterForVehicleOwner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class CompletedFragmentForVehicleOwner extends Fragment {
     DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
-    List<CompletedTrip> completedTripList = new ArrayList<>();
     RecyclerView completedRecycler;
     DashBoardActivity dashBoardActivity;
     Context context;
     CompletedTripAdapterForVehicleOwner completedTripAdapterForVehicleOwner;
     SwipeRefreshLayout swiptorefresh;
 
-    public CompletedFragmentForVehicleOwner() {
-
-    }
+    public CompletedFragmentForVehicleOwner() { }
 
 
-    public static CompletedFragmentForVehicleOwner newInstance(String param1, String param2) {
+    public static CompletedFragmentForVehicleOwner newInstance() {
         CompletedFragmentForVehicleOwner fragment = new CompletedFragmentForVehicleOwner();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -46,9 +42,7 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        if (getArguments() != null) {  }
     }
 
     @Override
@@ -57,8 +51,8 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
         completedRecycler = view.findViewById(R.id.CompletedRecyclerViewForVehicle);
         swiptorefresh = view.findViewById(R.id.swiptorefresh);
 
-
         return view;
+
     }
 
     @Override
@@ -71,22 +65,17 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 
-    public void completedUpdatedTripList(List<CompletedTrip> completedTrips, DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner) {
-        if (completedTrips != null && completedTrips.size() > 0) {
-            this.dashBoardFragmentForVehicleOwner = dashBoardFragmentForVehicleOwner;
-            completedTripAdapterForVehicleOwner = new CompletedTripAdapterForVehicleOwner(completedTrips, getContext());
+    public void vehiclecompletedUpdatedTripList(List<CompletedTrip> completedTrips) {
+        if (completedTrips!=null && completedTrips.size()>0){
+            completedTripAdapterForVehicleOwner = new CompletedTripAdapterForVehicleOwner(completedTrips,getActivity());
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             completedRecycler.setLayoutManager(layoutManager);
             completedRecycler.setItemAnimator(new DefaultItemAnimator());
             completedRecycler.setAdapter(completedTripAdapterForVehicleOwner);
-
-
-        } else {
-            Toast.makeText(dashBoardActivity, "Some thing is wrong in completed trips for vehicle owner", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(dashBoardActivity, "No! trip data are found for Completed trip for vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

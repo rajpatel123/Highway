@@ -72,7 +72,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     private AppBarConfiguration mAppBarConfiguration;
     // for Driver
-    private List<CancelTrip> cancelTrips = new ArrayList<>();
+
     private DashBoardFragmentForMillUser dashBoardFragmentForMillUser;
     private DashBoardFragmentForDriver dashBoardFragmentForDriver;
     private DashBordFragmentForCustomer dashBordFragmentForCustomer;
@@ -88,38 +88,23 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
+    private List<CancelTrip> cancelTrips = new ArrayList<>();
+
 
     public List<CancelTrip> getCancelTrips() {
         return cancelTrips;
     }
-
     public void setCancelTrips(List<CancelTrip> cancelTrips) {
         this.cancelTrips = cancelTrips;
     }
-
-    public List<CompletedTrip> getCompletedTrips() {
-        return completedTrips;
-    }
-
-    public void setCompletedTrips(List<CompletedTrip> completedTrips) {
-        this.completedTrips = completedTrips;
-    }
-
-    public List<OngoingTrip> getOngoingTrips() {
-        return ongoingTrips;
-    }
-
-    public void setOngoingTrips(List<OngoingTrip> ongoingTrips) {
-        this.ongoingTrips = ongoingTrips;
-    }
-
+    public List<CompletedTrip> getCompletedTrips() { return completedTrips; }
+    public void setCompletedTrips(List<CompletedTrip> completedTrips) { this.completedTrips = completedTrips; }
+    public List<OngoingTrip> getOngoingTrips() { return ongoingTrips; }
+    public void setOngoingTrips(List<OngoingTrip> ongoingTrips) { this.ongoingTrips = ongoingTrips; }
     public List<UpcomingTrip> getUpcomingTrips() {
         return upcomingTrips;
     }
-
-    public void setUpcomingTrips(List<UpcomingTrip> upcomingTrips) {
-        this.upcomingTrips = upcomingTrips;
-    }
+    public void setUpcomingTrips(List<UpcomingTrip> upcomingTrips) { this.upcomingTrips = upcomingTrips; }
 
 
     private Toolbar dashBoardToolbar;
@@ -207,10 +192,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         dashBoardToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(dashBoardToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         navigationView = findViewById(R.id.nav_view);
         //btnLogOut = findViewById(R.id.btnLogout);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, dashBoardToolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);

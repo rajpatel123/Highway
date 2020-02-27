@@ -33,7 +33,6 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
     private TabLayout vehicleOwnerTabMode;
     private ViewPager vehicleOwnerViewPager;
 
-
     DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
     DashBoardActivity dashBoardActivity;
     UpComingFragmentForVehicleOwner upComingFragmentForVehicleOwner;
@@ -41,7 +40,6 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
     PendingFragmentForVehicleOwner pendingFragmentForVehicleOwner;
     CompletedFragmentForVehicleOwner completedFragmentForVehicleOwner;
     CancelFragmentForVehicleOwner cancelFragmentForVehicleOwner;
-
 
     List<Fragment> vehicleOwnerfragmentlist = new ArrayList<>();
     private String userId;
@@ -52,7 +50,6 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
     public static DashBoardFragmentForVehicleOwner newInstance() {
         DashBoardFragmentForVehicleOwner fragment = new DashBoardFragmentForVehicleOwner();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -82,8 +79,8 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
         vehicleOwnerfragmentlist.add(completedFragmentForVehicleOwner);
         vehicleOwnerfragmentlist.add(cancelFragmentForVehicleOwner);
 
-        FragmentTabAdapterForVehicleOwner fragmentTabAdapterForVehicleOwner = new FragmentTabAdapterForVehicleOwner(getActivity()
-                .getSupportFragmentManager(), vehicleOwnerfragmentlist);
+        FragmentTabAdapterForVehicleOwner fragmentTabAdapterForVehicleOwner =
+                new FragmentTabAdapterForVehicleOwner(getActivity().getSupportFragmentManager(), vehicleOwnerfragmentlist);
 
         vehicleOwnerViewPager.setAdapter(fragmentTabAdapterForVehicleOwner);
         vehicleOwnerViewPager.setOffscreenPageLimit(4);
@@ -159,8 +156,10 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
                 Utils.dismissProgressDialog();
                 if (response.body() != null && response.body().getStatus() != null) {
                     if (response.body().getStatus()) {
+
                         GetAllTripByUserIdResponse getAllTripByUserIdResponse = response.body();
                         if (getAllTripByUserIdResponse != null) {
+
                             if (getAllTripByUserIdResponse.getCompletedTrips() != null && getAllTripByUserIdResponse.getCompletedTrips().size() > 0) {
                                 dashBoardActivity.setCompletedTrips(getAllTripByUserIdResponse.getCompletedTrips());
                             }
@@ -180,7 +179,6 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
                     Toast.makeText(dashBoardActivity, "Response failed", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<GetAllTripByUserIdResponse> call, Throwable t) {
                 Toast.makeText(dashBoardActivity, "failed", Toast.LENGTH_SHORT).show();
@@ -189,11 +187,10 @@ public class DashBoardFragmentForVehicleOwner extends Fragment {
     }
 
     public void updateAllVehicleOwnerFragment() {
-        completedFragmentForVehicleOwner.completedUpdatedTripList(dashBoardActivity.getCompletedTrips(), this);
+        //completedFragmentForVehicleOwner.vehiclecompletedUpdatedTripList(dashBoardActivity.getCompletedTrips());
         onGoingFragmentForVehicleOwner.vehicleOnGoingUpdateList(dashBoardActivity.getOngoingTrips());
         cancelFragmentForVehicleOwner.vehicleCancleUpdatedTripList(dashBoardActivity.getCancelTrips());
         upComingFragmentForVehicleOwner.vehicleUpcomingUpdatedTripList(dashBoardActivity.getUpcomingTrips());
-
     }
 
 }

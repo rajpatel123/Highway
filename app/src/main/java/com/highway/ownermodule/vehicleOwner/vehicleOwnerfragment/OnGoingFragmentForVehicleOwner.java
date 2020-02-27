@@ -78,7 +78,7 @@ public class OnGoingFragmentForVehicleOwner extends Fragment {
             vehicleOngoingRecycler.setItemAnimator(new DefaultItemAnimator());
             vehicleOngoingRecycler.setAdapter(onGoingTripAdapterForVehicleOwner);
         }else {
-            Toast.makeText(getActivity(), "No! trip found in Ongoing trips for Vehicle owner", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "No! trip data found for Ongoing trips for Vehicle owner", Toast.LENGTH_SHORT).show();
         }
       }
 
