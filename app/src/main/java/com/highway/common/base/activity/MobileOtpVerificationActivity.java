@@ -56,7 +56,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
 
 
 
-        timerInOtp();                          // time count dowan of otp
+        timerInOtp();                          // time count down of otp
 
         mobileNumberTV.setText(HighwayPrefs.getString(this, Constants.USERMOBILE));
 
