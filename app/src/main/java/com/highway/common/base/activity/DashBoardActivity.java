@@ -198,8 +198,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, dashBoardToolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);

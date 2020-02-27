@@ -150,6 +150,7 @@ public class ConformBookingActivity extends AppCompatActivity implements OnMapRe
             }
         });
 
+
         confirmBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,21 +162,31 @@ public class ConformBookingActivity extends AppCompatActivity implements OnMapRe
                             BookingHTripResponse resp = response.body();
                             if (resp != null && resp.getBookIdCode() != null && resp.getBookId() != null)
                                 BookingConformedActivity.start(ConformBookingActivity.this, resp.getBookIdCode(), resp.getBookId(),
-                                        HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId());
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId(),
+                                        /// Asked by sir
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getUserId(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getTripRecevirId(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getGoodsTypeId(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getCouponId(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getDestLat(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getDestLong(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getTripFare(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress(),
+                                        HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress()
+                                        );
                             finish();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BookingHTripResponse> call, Throwable t) {
-
+                        Toast.makeText(ConformBookingActivity.this, "booking failed", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
             }
         });
-
 
         editTV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,14 +198,15 @@ public class ConformBookingActivity extends AppCompatActivity implements OnMapRe
     }
 
     private void initLocations(Intent intent) {
+
         destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
         destLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLat();
+
         destLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLong();
         edtDropLocation.setText("" + destName);
 
         markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
         markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
-
     }
 
 
