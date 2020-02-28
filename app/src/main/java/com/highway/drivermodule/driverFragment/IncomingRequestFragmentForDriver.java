@@ -151,14 +151,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
         init();
 
-        btnAccept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent("com.highway.broadCastReceiver.ACTION_SEND");
-                intent.putExtra("om.highway.EXTRA_DATA","Driver trip accepted");
-                 getActivity().sendBroadcast(intent);
-            }
-        });
+//        btnAccept.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent  = new Intent("com.highway.broadCastReceiver.ACTION_SEND");
+//                intent.putExtra("om.highway.EXTRA_DATA","Driver trip accepted");
+//                 getActivity().sendBroadcast(intent);
+//            }
+//        });
+
+        btnAccept.setOnClickListener(this);
+        btnReject.setOnClickListener(this);
 
         return view;
     }

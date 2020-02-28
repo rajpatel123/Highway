@@ -60,78 +60,63 @@ public class LoginOptionActivity extends AppCompatActivity {
     }
 
     public void clickListenerView(){
-        miller.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userRoleId="2";
-                updateSelectionView(miller);
-            }
+        miller.setOnClickListener(v -> {
+            userRoleId="2";
+            updateSelectionView(miller);
         });
 
-        driver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userRoleId="3";
-                updateSelectionView(driver);
-            }
+        driver.setOnClickListener(v -> {
+            userRoleId="3";
+            updateSelectionView(driver);
         });
 
-        customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userRoleId = "4";
-                updateSelectionView(customer);
-            }
+        customer.setOnClickListener(v -> {
+            userRoleId = "4";
+            updateSelectionView(customer);
         });
 
-        owner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userRoleId= "5";
-                updateSelectionView(owner);
-            }
+        owner.setOnClickListener(v -> {
+            userRoleId= "5";
+            updateSelectionView(owner);
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnNext.setOnClickListener(view -> {
 
-                if (TextUtils.isEmpty(userRoleId)){
-                    Toast.makeText(LoginOptionActivity.this, "Pls select user role", Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(userRoleId)){
+                Toast.makeText(LoginOptionActivity.this, "Pls select user role", Toast.LENGTH_SHORT).show();
 
-                }else{
-                    switch (userRoleId){
-                        case "2":
-                            intent = new Intent(LoginOptionActivity.this, WelcomeActivityForMiller.class);
-                            HighwayPrefs.putString(getApplicationContext(), "millerRoleId" ,userRoleId);
-                            startActivity(intent);
-                            finish();
-                            break;
+            }else{
+                switch (userRoleId){
+                    case "2":
+                        intent = new Intent(LoginOptionActivity.this, WelcomeActivityForMiller.class);
+                        HighwayPrefs.putString(getApplicationContext(), "millerRoleId" ,userRoleId);
+                        startActivity(intent);
+                        finish();
+                        break;
 
-                        case "3":
-                            intent = new Intent(LoginOptionActivity.this, WelcomeDriverActivity.class);
-                          //  intent.putExtra("driverRoleId", userRoleId);
-                            HighwayPrefs.putString(getApplicationContext(),"driverRoleId",userRoleId);
-                            startActivity(intent);
-                            finish();
-                            break;
+                    case "3":
+                        intent = new Intent(LoginOptionActivity.this, WelcomeDriverActivity.class);
+                      //  intent.putExtra("driverRoleId", userRoleId);
+                        HighwayPrefs.putString(getApplicationContext(),"driverRoleId",userRoleId);
+                        startActivity(intent);
+                        finish();
+                        break;
 
-                        case "4":
-                            intent = new Intent(LoginOptionActivity.this, WelcomeActivityForCustomer.class);
-                           // intent.putExtra("customerRoleId", userRoleId);
-                            HighwayPrefs.putString(getApplicationContext(),"customerRoleId",userRoleId);
-                            startActivity(intent);
-                            finish();
-                            break;
+                    case "4":
+                        intent = new Intent(LoginOptionActivity.this, WelcomeActivityForCustomer.class);
+                       // intent.putExtra("customerRoleId", userRoleId);
+                        HighwayPrefs.putString(getApplicationContext(),"customerRoleId",userRoleId);
+                        startActivity(intent);
+                        finish();
+                        break;
 
-                        case "5":
-                            intent = new Intent(LoginOptionActivity.this, WelcomeOwnerActivity.class);
-                         //   intent.putExtra("ownerRoleId", userRoleId);
-                            HighwayPrefs.putString(getApplicationContext(),"ownerRoleId",userRoleId);
-                            startActivity(intent);
-                            finish();
-                            break;
-                    }
+                    case "5":
+                        intent = new Intent(LoginOptionActivity.this, WelcomeOwnerActivity.class);
+                     //   intent.putExtra("ownerRoleId", userRoleId);
+                        HighwayPrefs.putString(getApplicationContext(),"ownerRoleId",userRoleId);
+                        startActivity(intent);
+                        finish();
+                        break;
                 }
             }
         });

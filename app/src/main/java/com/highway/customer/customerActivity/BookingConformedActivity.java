@@ -122,14 +122,32 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     };
 
 
-    public static void start(ConformBookingActivity activity, String bookTripIdCode, String bookId, String vTypeId) {
+    public static void start(ConformBookingActivity activity, String bookTripIdCode, String bookId, String vTypeId, String user_id, String tripRecevirId, String GoodsTypeId, String couponId,
+                             double sourceLat, double sourceLong, double destLat,double destLong, String tripFare, String sourceAddress, String destAddress) {
         Intent intent = new Intent(activity, BookingConformedActivity.class);
         intent.putExtra("bookTripIdCode", bookTripIdCode);
         intent.putExtra("bookId", bookId);
         intent.putExtra("vTypeId", vTypeId);
+            // Asked by sir
+        intent.putExtra("User_id",user_id);
+        intent.putExtra("tripRecevirId",tripRecevirId);
+        intent.putExtra("GoodsTypeId",GoodsTypeId);
+        intent.putExtra("CouponId",couponId);
+        intent.putExtra("SourceLat",sourceLat);
+        intent.putExtra("SourceLong",sourceLong);
+        intent.putExtra("DestLat",destLat);
+        intent.putExtra("DestLong",destLong);
+        intent.putExtra("TripFare",tripFare);
+        intent.putExtra("sourceAddress",sourceAddress);
+        intent.putExtra("destAddress",destAddress);
+
+
+
         activity.startActivity(intent);
 
     }
+
+
 
 
     @Override
