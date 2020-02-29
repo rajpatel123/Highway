@@ -166,9 +166,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         infoTV = findViewById(R.id.tripInfo);
         toolbar = findViewById(R.id.toolbar);
         // Using Broadcast for Customer
-        rejTV = findViewById(R.id.TripRejectedTv);
+        /*rejTV = findViewById(R.id.TripRejectedTv);
         acptTripTv = findViewById(R.id.TripAcceptTv);
-
+*/
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), RECEIVERPHONENO);
         bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
