@@ -83,8 +83,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
                 }
             }
         });
-
-
         if(row_index==position){
             holder.row_linearlayout.setBackgroundColor(Color.parseColor("#FFB400"));
            // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
@@ -96,11 +94,11 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         }
 
 
-        /*if (vehicleList.isSelected()){
+        if (vehicleList.isSelected()){
             Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
         }else{
             Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
-        }*/
+        }
     }
 
     @Override

@@ -74,8 +74,6 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
         if (validateInput()){
 
-           /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-            loginRegisterRequest.setMobile(phone_number);*/
             customerLogInId = HighwayPrefs.getString(getApplicationContext(),"customerRoleId");
             LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
             loginReqUpdated.setMobile(phone_number);
