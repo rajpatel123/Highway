@@ -103,6 +103,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".common.base.activity.DashBoardActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".common.base.activity.LoginOptionActivity"

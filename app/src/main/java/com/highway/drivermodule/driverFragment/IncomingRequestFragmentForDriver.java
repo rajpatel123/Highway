@@ -82,9 +82,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     private BroadcastReceiver mInnerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if ("com.highway.broadCastReceiver.ACTION_SEND".equals(intent.getAction())){
-                String intentExtra =   intent.getStringExtra("om.highway.EXTRA_DATA");
-                btnAccept.setText("inner BroadCast Receiver" +intentExtra);
+            if ("com.highway.broadCastReceiver.ACTION_SEND".equals(intent.getAction())) {
+                String intentExtra = intent.getStringExtra("om.highway.EXTRA_DATA");
+                btnAccept.setText("inner BroadCast Receiver" + intentExtra);
             }
         }
     };
@@ -103,6 +103,14 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getPushData();
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        getActivity().registerReceiver(mySenderBroadCast, intentFilter);
+
+    }
+
+    private void getPushData() {
         if (getArguments() != null) {
             try {
                 pushData = getArguments().getParcelable(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
@@ -111,18 +119,13 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             }
             Log.e(TAG, BaseUtil.jsonFromModel(pushData));
         }
-
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        getActivity().registerReceiver(mySenderBroadCast,intentFilter);
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
         IntentFilter intentFilter = new IntentFilter("com.highway.broadCastReceiver.ACTION_SEND");
-        getActivity().registerReceiver(mInnerReceiver,intentFilter);
+        getActivity().registerReceiver(mInnerReceiver, intentFilter);
     }
 
 
@@ -214,6 +217,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
         countDownTimer.start();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
+        pickupAddress.setText(pushData.getSource());
+        dropAddress.setText(pushData.getDestination());
     }
 
 
@@ -265,8 +270,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
             @Override
             public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
+                Utils.dismissProgressDialog();
                 if (response.code() == 200 && response.body() != null) {
-                    Utils.dismissProgressDialog();
                     BookingAcceptRejectResponse resp = response.body();
 
 

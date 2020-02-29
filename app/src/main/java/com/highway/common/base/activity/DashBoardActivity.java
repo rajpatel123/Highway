@@ -128,20 +128,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
+        Log.e(TAG,"onCreate");
 //        intent = getIntent();
 //        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
-        if (getIntent().getExtras() != null) {
-            try {
-                pushData = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
-        }
 
-        navigationInitView();
-        updateNavViewHeader();
-        navAccordingRoleId();// According RoleId Navigation Icon
+
         //setOnClickListenerOperation();
 
         String token = HighwayPrefs.getString(this, "device_token");
@@ -859,6 +850,31 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         }
     };
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPushData();
+        navigationInitView();
+        updateNavViewHeader();
+        navAccordingRoleId();// According RoleId Navigation Icon
+    }
+
+    private void getPushData(){
+        if (getIntent().getExtras() != null) {
+            try {
+                pushData = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -868,6 +884,3 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 }
-
-
-
