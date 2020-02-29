@@ -478,7 +478,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     public void bookingTimer() {
 
-        new CountDownTimer(60 * 1 * 1000, 1000) {
+        new CountDownTimer(60 * 10 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",

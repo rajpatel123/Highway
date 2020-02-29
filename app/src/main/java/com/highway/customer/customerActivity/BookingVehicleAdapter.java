@@ -59,11 +59,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         holder.tataAceTv1.setText(""+vehicleList.getVehicleName());
         holder.faireChargeTv3.setText("\u20B9"+vehicleList.getVehicleFare());
 
-        if (vehicleList.isSelected()){
-            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
-        }else{
-            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
-        }
 
         holder.infoImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +77,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
                     onClickEvents.onCLickTruck(holder.getAdapterPosition(),vehicleList.getVehicleFare());
 
                     if (vehicleList.isSelected()){
-
                         holder.itemView.setBackgroundColor(Color.parseColor("#8DFFFFFF"));
                     }else {
                         holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -91,6 +85,13 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
                    // holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.blue));
             }
         });
+
+
+        if (vehicleList.isSelected()){
+            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
+        }else{
+            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
+        }
     }
 
     @Override
