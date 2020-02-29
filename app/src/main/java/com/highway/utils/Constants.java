@@ -45,4 +45,11 @@ public class Constants {
     public static final String NOTIFICATION_TYPE_TRIP_NORESPONCE = "TRIP_NORESPONCE";
 
     public static final String UserRole = "userRole";
+    public static final String PUSH_TYPE = "type";
+    public static final String CUSTOMER_NAME ="customer_name" ;
+    public static final String PUSH_MOBILE = "mobile";
+    public static final String TRIP_ID = "tripId";
+    public static final String SOURCE = "source";
+    public static final String DESTINATEION = "push_mobile";
+    public static final String PUSH_ACTION = "com.newbooking.call";
 }

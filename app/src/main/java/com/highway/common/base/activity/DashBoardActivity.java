@@ -28,11 +28,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.highway.PushReciever;
 import com.highway.R;
+import com.highway.broadCastReceiver.MyIntentService;
+import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
@@ -123,6 +127,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private int notificationType = 0;
     private NotificationPushData pushData;
     private String TAG = getClass().getSimpleName();
+    IntentFilter intentFilter;
+    MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,14 +154,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         System.out.println("asdf fcm --- : " + token);
 
         // Create an IntentFilter instance.
-        IntentFilter intentFilter = new IntentFilter();
+        intentFilter = new IntentFilter();
         // Add network connectivity change action.
-        intentFilter.addAction("com.new.call");
+        intentFilter.addAction(Constants.PUSH_ACTION);
 
-        // Set broadcast receiver priority.
         intentFilter.setPriority(100);
-        registerReceiver(listener, intentFilter);
-        //showDialog(this);
+        registerReceiver(new PushReciever(), intentFilter);
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, instanceIdResult -> {
             String newToken = instanceIdResult.getToken();
@@ -185,6 +189,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             Log.e("newToken", newToken);
         });
+
+        intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
+        registerReceiver(mySenderBroadCast,intentFilter);
 
     }
 
@@ -761,7 +768,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hello friends, the best app for Heighway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
+                            "Hello friends, the best app for Highway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
@@ -849,23 +856,37 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         dialog.show();
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter(MyIntentService.MY_SERVICE_INTENT);
+        LocalBroadcastManager.getInstance(getApplicationContext())
+                .registerReceiver(listener,intentFilter);
+    }
+
+
     private BroadcastReceiver listener = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String data = intent.getStringExtra("data");
+           String data = intent.getStringExtra("data");
+            /*acptTripTv.setText(data);*/
+           //Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
 
-            Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
+            Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
+            Bundle bundle = new Bundle();
+            fragment3.setArguments(bundle);
 
         }
     };
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (listener != null) {
+        unregisterReceiver(mySenderBroadCast);
+        /*if (listener != null) {
             unregisterReceiver(listener);
-        }
+        }*/
     }
 }
 

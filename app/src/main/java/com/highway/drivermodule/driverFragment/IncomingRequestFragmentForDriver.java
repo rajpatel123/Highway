@@ -121,15 +121,15 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onStart() {
         super.onStart();
-        IntentFilter intentFilter = new IntentFilter("com.highway.broadCastReceiver.ACTION_SEND");
-        getActivity().registerReceiver(mInnerReceiver,intentFilter);
+//        IntentFilter intentFilter = new IntentFilter("com.highway.broadCastReceiver.ACTION_SEND");
+//        getActivity().registerReceiver(mInnerReceiver,intentFilter);
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(mySenderBroadCast);
+      //  getActivity().unregisterReceiver(mySenderBroadCast);
     }
 
     @Override

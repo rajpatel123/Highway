@@ -211,8 +211,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         clicklistener();
         bookingTimer();
-
     }
+
 // USING BROAD CAST RECEIVER
     public void broadCastMessage(View view) {
         Intent serviceIntent = new Intent(this, MyIntentService.class);
