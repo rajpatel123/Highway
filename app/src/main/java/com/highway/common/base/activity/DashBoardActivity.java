@@ -32,6 +32,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.highway.PushReciever;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
@@ -141,11 +142,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         // Create an IntentFilter instance.
         IntentFilter intentFilter = new IntentFilter();
         // Add network connectivity change action.
-        intentFilter.addAction("com.new.call");
+        intentFilter.addAction(Constants.PUSH_ACTION);
 
         // Set broadcast receiver priority.
         intentFilter.setPriority(100);
-        registerReceiver(listener, intentFilter);
+        registerReceiver(new PushReciever(), intentFilter);
         //showDialog(this);
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, instanceIdResult -> {
@@ -752,7 +753,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hello friends, the best app for Heighway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
+                            "Hello friends, the best app for Highway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
@@ -843,9 +844,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private BroadcastReceiver listener = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String data = intent.getStringExtra("data");
+          //  String data = intent.getStringExtra("data");
+           // Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
 
-            Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
+            Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
+            Bundle bundle = new Bundle();
+            fragment3.setArguments(bundle);
 
         }
     };

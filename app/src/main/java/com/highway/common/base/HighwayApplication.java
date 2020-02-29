@@ -2,6 +2,7 @@ package com.highway.common.base;
 
 import android.app.Application;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 
 public class HighwayApplication extends Application {
@@ -21,6 +22,7 @@ public class HighwayApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
         instance = this;
     }
 

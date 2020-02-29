@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.highway.utils.Constants;
+
 
 public class MyIntentService extends IntentService {
 
@@ -24,7 +26,7 @@ public class MyIntentService extends IntentService {
             e.printStackTrace();
         }
 
-        Intent resultIntent  = new Intent(MY_SERVICE_INTENT);
+        Intent resultIntent  = new Intent(Constants.PUSH_ACTION);
         resultIntent.putExtra("key","Driver Accepted Trip");
         LocalBroadcastManager.getInstance(getApplicationContext())
                 .sendBroadcast(resultIntent);

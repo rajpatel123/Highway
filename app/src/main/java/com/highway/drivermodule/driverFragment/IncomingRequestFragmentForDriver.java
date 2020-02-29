@@ -103,14 +103,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getPushData();
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        getActivity().registerReceiver(mySenderBroadCast, intentFilter);
-
-    }
-
-    private void getPushData() {
         if (getArguments() != null) {
             try {
                 pushData = getArguments().getParcelable(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
@@ -119,20 +111,25 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             }
             Log.e(TAG, BaseUtil.jsonFromModel(pushData));
         }
+
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        getActivity().registerReceiver(mySenderBroadCast,intentFilter);
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        IntentFilter intentFilter = new IntentFilter("com.highway.broadCastReceiver.ACTION_SEND");
-        getActivity().registerReceiver(mInnerReceiver, intentFilter);
+//        IntentFilter intentFilter = new IntentFilter("com.highway.broadCastReceiver.ACTION_SEND");
+//        getActivity().registerReceiver(mInnerReceiver,intentFilter);
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(mySenderBroadCast);
+      //  getActivity().unregisterReceiver(mySenderBroadCast);
     }
 
     @Override

@@ -32,9 +32,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".PushReciever"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.newbooking.call"/>
+            </intent-filter>
+
+        </receiver>
+
         <service
             android:name=".broadCastReceiver.MyIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name=".customer.customerActivity.BookingInfoDetailsActivity"
@@ -133,7 +143,7 @@
         <service android:name=".common.base.firebaseService.MyFirebaseServiceMessaging">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service> <!-- Recievers -->
         <receiver android:name=".reciever.SmsReceiver">
