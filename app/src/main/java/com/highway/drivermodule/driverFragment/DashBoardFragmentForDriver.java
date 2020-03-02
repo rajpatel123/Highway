@@ -11,6 +11,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +46,27 @@ import retrofit2.Response;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.content.ContentValues.TAG;
 
 
-public class DashBoardFragmentForDriver extends Fragment /*implements LocationListener */ {
+public class DashBoardFragmentForDriver extends Fragment /*implements LocationListener*/ {
 
     private TabLayout driverTabLayout;
     private ViewPager driverViewPager;
     public TextView gpsTv;
     public LocationManager locationManager;
+
+    /////////////////// code  on Service class ///////////////////////////
+    private ArrayList<String> permissionsToRequest;
+    private ArrayList<String> permissionsRejected = new ArrayList<>();
+    private ArrayList<String> permissions = new ArrayList<>();
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    public LocationTrack locationTrack;
+
+    public int TIMECOUNT = 10000;
+    public boolean ISTRAVERSING = true;
+    Handler handler = new Handler();
+
 
     DashBoardActivity dashBoardActivity;
     UpComingFragmentForDriver upComingFragmentForDriver;
@@ -63,10 +78,9 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     List<Fragment> driverFragmentList = new ArrayList<>();
     private String userId;
 
-    public DashBoardFragmentForDriver() {
-        // Required empty public constructor
-    }
 
+    public DashBoardFragmentForDriver() {
+    }
 
     public static DashBoardFragmentForDriver newInstance() {
         DashBoardFragmentForDriver fragment = new DashBoardFragmentForDriver();
@@ -90,9 +104,15 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
         driverTabLayout = view.findViewById(R.id.drivertabMode);
         driverViewPager = view.findViewById(R.id.driverViewPager);
         gpsTv = view.findViewById(R.id.gpsTv);
-
         //gpsTrackingWithOutServiceClass();
-        gpsTrackingWithServiceClass();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.removeCallbacks(sendData);
+                ISTRAVERSING = false;
+                gpsTrackingWithServiceClass();
+            }
+        }, 5000);
 
 
         upComingFragmentForDriver = new UpComingFragmentForDriver();
@@ -158,7 +178,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
 
     }
 
-    }*/
+}*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -238,7 +258,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     }
 
 
- /*   @RequiresApi(api = Build.VERSION_CODES.M)
+    /*   @RequiresApi(api = Build.VERSION_CODES.M)
     public void gpsTrackingWithOutServiceClass() {
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -295,13 +315,6 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
 
     }*/
 
-    private ArrayList<String> permissionsToRequest;
-    private ArrayList<String> permissionsRejected = new ArrayList<>();
-    private ArrayList<String> permissions = new ArrayList<>();
-
-    private final static int ALL_PERMISSIONS_RESULT = 101;
-    public LocationTrack locationTrack;
-
     public void gpsTrackingWithServiceClass() {
 
         permissions.add(ACCESS_FINE_LOCATION);
@@ -311,37 +324,69 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
         //get the permissions we have asked for before but are not granted..
         //we will store this in a global list to access later.
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
 
             if (permissionsToRequest.size() > 0)
                 requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
         }
 
-
-        gpsTv.setOnClickListener(new View.OnClickListener() {
+        /* gpsTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-                locationTrack = new LocationTrack(getActivity());
-
+               locationTrack = new LocationTrack(getActivity());
 
                 if (locationTrack.canGetLocation()) {
 
-
                     double longitude = locationTrack.getLongitude();
                     double latitude = locationTrack.getLatitude();
+                    Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n" +
+                            "Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+                    ISTRAVERSING = true;
+                    handler.postDelayed(sendData, TIMECOUNT);
+
                 } else {
 
                     locationTrack.showSettingsAlert();
                 }
 
             }
-        });
+        }); */
+
+        locationTrack = new LocationTrack(getActivity());
+
+        if (locationTrack.canGetLocation()) {
+
+            double longitude = locationTrack.getLongitude();
+            double latitude = locationTrack.getLatitude();
+            Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n" +
+                    "Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+
+            ISTRAVERSING = true;
+            handler.postDelayed(sendData, TIMECOUNT);
+
+        } else {
+
+            locationTrack.showSettingsAlert();
+        }
+
     }
+
+    private Runnable sendData = new Runnable() {
+        public void run() {
+            try {
+                //prepare and send the data here..
+                gpsTrackingWithServiceClass();
+                if (ISTRAVERSING) {
+                    handler.postDelayed(sendData, TIMECOUNT);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
 
     private ArrayList<String> findUnAskedPermissions(ArrayList<String> wanted) {
         ArrayList<String> result = new ArrayList<String>();
@@ -421,6 +466,5 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
         super.onDestroy();
         locationTrack.stopListener();
     }
-
 
 }

@@ -17,6 +17,10 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
 public class LocationTrack extends Service implements LocationListener {
 
     private final Context mContext;
@@ -182,6 +186,10 @@ public class LocationTrack extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
 
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+//        Toast.makeText(getApplicationContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -198,6 +206,7 @@ public class LocationTrack extends Service implements LocationListener {
     public void onProviderDisabled(String s) {
 
     }
+
 
 
 
