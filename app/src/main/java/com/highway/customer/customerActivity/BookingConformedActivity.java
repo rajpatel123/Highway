@@ -166,9 +166,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         infoTV = findViewById(R.id.tripInfo);
         toolbar = findViewById(R.id.toolbar);
         // Using Broadcast for Customer
-        rejTV = findViewById(R.id.TripRejectedTv);
+        /*rejTV = findViewById(R.id.TripRejectedTv);
         acptTripTv = findViewById(R.id.TripAcceptTv);
-
+*/
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), RECEIVERPHONENO);
         bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
@@ -211,8 +211,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         clicklistener();
         bookingTimer();
-
     }
+
 // USING BROAD CAST RECEIVER
     public void broadCastMessage(View view) {
         Intent serviceIntent = new Intent(this, MyIntentService.class);
@@ -478,7 +478,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     public void bookingTimer() {
 
-        new CountDownTimer(60 * 1 * 1000, 1000) {
+        new CountDownTimer(60 * 10 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",

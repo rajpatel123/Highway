@@ -15,6 +15,8 @@ import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerActivity.LoginActivityForCustomer;
+import com.highway.drivermodule.driverActivity.LoginActivityForDriver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -33,7 +35,7 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
     private Button btnOwnerOtp;
     String phone_number;
     private int backpress;
-    private String OwnerLoginRoleId;
+    public String OwnerLoginRoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,40 +45,39 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
         ownerPhoneNo = findViewById(R.id.edtTxtOwnerMobNo);
         btnOwnerOtp = findViewById(R.id.btnSendOwnerOtp);
 
-      //  OwnerLoginRoleId = getIntent().getStringExtra("ownerRoleId") ;
-        OwnerLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"ownerRoleId");
-
-        btnOwnerOtp.setOnClickListener(new View.OnClickListener() {
+             btnOwnerOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validationLoginOwner();
+                validationLoginUser();
             }
         });
     }
 
 
-    private boolean inputOwnerValidate() {
+    private boolean validateInput() {
         boolean check = true;
 
         phone_number = ownerPhoneNo.getText().toString();
 
-        if (phone_number.isEmpty() && ownerPhoneNo.length()!=10) {
-            ownerPhoneNo.setError(" enter a valid phone number ");
+        if (phone_number.isEmpty() || ownerPhoneNo.length()<10) {
+            ownerPhoneNo.setError(" Enter a valid phone number ");
             check = false;
         } else {
             ownerPhoneNo.setError(null);
             check = true;
         }
+
         return check;
     }
 
 
-    public void validationLoginOwner() {
+    public void validationLoginUser() {
 
-        if (inputOwnerValidate()){
+        if (validateInput()){
 
            /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
             loginRegisterRequest.setMobile(phone_number);*/
+            OwnerLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"ownerRoleId");
             LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
             loginReqUpdated.setMobile(phone_number);
             loginReqUpdated.setRoleId(OwnerLoginRoleId);
@@ -90,29 +91,20 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
-                            if (response.code() ==200) {
-                                Intent intent = new Intent(LoginActivityForVehicleOwner.this, MobileOtpVerificationActivity.class);
-                                HighwayPrefs.putString(LoginActivityForVehicleOwner.this, USERMOBILE, phone_number);
+                            if (response.code()==200) {
+                                Intent intent = new Intent(getApplicationContext(),MobileOtpVerificationActivity.class);
+                                HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, phone_number);
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, OwnerLoginRoleId);
-
-                                /* HighwayPrefs.putString(LoginActivityForVehicleOwner.this, Constants.ID,"5");
-                                HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.NAME,"Nitin");
-                                HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.OwnerEmail,"prit@gmail.com");
-                                HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.MillerGender,"Male");
-                                HighwayPrefs.putString(LoginActivityForVehicleOwner.this,Constants.ROLEID,"5");
-                                HighwayPrefs.putBoolean(LoginActivityForVehicleOwner.this,Constants.User_statuss,true);*/
-
                                 startActivity(intent);
                                 finish();
-
-                                Toast.makeText(LoginActivityForVehicleOwner.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();
-                                /*Toast.makeText(LoginActivityForVehicleOwner.this, "Welcome Owner !", Toast.LENGTH_SHORT).show();*/
+                                Toast.makeText(getApplicationContext(), "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(LoginActivityForVehicleOwner.this, "Login failed", Toast.LENGTH_SHORT).show();
+                        Utils.dismissProgressDialog();
+                        Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });

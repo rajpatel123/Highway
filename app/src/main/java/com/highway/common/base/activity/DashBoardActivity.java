@@ -59,6 +59,8 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,7 +124,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     Intent intent;
     WebViewActivity webViewActivity;
     private int notificationType = 0;
-    private NotificationPushData pushData;
+    public JSONObject pushData;
     private String TAG = getClass().getSimpleName();
 
     @Override
@@ -131,6 +133,14 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
 //        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
+        if (getIntent().getExtras() != null && getIntent().hasExtra("data")) {
+            try {
+                pushData = new JSONObject(getIntent().getStringExtra("data"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
+        }
 
 
         //setOnClickListenerOperation();
@@ -283,9 +293,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 } else {
 
                     Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, pushData);
-                    fragment3.setArguments(bundle);
                     replaceFragment(fragment3);
                 }
 //                }
@@ -789,7 +796,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         try {
             FragmentManager fragmentManager = getSupportFragmentManager();
             if (fragmentManager != null) {
@@ -881,7 +888,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onDestroy() {
         super.onDestroy();
         if (listener != null) {
-            unregisterReceiver(listener);
+           // unregisterReceiver(listener);
         }
     }
 }

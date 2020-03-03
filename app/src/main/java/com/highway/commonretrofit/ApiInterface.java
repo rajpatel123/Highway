@@ -59,15 +59,14 @@ import retrofit2.http.POST;
 public interface ApiInterface {
     // mobile logon
     @POST("api/Login/login_register")
-    /*Call<ResponseBody> loginResponseCall(@Body LoginRegisterRequest loginRequest);*/
     Call<ResponseBody> loginResponseCall(@Body LoginReqUpdated loginReqUpdated);
 
+    // otp verification
     @POST("api/Login/otp_verify")
-        // otp verification
     Call<VerifyOtpResponse> verifyOtpResponseCall(@Body VerifyOtpRequest verifyOtpRequest);
 
+    // Registration Details
     @POST("api/Login/signup")
-        // Registration Details
     Call<RegistrationRespUpdated> regDetailsResponseCall(@Body RegistrationReqUpdated registrationReqUpdated);
 
     // Driver All Trips

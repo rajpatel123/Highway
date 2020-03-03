@@ -10,6 +10,7 @@ public class MySenderBroadCast extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
        /* if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())){
             boolean boleanExtra = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,false);
 

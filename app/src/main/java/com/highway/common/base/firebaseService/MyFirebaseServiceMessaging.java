@@ -30,7 +30,6 @@ import com.highway.R;
 import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.reciever.PushNavigateReceiver;
-import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
@@ -73,54 +72,54 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Fromdata: " + remoteMessage.getData());
-        JSONObject jsonObject = new JSONObject(remoteMessage.getData());
+        JSONObject jsonObject = new JSONObject();
 
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 //            sendNotification(remoteMessage.getData().get("message"));
             try {
-//                String type = remoteMessage.getData().get("type");
-//
-//                switch (type) {
-//                    case "SERVICE":
-//                        break;
-//
-//                    case "TRIP_NEW":
-//                        jsonObject.put(Constants.PUSH_TYPE, type);
-//                        jsonObject.put(Constants.CUSTOMER_NAME, remoteMessage.getData().get("customer"));
-//                        jsonObject.put(Constants.PUSH_MOBILE, remoteMessage.getData().get("mobile"));
-//                        jsonObject.put(Constants.TRIP_ID, remoteMessage.getData().get("tripId"));
-//                        jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
-//                        jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
-//
-////                        Intent serviceIntent = new Intent(this, MyIntentService.class);
-////                        serviceIntent.putExtra("key","Inital Value");
-////                        startService(serviceIntent);
-//
-//                        break;
-//
-//                    case "SEARCHING":
-//                        break;
-//                    case "STARTED":
-//
-//                        break;
-//                    case "ARRIVED":
-//
-//                        break;
-//
-//                    case "PICKEDUP":
-//                        break;
-//                    case "DROPPED":
-//                        break;
-//                    case "COMPLETED":
-//                        break;
-//                    case "RATING":
-//                        break;
-//                    case "INVOICE":
-//                        break;
-//
-//
-//                }
+                String type = remoteMessage.getData().get("type");
+
+                switch (type) {
+                    case "SERVICE":
+                        break;
+
+                    case "TRIP_NEW":
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+                        jsonObject.put(Constants.CUSTOMER_NAME, remoteMessage.getData().get("customer"));
+                        jsonObject.put(Constants.PUSH_MOBILE, remoteMessage.getData().get("mobile"));
+                        jsonObject.put(Constants.TRIP_ID, remoteMessage.getData().get("tripId"));
+                        jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
+                        jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
+
+                        Intent mainIntent = new Intent(this, DashBoardActivity.class);
+                        mainIntent.putExtra("data",jsonObject.toString());
+                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(mainIntent);
+                        break;
+
+                    case "SEARCHING":
+                        break;
+                    case "STARTED":
+
+                        break;
+                    case "ARRIVED":
+
+                        break;
+
+                    case "PICKEDUP":
+                        break;
+                    case "DROPPED":
+                        break;
+                    case "COMPLETED":
+                        break;
+                    case "RATING":
+                        break;
+                    case "INVOICE":
+                        break;
+
+
+                }
 
 
                 handleDataMessage(jsonObject);
@@ -180,11 +179,10 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 //            }
         }
 
-        NotificationPushData data = BaseUtil.objectFromString(messageBody, NotificationPushData.class);
-
+        // NotificationPushData data = BaseUtil.objectFromString(messageBody, NotificationPushData.class);
         Intent intent = new Intent(getApplicationContext(), DashBoardActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
+        //intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 //        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
@@ -297,7 +295,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 //                    String customer = json.getString("customer");
 //                    System.out.println(mobile + message + destination + tripId + source + type + customer);
 //                    NotificationPushData data = BaseUtil.objectFromString(message, NotificationPushData.class);
-                    sendNotification(json.toString());
+                    sendNotification(json.getString("type"));
                     break;
 
                 case Constants.NOTIFICATION_TYPE_TRIP_CANCEL:

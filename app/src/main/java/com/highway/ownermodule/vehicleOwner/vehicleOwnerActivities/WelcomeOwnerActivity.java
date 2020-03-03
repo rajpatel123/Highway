@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.highway.R;
 import com.highway.common.base.activity.LoginOptionActivity;
+import com.highway.customer.customerActivity.LoginActivityForCustomer;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 

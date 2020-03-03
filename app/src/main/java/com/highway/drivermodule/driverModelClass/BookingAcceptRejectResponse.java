@@ -5,16 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class BookingAcceptRejectResponse {
 
-
     @SerializedName("status")
     @Expose
     private Boolean status;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("driverVehicleDetails")
+    @SerializedName("customerDetails")
     @Expose
-    private DriverVehicleDetails driverVehicleDetails;
+    private CustomerDetails customerDetails;
 
     public Boolean getStatus() {
         return status;
@@ -32,11 +31,12 @@ public class BookingAcceptRejectResponse {
         this.message = message;
     }
 
-    public DriverVehicleDetails getDriverVehicleDetails() {
-        return driverVehicleDetails;
+    public CustomerDetails getCustomerDetails() {
+        return customerDetails;
     }
 
-    public void setDriverVehicleDetails(DriverVehicleDetails driverVehicleDetails) {
-        this.driverVehicleDetails = driverVehicleDetails;
+    public void setCustomerDetails(CustomerDetails customerDetails) {
+        this.customerDetails = customerDetails;
     }
+
 }

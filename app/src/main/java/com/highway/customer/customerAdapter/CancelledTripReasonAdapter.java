@@ -1,6 +1,7 @@
 package com.highway.customer.customerAdapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class CancelledTripReasonAdapter extends RecyclerView.Adapter<CancelledTr
     List<CancelTripReson> cancelTripResonList;
     OnCancelReasonTypeSelect onCancelReasonTypeSelect;
     private RadioGroup lastCheckedRadioGroup = null;
+    public int row_index;
     //CancelledTripReasonAdapter cancelledTripReasonAdapter;
 
     public CancelledTripReasonAdapter(List<CancelTripReson> cancelTripResonList, Context context) {
@@ -53,11 +55,23 @@ public class CancelledTripReasonAdapter extends RecyclerView.Adapter<CancelledTr
             @Override
             public void onClick(View v) {
                 if (onCancelReasonTypeSelect != null) {
+                    row_index = position;
                     onCancelReasonTypeSelect.onSelectedReasonType(cancelTripReson.getCancelId(),
                             cancelTripReson.getCancelReason());
+                    notifyDataSetChanged();
                 }
             }
         });
+
+        if(row_index==position){
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#FFB400"));
+            holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
+        }
+        else
+        {
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
+        }
 
     }
 
@@ -91,4 +105,6 @@ public class CancelledTripReasonAdapter extends RecyclerView.Adapter<CancelledTr
     public interface OnCancelReasonTypeSelect {
         void onSelectedReasonType(String id, String type);
     }
+
+
 }
