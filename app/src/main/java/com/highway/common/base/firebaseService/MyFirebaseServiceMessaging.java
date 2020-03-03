@@ -90,10 +90,10 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
 
-                        Intent serviceIntent = new Intent(this, MyIntentService.class);
-                        serviceIntent.putExtra("key","Inital Value");
-                        startService(serviceIntent);
-
+                        Intent mainIntent = new Intent(this, DashBoardActivity.class);
+                        mainIntent.putExtra("data",jsonObject.toString());
+                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(mainIntent);
                         break;
 
                     case "SEARCHING":

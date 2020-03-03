@@ -22,12 +22,12 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.firebaseService.NotificationPushData;
-import com.highway.commonretrofit.RestClient;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
+import com.highway.commonretrofit.RestClient;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
@@ -35,6 +35,9 @@ import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +77,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     CancelTripAdapterForDriver cancelTripAdapterForDriver;
     DashBoardActivity dashBoardActivity;
     public int time_to_left = 60;
-    public NotificationPushData pushData;
+    public JSONObject pushData;
     public String userId;
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
@@ -82,9 +85,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     private BroadcastReceiver mInnerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if ("com.highway.broadCastReceiver.ACTION_SEND".equals(intent.getAction())){
-                String intentExtra =   intent.getStringExtra("om.highway.EXTRA_DATA");
-                btnAccept.setText("inner BroadCast Receiver" +intentExtra);
+            if ("com.highway.broadCastReceiver.ACTION_SEND".equals(intent.getAction())) {
+                String intentExtra = intent.getStringExtra("om.highway.EXTRA_DATA");
+                btnAccept.setText("inner BroadCast Receiver" + intentExtra);
             }
         }
     };
@@ -105,7 +108,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             try {
-                pushData = getArguments().getParcelable(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+                pushData = ((DashBoardActivity) getActivity()).pushData;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -114,7 +117,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        getActivity().registerReceiver(mySenderBroadCast,intentFilter);
+        getActivity().registerReceiver(mySenderBroadCast, intentFilter);
 
     }
 
@@ -129,7 +132,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onDestroy() {
         super.onDestroy();
-      //  getActivity().unregisterReceiver(mySenderBroadCast);
+        //  getActivity().unregisterReceiver(mySenderBroadCast);
     }
 
     @Override
@@ -151,14 +154,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
         init();
 
-//        btnAccept.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent  = new Intent("com.highway.broadCastReceiver.ACTION_SEND");
-//                intent.putExtra("om.highway.EXTRA_DATA","Driver trip accepted");
-//                 getActivity().sendBroadcast(intent);
-//            }
-//        });
+
 
         btnAccept.setOnClickListener(this);
         btnReject.setOnClickListener(this);
@@ -173,29 +169,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     }
 
     void init() {
-//        data = BaseActivity.DATUM;
-//        if (data != null) {
-////            lblUserName.setText(String.format("%s %s", data.getUser().getFirstName(), data.getUser().getLastName()));
-////            ratingUser.setRating(Float.parseFloat(data.getUser().getRating()));
-////            pickupAddress.setText(data.getSAddress());
-////            lblCarType.setText("Car Type: " + data.getServicetype().getName());
-////            dropAddress.setText(data.getDAddress());
-////           // Glide.with(activity()).load(BuildConfig.BASE_IMAGE_URL + data.getUser().getPicture()).apply(RequestOptions.placeholderOf(R.drawable.user).dontAnimate().error(R.drawable.user)).into(imgUser);
-////            LatLng providerLat = new LatLng(Double.parseDouble(HighwayPrefs.getString(context, "current_latitude")), Double.parseDouble(HighwayPrefs.getString(context, "current_longitude")));
-////            LatLng source = new LatLng(data.getSLatitude(), data.getSLongitude());
-////
-////            ((MainActivity) context).drawDirectionToStop(data.getRouteKey());
-////
-////            if (data.getServiceRequired() != null && data.getServiceRequired().equalsIgnoreCase("rental")) {
-////                dropAddressLayout.setVisibility(View.GONE);
-////            }
-////
-////            getDistance(providerLat, source);
-//            if (!mPlayer.isPlaying())
-//                mPlayer.start();
-//        }
-
-
         if (!mPlayer.isPlaying())
             mPlayer.start();
 
@@ -207,8 +180,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
             public void onFinish() {
                 stopMediaPlayer();
-//                Intent intent = new Intent(INTENT_FILTER);
-//                context.sendBroadcast(intent);
+                ((DashBoardActivity)getActivity()).replaceFragment(new DashBoardFragmentForDriver());
             }
         };
 
@@ -240,28 +212,47 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             case R.id.btnReject:
                 if (Utils.isInternetConnected(context)) {
                     Utils.showProgressDialog(context);
-                    acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED));
+                    try {
+                        if (countDownTimer != null) {
+                            if (mPlayer != null & mPlayer.isPlaying())
+                                mPlayer.stop();
+                                countDownTimer.cancel();
+
+                        }
+                        acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
 
             case R.id.btnAccept:
                 if (Utils.isInternetConnected(context)) {
                     Utils.showProgressDialog(context);
-                    acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED));
+                    try {
+                        if (countDownTimer != null) {
+                            if (mPlayer != null & mPlayer.isPlaying())
+                                mPlayer.stop();
+                            countDownTimer.cancel();
+                        }
+                        acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED), true);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
         }
     }
 
-    public BookingAcceptRejectData getAcceptRejectBookingTripParams(String acceptReject) {
+    public BookingAcceptRejectData getAcceptRejectBookingTripParams(String acceptReject) throws JSONException {
         BookingAcceptRejectData acceptRejectData = new BookingAcceptRejectData();
-        acceptRejectData.setTripId(pushData.getTripId());
+        acceptRejectData.setTripId(pushData.getString(Constants.TRIP_ID));
         acceptRejectData.setUserId(userId);
         acceptRejectData.setAcceptReject(acceptReject);
         return acceptRejectData;
     }
 
-    public void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData) {
+    public void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, boolean isAccepted) {
         RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
             @Override
             public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
@@ -269,6 +260,16 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                     Utils.dismissProgressDialog();
                     BookingAcceptRejectResponse resp = response.body();
 
+                    if (isAccepted) {
+                        LatLng latLng = new LatLng(Double.parseDouble(resp.getCustomerDetails().getStartTripLat()),
+                                Double.parseDouble(resp.getCustomerDetails().getStartTripLong()));
+                        pickupAddress.setText(""+Utils.getAddress(getActivity(),latLng));
+
+                        LatLng latLngD = new LatLng(Double.parseDouble(resp.getCustomerDetails().getEndTripLat()),
+                                Double.parseDouble(resp.getCustomerDetails().getEndTripLong()));
+                        pickupAddress.setText(""+Utils.getAddress(getActivity(),latLng));
+
+                    }
 
                 }
             }
@@ -320,7 +321,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public void onDestroyView() {
         super.onDestroyView();
         stopMediaPlayer();
-        getActivity().unregisterReceiver(mInnerReceiver);  /// broadcastReceiver
+        //   getActivity().unregisterReceiver(mInnerReceiver);  /// broadcastReceiver
     }
 
 
