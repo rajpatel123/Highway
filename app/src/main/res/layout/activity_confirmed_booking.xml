@@ -88,29 +88,29 @@
                     android:layout_margin="@dimen/_10dp"
                     android:layout_alignParentBottom="true">
 
-                    <TextView
-                        android:id="@+id/TripRejectedTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/rounded_corner_shape"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:onClick="broadCastMessage"
-                        android:padding="@dimen/_11sdp"
-                        android:text="Rejected" />
+                    <!--  <TextView
+                          android:id="@+id/TripRejectedTv"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:gravity="center_horizontal"
+                          android:background="@drawable/rounded_corner_shape"
+                          android:layout_weight="1"
+                          android:textColor="@color/black"
+                          android:onClick="broadCastMessage"
+                          android:padding="@dimen/_11sdp"
+                          android:text="Rejected" />
 
-                    <TextView
-                        android:id="@+id/TripAcceptTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_horizontal"
-                        android:padding="@dimen/_11sdp"
-                        android:textColor="@color/black"
-                        android:onClick="broadCastMessage"
-                        android:background="@drawable/rounded_corner_shape"
-                        android:layout_weight="1"
-                        android:text="Accept" />
+                      <TextView
+                          android:id="@+id/TripAcceptTv"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:gravity="center_horizontal"
+                          android:padding="@dimen/_11sdp"
+                          android:textColor="@color/black"
+                          android:onClick="broadCastMessage"
+                          android:background="@drawable/rounded_corner_shape"
+                          android:layout_weight="1"
+                          android:text="Accept" />-->
                 </LinearLayout>
             </RelativeLayout>
 

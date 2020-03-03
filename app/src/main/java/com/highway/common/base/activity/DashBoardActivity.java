@@ -867,7 +867,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onDestroy() {
         super.onDestroy();
         if (listener != null) {
-            unregisterReceiver(listener);
+           // unregisterReceiver(listener);
         }
     }
 }

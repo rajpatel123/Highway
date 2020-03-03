@@ -65,8 +65,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 //        Intent intent = new Intent(INTENT_FILTER);
 //        sendBroadcast(intent);
 
-
-        // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Fromdata: " + remoteMessage.getData());

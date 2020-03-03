@@ -52,7 +52,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
     public String TAG = getClass().getSimpleName();
     public Button btnReject;
-    public Button btnAccept;
+    public Button btnAccept,btnStartTrip;
     public TextView lblCount;
     public CircleImageView imgUser;
     public TextView lblUserName;
@@ -141,6 +141,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
         btnReject = view.findViewById(R.id.btnReject);
         btnAccept = view.findViewById(R.id.btnAccept);
+        btnStartTrip = view.findViewById(R.id.btnStartTrip);
         lblCount = view.findViewById(R.id.lblCount);
         imgUser = view.findViewById(R.id.imgUser);
         lblUserName = view.findViewById(R.id.lblUserName);
@@ -158,6 +159,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
         btnAccept.setOnClickListener(this);
         btnReject.setOnClickListener(this);
+        btnStartTrip.setOnClickListener(this);
 
         return view;
     }

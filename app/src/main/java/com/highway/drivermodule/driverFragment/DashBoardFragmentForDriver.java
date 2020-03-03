@@ -1,13 +1,27 @@
 package com.highway.drivermodule.driverFragment;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -17,6 +31,7 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
 import com.highway.commonretrofit.RestClient;
+import com.highway.drivermodule.driverActivity.LocationTrack;
 import com.highway.drivermodule.driverAdapter.FragmentTabModeAdapterForDriver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -29,11 +44,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.content.ContentValues.TAG;
 
-public class DashBoardFragmentForDriver extends Fragment {
+
+public class DashBoardFragmentForDriver extends Fragment /*implements LocationListener*/ {
 
     private TabLayout driverTabLayout;
     private ViewPager driverViewPager;
+    public TextView gpsTv;
+    public LocationManager locationManager;
+
+    /////////////////// code  on Service class ///////////////////////////
+    private ArrayList<String> permissionsToRequest;
+    private ArrayList<String> permissionsRejected = new ArrayList<>();
+    private ArrayList<String> permissions = new ArrayList<>();
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    public LocationTrack locationTrack;
+
+    public int TIMECOUNT = 10000;
+    public boolean ISTRAVERSING = true;
+    Handler handler = new Handler();
+
 
     DashBoardActivity dashBoardActivity;
     UpComingFragmentForDriver upComingFragmentForDriver;
@@ -45,10 +78,9 @@ public class DashBoardFragmentForDriver extends Fragment {
     List<Fragment> driverFragmentList = new ArrayList<>();
     private String userId;
 
-    public DashBoardFragmentForDriver() {
-        // Required empty public constructor
-    }
 
+    public DashBoardFragmentForDriver() {
+    }
 
     public static DashBoardFragmentForDriver newInstance() {
         DashBoardFragmentForDriver fragment = new DashBoardFragmentForDriver();
@@ -64,22 +96,34 @@ public class DashBoardFragmentForDriver extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_driver_dash_board, container, false);
 
         driverTabLayout = view.findViewById(R.id.drivertabMode);
         driverViewPager = view.findViewById(R.id.driverViewPager);
+        gpsTv = view.findViewById(R.id.gpsTv);
+        //gpsTrackingWithOutServiceClass();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.removeCallbacks(sendData);
+                ISTRAVERSING = false;
+                gpsTrackingWithServiceClass();
+            }
+        }, 5000);
+
 
         upComingFragmentForDriver = new UpComingFragmentForDriver();
         onGoingFragmentForDriver = new OnGoingFragmentForDriver();
-     //   pendingFragmentForDriver = new PendingFragmentForDriver();
+        //   pendingFragmentForDriver = new PendingFragmentForDriver();
         completedFragmentForDriver = new CompletedFragmentForDriver();
         cancelFragmentForDriver = new CancelFragmentForDriver();
 
         driverFragmentList.add(upComingFragmentForDriver);
         driverFragmentList.add(onGoingFragmentForDriver);
-    //    driverFragmentList.add(pendingFragmentForDriver);
+        //    driverFragmentList.add(pendingFragmentForDriver);
         driverFragmentList.add(completedFragmentForDriver);
         driverFragmentList.add(cancelFragmentForDriver);
 
@@ -134,7 +178,7 @@ public class DashBoardFragmentForDriver extends Fragment {
 
     }
 
-    }*/
+}*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -172,7 +216,7 @@ public class DashBoardFragmentForDriver extends Fragment {
             @Override
             public void onResponse(Call<GetAllTripByUserIdResponse> call, Response<GetAllTripByUserIdResponse> response) {
                 Utils.dismissProgressDialog();
-                if (response.body() != null && response.body().getStatus()!=null    )   {
+                if (response.body() != null && response.body().getStatus() != null) {
                     if (response.body().getStatus()) {
                         GetAllTripByUserIdResponse getAllTripByUserIdResponse = response.body();
                         if (getAllTripByUserIdResponse != null) {
@@ -213,5 +257,214 @@ public class DashBoardFragmentForDriver extends Fragment {
 
     }
 
+
+    /*   @RequiresApi(api = Build.VERSION_CODES.M)
+    public void gpsTrackingWithOutServiceClass() {
+
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // TODO: Consider calling
+            //    Activity#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for Activity#requestPermissions for more details.
+            return;
+        }
+
+        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+        onLocationChanged(location);
+
+    }
+
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        // gpsTv.setText("Longitude: " + longitude + "\n" + "Latitude: " + latitude);
+        gpsTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }*/
+
+    public void gpsTrackingWithServiceClass() {
+
+        permissions.add(ACCESS_FINE_LOCATION);
+        permissions.add(ACCESS_COARSE_LOCATION);
+
+        permissionsToRequest = findUnAskedPermissions(permissions);
+        //get the permissions we have asked for before but are not granted..
+        //we will store this in a global list to access later.
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            if (permissionsToRequest.size() > 0)
+                requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+        }
+
+        /* gpsTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               locationTrack = new LocationTrack(getActivity());
+
+                if (locationTrack.canGetLocation()) {
+
+                    double longitude = locationTrack.getLongitude();
+                    double latitude = locationTrack.getLatitude();
+                    Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n" +
+                            "Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+
+                    ISTRAVERSING = true;
+                    handler.postDelayed(sendData, TIMECOUNT);
+
+                } else {
+
+                    locationTrack.showSettingsAlert();
+                }
+
+            }
+        }); */
+
+        locationTrack = new LocationTrack(getActivity());
+
+        if (locationTrack.canGetLocation()) {
+
+            double longitude = locationTrack.getLongitude();
+            double latitude = locationTrack.getLatitude();
+            Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n" +
+                    "Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+
+            ISTRAVERSING = true;
+            handler.postDelayed(sendData, TIMECOUNT);
+
+        } else {
+
+            locationTrack.showSettingsAlert();
+        }
+
+    }
+
+    private Runnable sendData = new Runnable() {
+        public void run() {
+            try {
+                //prepare and send the data here..
+                gpsTrackingWithServiceClass();
+                if (ISTRAVERSING) {
+                    handler.postDelayed(sendData, TIMECOUNT);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+
+    private ArrayList<String> findUnAskedPermissions(ArrayList<String> wanted) {
+        ArrayList<String> result = new ArrayList<String>();
+
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
+                result.add(perm);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (getActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+            }
+        }
+        return true;
+    }
+
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+
+            case ALL_PERMISSIONS_RESULT:
+                for (String perms : permissionsToRequest) {
+                    if (!hasPermission(perms)) {
+                        permissionsRejected.add(perms);
+                    }
+                }
+
+                if (permissionsRejected.size() > 0) {
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
+                            showMessageOKCancel("These permissions are mandatory for the application. Please allow access.",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermissions(permissionsRejected.toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
+                                            }
+                                        }
+                                    });
+                            return;
+                        }
+                    }
+
+                }
+
+                break;
+        }
+
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        locationTrack.stopListener();
+    }
 
 }

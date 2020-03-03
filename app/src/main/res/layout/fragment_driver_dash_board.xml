@@ -4,15 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/myBookingViewPager"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:textColor="@color/red"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/drivertabMode"
@@ -23,7 +17,20 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/driverViewPager"
         android:layout_width="match_parent"
-        android:layout_height="665dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/drivertabMode" />
+
+    <TextView
+        android:id="@+id/gpsTv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/myBookingViewPager"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@drawable/rounded_corner_shape"
+        android:text="Gps Track"
+        android:textColor="@color/red"/>
+
+
 
 </RelativeLayout>

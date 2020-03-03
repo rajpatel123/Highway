@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
     public int previousPosition = -1;
     public SingleViewItemBinding previousView;
+    private int row_index;
 
     public BookingVehicleAdapter(BookingVehicleListResponse bookingVehicleListResponse1, Context context1, OnClickEvents onClickEvents1) {
         this.context = context1;
@@ -59,11 +61,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         holder.tataAceTv1.setText(""+vehicleList.getVehicleName());
         holder.faireChargeTv3.setText("\u20B9"+vehicleList.getVehicleFare());
 
-        if (vehicleList.isSelected()){
-            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
-        }else{
-            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
-        }
 
         holder.infoImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,22 +72,33 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         });
 
 
-        holder.vehicleIcons.setOnClickListener(new View.OnClickListener() {
+        holder.row_linearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onClickEvents != null) {
-                    onClickEvents.onCLickTruck(holder.getAdapterPosition(),vehicleList.getVehicleFare());
-
-                    if (vehicleList.isSelected()){
-
-                        holder.itemView.setBackgroundColor(Color.parseColor("#8DFFFFFF"));
-                    }else {
-                        holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    }
+                    row_index = position;
+                    onClickEvents.onCLickTruck(holder.getAdapterPosition(),
+                            vehicleList.getVehicleFare());
+                    notifyDataSetChanged();
                 }
-                   // holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.blue));
             }
         });
+        if(row_index==position){
+            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#FFB400"));
+           // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
+        }
+        else
+        {
+            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
+        }
+
+
+        if (vehicleList.isSelected()){
+            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
+        }else{
+            Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
+        }
     }
 
     @Override
@@ -117,6 +125,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
         TextView tataAceTv1, timeTv2, faireChargeTv3;
         ImageView vehicleIcons, infoImg;
+        LinearLayout  row_linearlayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -125,6 +134,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             faireChargeTv3 = itemView.findViewById(R.id.faireChargeTv3);
             vehicleIcons = itemView.findViewById(R.id.vehicleImg1);
             infoImg = itemView.findViewById(R.id.infoImg);
+            row_linearlayout = itemView.findViewById(R.id.Llayout1);
         }
     }
 

@@ -160,6 +160,7 @@
                 android:background="@color/colorAccent"
                 android:ellipsize="end"
                 android:singleLine="true"
+                android:visibility="gone"
                 android:text="@string/reject"
                 android:textColor="#FFF" />
 
@@ -169,11 +170,24 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:background="@color/colorPrimary"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="@string/accept"
                 android:textColor="#FFF" />
+            <Button
+                android:id="@+id/btnStartTrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/accept"
+                android:textColor="#FFF" />
+
 
         </LinearLayout>
 
