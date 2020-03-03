@@ -17,6 +17,7 @@ import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.Canc
 import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerRequest;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
+import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
@@ -184,11 +185,16 @@ public class RestClient {
     public static void confirmBooking(BookingHTripRequest bookingHTripRequest, Callback<BookingHTripResponse> bookingHTripRespCallback) {
         RetrofitClient.getClient().BOOKING_H_TRIP_RESPONSE_CALL(bookingHTripRequest).enqueue(bookingHTripRespCallback);
     }
+
     // accept/reject booking by driver
-    public static void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, Callback<BookingAcceptRejectResponse> acceptRejectResponseCallback){
+    public static void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, Callback<BookingAcceptRejectResponse> acceptRejectResponseCallback) {
         RetrofitClient.getClient().ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(acceptRejectData).enqueue(acceptRejectResponseCallback);
     }
 
+    // get near by driver to the particular location
+    public static void getNearByDriverLocation(Callback<NearByDriverLocationResponse> driverLocationResponseCallback) {
+        RetrofitClient.getClient().GET_NEAR_BY_DRIVER_LOCATION_RESPONSE_CALL().enqueue(driverLocationResponseCallback);
+    }
 
     // cancel reason type
     public static void getCancleReason(CancelTripReasonRequest cancelTripReasonRequest, Callback<CancelTripReasonResponse> cancelTripReasonResponseCallback) {

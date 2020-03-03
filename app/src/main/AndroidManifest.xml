@@ -37,7 +37,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.newbooking.call"/>
+                <action android:name="com.newbooking.call" />
             </intent-filter>
 
         </receiver>
@@ -151,6 +151,13 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".reciever.PushNavigateReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="custom.notification.navigation" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

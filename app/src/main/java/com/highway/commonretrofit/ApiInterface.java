@@ -16,6 +16,7 @@ import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.Canc
 import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerRequest;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
+import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 import com.highway.customer.customerModelClass.updateReceiverModel.UpdateReceiverPhoneNoAndNameRequest;
@@ -52,6 +53,7 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDr
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -155,7 +157,7 @@ public interface ApiInterface {
     @POST("api/Booking/cancelTripReason")
     Call<CancelTripReasonResponse>CANCEL_TRIP_REASON_RESPONSE_CALL (@Body CancelTripReasonRequest cancelTripReasonRequest);
 
-    //cancle trip by customer
+    //cancel trip by customer
     @POST("api/Booking/cancelTripByCustomer")
     Call<CancelTripByCustomerResponse>CANCEL_TRIP_BY_CUSTOMER_RESPONSE_CALL(@Body CancelTripByCustomerRequest cancelTripByCustomerRequest);
 
@@ -166,5 +168,9 @@ public interface ApiInterface {
     // accept/reject booking trip by driver
     @POST("api/Booking/acceptBookTrip")
     Call<BookingAcceptRejectResponse> ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(@Body BookingAcceptRejectData bookingAcceptReject);
+
+    // get near by driver to the particular location
+    @GET("api/Booking/getNearByDriverLocation")
+    Call<NearByDriverLocationResponse> GET_NEAR_BY_DRIVER_LOCATION_RESPONSE_CALL();
 
 }

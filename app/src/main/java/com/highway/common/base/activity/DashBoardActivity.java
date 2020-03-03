@@ -129,7 +129,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-        Log.e(TAG,"onCreate");
 //        intent = getIntent();
 //        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
 
@@ -809,9 +808,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         Intent intent = new Intent(DashBoardActivity.this, LoginOptionActivity.class);
         startActivity(intent);
         finish();
-
     }
-
 
     public void showDialog(DashBoardActivity activity) {
         final Dialog dialog = new Dialog(activity);

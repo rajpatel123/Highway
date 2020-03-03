@@ -8,15 +8,20 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,6 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -41,9 +47,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -53,11 +61,22 @@ import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
+import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
+import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
+import com.highway.customer.helper.LatLngInterpolator;
+import com.highway.customer.helper.MarkerAnimation;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
+import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.utils.Constants;
 import com.highway.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -82,6 +101,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     LinearLayout destLL;
 
 
+    private boolean isMarkerRotating;
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
     private String sourceName;
@@ -124,10 +144,10 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Places.initialize(mActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+        Places.initialize(mActivity, getString(R.string.google_api_key));
 
         if (!Places.isInitialized()) {
-            Places.initialize(mActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+            Places.initialize(mActivity, getString(R.string.google_api_key));
         }
 
         sourceLL.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +192,10 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             }
         });
 
+        if (Utils.isInternetConnected(getContext())) {
+            Utils.showProgressDialog(getContext());
+            getNearByDriverLocation();
+        }
 
         return view;
     }
@@ -385,11 +409,14 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
 
+        Location location1 = new Location("");
+        location1.setLatitude(30.5518691);
+        location1.setLongitude(75.6513571);
+        showMarker(location1);
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
-
     }
 
 
@@ -470,4 +497,101 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             // You can add here other case statements according to your requirement.
         }
     }
+
+    private void showMarker(@NonNull Location currentLocation) {
+        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        if (mCurrLocationMarker == null)
+            mCurrLocationMarker = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(getContext(),R.drawable.ic_navigation))).position(latLng));
+        else
+            MarkerAnimation.animateMarkerToGB(mCurrLocationMarker, latLng, new LatLngInterpolator.Spherical());
+        rotateMarker(mCurrLocationMarker, 23.9F);
+    }
+
+    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            drawable = (DrawableCompat.wrap(drawable)).mutate();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    private double bearingBetweenLocations(LatLng latLng1, LatLng latLng2) {
+
+        double PI = 3.14159;
+        double lat1 = latLng1.latitude * PI / 180;
+        double long1 = latLng1.longitude * PI / 180;
+        double lat2 = latLng2.latitude * PI / 180;
+        double long2 = latLng2.longitude * PI / 180;
+
+        double dLon = (long2 - long1);
+
+        double y = Math.sin(dLon) * Math.cos(lat2);
+        double x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1)
+                * Math.cos(lat2) * Math.cos(dLon);
+
+        double brng = Math.atan2(y, x);
+
+        brng = Math.toDegrees(brng);
+        brng = (brng + 360) % 360;
+
+        return brng;
+    }
+
+    private void rotateMarker(final Marker marker, final float toRotation) {
+        if (!isMarkerRotating) {
+            final Handler handler = new Handler();
+            final long start = SystemClock.uptimeMillis();
+            final float startRotation = marker.getRotation();
+            final long duration = 1000;
+
+            final Interpolator interpolator = new LinearInterpolator();
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    isMarkerRotating = true;
+
+                    long elapsed = SystemClock.uptimeMillis() - start;
+                    float t = interpolator.getInterpolation((float) elapsed / duration);
+
+                    float rot = t * toRotation + (1 - t) * startRotation;
+
+                    marker.setRotation(-rot > 180 ? rot / 2 : rot);
+                    if (t < 1.0) {
+                        // Post again 16ms later.
+                        handler.postDelayed(this, 16);
+                    } else {
+                        isMarkerRotating = false;
+                    }
+                }
+            });
+        }
+    }
+
+    public void getNearByDriverLocation() {
+        RestClient.getNearByDriverLocation( new Callback<NearByDriverLocationResponse>() {
+            @Override
+            public void onResponse(Call<NearByDriverLocationResponse> call, Response<NearByDriverLocationResponse> response) {
+                Utils.dismissProgressDialog();
+                if (response.code() == 200 && response.body() != null) {
+                    NearByDriverLocationResponse resp = response.body();
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NearByDriverLocationResponse> call, Throwable t) {
+                Utils.dismissProgressDialog();
+
+            }
+        });
+    }
+
 }
