@@ -16,12 +16,15 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.gson.JsonObject;
 import com.highway.R;
 import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
 import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
+
+import org.json.JSONObject;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -67,28 +70,34 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void splashScreenHandler() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                if (HighwayPrefs.getBoolean(SplashActivity.this, Constants.LOGGED_IN)) {
-                    Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
-                    if (getIntent().getExtras() != null) {
-                        NotificationPushData data = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
-                        i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
-                        Log.e(TAG, BaseUtil.jsonFromModel(data));
+            if (HighwayPrefs.getBoolean(SplashActivity.this, Constants.LOGGED_IN)) {
+                Intent i = new Intent(SplashActivity.this, DashBoardActivity.class);
+//                    if (getIntent().getExtras() != null) {
+//                        NotificationPushData data = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+//                        i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
+//                        Log.e(TAG, BaseUtil.jsonFromModel(data));
+//                    }
+                if (getIntent().getExtras() != null && getIntent().hasExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
+                    JSONObject pushData;
+                    try {
+                        pushData = new JSONObject(getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+                        i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, pushData.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                }
 //                    String data = getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
 //                    Log.e(getClass().getSimpleName(), data);
-                    String token = HighwayPrefs.getString(SplashActivity.this, "device_token");
-                    System.out.println("asdf fcm --- : " + token);
-                    startActivity(i);
-                    finish();
-                } else {
-                    Intent i = new Intent(SplashActivity.this, LoginOptionActivity.class);
-                    startActivity(i);
-                    finish();
-                }
+                String token = HighwayPrefs.getString(SplashActivity.this, "device_token");
+                System.out.println("asdf fcm --- : " + token);
+                startActivity(i);
+                finish();
+            } else {
+                Intent i = new Intent(SplashActivity.this, LoginOptionActivity.class);
+                startActivity(i);
+                finish();
             }
         }, SPLASH_TIME_OUT);
     }

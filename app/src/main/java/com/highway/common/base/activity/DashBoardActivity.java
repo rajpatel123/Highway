@@ -133,20 +133,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
 //        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
-        if (getIntent().getExtras() != null && getIntent().hasExtra("data")) {
-            try {
-                pushData = new JSONObject(getIntent().getStringExtra("data"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
-        }
-
 
         //setOnClickListenerOperation();
-
-        String token = HighwayPrefs.getString(this, "device_token");
-        System.out.println("asdf fcm --- : " + token);
 
         // Create an IntentFilter instance.
         IntentFilter intentFilter = new IntentFilter();
@@ -874,9 +862,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void getPushData(){
-        if (getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null && getIntent().hasExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
             try {
-                pushData = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+                pushData = new JSONObject(getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
             } catch (Exception e) {
                 e.printStackTrace();
             }

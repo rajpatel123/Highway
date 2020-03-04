@@ -93,7 +93,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
 
                         Intent mainIntent = new Intent(this, DashBoardActivity.class);
-                        mainIntent.putExtra("data",jsonObject.toString());
+                        mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
                         mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(mainIntent);
                         break;
@@ -190,9 +190,9 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 //        // Send local broadcast
 //        localBroadcastManager.sendBroadcast(localIntent);
 //        localBroadcastManager.sendBroadcast(intent);
-        PushNavigateReceiver receiver=new PushNavigateReceiver();
-        IntentFilter intentFilter=new IntentFilter("custom.notification.navigation");
-        registerReceiver(receiver,intentFilter);
+        PushNavigateReceiver receiver = new PushNavigateReceiver();
+        IntentFilter intentFilter = new IntentFilter("custom.notification.navigation");
+        registerReceiver(receiver, intentFilter);
         Intent filter = new Intent("custom.notification.navigation");
         sendBroadcast(filter);
 

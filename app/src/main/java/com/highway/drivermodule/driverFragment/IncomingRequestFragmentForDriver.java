@@ -27,6 +27,7 @@ import com.highway.R;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
+import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
@@ -52,7 +53,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
     public String TAG = getClass().getSimpleName();
     public Button btnReject;
-    public Button btnAccept,btnStartTrip;
+    public Button btnAccept, btnStartTrip;
     public TextView lblCount;
     public CircleImageView imgUser;
     public TextView lblUserName;
@@ -78,6 +79,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     DashBoardActivity dashBoardActivity;
     public int time_to_left = 60;
     public JSONObject pushData;
+    private NotificationPushData data;
     public String userId;
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
@@ -109,6 +111,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         if (getArguments() != null) {
             try {
                 pushData = ((DashBoardActivity) getActivity()).pushData;
+                data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -156,7 +159,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         init();
 
 
-
         btnAccept.setOnClickListener(this);
         btnReject.setOnClickListener(this);
         btnStartTrip.setOnClickListener(this);
@@ -182,14 +184,14 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
             public void onFinish() {
                 stopMediaPlayer();
-                ((DashBoardActivity)getActivity()).replaceFragment(new DashBoardFragmentForDriver());
+                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver());
             }
         };
 
         countDownTimer.start();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
-        pickupAddress.setText(pushData.getSource());
-        dropAddress.setText(pushData.getDestination());
+        pickupAddress.setText(data.getSource());
+        dropAddress.setText(data.getDestination());
     }
 
 
@@ -220,7 +222,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                         if (countDownTimer != null) {
                             if (mPlayer != null & mPlayer.isPlaying())
                                 mPlayer.stop();
-                                countDownTimer.cancel();
+                            countDownTimer.cancel();
 
                         }
                         acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
@@ -267,11 +269,11 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                     if (isAccepted) {
                         LatLng latLng = new LatLng(Double.parseDouble(resp.getCustomerDetails().getStartTripLat()),
                                 Double.parseDouble(resp.getCustomerDetails().getStartTripLong()));
-                        pickupAddress.setText(""+Utils.getAddress(getActivity(),latLng));
+                        pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
 
                         LatLng latLngD = new LatLng(Double.parseDouble(resp.getCustomerDetails().getEndTripLat()),
                                 Double.parseDouble(resp.getCustomerDetails().getEndTripLong()));
-                        pickupAddress.setText(""+Utils.getAddress(getActivity(),latLng));
+                        pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
 
                     }
 
