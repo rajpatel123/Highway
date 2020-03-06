@@ -26,6 +26,9 @@ import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
 import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
 import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoResponse;
+import com.highway.drivermodule.driverModelClass.DriverResponse;
+import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
+import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -209,6 +212,16 @@ public class RestClient {
     // booking vehicle info
     public static void getInfo(BookingVehicleInfoRequest bookingVehicleInfoRequest, Callback<BookingVehicleInfoResponse> bookingVehicleInfoResponseCallback) {
         RetrofitClient.getClient().BOOKING_VEHICLE_INFO_RESPONSE_CALL(bookingVehicleInfoRequest).enqueue(bookingVehicleInfoResponseCallback);
+    }
+
+    // Add location route used by the driver
+    public static void addCurrentLocationOfVehicle(VehicleCurrentLocation vehicleCurrentLocation, Callback<DriverResponse> driverLocationResponseCallback) {
+        RetrofitClient.getClient().VEHICLE_CURRENT_LOCATION_RESPONSE_CALL(vehicleCurrentLocation).enqueue(driverLocationResponseCallback);
+    }
+
+    // Driver start the trip from pickup location
+    public static void addCurrentLocationOfVehicle(DriverStartTripRequest startTripRequest, Callback<DriverResponse> driverLocationResponseCallback) {
+        RetrofitClient.getClient().DRIVER_START_TRIP_RESPONSE_CALL(startTripRequest).enqueue(driverLocationResponseCallback);
     }
 
 }
