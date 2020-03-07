@@ -143,7 +143,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         // Set broadcast receiver priority.
         intentFilter.setPriority(100);
-        registerReceiver(new PushReciever(), intentFilter);
+      //  registerReceiver(new PushReciever(), intentFilter);
         //showDialog(this);
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, instanceIdResult -> {

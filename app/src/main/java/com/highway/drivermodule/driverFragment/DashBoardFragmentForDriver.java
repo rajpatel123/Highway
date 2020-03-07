@@ -112,7 +112,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
             public void run() {
                 handler.removeCallbacks(sendData);
                 ISTRAVERSING = false;
-                gpsTrackingWithServiceClass();
+              //  gpsTrackingWithServiceClass();
             }
         }, 5000);
 
@@ -202,7 +202,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     @Override
     public void onResume() {
         super.onResume();
-        getDriverCompletedDetail();
+       getDriverCompletedDetail();
     }
 
 
@@ -295,7 +295,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
         public void run() {
             try {
                 //prepare and send the data here..
-                gpsTrackingWithServiceClass();
+               // gpsTrackingWithServiceClass();
                 if (ISTRAVERSING) {
                     handler.postDelayed(sendData, TIMECOUNT);
                 }
@@ -382,7 +382,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        locationTrack.stopListener();
+      //  locationTrack.stopListener();
     }
 
 }

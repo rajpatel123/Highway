@@ -58,12 +58,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
 public class RestClient {
-   /* // login mob no
-    public static void loginUser(LoginRegisterRequest loginRegisterRequest, Callback<ResponseBody> callback) {
-        RetrofitClient.getClient().loginResponseCall(loginRegisterRequest).enqueue(callback);
-    }*/
-
-    // login mob no
+     // login mob no
     public static void loginUser(LoginReqUpdated loginReqUpdated, Callback<ResponseBody> callback) {
         RetrofitClient.getClient().loginResponseCall(loginReqUpdated).enqueue(callback);
     }

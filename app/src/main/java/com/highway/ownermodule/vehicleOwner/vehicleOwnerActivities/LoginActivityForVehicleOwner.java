@@ -45,7 +45,9 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
         ownerPhoneNo = findViewById(R.id.edtTxtOwnerMobNo);
         btnOwnerOtp = findViewById(R.id.btnSendOwnerOtp);
 
-             btnOwnerOtp.setOnClickListener(new View.OnClickListener() {
+        OwnerLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"ownerRoleId");
+
+        btnOwnerOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validationLoginUser();
@@ -75,9 +77,7 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
 
         if (validateInput()){
 
-           /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-            loginRegisterRequest.setMobile(phone_number);*/
-            OwnerLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"ownerRoleId");
+
             LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
             loginReqUpdated.setMobile(phone_number);
             loginReqUpdated.setRoleId(OwnerLoginRoleId);
