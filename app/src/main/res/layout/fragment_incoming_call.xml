@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@color/colorPrimary"
                 android:ellipsize="end"
                 android:singleLine="true"
@@ -182,10 +182,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:background="@color/colorPrimary"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="@string/accept"
+                android:text="@string/navigate_to_source"
                 android:textColor="#FFF" />
 
 

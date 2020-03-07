@@ -190,9 +190,9 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 //        // Send local broadcast
 //        localBroadcastManager.sendBroadcast(localIntent);
 //        localBroadcastManager.sendBroadcast(intent);
-        PushNavigateReceiver receiver = new PushNavigateReceiver();
-        IntentFilter intentFilter = new IntentFilter("custom.notification.navigation");
-        registerReceiver(receiver, intentFilter);
+//        PushNavigateReceiver receiver = new PushNavigateReceiver();
+//        IntentFilter intentFilter = new IntentFilter("custom.notification.navigation");
+//        registerReceiver(receiver, intentFilter);
         Intent filter = new Intent("custom.notification.navigation");
         sendBroadcast(filter);
 

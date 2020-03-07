@@ -52,8 +52,7 @@ import retrofit2.Response;
 public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener {
 
     public String TAG = getClass().getSimpleName();
-    public Button btnReject;
-    public Button btnAccept, btnStartTrip;
+    public Button btnAccept, btnReject, btnStartTrip;
     public TextView lblCount;
     public CircleImageView imgUser;
     public TextView lblUserName;
@@ -223,7 +222,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                             if (mPlayer != null & mPlayer.isPlaying())
                                 mPlayer.stop();
                             countDownTimer.cancel();
-
                         }
                         acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
                     } catch (JSONException e) {
@@ -247,6 +245,11 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                     }
                 }
                 break;
+
+            case R.id.btnStartTrip:
+
+
+                break;
         }
     }
 
@@ -265,7 +268,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 Utils.dismissProgressDialog();
                 if (response.code() == 200 && response.body() != null) {
                     BookingAcceptRejectResponse resp = response.body();
-
+                    BaseUtil.jsonFromModel(resp);
                     if (isAccepted) {
                         LatLng latLng = new LatLng(Double.parseDouble(resp.getCustomerDetails().getStartTripLat()),
                                 Double.parseDouble(resp.getCustomerDetails().getStartTripLong()));
@@ -274,7 +277,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                         LatLng latLngD = new LatLng(Double.parseDouble(resp.getCustomerDetails().getEndTripLat()),
                                 Double.parseDouble(resp.getCustomerDetails().getEndTripLong()));
                         pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
-
+                        btnAccept.setVisibility(View.GONE);
+                        btnReject.setVisibility(View.GONE);
+                        btnStartTrip.setVisibility(View.VISIBLE);
                     }
 
                 }

@@ -25,6 +25,9 @@ import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
 import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
 import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoResponse;
+import com.highway.drivermodule.driverModelClass.DriverResponse;
+import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
+import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -171,5 +174,13 @@ public interface ApiInterface {
     // get near by driver to the particular location
     @GET("api/Booking/getNearByDriverLocation")
     Call<NearByDriverLocationResponse> GET_NEAR_BY_DRIVER_LOCATION_RESPONSE_CALL();
+
+    // Add location route used by the driver
+    @POST("api/Booking/addCurrentLocationOfVehicle")
+    Call<DriverResponse> VEHICLE_CURRENT_LOCATION_RESPONSE_CALL(@Body VehicleCurrentLocation vehicleCurrentLocation);
+
+    // Driver start the trip from pickup location
+    @POST("api/Booking/addCurrentLocationOfVehicle")
+    Call<DriverResponse> DRIVER_START_TRIP_RESPONSE_CALL(@Body DriverStartTripRequest startTripRequest);
 
 }
