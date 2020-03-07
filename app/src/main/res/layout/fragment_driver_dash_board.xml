@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <com.google.android.material.tabs.TabLayout
@@ -18,9 +16,9 @@
         android:id="@+id/driverViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/drivertabMode" />
+        android:layout_below="@+id/drivertabMode"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/gpsTv"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -30,7 +28,7 @@
         android:background="@drawable/rounded_corner_shape"
         android:text="Gps Track"
         android:textColor="@color/red"/>
-
+-->
 
 
 </RelativeLayout>

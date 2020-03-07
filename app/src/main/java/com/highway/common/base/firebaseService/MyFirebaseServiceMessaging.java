@@ -10,6 +10,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.reciever.PushNavigateReceiver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
@@ -65,6 +67,8 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 //        Intent intent = new Intent(INTENT_FILTER);
 //        sendBroadcast(intent);
 
+
+        // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Fromdata: " + remoteMessage.getData());
@@ -89,7 +93,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
 
                         Intent mainIntent = new Intent(this, DashBoardActivity.class);
-                        mainIntent.putExtra("data",jsonObject.toString());
+                        mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
                         mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(mainIntent);
                         break;
@@ -180,6 +184,17 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         //intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+//        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(getApplicationContext());
+//        Intent localIntent = new Intent("CUSTOM_ACTION");
+//        // Send local broadcast
+//        localBroadcastManager.sendBroadcast(localIntent);
+//        localBroadcastManager.sendBroadcast(intent);
+//        PushNavigateReceiver receiver = new PushNavigateReceiver();
+//        IntentFilter intentFilter = new IntentFilter("custom.notification.navigation");
+//        registerReceiver(receiver, intentFilter);
+        Intent filter = new Intent("custom.notification.navigation");
+        sendBroadcast(filter);
 
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "PUSH");

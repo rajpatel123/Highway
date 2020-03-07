@@ -84,7 +84,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, TaskLoadedCallback, BookingVehicleAdapter.OnClickEvents {
 
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int SELECT_TYPE = 4;
     public TextView bookTruckTv, phoneNoTv, nameTv;
@@ -128,7 +127,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     private Paint paint;
 
     public static void start(Activity activity) {
-
 
         Intent intent = new Intent(activity, BookingWithDetailsActivity.class);
 
@@ -400,7 +398,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
                         mMap.moveCamera(cameraUpdate);
                     }
-
                 }
             } else if (requestCode == SELECT_TYPE) {
                 gdTypeId = data.getStringExtra("id");
@@ -415,8 +412,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         } else if (resultCode == RESULT_CANCELED) {
             // The user canceled the operation.
         }
-
-
     }
 
     public Bitmap createCustomMarker(@DrawableRes int resource) {
@@ -535,7 +530,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
-
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -583,8 +577,6 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
@@ -637,7 +629,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     @Override
     public void onCLickInfo(int position) {
 
-       /* if (vehicleList != null && vehicleList.size() > 0)
+         /* if (vehicleList != null && vehicleList.size() > 0)
             showInfoDialog(vehicleInfoList.get(position));  */
 
         if (bookingVehicleListResponse.getVehicleData().getVehicleList() != null

@@ -71,7 +71,7 @@ public class OnGoingFragmentForDriver extends Fragment {
             onGoingRecyForDriver.setItemAnimator(new DefaultItemAnimator());
             onGoingRecyForDriver.setAdapter(onGoingTripAdapterForDriver);
         }else{
-            Toast.makeText(dashBoardActivity, "Something is wrong of Ongoing trip list for Driver", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(dashBoardActivity, "Something is wrong of Ongoing trip list for Driver", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -133,22 +133,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
 //        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
-        if (getIntent().getExtras() != null && getIntent().hasExtra("data")) {
-            try {
-                pushData = new JSONObject(getIntent().getStringExtra("data"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
-        }
 
-        navigationInitView();
-        updateNavViewHeader();
-        navAccordingRoleId();// According RoleId Navigation Icon
         //setOnClickListenerOperation();
-
-        String token = HighwayPrefs.getString(this, "device_token");
-        System.out.println("asdf fcm --- : " + token);
 
         // Create an IntentFilter instance.
         IntentFilter intentFilter = new IntentFilter();
@@ -157,7 +143,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         // Set broadcast receiver priority.
         intentFilter.setPriority(100);
-        registerReceiver(new PushReciever(), intentFilter);
+      //  registerReceiver(new PushReciever(), intentFilter);
         //showDialog(this);
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, instanceIdResult -> {
@@ -817,9 +803,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         Intent intent = new Intent(DashBoardActivity.this, LoginOptionActivity.class);
         startActivity(intent);
         finish();
-
     }
-
 
     public void showDialog(DashBoardActivity activity) {
         final Dialog dialog = new Dialog(activity);
@@ -862,6 +846,31 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         }
     };
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPushData();
+        navigationInitView();
+        updateNavViewHeader();
+        navAccordingRoleId();// According RoleId Navigation Icon
+    }
+
+    private void getPushData(){
+        if (getIntent().getExtras() != null && getIntent().hasExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
+            try {
+                pushData = new JSONObject(getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -871,6 +880,3 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 }
-
-
-

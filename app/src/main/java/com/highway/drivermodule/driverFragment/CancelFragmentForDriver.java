@@ -76,7 +76,7 @@ public class CancelFragmentForDriver extends Fragment {
             recyclerViewForDriver.setAdapter(cancelTripAdapterForDriver);
 
         } else {
-            Toast.makeText(dashBoardActivity, "Something went wrong for cancle trip for driver", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(dashBoardActivity, "Something went wrong for cancle trip for driver", Toast.LENGTH_SHORT).show();
 
         }
     }

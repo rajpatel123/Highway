@@ -9,26 +9,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.highway.R;
 
-public class GoToOnlineFragmentForDriver extends Fragment {
 
-    Button goOnlineBtn;
-    TextView status;
+public class DriverOnlineFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
 
-    public GoToOnlineFragmentForDriver() {
-        // Required empty public constructor
-    }
+    public DriverOnlineFragment() { }
 
-    public static GoToOnlineFragmentForDriver newInstance() {
-        GoToOnlineFragmentForDriver fragment = new GoToOnlineFragmentForDriver();
+    public static DriverOnlineFragment newInstance(String param1, String param2) {
+        DriverOnlineFragment fragment = new DriverOnlineFragment();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,13 +35,9 @@ public class GoToOnlineFragmentForDriver extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_go_to_online_fragment_for_driver, container, false);
-        goOnlineBtn = view.findViewById(R.id.go_online_btn);
-        status = view.findViewById(R.id.status);
-
-        return view;
+        View view=  inflater.inflate(R.layout.fragment_driver_online, container, false);
+       return  view;
     }
-
 
 
     @Override
@@ -61,11 +49,10 @@ public class GoToOnlineFragmentForDriver extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+
     }
 
     public interface OnFragmentInteractionListener {
-
         void onFragmentInteraction(Uri uri);
     }
 }

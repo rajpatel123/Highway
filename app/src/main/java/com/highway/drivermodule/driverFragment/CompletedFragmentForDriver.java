@@ -75,7 +75,7 @@ public class CompletedFragmentForDriver extends Fragment {
             completedRecyclerForDriver.setItemAnimator(new DefaultItemAnimator());
             completedRecyclerForDriver.setAdapter(onCompletedTripAdapterForDriver);
         } else {
-            Toast.makeText(dashBoardActivity, "Something went wrong for completed trip list for Driver", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(dashBoardActivity, "Something went wrong for completed trip list for Driver", Toast.LENGTH_SHORT).show();
 
         }
 
