@@ -103,8 +103,10 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
 
         driverTabLayout = view.findViewById(R.id.drivertabMode);
         driverViewPager = view.findViewById(R.id.driverViewPager);
-        gpsTv = view.findViewById(R.id.gpsTv);
+        //gpsTv = view.findViewById(R.id.gpsTv);
         //gpsTrackingWithOutServiceClass();
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -208,7 +210,6 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
 
         GetAllTripByUserIdRequest getAllTripByUserIdRequest = new GetAllTripByUserIdRequest();
         userId = HighwayPrefs.getString(getContext(), Constants.ID);
-        /*allHighwayTripsRequest.setUserId(userId);*/
         getAllTripByUserIdRequest.setUserId(userId);
 
         Utils.showProgressDialog(getContext());
@@ -217,6 +218,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
             public void onResponse(Call<GetAllTripByUserIdResponse> call, Response<GetAllTripByUserIdResponse> response) {
                 Utils.dismissProgressDialog();
                 if (response.body() != null && response.body().getStatus() != null) {
+
                     if (response.body().getStatus()) {
                         GetAllTripByUserIdResponse getAllTripByUserIdResponse = response.body();
                         if (getAllTripByUserIdResponse != null) {
@@ -254,66 +256,8 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
         onGoingFragmentForDriver.onGoingUpdatedTripListForDriver(dashBoardActivity.getOngoingTrips());
         completedFragmentForDriver.completedUpdatedTripListForDriver(dashBoardActivity.getCompletedTrips());
         cancelFragmentForDriver.cancleUpdatedTripListForDriver(dashBoardActivity.getCancelTrips());
-
     }
 
-
-    /*   @RequiresApi(api = Build.VERSION_CODES.M)
-    public void gpsTrackingWithOutServiceClass() {
-
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        if (getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && getActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // TODO: Consider calling
-            //    Activity#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return;
-        }
-
-        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        onLocationChanged(location);
-
-    }
-
-
-
-    @Override
-    public void onLocationChanged(Location location) {
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-        // gpsTv.setText("Longitude: " + longitude + "\n" + "Latitude: " + latitude);
-        gpsTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }*/
 
     public void gpsTrackingWithServiceClass() {
 
@@ -321,38 +265,12 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
         permissions.add(ACCESS_COARSE_LOCATION);
 
         permissionsToRequest = findUnAskedPermissions(permissions);
-        //get the permissions we have asked for before but are not granted..
-        //we will store this in a global list to access later.
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             if (permissionsToRequest.size() > 0)
                 requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
         }
-
-        /* gpsTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-               locationTrack = new LocationTrack(getActivity());
-
-                if (locationTrack.canGetLocation()) {
-
-                    double longitude = locationTrack.getLongitude();
-                    double latitude = locationTrack.getLatitude();
-                    Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n" +
-                            "Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
-
-                    ISTRAVERSING = true;
-                    handler.postDelayed(sendData, TIMECOUNT);
-
-                } else {
-
-                    locationTrack.showSettingsAlert();
-                }
-
-            }
-        }); */
 
         locationTrack = new LocationTrack(getActivity());
 

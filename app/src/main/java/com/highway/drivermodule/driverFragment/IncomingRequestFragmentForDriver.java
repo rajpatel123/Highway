@@ -277,6 +277,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                         LatLng latLngD = new LatLng(Double.parseDouble(resp.getCustomerDetails().getEndTripLat()),
                                 Double.parseDouble(resp.getCustomerDetails().getEndTripLong()));
                         pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
+
                         btnAccept.setVisibility(View.GONE);
                         btnReject.setVisibility(View.GONE);
                         btnStartTrip.setVisibility(View.VISIBLE);

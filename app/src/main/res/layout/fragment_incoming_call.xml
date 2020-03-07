@@ -50,16 +50,24 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:singleLine="true"
+                    android:layout_weight="1"
+                    android:text="Booking user name"
                     android:textSize="@dimen/_13ssp" />
 
 
-                <RatingBar
+                <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/ratingUser"
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:isIndicator="false"
-                    android:progressTint="@color/colorPrimary" />
+                    android:layout_weight="1"
+                    android:progressTint="@color/colorPrimary"
+                    android:rating="3"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+
+                    />
 
 
                 <TextView
@@ -68,6 +76,8 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:singleLine="true"
+                    android:text="Car Type: SEDAN"
+                    android:layout_weight="1"
                     android:textSize="@dimen/_11ssp" />
 
             </LinearLayout>
@@ -165,6 +175,20 @@
                 android:textColor="#FFF" />
 
             <Button
+                android:id="@+id/btnArrived"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:text="@string/arrived"
+                android:textColor="#FFF" />
+
+
+            <Button
                 android:id="@+id/btnAccept"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,6 +200,22 @@
                 android:singleLine="true"
                 android:text="@string/accept"
                 android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:background="@color/colorPrimary"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/cancel"
+                android:textColor="#FFF" />
+
+
+
             <Button
                 android:id="@+id/btnStartTrip"
                 android:layout_width="match_parent"

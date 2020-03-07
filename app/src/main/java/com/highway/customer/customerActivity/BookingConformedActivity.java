@@ -141,8 +141,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         intent.putExtra("sourceAddress",sourceAddress);
         intent.putExtra("destAddress",destAddress);
 
-
-
         activity.startActivity(intent);
 
     }

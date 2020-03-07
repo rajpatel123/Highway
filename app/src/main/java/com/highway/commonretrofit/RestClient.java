@@ -189,15 +189,7 @@ public class RestClient {
         RetrofitClient.getClient().BOOKING_H_TRIP_RESPONSE_CALL(bookingHTripRequest).enqueue(bookingHTripRespCallback);
     }
 
-    // accept/reject booking by driver
-    public static void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, Callback<BookingAcceptRejectResponse> acceptRejectResponseCallback) {
-        RetrofitClient.getClient().ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(acceptRejectData).enqueue(acceptRejectResponseCallback);
-    }
 
-    // get near by driver to the particular location
-    public static void getNearByDriverLocation(Callback<NearByDriverLocationResponse> driverLocationResponseCallback) {
-        RetrofitClient.getClient().GET_NEAR_BY_DRIVER_LOCATION_RESPONSE_CALL().enqueue(driverLocationResponseCallback);
-    }
 
     // cancel reason type
     public static void getCancleReason(CancelTripReasonRequest cancelTripReasonRequest, Callback<CancelTripReasonResponse> cancelTripReasonResponseCallback) {
@@ -214,6 +206,16 @@ public class RestClient {
         RetrofitClient.getClient().BOOKING_VEHICLE_INFO_RESPONSE_CALL(bookingVehicleInfoRequest).enqueue(bookingVehicleInfoResponseCallback);
     }
 
+    // accept/reject booking by driver
+    public static void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, Callback<BookingAcceptRejectResponse> acceptRejectResponseCallback) {
+        RetrofitClient.getClient().ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(acceptRejectData).enqueue(acceptRejectResponseCallback);
+    }
+
+    // get near by driver to the particular location
+    public static void getNearByDriverLocation(Callback<NearByDriverLocationResponse> driverLocationResponseCallback) {
+        RetrofitClient.getClient().GET_NEAR_BY_DRIVER_LOCATION_RESPONSE_CALL().enqueue(driverLocationResponseCallback);
+    }
+
     // Add location route used by the driver
     public static void addCurrentLocationOfVehicle(VehicleCurrentLocation vehicleCurrentLocation, Callback<DriverResponse> driverLocationResponseCallback) {
         RetrofitClient.getClient().VEHICLE_CURRENT_LOCATION_RESPONSE_CALL(vehicleCurrentLocation).enqueue(driverLocationResponseCallback);
@@ -223,5 +225,7 @@ public class RestClient {
     public static void addCurrentLocationOfVehicle(DriverStartTripRequest startTripRequest, Callback<DriverResponse> driverLocationResponseCallback) {
         RetrofitClient.getClient().DRIVER_START_TRIP_RESPONSE_CALL(startTripRequest).enqueue(driverLocationResponseCallback);
     }
+
+
 
 }

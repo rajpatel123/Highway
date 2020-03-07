@@ -321,16 +321,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
             layoutParams.setMargins(0, 180, 180, 0);
-/*
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 30);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 50);
 
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, 50);
-            layoutParams.addRule(RelativeLayout.ALIGN_END, 50);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT ,50);
-            layoutParams.setMargins(30, 50, 50, 40);*/
         }
 
         try {
@@ -530,7 +521,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
         double dLon = (long2 - long1);
 
-        double y = Math.sin(dLon) * Math.cos(lat2);
+        double y = Math.sin(dLon) * Math .cos(lat2);
         double x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1)
                 * Math.cos(lat2) * Math.cos(dLon);
 
@@ -580,7 +571,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                 Utils.dismissProgressDialog();
                 if (response.code() == 200 && response.body() != null) {
                     NearByDriverLocationResponse resp = response.body();
-
 
                 }
             }

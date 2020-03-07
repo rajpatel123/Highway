@@ -76,7 +76,7 @@ public class UpComingFragmentForDriver extends Fragment {
             upComingRecyclerForDriver.setAdapter(upComingTripAdapterForDriver);
 
         } else {
-            Toast.makeText(getActivity(), "Something went wrong of upcoming trip list for Driver" , Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getActivity(), "Something went wrong of upcoming trip list for Driver" , Toast.LENGTH_SHORT).show();
         }
 
 
