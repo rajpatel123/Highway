@@ -53,4 +53,14 @@ public class Constants {
     public static final String DESTINATEION = "destination";
     public static final String PUSH_ACTION = "com.newbooking.call";
     public static final String ONLINE = "online" ;
+
+    public static final String TRIP_NEW = "TRIP_NEW";
+    public static final String SEARCHING = "SEARCHING";
+    public static final String TRIP_STARTED = "STARTED";
+    public static final String ARRIVED = "ARRIVED";
+    public static final String PICKEDUP = "PICKEDUP";
+    public static final String DROPPED = "DROPPED";
+    public static final String COMPLETED = "COMPLETED";
+    public static final String RATING = "RATING";
+    public static final String INVOICE = "INVOICE";
 }

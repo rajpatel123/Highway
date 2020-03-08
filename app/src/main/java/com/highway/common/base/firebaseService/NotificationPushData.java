@@ -31,7 +31,7 @@ public class NotificationPushData implements Parcelable {
     @Expose
     private String customer;
 
-    protected NotificationPushData(Parcel in) {
+    public NotificationPushData(Parcel in) {
         mobile = in.readString();
         message = in.readString();
         destination = in.readString();
@@ -52,6 +52,10 @@ public class NotificationPushData implements Parcelable {
             return new NotificationPushData[size];
         }
     };
+
+    public NotificationPushData() {
+
+    }
 
     public String getMobile() {
         return mobile;

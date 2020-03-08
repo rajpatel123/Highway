@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -14,14 +15,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -91,6 +95,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
     private List<CancelTrip> cancelTrips = new ArrayList<>();
+    private IncomingRequestFragmentForDriver incomingFragment;
 
 
     public List<CancelTrip> getCancelTrips() {
@@ -137,9 +142,21 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public JSONObject pushData;
     private String TAG = getClass().getSimpleName();
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window window = getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.transparent));
+
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
 //        notificationType = getIntent().getIntExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, 0);
@@ -290,8 +307,14 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "3":                                              // Driver
 
-                driverOnlineFragment = DriverOnlineFragment.newInstance();
-                replaceFragment(driverOnlineFragment,"Online");
+//                driverOnlineFragment = DriverOnlineFragment.newInstance();
+//                replaceFragment(driverOnlineFragment,"Online");
+
+                incomingFragment = IncomingRequestFragmentForDriver.newInstance();
+                Bundle bundle = new Bundle();
+                incomingFragment.setArguments(bundle);
+                replaceFragment(incomingFragment,"Online");
+
 
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
@@ -400,11 +423,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         }, 2000);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.dash_board, menu);
-        return true;
-    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

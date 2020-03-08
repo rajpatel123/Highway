@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:layout_gravity="bottom"
         android:orientation="vertical">
 
         <!--  Status Layout-->
@@ -169,20 +170,34 @@
                     android:animateLayoutChanges="true"
                     android:background="@color/colorAccent"
                     android:ellipsize="end"
+                    android:visibility="gone"
                     android:singleLine="true"
                     android:text="@string/cancel"
                     android:textColor="@color/white"/>
 
+                <Button
+                    android:id="@+id/tapToDrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:animateLayoutChanges="true"
+                    android:background="@color/colorPrimaryDark"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/taptodrop"
+                    android:textColor="#FFF" />
                 <Space
                     android:layout_width="@dimen/_4sdp"
                     android:layout_height="wrap_content" />
 
                 <Button
-                    android:id="@+id/btnStatus"
+                    android:id="@+id/btnArrived"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:animateLayoutChanges="true"
                     android:background="@color/colorPrimaryDark"
                     android:ellipsize="end"

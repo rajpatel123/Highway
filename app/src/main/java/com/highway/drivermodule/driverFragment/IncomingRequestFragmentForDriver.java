@@ -22,7 +22,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.activity.DashBoardActivity;
@@ -48,11 +47,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.highway.utils.Constants.ARRIVED;
+import static com.highway.utils.Constants.COMPLETED;
+import static com.highway.utils.Constants.DROPPED;
+import static com.highway.utils.Constants.INVOICE;
+import static com.highway.utils.Constants.PICKEDUP;
+import static com.highway.utils.Constants.RATING;
+import static com.highway.utils.Constants.TRIP_NEW;
+import static com.highway.utils.Constants.TRIP_STARTED;
+
 
 public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener {
 
     public String TAG = getClass().getSimpleName();
-    public Button btnAccept, btnReject, btnStartTrip;
+    public Button btnAccept, btnReject, btnCancelTrip, btnCancel, btnTapToDrop, btnArrived;
+
     public TextView lblCount;
     public CircleImageView imgUser;
     public TextView lblUserName;
@@ -77,8 +86,10 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     CancelTripAdapterForDriver cancelTripAdapterForDriver;
     DashBoardActivity dashBoardActivity;
     public int time_to_left = 60;
+
+    View goingtoPickupLocationView, incomingCallView;
     public JSONObject pushData;
-    private NotificationPushData data;
+    private NotificationPushData data = new NotificationPushData();
     public String userId;
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
@@ -109,8 +120,14 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             try {
-                pushData = ((DashBoardActivity) getActivity()).pushData;
-                data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
+                //pushData = ((DashBoardActivity) getActivity()).pushData;
+               // data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
+
+                data.setDestination("Delhi, Testing location");
+                data.setSource("Delhi, Testing location");
+                data.setMobile("4638746864");
+                data.setTripId("#HIG3345");
+                data.setTripId("NEW_TRIP");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -141,9 +158,15 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
 
+        btnCancel = view.findViewById(R.id.btnCancel);
+        btnTapToDrop = view.findViewById(R.id.tapToDrop);
+        btnArrived = view.findViewById(R.id.btnArrived);
+
+        goingtoPickupLocationView=view.findViewById(R.id.goingtoPickupLocation);
+        incomingCallView=view.findViewById(R.id.incomingCall);
         btnReject = view.findViewById(R.id.btnReject);
         btnAccept = view.findViewById(R.id.btnAccept);
-        btnStartTrip = view.findViewById(R.id.btnStartTrip);
+        btnCancelTrip = view.findViewById(R.id.btnCancel);
         lblCount = view.findViewById(R.id.lblCount);
         imgUser = view.findViewById(R.id.imgUser);
         lblUserName = view.findViewById(R.id.lblUserName);
@@ -155,12 +178,15 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         dropAddressLayout = view.findViewById(R.id.drop_address_layout);
         context = getActivity();
         mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
-        init();
+        init(TRIP_NEW);
 
 
         btnAccept.setOnClickListener(this);
         btnReject.setOnClickListener(this);
-        btnStartTrip.setOnClickListener(this);
+        btnCancelTrip.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+        btnTapToDrop.setOnClickListener(this);
+        btnArrived.setOnClickListener(this);
 
         return view;
     }
@@ -171,26 +197,52 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         dashBoardActivity = (DashBoardActivity) getActivity();
     }
 
-    void init() {
-        if (!mPlayer.isPlaying())
-            mPlayer.start();
+    void init(String status) {
 
-        countDownTimer = new CountDownTimer(time_to_left * 1000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                lblCount.setText(String.valueOf(millisUntilFinished / 1000));
-                setTvZoomInOutAnimation(lblCount);
-            }
+        switch (status) {
+            case TRIP_NEW:
+                if (data != null) {
+                    if (!mPlayer.isPlaying())
+                        mPlayer.start();
 
-            public void onFinish() {
-                stopMediaPlayer();
-                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(),"");
-            }
-        };
+                    countDownTimer = new CountDownTimer(time_to_left * 1000, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            lblCount.setText(String.valueOf(millisUntilFinished / 1000));
+                            setTvZoomInOutAnimation(lblCount);
+                        }
 
-        countDownTimer.start();
-        userId = HighwayPrefs.getString(getContext(), Constants.ID);
-        pickupAddress.setText(data.getSource());
-        dropAddress.setText(data.getDestination());
+                        public void onFinish() {
+                            stopMediaPlayer();
+                            ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
+                        }
+                    };
+
+                    incomingCallView.setVisibility(View.VISIBLE);
+                    countDownTimer.start();
+                    userId = HighwayPrefs.getString(getContext(), Constants.ID);
+                    pickupAddress.setText(data.getSource());
+                    dropAddress.setText(data.getDestination());
+                }
+
+                break;
+            case TRIP_STARTED:
+                break;
+            case ARRIVED:
+                break;
+            case PICKEDUP:
+                break;
+            case DROPPED:
+                break;
+            case COMPLETED:
+                break;
+            case RATING:
+                break;
+            case INVOICE:
+                break;
+
+        }
+
+
     }
 
 
@@ -218,11 +270,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 if (Utils.isInternetConnected(context)) {
                     Utils.showProgressDialog(context);
                     try {
-                        if (countDownTimer != null) {
-                            if (mPlayer != null & mPlayer.isPlaying())
-                                mPlayer.stop();
-                            countDownTimer.cancel();
-                        }
+
                         acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -234,11 +282,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 if (Utils.isInternetConnected(context)) {
                     Utils.showProgressDialog(context);
                     try {
-                        if (countDownTimer != null) {
-                            if (mPlayer != null & mPlayer.isPlaying())
-                                mPlayer.stop();
-                            countDownTimer.cancel();
-                        }
+
                         acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED), true);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -246,7 +290,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 }
                 break;
 
-            case R.id.btnStartTrip:
+            case R.id.tapToDrop:
+
+
+                break;
+
+            case R.id.btnArrived:
+
+
+                break;
+
+            case R.id.btnCancel:
 
 
                 break;
@@ -255,7 +309,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
     public BookingAcceptRejectData getAcceptRejectBookingTripParams(String acceptReject) throws JSONException {
         BookingAcceptRejectData acceptRejectData = new BookingAcceptRejectData();
-        acceptRejectData.setTripId(pushData.getString(Constants.TRIP_ID));
+//        acceptRejectData.setTripId(pushData.getString(Constants.TRIP_ID));
+        acceptRejectData.setTripId(data.getTripId());
         acceptRejectData.setUserId(userId);
         acceptRejectData.setAcceptReject(acceptReject);
         return acceptRejectData;
@@ -270,17 +325,24 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                     BookingAcceptRejectResponse resp = response.body();
                     BaseUtil.jsonFromModel(resp);
                     if (isAccepted) {
-                        LatLng latLng = new LatLng(Double.parseDouble(resp.getCustomerDetails().getStartTripLat()),
-                                Double.parseDouble(resp.getCustomerDetails().getStartTripLong()));
-                        pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
+//                        LatLng latLng = new LatLng(Double.parseDouble(resp.getCustomerDetails().getStartTripLat()),
+//                                Double.parseDouble(resp.getCustomerDetails().getStartTripLong()));
+//                        //pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
+//
+//                        LatLng latLngD = new LatLng(Double.parseDouble(resp.getCustomerDetails().getEndTripLat()),
+//                                Double.parseDouble(resp.getCustomerDetails().getEndTripLong()));
+//                        pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
 
-                        LatLng latLngD = new LatLng(Double.parseDouble(resp.getCustomerDetails().getEndTripLat()),
-                                Double.parseDouble(resp.getCustomerDetails().getEndTripLong()));
-                        pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
 
+                        if (countDownTimer != null) {
+                            if (mPlayer != null & mPlayer.isPlaying())
+                                mPlayer.stop();
+                            countDownTimer.cancel();
+                        }
                         btnAccept.setVisibility(View.GONE);
                         btnReject.setVisibility(View.GONE);
-                        btnStartTrip.setVisibility(View.VISIBLE);
+
+
                     }
 
                 }

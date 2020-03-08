@@ -10,7 +10,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
@@ -18,7 +17,6 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -27,15 +25,21 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.highway.BuildConfig;
 import com.highway.R;
-import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.reciever.PushNavigateReceiver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.highway.utils.Constants.COMPLETED;
+import static com.highway.utils.Constants.DROPPED;
+import static com.highway.utils.Constants.INVOICE;
+import static com.highway.utils.Constants.PICKEDUP;
+import static com.highway.utils.Constants.RATING;
+import static com.highway.utils.Constants.SEARCHING;
+import static com.highway.utils.Constants.TRIP_STARTED;
 
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     int notificationId = 0;
@@ -81,10 +85,9 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                 String type = remoteMessage.getData().get("type");
 
                 switch (type) {
-                    case "SERVICE":
-                        break;
 
-                    case "TRIP_NEW":
+
+                    case Constants.TRIP_NEW:
                         jsonObject.put(Constants.PUSH_TYPE, type);
                         jsonObject.put(Constants.CUSTOMER_NAME, remoteMessage.getData().get("customer"));
                         jsonObject.put(Constants.PUSH_MOBILE, remoteMessage.getData().get("mobile"));
@@ -98,24 +101,21 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         startActivity(mainIntent);
                         break;
 
-                    case "SEARCHING":
+                    case SEARCHING:
                         break;
-                    case "STARTED":
-
+                    case TRIP_STARTED:
                         break;
-                    case "ARRIVED":
-
+                    case Constants.ARRIVED:
                         break;
-
-                    case "PICKEDUP":
+                    case PICKEDUP:
                         break;
-                    case "DROPPED":
+                    case DROPPED:
                         break;
-                    case "COMPLETED":
+                    case COMPLETED:
                         break;
-                    case "RATING":
+                    case RATING:
                         break;
-                    case "INVOICE":
+                    case INVOICE:
                         break;
 
 
