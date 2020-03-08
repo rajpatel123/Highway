@@ -52,4 +52,5 @@ public class Constants {
     public static final String SOURCE = "source";
     public static final String DESTINATEION = "destination";
     public static final String PUSH_ACTION = "com.newbooking.call";
+    public static final String ONLINE = "online" ;
 }

@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,19 +31,18 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.highway.PushReciever;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.UpcomingTrip;
-import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
+import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
 import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
@@ -78,6 +76,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     private DashBoardFragmentForMillUser dashBoardFragmentForMillUser;
     private DashBoardFragmentForDriver dashBoardFragmentForDriver;
+    private DriverOnlineFragment driverOnlineFragment;
     private DashBordFragmentForCustomer dashBordFragmentForCustomer;
     private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
     private DashBoardActivity dashBoardActivity;
@@ -97,33 +96,44 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public List<CancelTrip> getCancelTrips() {
         return cancelTrips;
     }
+
     public void setCancelTrips(List<CancelTrip> cancelTrips) {
         this.cancelTrips = cancelTrips;
     }
-    public List<CompletedTrip> getCompletedTrips() { return completedTrips; }
-    public void setCompletedTrips(List<CompletedTrip> completedTrips) { this.completedTrips = completedTrips; }
-    public List<OngoingTrip> getOngoingTrips() { return ongoingTrips; }
-    public void setOngoingTrips(List<OngoingTrip> ongoingTrips) { this.ongoingTrips = ongoingTrips; }
+
+    public List<CompletedTrip> getCompletedTrips() {
+        return completedTrips;
+    }
+
+    public void setCompletedTrips(List<CompletedTrip> completedTrips) {
+        this.completedTrips = completedTrips;
+    }
+
+    public List<OngoingTrip> getOngoingTrips() {
+        return ongoingTrips;
+    }
+
+    public void setOngoingTrips(List<OngoingTrip> ongoingTrips) {
+        this.ongoingTrips = ongoingTrips;
+    }
+
     public List<UpcomingTrip> getUpcomingTrips() {
         return upcomingTrips;
     }
-    public void setUpcomingTrips(List<UpcomingTrip> upcomingTrips) { this.upcomingTrips = upcomingTrips; }
+
+    public void setUpcomingTrips(List<UpcomingTrip> upcomingTrips) {
+        this.upcomingTrips = upcomingTrips;
+    }
 
 
     private Toolbar dashBoardToolbar;
     private CircleImageView nevCircularUserImgView;
     private TextView nevUserName, nevUserMobNo;
     String name, image, mobNo;
-    private TextView tvName, tvMobileNo, tvSetting;
     private NavigationView navigationView;
     String userRole;
     private MenuItem newBooking, myBooking, millBooking, addVehicle, wallet, notification, rateCard, help,
             about, share, send, gallery, tCondition, logout, addDriver, assignD2V, getAllVehicle, getAllDriver, bookload;
-    private MenuItem item;
-    private Button btnLogOut;
-    Intent intent;
-    WebViewActivity webViewActivity;
-    private int notificationType = 0;
     public JSONObject pushData;
     private String TAG = getClass().getSimpleName();
 
@@ -143,7 +153,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         // Set broadcast receiver priority.
         intentFilter.setPriority(100);
-      //  registerReceiver(new PushReciever(), intentFilter);
+        //  registerReceiver(new PushReciever(), intentFilter);
         //showDialog(this);
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(DashBoardActivity.this, instanceIdResult -> {
@@ -174,6 +184,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             Log.e("newToken", newToken);
         });
+
+
+        getPushData();
+        navigationInitView();
+        updateNavViewHeader();
+        navAccordingRoleId();// According RoleId Navigation Icon
+
 
     }
 
@@ -249,7 +266,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "2":                                    //  mill user
                 Fragment fragment2 = NewBookingFragment.newInstance();
-                replaceFragment(fragment2);
+                replaceFragment(fragment2,"");
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -273,17 +290,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "3":                                              // Driver
 
-//                if (HighwayPrefs.getString(this, Constants.User_statuss).equalsIgnoreCase("")) {
-                if (pushData == null) {
-//                if (notificationType == 0) {
-                    Fragment fragment3 = DashBoardFragmentForDriver.newInstance();
-                    replaceFragment(fragment3);
-                } else {
-
-                    Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
-                    replaceFragment(fragment3);
-                }
-//                }
+                driverOnlineFragment = DriverOnlineFragment.newInstance();
+                replaceFragment(driverOnlineFragment,"Online");
 
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
@@ -308,7 +316,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "4":                                   //  Customer
                 Fragment fragment4 = NewBookingFragment.newInstance();
-                replaceFragment(fragment4);
+                replaceFragment(fragment4,"");
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -333,7 +341,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "5":                              // Owner .. vehicle Owner
                 Fragment fragment5 = NewBookingFragment.newInstance();
-                replaceFragment(fragment5);
+                replaceFragment(fragment5,"");
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -362,6 +370,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onBackPressed() {
+
+
+
         //  for Nav Drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -413,7 +424,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_new_booking:
                 dashBoardToolbar.setTitle("New Booking");
                 Fragment newBookingFragment = NewBookingFragment.newInstance();
-                replaceFragment(newBookingFragment);
+                replaceFragment(newBookingFragment,"");
                 break;
 
             case R.id.nav_my_booking:
@@ -427,21 +438,21 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (dashBoardFragmentForMillUser == null) {
                             dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForMillUser);
+                        replaceFragment(dashBoardFragmentForMillUser,"");
                         break;
 
                     case "3":
                         if (dashBoardFragmentForDriver == null) {
                             dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForDriver);
+                        replaceFragment(dashBoardFragmentForDriver,"");
                         break;
 
                     case "4":
                         if (dashBoardFragmentForVehicleOwner == null) {
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForVehicleOwner);
+                        replaceFragment(dashBoardFragmentForVehicleOwner,"");
 //                        dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
 //                        replaceFragment(dashBordFragmentForCustomer);
                         break;
@@ -450,7 +461,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (dashBoardFragmentForVehicleOwner == null) {
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForVehicleOwner);
+                        replaceFragment(dashBoardFragmentForVehicleOwner,"");
 
                         break;
                 }
@@ -465,7 +476,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (bookLoadFragmentForMillUser == null) {
                             bookLoadFragmentForMillUser = BookLoadFragmentForMillUser.newInstance();
                         }
-                        replaceFragment(bookLoadFragmentForMillUser);
+                        replaceFragment(bookLoadFragmentForMillUser,"");
 
                         break;
 
@@ -500,7 +511,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (addVehicleFragmentForVehicleOwner == null) {
                             addVehicleFragmentForVehicleOwner = AddVehicleFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(addVehicleFragmentForVehicleOwner);
+                        replaceFragment(addVehicleFragmentForVehicleOwner,"");
                         break;
                 }
                 break;
@@ -522,7 +533,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (addDriverFragmentForVehicleOwner == null) {
                         }
                         addDriverFragmentForVehicleOwner = AddDriverFragmentForVehicleOwner.newInstance();
-                        replaceFragment(addDriverFragmentForVehicleOwner);
+                        replaceFragment(addDriverFragmentForVehicleOwner,"");
                         break;
                 }
                 break;
@@ -545,7 +556,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (assign_d2V_fragmentForVehicleOwner == null) {
                         }
                         assign_d2V_fragmentForVehicleOwner = Assign_D2V_FragmentForVehicleOwner.newInstance();
-                        replaceFragment(assign_d2V_fragmentForVehicleOwner);
+                        replaceFragment(assign_d2V_fragmentForVehicleOwner,"");
                         break;
                 }
                 break;
@@ -568,7 +579,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (getAllDriverFragmentForVehicleOwner == null) {
                             getAllDriverFragmentForVehicleOwner = GetAllDriverFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllDriverFragmentForVehicleOwner);
+                        replaceFragment(getAllDriverFragmentForVehicleOwner,"");
                         break;
                 }
                 break;
@@ -589,7 +600,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (getAllVehicleFragmentForVehicleOwner == null) {
                             getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllVehicleFragmentForVehicleOwner);
+                        replaceFragment(getAllVehicleFragmentForVehicleOwner,"");
                         break;
                 }
                 break;
@@ -747,7 +758,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                            "Hello friends, the best app for Highway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
+                        "Hello friends, the best app for Highway is now available at: https://play.google.com/store/apps/details?id=com.dnamedical");
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
@@ -784,12 +795,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment, String tag) {
         try {
             FragmentManager fragmentManager = getSupportFragmentManager();
             if (fragmentManager != null) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, "");
+                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, tag);
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commitAllowingStateLoss();
             }
@@ -836,8 +847,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private BroadcastReceiver listener = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-          //  String data = intent.getStringExtra("data");
-           // Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
+            //  String data = intent.getStringExtra("data");
+            // Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
 
             Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
             Bundle bundle = new Bundle();
@@ -855,13 +866,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onResume() {
         super.onResume();
-        getPushData();
-        navigationInitView();
-        updateNavViewHeader();
-        navAccordingRoleId();// According RoleId Navigation Icon
+
     }
 
-    private void getPushData(){
+    private void getPushData() {
         if (getIntent().getExtras() != null && getIntent().hasExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
             try {
                 pushData = new JSONObject(getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
@@ -876,7 +884,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onDestroy() {
         super.onDestroy();
         if (listener != null) {
-           // unregisterReceiver(listener);
+            // unregisterReceiver(listener);
         }
     }
 }

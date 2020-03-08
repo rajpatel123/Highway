@@ -144,10 +144,10 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Places.initialize(mActivity, getString(R.string.google_api_key));
+        Places.initialize(mActivity,"AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
 
         if (!Places.isInitialized()) {
-            Places.initialize(mActivity, getString(R.string.google_api_key));
+            Places.initialize(mActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
         }
 
         sourceLL.setOnClickListener(new View.OnClickListener() {

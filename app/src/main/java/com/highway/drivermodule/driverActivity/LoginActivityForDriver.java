@@ -3,6 +3,7 @@ package com.highway.drivermodule.driverActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,11 @@ import com.highway.commonretrofit.RestClient;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -57,7 +63,7 @@ public class LoginActivityForDriver extends AppCompatActivity {
         phone_number = edtDriverMobNo.getText().toString();
 
         if (phone_number.isEmpty() && edtDriverMobNo.length() == 10) {
-            edtDriverMobNo.setError(" enter a valid phone number ");
+            edtDriverMobNo.setError(" Enter a valid phone number ");
             check = false;
         } else {
             edtDriverMobNo.setError(null);
@@ -79,7 +85,7 @@ public class LoginActivityForDriver extends AppCompatActivity {
 
             if (Utils.isInternetConnected(this)) {
 
-                Utils.showProgressDialog(getApplicationContext());
+                Utils.showProgressDialog(this);
 
                 RestClient.loginUser(loginReqUpdated, new Callback<ResponseBody>() {
                     @Override
@@ -95,6 +101,20 @@ public class LoginActivityForDriver extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(LoginActivityForDriver.this, "Pls verify Otp ", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+
+                            try {
+                                String  rawJson = response.errorBody().string();
+                                if (!TextUtils.isEmpty(rawJson)){
+                                    JSONObject reObject = new JSONObject(rawJson);
+                                    Toast.makeText(LoginActivityForDriver.this,reObject.optString("message"),Toast.LENGTH_LONG).show();
+                                }
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
