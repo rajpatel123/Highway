@@ -100,6 +100,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_driver_dash_board, container, false);
+        ((DashBoardActivity) getActivity()).appBarLayout.setVisibility(View.VISIBLE);
 
         driverTabLayout = view.findViewById(R.id.drivertabMode);
         driverViewPager = view.findViewById(R.id.driverViewPager);

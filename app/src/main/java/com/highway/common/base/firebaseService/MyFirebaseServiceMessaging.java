@@ -26,6 +26,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.activity.SplashActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
@@ -67,6 +68,11 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        if (!HighwayPrefs.getBoolean(this, Constants.LOGGED_IN)) {
+            return;
+        }
+
+
 
 //        Intent intent = new Intent(INTENT_FILTER);
 //        sendBroadcast(intent);

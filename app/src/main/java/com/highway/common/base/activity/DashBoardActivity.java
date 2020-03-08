@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.highway.R;
@@ -133,7 +134,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    private Toolbar dashBoardToolbar;
+    public Toolbar dashBoardToolbar;
+    public AppBarLayout appBarLayout;
     private CircleImageView nevCircularUserImgView;
     private TextView nevUserName, nevUserMobNo;
     String name, image, mobNo;
@@ -215,6 +217,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     public void navigationInitView() {
         dashBoardToolbar = findViewById(R.id.toolbar);
+        appBarLayout = findViewById(R.id.appBarLayout);
         setSupportActionBar(dashBoardToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
