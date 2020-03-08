@@ -55,8 +55,7 @@ public class InvoiceBottomDialogFragment extends BottomSheetDialogFragment
             @Override
             public void onClick(View v) {
                 afterCmpltRidDriverStatus();
-                ((DashBoardActivity) getActivity()).showratingBottomSheet();
-                dismiss();
+
 
 
             }
@@ -76,7 +75,8 @@ public class InvoiceBottomDialogFragment extends BottomSheetDialogFragment
             public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
                 if (response.body()!=null){
                     if (response.body().getStatus()){
-
+                        ((DashBoardActivity) getActivity()).showratingBottomSheet();
+                        dismiss();
                     }
                 }
             }
