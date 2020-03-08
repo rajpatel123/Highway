@@ -452,8 +452,18 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                     ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
 
                     break;
+                    
+                    
+                    case R.id.imgCall:
+                   if (!TextUtils.isEmpty(mobileNo)){
+                       callTask();
+                   }
+                    break;
             }
         }
+
+    private void callTask() {
+    }
 
     private void updateDriverStatus() {
 

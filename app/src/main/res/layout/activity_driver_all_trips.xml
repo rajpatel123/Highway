@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".drivermodule.driverActivity.DriverAllTripsActivity">
 
-    <fragment
-        android:id="@+id/allTrips"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -25,12 +21,18 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/back_arrow_icon"
             app:title="Driver All Trip"
+            app:subtitleTextColor="@color/white"
             app:subtitle=""/>
 
 
     </com.google.android.material.appbar.AppBarLayout>
+    <fragment
+        android:id="@+id/allTrips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver"/>
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
