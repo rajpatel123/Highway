@@ -2,7 +2,6 @@ package com.highway.drivermodule.driverFragment;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,13 +29,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -48,7 +44,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.activity.DashBoardActivity;
@@ -68,9 +63,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import butterknife.BindView;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -87,7 +80,7 @@ import static com.highway.utils.Constants.TRIP_NEW;
 import static com.highway.utils.Constants.TRIP_STARTED;
 
 
-public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener , OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
 
@@ -102,17 +95,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     RelativeLayout mylocation;
     private DashBoardActivity activity;
     public String TAG = getClass().getSimpleName();
-    public Button btnAccept, btnReject, btnCancelTrip, btnCancel, btnTapToDrop, btnArrived;
+    public Button btnAccept, btnReject, btnCancelTrip, btnTapToDrop, btnArrived;
 
     public TextView lblCount;
     public CircleImageView imgUser;
-    public TextView lblUserName,lblLocationType,locationAddressTV;
+    public TextView lblUserName, lblLocationType, locationAddressTV;
     public RatingBar ratingUser;
     public TextView pickupAddress;
     public TextView dropAddress;
     public TextView lblLocationDistance;
     public LinearLayout pickupAddressLayout;
-    public LinearLayout dropAddressLayout;
+    public LinearLayout dropAddressLayout, lnrLocationHeader;
     public ImageView navigateToMap;
     private SupportMapFragment mapFragment;
 
@@ -137,32 +130,27 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public String userId;
 
 
-    @BindView(R.id.user_name)
     TextView userName;
-    @BindView(R.id.user_rating)
     RatingBar userRating;
-    @BindView(R.id.imgCall)
     ImageView imgCall;
-//    @BindView(R.id.btnCancel)
-//    Button btnCancel;
-//   
-    @BindView(R.id.status_arrived_img)
+    Button btnCancel;
+
     CircleImageView statusArrivedImg;
-    @BindView(R.id.status_picked_up_img)
     CircleImageView statusPickedUpImg;
-    @BindView(R.id.status_finished_img)
     CircleImageView statusFinishedImg;
-    @BindView(R.id.user_img)
-    CircleImageView userImg;
-    @BindView(R.id.imgMsg)
+    CircleImageView userImg, user_img;
     ImageView imgMsg;
+
+
+    Button btnpickedUp, btnCancelafterArrived;
+
+
     Unbinder unbinder;
     AlertDialog otpDialog;
     AlertDialog KmDialog;
     String STATUS = "";
     Context thisContext;
-    private View v;
-    private Object mContext;
+
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
 
@@ -194,7 +182,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         if (getArguments() != null) {
             try {
                 //pushData = ((DashBoardActivity) getActivity()).pushData;
-               // data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
+                // data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
 
                 data.setDestination("Delhi, Testing location");
                 data.setSource("Delhi, Testing location");
@@ -231,15 +219,30 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
 
+        ((DashBoardActivity) getActivity()).appBarLayout.setVisibility(View.GONE);
+
+        userName = view.findViewById(R.id.lblUserName);
+        imgCall = view.findViewById(R.id.imgCall);
         btnCancel = view.findViewById(R.id.btnCancel);
+
+        statusArrivedImg = view.findViewById(R.id.status_arrived_img);
+        statusPickedUpImg = view.findViewById(R.id.status_picked_up_img);
+        statusFinishedImg = view.findViewById(R.id.status_finished_img);
+        user_img = view.findViewById(R.id.user_img);
+        userImg = view.findViewById(R.id.imgUser);
+        imgMsg = view.findViewById(R.id.imgMsg);
+
         btnTapToDrop = view.findViewById(R.id.tapToDrop);
         btnArrived = view.findViewById(R.id.btnArrived);
+        btnCancel = view.findViewById(R.id.btnCancel);
+        btnCancelafterArrived = view.findViewById(R.id.btnCancelafterArrived);
+        btnpickedUp = view.findViewById(R.id.btnpickedUp);
 
-        goingtoPickupLocationView=view.findViewById(R.id.goingtoPickupLocation);
-        incomingCallView=view.findViewById(R.id.incomingCall);
+
+        goingtoPickupLocationView = view.findViewById(R.id.goingtoPickupLocation);
+        incomingCallView = view.findViewById(R.id.incomingCall);
         btnReject = view.findViewById(R.id.btnReject);
         btnAccept = view.findViewById(R.id.btnAccept);
-        btnCancelTrip = view.findViewById(R.id.btnCancel);
         lblCount = view.findViewById(R.id.lblCount);
         imgUser = view.findViewById(R.id.imgUser);
         lblUserName = view.findViewById(R.id.lblUserName);
@@ -249,14 +252,15 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         lblLocationDistance = view.findViewById(R.id.lblLocationDistance);
         pickupAddressLayout = view.findViewById(R.id.pickup_address_layout);
         dropAddressLayout = view.findViewById(R.id.drop_address_layout);
+        lnrLocationHeader = view.findViewById(R.id.lnrLocationHeader);
         context = getActivity();
         mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
-        init(TRIP_NEW);
+
 
         btnAccept.setOnClickListener(this);
         btnReject.setOnClickListener(this);
-        btnCancelTrip.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+        btnCancelafterArrived.setOnClickListener(this);
         btnTapToDrop.setOnClickListener(this);
         btnArrived.setOnClickListener(this);
 
@@ -268,11 +272,16 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         onlineFramelayout = view.findViewById(R.id.online);
         mylocation = view.findViewById(R.id.mylocation);
 
+        mylocation.setOnClickListener(this);
+        navigateToMap.setOnClickListener(this);
+
 
         mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        btnpickedUp.setOnClickListener(this);
+        init(TRIP_NEW);
         return view;
     }
 
@@ -308,14 +317,41 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             case TRIP_STARTED:
                 break;
             case ARRIVED:
+                btnArrived.setVisibility(View.GONE);
+                btnpickedUp.setVisibility(View.VISIBLE);
+                statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
+                        android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case PICKEDUP:
+                btnArrived.setVisibility(View.GONE);
+                btnpickedUp.setVisibility(View.GONE);
+                btnCancel.setVisibility(View.GONE);
+                btnTapToDrop.setVisibility(View.VISIBLE);
+                locationAddressTV.setText("Drop Location");
+
+                statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
+                        android.graphics.PorterDuff.Mode.MULTIPLY);
+
+                statusPickedUpImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
+                        android.graphics.PorterDuff.Mode.MULTIPLY);
+
+                btnCancelafterArrived.setVisibility(View.GONE);
+
                 break;
             case DROPPED:
+                ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
+                ((DashBoardActivity) getActivity()).showBottomSheet();
+
+
                 break;
             case COMPLETED:
+                ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
+                ((DashBoardActivity) getActivity()).showBottomSheet();
+
                 break;
             case RATING:
+                ((DashBoardActivity) getActivity()).showratingBottomSheet();
+
                 break;
             case INVOICE:
                 break;
@@ -352,10 +388,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.navigation_img:
-                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?saddr=28.535517,77.391029&daddr=28.613939,77.209023"));
+                startActivity(intent);
                 break;
 
             case R.id.btnReject:
@@ -383,17 +418,28 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.tapToDrop:
-
-
+                init(DROPPED);
                 break;
 
             case R.id.btnArrived:
-
-
+                init(ARRIVED);
                 break;
 
             case R.id.btnCancel:
 
+                stopMediaPlayer();
+                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
+
+                break;
+
+            case R.id.btnpickedUp:
+
+                init(PICKEDUP);
+                break;
+
+            case R.id.btnCancelafterArrived:
+                stopMediaPlayer();
+                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
 
                 break;
         }
@@ -413,6 +459,12 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             @Override
             public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
                 Utils.dismissProgressDialog();
+
+                incomingCallView.setVisibility(View.GONE);
+                goingtoPickupLocationView.setVisibility(View.VISIBLE);
+                lnrLocationHeader.setVisibility(View.VISIBLE);
+                locationAddressTV.setText("Pick UP Location");
+
                 if (response.code() == 200 && response.body() != null) {
                     BookingAcceptRejectResponse resp = response.body();
                     BaseUtil.jsonFromModel(resp);
@@ -583,7 +635,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     }
 
     private void updateMyLocation() {
-        if (mLastLocation==null){
+        if (mLastLocation == null) {
             return;
         }
         LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
@@ -598,9 +650,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
     }
-
-
-
 
 
 }

@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.highway.R;
@@ -45,9 +46,11 @@ import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
+import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
 import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
+import com.highway.drivermodule.driverFragment.RatingBottomDialogFragment;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
@@ -131,7 +134,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    private Toolbar dashBoardToolbar;
+    public Toolbar dashBoardToolbar;
+    public AppBarLayout appBarLayout;
     private CircleImageView nevCircularUserImgView;
     private TextView nevUserName, nevUserMobNo;
     String name, image, mobNo;
@@ -213,6 +217,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     public void navigationInitView() {
         dashBoardToolbar = findViewById(R.id.toolbar);
+        appBarLayout = findViewById(R.id.appBarLayout);
         setSupportActionBar(dashBoardToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -907,4 +912,23 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             // unregisterReceiver(listener);
         }
     }
+
+    public void showBottomSheet() {
+        InvoiceBottomDialogFragment addPhotoBottomDialogFragment =
+                InvoiceBottomDialogFragment.newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragment.TAG);
+    }
+
+
+    public void showratingBottomSheet() {
+        RatingBottomDialogFragment addPhotoBottomDialogFragment =
+                RatingBottomDialogFragment.newInstance().newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragment.TAG);
+    }
+
+
+
+
 }
