@@ -76,7 +76,6 @@ public class UpComingFragmentForVehicleOwner extends Fragment {
             vehicleUpcomingRecycler.setAdapter(upcomingTripAdapterForVehicleOwner);
 
         }else{
-            Toast.makeText(dashBoardActivity, "Some thing is wrong in Upcoming trip Vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -181,9 +181,8 @@ public class DriverOnlineFragment extends Fragment implements View.OnClickListen
 //            // Oops, looks like the map style resource couldn't be found!
 //        }
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
-        //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
             if (ContextCompat.checkSelfPermission(activity,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {

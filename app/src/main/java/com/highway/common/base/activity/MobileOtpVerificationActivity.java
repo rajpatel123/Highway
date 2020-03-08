@@ -127,6 +127,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                         if (response.body() != null) {
                             if (TextUtils.isEmpty(response.body().getUser().getName())) {
                                 Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
+
                                 userId = response.body().getUser().getUserId();
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ID, userId);
 
