@@ -48,7 +48,7 @@
                     android:id="@+id/lblLocationType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Drop Location"
+                    android:text=""
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/_12ssp" />
 
@@ -179,15 +179,6 @@
                         />
 
 
-                    <TextView
-                        android:id="@+id/lblCarType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="Car Type: SEDAN"
-                        android:textSize="@dimen/_11ssp" />
 
                 </LinearLayout>
 
@@ -318,8 +309,7 @@
 
     </LinearLayout>
 
-    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:id="@+id/goingtoPickupLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -417,7 +407,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/user_name"
+                            android:id="@+id/customer_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -467,6 +457,7 @@
                             android:layout_height="@dimen/_25sdp"
                             android:layout_marginTop="@dimen/_7sdp"
                             android:tint="@color/colorTheme"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_message" />
 
                     </LinearLayout>
@@ -540,7 +531,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:ellipsize="end"
                         android:singleLine="true"
-                        android:text="@string/pick_up"
+                        android:text="@string/start_trip"
                         android:textColor="#FFF"
                         android:visibility="gone" />
                 </LinearLayout>
