@@ -31,6 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -41,6 +42,7 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHigh
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.UpcomingTrip;
+import com.highway.common.base.firebaseService.MyFirebaseServiceMessaging;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
@@ -77,7 +79,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import static com.highway.utils.Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY;
+
+public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyFirebaseServiceMessaging.OnMessageRecievedFromPush {
 
     private AppBarConfiguration mAppBarConfiguration;
     // for Driver
@@ -208,6 +212,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         });
 
 
+        MyFirebaseServiceMessaging myFirebaseServiceMessaging = new MyFirebaseServiceMessaging();
+        myFirebaseServiceMessaging.setPushListener(this);
         getPushData();
         navigationInitView();
         updateNavViewHeader();
@@ -872,15 +878,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         dialog.show();
     }
 
-    private BroadcastReceiver listener = new BroadcastReceiver() {
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            //  String data = intent.getStringExtra("data");
-            // Toast.makeText(DashBoardActivity.this, "Call comes", Toast.LENGTH_LONG).show();
 
-            Fragment fragment3 = IncomingRequestFragmentForDriver.newInstance();
-            Bundle bundle = new Bundle();
-            fragment3.setArguments(bundle);
+            Intent datarcvd = new Intent("MyData");
+            Log.d("Data",intent.getStringExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY));
 
         }
     };
@@ -898,9 +901,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void getPushData() {
-        if (getIntent().getExtras() != null && getIntent().hasExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
+        if (getIntent().getExtras() != null && getIntent().hasExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
             try {
-                pushData = new JSONObject(getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+                pushData = new JSONObject(getIntent().getStringExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -911,10 +914,25 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (listener != null) {
-            // unregisterReceiver(listener);
+        if (mMessageReceiver != null) {
+             unregisterReceiver(mMessageReceiver);
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
+                new IntentFilter("MyData")
+        );
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+    }
+
 
     public void showBottomSheet() {
         InvoiceBottomDialogFragment addPhotoBottomDialogFragment =
@@ -932,6 +950,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
+    @Override
+    public void onPushData(JSONObject jsonObject) {
+        if (!TextUtils.isEmpty(userRole)){
+            incomingFragment = IncomingRequestFragmentForDriver.newInstance();
+            Bundle bundle = new Bundle();
+            incomingFragment.setArguments(bundle);
+            pushData = jsonObject;
+            replaceFragment(incomingFragment,"Online");
 
-
+        }
+    }
 }

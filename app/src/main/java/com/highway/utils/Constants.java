@@ -63,4 +63,5 @@ public class Constants {
     public static final String COMPLETED = "COMPLETED";
     public static final String RATING = "RATING";
     public static final String INVOICE = "INVOICE";
+    public static final String CANCELED = "CANCELED";
 }
