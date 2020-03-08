@@ -239,7 +239,6 @@
     <!--    <string name="google_api_key">AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U</string>-->
 
 
-
     <string name="FACEBOOK_APP_ID" translatable="false">2108224882621147</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN" translatable="false">906313ffc75e8741427bf9b70d99df0c</string>
     <string name="google_signin_server_client_id" translatable="false">947400722633-4ur8bmnlv2urm2knoos0qh98da2e435e.apps.googleusercontent.com</string>

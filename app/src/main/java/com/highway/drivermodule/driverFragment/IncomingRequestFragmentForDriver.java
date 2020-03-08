@@ -179,338 +179,332 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (pushData == null) {
             try {
-                //pushData = ((DashBoardActivity) getActivity()).pushData;
-                // data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
-
-                data.setDestination("Delhi, Testing location");
-                data.setSource("Delhi, Testing location");
-                data.setMobile("4638746864");
-                data.setTripId("#HIG3345");
-                data.setTripId("NEW_TRIP");
+                pushData = ((DashBoardActivity) getActivity()).pushData;
+                data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
             Log.e(TAG, BaseUtil.jsonFromModel(pushData));
+
+
+            IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+            intentFilter.addAction(Intent.ACTION_TIME_TICK);
+            getActivity().registerReceiver(mySenderBroadCast, intentFilter);
+
         }
 
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        getActivity().registerReceiver(mySenderBroadCast, intentFilter);
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
+        @Override
+        public void onStart () {
+            super.onStart();
 //        IntentFilter intentFilter = new IntentFilter("com.highway.broadCastReceiver.ACTION_SEND");
 //        getActivity().registerReceiver(mInnerReceiver,intentFilter);
-    }
+        }
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //  getActivity().unregisterReceiver(mySenderBroadCast);
-    }
+        @Override
+        public void onDestroy () {
+            super.onDestroy();
+            //  getActivity().unregisterReceiver(mySenderBroadCast);
+        }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
+        @Override
+        public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle
+        savedInstanceState){
+            View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
 
-        ((DashBoardActivity) getActivity()).appBarLayout.setVisibility(View.GONE);
+            ((DashBoardActivity) getActivity()).appBarLayout.setVisibility(View.GONE);
 
-        userName = view.findViewById(R.id.lblUserName);
-        imgCall = view.findViewById(R.id.imgCall);
-        btnCancel = view.findViewById(R.id.btnCancel);
+            userName = view.findViewById(R.id.lblUserName);
+            imgCall = view.findViewById(R.id.imgCall);
+            btnCancel = view.findViewById(R.id.btnCancel);
 
-        statusArrivedImg = view.findViewById(R.id.status_arrived_img);
-        statusPickedUpImg = view.findViewById(R.id.status_picked_up_img);
-        statusFinishedImg = view.findViewById(R.id.status_finished_img);
-        user_img = view.findViewById(R.id.user_img);
-        userImg = view.findViewById(R.id.imgUser);
-        imgMsg = view.findViewById(R.id.imgMsg);
+            statusArrivedImg = view.findViewById(R.id.status_arrived_img);
+            statusPickedUpImg = view.findViewById(R.id.status_picked_up_img);
+            statusFinishedImg = view.findViewById(R.id.status_finished_img);
+            user_img = view.findViewById(R.id.user_img);
+            userImg = view.findViewById(R.id.imgUser);
+            imgMsg = view.findViewById(R.id.imgMsg);
 
-        btnTapToDrop = view.findViewById(R.id.tapToDrop);
-        btnArrived = view.findViewById(R.id.btnArrived);
-        btnCancel = view.findViewById(R.id.btnCancel);
-        btnCancelafterArrived = view.findViewById(R.id.btnCancelafterArrived);
-        btnpickedUp = view.findViewById(R.id.btnpickedUp);
-
-
-        goingtoPickupLocationView = view.findViewById(R.id.goingtoPickupLocation);
-        incomingCallView = view.findViewById(R.id.incomingCall);
-        btnReject = view.findViewById(R.id.btnReject);
-        btnAccept = view.findViewById(R.id.btnAccept);
-        lblCount = view.findViewById(R.id.lblCount);
-        imgUser = view.findViewById(R.id.imgUser);
-        lblUserName = view.findViewById(R.id.lblUserName);
-        ratingUser = view.findViewById(R.id.ratingUser);
-        pickupAddress = view.findViewById(R.id.pickup_address);
-        dropAddress = view.findViewById(R.id.drop_address);
-        lblLocationDistance = view.findViewById(R.id.lblLocationDistance);
-        pickupAddressLayout = view.findViewById(R.id.pickup_address_layout);
-        dropAddressLayout = view.findViewById(R.id.drop_address_layout);
-        lnrLocationHeader = view.findViewById(R.id.lnrLocationHeader);
-        context = getActivity();
-        mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
+            btnTapToDrop = view.findViewById(R.id.tapToDrop);
+            btnArrived = view.findViewById(R.id.btnArrived);
+            btnCancel = view.findViewById(R.id.btnCancel);
+            btnCancelafterArrived = view.findViewById(R.id.btnCancelafterArrived);
+            btnpickedUp = view.findViewById(R.id.btnpickedUp);
 
 
-        btnAccept.setOnClickListener(this);
-        btnReject.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
-        btnCancelafterArrived.setOnClickListener(this);
-        btnTapToDrop.setOnClickListener(this);
-        btnArrived.setOnClickListener(this);
+            goingtoPickupLocationView = view.findViewById(R.id.goingtoPickupLocation);
+            incomingCallView = view.findViewById(R.id.incomingCall);
+            btnReject = view.findViewById(R.id.btnReject);
+            btnAccept = view.findViewById(R.id.btnAccept);
+            lblCount = view.findViewById(R.id.lblCount);
+            imgUser = view.findViewById(R.id.imgUser);
+            lblUserName = view.findViewById(R.id.lblUserName);
+            ratingUser = view.findViewById(R.id.ratingUser);
+            pickupAddress = view.findViewById(R.id.pickup_address);
+            dropAddress = view.findViewById(R.id.drop_address);
+            lblLocationDistance = view.findViewById(R.id.lblLocationDistance);
+            pickupAddressLayout = view.findViewById(R.id.pickup_address_layout);
+            dropAddressLayout = view.findViewById(R.id.drop_address_layout);
+            lnrLocationHeader = view.findViewById(R.id.lnrLocationHeader);
+            context = getActivity();
+            mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
 
 
-        locationAddressTV = view.findViewById(R.id.lblLocationName);
-        lblLocationType = view.findViewById(R.id.lblLocationType);
-        navigateToMap = view.findViewById(R.id.navigation_img);
-        navigateToMap.setVisibility(View.VISIBLE);
-        onlineFramelayout = view.findViewById(R.id.online);
-        mylocation = view.findViewById(R.id.mylocation);
-
-        mylocation.setOnClickListener(this);
-        navigateToMap.setOnClickListener(this);
+            btnAccept.setOnClickListener(this);
+            btnReject.setOnClickListener(this);
+            btnCancel.setOnClickListener(this);
+            btnCancelafterArrived.setOnClickListener(this);
+            btnTapToDrop.setOnClickListener(this);
+            btnArrived.setOnClickListener(this);
 
 
-        mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+            locationAddressTV = view.findViewById(R.id.lblLocationName);
+            lblLocationType = view.findViewById(R.id.lblLocationType);
+            navigateToMap = view.findViewById(R.id.navigation_img);
+            navigateToMap.setVisibility(View.VISIBLE);
+            onlineFramelayout = view.findViewById(R.id.online);
+            mylocation = view.findViewById(R.id.mylocation);
 
-        btnpickedUp.setOnClickListener(this);
-        init(TRIP_NEW);
-        return view;
-    }
-
-
-    void init(String status) {
-
-        switch (status) {
-            case TRIP_NEW:
-                if (data != null) {
-                    if (!mPlayer.isPlaying())
-                        mPlayer.start();
-
-                    countDownTimer = new CountDownTimer(time_to_left * 1000, 1000) {
-                        public void onTick(long millisUntilFinished) {
-                            lblCount.setText(String.valueOf(millisUntilFinished / 1000));
-                            setTvZoomInOutAnimation(lblCount);
-                        }
-
-                        public void onFinish() {
-                            stopMediaPlayer();
-                            ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
-                        }
-                    };
-
-                    incomingCallView.setVisibility(View.VISIBLE);
-                    countDownTimer.start();
-                    userId = HighwayPrefs.getString(getContext(), Constants.ID);
-                    pickupAddress.setText(data.getSource());
-                    dropAddress.setText(data.getDestination());
-                }
-
-                break;
-            case TRIP_STARTED:
-                break;
-            case ARRIVED:
-                btnArrived.setVisibility(View.GONE);
-                btnpickedUp.setVisibility(View.VISIBLE);
-                statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
-                        android.graphics.PorterDuff.Mode.MULTIPLY);
-                break;
-            case PICKEDUP:
-                btnArrived.setVisibility(View.GONE);
-                btnpickedUp.setVisibility(View.GONE);
-                btnCancel.setVisibility(View.GONE);
-                btnTapToDrop.setVisibility(View.VISIBLE);
-                locationAddressTV.setText("Drop Location");
-
-                statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
-                        android.graphics.PorterDuff.Mode.MULTIPLY);
-
-                statusPickedUpImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
-                        android.graphics.PorterDuff.Mode.MULTIPLY);
-
-                btnCancelafterArrived.setVisibility(View.GONE);
-
-                break;
-            case DROPPED:
-                ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheet();
+            mylocation.setOnClickListener(this);
+            navigateToMap.setOnClickListener(this);
 
 
-                break;
-            case COMPLETED:
-                ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheet();
+            mapFragment = (SupportMapFragment) getChildFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
 
-                break;
-            case RATING:
-                ((DashBoardActivity) getActivity()).showratingBottomSheet();
+            btnpickedUp.setOnClickListener(this);
+            init(data.getType());
+            return view;
+        }
 
-                break;
-            case INVOICE:
-                break;
+
+        void init (String status){
+
+            switch (status) {
+                case TRIP_NEW:
+                    if (data != null) {
+                        if (!mPlayer.isPlaying())
+                            mPlayer.start();
+
+                        countDownTimer = new CountDownTimer(time_to_left * 1000, 1000) {
+                            public void onTick(long millisUntilFinished) {
+                                lblCount.setText(String.valueOf(millisUntilFinished / 1000));
+                                setTvZoomInOutAnimation(lblCount);
+                            }
+
+                            public void onFinish() {
+                                stopMediaPlayer();
+                                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
+                            }
+                        };
+
+                        incomingCallView.setVisibility(View.VISIBLE);
+                        pickupAddress.setText(""+data.getSource());
+                        dropAddress.setText(""+data.getSource());
+
+                        countDownTimer.start();
+                        userId = HighwayPrefs.getString(getContext(), Constants.ID);
+                        pickupAddress.setText(data.getSource());
+                        dropAddress.setText(data.getDestination());
+                    }
+
+                    break;
+                case TRIP_STARTED:
+                    break;
+                case ARRIVED:
+                    btnArrived.setVisibility(View.GONE);
+                    btnpickedUp.setVisibility(View.VISIBLE);
+                    statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
+                            android.graphics.PorterDuff.Mode.MULTIPLY);
+                    break;
+                case PICKEDUP:
+                    btnArrived.setVisibility(View.GONE);
+                    btnpickedUp.setVisibility(View.GONE);
+                    btnCancel.setVisibility(View.GONE);
+                    btnTapToDrop.setVisibility(View.VISIBLE);
+                    locationAddressTV.setText("Drop Location");
+
+                    statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
+                            android.graphics.PorterDuff.Mode.MULTIPLY);
+
+                    statusPickedUpImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
+                            android.graphics.PorterDuff.Mode.MULTIPLY);
+
+                    btnCancelafterArrived.setVisibility(View.GONE);
+
+                    break;
+                case DROPPED:
+                    ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
+                    ((DashBoardActivity) getActivity()).showBottomSheet();
+
+
+                    break;
+                case COMPLETED:
+                    ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
+                    ((DashBoardActivity) getActivity()).showBottomSheet();
+
+                    break;
+                case RATING:
+                    ((DashBoardActivity) getActivity()).showratingBottomSheet();
+
+                    break;
+                case INVOICE:
+                    break;
+
+            }
+
 
         }
 
 
-    }
+        public void setTvZoomInOutAnimation ( final TextView textView){
+            final float startSize = 20;
+            final float endSize = 13;
+            final int animationDuration = 900; // Animation duration in ms
 
+            ValueAnimator animator = ValueAnimator.ofFloat(startSize, endSize);
+            animator.setDuration(animationDuration);
 
-    public void setTvZoomInOutAnimation(final TextView textView) {
-        final float startSize = 20;
-        final float endSize = 13;
-        final int animationDuration = 900; // Animation duration in ms
+            animator.addUpdateListener(valueAnimator -> {
+                float animatedValue = (Float) valueAnimator.getAnimatedValue();
+                textView.setTextSize(animatedValue);
+            });
 
-        ValueAnimator animator = ValueAnimator.ofFloat(startSize, endSize);
-        animator.setDuration(animationDuration);
-
-        animator.addUpdateListener(valueAnimator -> {
-            float animatedValue = (Float) valueAnimator.getAnimatedValue();
-            textView.setTextSize(animatedValue);
-        });
-
-        animator.setRepeatCount(2);
-        animator.start();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.mylocation:          // for location
-                updateMyLocation();
-                break;
-
-            case R.id.navigation_img:
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?saddr=28.535517,77.391029&daddr=28.613939,77.209023"));
-                startActivity(intent);
-                break;
-
-            case R.id.btnReject:
-                if (Utils.isInternetConnected(context)) {
-                    Utils.showProgressDialog(context);
-                    try {
-
-                        acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
-
-            case R.id.btnAccept:
-                if (Utils.isInternetConnected(context)) {
-                    Utils.showProgressDialog(context);
-                    try {
-
-                        acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED), true);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
-
-            case R.id.tapToDrop:
-                init(DROPPED);
-                break;
-
-            case R.id.btnArrived:
-                init(ARRIVED);
-                break;
-
-            case R.id.btnCancel:
-
-                stopMediaPlayer();
-                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
-
-                break;
-
-            case R.id.btnpickedUp:
-
-                init(PICKEDUP);
-                break;
-
-            case R.id.btnCancelafterArrived:
-                stopMediaPlayer();
-                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
-
-                break;
+            animator.setRepeatCount(2);
+            animator.start();
         }
-    }
 
-    public BookingAcceptRejectData getAcceptRejectBookingTripParams(String acceptReject) throws JSONException {
-        BookingAcceptRejectData acceptRejectData = new BookingAcceptRejectData();
-//        acceptRejectData.setTripId(pushData.getString(Constants.TRIP_ID));
-        acceptRejectData.setTripId(data.getTripId());
-        acceptRejectData.setUserId(userId);
-        acceptRejectData.setAcceptReject(acceptReject);
-        return acceptRejectData;
-    }
+        @Override
+        public void onClick (View v){
+            switch (v.getId()) {
 
-    public void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, boolean isAccepted) {
-        RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
-            @Override
-            public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
-                Utils.dismissProgressDialog();
+                case R.id.mylocation:          // for location
+                    updateMyLocation();
+                    break;
 
-                incomingCallView.setVisibility(View.GONE);
-                goingtoPickupLocationView.setVisibility(View.VISIBLE);
-                lnrLocationHeader.setVisibility(View.VISIBLE);
-                locationAddressTV.setText("Pick UP Location");
+                case R.id.navigation_img:
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse("http://maps.google.com/maps?saddr=28.535517,77.391029&daddr=28.613939,77.209023"));
+                    startActivity(intent);
+                    break;
 
-                if (response.code() == 200 && response.body() != null) {
-                    BookingAcceptRejectResponse resp = response.body();
-                    BaseUtil.jsonFromModel(resp);
-                    if (isAccepted) {
-//                        LatLng latLng = new LatLng(Double.parseDouble(resp.getCustomerDetails().getStartTripLat()),
-//                                Double.parseDouble(resp.getCustomerDetails().getStartTripLong()));
-//                        //pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
-//
-//                        LatLng latLngD = new LatLng(Double.parseDouble(resp.getCustomerDetails().getEndTripLat()),
-//                                Double.parseDouble(resp.getCustomerDetails().getEndTripLong()));
-//                        pickupAddress.setText("" + Utils.getAddress(getActivity(), latLng));
+                case R.id.btnReject:
+                    if (Utils.isInternetConnected(context)) {
+                        Utils.showProgressDialog(context);
+                        try {
 
-
-                        if (countDownTimer != null) {
-                            if (mPlayer != null & mPlayer.isPlaying())
-                                mPlayer.stop();
-                            countDownTimer.cancel();
+                            acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        btnAccept.setVisibility(View.GONE);
-                        btnReject.setVisibility(View.GONE);
+                    }
+                    break;
 
+                case R.id.btnAccept:
+                    if (Utils.isInternetConnected(context)) {
+                        Utils.showProgressDialog(context);
+                        try {
+
+                            acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED), true);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+
+                case R.id.tapToDrop:
+                    init(DROPPED);
+                    break;
+
+                case R.id.btnArrived:
+                    init(ARRIVED);
+                    break;
+
+                case R.id.btnCancel:
+
+                    stopMediaPlayer();
+                    ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
+
+                    break;
+
+                case R.id.btnpickedUp:
+
+                    init(PICKEDUP);
+                    break;
+
+                case R.id.btnCancelafterArrived:
+                    stopMediaPlayer();
+                    ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
+
+                    break;
+            }
+        }
+
+        public BookingAcceptRejectData getAcceptRejectBookingTripParams (String acceptReject) throws
+        JSONException {
+            BookingAcceptRejectData acceptRejectData = new BookingAcceptRejectData();
+            acceptRejectData.setTripId(pushData.getString(Constants.TRIP_ID));
+//        acceptRejectData.setTripId(data.getTripId());
+            acceptRejectData.setUserId(userId);
+            acceptRejectData.setAcceptReject(acceptReject);
+            return acceptRejectData;
+        }
+
+        public void acceptRejectBookingTrip (BookingAcceptRejectData acceptRejectData,
+        boolean isAccepted){
+            RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
+                @Override
+                public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
+                    Utils.dismissProgressDialog();
+
+
+                    if (response.code() == 200 && response.body() != null) {
+                        BookingAcceptRejectResponse resp = response.body();
+                        BaseUtil.jsonFromModel(resp);
+                        if (isAccepted) {
+
+                            incomingCallView.setVisibility(View.GONE);
+                            goingtoPickupLocationView.setVisibility(View.VISIBLE);
+                            lnrLocationHeader.setVisibility(View.VISIBLE);
+                            locationAddressTV.setText("Pick UP Location");
+
+                            if (countDownTimer != null) {
+                                if (mPlayer != null & mPlayer.isPlaying())
+                                    mPlayer.stop();
+                                countDownTimer.cancel();
+                            }
+                            btnAccept.setVisibility(View.GONE);
+                            btnReject.setVisibility(View.GONE);
+
+
+                        }
 
                     }
+                }
+
+                @Override
+                public void onFailure(Call<BookingAcceptRejectResponse> call, Throwable t) {
+                    Utils.dismissProgressDialog();
 
                 }
-            }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<BookingAcceptRejectResponse> call, Throwable t) {
-                Utils.dismissProgressDialog();
+        public void rejectTripAlert (String message){
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Booking Rejected!")
+                    .setMessage(message)
+                    .setPositiveButton("OKAY", (dialog, which) -> {
 
-            }
-        });
-    }
-
-    public void rejectTripAlert(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Booking Rejected!")
-                .setMessage(message)
-                .setPositiveButton("OKAY", (dialog, which) -> {
-
-                })/*
+                    })/*
                 .setNegativeButton("CANCEL", (dialog, which) -> {
 
                 })*/.show();
-    }
+        }
 
 //    public void getDistance(LatLng source, LatLng destination) {
 //        GoogleDirection.withServerKey(BuildConfig.google_map_key)
@@ -521,48 +515,48 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 //    }
 
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        stopMediaPlayer();
-    }
-
-    void stopMediaPlayer() {
-        if (mPlayer != null) {
-            mPlayer.stop();
-            mPlayer.release();
-            mPlayer = null;
+        @Override
+        public void onStop () {
+            super.onStop();
+            stopMediaPlayer();
         }
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        stopMediaPlayer();
-        //   getActivity().unregisterReceiver(mInnerReceiver);  /// broadcastReceiver
-    }
+        void stopMediaPlayer () {
+            if (mPlayer != null) {
+                mPlayer.stop();
+                mPlayer.release();
+                mPlayer = null;
+            }
+        }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
+        @Override
+        public void onDestroyView () {
+            super.onDestroyView();
+            stopMediaPlayer();
+            //   getActivity().unregisterReceiver(mInnerReceiver);  /// broadcastReceiver
+        }
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        // mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setMinZoomPreference(10.0f);
-        mMap.setMaxZoomPreference(18.0f);
+        @Override
+        public void onAttach (Context context){
+            super.onAttach(context);
+            dashBoardActivity = (DashBoardActivity) getActivity();
+        }
+
+
+        @Override
+        public void onDetach () {
+            super.onDetach();
+        }
+
+
+        @Override
+        public void onMapReady (GoogleMap googleMap){
+            mMap = googleMap;
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            // mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.setMinZoomPreference(10.0f);
+            mMap.setMaxZoomPreference(18.0f);
 
 //        try {
 //            mMap.setMapStyle(
@@ -571,10 +565,10 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 //            e.printStackTrace();
 //            // Oops, looks like the map style resource couldn't be found!
 //        }
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        //Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //Initialize Google Play Services
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
 //            if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)
 //                    != PackageManager.PERMISSION_GRANTED) {
@@ -582,74 +576,74 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 //                        android.Manifest.permission.ACCESS_FINE_LOCATION
 //                }, 10);
 //            }
-            if (ContextCompat.checkSelfPermission(getActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    buildGoogleApiClient();
+                    mMap.setMyLocationEnabled(true);
+                }
+            } else {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
             }
-        } else {
-            buildGoogleApiClient();
-            mMap.setMyLocationEnabled(true);
         }
-    }
 
 
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        protected synchronized void buildGoogleApiClient () {
+            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mGoogleApiClient.connect();
         }
-    }
 
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        mLastLocation = location;
-        //Place current location marker
-        updateMyLocation();
-    }
-
-    private void updateMyLocation() {
-        if (mLastLocation == null) {
-            return;
+        @Override
+        public void onConnected (@Nullable Bundle bundle){
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(1000);
+            mLocationRequest.setFastestInterval(1000);
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+            if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            }
         }
-        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-        //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        @Override
+        public void onConnectionSuspended ( int i){
 
-
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+
+        @Override
+        public void onConnectionFailed (@NonNull ConnectionResult connectionResult){
+
+        }
+
+        @Override
+        public void onLocationChanged (Location location){
+            mLastLocation = location;
+            //Place current location marker
+            updateMyLocation();
+        }
+
+        private void updateMyLocation () {
+            if (mLastLocation == null) {
+                return;
+            }
+            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+            //move map camera
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+
+
+            //stop location updates
+            if (mGoogleApiClient != null) {
+                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            }
+        }
+
+
     }
-
-
-}

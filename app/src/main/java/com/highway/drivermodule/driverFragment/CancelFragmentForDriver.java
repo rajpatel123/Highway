@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
+import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class CancelFragmentForDriver extends Fragment {
     private List<CancelTrip> cancelTrips = new ArrayList<>();
     private RecyclerView recyclerViewForDriver;
     CancelTripAdapterForDriver cancelTripAdapterForDriver;
-    DashBoardActivity dashBoardActivity;
+    DriverAllTripsActivity dashBoardActivity;
     Context context;
 
 
@@ -58,7 +59,7 @@ public class CancelFragmentForDriver extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        dashBoardActivity = (DriverAllTripsActivity) getActivity();
     }
 
     @Override

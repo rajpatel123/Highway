@@ -72,12 +72,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
             return;
         }
 
-
-
-//        Intent intent = new Intent(INTENT_FILTER);
-//        sendBroadcast(intent);
-
-
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
@@ -91,8 +85,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                 String type = remoteMessage.getData().get("type");
 
                 switch (type) {
-
-
                     case Constants.TRIP_NEW:
                         jsonObject.put(Constants.PUSH_TYPE, type);
                         jsonObject.put(Constants.CUSTOMER_NAME, remoteMessage.getData().get("customer"));
@@ -103,7 +95,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
                         Intent mainIntent = new Intent(this, DashBoardActivity.class);
                         mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
-                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(mainIntent);
                         break;
 

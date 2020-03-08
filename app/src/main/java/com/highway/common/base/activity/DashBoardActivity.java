@@ -46,6 +46,7 @@ import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
+import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
@@ -312,13 +313,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "3":                                              // Driver
 
-//                driverOnlineFragment = DriverOnlineFragment.newInstance();
-//                replaceFragment(driverOnlineFragment,"Online");
+                if (pushData!=null){
 
                 incomingFragment = IncomingRequestFragmentForDriver.newInstance();
                 Bundle bundle = new Bundle();
                 incomingFragment.setArguments(bundle);
                 replaceFragment(incomingFragment,"Online");
+
+                }else{
+                    driverOnlineFragment = DriverOnlineFragment.newInstance();
+                    replaceFragment(driverOnlineFragment,"Online");
+
+                }
 
 
                 newBooking.setVisible(false);
@@ -467,10 +473,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
 
                     case "3":
-                        if (dashBoardFragmentForDriver == null) {
-                            dashBoardFragmentForDriver = DashBoardFragmentForDriver.newInstance();
-                        }
-                        replaceFragment(dashBoardFragmentForDriver,"");
+                       startActivity(new Intent(this, DriverAllTripsActivity.class));
                         break;
 
                     case "4":
