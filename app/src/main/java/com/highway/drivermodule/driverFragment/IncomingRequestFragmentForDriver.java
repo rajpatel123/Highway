@@ -463,6 +463,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         }
 
     private void callTask() {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + data.getMobile()));
+        startActivity(intent);
     }
 
     private void updateDriverStatus() {
