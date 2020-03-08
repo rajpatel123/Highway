@@ -28,6 +28,8 @@ import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRes
 import com.highway.drivermodule.driverModelClass.DriverResponse;
 import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
 import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -184,5 +186,9 @@ public interface ApiInterface {
     // Driver start the trip from pickup location
     @POST("api/Booking/addCurrentLocationOfVehicle")
     Call<DriverResponse> DRIVER_START_TRIP_RESPONSE_CALL(@Body DriverStartTripRequest startTripRequest);
+
+    // update trip status by driver
+    @POST("api/Booking/updateTripStatusByDriver")
+    Call<UpdateTripStatusByDriverResp> UPDATE_TRIP_STATUS_BY_DRIVER_RESP_CALL(@Body UpdateTripStatusByDriverReq updateTripStatusByDriverReq);
 
 }

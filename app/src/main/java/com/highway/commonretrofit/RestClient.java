@@ -29,6 +29,8 @@ import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRes
 import com.highway.drivermodule.driverModelClass.DriverResponse;
 import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
 import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
@@ -221,6 +223,10 @@ public class RestClient {
         RetrofitClient.getClient().DRIVER_START_TRIP_RESPONSE_CALL(startTripRequest).enqueue(driverLocationResponseCallback);
     }
 
+    // updated trip status by driver
+    public static void updateTripStatusByDriver(UpdateTripStatusByDriverReq updateTripStatusByDriverReq, Callback<UpdateTripStatusByDriverResp>updateTripStatusByDriverRespCallback){
+        RetrofitClient.getClient().UPDATE_TRIP_STATUS_BY_DRIVER_RESP_CALL(updateTripStatusByDriverReq).enqueue(updateTripStatusByDriverRespCallback);
+    }
 
 
 }

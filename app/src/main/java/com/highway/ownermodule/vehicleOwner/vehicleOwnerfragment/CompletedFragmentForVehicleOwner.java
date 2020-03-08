@@ -75,7 +75,6 @@ public class CompletedFragmentForVehicleOwner extends Fragment {
             completedRecycler.setItemAnimator(new DefaultItemAnimator());
             completedRecycler.setAdapter(completedTripAdapterForVehicleOwner);
         }else{
-            Toast.makeText(dashBoardActivity, "No! trip data are found for Completed trip for vehicle owner", Toast.LENGTH_SHORT).show();
         }
     }
 }

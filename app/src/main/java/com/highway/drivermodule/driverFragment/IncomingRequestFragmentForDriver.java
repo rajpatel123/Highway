@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +54,8 @@ import com.highway.commonretrofit.RestClient;
 import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -422,6 +425,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.btnArrived:
+                updateDriverStatus();
                 init(ARRIVED);
                 break;
 
@@ -443,6 +447,34 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                 break;
         }
+    }
+
+    private void updateDriverStatus() {
+
+        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        UpdateTripStatusByDriverReq updateTripStatusByDriverReq = new UpdateTripStatusByDriverReq();
+        updateTripStatusByDriverReq.setDriverId(userId);
+        updateTripStatusByDriverReq.setTripId("");
+        updateTripStatusByDriverReq.setTRIPSTATS("");
+        updateTripStatusByDriverReq.setUpdatedAt("");
+
+        RestClient.updateTripStatusByDriver(updateTripStatusByDriverReq, new Callback<UpdateTripStatusByDriverResp>() {
+            @Override
+            public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
+                if (response.body()!=null){
+                    if (response.body().getStatus()){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateTripStatusByDriverResp> call, Throwable t) {
+                Toast.makeText(getActivity(), "failure!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     public BookingAcceptRejectData getAcceptRejectBookingTripParams(String acceptReject) throws JSONException {
