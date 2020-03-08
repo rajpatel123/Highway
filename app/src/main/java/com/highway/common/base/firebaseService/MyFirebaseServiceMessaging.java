@@ -101,10 +101,10 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
 
-//                        Intent mainIntent = new Intent(this, DashBoardActivity.class);
-//                        mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
-//                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(mainIntent);
+                        Intent mainIntent = new Intent(this, DashBoardActivity.class);
+                        mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
+                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(mainIntent);
                         Intent intent = new Intent("MyData");
                         intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
 
