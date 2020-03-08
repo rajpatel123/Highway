@@ -49,10 +49,10 @@ import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
-import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
 import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
+import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragment;
 import com.highway.drivermodule.driverFragment.RatingBottomDialogFragment;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
@@ -67,6 +67,7 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -164,7 +165,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.transparent));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.transparent));
 
         setContentView(R.layout.activity_dash_board);
 //        intent = getIntent();
@@ -295,7 +296,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "2":                                    //  mill user
                 Fragment fragment2 = NewBookingFragment.newInstance();
-                replaceFragment(fragment2,"");
+                replaceFragment(fragment2, "");
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -319,16 +320,16 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "3":                                              // Driver
 
-                if (pushData!=null){
+                if (pushData != null) {
 
-                incomingFragment = IncomingRequestFragmentForDriver.newInstance();
-                Bundle bundle = new Bundle();
-                incomingFragment.setArguments(bundle);
-                replaceFragment(incomingFragment,"Online");
+                    incomingFragment = IncomingRequestFragmentForDriver.newInstance();
+                    Bundle bundle = new Bundle();
+                    incomingFragment.setArguments(bundle);
+                    replaceFragment(incomingFragment, "Online");
 
-                }else{
+                } else {
                     driverOnlineFragment = DriverOnlineFragment.newInstance();
-                    replaceFragment(driverOnlineFragment,"Online");
+                    replaceFragment(driverOnlineFragment, "Online");
 
                 }
 
@@ -356,7 +357,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "4":                                   //  Customer
                 Fragment fragment4 = NewBookingFragment.newInstance();
-                replaceFragment(fragment4,"");
+                replaceFragment(fragment4, "");
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -381,7 +382,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "5":                              // Owner .. vehicle Owner
                 Fragment fragment5 = NewBookingFragment.newInstance();
-                replaceFragment(fragment5,"");
+                replaceFragment(fragment5, "");
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -412,7 +413,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public void onBackPressed() {
 
 
-
         //  for Nav Drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -441,8 +441,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -461,7 +459,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_new_booking:
                 dashBoardToolbar.setTitle("New Booking");
                 Fragment newBookingFragment = NewBookingFragment.newInstance();
-                replaceFragment(newBookingFragment,"");
+                replaceFragment(newBookingFragment, "");
                 break;
 
             case R.id.nav_my_booking:
@@ -475,18 +473,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (dashBoardFragmentForMillUser == null) {
                             dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForMillUser,"");
+                        replaceFragment(dashBoardFragmentForMillUser, "");
                         break;
 
                     case "3":
-                       startActivity(new Intent(this, DriverAllTripsActivity.class));
+                        startActivity(new Intent(this, DriverAllTripsActivity.class));
                         break;
 
                     case "4":
                         if (dashBoardFragmentForVehicleOwner == null) {
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForVehicleOwner,"");
+                        replaceFragment(dashBoardFragmentForVehicleOwner, "");
 //                        dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
 //                        replaceFragment(dashBordFragmentForCustomer);
                         break;
@@ -495,7 +493,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (dashBoardFragmentForVehicleOwner == null) {
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForVehicleOwner,"");
+                        replaceFragment(dashBoardFragmentForVehicleOwner, "");
 
                         break;
                 }
@@ -510,7 +508,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (bookLoadFragmentForMillUser == null) {
                             bookLoadFragmentForMillUser = BookLoadFragmentForMillUser.newInstance();
                         }
-                        replaceFragment(bookLoadFragmentForMillUser,"");
+                        replaceFragment(bookLoadFragmentForMillUser, "");
 
                         break;
 
@@ -545,7 +543,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (addVehicleFragmentForVehicleOwner == null) {
                             addVehicleFragmentForVehicleOwner = AddVehicleFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(addVehicleFragmentForVehicleOwner,"");
+                        replaceFragment(addVehicleFragmentForVehicleOwner, "");
                         break;
                 }
                 break;
@@ -567,7 +565,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (addDriverFragmentForVehicleOwner == null) {
                         }
                         addDriverFragmentForVehicleOwner = AddDriverFragmentForVehicleOwner.newInstance();
-                        replaceFragment(addDriverFragmentForVehicleOwner,"");
+                        replaceFragment(addDriverFragmentForVehicleOwner, "");
                         break;
                 }
                 break;
@@ -590,7 +588,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (assign_d2V_fragmentForVehicleOwner == null) {
                         }
                         assign_d2V_fragmentForVehicleOwner = Assign_D2V_FragmentForVehicleOwner.newInstance();
-                        replaceFragment(assign_d2V_fragmentForVehicleOwner,"");
+                        replaceFragment(assign_d2V_fragmentForVehicleOwner, "");
                         break;
                 }
                 break;
@@ -613,7 +611,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (getAllDriverFragmentForVehicleOwner == null) {
                             getAllDriverFragmentForVehicleOwner = GetAllDriverFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllDriverFragmentForVehicleOwner,"");
+                        replaceFragment(getAllDriverFragmentForVehicleOwner, "");
                         break;
                 }
                 break;
@@ -634,7 +632,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (getAllVehicleFragmentForVehicleOwner == null) {
                             getAllVehicleFragmentForVehicleOwner = GetAllVehicleFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(getAllVehicleFragmentForVehicleOwner,"");
+                        replaceFragment(getAllVehicleFragmentForVehicleOwner, "");
                         break;
                 }
                 break;
@@ -882,9 +880,17 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            Intent datarcvd = new Intent("MyData");
-            Log.d("Data",intent.getStringExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY));
-
+            try {
+                pushData = new JSONObject(intent.getStringExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (!TextUtils.isEmpty(userRole) && userRole.equalsIgnoreCase("3")) {
+                incomingFragment = IncomingRequestFragmentForDriver.newInstance();
+                Bundle bundle = new Bundle();
+                incomingFragment.setArguments(bundle);
+                replaceFragment(incomingFragment, "Online");
+            }
         }
     };
 
@@ -915,7 +921,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onDestroy() {
         super.onDestroy();
         if (mMessageReceiver != null) {
-             unregisterReceiver(mMessageReceiver);
+            unregisterReceiver(mMessageReceiver);
         }
     }
 
@@ -952,12 +958,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onPushData(JSONObject jsonObject) {
-        if (!TextUtils.isEmpty(userRole)){
+        if (!TextUtils.isEmpty(userRole)) {
             incomingFragment = IncomingRequestFragmentForDriver.newInstance();
             Bundle bundle = new Bundle();
             incomingFragment.setArguments(bundle);
             pushData = jsonObject;
-            replaceFragment(incomingFragment,"Online");
+            replaceFragment(incomingFragment, "Online");
 
         }
     }
