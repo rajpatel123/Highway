@@ -1,20 +1,24 @@
 package com.highway.common.base.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.highway.R;
@@ -61,8 +67,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -132,6 +140,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     String name, image, mobNo;
     private NavigationView navigationView;
     String userRole;
+    DrawerLayout drawer;
+    public ImageView drawerToolMenu;
     private MenuItem newBooking, myBooking, millBooking, addVehicle, wallet, notification, rateCard, help,
             about, share, send, gallery, tCondition, logout, addDriver, assignD2V, getAllVehicle, getAllDriver, bookload;
     public JSONObject pushData;
@@ -198,10 +208,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         dashBoardToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(dashBoardToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+       // drawerToolMenu = findViewById(R.id.drawerToolMenu);
         navigationView = findViewById(R.id.nav_view);
         //btnLogOut = findViewById(R.id.btnLogout);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+         drawer = findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, dashBoardToolbar,
@@ -235,7 +245,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         getAllDriver = menues.findItem(R.id.nav_add_getAllDriver);
         bookload = menues.findItem(R.id.nav_add_bookLoad);
         logout = menues.findItem(R.id.nav_logout);
+
     }
+
+
 
     public void updateNavViewHeader() {
         image = HighwayPrefs.getString(getApplicationContext(), Constants.IMAGE);
@@ -365,13 +378,14 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+
+
+
     // onBacked pressed
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onBackPressed() {
-
-
 
         //  for Nav Drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

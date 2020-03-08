@@ -124,4 +124,8 @@ public class NotificationPushData implements Parcelable {
         dest.writeString(destination);
         dest.writeString(tripId);
     }
+
+    public boolean getUser() {
+        return false;
+    }
 }

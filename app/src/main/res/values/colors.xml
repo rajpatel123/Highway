@@ -109,7 +109,7 @@
     <!-- App Theme Color-->
     <color name="colorTheme">#9374D1</color>
     <color name="grey">#37000000</color>
-
+    <color name="toolbarTransparent">#00FFFFFF</color>
     <!-- Summary-->
     <color name="ratingBarColor">#fdc928</color>
     <color name="instant_btn">#F79646</color>

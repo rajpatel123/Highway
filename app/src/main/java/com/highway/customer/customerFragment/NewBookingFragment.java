@@ -1,7 +1,6 @@
 package com.highway.customer.customerFragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -66,9 +65,6 @@ import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.helper.LatLngInterpolator;
 import com.highway.customer.helper.MarkerAnimation;
-import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
-import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
-import com.highway.utils.Constants;
 import com.highway.utils.Utils;
 
 import java.util.Arrays;

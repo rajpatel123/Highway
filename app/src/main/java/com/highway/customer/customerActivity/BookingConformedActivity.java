@@ -180,7 +180,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             if (getIntent().hasExtra("bookTripIdCode")) {
                 bookTripIdCode = getIntent().getStringExtra("bookTripIdCode");
                 bookId = getIntent().getStringExtra("bookId");
-                vehicleTypeId = getIntent().getStringExtra("vTypeId");  //vehicle type id
+                vehicleTypeId = getIntent().getStringExtra("vTypeId");
                 getSupportActionBar().setTitle("TRIP " + bookTripIdCode);
                 HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
 
@@ -219,27 +219,27 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     }
     // USING BROAD CAST RECEIVER --- registered
-    @Override
-    protected void onStart() {
-        super.onStart();
-        IntentFilter intentFilter = new IntentFilter(MyIntentService.MY_SERVICE_INTENT);
-        LocalBroadcastManager.getInstance(getApplicationContext())
-                .registerReceiver(mReceiver,intentFilter);
-    }
-// USING BROAD CAST RECEIVER --- Unregistered
-    @Override
-    protected void onStop() {
-        super.onStop();
-        LocalBroadcastManager.getInstance(getApplicationContext())
-                .unregisterReceiver(mReceiver);
-    }
-
-// USING BROAD CAST RECEIVER --- Unregistered
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mySenderBroadCast);
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        IntentFilter intentFilter = new IntentFilter(MyIntentService.MY_SERVICE_INTENT);
+//        LocalBroadcastManager.getInstance(getApplicationContext())
+//                .registerReceiver(mReceiver,intentFilter);
+//    }
+//// USING BROAD CAST RECEIVER --- Unregistered
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        LocalBroadcastManager.getInstance(getApplicationContext())
+//                .unregisterReceiver(mReceiver);
+//    }
+//
+//// USING BROAD CAST RECEIVER --- Unregistered
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        unregisterReceiver(mySenderBroadCast);
+//    }
 
     public void clicklistener() {
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
