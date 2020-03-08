@@ -3,6 +3,7 @@ package com.highway.customer.customerActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +17,15 @@ import com.highway.common.base.activity.MobileOtpVerificationActivity;
 import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.commonretrofit.RestClient;
+import com.highway.drivermodule.driverActivity.LoginActivityForDriver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -44,7 +51,6 @@ public class LoginActivityForCustomer extends AppCompatActivity {
         //customerLogInId = getIntent().getStringExtra("customerRoleId");
 
 
-
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +65,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
         phone_number = CustomerPhoneNo.getText().toString();
 
-        if (phone_number.isEmpty() || CustomerPhoneNo.length()<10) {
+        if (phone_number.isEmpty() || CustomerPhoneNo.length() < 10) {
             CustomerPhoneNo.setError(" Enter a valid phone number ");
             check = false;
         } else {
@@ -72,9 +78,9 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
     public void validationLoginUser() {
 
-        if (validateInput()){
+        if (validateInput()) {
 
-            customerLogInId = HighwayPrefs.getString(getApplicationContext(),"customerRoleId");
+            customerLogInId = HighwayPrefs.getString(getApplicationContext(), "customerRoleId");
             LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
             loginReqUpdated.setMobile(phone_number);
             loginReqUpdated.setRoleId(customerLogInId);
@@ -88,16 +94,31 @@ public class LoginActivityForCustomer extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Utils.dismissProgressDialog();
                         if (response.body() != null) {
-                            if (response.code()==200) {
-                                Intent intent = new Intent(LoginActivityForCustomer.this,MobileOtpVerificationActivity.class);
+                            if (response.code() == 200) {
+                                Intent intent = new Intent(LoginActivityForCustomer.this, MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(LoginActivityForCustomer.this, Constants.USERMOBILE, phone_number);
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, customerLogInId);
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(LoginActivityForCustomer.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
                             }
+                        } else {
+
+                            try {
+                                String rawJson = response.errorBody().string();
+                                if (!TextUtils.isEmpty(rawJson)) {
+                                    JSONObject reObject = new JSONObject(rawJson);
+                                    Toast.makeText(LoginActivityForCustomer.this, reObject.optString("message"), Toast.LENGTH_LONG).show();
+                                }
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
+
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Utils.dismissProgressDialog();
@@ -111,6 +132,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
     }
 
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {

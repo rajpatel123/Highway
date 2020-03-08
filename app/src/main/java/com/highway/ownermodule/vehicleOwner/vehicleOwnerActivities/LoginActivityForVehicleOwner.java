@@ -3,6 +3,7 @@ package com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,11 @@ import com.highway.drivermodule.driverActivity.LoginActivityForDriver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -98,6 +104,20 @@ public class LoginActivityForVehicleOwner extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(getApplicationContext(), "Pls verify Otp  !", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+
+                            try {
+                                String  rawJson = response.errorBody().string();
+                                if (!TextUtils.isEmpty(rawJson)){
+                                    JSONObject reObject = new JSONObject(rawJson);
+                                    Toast.makeText(LoginActivityForVehicleOwner.this,reObject.optString("message"),Toast.LENGTH_LONG).show();
+                                }
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
                     }

@@ -161,6 +161,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         .setCountry("IN")
                         .build(mActivity);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
+
             }
         });
 
@@ -175,6 +176,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         .setCountry("IN")
                         .build(mActivity);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
+
             }
         });
 
@@ -276,7 +278,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             HighwayApplication.getInstance().getBookingHTripRequest().setDestLat(destLatitude);
             HighwayApplication.getInstance().getBookingHTripRequest().setDestLong(destLongitude);
             BookingWithDetailsActivity.start(mActivity);
-            getActivity().finish();  //
+           // getActivity().finish();  //
         }
     }
 
