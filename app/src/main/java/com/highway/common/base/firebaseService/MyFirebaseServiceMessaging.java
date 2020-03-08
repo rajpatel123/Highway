@@ -17,6 +17,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -26,7 +27,6 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.activity.SplashActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
@@ -43,7 +43,9 @@ import static com.highway.utils.Constants.SEARCHING;
 import static com.highway.utils.Constants.TRIP_STARTED;
 
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
+    private LocalBroadcastManager broadcaster;
     int notificationId = 0;
+    OnMessageRecievedFromPush onMessageRecievedFromPush;
     private final String TAG = getClass().getSimpleName();
     public static final String INTENT_FILTER = "INTENT_FILTER" + BuildConfig.APPLICATION_ID;
 
@@ -57,6 +59,12 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
         HighwayPrefs.putString(this, "device_token", s);
         HighwayPrefs.putString(this, "device_id", deviceId);
+    }
+
+
+    @Override
+    public void onCreate() {
+        broadcaster = LocalBroadcastManager.getInstance(this);
     }
 
     /**
@@ -93,10 +101,17 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
 
-                        Intent mainIntent = new Intent(this, DashBoardActivity.class);
-                        mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
-                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(mainIntent);
+//                        Intent mainIntent = new Intent(this, DashBoardActivity.class);
+//                        mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
+//                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(mainIntent);
+                        Intent intent = new Intent("MyData");
+                        intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
+
+                        broadcaster.sendBroadcast(intent);
+                        if (onMessageRecievedFromPush != null) {
+                            onMessageRecievedFromPush.onPushData(jsonObject);
+                        }
                         break;
 
                     case SEARCHING:
@@ -247,35 +262,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         }
     }
 
-    /*private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 *//* Request code *//*, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        String channelId = getString(R.string.default_notification_channel_id);
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText(messageBody)
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-        notificationManager.notify(notificationId++ *//* ID of notification *//*, notificationBuilder.build());
-    }*/
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private void handleDataMessage(JSONObject json) {
@@ -319,6 +305,15 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         } catch (Exception e) {
             Log.e("Exception: ", e.getMessage());
         }
+    }
+
+    public void setPushListener(OnMessageRecievedFromPush onMessageRecievedFromPush) {
+        this.onMessageRecievedFromPush = onMessageRecievedFromPush;
+    }
+
+
+    public interface OnMessageRecievedFromPush {
+        void onPushData(JSONObject jsonObject);
     }
 
 }
