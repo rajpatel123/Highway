@@ -170,7 +170,7 @@
                     android:animateLayoutChanges="true"
                     android:background="@color/colorAccent"
                     android:ellipsize="end"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:singleLine="true"
                     android:text="@string/cancel"
                     android:textColor="@color/white"/>
@@ -181,6 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:animateLayoutChanges="true"
                     android:background="@color/colorPrimaryDark"
                     android:ellipsize="end"
@@ -197,12 +198,26 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:animateLayoutChanges="true"
                     android:background="@color/colorPrimaryDark"
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="@string/arrived"
+                    android:textColor="#FFF" />
+
+                <Button
+                    android:id="@+id/btnpickedUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:animateLayoutChanges="true"
+                    android:background="@color/colorPrimaryDark"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/pick_up"
                     android:textColor="#FFF" />
             </LinearLayout>
         </LinearLayout>

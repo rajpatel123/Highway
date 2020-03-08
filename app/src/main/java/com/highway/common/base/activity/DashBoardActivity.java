@@ -45,9 +45,11 @@ import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
+import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragment;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
 import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
+import com.highway.drivermodule.driverFragment.RatingBottomDialogFragment;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
@@ -907,4 +909,23 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             // unregisterReceiver(listener);
         }
     }
+
+    public void showBottomSheet() {
+        InvoiceBottomDialogFragment addPhotoBottomDialogFragment =
+                InvoiceBottomDialogFragment.newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragment.TAG);
+    }
+
+
+    public void showratingBottomSheet() {
+        RatingBottomDialogFragment addPhotoBottomDialogFragment =
+                RatingBottomDialogFragment.newInstance().newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragment.TAG);
+    }
+
+
+
+
 }
