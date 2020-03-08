@@ -31,6 +31,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".drivermodule.driverActivity.DriverAllTripsActivity"></activity>
+
         <receiver
             android:name=".PushReciever"
             android:enabled="true"
@@ -38,7 +40,6 @@
             <intent-filter>
                 <action android:name="com.newbooking.call" />
             </intent-filter>
-
         </receiver>
 
         <service
@@ -112,8 +113,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".common.base.activity.DashBoardActivity"
-            android:launchMode="singleInstance"
             android:label=""
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".common.base.activity.LoginOptionActivity"
@@ -151,13 +152,13 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".reciever.PushNavigateReceiver" android:exported="false">
+        <receiver
+            android:name=".reciever.PushNavigateReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="custom.notification.navigation" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

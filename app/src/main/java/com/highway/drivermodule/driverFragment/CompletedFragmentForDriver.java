@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
+import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverAdapter.OnCompletedTripAdapterForDriver;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.List;
 public class CompletedFragmentForDriver extends Fragment {
     private List<CompletedTrip> completedTrips = new ArrayList<>();
     RecyclerView completedRecyclerForDriver;
-    DashBoardActivity dashBoardActivity;
+    DriverAllTripsActivity dashBoardActivity;
     OnCompletedTripAdapterForDriver onCompletedTripAdapterForDriver;
     Context context;
 
@@ -58,7 +59,7 @@ public class CompletedFragmentForDriver extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        dashBoardActivity = (DriverAllTripsActivity) getActivity();
 
     }
 

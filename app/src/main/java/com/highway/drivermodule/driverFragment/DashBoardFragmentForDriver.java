@@ -31,6 +31,7 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
 import com.highway.commonretrofit.RestClient;
+import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverActivity.LocationTrack;
 import com.highway.drivermodule.driverAdapter.FragmentTabModeAdapterForDriver;
 import com.highway.utils.Constants;
@@ -68,7 +69,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     Handler handler = new Handler();
 
 
-    DashBoardActivity dashBoardActivity;
+    DriverAllTripsActivity dashBoardActivity;
     UpComingFragmentForDriver upComingFragmentForDriver;
     OnGoingFragmentForDriver onGoingFragmentForDriver;
     PendingFragmentForDriver pendingFragmentForDriver;
@@ -100,7 +101,6 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_driver_dash_board, container, false);
-        ((DashBoardActivity) getActivity()).appBarLayout.setVisibility(View.VISIBLE);
 
         driverTabLayout = view.findViewById(R.id.drivertabMode);
         driverViewPager = view.findViewById(R.id.driverViewPager);
@@ -191,7 +191,7 @@ public class DashBoardFragmentForDriver extends Fragment /*implements LocationLi
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        dashBoardActivity = (DriverAllTripsActivity) getActivity();
 
     }
 
