@@ -3,6 +3,7 @@ package com.highway.millUserModule.milluserActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,12 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.highway.R;
 import com.highway.common.base.activity.MobileOtpVerificationActivity;
-import com.highway.common.base.commonModel.login.LoginRegisterRequest;
 import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.commonretrofit.RestClient;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -40,9 +45,8 @@ public class LoginActivityForMiller extends AppCompatActivity {
         millerPhoneNo = findViewById(R.id.edtTxtMillerMobNo);
         btnMillerOtp = findViewById(R.id.btnSendMillerOtp);
 
-       // millerLoginRoleId = getIntent().getStringExtra("millerRoleId");
-        millerLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"millerRoleId");
-
+        // millerLoginRoleId = getIntent().getStringExtra("millerRoleId");
+        millerLoginRoleId = HighwayPrefs.getString(getApplicationContext(), "millerRoleId");
 
 
         btnMillerOtp.setOnClickListener(new View.OnClickListener() {
@@ -53,12 +57,12 @@ public class LoginActivityForMiller extends AppCompatActivity {
         });
     }
 
-    public boolean inputMillerVatidation(){
+    public boolean inputMillerVatidation() {
         boolean check = true;
 
         phone_number = millerPhoneNo.getText().toString();
 
-        if (phone_number.isEmpty() && millerPhoneNo.length()==10) {
+        if (phone_number.isEmpty() && millerPhoneNo.length() == 10) {
             millerPhoneNo.setError(" enter a valid phone number ");
             check = false;
         } else {
@@ -69,9 +73,9 @@ public class LoginActivityForMiller extends AppCompatActivity {
         return check;
     }
 
-    public void validationMillerLogin(){
+    public void validationMillerLogin() {
 
-        if (inputMillerVatidation()){
+        if (inputMillerVatidation()) {
 
            /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
             loginRegisterRequest.setMobile(phone_number);*/
@@ -94,15 +98,27 @@ public class LoginActivityForMiller extends AppCompatActivity {
 
                                 HighwayPrefs.putString(LoginActivityForMiller.this, Constants.USERMOBILE, phone_number);
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, millerLoginRoleId);
-
                                 startActivity(intent);
                                 finish();
-
                                 Toast.makeText(LoginActivityForMiller.this, "pls Verify Otp", Toast.LENGTH_SHORT).show();
-                               /* Toast.makeText(LoginActivityForMiller.this, "Welcome Miller", Toast.LENGTH_SHORT).show();*/
+                            }
+                        }else{
+
+                            try {
+                                String  rawJson = response.errorBody().string();
+                                if (!TextUtils.isEmpty(rawJson)){
+                                    JSONObject reObject = new JSONObject(rawJson);
+                                    Toast.makeText(LoginActivityForMiller.this,reObject.optString("message"),Toast.LENGTH_LONG).show();
+                                }
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
+
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Toast.makeText(LoginActivityForMiller.this, "Login failed", Toast.LENGTH_SHORT).show();
@@ -115,6 +131,7 @@ public class LoginActivityForMiller extends AppCompatActivity {
     }
 
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -134,7 +151,6 @@ public class LoginActivityForMiller extends AppCompatActivity {
             }
         }, 2000);
     }
-
 
 
 }

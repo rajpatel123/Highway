@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -22,6 +23,10 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.highway.BuildConfig;
 import com.highway.R;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.activity.DashBoardActivity;
@@ -41,7 +46,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,6 +99,33 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public JSONObject pushData;
     private NotificationPushData data = new NotificationPushData();
     public String userId;
+
+
+    @BindView(R.id.user_name)
+    TextView userName;
+    @BindView(R.id.user_rating)
+    RatingBar userRating;
+    @BindView(R.id.imgCall)
+    ImageView imgCall;
+//    @BindView(R.id.btnCancel)
+//    Button btnCancel;
+//   
+    @BindView(R.id.status_arrived_img)
+    CircleImageView statusArrivedImg;
+    @BindView(R.id.status_picked_up_img)
+    CircleImageView statusPickedUpImg;
+    @BindView(R.id.status_finished_img)
+    CircleImageView statusFinishedImg;
+    @BindView(R.id.user_img)
+    CircleImageView userImg;
+    @BindView(R.id.imgMsg)
+    ImageView imgMsg;
+    Unbinder unbinder;
+    AlertDialog otpDialog;
+    AlertDialog KmDialog;
+    String STATUS = "";
+    Context thisContext;
+
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
 
@@ -179,7 +214,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         context = getActivity();
         mPlayer = MediaPlayer.create(getActivity(), R.raw.alert_tone);
         init(TRIP_NEW);
-
 
         btnAccept.setOnClickListener(this);
         btnReject.setOnClickListener(this);

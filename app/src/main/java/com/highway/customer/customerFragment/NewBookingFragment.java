@@ -1,7 +1,6 @@
 package com.highway.customer.customerFragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -66,9 +65,6 @@ import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.helper.LatLngInterpolator;
 import com.highway.customer.helper.MarkerAnimation;
-import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
-import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
-import com.highway.utils.Constants;
 import com.highway.utils.Utils;
 
 import java.util.Arrays;
@@ -161,6 +157,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         .setCountry("IN")
                         .build(mActivity);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
+
             }
         });
 
@@ -175,6 +172,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         .setCountry("IN")
                         .build(mActivity);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
+
             }
         });
 
@@ -276,7 +274,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             HighwayApplication.getInstance().getBookingHTripRequest().setDestLat(destLatitude);
             HighwayApplication.getInstance().getBookingHTripRequest().setDestLong(destLongitude);
             BookingWithDetailsActivity.start(mActivity);
-            getActivity().finish();  //
+           // getActivity().finish();  //
         }
     }
 

@@ -45,8 +45,8 @@ public class LoginActivityForDriver extends AppCompatActivity {
         edtDriverMobNo = findViewById(R.id.edtTxtDriverMobNo);
         sendOtp = findViewById(R.id.btnSendDriverOtp);
 
-      //  driverLoginRoleId = getIntent().getStringExtra("driverRoleId");
-        driverLoginRoleId = HighwayPrefs.getString(getApplicationContext(),"driverRoleId");
+        //  driverLoginRoleId = getIntent().getStringExtra("driverRoleId");
+        driverLoginRoleId = HighwayPrefs.getString(getApplicationContext(), "driverRoleId");
 
         sendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +77,6 @@ public class LoginActivityForDriver extends AppCompatActivity {
 
         if (inputValidation()) {
 
-           /* LoginRegisterRequest loginRegisterRequest = new LoginRegisterRequest();
-            loginRegisterRequest.setMobile(phone_number);*/
             LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
             loginReqUpdated.setMobile(phone_number);
             loginReqUpdated.setRoleId(driverLoginRoleId);
@@ -93,22 +91,21 @@ public class LoginActivityForDriver extends AppCompatActivity {
                         Utils.dismissProgressDialog();
 
                         if (response.body() != null) {
-                            if (response.code() ==200) {
+                            if (response.code() == 200) {
                                 Intent intent = new Intent(LoginActivityForDriver.this, MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(LoginActivityForDriver.this, Constants.USERMOBILE, phone_number);
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, driverLoginRoleId);
-
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(LoginActivityForDriver.this, "Pls verify Otp ", Toast.LENGTH_SHORT).show();
                             }
-                        }else{
+                        } else {
 
                             try {
-                                String  rawJson = response.errorBody().string();
-                                if (!TextUtils.isEmpty(rawJson)){
+                                String rawJson = response.errorBody().string();
+                                if (!TextUtils.isEmpty(rawJson)) {
                                     JSONObject reObject = new JSONObject(rawJson);
-                                    Toast.makeText(LoginActivityForDriver.this,reObject.optString("message"),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivityForDriver.this, reObject.optString("message"), Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (IOException e) {
