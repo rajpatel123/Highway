@@ -82,11 +82,25 @@ public class InvoiceBottomDialogFragmentForCustomer extends Fragment {
 
 
         bookingId = view.findViewById(R.id.booking_id);
+        startDate = view.findViewById(R.id.start_date);
+        endDate = view.findViewById(R.id.end_date);
+        distance = view.findViewById(R.id.distance);
+        travelTime = view.findViewById(R.id.travel_time);
+
         fixed = view.findViewById(R.id.fixed);
+        distancePrice = view.findViewById(R.id.distance_price);
         peekHourCharges = view.findViewById(R.id.peek_hour_charges);
         nightFare = view.findViewById(R.id.night_fare);
         tax = view.findViewById(R.id.tax);
+        totalAmount = view.findViewById(R.id.total);
+        walletDetection = view.findViewById(R.id.wallet_detection);
         discount = view.findViewById(R.id.discount);
+        paymentMode = view.findViewById(R.id.payment_mode);
+        done = view.findViewById(R.id.done);
+        payNow = view.findViewById(R.id.payable);
+
+
+
         layout_normal_flow = view.findViewById(R.id.layout_normal_flow);
         layout_rental_flow = view.findViewById(R.id.layout_rental_flow);
         rentalNormalPrice = view.findViewById(R.id.rental_normal_price);
@@ -100,8 +114,10 @@ public class InvoiceBottomDialogFragmentForCustomer extends Fragment {
         outstationDriverBeta = view.findViewById(R.id.outstation_driver_beta);
         outstationRoundSingle = view.findViewById(R.id.outstation_round_single);
         outstationNoOfDays = view.findViewById(R.id.outstation_no_of_days);
-        startDate = view.findViewById(R.id.start_date);
-        endDate = view.findViewById(R.id.end_date);
+
+
+
+
 
 
         return view;

@@ -77,6 +77,8 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     TextView endDate;
     NestedScrollView nestedScrollView;
     int yy, mm, dd;
+    TextView distance;
+    private String totDistance;
 
     public static InvoiceBottomDialogFragmentForDriver newInstance() {
         return new InvoiceBottomDialogFragmentForDriver();
@@ -87,24 +89,28 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_invoice_dialog_for_driver, container, false);
 
-
         bookingId = view.findViewById(R.id.booking_id);
-        totalAmount = view.findViewById(R.id.total_amount);
-        payableAmount = view.findViewById(R.id.payable_amount);
-        paymentModeLayout = view.findViewById(R.id.payment_mode_layout);
-        btnConfirmPayment = view.findViewById(R.id.btnConfirmPayment);
-        lblPaymentType = view.findViewById(R.id.lblPaymentType);
+        startDate = view.findViewById(R.id.start_date);
+        endDate = view.findViewById(R.id.end_date);
         totalDistance = view.findViewById(R.id.total_distance);
+        travelTime = view.findViewById(R.id.travel_time);
         fixed = view.findViewById(R.id.fixed);
         distanceFare = view.findViewById(R.id.distance_fare);
         peekHourCharges = view.findViewById(R.id.peek_hour_charges);
         nightFare = view.findViewById(R.id.night_fare);
+        totalAmount = view.findViewById(R.id.total_amount);
         tax = view.findViewById(R.id.tax);
         discount = view.findViewById(R.id.discount);
-        discountLayout = view.findViewById(R.id.discount_layout);
+        payableAmount = view.findViewById(R.id.payable_amount);
         tax2 = view.findViewById(R.id.tax2);
         commission = view.findViewById(R.id.commission);
         tds = view.findViewById(R.id.tds);
+        providerEarnings = view.findViewById(R.id.provider_earnings);
+        lblPaymentType = view.findViewById(R.id.lblPaymentType);
+        confirmPaymentBtn = view.findViewById(R.id.btnConfirmPayment);
+
+        paymentModeLayout = view.findViewById(R.id.payment_mode_layout);
+        discountLayout = view.findViewById(R.id.discount_layout);
         layout_normal_flow = view.findViewById(R.id.layout_normal_flow);
         layout_rental_flow = view.findViewById(R.id.layout_rental_flow);
         rentalNormalPrice = view.findViewById(R.id.rental_normal_price);
@@ -118,20 +124,15 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         outstationDriverBeta = view.findViewById(R.id.outstation_driver_beta);
         outstationRoundSingle = view.findViewById(R.id.outstation_round_single);
         outstationNoOfDays = view.findViewById(R.id.outstation_no_of_days);
-        startDate = view.findViewById(R.id.start_date);
-        endDate = view.findViewById(R.id.end_date);
         nestedScrollView = view.findViewById(R.id.nested_scroll_view);
-
-        confirmPaymentBtn = view.findViewById(R.id.btnConfirmPayment);
-
-
 
 
         tripdate();
         //Intent intent =getActivity().getIntent();
         String bookTripIdCode = getActivity().getIntent().getStringExtra("bookTripIdCode");
         bookingId.setText(bookTripIdCode);
-        Float totDistance = Float.valueOf(getActivity().getIntent().getStringExtra("distance"));
+        totDistance = (getActivity().getIntent().getStringExtra("distance"));
+        totalDistance.setText(totDistance);
 
         return view;
     }

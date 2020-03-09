@@ -36,7 +36,7 @@
                     android:ellipsize="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/booking_id"
+                    android:text="@string/booking_id_code"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/text_small" />
 
@@ -48,10 +48,10 @@
                     android:gravity="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/dash"
+                    android:text="#HIG8805"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/text_small" />
-
+<!--                android:text="@string/dash"-->
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +78,7 @@
                     android:gravity="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/dash"
+                    android:text="11-March-2020"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/text_small" />
 
@@ -107,7 +107,7 @@
                     android:gravity="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/dash"
+                    android:text="11-March-2020"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/text_small" />
 
@@ -118,8 +118,7 @@
                 android:id="@+id/layout_normal_flow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -146,7 +145,7 @@
                         android:gravity="end"
                         android:padding="8dp"
                         android:singleLine="true"
-                        android:text="@string/dash"
+                        android:text="0.0 km"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/text_small" />
 
@@ -176,7 +175,7 @@
                         android:gravity="end"
                         android:padding="8dp"
                         android:singleLine="true"
-                        android:text="@string/dash"
+                        android:text="0.0 min(s)"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/text_small" />
 
@@ -206,7 +205,7 @@
                         android:gravity="end"
                         android:padding="8dp"
                         android:singleLine="true"
-                        android:text="@string/dash"
+                        android:text="@string/Rs_basefair"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/text_small" />
 
@@ -236,7 +235,7 @@
                         android:gravity="end"
                         android:padding="8dp"
                         android:singleLine="true"
-                        android:text="@string/dash"
+                        android:text="@string/Rs_distance_price"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/text_small" />
 
@@ -266,7 +265,7 @@
                         android:gravity="end"
                         android:padding="8dp"
                         android:singleLine="true"
-                        android:text="@string/dash"
+                        android:text="@string/Rs_distance_price"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/text_small" />
 
@@ -296,7 +295,7 @@
                         android:gravity="end"
                         android:padding="8dp"
                         android:singleLine="true"
-                        android:text="@string/dash"
+                        android:text="@string/Rs_distance_price"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/text_small" />
 
@@ -658,7 +657,7 @@
                     android:gravity="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/dash"
+                    android:text="@string/Rs_distance_price"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_small" />
 
@@ -691,7 +690,7 @@
                     android:gravity="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/dash"
+                    android:text="@string/Rs_basefair"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/text_small" />
 
@@ -723,7 +722,7 @@
                     android:gravity="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/dash"
+                    android:text="@string/Rs_distance_price"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/text_small" />
 
@@ -753,7 +752,7 @@
                     android:gravity="end"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@string/dash"
+                    android:text="@string/Rs_basefair"
                     android:paddingStart="22dp"
                     android:paddingEnd="22dp"
                     android:layout_marginEnd="2dp"

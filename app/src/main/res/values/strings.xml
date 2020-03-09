@@ -106,10 +106,12 @@
     <string name="gps_txt_one">accurate pickup</string>
     <string name="nav_profile_progress_txt">Complete your Profile( 35% )</string>
     <string name="Rs">\u20B9</string>
+    <string name="Rs_distance_price">"\u20B9" 0.0</string>
     <string name="close">Close Sheet</string>
     <string name="expand">Expand Sheet</string>
     <string name="Rs_one">"\u20B9" 15.0</string>
     <string name="Rs_one1">"\u20B9" 645.00</string>
+    <string name="Rs_basefair">"\u20B9" 65.00</string>
     <string name="Rs_one999">"\u20B9" 999.00</string>
     <string name="trip_heading">"Trip#CRN68086794</string>
     <string name="driver_on_the_way_to_pickup">"Driver on the way to pickup"</string>
