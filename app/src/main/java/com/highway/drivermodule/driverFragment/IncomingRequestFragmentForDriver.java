@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -460,6 +461,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 if (!TextUtils.isEmpty(mobileNo)) {
                     callTask();
                 }
+
                 break;
         }
     }
@@ -481,7 +483,51 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     }
 
     private void callTask() {
+        if (isPermissionGranted()) {
+            call_action();
+        }
     }
+
+    private void call_action() {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + data.getMobile()));
+        startActivity(intent);
+    }
+
+    public boolean isPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (getActivity().checkSelfPermission(android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                Log.v("TAG", "Permission is granted");
+                return true;
+            } else {
+                Log.v("TAG", "Permission is revoked");
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE,}, 1);
+                return false;
+            }
+        } else {
+            Log.v("TAG", "Permission is granted");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permission granted", Toast.LENGTH_SHORT).show();
+                    call_action();
+                } else {
+                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
 
     private void updateDriverStatus(String status, String tripId) {
 
