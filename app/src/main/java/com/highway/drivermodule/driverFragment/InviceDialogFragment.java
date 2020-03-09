@@ -132,7 +132,7 @@ public class InviceDialogFragment extends Fragment {
         //Intent intent =getActivity().getIntent();
         String bookTripIdCode = getActivity().getIntent().getStringExtra("bookTripIdCode");
         bookingId.setText(bookTripIdCode);
-        Float distance = Float.valueOf(getActivity().getIntent().getStringExtra("distance"));
+        Float totDistance = Float.valueOf(getActivity().getIntent().getStringExtra("distance"));
         return view;
 
 
