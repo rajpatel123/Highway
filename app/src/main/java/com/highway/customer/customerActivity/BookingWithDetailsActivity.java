@@ -89,7 +89,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
     public TextView bookTruckTv, phoneNoTv, nameTv;
     public String userName, userMobNo;
     Button getDirection;
-    int distance;
+    float distance;
     MarkerOptions markerOptions1;
     MarkerOptions markerOptions2;
     List<Marker> markers = new ArrayList<>();
@@ -289,7 +289,10 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         Location endPoint = new Location("destName");
         endPoint.setLatitude(destLatitude);
         endPoint.setLongitude(destLongitude);
-        distance = (int) startPoint.distanceTo(endPoint) / 1000;
+        distance =  startPoint.distanceTo(endPoint) / 1000;
+
+        Intent intent = new Intent();
+        intent.putExtra("distance", distance);
 
         Toast.makeText(this, "" + String.valueOf(distance) + " " + " km ", Toast.LENGTH_SHORT).show();
         return distance;

@@ -320,6 +320,7 @@
 
 
     <string name="booking_id">Booking ID</string>
+    <string name="booking_id_code">Booking Code ID</string>
     <string name="submit">Submit</string>
 
     <string name="cancel_ride">Cancel Ride</string>
