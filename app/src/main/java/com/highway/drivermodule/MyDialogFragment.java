@@ -23,7 +23,7 @@ public class MyDialogFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_invoice_dialog, new LinearLayout(getActivity()), false);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_invoice_dialog_for_driver, new LinearLayout(getActivity()), false);
 
         // Retrieve layout elements
         TextView title =  view.findViewById(R.id.title);

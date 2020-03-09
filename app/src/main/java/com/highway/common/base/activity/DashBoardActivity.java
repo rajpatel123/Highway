@@ -52,8 +52,8 @@ import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
 import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
-import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragment;
-import com.highway.drivermodule.driverFragment.RatingBottomDialogFragment;
+import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragmentForDriver;
+import com.highway.drivermodule.driverFragment.RatingBottomDialogFragmentForDriver;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
@@ -941,18 +941,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
 
     public void showBottomSheet() {
-        InvoiceBottomDialogFragment addPhotoBottomDialogFragment =
-                InvoiceBottomDialogFragment.newInstance();
+        InvoiceBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
+                InvoiceBottomDialogFragmentForDriver.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
-                InvoiceBottomDialogFragment.TAG);
+                InvoiceBottomDialogFragmentForDriver.TAG);
     }
 
 
     public void showratingBottomSheet() {
-        RatingBottomDialogFragment addPhotoBottomDialogFragment =
-                RatingBottomDialogFragment.newInstance().newInstance();
+        RatingBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
+                RatingBottomDialogFragmentForDriver.newInstance().newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
-                InvoiceBottomDialogFragment.TAG);
+                InvoiceBottomDialogFragmentForDriver.TAG);
     }
 
 
