@@ -15,8 +15,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="30sp"
             android:gravity="center"
-            android:text="No! driver allocated in this area"
-            android:textColor="@color/colorAccent"
+            android:text="Seems no driver available in your area, kindly try again"
+            android:textColor="@color/grey"
             android:textSize="@dimen/_16ssp" />
 
         <TextView
@@ -43,19 +43,25 @@
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:paddingTop="5sp"
-            android:text="SUBMIT"
+            android:text="Try Again"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/text_cancel"
+
+        <Button
+            android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Discard"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/_20ssp" />
+            android:layout_marginBottom="@dimen/_25sdp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Cancel"
+
+            android:textAllCaps="false"
+            android:textColor="@color/button_color_noticeboard"
+            android:textSize="18sp" />
+
 
 
     </LinearLayout>

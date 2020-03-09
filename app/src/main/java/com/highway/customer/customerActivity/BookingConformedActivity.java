@@ -52,19 +52,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.highway.R;
-import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.broadCastReceiver.MyIntentService;
+import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.HighwayApplication;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import static com.highway.utils.Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY;
 import static com.highway.utils.Constants.RECEIVERPHONENO;
 
 public class BookingConformedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
@@ -87,6 +91,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
+    public JSONObject pushData;
 
 
     private Toolbar toolbar;
@@ -112,40 +117,38 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
 
-  // USING BROADCAST RECEIVER
+    // USING BROADCAST RECEIVER
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String data= intent.getStringExtra("key");
+            String data = intent.getStringExtra("key");
             acptTripTv.setText(data);
         }
     };
 
 
     public static void start(ConformBookingActivity activity, String bookTripIdCode, String bookId, String vTypeId, String user_id, String tripRecevirId, String GoodsTypeId, String couponId,
-                             double sourceLat, double sourceLong, double destLat,double destLong, String tripFare, String sourceAddress, String destAddress) {
+                             double sourceLat, double sourceLong, double destLat, double destLong, String tripFare, String sourceAddress, String destAddress) {
         Intent intent = new Intent(activity, BookingConformedActivity.class);
         intent.putExtra("bookTripIdCode", bookTripIdCode);
         intent.putExtra("bookId", bookId);
         intent.putExtra("vTypeId", vTypeId);
-            // Asked by sir
-        intent.putExtra("User_id",user_id);
-        intent.putExtra("tripRecevirId",tripRecevirId);
-        intent.putExtra("GoodsTypeId",GoodsTypeId);
-        intent.putExtra("CouponId",couponId);
-        intent.putExtra("SourceLat",sourceLat);
-        intent.putExtra("SourceLong",sourceLong);
-        intent.putExtra("DestLat",destLat);
-        intent.putExtra("DestLong",destLong);
-        intent.putExtra("TripFare",tripFare);
-        intent.putExtra("sourceAddress",sourceAddress);
-        intent.putExtra("destAddress",destAddress);
+        // Asked by sir
+        intent.putExtra("User_id", user_id);
+        intent.putExtra("tripRecevirId", tripRecevirId);
+        intent.putExtra("GoodsTypeId", GoodsTypeId);
+        intent.putExtra("CouponId", couponId);
+        intent.putExtra("SourceLat", sourceLat);
+        intent.putExtra("SourceLong", sourceLong);
+        intent.putExtra("DestLat", destLat);
+        intent.putExtra("DestLong", destLong);
+        intent.putExtra("TripFare", tripFare);
+        intent.putExtra("sourceAddress", sourceAddress);
+        intent.putExtra("destAddress", destAddress);
 
         activity.startActivity(intent);
 
     }
-
-
 
 
     @Override
@@ -205,16 +208,16 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         }
 
         IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
-        registerReceiver(mySenderBroadCast,intentFilter);
+        registerReceiver(mySenderBroadCast, intentFilter);
 
         clicklistener();
         bookingTimer();
     }
 
-// USING BROAD CAST RECEIVER
+    // USING BROAD CAST RECEIVER
     public void broadCastMessage(View view) {
         Intent serviceIntent = new Intent(this, MyIntentService.class);
-        serviceIntent.putExtra("key","Inital Value");
+        serviceIntent.putExtra("key", "Inital Value");
         startService(serviceIntent);
 
     }
@@ -269,6 +272,36 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             }
         });
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
+                new IntentFilter("MyData")
+        );
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+    }
+
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            try {
+                pushData = new JSONObject(intent.getStringExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+                Toast.makeText(BookingConformedActivity.this, "Dta" + pushData.toString(), Toast.LENGTH_LONG).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
 
 
     private void initLocations(Intent intent) {
@@ -476,7 +509,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     public void bookingTimer() {
 
-        new CountDownTimer(60 * 10 * 1000, 1000) {
+        new CountDownTimer(60 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",
@@ -506,13 +539,16 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         final android.app.AlertDialog dialog = dialogBuilder.create();
         Button done = dialogView.findViewById(R.id.btn_done);
 
-        TextView text_cancel = dialogView.findViewById(R.id.text_cancel);
+        TextView text_cancel = dialogView.findViewById(R.id.btnCancel);
         text_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 dialog.dismiss();
             }
         });
+
+        dialogBuilder.create().show();
     }
 
     //by sir notes

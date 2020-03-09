@@ -5,23 +5,46 @@ import com.google.gson.annotations.SerializedName;
 
 public class BookingAcceptRejectData {
 
-    @SerializedName("userId")
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @SerializedName("driverId")
     @Expose
-    private String userId;
+    private String driverId;
     @SerializedName("tripId")
     @Expose
     private String tripId;
-    @SerializedName("acceptReject")
+    @SerializedName("TRIP_STATS")
     @Expose
-    private String acceptReject;
+    private String status;
 
-    public String getUserId() {
-        return userId;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    @SerializedName("updatedAt")
+    @Expose
+    private String updatedAt;
+
+
 
     public String getTripId() {
         return tripId;
@@ -31,11 +54,5 @@ public class BookingAcceptRejectData {
         this.tripId = tripId;
     }
 
-    public String getAcceptReject() {
-        return acceptReject;
-    }
 
-    public void setAcceptReject(String acceptReject) {
-        this.acceptReject = acceptReject;
-    }
 }
