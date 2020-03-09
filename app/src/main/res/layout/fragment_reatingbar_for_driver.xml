@@ -7,7 +7,7 @@
     android:elevation="@dimen/_4sdp"
     android:padding="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/_2sdp"
-    tools:context=".customer.customerFragment.ReatingbarFragment">
+    tools:context=".customer.customerFragment.ReatingbarFragmentForCustomer">
 
 
     <LinearLayout

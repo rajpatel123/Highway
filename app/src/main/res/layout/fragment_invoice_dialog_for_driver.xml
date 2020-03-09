@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".drivermodule.driverFragment.InviceDialogFragment">
-
+    android:id="@+id/nested_scroll_view"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="@dimen/_7sdp">
 
@@ -33,20 +34,21 @@
                 android:layout_weight="1"
                 android:padding="8dp"
                 android:singleLine="true"
-                android:text="@string/booking_id_code"
+                android:text="@string/booking_id"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/booking_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:hint="-#HIG6133"
+                android:hint="-#HIG3196"
+                android:text="#HIG3196"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
         <LinearLayout
@@ -62,18 +64,19 @@
                 android:singleLine="true"
                 android:text="@string/start_date"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/start_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:hint="-"
+                android:hint="11-March-2020-"
+                android:text="11-March-2020"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
         <LinearLayout
@@ -89,18 +92,19 @@
                 android:singleLine="true"
                 android:text="@string/end_date"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/end_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:hint="-"
+                android:hint="11-March-2020"
+                android:text="11-March-2020"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -110,7 +114,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+           >
+<!--            android:visibility="gone"-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,7 +131,7 @@
                     android:singleLine="true"
                     android:text="@string/total_distance_km"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/total_distance"
@@ -136,7 +142,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -153,7 +159,7 @@
                     android:singleLine="true"
                     android:text="@string/total_riding_time_minutes"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/travel_time"
@@ -164,7 +170,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -181,7 +187,7 @@
                     android:singleLine="true"
                     android:text="@string/base_fare_first_2km"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/fixed"
@@ -192,7 +198,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -209,7 +215,7 @@
                     android:singleLine="true"
                     android:text="@string/distance_fare"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/distance_fare"
@@ -220,7 +226,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -237,7 +243,7 @@
                     android:singleLine="true"
                     android:text="@string/peek_hour_charges"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/peek_hour_charges"
@@ -248,7 +254,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -265,7 +271,7 @@
                     android:singleLine="true"
                     android:text="@string/night_fare"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/night_fare"
@@ -276,7 +282,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -307,7 +313,7 @@
                     android:singleLine="true"
                     android:text="@string/total_distance_km"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/rental_total_distance_km"
@@ -318,7 +324,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
             <LinearLayout
@@ -334,7 +340,7 @@
                     android:singleLine="true"
                     android:text="@string/travel_time"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/rental_travel_time"
@@ -345,7 +351,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
             <LinearLayout
@@ -362,7 +368,7 @@
                     android:singleLine="true"
                     android:text="@string/rental_normal_price"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/rental_normal_price"
@@ -373,7 +379,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -390,7 +396,7 @@
                     android:singleLine="true"
                     android:text="@string/rental_extra_hr_km_price"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/rental_extra_hr_km_price"
@@ -401,7 +407,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -432,7 +438,7 @@
                     android:singleLine="true"
                     android:text="@string/round_single"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/outstation_round_single"
@@ -443,7 +449,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
             <LinearLayout
@@ -459,7 +465,7 @@
                     android:singleLine="true"
                     android:text="@string/distance_travelled"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/outstation_distance_travelled"
@@ -470,7 +476,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -487,7 +493,7 @@
                     android:singleLine="true"
                     android:text="@string/no_of_days"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/outstation_no_of_days"
@@ -498,7 +504,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -515,7 +521,7 @@
                     android:singleLine="true"
                     android:text="@string/distance_fare"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/outstation_distance_fare"
@@ -526,7 +532,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -543,7 +549,7 @@
                     android:singleLine="true"
                     android:text="@string/driver_beta"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
                 <TextView
                     android:id="@+id/outstation_driver_beta"
@@ -554,7 +560,7 @@
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/normal_txt" />
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
 
@@ -578,7 +584,7 @@
                 android:singleLine="true"
                 android:text="@string/total_riding_charges"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/total_amount"
@@ -586,10 +592,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:hint="-"
+                android:text="@string/Rs_basefair"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -606,7 +613,7 @@
                 android:singleLine="true"
                 android:text="@string/gst"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/tax"
@@ -614,10 +621,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:hint="-"
+                android:text="@string/Rs_one"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
         <LinearLayout
@@ -634,7 +642,7 @@
                 android:singleLine="true"
                 android:text="@string/discount"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/discount"
@@ -642,10 +650,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:hint="-"
+                android:text="@string/Rs_one"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -662,7 +671,7 @@
                 android:singleLine="true"
                 android:text="@string/customer_payable_amount"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/payable_amount"
@@ -670,13 +679,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:hint="-"
+                android:text="Rs. 95"
                 android:padding="8dp"
                 android:background="@drawable/round_label"
                 android:paddingStart="22dp"
                 android:paddingEnd="22dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -693,7 +703,7 @@
                 android:singleLine="true"
                 android:text="@string/gst_5"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/tax2"
@@ -701,10 +711,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:hint="-"
+                android:text="-0.0"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -721,7 +732,7 @@
                 android:singleLine="true"
                 android:text="@string/commission_10"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/commission"
@@ -729,10 +740,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:hint="-"
+                android:text="-0.0"
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -750,7 +762,7 @@
                 android:singleLine="true"
                 android:text="TDS (1%)"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/tds"
@@ -761,7 +773,7 @@
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -778,7 +790,7 @@
                 android:singleLine="true"
                 android:text="@string/provider_earnings"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
             <TextView
                 android:id="@+id/provider_earnings"
@@ -789,7 +801,7 @@
                 android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
         </LinearLayout>
 
@@ -816,7 +828,7 @@
                 tools:text="@string/cash"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText"
-                android:textSize="@dimen/normal_txt" />
+                android:textSize="@dimen/text_small" />
 
 
         </LinearLayout>
