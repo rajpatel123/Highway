@@ -818,7 +818,7 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="@string/pay_now"
+                android:text="pay_now"
                 android:textColor="#FFF"
                 android:visibility="gone" />
 
