@@ -352,17 +352,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
             case DROPPED:
                 ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheet();
+                ((DashBoardActivity) getActivity()).showBottomSheet(data.getTripId());
 
 
                 break;
             case COMPLETED:
                 ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheet();
+                ((DashBoardActivity) getActivity()).showBottomSheet(data.getTripId());
 
                 break;
             case RATING:
-                ((DashBoardActivity) getActivity()).showratingBottomSheet();
+                ((DashBoardActivity) getActivity()).showratingBottomSheet(data.getTripId());
 
                 break;
             case INVOICE:
@@ -561,8 +561,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         BookingAcceptRejectData acceptRejectData = new BookingAcceptRejectData();
 //        acceptRejectData.setTripId(pushData.getString(Constants.TRIP_ID));
         acceptRejectData.setTripId(data.getTripId());
-        acceptRejectData.setUserId(userId);
-        acceptRejectData.setAcceptReject(acceptReject);
+        acceptRejectData.setDriverId(userId);
+        acceptRejectData.setStatus(acceptReject);
+        acceptRejectData.setUpdatedAt(""+System.currentTimeMillis());
         return acceptRejectData;
     }
 

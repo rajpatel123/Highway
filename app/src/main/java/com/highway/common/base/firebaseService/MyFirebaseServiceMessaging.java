@@ -19,9 +19,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.highway.BuildConfig;
@@ -31,7 +28,6 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utilities;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.highway.utils.Constants.COMPLETED;
@@ -40,6 +36,7 @@ import static com.highway.utils.Constants.INVOICE;
 import static com.highway.utils.Constants.PICKEDUP;
 import static com.highway.utils.Constants.RATING;
 import static com.highway.utils.Constants.SEARCHING;
+import static com.highway.utils.Constants.TRIP_NEW;
 import static com.highway.utils.Constants.TRIP_STARTED;
 
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
@@ -100,18 +97,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.TRIP_ID, remoteMessage.getData().get("tripId"));
                         jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
-
-                        Intent mainIntent = new Intent(this, DashBoardActivity.class);
-                        mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
-                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(mainIntent);
-                        Intent intent = new Intent("MyData");
-                        intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
-
-                        broadcaster.sendBroadcast(intent);
-                        if (onMessageRecievedFromPush != null) {
-                            onMessageRecievedFromPush.onPushData(jsonObject);
-                        }
                         break;
 
                     case SEARCHING:
@@ -135,7 +120,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                 }
 
 
-                handleDataMessage(jsonObject);
+                sendNotification(jsonObject, type);
             } catch (Exception e) {
                 Log.e("Exception: ", e.getMessage());
             }
@@ -146,19 +131,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     }
     // [END receive_message]
 
-    /**
-     * Schedule a job using FirebaseJobDispatcher.
-     */
-    private void scheduleJob() {
-        // [START dispatch_job]
-        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
-        Job myJob = dispatcher.newJobBuilder()
-                //.setService(MyJobService.class)
-                .setTag("my-job-tag")
-                .build();
-        dispatcher.schedule(myJob);
-        // [END dispatch_job]
-    }
 
     /**
      * Handle time allotted to BroadcastReceivers.
@@ -175,21 +147,31 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    private void sendNotification(String messageBody) {
-
+    private void sendNotification(JSONObject jsonObject, String type) {
+        String messageBody = jsonObject.toString();
         if (!Utilities.isAppIsInBackground(getApplicationContext())) {
-            // app is in foreground, broadcast the push message
-            Utilities.printV(TAG, "foreground");
+
+            if (type.equalsIgnoreCase(TRIP_NEW) && HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID).equalsIgnoreCase("4")) {
+                return;
+            }
+            Intent intent = new Intent("MyData");
+            intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
+
+            broadcaster.sendBroadcast(intent);
+
+
         } else {
-            Utilities.printV(TAG, "background");
-            // app is in background, show the notification in notification tray
-//            if (messageBody.equalsIgnoreCase("New Incoming Ride")) {
-//
-//                Intent mainIntent = new Intent(this, DashBoardActivity.class);
-//                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, messageBody);
-//                startActivity(mainIntent);
-//            }
+
+            if (type.equalsIgnoreCase(TRIP_NEW) && HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID).equalsIgnoreCase("4")) {
+                return;
+            }
+                Utilities.printV(TAG, "background");
+                Intent mainIntent = new Intent(this, DashBoardActivity.class);
+                mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
+                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(mainIntent);
+
+
         }
 
         // NotificationPushData data = BaseUtil.objectFromString(messageBody, NotificationPushData.class);
@@ -230,7 +212,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                 .setContentTitle(getString(R.string.app_name))
                 .setContentIntent(pendingIntent)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageBody))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(type))
                 .setWhen(when)
                 .setSmallIcon(getNotificationIcon(mBuilder))
                 .setContentText(messageBody)
@@ -262,50 +244,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         }
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    private void handleDataMessage(JSONObject json) {
-        try {
-//            JSONObject data = json.getJSONObject("");
-            switch (json.getString("type")) {
-
-                case Constants.NOTIFICATION_TYPE_TRIP_NEW:
-//                    String mobile = json.getString("mobile");
-//                    String message = json.getString("message");
-//                    String destination = json.getString("destination");
-//                    String tripId = json.getString("tripId");
-//                    String source = json.getString("source");
-//                    String type = json.getString("type");
-//                    String customer = json.getString("customer");
-//                    System.out.println(mobile + message + destination + tripId + source + type + customer);
-//                    NotificationPushData data = BaseUtil.objectFromString(message, NotificationPushData.class);
-                    sendNotification(json.getString("type"));
-                    break;
-
-                case Constants.NOTIFICATION_TYPE_TRIP_CANCEL:
-                    break;
-
-                case Constants.NOTIFICATION_TYPE_TRIP_START:
-                    break;
-
-                case Constants.NOTIFICATION_TYPE_TRIP_END:
-                    break;
-
-                case Constants.NOTIFICATION_TYPE_TRIP_ACCEPTED:
-                    break;
-
-                case Constants.NOTIFICATION_TYPE_TRIP_REJECTED:
-                    break;
-
-                case Constants.NOTIFICATION_TYPE_TRIP_NORESPONCE:
-                    break;
-            }
-        } catch (JSONException e) {
-            Log.e("Json Exception: ", e.getMessage());
-        } catch (Exception e) {
-            Log.e("Exception: ", e.getMessage());
-        }
-    }
 
     public void setPushListener(OnMessageRecievedFromPush onMessageRecievedFromPush) {
         this.onMessageRecievedFromPush = onMessageRecievedFromPush;

@@ -2,6 +2,7 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,25 @@ public class RatingBottomDialogFragment extends BottomSheetDialogFragment
     implements View.OnClickListener {
   public static final String TAG = "ActionBottomDialog";
   private ItemClickListener mListener;
-  public static RatingBottomDialogFragment newInstance() {
-    return new RatingBottomDialogFragment();
+  private String tripId;
+
+  public static RatingBottomDialogFragment newInstance(String tripId) {
+    RatingBottomDialogFragment ratingBottomDialogFragment = new RatingBottomDialogFragment();
+    Bundle bundle = new Bundle();
+    bundle.putString("tripId", tripId);
+    ratingBottomDialogFragment.setArguments(bundle);
+
+
+    return ratingBottomDialogFragment;
+
   }
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
+
+    if (getArguments() != null && TextUtils.isEmpty(getArguments().getString("tripId"))) {
+      tripId = getArguments().getString("tripId");
+    }
     return inflater.inflate(R.layout.fragment_reatingbar, container, false);
   }
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

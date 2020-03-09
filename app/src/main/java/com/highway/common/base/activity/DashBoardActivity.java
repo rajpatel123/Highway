@@ -940,17 +940,17 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showBottomSheet() {
+    public void showBottomSheet(String tripId) {
         InvoiceBottomDialogFragment addPhotoBottomDialogFragment =
-                InvoiceBottomDialogFragment.newInstance();
+                InvoiceBottomDialogFragment.newInstance(tripId);
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragment.TAG);
     }
 
 
-    public void showratingBottomSheet() {
+    public void showratingBottomSheet(String tripId) {
         RatingBottomDialogFragment addPhotoBottomDialogFragment =
-                RatingBottomDialogFragment.newInstance().newInstance();
+                RatingBottomDialogFragment.newInstance(tripId).newInstance(tripId);
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragment.TAG);
     }

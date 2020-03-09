@@ -2,6 +2,7 @@ package com.highway.drivermodule.driverFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +32,15 @@ public class InvoiceBottomDialogFragment extends BottomSheetDialogFragment
     private ItemClickListener mListener;
     private Button confirmPaymentBtn;
     public String userId;
+    private String tripId;
 
-    public static InvoiceBottomDialogFragment newInstance() {
-        return new InvoiceBottomDialogFragment();
+    public static InvoiceBottomDialogFragment newInstance(String tripId) {
+        InvoiceBottomDialogFragment invoiceBottomDialogFragment = new InvoiceBottomDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("tripId", tripId);
+        invoiceBottomDialogFragment.setArguments(bundle);
+
+        return invoiceBottomDialogFragment;
     }
 
     @Nullable
@@ -42,6 +49,10 @@ public class InvoiceBottomDialogFragment extends BottomSheetDialogFragment
         View view = inflater.inflate(R.layout.fragment_invoice_dialog, container, false);
         confirmPaymentBtn = view.findViewById(R.id.btnConfirmPayment);
 
+
+        if (getArguments() != null && TextUtils.isEmpty(getArguments().getString("tripId"))) {
+            tripId = getArguments().getString("tripId");
+        }
 
         return view;
     }
@@ -57,7 +68,6 @@ public class InvoiceBottomDialogFragment extends BottomSheetDialogFragment
                 afterCmpltRidDriverStatus();
 
 
-
             }
         });
     }
@@ -65,17 +75,17 @@ public class InvoiceBottomDialogFragment extends BottomSheetDialogFragment
     private void afterCmpltRidDriverStatus() {
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
         UpdateTripStatusByDriverReq updateTripStatusByDriverReq = new UpdateTripStatusByDriverReq();
-        updateTripStatusByDriverReq.setDriverId(userId);
-        updateTripStatusByDriverReq.setTripId("");
-        updateTripStatusByDriverReq.setTRIPSTATS("");
-        updateTripStatusByDriverReq.setUpdatedAt("");
+        updateTripStatusByDriverReq.setDriverId(HighwayPrefs.getString(getContext(), Constants.ID));
+        updateTripStatusByDriverReq.setTripId(tripId);
+        updateTripStatusByDriverReq.setTRIPSTATS(Constants.INVOICE);
+        updateTripStatusByDriverReq.setUpdatedAt("" + System.currentTimeMillis());
 
         RestClient.updateTripStatusByDriver(updateTripStatusByDriverReq, new Callback<UpdateTripStatusByDriverResp>() {
             @Override
             public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
-                if (response.body()!=null){
-                    if (response.body().getStatus()){
-                        ((DashBoardActivity) getActivity()).showratingBottomSheet();
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+                        ((DashBoardActivity) getActivity()).showratingBottomSheet(tripId);
                         dismiss();
                     }
                 }
