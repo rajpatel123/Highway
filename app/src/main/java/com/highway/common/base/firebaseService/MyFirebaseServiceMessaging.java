@@ -36,6 +36,7 @@ import static com.highway.utils.Constants.INVOICE;
 import static com.highway.utils.Constants.PICKEDUP;
 import static com.highway.utils.Constants.RATING;
 import static com.highway.utils.Constants.SEARCHING;
+import static com.highway.utils.Constants.TRIP_ACCEPTED;
 import static com.highway.utils.Constants.TRIP_NEW;
 import static com.highway.utils.Constants.TRIP_STARTED;
 
@@ -101,19 +102,38 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
                     case SEARCHING:
                         break;
+
+                    case TRIP_ACCEPTED:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+                        jsonObject.put(Constants.DRIVER_NAME, remoteMessage.getData().get("'driver'"));
+                        jsonObject.put(Constants.PUSH_MOBILE, remoteMessage.getData().get("mobile"));
+                        jsonObject.put(Constants.TRIP_ID, remoteMessage.getData().get("tripId"));
+                        jsonObject.put(Constants.VEHICLE_TYPE, remoteMessage.getData().get("vehicleType"));
+                        jsonObject.put(Constants.VEHICLE_NUMBER, remoteMessage.getData().get("vehicleNumber"));
+                        jsonObject.put(Constants.VEHICLE_IMAGE, remoteMessage.getData().get("vehicleImage"));
+                        break;
                     case TRIP_STARTED:
                         break;
                     case Constants.ARRIVED:
                         break;
                     case PICKEDUP:
+
+
                         break;
                     case DROPPED:
+
+
                         break;
                     case COMPLETED:
+
+
                         break;
                     case RATING:
+
+
                         break;
                     case INVOICE:
+
                         break;
 
 
@@ -165,11 +185,11 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
             if (type.equalsIgnoreCase(TRIP_NEW) && HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID).equalsIgnoreCase("4")) {
                 return;
             }
-                Utilities.printV(TAG, "background");
-                Intent mainIntent = new Intent(this, DashBoardActivity.class);
-                mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
-                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(mainIntent);
+            Utilities.printV(TAG, "background");
+            Intent mainIntent = new Intent(this, DashBoardActivity.class);
+            mainIntent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, jsonObject.toString());
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(mainIntent);
 
 
         }

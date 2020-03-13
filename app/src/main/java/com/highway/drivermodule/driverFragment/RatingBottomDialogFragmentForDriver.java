@@ -41,6 +41,12 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
         rating = view.findViewById(R.id.rating);
         comment = view.findViewById(R.id.comment);
         submit = view.findViewById(R.id.submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         return view;
     }
 

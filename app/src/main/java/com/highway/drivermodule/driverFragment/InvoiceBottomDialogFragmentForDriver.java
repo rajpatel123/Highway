@@ -161,7 +161,10 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         confirmPaymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                afterCmpltRidDriverStatus();
+
+                ((DashBoardActivity) getActivity()).showratingBottomSheetDriver("");
+                dismiss();
+                // afterCmpltRidDriverStatus();
             }
         });
     }
@@ -177,9 +180,9 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         RestClient.updateTripStatusByDriver(updateTripStatusByDriverReq, new Callback<UpdateTripStatusByDriverResp>() {
             @Override
             public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
-                if (response.body()!=null){
-                    if (response.body().getStatus()){
-                        ((DashBoardActivity) getActivity()).showratingBottomSheet();
+                if (response.body() != null) {
+                    if (response.body().getStatus()) {
+//                        ((DashBoardActivity) getActivity()).showratingBottomSheet();
                         dismiss();
                     }
                 }

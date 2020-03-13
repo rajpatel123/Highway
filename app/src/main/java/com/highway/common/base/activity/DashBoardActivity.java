@@ -47,6 +47,7 @@ import com.highway.commonretrofit.RestClient;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
+import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
@@ -940,7 +941,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showBottomSheet() {
+    public void showBottomSheetDriver(String tripId) {
         InvoiceBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
                 InvoiceBottomDialogFragmentForDriver.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
@@ -948,9 +949,25 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showratingBottomSheet() {
+ public void showBottomSheetCustomer(String tripId) {
+        InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
+                InvoiceBottomDialogFragmentForCustomer.newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragmentForDriver.TAG);
+    }
+
+
+    public void showratingBottomSheetDriver(String tripId) {
         RatingBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
                 RatingBottomDialogFragmentForDriver.newInstance().newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragmentForDriver.TAG);
+    }
+
+
+    public void showratingBottomSheetForCustomer(String tripId) {
+        InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
+                InvoiceBottomDialogFragmentForCustomer.newInstance().newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragmentForDriver.TAG);
     }

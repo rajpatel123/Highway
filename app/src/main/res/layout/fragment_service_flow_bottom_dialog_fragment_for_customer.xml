@@ -155,7 +155,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/text_tiny" />
+                    android:textSize="@dimen/spacing_12" />
 
 
             </LinearLayout>
@@ -169,7 +169,7 @@
             android:padding="8dp"
             android:text="@string/due_to_peek_hours"
             android:textColor="@color/colorSecondaryText"
-            android:textSize="@dimen/text_tiny" />
+            android:textSize="@dimen/spacing_12" />
 
         <TextView
             android:id="@+id/lblgeo"
@@ -179,7 +179,7 @@
             android:padding="8dp"
             android:text=""
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/text_tiny"
+            android:textSize="@dimen/spacing_12"
             android:visibility="gone"/>
 
         <LinearLayout
