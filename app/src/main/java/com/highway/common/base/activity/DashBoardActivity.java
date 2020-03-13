@@ -206,6 +206,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("New Token Updated", "Failed to update Token");
 
                 }
             });
@@ -921,10 +922,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mMessageReceiver != null) {
-            unregisterReceiver(mMessageReceiver);
+        try {
+            if (mMessageReceiver != null) {
+                unregisterReceiver(mMessageReceiver);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
-    }
+            }
 
     @Override
     protected void onStart() {

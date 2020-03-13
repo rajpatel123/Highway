@@ -98,6 +98,8 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.TRIP_ID, remoteMessage.getData().get("tripId"));
                         jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
+                        sendNotification(jsonObject, type,"New Ride coming");
+
                         break;
 
                     case SEARCHING:
@@ -111,17 +113,22 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.VEHICLE_TYPE, remoteMessage.getData().get("vehicleType"));
                         jsonObject.put(Constants.VEHICLE_NUMBER, remoteMessage.getData().get("vehicleNumber"));
                         jsonObject.put(Constants.VEHICLE_IMAGE, remoteMessage.getData().get("vehicleImage"));
+
+                        sendNotification(jsonObject, type,"Your trip assigned to a driver");
+
                         break;
                     case TRIP_STARTED:
+                        sendNotification(jsonObject, type,"You are on your way!");
+
                         break;
                     case Constants.ARRIVED:
+                        sendNotification(jsonObject, type,"I have arrived!");
+
                         break;
                     case PICKEDUP:
-
-
                         break;
                     case DROPPED:
-
+                        sendNotification(jsonObject, type,"Thanks for booking with Highway, it was a great trip with you. Hope you are happy with our service, please rate your trip");
 
                         break;
                     case COMPLETED:
@@ -140,7 +147,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                 }
 
 
-                sendNotification(jsonObject, type);
             } catch (Exception e) {
                 Log.e("Exception: ", e.getMessage());
             }
@@ -167,7 +173,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    private void sendNotification(JSONObject jsonObject, String type) {
+    private void sendNotification(JSONObject jsonObject, String type,String tittle) {
         String messageBody = jsonObject.toString();
         if (!Utilities.isAppIsInBackground(getApplicationContext())) {
 
