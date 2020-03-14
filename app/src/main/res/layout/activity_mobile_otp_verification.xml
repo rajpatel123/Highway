@@ -13,7 +13,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/logi_for_test" />
+        app:srcCompat="@drawable/highway_logo"/>
 
     <LinearLayout
         android:id="@+id/mobileRL"

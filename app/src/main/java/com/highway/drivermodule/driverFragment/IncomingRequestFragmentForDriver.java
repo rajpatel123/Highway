@@ -352,17 +352,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
             case DROPPED:
                 ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheet(data.getTripId());
+                ((DashBoardActivity) getActivity()).showBottomSheetDriver(data.getTripId());
 
 
                 break;
             case COMPLETED:
                 ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheet(data.getTripId());
+                ((DashBoardActivity) getActivity()).showBottomSheetDriver(data.getTripId());
 
                 break;
             case RATING:
-                ((DashBoardActivity) getActivity()).showratingBottomSheet(data.getTripId());
+                ((DashBoardActivity) getActivity()).showratingBottomSheetDriver(data.getTripId());
 
                 break;
             case INVOICE:

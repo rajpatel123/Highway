@@ -47,6 +47,7 @@ import com.highway.commonretrofit.RestClient;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
+import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
@@ -201,6 +202,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+//////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////
                 }
 
                 @Override
@@ -212,6 +217,35 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             Log.e("newToken", newToken);
         });
 
+        ////////////////////////////////////////////////
+
+        /*if (HighwayPrefs.getBoolean(DashBoardActivity.this, Constants.LOGGED_IN)) {
+            Intent i = new Intent(String.valueOf(this));
+//                    if (getIntent().getExtras() != null) {
+//                        NotificationPushData data = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+//                        i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
+//                        Log.e(TAG, BaseUtil.jsonFromModel(data));
+//                    }
+            if (getIntent().getExtras() != null && getIntent().hasExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
+                JSONObject pushData;
+                try {
+                    pushData = new JSONObject(getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+                    i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, pushData.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+//                    String data = getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
+//                    Log.e(getClass().getSimpleName(), data);
+            String token = HighwayPrefs.getString(DashBoardActivity.this, "device_token");
+            System.out.println("asdf fcm --- : " + token);
+           // startActivity(i);
+            finish();
+        } else {
+            Intent i = new Intent(String.valueOf(this));
+            startActivity(i);
+            finish();
+        }*////////////////////////////////////////////
 
         MyFirebaseServiceMessaging myFirebaseServiceMessaging = new MyFirebaseServiceMessaging();
         myFirebaseServiceMessaging.setPushListener(this);
@@ -219,7 +253,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         navigationInitView();
         updateNavViewHeader();
         navAccordingRoleId();// According RoleId Navigation Icon
-
 
     }
 
@@ -921,7 +954,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     protected void onDestroy() {
         super.onDestroy();
         if (mMessageReceiver != null) {
-            unregisterReceiver(mMessageReceiver);
+            //  unregisterReceiver(mMessageReceiver);
         }
     }
 
@@ -940,7 +973,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showBottomSheet() {
+    public void showBottomSheetDriver(String tripId) {
         InvoiceBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
                 InvoiceBottomDialogFragmentForDriver.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
@@ -948,9 +981,25 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showratingBottomSheet() {
+    public void showBottomSheetCustomer(String tripId) {
+        InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
+                InvoiceBottomDialogFragmentForCustomer.newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragmentForDriver.TAG);
+    }
+
+
+    public void showratingBottomSheetDriver(String tripId) {
         RatingBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
                 RatingBottomDialogFragmentForDriver.newInstance().newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                InvoiceBottomDialogFragmentForDriver.TAG);
+    }
+
+
+    public void showratingBottomSheetForCustomer(String tripId) {
+        InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
+                InvoiceBottomDialogFragmentForCustomer.newInstance().newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragmentForDriver.TAG);
     }

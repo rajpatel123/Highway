@@ -14,11 +14,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 
 import java.text.NumberFormat;
 
-public class InvoiceBottomDialogFragmentForCustomer extends Fragment {
+public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
     private OnFragmentInteractionListener mListener;
     TextView paymentMode;

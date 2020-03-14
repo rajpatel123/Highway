@@ -57,6 +57,7 @@ public class Constants {
     public static final String TRIP_NEW = "TRIP_NEW";
     public static final String SEARCHING = "SEARCHING";
     public static final String TRIP_STARTED = "STARTED";
+    public static final String TRIP_ACCEPTED = "TRIP_ACCEPTED";
     public static final String ARRIVED = "ARRIVED";
     public static final String PICKEDUP = "PICKEDUP";
     public static final String DROPPED = "DROPPED";
@@ -64,4 +65,10 @@ public class Constants {
     public static final String RATING = "RATING";
     public static final String INVOICE = "INVOICE";
     public static final String CANCELED = "CANCELED";
+
+
+    public static final String DRIVER_NAME = "driver_name";
+    public static final String VEHICLE_TYPE = "v_type";
+    public static final String VEHICLE_NUMBER = "v_number";
+    public static final String VEHICLE_IMAGE = "v_image";
 }
