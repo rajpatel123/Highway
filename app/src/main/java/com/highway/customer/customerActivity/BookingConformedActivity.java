@@ -209,7 +209,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         sourceTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
         destTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
-        fareValue.setText("INR"+HighwayApplication.getInstance().getBookingHTripRequest().getTripFare()+" CASH");
+        fareValue.setText("INR" + HighwayApplication.getInstance().getBookingHTripRequest().getTripFare() + " CASH");
 
         initLocations(getIntent());
 
@@ -326,15 +326,15 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
                 if (pushData != null && pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_ACCEPTED)) {
                     driverName.setText("" + pushData.getString(DRIVER_NAME));
-                    vehicleName.setText("" + pushData.getString(VEHICLE_TYPE)+ " - " +pushData.getString(VEHICLE_NUMBER));
+                    vehicleName.setText("" + pushData.getString(VEHICLE_TYPE) + " - " + pushData.getString(VEHICLE_NUMBER));
                     driverMobile = pushData.getString(VEHICLE_NUMBER);
                     bookingSearchingLayout.setVisibility(View.GONE);
                     callActionIV.setVisibility(View.VISIBLE);
-                    if (countDownTimer!=null){
+                    if (countDownTimer != null) {
                         countDownTimer.cancel();
                     }
 
-                }else if(pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_CANCELED)){
+                } else if (pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_CANCELED)) {
                     finish();
 
                 }
@@ -554,7 +554,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     public void bookingTimer() {
 
-       countDownTimer=  new CountDownTimer(60 * 1000, 1000) {
+        countDownTimer = new CountDownTimer(60 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",
@@ -599,11 +599,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             e.printStackTrace();
         }
 
-        try{
+        try {
             if (!isFinishing())
                 dialogBuilder.create().show();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }

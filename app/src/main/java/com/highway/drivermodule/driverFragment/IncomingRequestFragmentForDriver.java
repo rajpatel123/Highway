@@ -34,7 +34,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -50,10 +49,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.highway.R;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.activity.DashBoardActivity;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
-import com.highway.drivermodule.driverAdapter.CancelTripAdapterForDriver;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
@@ -65,9 +62,6 @@ import com.highway.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -115,20 +109,10 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     public ImageView navigateToMap;
     private SupportMapFragment mapFragment;
 
-    public TextView lblCarType;
     public TextView customer_name;
-
-
-    Integer arrivalTime = 0;
     MediaPlayer mPlayer;
-
-
     Context context;
     CountDownTimer countDownTimer;
-
-    public List<CancelTrip> cancelTrips = new ArrayList<>();
-    public RecyclerView recyclerViewForDriver;
-    CancelTripAdapterForDriver cancelTripAdapterForDriver;
     DashBoardActivity dashBoardActivity;
     public int time_to_left = 60;
 
@@ -407,12 +391,14 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
             case R.id.btnReject:
                 if (Utils.isInternetConnected(context)) {
-                    Utils.showProgressDialog(context);
-                    try {
-                        acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    //Utils.showProgressDialog(context);
+
+                    confirmPopup("Are you sure want to reject?",true);
+//                    try {
+//                       // acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
                 }
                 break;
 
@@ -428,7 +414,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.tapToDrop:
-                confirmPopup();
+                confirmPopup("Are you sure want to drop?",false);
                 break;
 
             case R.id.btnArrived:
@@ -465,15 +451,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     }
 
 
-    void confirmPopup() {
+    void confirmPopup(String message,boolean isReject) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(dashBoardActivity);
         alertDialogBuilder
-                .setMessage("Are you sure want to drop?")
+                .setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("YES", (dialog, id) -> {
-                    updateDriverStatus(DROPPED, data.getTripId());
-
-
+                   if (isReject){
+                       ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
+                   }else{
+                       updateDriverStatus(DROPPED, data.getTripId());
+                   }
                 })
                 .setNegativeButton("NO", (dialog, id) -> dialog.cancel());
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -561,7 +549,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         acceptRejectData.setTripId(data.getTripId());
         acceptRejectData.setDriverId(userId);
         acceptRejectData.setStatus(acceptReject);
-        acceptRejectData.setUpdatedAt(""+System.currentTimeMillis());
+        acceptRejectData.setUpdatedAt("" + System.currentTimeMillis());
         return acceptRejectData;
     }
 
@@ -759,5 +747,41 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         }
     }
 
+    private void showAlertDiolog(String message) {
+
+        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.activity_show_alert_dialog_driver_not_responding, null);
+        dialogBuilder.setView(dialogView);
+
+        final android.app.AlertDialog dialog = dialogBuilder.create();
+        Button done = dialogView.findViewById(R.id.btn_done);
+
+        TextView text_cancel = dialogView.findViewById(R.id.btnCancel);
+        text_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (!activity.isFinishing())
+                dialogBuilder.create().show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+    }
 
 }
