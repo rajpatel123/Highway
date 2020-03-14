@@ -208,13 +208,13 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
 
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
-                           // if (response.body().getId()) {
+                          // if (response.body().getId()) {
                                 Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                                 startActivity(intent);
-                                getActivity().finish();
+                              //  getActivity().finish();
                                 Toast.makeText(getActivity(), "Add new Driver SuccessFully", Toast.LENGTH_SHORT).show();
 
-                           // }
+                            //}
                         }
                     }
                 }

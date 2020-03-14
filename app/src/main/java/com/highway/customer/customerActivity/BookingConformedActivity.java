@@ -98,7 +98,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
-    LinearLayout bookingSearchingLayout;
+    LinearLayout bookingSearchingLayout,LLoutPhoneCall;
     public JSONObject pushData;
 
 
@@ -180,6 +180,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         fareValue = findViewById(R.id.fareValue);
         callActionIV = findViewById(R.id.callActionIV);
         bookingSearchingLayout = findViewById(R.id.bookingSearchingLayout);
+        LLoutPhoneCall = findViewById(R.id.LLoutPhoneCall);
         cancelTripTV = findViewById(R.id.cancelTripTV);
         infoTV = findViewById(R.id.tripInfo);
         toolbar = findViewById(R.id.toolbar);
@@ -329,6 +330,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     vehicleName.setText("" + pushData.getString(VEHICLE_TYPE) + " - " + pushData.getString(VEHICLE_NUMBER));
                     driverMobile = pushData.getString(VEHICLE_NUMBER);
                     bookingSearchingLayout.setVisibility(View.GONE);
+                    LLoutPhoneCall.setVisibility(View.VISIBLE);
                     callActionIV.setVisibility(View.VISIBLE);
                     if (countDownTimer != null) {
                         countDownTimer.cancel();
