@@ -142,6 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10dp"
             android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
             android:layout_marginBottom="20dp">
 
             <ImageView
@@ -156,7 +157,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/message"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
+                android:gravity="center_vertical"
                 android:layout_toStartOf="@+id/callActionIV"
                 android:layout_toEndOf="@+id/imgIV"
                 android:orientation="vertical">
@@ -178,14 +181,15 @@
                     android:textColor="@color/quantum_grey700" />
 
                 <LinearLayout
+                    android:id="@+id/bookingSearchingLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    tools:visibility="visible"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
                         android:text="Booking will get cancelled if not allocated in  "
                         android:textColor="@color/red"
                         android:textSize="12sp" />
@@ -195,7 +199,6 @@
                         android:id="@+id/bookingInfoForDriverAllocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
                         android:text="10:00"
                         android:textColor="@color/red" />
                 </LinearLayout>
@@ -207,9 +210,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_10dp"
                 android:tint="@color/colorAccent"
+                android:layout_centerVertical="true"
                 android:visibility="gone"
+                android:layout_marginEnd="30dp"
                 app:srcCompat="@drawable/phone_call" />
         </RelativeLayout>
 
@@ -246,7 +250,7 @@
                 android:layout_marginStart="@dimen/margin_10"
                 android:layout_toEndOf="@+id/cashIV"
                 android:text="INR 565   Cash"
-                android:textColor="@color/black" />
+                android:textColor="@color/black_disabled" />
         </RelativeLayout>
 
 

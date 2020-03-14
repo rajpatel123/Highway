@@ -213,7 +213,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                     if (TextUtils.isEmpty(place.getAddress())) {
                         edtSourceLOcationEDT.setText("" + place.getName());
                     } else {
-                        edtSourceLOcationEDT.setText("" + place.getAddress());
+                        edtSourceLOcationEDT.setText(place.getName()+ "" + place.getAddress());
                     }
                     if (mMap != null && place.getLatLng() != null) {
 
@@ -240,7 +240,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                     if (TextUtils.isEmpty(placeDest.getAddress())) {
                         edtDropLocation.setText("" + placeDest.getName());
                     } else {
-                        edtDropLocation.setText("" + placeDest.getAddress());
+                        edtDropLocation.setText(placeDest.getName() +"" + placeDest.getAddress());
                     }
                     if (mMap != null && placeDest.getLatLng() != null) {
 
@@ -400,7 +400,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         Location location1 = new Location("");
         location1.setLatitude(30.5518691);
         location1.setLongitude(75.6513571);
-        showMarker(location1);
+       // showMarker(location1);
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -486,28 +486,28 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         }
     }
 
-    private void showMarker(@NonNull Location currentLocation) {
-        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        if (mCurrLocationMarker == null)
-            mCurrLocationMarker = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(getContext(),R.drawable.ic_navigation))).position(latLng));
-        else
-            MarkerAnimation.animateMarkerToGB(mCurrLocationMarker, latLng, new LatLngInterpolator.Spherical());
-        rotateMarker(mCurrLocationMarker, 23.9F);
-    }
+//    private void showMarker(@NonNull Location currentLocation) {
+//        LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+//        if (mCurrLocationMarker == null)
+//            mCurrLocationMarker = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(getContext(),R.drawable.ic_navigation))).position(latLng));
+//        else
+//            MarkerAnimation.animateMarkerToGB(mCurrLocationMarker, latLng, new LatLngInterpolator.Spherical());
+//        rotateMarker(mCurrLocationMarker, 23.9F);
+//    }
 
-    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            drawable = (DrawableCompat.wrap(drawable)).mutate();
-        }
-
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
-    }
+//    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+//        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//            drawable = (DrawableCompat.wrap(drawable)).mutate();
+//        }
+//
+//        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+//                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+//        Canvas canvas = new Canvas(bitmap);
+//        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+//        drawable.draw(canvas);
+//        return bitmap;
+//    }
 
     private double bearingBetweenLocations(LatLng latLng1, LatLng latLng2) {
 

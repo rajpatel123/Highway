@@ -137,15 +137,8 @@ public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivi
 
         cmntRsnEdtTxt = canReasonEdtTxt.getText().toString().trim();
 
-        if (cmntRsnEdtTxt.isEmpty()) {
-            canReasonEdtTxt.setError("pls enter the reason comment");
-            return false;
-        } else {
-            canReasonEdtTxt.setError(null);
-        }
-
         if (cancelreasonid.isEmpty()){
-            Toast.makeText(this, "pls select cancle reason", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select cancle reason", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

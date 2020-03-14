@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -68,8 +69,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import static com.highway.utils.Constants.DRIVER_NAME;
 import static com.highway.utils.Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY;
+import static com.highway.utils.Constants.PUSH_TYPE;
 import static com.highway.utils.Constants.RECEIVERPHONENO;
+import static com.highway.utils.Constants.TRIP_ACCEPTED;
+import static com.highway.utils.Constants.TRIP_CANCELED;
+import static com.highway.utils.Constants.VEHICLE_NUMBER;
+import static com.highway.utils.Constants.VEHICLE_TYPE;
 
 public class BookingConformedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -91,11 +98,13 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
+    LinearLayout bookingSearchingLayout;
     public JSONObject pushData;
 
 
     private Toolbar toolbar;
-    private TextView sourceTV, destTV, driverName, vehicleName, bookingInfoForDriverAllocationTime, fareValue, cancelTripTV, infoTV;
+    private TextView sourceTV, destTV, driverName, vehicleName,
+            bookingInfoForDriverAllocationTime, fareValue, cancelTripTV, infoTV;
     private ImageView imgTruckIV, callActionIV;
     TextView goodtype;
     private Polyline currentPolyline;
@@ -125,10 +134,17 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             acptTripTv.setText(data);
         }
     };
+    private String driverMobile;
+    private CountDownTimer countDownTimer;
 
 
-    public static void start(ConformBookingActivity activity, String bookTripIdCode, String bookId, String vTypeId, String user_id, String tripRecevirId, String GoodsTypeId, String couponId,
-                             double sourceLat, double sourceLong, double destLat, double destLong, String tripFare, String sourceAddress, String destAddress) {
+    public static void start(ConformBookingActivity activity,
+                             String bookTripIdCode, String bookId,
+                             String vTypeId, String user_id, String tripRecevirId,
+                             String GoodsTypeId, String couponId,
+                             double sourceLat, double sourceLong, double destLat,
+                             double destLong, String tripFare, String sourceAddress,
+                             String destAddress) {
         Intent intent = new Intent(activity, BookingConformedActivity.class);
         intent.putExtra("bookTripIdCode", bookTripIdCode);
         intent.putExtra("bookId", bookId);
@@ -163,6 +179,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         bookingInfoForDriverAllocationTime = findViewById(R.id.bookingInfoForDriverAllocation);
         fareValue = findViewById(R.id.fareValue);
         callActionIV = findViewById(R.id.callActionIV);
+        bookingSearchingLayout = findViewById(R.id.bookingSearchingLayout);
         cancelTripTV = findViewById(R.id.cancelTripTV);
         infoTV = findViewById(R.id.tripInfo);
         toolbar = findViewById(R.id.toolbar);
@@ -192,7 +209,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         sourceTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
         destTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
-        fareValue.setText(HighwayApplication.getInstance().getBookingHTripRequest().getTripFare());
+        fareValue.setText("INR"+HighwayApplication.getInstance().getBookingHTripRequest().getTripFare()+" CASH");
 
         initLocations(getIntent());
 
@@ -221,6 +238,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         startService(serviceIntent);
 
     }
+
     // USING BROAD CAST RECEIVER --- registered
 //    @Override
 //    protected void onStart() {
@@ -238,11 +256,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 //    }
 //
 //// USING BROAD CAST RECEIVER --- Unregistered
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        unregisterReceiver(mySenderBroadCast);
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mySenderBroadCast);
+    }
 
     public void clicklistener() {
         cancelTripTV.setOnClickListener(new View.OnClickListener() {
@@ -271,6 +289,16 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 //finish();
             }
         });
+
+
+        callActionIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + driverMobile));
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -295,6 +323,23 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
             try {
                 pushData = new JSONObject(intent.getStringExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY));
+
+                if (pushData != null && pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_ACCEPTED)) {
+                    driverName.setText("" + pushData.getString(DRIVER_NAME));
+                    vehicleName.setText("" + pushData.getString(VEHICLE_TYPE)+ " - " +pushData.getString(VEHICLE_NUMBER));
+                    driverMobile = pushData.getString(VEHICLE_NUMBER);
+                    bookingSearchingLayout.setVisibility(View.GONE);
+                    callActionIV.setVisibility(View.VISIBLE);
+                    if (countDownTimer!=null){
+                        countDownTimer.cancel();
+                    }
+
+                }else if(pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_CANCELED)){
+                    finish();
+
+                }
+
+
                 Toast.makeText(BookingConformedActivity.this, "Dta" + pushData.toString(), Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -509,7 +554,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     public void bookingTimer() {
 
-        new CountDownTimer(60 * 1000, 1000) {
+       countDownTimer=  new CountDownTimer(60 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",
@@ -548,7 +593,21 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             }
         });
 
-        dialogBuilder.create().show();
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try{
+            if (!isFinishing())
+                dialogBuilder.create().show();
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+
     }
 
     //by sir notes
