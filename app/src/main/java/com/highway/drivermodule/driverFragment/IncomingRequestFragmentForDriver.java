@@ -76,12 +76,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.highway.utils.Constants.ARRIVED;
-import static com.highway.utils.Constants.CANCELED;
 import static com.highway.utils.Constants.COMPLETED;
 import static com.highway.utils.Constants.DROPPED;
 import static com.highway.utils.Constants.INVOICE;
 import static com.highway.utils.Constants.PICKEDUP;
 import static com.highway.utils.Constants.RATING;
+import static com.highway.utils.Constants.TRIP_CANCELED;
 import static com.highway.utils.Constants.TRIP_NEW;
 import static com.highway.utils.Constants.TRIP_STARTED;
 
@@ -437,8 +437,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.btnCancel:
-                updateDriverStatus(CANCELED, data.getTripId());
-
+                updateDriverStatus(TRIP_CANCELED, data.getTripId());
                 stopMediaPlayer();
                 ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
 
@@ -450,12 +449,11 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.btnCancelafterArrived:
-                updateDriverStatus(CANCELED, data.getTripId());
+                updateDriverStatus(TRIP_CANCELED, data.getTripId());
                 stopMediaPlayer();
                 ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
 
                 break;
-
 
             case R.id.imgCall:
                 if (!TextUtils.isEmpty(mobileNo)) {
@@ -473,8 +471,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 .setMessage("Are you sure want to drop?")
                 .setCancelable(false)
                 .setPositiveButton("YES", (dialog, id) -> {
-                    init(DROPPED);
                     updateDriverStatus(DROPPED, data.getTripId());
+
 
                 })
                 .setNegativeButton("NO", (dialog, id) -> dialog.cancel());

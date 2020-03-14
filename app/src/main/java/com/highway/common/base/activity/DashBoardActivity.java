@@ -202,14 +202,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-//////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("New Token Updated", "Failed to update Token");
 
                 }
             });
@@ -217,35 +214,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             Log.e("newToken", newToken);
         });
 
-        ////////////////////////////////////////////////
-
-        /*if (HighwayPrefs.getBoolean(DashBoardActivity.this, Constants.LOGGED_IN)) {
-            Intent i = new Intent(String.valueOf(this));
-//                    if (getIntent().getExtras() != null) {
-//                        NotificationPushData data = getIntent().getParcelableExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
-//                        i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
-//                        Log.e(TAG, BaseUtil.jsonFromModel(data));
-//                    }
-            if (getIntent().getExtras() != null && getIntent().hasExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
-                JSONObject pushData;
-                try {
-                    pushData = new JSONObject(getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY));
-                    i.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, pushData.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-//                    String data = getIntent().getStringExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY);
-//                    Log.e(getClass().getSimpleName(), data);
-            String token = HighwayPrefs.getString(DashBoardActivity.this, "device_token");
-            System.out.println("asdf fcm --- : " + token);
-           // startActivity(i);
-            finish();
-        } else {
-            Intent i = new Intent(String.valueOf(this));
-            startActivity(i);
-            finish();
-        }*////////////////////////////////////////////
 
         MyFirebaseServiceMessaging myFirebaseServiceMessaging = new MyFirebaseServiceMessaging();
         myFirebaseServiceMessaging.setPushListener(this);
@@ -253,6 +221,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         navigationInitView();
         updateNavViewHeader();
         navAccordingRoleId();// According RoleId Navigation Icon
+
 
     }
 
@@ -953,10 +922,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mMessageReceiver != null) {
-            //  unregisterReceiver(mMessageReceiver);
+        try {
+            if (mMessageReceiver != null) {
+                unregisterReceiver(mMessageReceiver);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
-    }
+            }
 
     @Override
     protected void onStart() {
@@ -981,7 +955,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showBottomSheetCustomer(String tripId) {
+ public void showBottomSheetCustomer(String tripId) {
         InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
                 InvoiceBottomDialogFragmentForCustomer.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),

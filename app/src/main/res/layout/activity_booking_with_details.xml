@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".customer.customerActivity.BookingWithDetailsActivity">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -42,15 +43,16 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/maplayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="45"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_above="@+id/bottomView"
+            android:layout_below="@+id/toolbar">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/bottomView"
                 android:layout_below="@+id/toolbar">
 
                 <LinearLayout
@@ -170,7 +172,7 @@
                     android:id="@+id/map"
                     class="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
 
@@ -180,9 +182,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/bottomView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="55"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
             <View
@@ -201,14 +204,14 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/vehicleListRV"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_20"
-                    android:layout_weight="1.8" />
+                     />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_5"
+                    android:layout_height="@dimen/margin_2"
                     android:background="@color/email_gray" />
 
 
@@ -217,14 +220,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10"
-                    android:layout_weight="1"
                     android:orientation="vertical">
 
 
@@ -240,6 +241,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingLeft="@dimen/_10dp"
+                            android:textColor="@color/black"
                             android:text="Pickup Contact : "
                             android:textSize="12sp" />
 
@@ -260,7 +262,7 @@
                                 android:layout_weight="1"
                                 android:gravity="end"
                                 android:text="8285886155"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/green"
                                 android:textSize="13sp" />
 
                             <View
@@ -279,7 +281,7 @@
                                 android:gravity="end"
                                 android:inputType="textCapWords"
                                 android:text="Raj Patel"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/green"
                                 android:textSize="13sp" />
 
                         </LinearLayout>
@@ -304,6 +306,8 @@
                             android:layout_weight="1"
                             android:paddingLeft="@dimen/_10dp"
                             android:text="Good Type "
+                            android:textColor="@color/black"
+
                             android:textSize="12sp" />
 
 
@@ -319,13 +323,14 @@
                             <TextView
                                 android:id="@+id/goodtype"
 
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/margin_5"
                                 android:ellipsize="end"
+                                android:gravity="end"
                                 android:singleLine="true"
                                 android:text="Select Goods..."
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/green"
                                 android:textSize="13sp" />
 
                             <!-- <Spinner
@@ -348,75 +353,75 @@
                         android:background="@color/quantum_grey" />
 
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/padding_5"
-                        android:layout_marginEnd="@dimen/padding_5">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingBottom="@dimen/_10dp">
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="25dp"
-                                android:layout_marginStart="2dp"
-                                app:srcCompat="@drawable/money" />
-
-                            <TextView
-                                android:id="@+id/CashTv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:text="CASH"
-                                android:textColor="@color/green"
-                                android:textSize="@dimen/margin_16"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:id="@+id/ImgCashindicator"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="2dp"
-                                android:rotation="90"
-                                app:srcCompat="@drawable/login_arrow_icon" />
-
-                            <TextView
-                                android:id="@+id/bookTruckLatterTv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/margin_10"
-                                android:background="@drawable/btn_shape_draw"
-                                android:gravity="center"
-                                android:maxHeight="@dimen/margin_40"
-                                android:paddingStart="@dimen/_10dp"
-                                android:paddingEnd="@dimen/_10dp"
-                                android:text="BOOK LATTER"
-                                android:textColor="@color/white" />
-
-                            <TextView
-                                android:id="@+id/bookTruckTv"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginLeft="@dimen/margin_2"
-                                android:background="@drawable/btn_shape_draw"
-                                android:gravity="center"
-                                android:maxHeight="@dimen/margin_40"
-                                android:text="BOOK NOW"
-                                android:textColor="@color/white" />
-                            <!--                            android:onClick="showBottomSheet"-->
-
-                        </LinearLayout>
-                    </RelativeLayout>
 
                 </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/padding_5"
+                    android:layout_marginEnd="@dimen/padding_5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/_10dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="2dp"
+                            app:srcCompat="@drawable/money" />
+
+                        <TextView
+                            android:id="@+id/CashTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="CASH"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/margin_16"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ImgCashindicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:rotation="90"
+                            app:srcCompat="@drawable/login_arrow_icon" />
+
+                        <TextView
+                            android:id="@+id/bookTruckLatterTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="@dimen/margin_10"
+                            android:background="@drawable/btn_shape_draw"
+                            android:gravity="center"
+                            android:maxHeight="@dimen/margin_40"
+                            android:paddingStart="@dimen/_10dp"
+                            android:paddingEnd="@dimen/_10dp"
+                            android:text="BOOK LATTER"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/bookTruckTv"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="@dimen/margin_2"
+                            android:background="@drawable/btn_shape_draw"
+                            android:gravity="center"
+                            android:maxHeight="@dimen/margin_40"
+                            android:text="BOOK NOW"
+                            android:textColor="@color/white" />
+                        <!--                            android:onClick="showBottomSheet"-->
+
+                    </LinearLayout>
+                </RelativeLayout>
 
 
             </LinearLayout>
@@ -424,6 +429,6 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

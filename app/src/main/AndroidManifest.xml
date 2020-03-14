@@ -86,7 +86,7 @@
             android:name=".common.base.activity.SplashActivity"
             android:screenOrientation="portrait">
 
-            <!-- <activity android:name=".customer.customerActivity.CancelOrderTripByCustomerWithReasonActivity" android:screenOrientation="portrait"> -->
+             <!--<activity android:name=".TryActivity" android:screenOrientation="portrait">-->
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -37,7 +37,9 @@ import static com.highway.utils.Constants.PICKEDUP;
 import static com.highway.utils.Constants.RATING;
 import static com.highway.utils.Constants.SEARCHING;
 import static com.highway.utils.Constants.TRIP_ACCEPTED;
+import static com.highway.utils.Constants.TRIP_CANCELED;
 import static com.highway.utils.Constants.TRIP_NEW;
+import static com.highway.utils.Constants.TRIP_REJECTED;
 import static com.highway.utils.Constants.TRIP_STARTED;
 
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
@@ -98,49 +100,63 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                         jsonObject.put(Constants.TRIP_ID, remoteMessage.getData().get("tripId"));
                         jsonObject.put(Constants.SOURCE, remoteMessage.getData().get("source"));
                         jsonObject.put(Constants.DESTINATEION, remoteMessage.getData().get("destination"));
-                        break;
+                        sendNotification(jsonObject, type,"New Ride coming");
 
-                    case SEARCHING:
                         break;
 
                     case TRIP_ACCEPTED:
                         jsonObject.put(Constants.PUSH_TYPE, type);
-                        jsonObject.put(Constants.DRIVER_NAME, remoteMessage.getData().get("'driver'"));
+                        jsonObject.put(Constants.DRIVER_NAME, remoteMessage.getData().get("driver"));
                         jsonObject.put(Constants.PUSH_MOBILE, remoteMessage.getData().get("mobile"));
                         jsonObject.put(Constants.TRIP_ID, remoteMessage.getData().get("tripId"));
                         jsonObject.put(Constants.VEHICLE_TYPE, remoteMessage.getData().get("vehicleType"));
                         jsonObject.put(Constants.VEHICLE_NUMBER, remoteMessage.getData().get("vehicleNumber"));
                         jsonObject.put(Constants.VEHICLE_IMAGE, remoteMessage.getData().get("vehicleImage"));
+
+                        sendNotification(jsonObject, type,"Your trip assigned to a driver");
+
+                        break;
+
+                        case TRIP_REJECTED:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+                        sendNotification(jsonObject, type,"Your trip assigned to a driver");
+
+                        break;
+
+                        case TRIP_CANCELED:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+                        sendNotification(jsonObject, type,"Your trip has been cancelled by  a driver");
+
                         break;
                     case TRIP_STARTED:
+                        sendNotification(jsonObject, type,"You are on your way!");
+
                         break;
                     case Constants.ARRIVED:
+                        sendNotification(jsonObject, type,"I have arrived!");
+
                         break;
                     case PICKEDUP:
-
+                        sendNotification(jsonObject, type,"You are on your way!");
 
                         break;
                     case DROPPED:
+                        sendNotification(jsonObject, type,"Dropped!");
 
+//                        sendNotification(jsonObject, type,"Thanks for booking with Highway, it was a great trip with you");
 
                         break;
                     case COMPLETED:
-
-
                         break;
                     case RATING:
-
-
                         break;
                     case INVOICE:
-
                         break;
 
 
                 }
 
 
-                sendNotification(jsonObject, type);
             } catch (Exception e) {
                 Log.e("Exception: ", e.getMessage());
             }
@@ -162,12 +178,11 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     /**
      * Create and show a simple notification containing the received FCM message.
      *
-     * @param messageBody FCM message body received.
      */
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    private void sendNotification(JSONObject jsonObject, String type) {
+    private void sendNotification(JSONObject jsonObject, String type,String tittle) {
         String messageBody = jsonObject.toString();
         if (!Utilities.isAppIsInBackground(getApplicationContext())) {
 
@@ -232,7 +247,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
                 .setContentTitle(getString(R.string.app_name))
                 .setContentIntent(pendingIntent)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(type))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(tittle))
                 .setWhen(when)
                 .setSmallIcon(getNotificationIcon(mBuilder))
                 .setContentText(messageBody)
