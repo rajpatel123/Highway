@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,11 +54,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.libraries.places.api.Places;
 import com.highway.R;
 import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.HighwayApplication;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
+import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -80,11 +84,12 @@ import static com.highway.utils.Constants.VEHICLE_TYPE;
 
 public class BookingConformedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, TaskLoadedCallback {
+        LocationListener, TaskLoadedCallback, View.OnClickListener {
 
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int SELECT_TYPE = 4;
+    private static final int BOUND_PADDING = 100;
     public TextView bookTruckTv, phoneNoTv, nameTv, editTV;
     public String userName, userMobNo;
     MarkerOptions markerOptions1;
@@ -98,7 +103,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     TextView edtDropLocation;
     LinearLayout sourceLL;
     LinearLayout destLL;
-    LinearLayout bookingSearchingLayout,LLoutPhoneCall;
+    LinearLayout bookingSearchingLayout, LLoutPhoneCall;
     public JSONObject pushData;
 
 
@@ -123,6 +128,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     boolean timeUp;
     String bookVehicleName;
     public TextView rejTV, acptTripTv;
+    RelativeLayout mylocation;
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
 
@@ -136,6 +142,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     };
     private String driverMobile;
     private CountDownTimer countDownTimer;
+    private Iterable<? extends LatLng> list;
 
 
     public static void start(ConformBookingActivity activity,
@@ -184,6 +191,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         cancelTripTV = findViewById(R.id.cancelTripTV);
         infoTV = findViewById(R.id.tripInfo);
         toolbar = findViewById(R.id.toolbar);
+        mylocation = findViewById(R.id.mylocation);
+
+        mylocation.setOnClickListener(this);
         // Using Broadcast for Customer
         /*rejTV = findViewById(R.id.TripRejectedTv);
         acptTripTv = findViewById(R.id.TripAcceptTv);
@@ -208,9 +218,10 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             }
         }
 
+
         sourceTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
         destTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
-        fareValue.setText("INR"+HighwayApplication.getInstance().getBookingHTripRequest().getTripFare()+" CASH");
+        fareValue.setText("INR" + HighwayApplication.getInstance().getBookingHTripRequest().getTripFare() + " CASH");
 
         initLocations(getIntent());
 
@@ -223,6 +234,14 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        new FetchURL(BookingConformedActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+
+        Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+
+        if (!Places.isInitialized()) {
+            Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
         }
 
         IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
@@ -327,16 +346,16 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
                 if (pushData != null && pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_ACCEPTED)) {
                     driverName.setText("" + pushData.getString(DRIVER_NAME));
-                    vehicleName.setText("" + pushData.getString(VEHICLE_TYPE)+ " - " +pushData.getString(VEHICLE_NUMBER));
+                    vehicleName.setText("" + pushData.getString(VEHICLE_TYPE) + " - " + pushData.getString(VEHICLE_NUMBER));
                     driverMobile = pushData.getString(VEHICLE_NUMBER);
                     bookingSearchingLayout.setVisibility(View.GONE);
                     LLoutPhoneCall.setVisibility(View.VISIBLE);
                     callActionIV.setVisibility(View.VISIBLE);
-                    if (countDownTimer!=null){
+                    if (countDownTimer != null) {
                         countDownTimer.cancel();
                     }
 
-                }else if(pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_CANCELED)){
+                } else if (pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_CANCELED)) {
                     finish();
 
                 }
@@ -351,7 +370,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     };
 
 
-    private void initLocations(Intent intent) {
+    public void initLocations(Intent intent) {
         destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
         sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
 
@@ -368,6 +387,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
         markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+
 
     }
 
@@ -396,8 +416,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.setMinZoomPreference(2.0f);
         mMap.setMaxZoomPreference(18.0f);
 
@@ -484,7 +504,10 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     ///**********************
     @Override
     public void onLocationChanged(Location location) {
+
         mLastLocation = location;
+        updateMyLocation();
+
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
@@ -500,6 +523,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+
+
     }
 
 
@@ -531,6 +556,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         }
     }
 
+
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
@@ -549,14 +575,29 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     @Override
     public void onTaskDone(Object... values) {
-        if (currentPolyline != null)
+        if (currentPolyline != null) {
             currentPolyline.remove();
-        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+            currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (LatLng latLng : list) {
+                builder.include(latLng);
+            }
+
+            final LatLngBounds bounds = builder.build();
+            //BOUND_PADDING is an int to specify padding of bound.. try 100.
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, BOUND_PADDING);
+            mMap.animateCamera(cu);
+
+        }
+
+
     }
+
 
     public void bookingTimer() {
 
-       countDownTimer=  new CountDownTimer(60 * 1000, 1000) {
+        countDownTimer = new CountDownTimer(60 * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 String text = String.format(Locale.getDefault(), "%02d: %02d",
@@ -601,11 +642,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             e.printStackTrace();
         }
 
-        try{
+        try {
             if (!isFinishing())
                 dialogBuilder.create().show();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
@@ -633,4 +674,34 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         onBackPressed();
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.mylocation:          // for location
+                updateMyLocation();
+                break;
+        }
+    }
+
+    private void updateMyLocation() {
+        if (mLastLocation == null) {
+            return;
+        }
+        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
+
+
+    }
+
+
 }
