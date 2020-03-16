@@ -29,6 +29,8 @@ import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRes
 import com.highway.drivermodule.driverModelClass.DriverResponse;
 import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
 import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
+import com.highway.drivermodule.drivermodels.DriverDetailRequest;
+import com.highway.drivermodule.drivermodels.DriverDetails;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
@@ -55,6 +57,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle.GetAllVehicleResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
+
+import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -226,6 +230,17 @@ public class RestClient {
     // updated trip status by driver
     public static void updateTripStatusByDriver(UpdateTripStatusByDriverReq updateTripStatusByDriverReq, Callback<UpdateTripStatusByDriverResp>updateTripStatusByDriverRespCallback){
         RetrofitClient.getClient().UPDATE_TRIP_STATUS_BY_DRIVER_RESP_CALL(updateTripStatusByDriverReq).enqueue(updateTripStatusByDriverRespCallback);
+    }
+
+
+    // get driver details
+    public static void getDriverDetails(DriverDetailRequest obj, Callback<DriverDetails>updateTripStatusByDriverRespCallback){
+        RetrofitClient.getClient().getDriverDetails(obj).enqueue(updateTripStatusByDriverRespCallback);
+    }
+
+    // get Customer details
+    public static void getCustomerDetails(DriverDetailRequest obj, Callback<DriverDetails>updateTripStatusByDriverRespCallback){
+        RetrofitClient.getClient().getCustomerDetails(obj).enqueue(updateTripStatusByDriverRespCallback);
     }
 
 

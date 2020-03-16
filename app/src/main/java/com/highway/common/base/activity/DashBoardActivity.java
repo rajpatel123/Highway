@@ -38,6 +38,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CancelTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.CompletedTrip;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.OngoingTrip;
@@ -49,12 +50,16 @@ import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
+import com.highway.customer.customerFragment.ReatingBottomDialogFragmentForCustomer;
 import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
 import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
 import com.highway.drivermodule.driverFragment.InvoiceBottomDialogFragmentForDriver;
 import com.highway.drivermodule.driverFragment.RatingBottomDialogFragmentForDriver;
+import com.highway.drivermodule.drivermodels.DriverDetailRequest;
+import com.highway.drivermodule.drivermodels.DriverDetails;
+import com.highway.drivermodule.drivermodels.TripStatus;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
@@ -220,7 +225,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         getPushData();
         navigationInitView();
         updateNavViewHeader();
-        navAccordingRoleId();// According RoleId Navigation Icon
+        // navAccordingRoleId();// According RoleId Navigation Icon
 
 
     }
@@ -322,20 +327,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "3":                                              // Driver
 
-                if (pushData != null) {
-
-                    incomingFragment = IncomingRequestFragmentForDriver.newInstance();
-                    Bundle bundle = new Bundle();
-                    incomingFragment.setArguments(bundle);
-                    replaceFragment(incomingFragment, "Online");
-
-                } else {
-                    driverOnlineFragment = DriverOnlineFragment.newInstance();
-                    replaceFragment(driverOnlineFragment, "Online");
-
-                }
-
-
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -355,6 +346,20 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 getAllVehicle.setVisible(false);
                 getAllDriver.setVisible(false);
                 logout.setVisible(true);
+
+
+                if (pushData != null) {
+                    incomingFragment = IncomingRequestFragmentForDriver.newInstance();
+                    Bundle bundle = new Bundle();
+                    incomingFragment.setArguments(bundle);
+                    replaceFragment(incomingFragment, "Online");
+
+                } else {
+                    driverOnlineFragment = DriverOnlineFragment.newInstance();
+                    replaceFragment(driverOnlineFragment, "Online");
+                    getDriverDetails();
+
+                }
                 break;
 
             case "4":                                   //  Customer
@@ -380,6 +385,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 getAllVehicle.setVisible(false);
                 getAllDriver.setVisible(false);
                 logout.setVisible(true);
+
+                getCustomerDetails();
                 break;
 
             case "5":                              // Owner .. vehicle Owner
@@ -905,8 +912,11 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onResume() {
         super.onResume();
+        navAccordingRoleId();
+
 
     }
+
 
     private void getPushData() {
         if (getIntent().getExtras() != null && getIntent().hasExtra(PUSH_NEW_BOOKING_TRIP_DATA_KEY)) {
@@ -927,10 +937,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 unregisterReceiver(mMessageReceiver);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-            }
+    }
 
     @Override
     protected void onStart() {
@@ -947,7 +957,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showBottomSheetDriver(String tripId) {
+    public void showInvoiceBottomSheetDriver() {
         InvoiceBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
                 InvoiceBottomDialogFragmentForDriver.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
@@ -955,27 +965,27 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
- public void showBottomSheetCustomer(String tripId) {
+    public void showInVoiceBottomSheetCustomer(String tripId) {
         InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
-                InvoiceBottomDialogFragmentForCustomer.newInstance();
+                InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragmentForDriver.TAG);
     }
 
 
-    public void showratingBottomSheetDriver(String tripId) {
+    public void showratingBottomSheetDriver() {
         RatingBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
-                RatingBottomDialogFragmentForDriver.newInstance().newInstance();
+                RatingBottomDialogFragmentForDriver.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragmentForDriver.TAG);
     }
 
 
-    public void showratingBottomSheetForCustomer(String tripId) {
-        InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
-                InvoiceBottomDialogFragmentForCustomer.newInstance().newInstance();
+    public void showratingBottomSheetForCustomer() {
+        ReatingBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
+                ReatingBottomDialogFragmentForCustomer.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
-                InvoiceBottomDialogFragmentForDriver.TAG);
+                ReatingBottomDialogFragmentForCustomer.class.getSimpleName());
     }
 
 
@@ -989,5 +999,60 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             replaceFragment(incomingFragment, "Online");
 
         }
+    }
+
+
+    private void getDriverDetails() {
+        DriverDetailRequest driverData = new DriverDetailRequest();
+
+            driverData.setDriverId(HighwayPrefs.getString(this, Constants.ID));
+            RestClient.getDriverDetails(driverData, new Callback<DriverDetails>() {
+                @Override
+                public void onResponse(Call<DriverDetails> call, Response<DriverDetails> response) {
+                    if (response != null && response.code() == 200 && response.body() != null) {
+                        TripStatus tripStatus = response.body().getDriverTripStatus();
+                        Log.d("Driver Details", "" + tripStatus.getCurrentTripStatus());
+                        if (tripStatus.getRatingStatus().equalsIgnoreCase("0")) {
+                            HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
+                            HighwayApplication.getInstance().setUserDetails(tripStatus);
+                            incomingFragment = IncomingRequestFragmentForDriver.newInstance();
+                            Bundle bundle = new Bundle();
+                            incomingFragment.setArguments(bundle);
+                            replaceFragment(incomingFragment, "Online");
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DriverDetails> call, Throwable t) {
+                    Log.d("User Details", "" + t.getMessage());
+
+                }
+            });
+
+
+
+    }
+
+
+    private void getCustomerDetails() {
+        DriverDetailRequest data = new DriverDetailRequest();
+            data.setDriverId(HighwayPrefs.getString(this, Constants.ID));
+            RestClient.getCustomerDetails(data, new Callback<DriverDetails>() {
+                @Override
+                public void onResponse(Call<DriverDetails> call, Response<DriverDetails> response) {
+                    if (response != null && response.code() == 200 && response.body() != null) {
+                        Log.d("User Details", "" + response.body().getDriverTripStatus().getCurrentTripStatus());
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DriverDetails> call, Throwable t) {
+                    Log.d("User Details", "" + t.getMessage());
+
+                }
+            });
     }
 }

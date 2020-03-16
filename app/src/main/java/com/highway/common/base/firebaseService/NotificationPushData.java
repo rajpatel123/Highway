@@ -12,6 +12,19 @@ public class NotificationPushData implements Parcelable {
     @SerializedName("mobile")
     @Expose
     private String mobile;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @SerializedName("name")
+    @Expose
+    private String name;
     @SerializedName("message")
     @Expose
     private String message;

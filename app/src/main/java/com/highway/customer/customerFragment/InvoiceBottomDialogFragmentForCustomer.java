@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 
 import java.text.NumberFormat;
+
+import static com.highway.utils.Constants.TRIP_ID;
 
 public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
@@ -58,14 +59,15 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     TextView startDate;
     TextView endDate;
     NestedScrollView nestedScrollView;
-    public InvoiceBottomDialogFragmentForCustomer() {
-
-    }
+    private String tripId;
 
 
-    public static InvoiceBottomDialogFragmentForCustomer newInstance() {
+
+
+    public static InvoiceBottomDialogFragmentForCustomer newInstance(String tripId) {
         InvoiceBottomDialogFragmentForCustomer fragment = new InvoiceBottomDialogFragmentForCustomer();
         Bundle args = new Bundle();
+        args.putString(TRIP_ID,tripId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -116,6 +118,10 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         outstationRoundSingle = view.findViewById(R.id.outstation_round_single);
         outstationNoOfDays = view.findViewById(R.id.outstation_no_of_days);
 
+
+        if (getArguments()!=null){
+            tripId = getArguments().getString(TRIP_ID);
+        }
 
 
 

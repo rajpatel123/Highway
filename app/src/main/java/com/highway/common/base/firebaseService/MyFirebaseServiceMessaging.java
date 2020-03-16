@@ -94,6 +94,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
                 switch (type) {
                     case Constants.TRIP_NEW:
+
                         jsonObject.put(Constants.PUSH_TYPE, type);
                         jsonObject.put(Constants.CUSTOMER_NAME, remoteMessage.getData().get("customer"));
                         jsonObject.put(Constants.PUSH_MOBILE, remoteMessage.getData().get("mobile"));

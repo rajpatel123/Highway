@@ -28,6 +28,8 @@ import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRes
 import com.highway.drivermodule.driverModelClass.DriverResponse;
 import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
 import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
+import com.highway.drivermodule.drivermodels.DriverDetailRequest;
+import com.highway.drivermodule.drivermodels.DriverDetails;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
@@ -54,6 +56,8 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimens
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.VehicleDiamensionSizeResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
+
+import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -190,5 +194,16 @@ public interface ApiInterface {
     // update trip status by driver
     @POST("api/Booking/updateTripStatusByDriver")
     Call<UpdateTripStatusByDriverResp> UPDATE_TRIP_STATUS_BY_DRIVER_RESP_CALL(@Body UpdateTripStatusByDriverReq updateTripStatusByDriverReq);
+
+
+
+    // get driver details by id
+    @POST("api/Booking/getDriverCurrentTripStatus")
+    Call<DriverDetails> getDriverDetails(@Body DriverDetailRequest driverId);
+
+
+    // get customer details by id
+    @POST("api/Booking/getCustomerCurrentTripStatus")
+    Call<DriverDetails> getCustomerDetails(@Body DriverDetailRequest driverId);
 
 }

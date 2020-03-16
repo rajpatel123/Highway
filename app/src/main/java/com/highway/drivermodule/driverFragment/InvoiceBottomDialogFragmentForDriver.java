@@ -1,5 +1,6 @@
 package com.highway.drivermodule.driverFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,9 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
@@ -29,6 +32,9 @@ import java.util.Calendar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.highway.utils.Constants.INVOICE;
+import static com.highway.utils.Constants.TRIP_ID;
 
 public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragment
         implements View.OnClickListener {
@@ -79,10 +85,15 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     int yy, mm, dd;
     TextView distance;
     private String totDistance;
+    private String tripId;
+    private DashBoardActivity mActivity;
 
     public static InvoiceBottomDialogFragmentForDriver newInstance() {
         return new InvoiceBottomDialogFragmentForDriver();
     }
+
+
+
 
     @Nullable
     @Override
@@ -134,6 +145,11 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         totDistance = (getActivity().getIntent().getStringExtra("distance"));
         totalDistance.setText(totDistance);
 
+
+
+
+
+
         return view;
     }
 
@@ -161,10 +177,12 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         confirmPaymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                afterCmpltRidDriverStatus();
 
-                ((DashBoardActivity) getActivity()).showratingBottomSheetDriver("");
+               // ((DashBoardActivity) getActivity()).showratingBottomSheetDriver("");
                 dismiss();
-                // afterCmpltRidDriverStatus();
+              //  ((DashBoardActivity) getActivity()).showratingBottomSheetForCustomer(tripId);
+
             }
         });
     }
@@ -173,16 +191,16 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
         UpdateTripStatusByDriverReq updateTripStatusByDriverReq = new UpdateTripStatusByDriverReq();
         updateTripStatusByDriverReq.setDriverId(userId);
-        updateTripStatusByDriverReq.setTripId("");
-        updateTripStatusByDriverReq.setTRIPSTATS("");
-        updateTripStatusByDriverReq.setUpdatedAt("");
+        updateTripStatusByDriverReq.setTripId(HighwayApplication.getInstance().getCurrentTripId());
+        updateTripStatusByDriverReq.setTRIPSTATS(INVOICE);
+        updateTripStatusByDriverReq.setUpdatedAt(""+System.currentTimeMillis());
 
         RestClient.updateTripStatusByDriver(updateTripStatusByDriverReq, new Callback<UpdateTripStatusByDriverResp>() {
             @Override
             public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-//                        ((DashBoardActivity) getActivity()).showratingBottomSheet();
+                        ((DashBoardActivity) mActivity).showratingBottomSheetDriver();
                         dismiss();
                     }
                 }
@@ -198,6 +216,8 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        mActivity = (DashBoardActivity) getActivity();
 
     }
 

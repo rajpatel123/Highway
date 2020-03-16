@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +33,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
+
+import static com.highway.utils.Constants.TRIP_ID;
 
 
 public class DriverOnlineFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
@@ -56,14 +60,12 @@ public class DriverOnlineFragment extends Fragment implements View.OnClickListen
     private ImageView navigateToMap;
     private DashBoardActivity activity;
     private SupportMapFragment mapFragment;
+    private String tripId;
 
-    public DriverOnlineFragment() {
-    }
 
     public static DriverOnlineFragment newInstance() {
         DriverOnlineFragment fragment = new DriverOnlineFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -236,7 +238,7 @@ public class DriverOnlineFragment extends Fragment implements View.OnClickListen
     }
 
     private void updateMyLocation() {
-        if (mLastLocation==null){
+        if (mLastLocation == null) {
             return;
         }
         LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());

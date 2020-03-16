@@ -14,13 +14,17 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ReatingBottomDialogFragmentForCustomer extends Fragment {
+import static com.highway.utils.Constants.TRIP_ID;
+
+public class ReatingBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
     CircleImageView avatar;
     TextView providerName;
@@ -34,19 +38,16 @@ public class ReatingBottomDialogFragmentForCustomer extends Fragment {
     }
 
 
-    public static ReatingBottomDialogFragmentForCustomer newInstance(String param1, String param2) {
+    public static ReatingBottomDialogFragmentForCustomer newInstance() {
         ReatingBottomDialogFragmentForCustomer fragment = new ReatingBottomDialogFragmentForCustomer();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
 
-        }
     }
 
     @Override
@@ -58,6 +59,15 @@ public class ReatingBottomDialogFragmentForCustomer extends Fragment {
         rating = view.findViewById(R.id.rating);
         comment = view.findViewById(R.id.comment);
         submit = view.findViewById(R.id.submit);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
     return view;
     }

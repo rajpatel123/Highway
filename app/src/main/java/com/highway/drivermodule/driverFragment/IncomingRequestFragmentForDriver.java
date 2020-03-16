@@ -48,11 +48,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.highway.R;
 import com.highway.broadCastReceiver.MySenderBroadCast;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.drivermodule.drivermodels.TripStatus;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.utils.BaseUtil;
@@ -75,6 +77,7 @@ import static com.highway.utils.Constants.DROPPED;
 import static com.highway.utils.Constants.INVOICE;
 import static com.highway.utils.Constants.PICKEDUP;
 import static com.highway.utils.Constants.RATING;
+import static com.highway.utils.Constants.TRIP_ACCEPTED;
 import static com.highway.utils.Constants.TRIP_CANCELED;
 import static com.highway.utils.Constants.TRIP_NEW;
 import static com.highway.utils.Constants.TRIP_STARTED;
@@ -171,13 +174,30 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (pushData == null) {
+        if (pushData == null  && ((DashBoardActivity) getActivity()).pushData!=null) {
             try {
                 pushData = ((DashBoardActivity) getActivity()).pushData;
                 data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
+                HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else{
+            data = new NotificationPushData();
+            TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
+            if (tripStatus!=null){
+                data.setTripId(tripStatus.getBookingTripId());
+                data.setMobile(tripStatus.getMobile());
+                data.setSource(""+tripStatus.getSourceAddress());
+                data.setDestination(""+tripStatus.getDestinationAddress());
+                data.setCustomer(""+tripStatus.getMobile());
+                data.setName(""+tripStatus.getName());
+                mobileNo= data.getMobile();
+                data.setType(tripStatus.getCurrentTripStatus());
+                HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
+
+            }
+
         }
         Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
@@ -292,7 +312,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                         public void onFinish() {
                             stopMediaPlayer();
-                            ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
+                            ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(),"");
                         }
                     };
 
@@ -309,11 +329,28 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 }
 
                 break;
-            case TRIP_STARTED:
+            case TRIP_ACCEPTED:
+                incomingCallView.setVisibility(View.GONE);
+                goingtoPickupLocationView.setVisibility(View.VISIBLE);
+                lnrLocationHeader.setVisibility(View.VISIBLE);
+                locationAddressTV.setText(data.getSource());
+                lblLocationType.setText("PickUp Location");
+                lblLocationType.setVisibility(View.VISIBLE);
+
+                customer_name.setText(data.getCustomer());
+                STATUS=TRIP_ACCEPTED;
+
                 break;
             case ARRIVED:
+                lnrLocationHeader.setVisibility(View.VISIBLE);
+                incomingCallView.setVisibility(View.GONE);
+                btnCancelafterArrived.setVisibility(View.VISIBLE);
+                goingtoPickupLocationView.setVisibility(View.VISIBLE);
                 btnArrived.setVisibility(View.GONE);
                 btnpickedUp.setVisibility(View.VISIBLE);
+                lblLocationType.setText("Drop Location");
+                lblLocationType.setVisibility(View.VISIBLE);
+
                 statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
                         android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
@@ -324,6 +361,10 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 btnTapToDrop.setVisibility(View.VISIBLE);
                 locationAddressTV.setText(data.getDestination());
                 lblLocationType.setText("Drop Location");
+                incomingCallView.setVisibility(View.GONE);
+                goingtoPickupLocationView.setVisibility(View.VISIBLE);
+                lblLocationType.setVisibility(View.VISIBLE);
+                lnrLocationHeader.setVisibility(View.VISIBLE);
 
                 statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
                         android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -335,19 +376,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                 break;
             case DROPPED:
-                ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheetDriver(data.getTripId());
+                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
 
 
                 break;
             case COMPLETED:
-                ((DashBoardActivity) getActivity()).replaceFragment(new DriverOnlineFragment(), "");
-                ((DashBoardActivity) getActivity()).showBottomSheetDriver(data.getTripId());
+                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
+                ((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
 
                 break;
             case RATING:
-                ((DashBoardActivity) getActivity()).showratingBottomSheetDriver(data.getTripId());
-
+                ((DashBoardActivity) getActivity()).showratingBottomSheetDriver();
                 break;
             case INVOICE:
                 break;
@@ -384,9 +423,10 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.navigation_img:
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?saddr=28.535517,77.391029&daddr=28.613939,77.209023"));
-                startActivity(intent);
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + locationAddressTV.getText().toString());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
                 break;
 
             case R.id.btnReject:
@@ -419,25 +459,28 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
             case R.id.btnArrived:
                 updateDriverStatus(ARRIVED, data.getTripId());
+                STATUS=ARRIVED;
                 init(ARRIVED);
                 break;
 
             case R.id.btnCancel:
                 updateDriverStatus(TRIP_CANCELED, data.getTripId());
                 stopMediaPlayer();
-                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
+                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
 
                 break;
 
             case R.id.btnpickedUp:
                 updateDriverStatus(PICKEDUP, data.getTripId());
+                STATUS=PICKEDUP;
                 init(PICKEDUP);
                 break;
 
             case R.id.btnCancelafterArrived:
+                STATUS=TRIP_CANCELED;
                 updateDriverStatus(TRIP_CANCELED, data.getTripId());
                 stopMediaPlayer();
-                ((DashBoardActivity) getActivity()).replaceFragment(new DashBoardFragmentForDriver(), "");
+                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
 
                 break;
 
@@ -450,7 +493,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         }
     }
 
-
     void confirmPopup(String message,boolean isReject) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(dashBoardActivity);
         alertDialogBuilder
@@ -460,7 +502,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                    if (isReject){
                        ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
                    }else{
+                       STATUS=DROPPED;
                        updateDriverStatus(DROPPED, data.getTripId());
+                       init(DROPPED);
                    }
                 })
                 .setNegativeButton("NO", (dialog, id) -> dialog.cancel());
@@ -572,10 +616,10 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                         locationAddressTV.setText(data.getSource());
                         lblLocationType.setText("PickUp Location");
                         customer_name.setText(data.getCustomer());
-
+                        STATUS=TRIP_ACCEPTED;
 
                         if (countDownTimer != null) {
-                            if (mPlayer != null & mPlayer.isPlaying())
+                            if (mPlayer != null && mPlayer.isPlaying())
                                 mPlayer.stop();
                             countDownTimer.cancel();
                         }
