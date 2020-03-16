@@ -54,6 +54,7 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
     String driverId,vehicleId;
     VehicleAssignDropDowanResponse vehicleAssignDropDowanResponse;
     DashBoardActivity dashBoardActivity;
+    private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
 
     public Assign_D2V_FragmentForVehicleOwner() {
         // Required empty public constructor
@@ -255,10 +256,15 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
 
-                        Intent intent = new Intent(getActivity(), DashBoardActivity.class);
-                        startActivity(intent);
+                       /* Intent intent = new Intent(getActivity(), DashBoardActivity.class);
+                        startActivity(intent);*/
+                        dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
+                        Bundle bundle = new Bundle();
+                        dashBoardFragmentForVehicleOwner.setArguments(bundle);
+                        ((DashBoardActivity) getActivity()).replaceFragment(dashBoardFragmentForVehicleOwner, " ");
+
                         Toast.makeText(getActivity(), "Assign Driver to  Vehicle   SuccessFully", Toast.LENGTH_SHORT).show();
-                        getActivity().finish();
+                       // getActivity().finish();
                     }
                 }
             }

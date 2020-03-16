@@ -1,5 +1,5 @@
 
-package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel;
+package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

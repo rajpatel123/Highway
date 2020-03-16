@@ -2,8 +2,10 @@ package com.highway.commonretrofit;
 
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdRequest;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.GetAllTripByUserIdResponse;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserReq;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserResp;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.GetAllTripByUserIdRequest;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.GetAllTripByUserIdResponse;
 import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
@@ -195,20 +197,16 @@ public interface ApiInterface {
     @POST("api/Booking/updateTripStatusByDriver")
     Call<UpdateTripStatusByDriverResp> UPDATE_TRIP_STATUS_BY_DRIVER_RESP_CALL(@Body UpdateTripStatusByDriverReq updateTripStatusByDriverReq);
 
-
-
     // get driver details by id
     @POST("api/Booking/getDriverCurrentTripStatus")
     Call<DriverDetails> getDriverDetails(@Body DriverDetailRequest driverId);
-
 
     // get customer details by id
     @POST("api/Booking/getCustomerCurrentTripStatus")
     Call<GetCustomerCurrentTripStatusResp> GET_CUSTOMER_CURRENT_TRIP_STATUS_RESPS_CALL(@Body GetCustomerCurrentTripStatusReq getCustomerCurrentTripStatusReq);
 
-
-   /* // customer rating
-    @POST("updateTripRatingByUser")
-    Call<>*/
+    // customer rating
+    @POST("api/Trip/updateTripRatingByUser")
+    Call<UpdateTripRatingByUserResp>UPDATE_TRIP_RATING_BY_USER_RESP_CALL(@Body UpdateTripRatingByUserReq updateTripRatingByUserReq);
 
 }

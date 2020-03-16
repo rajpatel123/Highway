@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
-import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.UpcomingTrip;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
 import com.highway.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UpcomingTripAdapterForVehicleOwner extends RecyclerView.Adapter<UpcomingTripAdapterForVehicleOwner.ViewHolder> {

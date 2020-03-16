@@ -70,6 +70,7 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
     VehicleTypeDropDowanResponse vehicleTypeDropDowanResponse;
     VehicleDiamensionSizeResponse vehicleDiamensionSizeResponse;
     VehicleLoadCapicityResponse vehicleLoadCapicityResponse;
+    private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
 
     public AddVehicleFragmentForVehicleOwner() {
         // Required empty public constructor
@@ -402,9 +403,14 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
                                 //if (response.body().getId())
-                                Intent intent = new Intent(getActivity(), DashBoardActivity.class);
+                                dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
+                                Bundle bundle = new Bundle();
+                                dashBoardFragmentForVehicleOwner.setArguments(bundle);
+                                ((DashBoardActivity) getActivity()).replaceFragment(dashBoardFragmentForVehicleOwner, " ");
+
+                               /* Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                                 startActivity(intent);
-                                getActivity().finish();
+                                getActivity().finish();*/
                                 Toast.makeText(getActivity(), "Vehicle added Successfully", Toast.LENGTH_SHORT).show();
                             }
                         }

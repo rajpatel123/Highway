@@ -18,7 +18,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserReq;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserResp;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.utils.Constants;
@@ -44,6 +47,7 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
     Button submit;
     private String userId;
     private String tripId;
+    private IncomingRequestFragmentForDriver incomingRequestFragmentForDriver;
 
     public static RatingBottomDialogFragmentForDriver newInstance() {
         RatingBottomDialogFragmentForDriver ratingBottomDialogFragmentForDriver = new RatingBottomDialogFragmentForDriver();
@@ -64,6 +68,7 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
             @Override
             public void onClick(View v) {
                 afterCmpltRidDriverStatus();
+                //driverRating();
             }
         });
 
@@ -71,6 +76,8 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
 
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -124,6 +131,35 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
             @Override
             public void onFailure(Call<UpdateTripStatusByDriverResp> call, Throwable t) {
                 Toast.makeText(getActivity(), "failure!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void driverRating() {
+        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        tripId = HighwayPrefs.getString(getActivity(),Constants.TRIP_ID);
+        UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
+        updateTripRatingByUserReq.setRatingStatus("1");
+        updateTripRatingByUserReq.setUserId(userId);
+        updateTripRatingByUserReq.setRatingComment("good");
+        updateTripRatingByUserReq.setRatingRate("4");
+        updateTripRatingByUserReq.setTripId(tripId);
+
+        RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
+            @Override
+            public void onResponse(Call<UpdateTripRatingByUserResp> call, Response<UpdateTripRatingByUserResp> response) {
+                if (response!=null && response.code()==200 && response.body()!=null){
+                    if (response.body().getStatus());
+                    incomingRequestFragmentForDriver = IncomingRequestFragmentForDriver.newInstance();
+                    Bundle bundle = new Bundle();
+                    incomingRequestFragmentForDriver.setArguments(bundle);
+                    ((DashBoardActivity) getActivity()).replaceFragment(incomingRequestFragmentForDriver, " ");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateTripRatingByUserResp> call, Throwable t) {
+                Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
             }
         });
     }

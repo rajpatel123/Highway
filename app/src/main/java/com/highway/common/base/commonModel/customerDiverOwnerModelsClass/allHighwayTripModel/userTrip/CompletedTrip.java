@@ -1,10 +1,10 @@
 
-package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel;
+package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class OngoingTrip {
+public class CompletedTrip {
 
     @SerializedName("sourceLat")
     @Expose

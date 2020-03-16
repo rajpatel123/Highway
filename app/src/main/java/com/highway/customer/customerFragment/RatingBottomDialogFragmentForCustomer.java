@@ -11,11 +11,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
+import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserReq;
+import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserResp;
+import com.highway.commonretrofit.RestClient;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
+import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.highway.utils.Constants.RATING;
 
 public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
@@ -25,6 +42,9 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
     EditText comment;
     Button submit;
     private OnFragmentInteractionListener mListener;
+    private String userId;
+    private String tripId;
+    private DashBordFragmentForCustomer dashBordFragmentForCustomer;
 
     public RatingBottomDialogFragmentForCustomer() {
         // Required empty public constructor
@@ -63,8 +83,35 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         return view;
     }
 
-    public void afterCmpltRidCustomerStatus() {
 
+
+    public void afterCmpltRidCustomerStatus() {
+        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        tripId = HighwayPrefs.getString(getActivity(),Constants.TRIP_ID);
+        UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
+        updateTripRatingByUserReq.setRatingStatus("1");
+        updateTripRatingByUserReq.setUserId(userId);
+        updateTripRatingByUserReq.setRatingComment("good");
+        updateTripRatingByUserReq.setRatingRate("4");
+        updateTripRatingByUserReq.setTripId(tripId);
+
+        RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
+            @Override
+            public void onResponse(Call<UpdateTripRatingByUserResp> call, Response<UpdateTripRatingByUserResp> response) {
+                if (response!=null && response.code()==200 && response.body()!=null){
+                   if (response.body().getStatus());
+                    dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
+                    Bundle bundle = new Bundle();
+                    dashBordFragmentForCustomer.setArguments(bundle);
+                    ((DashBoardActivity) getActivity()).replaceFragment(dashBordFragmentForCustomer, " ");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateTripRatingByUserResp> call, Throwable t) {
+                Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }

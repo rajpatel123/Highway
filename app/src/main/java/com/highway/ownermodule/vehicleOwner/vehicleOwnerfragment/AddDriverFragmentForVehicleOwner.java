@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
 import com.highway.utils.Constants;
@@ -50,6 +51,7 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
     private String vehicleId;
     List<String> vehicleNames;
     private String userId;
+    private DashBoardFragmentForVehicleOwner dashBoardFragmentForVehicleOwner;
 
     public AddDriverFragmentForVehicleOwner() {
         // Required empty public constructor
@@ -209,8 +211,12 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
                           // if (response.body().getId()) {
-                                Intent intent = new Intent(getActivity(), DashBoardActivity.class);
-                                startActivity(intent);
+                            dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
+                            Bundle bundle = new Bundle();
+                            dashBoardFragmentForVehicleOwner.setArguments(bundle);
+                            ((DashBoardActivity) getActivity()).replaceFragment(dashBoardFragmentForVehicleOwner, " ");
+                                //Intent intent = new Intent(getActivity(), DashBoardActivity.class);
+                                //startActivity(intent);
                               //  getActivity().finish();
                                 Toast.makeText(getActivity(), "Add new Driver SuccessFully", Toast.LENGTH_SHORT).show();
 

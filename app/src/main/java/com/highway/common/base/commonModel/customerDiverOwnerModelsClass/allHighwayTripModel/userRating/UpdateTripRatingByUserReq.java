@@ -1,4 +1,4 @@
-package com.highway.customer.customerModelClass.customerReting;
+package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

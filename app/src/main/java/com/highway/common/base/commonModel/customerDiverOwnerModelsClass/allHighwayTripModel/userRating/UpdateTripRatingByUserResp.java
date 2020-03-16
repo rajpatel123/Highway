@@ -1,4 +1,4 @@
-package com.highway.customer.customerModelClass.customerReting;
+package com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating;
 
 
 
