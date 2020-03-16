@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.CustomerTripStatus;
 import com.highway.drivermodule.drivermodels.TripStatus;
 
 public class HighwayApplication extends Application {
@@ -47,6 +48,10 @@ public class HighwayApplication extends Application {
     }
 
     public void setUserDetails(TripStatus tripStatus) {
+        this.tripStatus=tripStatus;
+    }
+
+    public void setUserDetails(CustomerTripStatus customerTripStatus) {
         this.tripStatus=tripStatus;
     }
 }

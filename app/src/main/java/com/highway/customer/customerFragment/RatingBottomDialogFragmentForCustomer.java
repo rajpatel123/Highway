@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +12,12 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.highway.utils.Constants.TRIP_ID;
-
-public class ReatingBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
+public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
     CircleImageView avatar;
     TextView providerName;
@@ -33,13 +26,13 @@ public class ReatingBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     Button submit;
     private OnFragmentInteractionListener mListener;
 
-    public ReatingBottomDialogFragmentForCustomer() {
+    public RatingBottomDialogFragmentForCustomer() {
         // Required empty public constructor
     }
 
 
-    public static ReatingBottomDialogFragmentForCustomer newInstance() {
-        ReatingBottomDialogFragmentForCustomer fragment = new ReatingBottomDialogFragmentForCustomer();
+    public static RatingBottomDialogFragmentForCustomer newInstance() {
+        RatingBottomDialogFragmentForCustomer fragment = new RatingBottomDialogFragmentForCustomer();
 
         return fragment;
     }
@@ -63,13 +56,17 @@ public class ReatingBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                afterCmpltRidCustomerStatus();
             }
         });
 
+        return view;
+    }
+
+    public void afterCmpltRidCustomerStatus() {
 
 
-    return view;
+
     }
 
 

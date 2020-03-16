@@ -2,6 +2,7 @@ package com.highway.drivermodule.drivermodels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.CustomerTripStatus;
 
 public class TripStatus {
 

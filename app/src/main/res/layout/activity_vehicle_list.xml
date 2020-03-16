@@ -29,16 +29,98 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tata Ace"
-                android:textSize="14sp"
                 android:textColor="@color/black"
-                />
+                android:textSize="14sp" />
 
             <ImageView
                 android:id="@+id/vehicleImg1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:backgroundTint="@color/black"
-                android:src="@drawable/vehicle" />
+                android:src="@drawable/vehicle1_tata_ace_icon1_un_selected"
+                />
+
+            <ImageView
+                android:id="@+id/vehicleImg2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle2_champion_icon2_un_selected"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/vehicleImg3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle3_pickup_icon3__un_selected"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/vehicleImg4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle4_evehicle_icon4_un_selected"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/vehicleImg5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle5_echo_icon5_un_selected"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/vehicleImg6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle6_icon6_un_selected"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/vehicleImg1Selected"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle11_tata_ace_icon11_selected"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/vehicleImg2Selected"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle22_champion_icon22_selected"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/vehicleImg3Selected"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle33_pickup_icon33_selected"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/vehicleImg4Selected"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle44_evehicle_icon44_selected"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/vehicleImg5Selected"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle55_echo_icon55_selected"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/vehicleImg6Selected"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/black"
+                android:src="@drawable/vehicle66_icon66_selected"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/timeDurationTv2"
@@ -46,9 +128,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="8 mins"
-                android:textSize="10sp"
                 android:textColor="@color/black"
-                />
+                android:textSize="10sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,11 +142,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/Rs_one1"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:textSize="10sp"
-                    android:textColor="@color/black" />
+                    android:text="@string/Rs_one1"
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:id="@+id/infoImg"

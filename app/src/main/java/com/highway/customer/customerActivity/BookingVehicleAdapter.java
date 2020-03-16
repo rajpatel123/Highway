@@ -77,28 +77,50 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             public void onClick(View v) {
                 if (onClickEvents != null) {
                     row_index = position;
-                    onClickEvents.onCLickTruck(holder.getAdapterPosition(),
+                   /* onClickEvents.onCLickTruck(holder.getAdapterPosition(),
                             vehicleList.getVehicleFare());
-                    notifyDataSetChanged();
+                            notifyDataSetChanged(); */
+                    for (int i = 0;i<=row_index; i++) {
+                        if (vehicleList.isSelected()==false){
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle1_tata_ace_icon1_un_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle2_champion_icon2_un_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle3_pickup_icon3__un_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle4_evehicle_icon4_un_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle5_echo_icon5_un_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle6_icon6_un_selected);
+                        }else {
+
+                            onClickEvents.onCLickTruck(holder.getAdapterPosition(),vehicleList.getVehicleFare());
+
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle11_tata_ace_icon11_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle22_champion_icon22_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle33_pickup_icon33_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle44_evehicle_icon44_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle55_echo_icon55_selected);
+                            Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle66_icon66_selected);
+                        }
+
+                        notifyDataSetChanged();
+                    }
                 }
             }
         });
-        if(row_index==position){
-            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#FFB400"));
-           // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
-        }
-        else
-        {
-            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#ffffff"));
-            //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
-        }
+//        if(row_index==position){
+//            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#FFB400"));
+//           // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
+//        }
+//        else
+//        {
+//              holder.row_linearlayout.setBackgroundColor(Color.parseColor("#ffffff"));
+//            //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
+//        }
 
 
-        if (vehicleList.isSelected()){
+        /*if (vehicleList.isSelected()){
             Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_color);
         }else{
             Utils.setTintForImage(context,holder.vehicleIcons,R.color.email_gray);
-        }
+        }*/
     }
 
     @Override

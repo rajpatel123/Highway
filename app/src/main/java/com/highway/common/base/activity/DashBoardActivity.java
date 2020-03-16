@@ -50,7 +50,10 @@ import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
-import com.highway.customer.customerFragment.ReatingBottomDialogFragmentForCustomer;
+import com.highway.customer.customerFragment.RatingBottomDialogFragmentForCustomer;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.CustomerTripStatus;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusReq;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
 import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
@@ -982,10 +985,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
 
     public void showratingBottomSheetForCustomer() {
-        ReatingBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
-                ReatingBottomDialogFragmentForCustomer.newInstance();
+        RatingBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
+                RatingBottomDialogFragmentForCustomer.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
-                ReatingBottomDialogFragmentForCustomer.class.getSimpleName());
+                RatingBottomDialogFragmentForCustomer.class.getSimpleName());
     }
 
 
@@ -1012,6 +1015,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     if (response != null && response.code() == 200 && response.body() != null) {
                         TripStatus tripStatus = response.body().getDriverTripStatus();
                         Log.d("Driver Details", "" + tripStatus.getCurrentTripStatus());
+
                         if (tripStatus.getRatingStatus().equalsIgnoreCase("0")) {
                             HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
                             HighwayApplication.getInstance().setUserDetails(tripStatus);
@@ -1036,7 +1040,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    private void getCustomerDetails() {
+   /* private void getCustomerDetails() {
         DriverDetailRequest data = new DriverDetailRequest();
             data.setDriverId(HighwayPrefs.getString(this, Constants.ID));
             RestClient.getCustomerDetails(data, new Callback<DriverDetails>() {
@@ -1044,6 +1048,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 public void onResponse(Call<DriverDetails> call, Response<DriverDetails> response) {
                     if (response != null && response.code() == 200 && response.body() != null) {
                         Log.d("User Details", "" + response.body().getDriverTripStatus().getCurrentTripStatus());
+
 
                     }
                 }
@@ -1054,5 +1059,38 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                 }
             });
-    }
+    }*/
+
+
+   public void getCustomerDetails(){
+       GetCustomerCurrentTripStatusReq customerTripRequest = new GetCustomerCurrentTripStatusReq();
+       customerTripRequest.setCustomerId(HighwayPrefs.getString(this,Constants.ID));
+
+       RestClient.getCustomerDetails(customerTripRequest, new Callback<GetCustomerCurrentTripStatusResp>() {
+           @Override
+           public void onResponse(Call<GetCustomerCurrentTripStatusResp> call, Response<GetCustomerCurrentTripStatusResp> response) {
+
+               if (response != null && response.code() == 200 && response.body() != null) {
+                 CustomerTripStatus customerTripStatus = response.body().getCustomerTripStatus();
+                   Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
+
+                   if (customerTripStatus.getRatingStatus().equalsIgnoreCase("0")) {
+                       HighwayApplication.getInstance().setCurrentTripId(customerTripStatus.getBookingTripId());
+                       HighwayApplication.getInstance().setUserDetails(customerTripStatus);
+                       dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
+                       Bundle bundle = new Bundle();
+                       dashBordFragmentForCustomer.setArguments(bundle);
+                       replaceFragment(dashBordFragmentForCustomer, " ");
+                   }
+
+               }
+           }
+
+           @Override
+           public void onFailure(Call<GetCustomerCurrentTripStatusResp> call, Throwable t) {
+               Log.d("User Details", "" + t.getMessage());
+               Toast.makeText(dashBoardActivity, "failure", Toast.LENGTH_SHORT).show();
+           }
+       });
+   }
 }

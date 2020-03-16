@@ -16,6 +16,8 @@ import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.Canc
 import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerRequest;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusReq;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
@@ -56,8 +58,6 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimens
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleDimensionSize.VehicleDiamensionSizeResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
-
-import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -204,6 +204,11 @@ public interface ApiInterface {
 
     // get customer details by id
     @POST("api/Booking/getCustomerCurrentTripStatus")
-    Call<DriverDetails> getCustomerDetails(@Body DriverDetailRequest driverId);
+    Call<GetCustomerCurrentTripStatusResp> GET_CUSTOMER_CURRENT_TRIP_STATUS_RESPS_CALL(@Body GetCustomerCurrentTripStatusReq getCustomerCurrentTripStatusReq);
+
+
+   /* // customer rating
+    @POST("updateTripRatingByUser")
+    Call<>*/
 
 }

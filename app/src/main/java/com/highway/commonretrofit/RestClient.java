@@ -17,6 +17,8 @@ import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.Canc
 import com.highway.customer.customerModelClass.cancleTripModel.cancleReason.CancelTripReasonResponse;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerRequest;
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusReq;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
@@ -57,8 +59,6 @@ import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.getAllVehicle.GetAllVehicleResponse;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanRequest;
 import com.highway.ownermodule.vehicleOwner.vehileOwnerModelsClass.vehicleTypeDropDowan.VehicleTypeDropDowanResponse;
-
-import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
@@ -239,9 +239,12 @@ public class RestClient {
     }
 
     // get Customer details
-    public static void getCustomerDetails(DriverDetailRequest obj, Callback<DriverDetails>updateTripStatusByDriverRespCallback){
+   /* public static void getCustomerDetails(DriverDetailRequest obj, Callback<DriverDetails>updateTripStatusByDriverRespCallback){
         RetrofitClient.getClient().getCustomerDetails(obj).enqueue(updateTripStatusByDriverRespCallback);
-    }
+    }*/
+    public static void getCustomerDetails(GetCustomerCurrentTripStatusReq obj, Callback<GetCustomerCurrentTripStatusResp>customerTripResponseCallback) {
+        RetrofitClient.getClient().GET_CUSTOMER_CURRENT_TRIP_STATUS_RESPS_CALL(obj).enqueue(customerTripResponseCallback);
 
+    }
 
 }
