@@ -77,10 +77,10 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
             public void onClick(View v) {
                 if (onClickEvents != null) {
                     row_index = position;
-                   /* onClickEvents.onCLickTruck(holder.getAdapterPosition(),
+                    onClickEvents.onCLickTruck(holder.getAdapterPosition(),
                             vehicleList.getVehicleFare());
-                            notifyDataSetChanged(); */
-                    for (int i = 0;i<=row_index; i++) {
+                            notifyDataSetChanged();
+                    /*for (int i = 0;i<=row_index; i++) {
                         if (vehicleList.isSelected()==false){
                             Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle1_tata_ace_icon1_un_selected);
                             Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.vehicle2_champion_icon2_un_selected);
@@ -101,19 +101,19 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
                         }
 
                         notifyDataSetChanged();
-                    }
+                    }*/
                 }
             }
         });
-//        if(row_index==position){
-//            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#FFB400"));
-//           // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
-//        }
-//        else
-//        {
-//              holder.row_linearlayout.setBackgroundColor(Color.parseColor("#ffffff"));
-//            //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
-//        }
+        if(row_index==position){
+            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#FFB400"));
+            // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
+        }
+        else
+        {
+            holder.row_linearlayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
+        }
 
 
         /*if (vehicleList.isSelected()){
