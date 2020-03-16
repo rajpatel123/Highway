@@ -89,6 +89,8 @@
                             android:text="GaurGaurGaurGaurGaurGaurGaurGaurGaurGaur City 2" />
 
                     </LinearLayout>
+
+
                 </LinearLayout>
 
 
@@ -100,7 +102,26 @@
                     android:layout_below="@+id/dropAdd"
                     android:layout_gravity="center" />
 
+                <RelativeLayout
+                    android:id="@+id/mylocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:background="@drawable/location_bg"
+                    android:elevation="@dimen/_5sdp"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@drawable/ic_my_location" />
+                </RelativeLayout>
+
             </FrameLayout>
+
 
         </LinearLayout>
 
@@ -209,6 +230,7 @@
                         android:layout_height="@dimen/_80sdp"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:orientation="vertical"
                         android:layout_weight="3">
 
