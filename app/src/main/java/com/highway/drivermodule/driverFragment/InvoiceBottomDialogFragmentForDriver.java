@@ -1,6 +1,5 @@
 package com.highway.drivermodule.driverFragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,13 +13,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoice;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceReq;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceResp;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.utils.Constants;
@@ -33,8 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.google.android.libraries.places.internal.hy.f;
 import static com.highway.utils.Constants.INVOICE;
-import static com.highway.utils.Constants.TRIP_ID;
 
 public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragment
         implements View.OnClickListener {
@@ -44,7 +45,7 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     public String userId;
 
 
-    TextView bookingId;
+    TextView bookingIdCode;
     TextView totalAmount;
     TextView payableAmount;
     LinearLayout paymentModeLayout;
@@ -52,7 +53,7 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     TextView lblPaymentType;
     TextView totalDistance;
     TextView travelTime;
-    TextView fixed;
+    TextView baseFairefixed;
     TextView distanceFare;
     TextView peekHourCharges;
     TextView nightFare;
@@ -84,15 +85,16 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     NestedScrollView nestedScrollView;
     int yy, mm, dd;
     TextView distance;
+    TextView start_time,end_time;
     private String totDistance;
     private String tripId;
     private DashBoardActivity mActivity;
+    private String getBookTripIdCode;
+    private String getBookId;
 
     public static InvoiceBottomDialogFragmentForDriver newInstance() {
         return new InvoiceBottomDialogFragmentForDriver();
     }
-
-
 
 
     @Nullable
@@ -100,12 +102,14 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_invoice_dialog_for_driver, container, false);
 
-        bookingId = view.findViewById(R.id.booking_id);
+        bookingIdCode = view.findViewById(R.id.booking_id);
         startDate = view.findViewById(R.id.start_date);
         endDate = view.findViewById(R.id.end_date);
+        start_time = view.findViewById(R.id.start_time);
+        end_time = view.findViewById(R.id.end_time);
         totalDistance = view.findViewById(R.id.total_distance);
         travelTime = view.findViewById(R.id.travel_time);
-        fixed = view.findViewById(R.id.fixed);
+        baseFairefixed = view.findViewById(R.id.fixed);
         distanceFare = view.findViewById(R.id.distance_fare);
         peekHourCharges = view.findViewById(R.id.peek_hour_charges);
         nightFare = view.findViewById(R.id.night_fare);
@@ -138,16 +142,18 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         nestedScrollView = view.findViewById(R.id.nested_scroll_view);
 
 
-        tripdate();
         //Intent intent =getActivity().getIntent();
-        String bookTripIdCode = getActivity().getIntent().getStringExtra("bookTripIdCode");
-        bookingId.setText(bookTripIdCode);
+        String bookTripIdCode = getActivity().getIntent().getStringExtra("bookTbripIdCode");
+        bookingIdCode.setText(bookTripIdCode);
+
+        getBookTripIdCode = HighwayPrefs.getString(getActivity(), "bookTripIdCode");
+        getBookId = HighwayPrefs.getString(getActivity(), "BookingId");
+
         totDistance = (getActivity().getIntent().getStringExtra("distance"));
         totalDistance.setText(totDistance);
 
-
-
-
+        tripdate();
+        getInvoiceForDriver();
 
 
         return view;
@@ -169,6 +175,58 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         endDate.setText(dateString);
     }
 
+
+    private void getInvoiceForDriver() {
+
+        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        DriverInvoiceReq driverInvoiceReq = new DriverInvoiceReq();
+        driverInvoiceReq.setBookingId(getBookId);
+        driverInvoiceReq.setDriverId(userId);
+
+        RestClient.getDriverInvoice(driverInvoiceReq, new Callback<DriverInvoiceResp>() {
+            @Override
+            public void onResponse(Call<DriverInvoiceResp> call, Response<DriverInvoiceResp> response) {
+
+                if (response!=null && response.code()==200 && response.body()!=null){
+                    if (response.body().getStatus()){
+                        DriverInvoice driverInvoice = response.body().getDriverInvoice();
+
+                        invoiceForDriver(driverInvoice);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DriverInvoiceResp> call, Throwable t) {
+                Toast.makeText(mActivity, "invoice failed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+    }
+
+    private void invoiceForDriver(DriverInvoice driverInvoice) {
+        bookingIdCode.setText(" "+driverInvoice.getBookingTripCode());
+        startDate.setText(""+driverInvoice.getStartDate());
+        endDate.setText(" "+driverInvoice.getEndDate());
+        start_time.setText(""+driverInvoice.getStartTime());
+        end_time.setText(" "+driverInvoice.getEndTime());
+        totalDistance.setText(""+driverInvoice.getTotDistance());
+        travelTime.setText(" "+driverInvoice.getTravelTime());
+        baseFairefixed.setText(""+driverInvoice.getBasedFarefixed());
+        distanceFare.setText(" "+driverInvoice.getDistancePrice());
+        peekHourCharges.setText(""+driverInvoice.getPeekHourCharges());
+        nightFare.setText(" "+driverInvoice.getNightFare());
+        tax.setText(""+driverInvoice.getTax());
+        totalAmount.setText(" "+driverInvoice.getTotalAmount());
+       // .setText(""+driverInvoice.getWalletDetection());
+        discount.setText(" "+driverInvoice.getDiscount());
+        payableAmount.setText(""+driverInvoice.getPaymentMode());
+
+    }
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -179,9 +237,10 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
             public void onClick(View v) {
                 afterCmpltRidDriverStatus();
 
-               // ((DashBoardActivity) getActivity()).showratingBottomSheetDriver("");
+
+                // ((DashBoardActivity) getActivity()).showratingBottomSheetDriver("");
                 dismiss();
-              //  ((DashBoardActivity) getActivity()).showratingBottomSheetForCustomer(tripId);
+                //  ((DashBoardActivity) getActivity()).showratingBottomSheetForCustomer(tripId);
 
             }
         });
@@ -193,7 +252,7 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
         updateTripStatusByDriverReq.setDriverId(userId);
         updateTripStatusByDriverReq.setTripId(HighwayApplication.getInstance().getCurrentTripId());
         updateTripStatusByDriverReq.setTRIPSTATS(INVOICE);
-        updateTripStatusByDriverReq.setUpdatedAt(""+System.currentTimeMillis());
+        updateTripStatusByDriverReq.setUpdatedAt("" + System.currentTimeMillis());
 
         RestClient.updateTripStatusByDriver(updateTripStatusByDriverReq, new Callback<UpdateTripStatusByDriverResp>() {
             @Override

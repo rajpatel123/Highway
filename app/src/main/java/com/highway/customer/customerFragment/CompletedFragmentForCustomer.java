@@ -79,10 +79,10 @@ public class CompletedFragmentForCustomer extends Fragment {
             completedRecyclerforCustomer.setItemAnimator(new DefaultItemAnimator());
             completedRecyclerforCustomer.setAdapter(completedTripAdapterForCustomer);
 
-        } else {
+        }/* else {
             Toast.makeText(dashBoardActivity, "No completed data  for customer !", Toast.LENGTH_SHORT).show();
 
-        }
+        }*/
     }
 
 }

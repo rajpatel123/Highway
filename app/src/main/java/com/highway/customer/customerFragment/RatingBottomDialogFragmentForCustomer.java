@@ -40,11 +40,13 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
     TextView providerName;
     RatingBar rating;
     EditText comment;
+    String cmnt;
     Button submit;
     private OnFragmentInteractionListener mListener;
     private String userId;
     private String tripId;
     private DashBordFragmentForCustomer dashBordFragmentForCustomer;
+    private String ratingBar;
 
     public RatingBottomDialogFragmentForCustomer() {
         // Required empty public constructor
@@ -73,6 +75,8 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         comment = view.findViewById(R.id.comment);
         submit = view.findViewById(R.id.submit);
 
+         ratingAndCmnt();
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +87,21 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         return view;
     }
 
+    private void ratingAndCmnt() {
+        cmnt = comment.getText().toString().trim();
+
+           /* if (cmmnt.isEmpty()) {
+                comment.setError("pls enter comments");
+                return false;
+            } else {
+                comment.setError(null);
+            }
+
+        return false;*/
+
+        ratingBar = String.valueOf(rating.getRating());
+        Toast.makeText(getActivity(), ratingBar, Toast.LENGTH_LONG).show();
+    }
 
 
     public void afterCmpltRidCustomerStatus() {
@@ -91,8 +110,8 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
         updateTripRatingByUserReq.setRatingStatus("1");
         updateTripRatingByUserReq.setUserId(userId);
-        updateTripRatingByUserReq.setRatingComment("good");
-        updateTripRatingByUserReq.setRatingRate("4");
+        updateTripRatingByUserReq.setRatingComment(cmnt);
+        updateTripRatingByUserReq.setRatingRate(ratingBar);
         updateTripRatingByUserReq.setTripId(tripId);
 
         RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
@@ -127,6 +146,10 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void show(String tag) {
+
     }
 
     public interface OnFragmentInteractionListener {

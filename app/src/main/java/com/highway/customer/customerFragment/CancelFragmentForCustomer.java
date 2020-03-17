@@ -76,9 +76,9 @@ public class CancelFragmentForCustomer extends Fragment {
             canRecyclerForCustomer.setLayoutManager(layoutManager);
             canRecyclerForCustomer.setItemAnimator(new DefaultItemAnimator());
             canRecyclerForCustomer.setAdapter(cancleTripAdapterForCustomer);
-        }else{
+        }/*else{
             Toast.makeText(dashBoardActivity, "No cancel trip data for customer !", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
 

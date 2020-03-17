@@ -56,6 +56,7 @@
                     android:layout_marginTop="-8sp"
                     android:progressTint="@color/colorPrimary"
                     android:rating="3"
+                    android:saveEnabled="true"
                     android:scaleX="0.6"
                     android:scaleY="0.6" />
 

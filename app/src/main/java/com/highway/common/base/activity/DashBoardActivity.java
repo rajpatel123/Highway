@@ -46,6 +46,7 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHigh
 import com.highway.common.base.firebaseService.MyFirebaseServiceMessaging;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.RegisterForPushModel;
+import com.highway.customer.customerActivity.BookingConformedActivity;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
@@ -114,6 +115,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
     private List<CancelTrip> cancelTrips = new ArrayList<>();
     private IncomingRequestFragmentForDriver incomingFragment;
+    private BookingConformedActivity bookingConformed;
 
 
     public List<CancelTrip> getCancelTrips() {
@@ -897,12 +899,20 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             if (!TextUtils.isEmpty(userRole) && userRole.equalsIgnoreCase("3")) {
                 incomingFragment = IncomingRequestFragmentForDriver.newInstance();
                 Bundle bundle = new Bundle();
                 incomingFragment.setArguments(bundle);
                 replaceFragment(incomingFragment, "Online");
             }
+
+            if (!TextUtils.isEmpty(userRole) && userRole.equalsIgnoreCase("4")){
+              // bookingConformed = new BookingConformedActivity();
+                Intent intent1 = new Intent(DashBoardActivity.this,BookingConformedActivity.class);
+                startActivity(intent1);
+            }
+
         }
     };
 
@@ -968,7 +978,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public void showInVoiceBottomSheetCustomer(String tripId) {
+    public  void showInVoiceBottomSheetCustomer(String tripId) {
         InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
                 InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),

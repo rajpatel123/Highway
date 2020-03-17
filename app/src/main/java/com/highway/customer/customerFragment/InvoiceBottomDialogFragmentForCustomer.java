@@ -12,16 +12,32 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
+import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
+import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoice;
+import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceReq;
+import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceResp;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceReq;
+import com.highway.utils.Constants;
+import com.highway.utils.HighwayPrefs;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.highway.utils.Constants.TRIP_ID;
 
 public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
+    public static final String TAG = "ActionBottomDialog";
     private OnFragmentInteractionListener mListener;
     TextView paymentMode;
     Button payNow;
@@ -60,9 +76,15 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     TextView endDate;
     NestedScrollView nestedScrollView;
     private String tripId;
-
-
-
+    private String userId;
+    TextView bookingIdCode;
+    private String getBookTripIdCode;
+    private String getBookId;
+    private String totDistance;
+    private String totalDistance;
+    private TextView payAbleAmout;
+    private int yy, mm, dd;
+    TextView start_time,end_time;
 
     public static InvoiceBottomDialogFragmentForCustomer newInstance(String tripId) {
         InvoiceBottomDialogFragmentForCustomer fragment = new InvoiceBottomDialogFragmentForCustomer();
@@ -87,6 +109,10 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         bookingId = view.findViewById(R.id.booking_id);
         startDate = view.findViewById(R.id.start_date);
         endDate = view.findViewById(R.id.end_date);
+
+        start_time = view.findViewById(R.id.start_time);
+        end_time = view.findViewById(R.id.end_time);
+
         distance = view.findViewById(R.id.distance);
         travelTime = view.findViewById(R.id.travel_time);
 
@@ -100,7 +126,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         discount = view.findViewById(R.id.discount);
         paymentMode = view.findViewById(R.id.payment_mode);
         done = view.findViewById(R.id.done);
-        payNow = view.findViewById(R.id.payable);
+        payAbleAmout = view.findViewById(R.id.payable);
 
 
 
@@ -124,10 +150,97 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         }
 
 
+        //Intent intent =getActivity().getIntent();
+        String bookTripIdCode = getActivity().getIntent().getStringExtra("bookTbripIdCode");
+        bookingIdCode.setText(bookTripIdCode);
 
+        getBookTripIdCode = HighwayPrefs.getString(getActivity(), "bookTripIdCode");
+        getBookId = HighwayPrefs.getString(getActivity(), "BookingId");
+
+        totDistance = (getActivity().getIntent().getStringExtra("distance"));
+        distance.setText(totDistance);
+
+        tripdate();
+        getInvoiceForCustomer();
+        clicklistner();
 
 
         return view;
+    }
+
+    private void clicklistner() {
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                RatingBottomDialogFragmentForCustomer ratingBottomDialogFragmentForCustomer = RatingBottomDialogFragmentForCustomer.newInstance();
+                ratingBottomDialogFragmentForCustomer.show( InvoiceBottomDialogFragmentForCustomer.TAG);
+
+
+            }
+        });
+
+    }
+
+    private void tripdate() {
+        // set current date into textview -- for start date
+        final Calendar c = Calendar.getInstance();
+        yy = c.get(Calendar.YEAR);
+        mm = c.get(Calendar.MONTH);
+        dd = c.get(Calendar.DAY_OF_MONTH);
+        startDate.setText(new StringBuilder()
+                .append(yy).append(" ").append("-").append(mm + 1).append("-").append(dd));
+
+        // for end date
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd, yyyy h:mm a");
+        String dateString = sdf.format(date);
+        endDate.setText(dateString);
+    }
+
+
+    private void getInvoiceForCustomer() {
+        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        CustomerInvoiceReq customerInvoiceReq = new CustomerInvoiceReq();
+        customerInvoiceReq.setBookingId(getBookId);
+        customerInvoiceReq.setCustomerId(userId);
+
+        RestClient.getCustomerInvoice(customerInvoiceReq, new Callback<CustomerInvoiceResp>() {
+            @Override
+            public void onResponse(Call<CustomerInvoiceResp> call, Response<CustomerInvoiceResp> response) {
+                if (response!=null && response.code()==200 && response.body()!=null){
+                    if (response.body().getStatus()){
+                       CustomerInvoice customerInvoice =response.body().getCustomerInvoice();
+                       invoiceForCustomer(customerInvoice);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerInvoiceResp> call, Throwable t) {
+                Toast.makeText(getActivity(), "customer invoice failure", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void invoiceForCustomer(CustomerInvoice customerInvoice) {
+
+        bookingId.setText(""+customerInvoice.getBookingTripCode());
+        startDate.setText(""+customerInvoice.getStartDate());
+        endDate.setText(""+customerInvoice.getEndDate());
+        start_time.setText(""+customerInvoice.getStartTime());
+        end_time.setText(" "+customerInvoice.getEndTime());
+        distance.setText(""+customerInvoice.getTotDistance());
+        travelTime.setText(""+customerInvoice.getTravelTime());
+        bookingId.setText(""+customerInvoice.getBasedFarefixed());
+        bookingId.setText(""+customerInvoice.getDistancePrice());
+        peekHourCharges.setText(""+customerInvoice.getPeekHourCharges());
+        nightFare.setText(""+customerInvoice.getNightFare());
+        tax.setText(""+customerInvoice.getTax());
+        totalAmount.setText(""+customerInvoice.getTotalAmount());
+        discount.setText(""+customerInvoice.getDiscount());
+        payAbleAmout.setText(""+customerInvoice.getPaymentMode());
+
     }
 
 
@@ -145,7 +258,6 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

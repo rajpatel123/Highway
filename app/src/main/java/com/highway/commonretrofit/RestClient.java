@@ -21,6 +21,10 @@ import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.Cancel
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
 import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusReq;
 import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
+import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceReq;
+import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceResp;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceReq;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceResp;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
@@ -249,9 +253,19 @@ public class RestClient {
     }
 
     // user reating
-
     public static void getRatingUser(UpdateTripRatingByUserReq updateTripRatingByUserReq, Callback<UpdateTripRatingByUserResp>updateTripRatingByUserRespCallback){
         RetrofitClient.getClient().UPDATE_TRIP_RATING_BY_USER_RESP_CALL(updateTripRatingByUserReq).enqueue(updateTripRatingByUserRespCallback);
     }
+
+    // invoice driver
+    public static void getDriverInvoice(DriverInvoiceReq driverInvoiceReq, Callback<DriverInvoiceResp>driverInvoiceRespCallback){
+        RetrofitClient.getClient().DRIVER_INVOICE_RESP_CALL(driverInvoiceReq).enqueue(driverInvoiceRespCallback);
+    }
+
+    // invoice customer
+     public static void getCustomerInvoice(CustomerInvoiceReq customerInvoiceReq, Callback<CustomerInvoiceResp>customerInvoiceRespCallback){
+        RetrofitClient.getClient().CUSTOMER_INVOICE_RESP_CALL(customerInvoiceReq).enqueue(customerInvoiceRespCallback);
+     }
+
 
 }

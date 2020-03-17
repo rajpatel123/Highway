@@ -79,10 +79,10 @@ public class UpCommingFragmentForCustomer extends Fragment {
             upcomingRecyclerForCustomer.setItemAnimator(new DefaultItemAnimator());
             upcomingRecyclerForCustomer.setAdapter(upComingTripAdapterForCustomer);
 
-        } else {
+        } /*else {
             Toast.makeText(dashBoardActivity, "No upcoming data for customer !", Toast.LENGTH_SHORT).show();
 
-        }
+        }*/
     }
 
 }

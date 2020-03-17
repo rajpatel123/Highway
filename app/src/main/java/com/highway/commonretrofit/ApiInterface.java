@@ -20,6 +20,10 @@ import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.Cancel
 import com.highway.customer.customerModelClass.cancleTripModel.cancleTrip.CancelTripByCustomerResponse;
 import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusReq;
 import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
+import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceReq;
+import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceResp;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceReq;
+import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceResp;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataRequest;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
@@ -175,8 +179,6 @@ public interface ApiInterface {
     @POST("api/Booking/bookingInfoForCustomer")
     Call<BookingVehicleInfoResponse> BOOKING_VEHICLE_INFO_RESPONSE_CALL(@Body BookingVehicleInfoRequest bookingVehicleInfoRequest);
 
-
-
     // accept/reject booking trip by driver
     @POST("api/Booking/acceptBookTrip")
     Call<BookingAcceptRejectResponse> ACCEPT_REJECT_BOOKING_TRIP_RESPONSE_CALL(@Body BookingAcceptRejectData bookingAcceptReject);
@@ -208,5 +210,14 @@ public interface ApiInterface {
     // customer rating
     @POST("api/Trip/updateTripRatingByUser")
     Call<UpdateTripRatingByUserResp>UPDATE_TRIP_RATING_BY_USER_RESP_CALL(@Body UpdateTripRatingByUserReq updateTripRatingByUserReq);
+
+    // DriverInvoice
+    @POST("api/Email/driverInvoice")
+    Call<DriverInvoiceResp>DRIVER_INVOICE_RESP_CALL(@Body DriverInvoiceReq driverInvoiceReq);
+
+    //CustomerInvoiceReq
+    @POST("api/Email/customerInvoice")
+    Call<CustomerInvoiceResp>CUSTOMER_INVOICE_RESP_CALL(@Body CustomerInvoiceReq customerInvoiceReq);
+
 
 }

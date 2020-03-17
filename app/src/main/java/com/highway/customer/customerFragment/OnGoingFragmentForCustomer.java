@@ -76,9 +76,9 @@ public class OnGoingFragmentForCustomer extends Fragment {
             onGoingRecyclerForCustomer.setItemAnimator(new DefaultItemAnimator());
             onGoingRecyclerForCustomer.setAdapter(onGoingTripAdapterForCustomer);
 
-        } else {
+        } /*else {
             Toast.makeText(dashBoardActivity, "No ongoing data for customer !", Toast.LENGTH_SHORT).show();
 
-        }
+        }*/
     }
 }
