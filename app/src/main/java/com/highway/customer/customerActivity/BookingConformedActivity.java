@@ -11,12 +11,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +70,9 @@ import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicle
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
+import com.highway.drivermodule.drivermodels.TripStatus;
 import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -105,6 +109,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int SELECT_TYPE = 4;
     private static final int BOUND_PADDING = 100;
+    public String TAG = getClass().getSimpleName();;
     public TextView bookTruckTv, phoneNoTv, nameTv, editTV;
     public String userName, userMobNo;
     MarkerOptions markerOptions1;
@@ -160,6 +165,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private CountDownTimer countDownTimer;
     private Iterable<? extends LatLng> list;
     private NotificationPushData data = new NotificationPushData();
+    private String mobileNo;
 
 
     public static void start(ConformBookingActivity activity,
@@ -268,7 +274,46 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         clicklistener();
         bookingTimer();
-        performAfterNotification(data.getType());
+
+
+            if (pushData == null  && pushData!=null) {
+                try {
+                    pushData = new BookingConformedActivity().pushData;
+                    data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
+                    HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                data = new NotificationPushData();
+                TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
+                if (tripStatus!=null){
+                    data.setTripId(tripStatus.getBookingTripId());
+                    data.setMobile(tripStatus.getMobile());
+                    data.setSource(""+tripStatus.getSourceAddress());
+                    data.setDestination(""+tripStatus.getDestinationAddress());
+                    data.setCustomer(""+tripStatus.getMobile());
+                    data.setName(""+tripStatus.getName());
+                    mobileNo= data.getMobile();
+                    data.setType(tripStatus.getCurrentTripStatus());
+                    HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
+
+                }
+
+            }
+            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
+
+             performAfterNotification(data.getType());
+
+            intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+            intentFilter.addAction(Intent.ACTION_TIME_TICK);
+            bookingConformedActivity.registerReceiver(mySenderBroadCast, intentFilter);
+
+
+
+
+
+
     }
 
     // USING BROAD CAST RECEIVER
@@ -726,7 +771,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     void performAfterNotification(String status) {
         if (data != null) {
-
             switch (status) {
 
                 case TRIP_NEW:
