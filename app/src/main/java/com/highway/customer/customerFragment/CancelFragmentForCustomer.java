@@ -22,7 +22,7 @@ import java.util.List;
 
 
 public class CancelFragmentForCustomer extends Fragment {
-    private RecyclerView canRecyclerForCustomer;
+    public RecyclerView canRecyclerForCustomer;
     DashBoardActivity dashBoardActivity;
     CancleTripAdapterForCustomer cancleTripAdapterForCustomer;
     List<CancelTrip>cancelTrips = new ArrayList<>();

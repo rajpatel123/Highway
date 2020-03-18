@@ -109,7 +109,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int SELECT_TYPE = 4;
     private static final int BOUND_PADDING = 100;
-    public String TAG = getClass().getSimpleName();;
+    public String TAG = getClass().getSimpleName();
+    ;
     public TextView bookTruckTv, phoneNoTv, nameTv, editTV;
     public String userName, userMobNo;
     MarkerOptions markerOptions1;
@@ -166,6 +167,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private Iterable<? extends LatLng> list;
     private NotificationPushData data = new NotificationPushData();
     private String mobileNo;
+    private String userId;
 
 
     public static void start(ConformBookingActivity activity,
@@ -276,42 +278,38 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         bookingTimer();
 
 
-            if (pushData == null  && pushData!=null) {
-                try {
-                    pushData = new BookingConformedActivity().pushData;
-                    data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
-                    HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }else{
-                data = new NotificationPushData();
-                TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
-                if (tripStatus!=null){
-                    data.setTripId(tripStatus.getBookingTripId());
-                    data.setMobile(tripStatus.getMobile());
-                    data.setSource(""+tripStatus.getSourceAddress());
-                    data.setDestination(""+tripStatus.getDestinationAddress());
-                    data.setCustomer(""+tripStatus.getMobile());
-                    data.setName(""+tripStatus.getName());
-                    mobileNo= data.getMobile();
-                    data.setType(tripStatus.getCurrentTripStatus());
-                    HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
-
-                }
+        if (pushData == null && pushData != null) {
+            try {
+                pushData = new BookingConformedActivity().pushData;
+                data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
+                HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            data = new NotificationPushData();
+            TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
+            if (tripStatus != null) {
+                data.setTripId(tripStatus.getBookingTripId());
+                data.setMobile(tripStatus.getMobile());
+                data.setSource("" + tripStatus.getSourceAddress());
+                data.setDestination("" + tripStatus.getDestinationAddress());
+                data.setCustomer("" + tripStatus.getMobile());
+                data.setName("" + tripStatus.getName());
+                mobileNo = data.getMobile();
+                data.setType(tripStatus.getCurrentTripStatus());
+                HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
 
             }
-            Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
-             performAfterNotification(data.getType());
+        }
+        Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
-            intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-            intentFilter.addAction(Intent.ACTION_TIME_TICK);
-            bookingConformedActivity.registerReceiver(mySenderBroadCast, intentFilter);
+        performAfterNotification(data.getType());
 
-
-
-
+        intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        bookingConformedActivity.registerReceiver(mySenderBroadCast, intentFilter);
 
 
     }
@@ -770,46 +768,52 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
 
     void performAfterNotification(String status) {
-        if (data != null) {
-            switch (status) {
 
-                case TRIP_NEW:
+        switch (status) {
+/*
+            case TRIP_NEW:
+                if (data != null) {
+                    sourceTV.setText("" + data.getSource());
+                    destTV.setText("" + data.getDestination());
+                    driverName.setText(data.getCustomer());
+                    mobileNo = data.getMobile();
+                    userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+                }
+                break;*/
 
-                    break;
+            case TRIP_ACCEPTED:
 
-                case TRIP_ACCEPTED:
+                break;
 
-                    break;
+            case ARRIVED:
 
-                case ARRIVED:
+                break;
 
-                    break;
+            case PICKEDUP:
 
-                case PICKEDUP:
+                break;
 
-                    break;
+            case DROPPED:
 
-                case DROPPED:
+                if (bookingConformedActivity == null) {
+                    bookingConformedActivity = new BookingConformedActivity();
+                    InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
+                    invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
+                }
+                break;
 
-                    if (bookingConformedActivity == null) {
-                        bookingConformedActivity = new BookingConformedActivity();
-                        InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
-                        invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
-                    }
-                    break;
+            case COMPLETED:
 
-                case COMPLETED:
+                break;
 
-                    break;
+            case RATING:
+                break;
 
-                case RATING:
-                    break;
+            case INVOICE:
+                break;
 
-                case INVOICE:
-                    break;
-
-            }
         }
+
     }
 
 

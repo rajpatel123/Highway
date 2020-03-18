@@ -17,11 +17,9 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
-import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoice;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceReq;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceResp;
-import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceReq;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 

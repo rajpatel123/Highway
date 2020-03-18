@@ -9,9 +9,9 @@ public class GetCustomerCurrentTripStatusResp {
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("CustomerTripStatus")
+    @SerializedName("tripStatus")
     @Expose
-    private CustomerTripStatus customerTripStatus;
+    private CustomerTripStatus tripStatus;
 
     public Boolean getStatus() {
         return status;
@@ -21,12 +21,12 @@ public class GetCustomerCurrentTripStatusResp {
         this.status = status;
     }
 
-    public CustomerTripStatus getCustomerTripStatus() {
-        return customerTripStatus;
+    public CustomerTripStatus getTripStatus() {
+        return tripStatus;
     }
 
-    public void setCustomerTripStatus(CustomerTripStatus customerTripStatus) {
-        this.customerTripStatus = customerTripStatus;
+    public void setTripStatus(CustomerTripStatus tripStatus) {
+        this.tripStatus = tripStatus;
     }
 
 }
