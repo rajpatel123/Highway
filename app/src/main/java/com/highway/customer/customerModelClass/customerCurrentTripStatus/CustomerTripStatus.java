@@ -63,6 +63,9 @@ public class CustomerTripStatus {
     @SerializedName("destinationAddress")
     @Expose
     private String destinationAddress;
+    @SerializedName("otp")
+    @Expose
+    private String otp;
 
     public String getId() {
         return id;
@@ -214,6 +217,14 @@ public class CustomerTripStatus {
 
     public void setDestinationAddress(String destinationAddress) {
         this.destinationAddress = destinationAddress;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
     }
 
 }

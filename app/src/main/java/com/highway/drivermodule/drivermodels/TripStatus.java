@@ -2,71 +2,79 @@ package com.highway.drivermodule.drivermodels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.highway.customer.customerModelClass.customerCurrentTripStatus.CustomerTripStatus;
 
 public class TripStatus {
 
-@SerializedName("id")
-@Expose
-private String id;
-@SerializedName("Name")
-@Expose
-private String name;
-@SerializedName("email")
-@Expose
-private String email;
-@SerializedName("gender")
-@Expose
-private String gender;
-@SerializedName("mobile")
-@Expose
-private String mobile;
-@SerializedName("created_at")
-@Expose
-private String createdAt;
-@SerializedName("emergency_contact1")
-@Expose
-private Object emergencyContact1;
-@SerializedName("emergency_contact2")
-@Expose
-private Object emergencyContact2;
-@SerializedName("bookingTripId")
-@Expose
-private String bookingTripId;
-@SerializedName("bookingTripCode")
-@Expose
-private String bookingTripCode;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("Name")
+    @Expose
+    private String name;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("gender")
+    @Expose
+    private String gender;
+    @SerializedName("mobile")
+    @Expose
+    private String mobile;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("emergency_contact1")
+    @Expose
+    private Object emergencyContact1;
+    @SerializedName("emergency_contact2")
+    @Expose
+    private Object emergencyContact2;
+    @SerializedName("bookingTripId")
+    @Expose
+    private String bookingTripId;
+    @SerializedName("bookingTripCode")
+    @Expose
+    private String bookingTripCode;
 
 
-@SerializedName("bookingTripStatus")
-@Expose
-private String bookingTripStatus;
+    @SerializedName("bookingTripStatus")
+    @Expose
+    private String bookingTripStatus;
 
     @SerializedName("sourceLong")
-@Expose
-private String sourceLong;
+    @Expose
+    private String sourceLong;
 
-@SerializedName("dropLat")
-@Expose
-private String dropLat;
+    @SerializedName("dropLat")
+    @Expose
+    private String dropLat;
 
-@SerializedName("dropLong")
-@Expose
-private String dropLong;
+    @SerializedName("dropLong")
+    @Expose
+    private String dropLong;
 
 
-@SerializedName("sourceAddress")
-@Expose
-private String sourceAddress;
+    @SerializedName("sourceAddress")
+    @Expose
+    private String sourceAddress;
 
-@SerializedName("destinationAddress")
-@Expose
-private String destinationAddress;
+    @SerializedName("destinationAddress")
+    @Expose
+    private String destinationAddress;
 
 
     @SerializedName("sourceLat")
     @Expose
     private String sourceLat;
+
+    @SerializedName("otp")
+    @Expose
+    private String otp;
+
+
+    public String getOtp() { return otp; }
+
+    public void setOtp(String otp) { this.otp = otp; }
 
     public String getSourceLat() {
         return sourceLat;
@@ -117,11 +125,6 @@ private String destinationAddress;
     }
 
 
-
-
-
-
-
     public String getCurrentTripStatus() {
         return currentTripStatus;
     }
@@ -131,8 +134,8 @@ private String destinationAddress;
     }
 
     @SerializedName("currentTripStatus")
-@Expose
-private String currentTripStatus;
+    @Expose
+    private String currentTripStatus;
 
 
     public String getRatingStatus() {
@@ -144,96 +147,96 @@ private String currentTripStatus;
     }
 
     @SerializedName("ratingStatus")
-@Expose
-private String ratingStatus;
+    @Expose
+    private String ratingStatus;
 
-public String getId() {
-return id;
-}
+    public String getId() {
+        return id;
+    }
 
-public void setId(String id) {
-this.id = id;
-}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-public String getName() {
-return name;
-}
+    public String getName() {
+        return name;
+    }
 
-public void setName(String name) {
-this.name = name;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public String getEmail() {
-return email;
-}
+    public String getEmail() {
+        return email;
+    }
 
-public void setEmail(String email) {
-this.email = email;
-}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-public String getGender() {
-return gender;
-}
+    public String getGender() {
+        return gender;
+    }
 
-public void setGender(String gender) {
-this.gender = gender;
-}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-public String getMobile() {
-return mobile;
-}
+    public String getMobile() {
+        return mobile;
+    }
 
-public void setMobile(String mobile) {
-this.mobile = mobile;
-}
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-public String getCreatedAt() {
-return createdAt;
-}
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-public void setCreatedAt(String createdAt) {
-this.createdAt = createdAt;
-}
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-public Object getEmergencyContact1() {
-return emergencyContact1;
-}
+    public Object getEmergencyContact1() {
+        return emergencyContact1;
+    }
 
-public void setEmergencyContact1(Object emergencyContact1) {
-this.emergencyContact1 = emergencyContact1;
-}
+    public void setEmergencyContact1(Object emergencyContact1) {
+        this.emergencyContact1 = emergencyContact1;
+    }
 
-public Object getEmergencyContact2() {
-return emergencyContact2;
-}
+    public Object getEmergencyContact2() {
+        return emergencyContact2;
+    }
 
-public void setEmergencyContact2(Object emergencyContact2) {
-this.emergencyContact2 = emergencyContact2;
-}
+    public void setEmergencyContact2(Object emergencyContact2) {
+        this.emergencyContact2 = emergencyContact2;
+    }
 
-public String getBookingTripId() {
-return bookingTripId;
-}
+    public String getBookingTripId() {
+        return bookingTripId;
+    }
 
-public void setBookingTripId(String bookingTripId) {
-this.bookingTripId = bookingTripId;
-}
+    public void setBookingTripId(String bookingTripId) {
+        this.bookingTripId = bookingTripId;
+    }
 
-public String getBookingTripCode() {
-return bookingTripCode;
-}
+    public String getBookingTripCode() {
+        return bookingTripCode;
+    }
 
-public void setBookingTripCode(String bookingTripCode) {
-this.bookingTripCode = bookingTripCode;
-}
+    public void setBookingTripCode(String bookingTripCode) {
+        this.bookingTripCode = bookingTripCode;
+    }
 
-public String getBookingTripStatus() {
-return bookingTripStatus;
-}
+    public String getBookingTripStatus() {
+        return bookingTripStatus;
+    }
 
-public void setBookingTripStatus(String bookingTripStatus) {
-this.bookingTripStatus = bookingTripStatus;
-}
+    public void setBookingTripStatus(String bookingTripStatus) {
+        this.bookingTripStatus = bookingTripStatus;
+    }
 
 
 }

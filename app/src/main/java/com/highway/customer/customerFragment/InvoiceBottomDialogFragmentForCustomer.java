@@ -16,12 +16,11 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.commonretrofit.RestClient;
-import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoice;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceReq;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceResp;
-import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceReq;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
@@ -86,11 +85,9 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     private int yy, mm, dd;
     TextView start_time,end_time;
 
-    public static InvoiceBottomDialogFragmentForCustomer newInstance(String tripId) {
+    public static InvoiceBottomDialogFragmentForCustomer newInstance() {
         InvoiceBottomDialogFragmentForCustomer fragment = new InvoiceBottomDialogFragmentForCustomer();
-        Bundle args = new Bundle();
-        args.putString(TRIP_ID,tripId);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -155,7 +152,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         bookingIdCode.setText(bookTripIdCode);
 
         getBookTripIdCode = HighwayPrefs.getString(getActivity(), "bookTripIdCode");
-        getBookId = HighwayPrefs.getString(getActivity(), "BookingId");
+        getBookId = HighwayApplication.getInstance().getCurrentTripId();
 
         totDistance = (getActivity().getIntent().getStringExtra("distance"));
         distance.setText(totDistance);
@@ -174,7 +171,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
             public void onClick(View v) {
 
                 RatingBottomDialogFragmentForCustomer ratingBottomDialogFragmentForCustomer = RatingBottomDialogFragmentForCustomer.newInstance();
-                ratingBottomDialogFragmentForCustomer.show( InvoiceBottomDialogFragmentForCustomer.TAG);
+                ratingBottomDialogFragmentForCustomer.show(getActivity().getSupportFragmentManager(), RatingBottomDialogFragmentForCustomer.TAG);
 
 
             }

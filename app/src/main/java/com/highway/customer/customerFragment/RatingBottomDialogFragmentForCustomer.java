@@ -36,6 +36,7 @@ import static com.highway.utils.Constants.RATING;
 
 public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
+    public static final String TAG = "ActionBottomDialog";
     CircleImageView avatar;
     TextView providerName;
     RatingBar rating;

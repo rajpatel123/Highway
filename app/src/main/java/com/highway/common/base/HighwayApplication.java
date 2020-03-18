@@ -16,6 +16,7 @@ public class HighwayApplication extends Application {
         return bookingHTripRequest;
     }
     TripStatus tripStatus=null;
+    CustomerTripStatus customerTripStatus=null;
     public void setBookingHTripRequest(BookingHTripRequest bookingHTripRequest) {
         this.bookingHTripRequest = bookingHTripRequest;
     }
@@ -52,6 +53,6 @@ public class HighwayApplication extends Application {
     }
 
     public void setUserDetails(CustomerTripStatus customerTripStatus) {
-        this.tripStatus=tripStatus;
+        this.customerTripStatus=customerTripStatus;
     }
 }
