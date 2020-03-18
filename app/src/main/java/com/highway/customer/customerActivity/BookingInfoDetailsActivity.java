@@ -85,7 +85,9 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
         userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
         BookingVehicleInfoRequest bookingVehicleInfoRequest = new BookingVehicleInfoRequest();
         bookingVehicleInfoRequest.setUserId(userId);
+        bookingVehicleInfoRequest.setVehicleTypeId(HighwayApplication.getInstance().getVehicleType());
         bookingVehicleInfoRequest.setVehicleTypeId(vehicleTypeId);
+
         RestClient.getInfo(bookingVehicleInfoRequest, new Callback<BookingVehicleInfoResponse>() {
             @Override
             public void onResponse(Call<BookingVehicleInfoResponse> call, Response<BookingVehicleInfoResponse> response) {
