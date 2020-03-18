@@ -149,7 +149,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
 
         //Intent intent =getActivity().getIntent();
         String bookTripIdCode = getActivity().getIntent().getStringExtra("bookTbripIdCode");
-        bookingIdCode.setText(bookTripIdCode);
+       // bookingIdCode.setText(bookTripIdCode);
 
         getBookTripIdCode = HighwayPrefs.getString(getActivity(), "bookTripIdCode");
         getBookId = HighwayApplication.getInstance().getCurrentTripId();

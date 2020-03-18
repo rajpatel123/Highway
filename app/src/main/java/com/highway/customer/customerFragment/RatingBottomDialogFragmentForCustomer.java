@@ -88,7 +88,7 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         return view;
     }
 
-    private void ratingAndCmnt() {
+    public boolean ratingAndCmnt() {
         cmnt = comment.getText().toString().trim();
 
            /* if (cmmnt.isEmpty()) {
@@ -101,19 +101,25 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         return false;*/
 
         ratingBar = String.valueOf(rating.getRating());
-        Toast.makeText(getActivity(), ratingBar, Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getActivity(), ratingBar, Toast.LENGTH_LONG).show();
+        return true;
     }
 
 
     public void afterCmpltRidCustomerStatus() {
+
+        ratingBar = String.valueOf(rating.getRating());
+        cmnt = comment.getText().toString().trim();
+
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
         tripId = HighwayPrefs.getString(getActivity(),Constants.TRIP_ID);
+
         UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
         updateTripRatingByUserReq.setRatingStatus("1");
         updateTripRatingByUserReq.setUserId(userId);
         updateTripRatingByUserReq.setRatingComment(cmnt);
         updateTripRatingByUserReq.setRatingRate(ratingBar);
-        updateTripRatingByUserReq.setTripId(tripId);
+        updateTripRatingByUserReq.setTripId(HighwayApplication.getInstance().getCurrentTripId());
 
         RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
             @Override

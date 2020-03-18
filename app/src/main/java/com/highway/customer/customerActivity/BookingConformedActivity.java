@@ -245,7 +245,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
                     bookTripIdCode = tripStatus.getBookingTripCode();
                     bookId = tripStatus.getBookingTripId();
-                    vehicleTypeId = tripStatus.getBookingTripId();
+                    vehicleTypeId = tripStatus.getVehicleType();
                     getSupportActionBar().setTitle("TRIP " + bookTripIdCode);
 
                     HighwayApplication.getInstance().setCurrentTripId(bookId);
@@ -276,9 +276,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        new FetchURL(BookingConformedActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-        new FetchURL(BookingConformedActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         if (!Places.isInitialized()) {
             Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
@@ -780,6 +780,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 if (tripStatus != null) {
                     driverName.setText("" + tripStatus.getName());
                     vehicleName.setText("" + tripStatus.getBookingTripCode() + " - " + tripStatus.getName());
+                    sourceTV.setText(""+tripStatus.getSourceAddress());
+                    destTV.setText(""+tripStatus.getDestinationAddress());
+
                     driverMobile = tripStatus.getMobile();
                     bookingSearchingLayout.setVisibility(View.GONE);
                     LLoutPhoneCall.setVisibility(View.VISIBLE);
@@ -800,6 +803,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 break;
 
             case DROPPED:
+              //  showInVoiceBottomSheetCustomer();
                 finish();
                 break;
 

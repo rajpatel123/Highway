@@ -48,9 +48,10 @@
                 android:layout_height="wrap_content"
                 android:isIndicator="false"
                 android:numStars="5"
-                android:rating="3.5"
+
                 android:progressTint="#ebdb00"
                 android:stepSize="1" />
+<!--            android:rating="3.5"-->
 
             <EditText
                 android:id="@+id/comment"

@@ -376,13 +376,13 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                 break;
             case DROPPED:
-                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
-
+               /* ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");*/
+                ((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
 
                 break;
             case COMPLETED:
                 ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
-                ((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
+                //((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
 
                 break;
             case RATING:

@@ -70,8 +70,8 @@ public class CancelFragmentForVehicleOwner extends Fragment {
 
     public  void vehicleCancleUpdatedTripList(List<CancelTrip> cancelTrips){
         if (cancelTrips !=null && cancelTrips.size()>0){
-            cancleTripAdapterForVehicleOwner = new CancleTripAdapterForVehicleOwner(cancelTrips,getContext());
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+            cancleTripAdapterForVehicleOwner = new CancleTripAdapterForVehicleOwner(cancelTrips,getActivity());
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
             cancleRecycler.setLayoutManager(layoutManager);
             cancleRecycler.setItemAnimator(new DefaultItemAnimator());
             cancleRecycler.setAdapter(cancleTripAdapterForVehicleOwner);
