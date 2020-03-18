@@ -172,7 +172,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
             public void onClick(View v) {
 
                 RatingBottomDialogFragmentForCustomer ratingBottomDialogFragmentForCustomer = RatingBottomDialogFragmentForCustomer.newInstance();
-                ratingBottomDialogFragmentForCustomer.show( InvoiceBottomDialogFragmentForCustomer.TAG);
+                ratingBottomDialogFragmentForCustomer.show(getActivity().getSupportFragmentManager(), RatingBottomDialogFragmentForCustomer.TAG);
 
 
             }

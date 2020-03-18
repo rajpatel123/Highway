@@ -1082,15 +1082,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                if (response != null && response.code() == 200 && response.body() != null) {
                  CustomerTripStatus customerTripStatus = response.body().getTripStatus();
-                   Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
+                 //  Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
 
                    if (customerTripStatus.getRatingStatus().equalsIgnoreCase("0")) {
                        HighwayApplication.getInstance().setCurrentTripId(customerTripStatus.getBookingTripId());
                        HighwayApplication.getInstance().setUserDetails(customerTripStatus);
-                       dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
+
+                       Intent intent = new Intent(DashBoardActivity.this,BookingConformedActivity.class);
+                       startActivity(intent);
+                      /* dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
                        Bundle bundle = new Bundle();
                        dashBordFragmentForCustomer.setArguments(bundle);
-                       replaceFragment(dashBordFragmentForCustomer, " ");
+                       replaceFragment(dashBordFragmentForCustomer, " ");*/
                    }
 
                }
