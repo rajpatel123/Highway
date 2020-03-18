@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".common.base.activity.DashBoardActivity">
 
-  <!--  <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
              />
 
-    </com.google.android.material.appbar.AppBarLayout>-->
+    </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_dash_board" />
 

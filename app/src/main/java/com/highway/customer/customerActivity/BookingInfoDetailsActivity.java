@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerAdapter.BookingVehicleInfoAdapter;
 import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRequest;
@@ -40,7 +41,7 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
     public BookingVehicleInfoAdapter bookingVehicleInfoAdapter;
 
     public BookingVehicleInfoResponse bookingVehicleInfoResponse;
-    private String userId,viechelId;
+    public String userId,vehicleTypeId;
 
     List<VehicleTypeInfo>vehicleTypeInfos =new ArrayList<>();
 
@@ -49,8 +50,8 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_info_details);
 
-        viechelId =  HighwayPrefs.getString(getApplicationContext(), "vechicleId");
-        Log.i("vichelid",viechelId);
+        vehicleTypeId =  HighwayPrefs.getString(getApplicationContext(), "vechicleId");
+        Log.i("vichelid",vehicleTypeId);
         initView();
 
     }
@@ -84,7 +85,7 @@ public class BookingInfoDetailsActivity extends AppCompatActivity {
         userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
         BookingVehicleInfoRequest bookingVehicleInfoRequest = new BookingVehicleInfoRequest();
         bookingVehicleInfoRequest.setUserId(userId);
-        bookingVehicleInfoRequest.setVehicleTypeId(viechelId);
+        bookingVehicleInfoRequest.setVehicleTypeId(vehicleTypeId);
         RestClient.getInfo(bookingVehicleInfoRequest, new Callback<BookingVehicleInfoResponse>() {
             @Override
             public void onResponse(Call<BookingVehicleInfoResponse> call, Response<BookingVehicleInfoResponse> response) {

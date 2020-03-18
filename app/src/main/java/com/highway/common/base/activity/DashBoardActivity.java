@@ -90,7 +90,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.highway.utils.Constants.DROPPED;
+import static com.highway.utils.Constants.INVOICE;
+import static com.highway.utils.Constants.PICKEDUP;
 import static com.highway.utils.Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY;
+import static com.highway.utils.Constants.RATING;
+import static com.highway.utils.Constants.TRIP_ACCEPTED;
+import static com.highway.utils.Constants.TRIP_NEW;
 
 public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyFirebaseServiceMessaging.OnMessageRecievedFromPush {
 
@@ -907,10 +913,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 replaceFragment(incomingFragment, "Online");
             }
 
-            if (!TextUtils.isEmpty(userRole) && userRole.equalsIgnoreCase("4")){
-              // bookingConformed = new BookingConformedActivity();
-                Intent intent1 = new Intent(DashBoardActivity.this,BookingConformedActivity.class);
-                startActivity(intent1);
+            if (!TextUtils.isEmpty(userRole) && userRole.equalsIgnoreCase("4")) {
+                getCustomerDetails();
             }
 
         }
@@ -978,9 +982,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }
 
 
-    public  void showInVoiceBottomSheetCustomer(String tripId) {
+    public void showInVoiceBottomSheetCustomer() {
         InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
-                InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
+                InvoiceBottomDialogFragmentForCustomer.newInstance();
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragmentForDriver.TAG);
     }
@@ -1017,34 +1021,32 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     private void getDriverDetails() {
         DriverDetailRequest driverData = new DriverDetailRequest();
+        driverData.setDriverId(HighwayPrefs.getString(this, Constants.ID));
+        RestClient.getDriverDetails(driverData, new Callback<DriverDetails>() {
+            @Override
+            public void onResponse(Call<DriverDetails> call, Response<DriverDetails> response) {
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    TripStatus tripStatus = response.body().getDriverTripStatus();
+                    Log.d("Driver Details", "" + tripStatus.getCurrentTripStatus());
 
-            driverData.setDriverId(HighwayPrefs.getString(this, Constants.ID));
-            RestClient.getDriverDetails(driverData, new Callback<DriverDetails>() {
-                @Override
-                public void onResponse(Call<DriverDetails> call, Response<DriverDetails> response) {
-                    if (response != null && response.code() == 200 && response.body() != null) {
-                        TripStatus tripStatus = response.body().getDriverTripStatus();
-                        Log.d("Driver Details", "" + tripStatus.getCurrentTripStatus());
-
-                        if (tripStatus.getRatingStatus().equalsIgnoreCase("0")) {
-                            HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
-                            HighwayApplication.getInstance().setUserDetails(tripStatus);
-                            incomingFragment = IncomingRequestFragmentForDriver.newInstance();
-                            Bundle bundle = new Bundle();
-                            incomingFragment.setArguments(bundle);
-                            replaceFragment(incomingFragment, "Online");
-                        }
-
+                    if (tripStatus.getRatingStatus().equalsIgnoreCase("0")) {
+                        HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
+                        HighwayApplication.getInstance().setUserDetails(tripStatus);
+                        incomingFragment = IncomingRequestFragmentForDriver.newInstance();
+                        Bundle bundle = new Bundle();
+                        incomingFragment.setArguments(bundle);
+                        replaceFragment(incomingFragment, "Online");
                     }
-                }
-
-                @Override
-                public void onFailure(Call<DriverDetails> call, Throwable t) {
-                    Log.d("User Details", "" + t.getMessage());
 
                 }
-            });
+            }
 
+            @Override
+            public void onFailure(Call<DriverDetails> call, Throwable t) {
+                Log.d("User Details", "" + t.getMessage());
+
+            }
+        });
 
 
     }
@@ -1059,7 +1061,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     if (response != null && response.code() == 200 && response.body() != null) {
                         Log.d("User Details", "" + response.body().getDriverTripStatus().getCurrentTripStatus());
 
-
                     }
                 }
 
@@ -1072,38 +1073,50 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     }*/
 
 
-   public void getCustomerDetails(){
-       GetCustomerCurrentTripStatusReq customerTripRequest = new GetCustomerCurrentTripStatusReq();
-       customerTripRequest.setCustomerId(HighwayPrefs.getString(this,Constants.ID));
+    public void getCustomerDetails() {
+        GetCustomerCurrentTripStatusReq customerTripRequest = new GetCustomerCurrentTripStatusReq();
+        customerTripRequest.setCustomerId(HighwayPrefs.getString(this, Constants.ID));
 
-       RestClient.getCustomerDetails(customerTripRequest, new Callback<GetCustomerCurrentTripStatusResp>() {
-           @Override
-           public void onResponse(Call<GetCustomerCurrentTripStatusResp> call, Response<GetCustomerCurrentTripStatusResp> response) {
+        RestClient.getCustomerDetails(customerTripRequest, new Callback<GetCustomerCurrentTripStatusResp>() {
+            @Override
+            public void onResponse(Call<GetCustomerCurrentTripStatusResp> call, Response<GetCustomerCurrentTripStatusResp> response) {
 
-               if (response != null && response.code() == 200 && response.body() != null) {
+                if (response != null && response.code() == 200 && response.body() != null) {
                     CustomerTripStatus customerTripStatus = response.body().getTripStatus();
-                 //  Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
+                    //  Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
 
-                   if (customerTripStatus.getRatingStatus().equalsIgnoreCase("0")) {
-                       HighwayApplication.getInstance().setCurrentTripId(customerTripStatus.getBookingTripId());
-                       HighwayApplication.getInstance().setUserDetails(customerTripStatus);
+                    if (customerTripStatus.getRatingStatus().equalsIgnoreCase("0")) {
+                        HighwayApplication.getInstance().setCurrentTripId(customerTripStatus.getBookingTripId());
+                        HighwayApplication.getInstance().setUserDetails(customerTripStatus);
 
-                       Intent intent = new Intent(DashBoardActivity.this,BookingConformedActivity.class);
-                       startActivity(intent);
-                      /* dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
+
+                        if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(TRIP_ACCEPTED)
+                                || customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(PICKEDUP)
+                                || customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(TRIP_NEW)) {
+                            Intent intent = new Intent(DashBoardActivity.this, BookingConformedActivity.class);
+                            startActivity(intent);
+                        } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED)) {
+                            showInVoiceBottomSheetCustomer();
+                        } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE)) {
+                            showInVoiceBottomSheetCustomer();
+                        } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)) {
+                            showratingBottomSheetForCustomer();
+                        }
+
+                       /* dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
                        Bundle bundle = new Bundle();
                        dashBordFragmentForCustomer.setArguments(bundle);
                        replaceFragment(dashBordFragmentForCustomer, " ");*/
-                   }
+                    }
 
-               }
-           }
+                }
+            }
 
-           @Override
-           public void onFailure(Call<GetCustomerCurrentTripStatusResp> call, Throwable t) {
-               Log.d("User Details", "" + t.getMessage());
-               Toast.makeText(dashBoardActivity, "failure", Toast.LENGTH_SHORT).show();
-           }
-       });
-   }
+            @Override
+            public void onFailure(Call<GetCustomerCurrentTripStatusResp> call, Throwable t) {
+                Log.d("User Details", "" + t.getMessage());
+                Toast.makeText(DashBoardActivity.this, "failure", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

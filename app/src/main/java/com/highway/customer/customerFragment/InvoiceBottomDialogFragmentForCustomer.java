@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoice;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceReq;
@@ -84,11 +85,9 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     private int yy, mm, dd;
     TextView start_time,end_time;
 
-    public static InvoiceBottomDialogFragmentForCustomer newInstance(String tripId) {
+    public static InvoiceBottomDialogFragmentForCustomer newInstance() {
         InvoiceBottomDialogFragmentForCustomer fragment = new InvoiceBottomDialogFragmentForCustomer();
-        Bundle args = new Bundle();
-        args.putString(TRIP_ID,tripId);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -153,7 +152,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         bookingIdCode.setText(bookTripIdCode);
 
         getBookTripIdCode = HighwayPrefs.getString(getActivity(), "bookTripIdCode");
-        getBookId = HighwayPrefs.getString(getActivity(), "BookingId");
+        getBookId = HighwayApplication.getInstance().getCurrentTripId();
 
         totDistance = (getActivity().getIntent().getStringExtra("distance"));
         distance.setText(totDistance);
@@ -170,10 +169,8 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 RatingBottomDialogFragmentForCustomer ratingBottomDialogFragmentForCustomer = RatingBottomDialogFragmentForCustomer.newInstance();
                 ratingBottomDialogFragmentForCustomer.show(getActivity().getSupportFragmentManager(), RatingBottomDialogFragmentForCustomer.TAG);
-
 
             }
         });
@@ -200,7 +197,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     private void getInvoiceForCustomer() {
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
         CustomerInvoiceReq customerInvoiceReq = new CustomerInvoiceReq();
-        customerInvoiceReq.setBookingId(getBookId);
+        customerInvoiceReq.setBookingId(HighwayApplication.getInstance().getCurrentTripId());
         customerInvoiceReq.setCustomerId(userId);
 
         RestClient.getCustomerInvoice(customerInvoiceReq, new Callback<CustomerInvoiceResp>() {

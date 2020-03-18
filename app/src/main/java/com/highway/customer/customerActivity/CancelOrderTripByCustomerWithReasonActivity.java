@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerAdapter.CancelledTripReasonAdapter;
@@ -51,6 +52,7 @@ public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivi
     public String userId, bookId,bookTripIdCode,vTypeId;
     String cancelreasonid;
     Intent resultIntent;
+    private String cancelResnId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +84,12 @@ public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivi
         showCanRsnTypeRV();
         getCanReasonData();
 
-        bookId = getIntent().getStringExtra("bookId");
+       // bookId = getIntent().getStringExtra("bookId");
         bookTripIdCode = getIntent().getStringExtra("bookTripIdCode");
         vTypeId = getIntent().getStringExtra("vTypeId");
+        bookId= HighwayPrefs.getString(getApplicationContext(),"bookId");
+        cancelreasonid = getIntent().getStringExtra("cancelReasonId");
 
-        //cancelResnId = getIntent().getStringExtra("cancelReasonId");
     }
 
 
@@ -135,13 +138,13 @@ public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivi
 
     public boolean inputValidation() {
 
-        cmntRsnEdtTxt = canReasonEdtTxt.getText().toString().trim();
+      cmntRsnEdtTxt = canReasonEdtTxt.getText().toString().trim();
 
       /*  if (cancelreasonid.isEmpty()){
             Toast.makeText(this, "Please select cancle reason", Toast.LENGTH_SHORT).show();
             return false;
         }*/
-        return true;
+      return true;
     }
 
 
@@ -155,11 +158,12 @@ public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivi
         });
     }
     public void cancelledTripOperation() {
-
         if (inputValidation()) {
 
+            // cmntRsnEdtTxt = canReasonEdtTxt.getText().toString().trim();
+
             CancelTripByCustomerRequest cancelTripByCustomerRequest = new CancelTripByCustomerRequest();
-            cancelTripByCustomerRequest.setCancelBookId(bookId);
+            cancelTripByCustomerRequest.setCancelBookId(HighwayApplication.getInstance().getCurrentTripId());
             cancelTripByCustomerRequest.setCancelReasonId(cancelreasonid);
             cancelTripByCustomerRequest.setCancelReasonComment(cmntRsnEdtTxt);
             userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
@@ -183,6 +187,7 @@ public class CancelOrderTripByCustomerWithReasonActivity extends AppCompatActivi
                         }
                     }
                 }
+
                 @Override
                 public void onFailure(Call<CancelTripByCustomerResponse> call, Throwable t) {
                     Toast.makeText(CancelOrderTripByCustomerWithReasonActivity.this, "Failure", Toast.LENGTH_SHORT).show();

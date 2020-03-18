@@ -9,14 +9,12 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -62,20 +60,14 @@ import com.highway.R;
 import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.HighwayApplication;
-import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.firebaseService.NotificationPushData;
-import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
-import com.highway.customer.customerFragment.ReceiverBottomSheetFragment;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
-import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
 import com.highway.drivermodule.drivermodels.TripStatus;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
 import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
-import com.highway.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,6 +83,7 @@ import static com.highway.utils.Constants.DRIVER_NAME;
 import static com.highway.utils.Constants.DROPPED;
 import static com.highway.utils.Constants.INVOICE;
 import static com.highway.utils.Constants.PICKEDUP;
+import static com.highway.utils.Constants.PUSH_MOBILE;
 import static com.highway.utils.Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY;
 import static com.highway.utils.Constants.PUSH_TYPE;
 import static com.highway.utils.Constants.RATING;
@@ -168,6 +161,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private NotificationPushData data = new NotificationPushData();
     private String mobileNo;
     private String userId;
+    private TripStatus tripStatus;
 
 
     public static void start(ConformBookingActivity activity,
@@ -238,11 +232,30 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 bookId = getIntent().getStringExtra("bookId");
                 vehicleTypeId = getIntent().getStringExtra("vTypeId");
                 getSupportActionBar().setTitle("TRIP " + bookTripIdCode);
+                HighwayApplication.getInstance().setCurrentTripId(bookId);
                 HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
+//
+//                HighwayPrefs.putString(getApplicationContext(), "bookTripIdCode", bookTripIdCode); // for invoiceBottomDialogfragmentForDriver
+               // HighwayPrefs.putString(getApplicationContext(), "BookingId", bookId);
+            } else {
 
-                HighwayPrefs.putString(getApplicationContext(), "bookTripIdCode", bookTripIdCode); // for invoiceBottomDialogfragmentForDriver
-                HighwayPrefs.putString(getApplicationContext(), "BookingId", bookId);  // for driver  invoice
+                tripStatus = HighwayApplication.getInstance().getTripStatus();
+                if (tripStatus != null) {
+
+
+                    bookTripIdCode = tripStatus.getBookingTripCode();
+                    bookId = tripStatus.getBookingTripId();
+                    vehicleTypeId = tripStatus.getBookingTripId();
+                    getSupportActionBar().setTitle("TRIP " + bookTripIdCode);
+
+                    HighwayApplication.getInstance().setCurrentTripId(bookId);
+                    performAfterNotification(tripStatus.getCurrentTripStatus());
+
+
+                }
             }
+
+
         }
 
 
@@ -263,9 +276,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        new FetchURL(BookingConformedActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+        new FetchURL(BookingConformedActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         if (!Places.isInitialized()) {
             Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
@@ -278,33 +291,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         bookingTimer();
 
 
-      /*  if (pushData == null && pushData != null) {
-            try {
-                pushData = new BookingConformedActivity().pushData;
-                data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
-                HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {*/
-        data = new NotificationPushData();
-        TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
-        if (tripStatus != null) {
-            data.setTripId(tripStatus.getBookingTripId());
-            data.setMobile(tripStatus.getMobile());
-            data.setSource("" + tripStatus.getSourceAddress());
-            data.setDestination("" + tripStatus.getDestinationAddress());
-            data.setCustomer("" + tripStatus.getMobile());
-            data.setName("" + tripStatus.getName());
-            mobileNo = data.getMobile();
-            data.setType(tripStatus.getCurrentTripStatus());
-            HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
-
-
-        }
         Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
-        performAfterNotification(data.getType());
 
         intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
@@ -409,7 +397,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 if (pushData != null && pushData.getString(PUSH_TYPE).equalsIgnoreCase(TRIP_ACCEPTED)) {
                     driverName.setText("" + pushData.getString(DRIVER_NAME));
                     vehicleName.setText("" + pushData.getString(VEHICLE_TYPE) + " - " + pushData.getString(VEHICLE_NUMBER));
-                    driverMobile = pushData.getString(VEHICLE_NUMBER);
+                    driverMobile = pushData.getString(PUSH_MOBILE);
                     bookingSearchingLayout.setVisibility(View.GONE);
                     LLoutPhoneCall.setVisibility(View.VISIBLE);
                     callActionIV.setVisibility(View.VISIBLE);
@@ -620,7 +608,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         }
     }
 
-
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
@@ -643,7 +630,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             currentPolyline.remove();
             currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
 
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+          /*  LatLngBounds.Builder builder = new LatLngBounds.Builder();
             for (LatLng latLng : list) {
                 builder.include(latLng);
             }
@@ -651,7 +638,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             final LatLngBounds bounds = builder.build();
             //BOUND_PADDING is an int to specify padding of bound.. try 100.
             CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, BOUND_PADDING);
-            mMap.animateCamera(cu);
+            mMap.animateCamera(cu);*/
 
         }
 
@@ -769,17 +756,38 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     void performAfterNotification(String status) {
 
         switch (status) {
+
             case TRIP_NEW:
                 if (data != null) {
                     sourceTV.setText("" + data.getSource());
                     destTV.setText("" + data.getDestination());
                     driverName.setText(data.getCustomer());
-                    mobileNo = data.getMobile();
+                    driverMobile = data.getMobile();
                     userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+                } else {
+                    if (tripStatus != null) {
+                        sourceTV.setText("" + tripStatus.getSourceAddress());
+                        destTV.setText("" + tripStatus.getDestinationAddress());
+                        driverName.setText(tripStatus.getName());
+                        driverMobile = tripStatus.getMobile();
+                        userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
+                    }
                 }
                 break;
 
             case TRIP_ACCEPTED:
+
+                if (tripStatus != null) {
+                    driverName.setText("" + tripStatus.getName());
+                    vehicleName.setText("" + tripStatus.getBookingTripCode() + " - " + tripStatus.getName());
+                    driverMobile = tripStatus.getMobile();
+                    bookingSearchingLayout.setVisibility(View.GONE);
+                    LLoutPhoneCall.setVisibility(View.VISIBLE);
+                    callActionIV.setVisibility(View.VISIBLE);
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel();
+                    }
+                }
 
                 break;
 
@@ -792,12 +800,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 break;
 
             case DROPPED:
-
-            /*    if (bookingConformedActivity == null) {
-                    bookingConformedActivity = new BookingConformedActivity();*/
-                InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
-                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
-                //  }
+                finish();
                 break;
 
             case COMPLETED:

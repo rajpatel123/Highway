@@ -12,10 +12,14 @@ public class HighwayApplication extends Application {
 
     static HighwayApplication instance = null;
     static String tripId;
+    private String vehicleType;
+    private String vehicleNumber;
+
     public BookingHTripRequest getBookingHTripRequest() {
         return bookingHTripRequest;
     }
     TripStatus tripStatus=null;
+
     CustomerTripStatus customerTripStatus=null;
     public void setBookingHTripRequest(BookingHTripRequest bookingHTripRequest) {
         this.bookingHTripRequest = bookingHTripRequest;
@@ -47,6 +51,16 @@ public class HighwayApplication extends Application {
     public TripStatus getTripStatus() {
         return tripStatus;
     }
+
+    public String getVehicleType() { return vehicleType; }
+
+    public void setVehicleType(String vehicleType) { this.vehicleType = vehicleType; }
+
+    public String getVehicleNumber() { return vehicleNumber; }
+
+    public void setVehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; }
+
+
 
     public void setUserDetails(TripStatus tripStatus) {
         this.tripStatus=tripStatus;
