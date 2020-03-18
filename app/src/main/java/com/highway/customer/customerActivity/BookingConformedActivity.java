@@ -278,7 +278,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         bookingTimer();
 
 
-        if (pushData == null && pushData != null) {
+      /*  if (pushData == null && pushData != null) {
             try {
                 pushData = new BookingConformedActivity().pushData;
                 data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
@@ -286,21 +286,20 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
-            data = new NotificationPushData();
-            TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
-            if (tripStatus != null) {
-                data.setTripId(tripStatus.getBookingTripId());
-                data.setMobile(tripStatus.getMobile());
-                data.setSource("" + tripStatus.getSourceAddress());
-                data.setDestination("" + tripStatus.getDestinationAddress());
-                data.setCustomer("" + tripStatus.getMobile());
-                data.setName("" + tripStatus.getName());
-                mobileNo = data.getMobile();
-                data.setType(tripStatus.getCurrentTripStatus());
-                HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
+        } else {*/
+        data = new NotificationPushData();
+        TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
+        if (tripStatus != null) {
+            data.setTripId(tripStatus.getBookingTripId());
+            data.setMobile(tripStatus.getMobile());
+            data.setSource("" + tripStatus.getSourceAddress());
+            data.setDestination("" + tripStatus.getDestinationAddress());
+            data.setCustomer("" + tripStatus.getMobile());
+            data.setName("" + tripStatus.getName());
+            mobileNo = data.getMobile();
+            data.setType(tripStatus.getCurrentTripStatus());
+            HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
 
-            }
 
         }
         Log.e(TAG, BaseUtil.jsonFromModel(pushData));
@@ -309,7 +308,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
         intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        bookingConformedActivity.registerReceiver(mySenderBroadCast, intentFilter);
+        registerReceiver(mySenderBroadCast, intentFilter);
 
 
     }
@@ -770,7 +769,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     void performAfterNotification(String status) {
 
         switch (status) {
-/*
             case TRIP_NEW:
                 if (data != null) {
                     sourceTV.setText("" + data.getSource());
@@ -779,7 +777,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     mobileNo = data.getMobile();
                     userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
                 }
-                break;*/
+                break;
 
             case TRIP_ACCEPTED:
 
@@ -795,11 +793,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
             case DROPPED:
 
-                if (bookingConformedActivity == null) {
-                    bookingConformedActivity = new BookingConformedActivity();
-                    InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
-                    invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
-                }
+            /*    if (bookingConformedActivity == null) {
+                    bookingConformedActivity = new BookingConformedActivity();*/
+                InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance(tripId);
+                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
+                //  }
                 break;
 
             case COMPLETED:

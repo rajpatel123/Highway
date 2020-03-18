@@ -1081,7 +1081,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
            public void onResponse(Call<GetCustomerCurrentTripStatusResp> call, Response<GetCustomerCurrentTripStatusResp> response) {
 
                if (response != null && response.code() == 200 && response.body() != null) {
-                 CustomerTripStatus customerTripStatus = response.body().getTripStatus();
+                    CustomerTripStatus customerTripStatus = response.body().getTripStatus();
                  //  Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
 
                    if (customerTripStatus.getRatingStatus().equalsIgnoreCase("0")) {

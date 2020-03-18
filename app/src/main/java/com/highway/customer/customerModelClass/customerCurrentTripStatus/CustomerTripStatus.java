@@ -67,6 +67,20 @@ public class CustomerTripStatus {
     @Expose
     private String otp;
 
+    @SerializedName("vehicleType")
+    @Expose
+    private String vehicleType;
+    @SerializedName("vehicleNumber")
+    @Expose
+    private String vehicleNumber;
+
+    public void setVehicleType(String vehicleType) { this.vehicleType = vehicleType; }
+
+    public String getVehicleNumber() { return vehicleNumber; }
+
+    public void setVehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; }
+
+
     public String getId() {
         return id;
     }

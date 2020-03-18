@@ -18,7 +18,7 @@
             android:elevation="@dimen/_16dp"
             android:orientation="vertical">
 
-            <LinearLayout
+           <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -64,7 +64,7 @@
                         android:layout_marginLeft="@dimen/_10dp"
                         android:src="@drawable/ic_favorite_in_pick_up_location_24dp" />
                 </RelativeLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
