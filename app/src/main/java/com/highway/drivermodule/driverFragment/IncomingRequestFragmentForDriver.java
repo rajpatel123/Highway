@@ -750,7 +750,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (ContextCompat.checkSelfPermission(dashBoardActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -793,7 +793,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
     private void showAlertDiolog(String message) {
 
-        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(activity);
+        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(dashBoardActivity);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_show_alert_dialog_driver_not_responding, null);
@@ -818,7 +818,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         }
 
         try {
-            if (!activity.isFinishing())
+            if (!dashBoardActivity.isFinishing())
                 dialogBuilder.create().show();
 
         } catch (Exception e) {
