@@ -22,6 +22,7 @@ import java.util.List;
 public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComingTripAdapterForCustomer.ViewHolder> {
     List<UpcomingTrip>upcomingTrips;
     Context context;
+    private SellingListInterface sellingListInterface;
 
     public UpComingTripAdapterForCustomer(List<UpcomingTrip>upcomingTrips, Context context){
         this.context = context;
@@ -80,8 +81,26 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
 
 
 
+       /* holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sellingListInterface != null) {
+                    sellingListInterface.sellinglistitem(upcomingTrips.get(position).getTripType());
+                }
+            }
+        });*/
 
     }
+
+    public void setSellingListInterface(SellingListInterface sellingListInterface) {
+        this.sellingListInterface = sellingListInterface;
+    }
+    public interface SellingListInterface {       ///
+        public void sellinglistitem(String title);
+
+
+    }
+
 
     @Override
     public int getItemCount() {
