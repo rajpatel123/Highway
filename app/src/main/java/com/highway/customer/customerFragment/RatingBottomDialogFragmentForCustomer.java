@@ -112,14 +112,14 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         cmnt = comment.getText().toString().trim();
 
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
-        tripId = HighwayPrefs.getString(getActivity(),Constants.TRIP_ID);
+        tripId = HighwayPrefs.getString(getActivity(),"BookingId");
 
         UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
         updateTripRatingByUserReq.setRatingStatus("1");
         updateTripRatingByUserReq.setUserId(userId);
         updateTripRatingByUserReq.setRatingComment(cmnt);
         updateTripRatingByUserReq.setRatingRate(ratingBar);
-        updateTripRatingByUserReq.setTripId(HighwayApplication.getInstance().getCurrentTripId());
+        updateTripRatingByUserReq.setTripId(tripId);
 
         RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
             @Override

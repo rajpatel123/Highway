@@ -1,5 +1,6 @@
 package com.highway.customer.customerAdapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,11 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
+import com.highway.customer.customerActivity.BookingConformedActivity;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -51,19 +54,49 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         holder.tv5DestTime.setText("" + upcomingTrip.getDropTime());
         holder.tv6VehicleName.setText("" + upcomingTrip.getVehicleName());
         holder.tv7FairCharge.setText("" + upcomingTrip.getFare());
+
         // img
+
+        holder.cardView.setOnClickListener(v -> {
+
+//                LatLng sourceAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
+//                LatLng destAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()), Double.parseDouble(upcomingTrip.getDestinationLong()));
+
+            Intent intent = new Intent(context, BookingConformedActivity.class);
+
+            intent.putExtra("SourceAddLatlog",upcomingTrips.get(holder.getAdapterPosition()).getSourceLat());
+            intent.putExtra("DestAddLatlog",upcomingTrips.get(holder.getAdapterPosition()).getSourceLat());
+            intent.putExtra("CompleteDate",upcomingTrips.get(holder.getAdapterPosition()).getEndDate());
+            intent.putExtra("PickupTime",upcomingTrips.get(holder.getAdapterPosition()).getPickupTime());
+            intent.putExtra("DropTime",upcomingTrips.get(holder.getAdapterPosition()).getDropTime());
+            intent.putExtra("VehicleName",upcomingTrips.get(holder.getAdapterPosition()).getVehicleName());
+            intent.putExtra("VehicleNumber",upcomingTrips.get(holder.getAdapterPosition()).getVehicleNumber());
+            intent.putExtra("GetFairCharge",upcomingTrips.get(holder.getAdapterPosition()).getFare());
+
+            context.startActivity(intent);
+
+
+        });
+
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return upcomingTrips.size();
+
+        if (upcomingTrips != null && upcomingTrips.size() > 0) {
+            return upcomingTrips.size();
+        } else {
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
-
+        public CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -78,6 +111,7 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
             img2DestIndicator = itemView.findViewById(R.id.Img2DestIndicator);
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
+            cardView= itemView.findViewById(R.id.upcomingCardView);
         }
     }
 }

@@ -138,7 +138,8 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
             public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-                        HighwayApplication.getInstance().setCurrentTripId("");
+                      //  HighwayApplication.getInstance().setCurrentTripId("");
+                      //  HighwayApplication.getInstance().getCurrentTripId();
                         dismiss();
                     }
                 }

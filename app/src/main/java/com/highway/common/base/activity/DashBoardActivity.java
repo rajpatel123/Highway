@@ -1096,9 +1096,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                             Intent intent = new Intent(DashBoardActivity.this, BookingConformedActivity.class);
                             startActivity(intent);
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED)) {
-                            showInVoiceBottomSheetCustomer();
+                          //  showInVoiceBottomSheetCustomer();
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE)) {
-                            showInVoiceBottomSheetCustomer();
+                            //showInVoiceBottomSheetCustomer();
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)) {
                             showratingBottomSheetForCustomer();
                         }

@@ -71,8 +71,8 @@ public class CancelFragmentForCustomer extends Fragment {
 
     public void cancelUpdatedTripListForCustomer(List<CancelTrip>cancelTrips){
         if (cancelTrips!=null && cancelTrips.size()>0){
-            cancleTripAdapterForCustomer = new CancleTripAdapterForCustomer(cancelTrips, getContext());
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+            cancleTripAdapterForCustomer = new CancleTripAdapterForCustomer(cancelTrips, getActivity());
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
             canRecyclerForCustomer.setLayoutManager(layoutManager);
             canRecyclerForCustomer.setItemAnimator(new DefaultItemAnimator());
             canRecyclerForCustomer.setAdapter(cancleTripAdapterForCustomer);

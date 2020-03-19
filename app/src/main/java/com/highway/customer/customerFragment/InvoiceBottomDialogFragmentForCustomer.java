@@ -236,6 +236,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         discount.setText(""+customerInvoice.getDiscount());
         payAbleAmout.setText(""+customerInvoice.getPaymentMode());
 
+
     }
 
 

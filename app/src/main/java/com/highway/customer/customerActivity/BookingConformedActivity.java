@@ -60,7 +60,10 @@ import com.highway.R;
 import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.HighwayApplication;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
+import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.common.base.firebaseService.NotificationPushData;
+import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
@@ -162,6 +165,15 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private String mobileNo;
     private String userId;
     private TripStatus tripStatus;
+    private String sourceTV1;
+    private String destTV1;
+    private String driverName1;
+    private String fareValue1;
+    private BookingHTripResponse bookingHTripResponse;
+    private String completeDate1;
+    private String pickUp1;
+    private String dropTime1;
+    private String vehicleNumber1;
 
 
     public static void start(ConformBookingActivity activity,
@@ -236,7 +248,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
 //
 //                HighwayPrefs.putString(getApplicationContext(), "bookTripIdCode", bookTripIdCode); // for invoiceBottomDialogfragmentForDriver
-               // HighwayPrefs.putString(getApplicationContext(), "BookingId", bookId);
+                  HighwayPrefs.putString(getApplicationContext(), "BookingId", bookId);
             } else {
 
                 tripStatus = HighwayApplication.getInstance().getTripStatus();
@@ -254,7 +266,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
                 }
             }
-
 
         }
 
@@ -291,6 +302,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         bookingTimer();
 
 
+
         Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
 
@@ -298,8 +310,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         registerReceiver(mySenderBroadCast, intentFilter);
 
-
+        tapToReturnUpComing();
     }
+
 
     // USING BROAD CAST RECEIVER
     public void broadCastMessage(View view) {
@@ -803,12 +816,36 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 break;
 
             case DROPPED:
-              //  showInVoiceBottomSheetCustomer();
+
+                if (tripStatus != null) {
+                    driverName.setText("" + tripStatus.getName());
+                    vehicleName.setText("" + tripStatus.getBookingTripCode() + " - " + tripStatus.getName());
+                    sourceTV.setText(""+tripStatus.getSourceAddress());
+                    destTV.setText(""+tripStatus.getDestinationAddress());
+
+                    driverMobile = tripStatus.getMobile();
+                    bookingSearchingLayout.setVisibility(View.GONE);
+                    LLoutPhoneCall.setVisibility(View.VISIBLE);
+                    callActionIV.setVisibility(View.VISIBLE);
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel();
+                    }
+                }
+
+                InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance();
+                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
+
                 finish();
                 break;
 
             case COMPLETED:
 
+
+
+               /* InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance();
+                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
+
+                finish();*/
                 break;
 
             case RATING:
@@ -820,6 +857,45 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         }
 
     }
+
+
+    public void tapToReturnUpComing(){
+        // get data throgh card view
+
+        Bundle bundle = getIntent().getExtras();
+
+        sourceTV1 = bundle.getString("SourceAddLatlog");
+        destTV1 = bundle.getString("DestAddLatlog");
+        driverName1 = bundle.getString("VehicleName");       // after change////
+        fareValue1 = bundle.getString("GetFairCharge");
+        ///////////////////////////////////////////////////
+        completeDate1 = bundle.getString("CompleteDate");
+        pickUp1 = bundle.getString("PickupTime");
+        dropTime1 = bundle.getString("DropTime");
+        vehicleNumber1 = bundle.getString("VehicleNumber");
+
+        sourceTV.setText(sourceTV1);
+        destTV.setText(destTV1);
+        driverName.setText(driverName1);
+        fareValue.setText(fareValue1);
+
+     /*   BookingHTripRequest bookingHTripRequest = new BookingHTripRequest();
+        sourceTV.setText(bookingHTripRequest.getSourceAddress());
+        destTV.setText(bookingHTripRequest.getSourceAddress());
+        driverName.setText(bookingHTripRequest.getVehicleTypeId());
+        fareValue.setText(bookingHTripRequest.getTripFare());
+
+        TripStatus tripStatus1 = new TripStatus();
+       // if (bookingHTripResponse  != null && bookingHTripResponse.getStatus ().toString().equalsIgnoreCase("1")) {
+
+        sourceTV.setText(tripStatus1.getSourceAddress());
+        destTV.setText(tripStatus1.getSourceAddress());
+        driverName.setText(tripStatus1.getName());
+        fareValue.setText(tripStatus1.getDropLat());
+        //}*/
+
+    }
+
 
 
 }
