@@ -219,7 +219,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //  getActivity().unregisterReceiver(mySenderBroadCast);
+        getActivity().unregisterReceiver(mySenderBroadCast);
     }
 
     @Override

@@ -951,7 +951,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         super.onDestroy();
         try {
             if (mMessageReceiver != null) {
-                unregisterReceiver(mMessageReceiver);
+                LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+               // unregisterReceiver(mMessageReceiver);
             }
 
         } catch (Exception e) {

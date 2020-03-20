@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
@@ -21,10 +22,13 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserReq;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserResp;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerFragment.RatingBottomDialogFragmentForCustomer;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -39,14 +43,15 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
     private ItemClickListener mListener;
     CircleImageView avatar;
     TextView providerName;
-    RatingBar rating;
-    EditText comment;
+    public RatingBar rating;
+    public EditText comment;
     Button submit;
     String cmmnt;
     private String userId;
     private String tripId;
     private IncomingRequestFragmentForDriver incomingRequestFragmentForDriver;
-    private String ratingBar;
+    public String ratingBar;
+    public OnGoingFragmentForDriver onGoingFragmentForDriver;
 
     public static RatingBottomDialogFragmentForDriver newInstance() {
         RatingBottomDialogFragmentForDriver ratingBottomDialogFragmentForDriver = new RatingBottomDialogFragmentForDriver();
@@ -60,24 +65,25 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
         View view = inflater.inflate(R.layout.fragment_reatingbar_for_driver, container, false);
         avatar = view.findViewById(R.id.avatar);
         providerName = view.findViewById(R.id.provider_name);
-        rating = view.findViewById(R.id.rating);
-        comment = view.findViewById(R.id.comment);
+        rating = view.findViewById(R.id.driver_rating);
+        comment = view.findViewById(R.id.comments);
         submit = view.findViewById(R.id.submit);
 
-        cmntAndRatingBar();
+        //  cmntAndRatingBar();
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                afterCmpltRidDriverStatus();
                 driverRating();
+                afterCmpltRidDriverStatus();
+
             }
         });
-
         return view;
     }
 
-    private void cmntAndRatingBar() {
+    public boolean cmntAndRatingBar() {
         cmmnt = comment.getText().toString().trim();
 
            /* if (cmmnt.isEmpty()) {
@@ -90,10 +96,9 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
         return false;*/
 
         ratingBar = String.valueOf(rating.getRating());
-        Toast.makeText(getActivity(), ratingBar, Toast.LENGTH_LONG).show();
-
+        // Toast.makeText(getActivity(), ratingBar, Toast.LENGTH_LONG).show();
+        return true;
     }
-
 
 
     @Override
@@ -126,6 +131,7 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
 
 
     private void afterCmpltRidDriverStatus() {
+
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
         UpdateTripStatusByDriverReq updateTripStatusByDriverReq = new UpdateTripStatusByDriverReq();
         updateTripStatusByDriverReq.setDriverId(userId);
@@ -138,8 +144,8 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
             public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
-                      //  HighwayApplication.getInstance().setCurrentTripId("");
-                      //  HighwayApplication.getInstance().getCurrentTripId();
+                        //  HighwayApplication.getInstance().setCurrentTripId("");
+                        //  HighwayApplication.getInstance().getCurrentTripId();
                         dismiss();
                     }
                 }
@@ -154,24 +160,30 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
 
     private void driverRating() {
 
+        cmmnt = comment.getText().toString().trim();
+        ratingBar = String.valueOf(rating.getRating());
+
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
-        tripId = HighwayPrefs.getString(getActivity(), Constants.TRIP_ID);
         UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
         updateTripRatingByUserReq.setRatingStatus("1");
         updateTripRatingByUserReq.setUserId(userId);
         updateTripRatingByUserReq.setRatingComment(cmmnt);
         updateTripRatingByUserReq.setRatingRate(ratingBar);
-        updateTripRatingByUserReq.setTripId(tripId);
+        updateTripRatingByUserReq.setTripId(HighwayApplication.getInstance().getCurrentTripId());
 
         RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
             @Override
             public void onResponse(Call<UpdateTripRatingByUserResp> call, Response<UpdateTripRatingByUserResp> response) {
                 if (response != null && response.code() == 200 && response.body() != null) {
                     if (response.body().getStatus()) ;
-                    incomingRequestFragmentForDriver = IncomingRequestFragmentForDriver.newInstance();
-                    Bundle bundle = new Bundle();
-                    incomingRequestFragmentForDriver.setArguments(bundle);
-                    ((DashBoardActivity) getActivity()).replaceFragment(incomingRequestFragmentForDriver, " ");
+
+                    if (getActivity()== null) {
+                        onGoingFragmentForDriver = OnGoingFragmentForDriver.newInstance();
+                        Bundle bundle = new Bundle();
+                        onGoingFragmentForDriver.setArguments(bundle);
+                        ((DashBoardActivity) getActivity()).replaceFragment(onGoingFragmentForDriver, " ");
+                        Toast.makeText(getActivity(), "Journey successfully", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -183,4 +195,6 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
 
 
     }
+
+
 }

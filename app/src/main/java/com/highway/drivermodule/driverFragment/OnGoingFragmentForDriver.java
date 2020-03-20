@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import java.util.List;
 
 
 public class OnGoingFragmentForDriver extends Fragment {
+    public static final String TAG = "ActionBottomDialog";;
     private List<OngoingTrip> ongoingTrips = new ArrayList<>();
     RecyclerView onGoingRecyForDriver;
     DriverAllTripsActivity dashBoardActivity;
@@ -73,6 +75,7 @@ public class OnGoingFragmentForDriver extends Fragment {
            // Toast.makeText(dashBoardActivity, "Something is wrong of Ongoing trip list for Driver", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
 
 

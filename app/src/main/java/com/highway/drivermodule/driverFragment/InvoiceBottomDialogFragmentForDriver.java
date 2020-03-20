@@ -180,7 +180,7 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
 
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
         DriverInvoiceReq driverInvoiceReq = new DriverInvoiceReq();
-        driverInvoiceReq.setBookingId(getBookId);
+        driverInvoiceReq.setBookingId(HighwayApplication.getInstance().getCurrentTripId());
         driverInvoiceReq.setDriverId(userId);
 
         RestClient.getDriverInvoice(driverInvoiceReq, new Callback<DriverInvoiceResp>() {
@@ -190,7 +190,6 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
                 if (response!=null && response.code()==200 && response.body()!=null){
                     if (response.body().getStatus()){
                         DriverInvoice driverInvoice = response.body().getDriverInvoice();
-
                         invoiceForDriver(driverInvoice);
                     }
                 }
