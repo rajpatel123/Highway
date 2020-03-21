@@ -978,6 +978,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public void showInvoiceBottomSheetDriver() {
         InvoiceBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
                 InvoiceBottomDialogFragmentForDriver.newInstance();
+        addPhotoBottomDialogFragment.setCancelable(false);
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragmentForDriver.TAG);
     }
@@ -994,6 +995,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public void showratingBottomSheetDriver() {
         RatingBottomDialogFragmentForDriver addPhotoBottomDialogFragment =
                 RatingBottomDialogFragmentForDriver.newInstance();
+        addPhotoBottomDialogFragment.setCancelable(false);
+
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 InvoiceBottomDialogFragmentForDriver.TAG);
     }
@@ -1030,7 +1033,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     TripStatus tripStatus = response.body().getDriverTripStatus();
                     Log.d("Driver Details", "" + tripStatus.getCurrentTripStatus());
 
-                    if (tripStatus.getRatingStatus().equalsIgnoreCase("0")) {
+                    if (!tripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)) {
                         HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
                         HighwayApplication.getInstance().setUserDetails(tripStatus);
                         incomingFragment = IncomingRequestFragmentForDriver.newInstance();
@@ -1078,12 +1081,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         GetCustomerCurrentTripStatusReq customerTripRequest = new GetCustomerCurrentTripStatusReq();
         customerTripRequest.setCustomerId(HighwayPrefs.getString(this, Constants.ID));
 
-        RestClient.getCustomerDetails(customerTripRequest, new Callback<GetCustomerCurrentTripStatusResp>() {
+        RestClient.getCustomerDetails(customerTripRequest, new Callback<DriverDetails>() {
             @Override
-            public void onResponse(Call<GetCustomerCurrentTripStatusResp> call, Response<GetCustomerCurrentTripStatusResp> response) {
+            public void onResponse(Call<DriverDetails> call, Response<DriverDetails> response) {
 
                 if (response != null && response.code() == 200 && response.body() != null) {
-                    CustomerTripStatus customerTripStatus = response.body().getTripStatus();
+                    TripStatus customerTripStatus = response.body().getDriverTripStatus();
                     //  Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
 
                     if (customerTripStatus.getRatingStatus().equalsIgnoreCase("0")) {
@@ -1094,6 +1097,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(TRIP_ACCEPTED)
                                 || customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(PICKEDUP)
                                 || customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(TRIP_NEW)) {
+
+
                             Intent intent = new Intent(DashBoardActivity.this, BookingConformedActivity.class);
                             startActivity(intent);
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED)) {
@@ -1114,7 +1119,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             }
 
             @Override
-            public void onFailure(Call<GetCustomerCurrentTripStatusResp> call, Throwable t) {
+            public void onFailure(Call<DriverDetails> call, Throwable t) {
                 Log.d("User Details", "" + t.getMessage());
                 Toast.makeText(DashBoardActivity.this, "failure", Toast.LENGTH_SHORT).show();
             }

@@ -20,12 +20,11 @@ public class HighwayApplication extends Application {
     }
     TripStatus tripStatus=null;
 
-    CustomerTripStatus customerTripStatus=null;
     public void setBookingHTripRequest(BookingHTripRequest bookingHTripRequest) {
         this.bookingHTripRequest = bookingHTripRequest;
     }
 
-    BookingHTripRequest bookingHTripRequest = new BookingHTripRequest();
+    BookingHTripRequest bookingHTripRequest = null;
 
     @Override
     public void onCreate() {
@@ -66,7 +65,5 @@ public class HighwayApplication extends Application {
         this.tripStatus=tripStatus;
     }
 
-    public void setUserDetails(CustomerTripStatus customerTripStatus) {
-        this.customerTripStatus=customerTripStatus;
-    }
+
 }
