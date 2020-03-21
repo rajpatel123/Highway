@@ -3,7 +3,6 @@ package com.highway.customer.customerFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,24 +14,16 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
-import com.highway.common.base.HighwayApplication;
-import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserReq;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserResp;
 import com.highway.commonretrofit.RestClient;
-import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
-import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
-
-import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.highway.utils.Constants.RATING;
 
 public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFragment {
 
@@ -76,7 +67,7 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         comment = view.findViewById(R.id.comment);
         submit = view.findViewById(R.id.submit);
 
-         ratingAndCmnt();
+        ratingAndCmnt();
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +92,7 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         return false;*/
 
         ratingBar = String.valueOf(rating.getRating());
-      //  Toast.makeText(getActivity(), ratingBar, Toast.LENGTH_LONG).show();
+        //  Toast.makeText(getActivity(), ratingBar, Toast.LENGTH_LONG).show();
         return true;
     }
 
@@ -112,7 +103,7 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         cmnt = comment.getText().toString().trim();
 
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
-        tripId = HighwayPrefs.getString(getActivity(),"BookingId");
+        tripId = HighwayPrefs.getString(getActivity(), "BookingId");
 
         UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
         updateTripRatingByUserReq.setRatingStatus("1");
@@ -124,12 +115,9 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
             @Override
             public void onResponse(Call<UpdateTripRatingByUserResp> call, Response<UpdateTripRatingByUserResp> response) {
-                if (response!=null && response.code()==200 && response.body()!=null){
-                   if (response.body().getStatus());
-                    dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
-                    Bundle bundle = new Bundle();
-                    dashBordFragmentForCustomer.setArguments(bundle);
-                    ((DashBoardActivity) getActivity()).replaceFragment(dashBordFragmentForCustomer, " ");
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    if (response.body().getStatus()) ;
+                    dismiss();
                 }
             }
 

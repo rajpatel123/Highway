@@ -80,7 +80,6 @@ import static com.highway.utils.Constants.RATING;
 import static com.highway.utils.Constants.TRIP_ACCEPTED;
 import static com.highway.utils.Constants.TRIP_CANCELED;
 import static com.highway.utils.Constants.TRIP_NEW;
-import static com.highway.utils.Constants.TRIP_STARTED;
 
 
 public class IncomingRequestFragmentForDriver extends Fragment implements View.OnClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
@@ -174,7 +173,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (pushData == null  && ((DashBoardActivity) getActivity()).pushData!=null) {
+        if (pushData == null && ((DashBoardActivity) getActivity()).pushData != null) {
             try {
                 pushData = ((DashBoardActivity) getActivity()).pushData;
                 data = BaseUtil.objectFromString(pushData.toString(), NotificationPushData.class);
@@ -182,17 +181,17 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             data = new NotificationPushData();
             TripStatus tripStatus = HighwayApplication.getInstance().getTripStatus();
-            if (tripStatus!=null){
+            if (tripStatus != null) {
                 data.setTripId(tripStatus.getBookingTripId());
                 data.setMobile(tripStatus.getMobile());
-                data.setSource(""+tripStatus.getSourceAddress());
-                data.setDestination(""+tripStatus.getDestinationAddress());
-                data.setCustomer(""+tripStatus.getMobile());
-                data.setName(""+tripStatus.getName());
-                mobileNo= data.getMobile();
+                data.setSource("" + tripStatus.getSourceAddress());
+                data.setDestination("" + tripStatus.getDestinationAddress());
+                data.setCustomer("" + tripStatus.getMobile());
+                data.setName("" + tripStatus.getName());
+                mobileNo = data.getMobile();
                 data.setType(tripStatus.getCurrentTripStatus());
                 HighwayApplication.getInstance().setCurrentTripId(data.getTripId());
 
@@ -312,7 +311,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                         public void onFinish() {
                             stopMediaPlayer();
-                            ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(),"");
+                            ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
                         }
                     };
 
@@ -338,7 +337,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 lblLocationType.setVisibility(View.VISIBLE);
 
                 customer_name.setText(data.getCustomer());
-                STATUS=TRIP_ACCEPTED;
+                STATUS = TRIP_ACCEPTED;
 
                 break;
             case ARRIVED:
@@ -376,7 +375,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                 break;
             case DROPPED:
-               ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
+                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
                 ((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
 
 
@@ -437,7 +436,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 if (Utils.isInternetConnected(context)) {
                     //Utils.showProgressDialog(context);
 
-                    confirmPopup("Are you sure want to reject?",true);
+                    confirmPopup("Are you sure want to reject?", true);
 //                    try {
 //                       // acceptRejectBookingTrip(getAcceptRejectBookingTripParams(Constants.NOTIFICATION_TYPE_TRIP_REJECTED), false);
 //                    } catch (JSONException e) {
@@ -458,12 +457,12 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
             case R.id.tapToDrop:
-                confirmPopup("Are you sure want to drop?",false);
+                confirmPopup("Are you sure want to drop?", false);
                 break;
 
             case R.id.btnArrived:
                 updateDriverStatus(ARRIVED, data.getTripId());
-                STATUS=ARRIVED;
+                STATUS = ARRIVED;
                 init(ARRIVED);
                 break;
 
@@ -476,12 +475,12 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
             case R.id.btnpickedUp:
                 updateDriverStatus(PICKEDUP, data.getTripId());
-                STATUS=PICKEDUP;
+                STATUS = PICKEDUP;
                 init(PICKEDUP);
                 break;
 
             case R.id.btnCancelafterArrived:
-                STATUS=TRIP_CANCELED;
+                STATUS = TRIP_CANCELED;
                 updateDriverStatus(TRIP_CANCELED, data.getTripId());
                 stopMediaPlayer();
                 ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
@@ -497,19 +496,19 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         }
     }
 
-    void confirmPopup(String message,boolean isReject) {
+    void confirmPopup(String message, boolean isReject) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(dashBoardActivity);
         alertDialogBuilder
                 .setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("YES", (dialog, id) -> {
-                   if (isReject){
-                       ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
-                   }else{
-                       STATUS=DROPPED;
-                       updateDriverStatus(DROPPED, data.getTripId());
-                       init(DROPPED);
-                   }
+                    if (isReject) {
+                        ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
+                    } else {
+                        STATUS = DROPPED;
+                        updateDriverStatus(DROPPED, data.getTripId());
+                        init(DROPPED);
+                    }
                 })
                 .setNegativeButton("NO", (dialog, id) -> dialog.cancel());
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -614,6 +613,14 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 if (response.code() == 200 && response.body() != null) {
                     BookingAcceptRejectResponse resp = response.body();
                     BaseUtil.jsonFromModel(resp);
+
+                    if (TRIP_ACCEPTED.equalsIgnoreCase("" + resp.getStatus())) {
+                        stopMediaPlayer();
+                        ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
+
+                    }
+
+
                     if (isAccepted) {
 
                         incomingCallView.setVisibility(View.GONE);
@@ -622,7 +629,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                         locationAddressTV.setText(data.getSource());
                         lblLocationType.setText("PickUp Location");
                         customer_name.setText(data.getCustomer());
-                        STATUS=TRIP_ACCEPTED;
+                        STATUS = TRIP_ACCEPTED;
 
                         if (countDownTimer != null) {
                             if (mPlayer != null && mPlayer.isPlaying())
