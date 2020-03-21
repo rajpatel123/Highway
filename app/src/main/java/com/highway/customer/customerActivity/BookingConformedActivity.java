@@ -60,7 +60,6 @@ import com.highway.R;
 import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.HighwayApplication;
-import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
@@ -248,7 +247,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
 //
 //                HighwayPrefs.putString(getApplicationContext(), "bookTripIdCode", bookTripIdCode); // for invoiceBottomDialogfragmentForDriver
-                  HighwayPrefs.putString(getApplicationContext(), "BookingId", bookId);
+                HighwayPrefs.putString(getApplicationContext(), "BookingId", bookId);
             } else {
 
                 tripStatus = HighwayApplication.getInstance().getTripStatus();
@@ -264,18 +263,34 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     performAfterNotification(tripStatus.getCurrentTripStatus());
 
 
+                    destName = tripStatus.getDestinationAddress();
+                    sourceName = tripStatus.getSourceAddress();
+
+                    destLatitude = Double.parseDouble(tripStatus.getDropLat());
+                    destLongitude = Double.parseDouble(tripStatus.getDropLong());
+
+
+                    sourceLatitude = Double.parseDouble(tripStatus.getSourceLat());
+                    sourceLongitude = Double.parseDouble(tripStatus.getSourceLong());
+
+
+                    sourceTV.setText("" + sourceName);
+                    destTV.setText("" + destName);
+
+                    markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+                    markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+
+                    markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+                    markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+
+
                 }
             }
 
         }
-
-
-        sourceTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress());
-        destTV.setText(HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress());
-        fareValue.setText("INR" + HighwayApplication.getInstance().getBookingHTripRequest().getTripFare() + " CASH");
-
-        initLocations(getIntent());
-
+        if (HighwayApplication.getInstance().getBookingHTripRequest() != null) {
+            initLocations();
+        }
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -302,7 +317,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         bookingTimer();
 
 
-
         Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
 
@@ -310,7 +324,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         registerReceiver(mySenderBroadCast, intentFilter);
 
-        tapToReturnUpComing();
+        //tapToReturnUpComing();
     }
 
 
@@ -435,7 +449,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     };
 
 
-    public void initLocations(Intent intent) {
+    public void initLocations() {
         destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
         sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
 
@@ -446,6 +460,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         sourceLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong();
 
         sourceTV.setText("" + sourceName);
+        destTV.setText("" + destName);
 
         markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
         markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
@@ -660,6 +675,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
 
     public void bookingTimer() {
+        if (tripStatus != null)
+            return;
 
         countDownTimer = new CountDownTimer(60 * 1000, 1000) {
 
@@ -793,8 +810,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 if (tripStatus != null) {
                     driverName.setText("" + tripStatus.getName());
                     vehicleName.setText("" + tripStatus.getBookingTripCode() + " - " + tripStatus.getName());
-                    sourceTV.setText(""+tripStatus.getSourceAddress());
-                    destTV.setText(""+tripStatus.getDestinationAddress());
+                    sourceTV.setText("" + tripStatus.getSourceAddress());
+                    destTV.setText("" + tripStatus.getDestinationAddress());
 
                     driverMobile = tripStatus.getMobile();
                     bookingSearchingLayout.setVisibility(View.GONE);
@@ -820,8 +837,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 if (tripStatus != null) {
                     driverName.setText("" + tripStatus.getName());
                     vehicleName.setText("" + tripStatus.getBookingTripCode() + " - " + tripStatus.getName());
-                    sourceTV.setText(""+tripStatus.getSourceAddress());
-                    destTV.setText(""+tripStatus.getDestinationAddress());
+                    sourceTV.setText("" + tripStatus.getSourceAddress());
+                    destTV.setText("" + tripStatus.getDestinationAddress());
 
                     driverMobile = tripStatus.getMobile();
                     bookingSearchingLayout.setVisibility(View.GONE);
@@ -856,7 +873,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     }
 
 
-    public void tapToReturnUpComing(){
+    public void tapToReturnUpComing() {
         // get data throgh card view
 
         Bundle bundle = getIntent().getExtras();
@@ -892,7 +909,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         //}*/
 
     }
-
 
 
 }

@@ -46,6 +46,7 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
     public RatingBar rating;
     public EditText comment;
     Button submit;
+    DashBoardActivity dashBaoardActivity;
     String cmmnt;
     private String userId;
     private String tripId;
@@ -109,6 +110,8 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        dashBaoardActivity = (DashBoardActivity) getActivity();
+
 
     }
 
@@ -132,7 +135,7 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
 
     private void afterCmpltRidDriverStatus() {
 
-        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        userId = HighwayPrefs.getString(dashBaoardActivity, Constants.ID);
         UpdateTripStatusByDriverReq updateTripStatusByDriverReq = new UpdateTripStatusByDriverReq();
         updateTripStatusByDriverReq.setDriverId(userId);
         updateTripStatusByDriverReq.setTripId(HighwayApplication.getInstance().getCurrentTripId());
@@ -153,7 +156,7 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
 
             @Override
             public void onFailure(Call<UpdateTripStatusByDriverResp> call, Throwable t) {
-                Toast.makeText(getActivity(), "failure!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(dashBaoardActivity, "failure!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -163,7 +166,7 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
         cmmnt = comment.getText().toString().trim();
         ratingBar = String.valueOf(rating.getRating());
 
-        userId = HighwayPrefs.getString(getActivity(), Constants.ID);
+        userId = HighwayPrefs.getString(dashBaoardActivity, Constants.ID);
         UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
         updateTripRatingByUserReq.setRatingStatus("1");
         updateTripRatingByUserReq.setUserId(userId);
@@ -176,20 +179,13 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
             public void onResponse(Call<UpdateTripRatingByUserResp> call, Response<UpdateTripRatingByUserResp> response) {
                 if (response != null && response.code() == 200 && response.body() != null) {
                     if (response.body().getStatus()) ;
-
-
-                        onGoingFragmentForDriver = OnGoingFragmentForDriver.newInstance();
-                        Bundle bundle = new Bundle();
-                        onGoingFragmentForDriver.setArguments(bundle);
-                        ((DashBoardActivity) getActivity()).replaceFragment(onGoingFragmentForDriver, " ");
-                        Toast.makeText(getActivity(), "Journey successfully", Toast.LENGTH_SHORT).show();
-
+                    dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<UpdateTripRatingByUserResp> call, Throwable t) {
-                Toast.makeText(getContext(), "failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(dashBaoardActivity, "failure", Toast.LENGTH_SHORT).show();
             }
         });
 

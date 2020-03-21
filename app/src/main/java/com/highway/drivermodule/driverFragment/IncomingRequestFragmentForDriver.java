@@ -376,19 +376,23 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                 break;
             case DROPPED:
-               /* ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");*/
+               ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
                 ((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
+
 
                 break;
             case COMPLETED:
                 ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
-                //((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
+                ((DashBoardActivity) getActivity()).showInvoiceBottomSheetDriver();
 
                 break;
             case RATING:
+                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
                 ((DashBoardActivity) getActivity()).showratingBottomSheetDriver();
                 break;
             case INVOICE:
+                ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
+                ((DashBoardActivity) getActivity()).showratingBottomSheetDriver();
                 break;
 
         }
@@ -573,6 +577,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             public void onResponse(Call<UpdateTripStatusByDriverResp> call, Response<UpdateTripStatusByDriverResp> response) {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
+
+
                         Log.d("Status Update", "" + response.body().getMessage());
                     }
                 }

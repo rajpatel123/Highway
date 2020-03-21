@@ -38,6 +38,7 @@ import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
 import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
 import com.highway.drivermodule.drivermodels.DriverDetailRequest;
 import com.highway.drivermodule.drivermodels.DriverDetails;
+import com.highway.drivermodule.drivermodels.TripStatus;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownRequest;
@@ -205,7 +206,7 @@ public interface ApiInterface {
 
     // get customer details by id
     @POST("api/Booking/getCustomerCurrentTripStatus")
-    Call<GetCustomerCurrentTripStatusResp> GET_CUSTOMER_CURRENT_TRIP_STATUS_RESPS_CALL(@Body GetCustomerCurrentTripStatusReq getCustomerCurrentTripStatusReq);
+    Call<DriverDetails> GET_CUSTOMER_CURRENT_TRIP_STATUS_RESPS_CALL(@Body GetCustomerCurrentTripStatusReq getCustomerCurrentTripStatusReq);
 
     // customer rating
     @POST("api/Trip/updateTripRatingByUser")

@@ -238,7 +238,6 @@ public class InvoiceBottomDialogFragmentForDriver extends BottomSheetDialogFragm
 
 
                 // ((DashBoardActivity) getActivity()).showratingBottomSheetDriver("");
-                dismiss();
                 //  ((DashBoardActivity) getActivity()).showratingBottomSheetForCustomer(tripId);
 
             }
