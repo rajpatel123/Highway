@@ -840,11 +840,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
             case COMPLETED:
 
-
-
                /* InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance();
-                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
-
+                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);DASH
                 finish();*/
                 break;
 

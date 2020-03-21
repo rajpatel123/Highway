@@ -177,19 +177,19 @@ public class RatingBottomDialogFragmentForDriver extends BottomSheetDialogFragme
                 if (response != null && response.code() == 200 && response.body() != null) {
                     if (response.body().getStatus()) ;
 
-                    if (getActivity()== null) {
+
                         onGoingFragmentForDriver = OnGoingFragmentForDriver.newInstance();
                         Bundle bundle = new Bundle();
                         onGoingFragmentForDriver.setArguments(bundle);
                         ((DashBoardActivity) getActivity()).replaceFragment(onGoingFragmentForDriver, " ");
                         Toast.makeText(getActivity(), "Journey successfully", Toast.LENGTH_SHORT).show();
-                    }
+
                 }
             }
 
             @Override
             public void onFailure(Call<UpdateTripRatingByUserResp> call, Throwable t) {
-                Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "failure", Toast.LENGTH_SHORT).show();
             }
         });
 
