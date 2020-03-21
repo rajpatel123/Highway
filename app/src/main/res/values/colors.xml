@@ -114,5 +114,6 @@
     <color name="ratingBarColor">#fdc928</color>
     <color name="instant_btn">#F79646</color>
 
-
+    <drawable name="clr_normal">#AAAAAA</drawable>
+    <drawable name="clr_pressed">#777777</drawable>
 </resources>

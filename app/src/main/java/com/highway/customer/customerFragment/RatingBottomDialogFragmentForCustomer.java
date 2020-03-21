@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
+import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserReq;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userRating.UpdateTripRatingByUserResp;
 import com.highway.commonretrofit.RestClient;
@@ -103,14 +104,14 @@ public class RatingBottomDialogFragmentForCustomer extends BottomSheetDialogFrag
         cmnt = comment.getText().toString().trim();
 
         userId = HighwayPrefs.getString(getActivity(), Constants.ID);
-        tripId = HighwayPrefs.getString(getActivity(), "BookingId");
+      //  tripId = HighwayPrefs.getString(getActivity(), "BookingId");
 
         UpdateTripRatingByUserReq updateTripRatingByUserReq = new UpdateTripRatingByUserReq();
         updateTripRatingByUserReq.setRatingStatus("1");
         updateTripRatingByUserReq.setUserId(userId);
         updateTripRatingByUserReq.setRatingComment(cmnt);
         updateTripRatingByUserReq.setRatingRate(ratingBar);
-        updateTripRatingByUserReq.setTripId(tripId);
+        updateTripRatingByUserReq.setTripId(HighwayApplication.getInstance().getCurrentTripId());
 
         RestClient.getRatingUser(updateTripRatingByUserReq, new Callback<UpdateTripRatingByUserResp>() {
             @Override

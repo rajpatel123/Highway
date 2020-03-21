@@ -602,8 +602,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         return acceptRejectData;
     }
 
-    public void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData,
-                                        boolean isAccepted) {
+    public void acceptRejectBookingTrip(BookingAcceptRejectData acceptRejectData, boolean isAccepted) {
         RestClient.acceptRejectBookingTrip(acceptRejectData, new Callback<BookingAcceptRejectResponse>() {
             @Override
             public void onResponse(Call<BookingAcceptRejectResponse> call, Response<BookingAcceptRejectResponse> response) {
@@ -619,7 +618,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                         ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
 
                     }
-
 
                     if (isAccepted) {
 
