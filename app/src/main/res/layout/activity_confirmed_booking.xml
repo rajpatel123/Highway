@@ -157,7 +157,7 @@
                 <ImageView
                     android:id="@+id/imgIV"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:paddingTop="@dimen/_10ssp"
                     app:srcCompat="@drawable/vehicle" />
@@ -196,7 +196,7 @@
                             android:id="@+id/driverName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_5"
+                            android:layout_marginTop="@dimen/_10dp"
                             android:text="Searching for driver...."
                             android:textColor="@color/quantum_grey700"/>
 
@@ -204,8 +204,9 @@
                         <LinearLayout
                             android:id="@+id/bookingSearchingLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             tools:visibility="visible"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -213,6 +214,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Booking will get cancelled if not allocated in  "
                                 android:textColor="@color/red"
+
                                 android:textSize="12sp" />
                             <TextView
                                 android:id="@+id/bookingInfoForDriverAllocation"
@@ -262,7 +264,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5sp"
                     android:layout_marginStart="@dimen/_10ssp"
                     android:layout_marginEnd="@dimen/_10ssp"
                     android:gravity="center_vertical"
@@ -275,6 +276,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="2"
                         android:gravity="center"
+                        android:layout_marginTop="@dimen/_10dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -327,7 +329,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_below="@+id/details"
-                    android:layout_marginTop="10px"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_10ssp"
                     android:layout_marginEnd="@dimen/_10ssp"
                     android:background="@color/quantum_grey" />
