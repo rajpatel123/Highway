@@ -72,4 +72,11 @@ public class Constants {
     public static final String VEHICLE_TYPE = "v_type";
     public static final String VEHICLE_NUMBER = "v_number";
     public static final String VEHICLE_IMAGE = "v_image";
+
+    public static final String PICKUP = "PICKUP";
+    public static final String CAR_TRANSPORTER = "CAR_TRANSPORTER";
+    public static final String TATA_MAGIC = "TATA_MAGIC";
+    public static final String SEMI_TRAILER = "SEMI_TRAILER";
+    public static final String TRUCK = "TRUCK";
+    public static final String TATA_ACE = "TATA_ACE";
 }

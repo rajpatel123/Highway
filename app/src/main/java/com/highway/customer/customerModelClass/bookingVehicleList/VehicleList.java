@@ -15,6 +15,11 @@ public class VehicleList {
     @SerializedName("VehicleName")
     @Expose
     private String vehicleName;
+
+    @SerializedName("VehicleType")
+    @Expose
+    private String vehicleType;
+
     @SerializedName("VehicleFare")
     @Expose
     private String vehicleFare;
@@ -45,6 +50,14 @@ public class VehicleList {
 
     public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public String getVehicleFare() {

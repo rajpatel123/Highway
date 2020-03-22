@@ -19,6 +19,13 @@ import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.highway.utils.Constants.CAR_TRANSPORTER;
+import static com.highway.utils.Constants.PICKUP;
+import static com.highway.utils.Constants.SEMI_TRAILER;
+import static com.highway.utils.Constants.TATA_ACE;
+import static com.highway.utils.Constants.TATA_MAGIC;
+import static com.highway.utils.Constants.TRUCK;
+
 public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAdapter.ViewHolder> {
     private Context context;
 
@@ -57,6 +64,7 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         holder.faireChargeTv3.setText("\u20B9" + vehicleList.getVehicleFare());
 
 
+
         Log.d("Data" + vehicleList.getVehicleName(), "" + vehicleList.isSelected());
 
         holder.infoImg.setOnClickListener(new View.OnClickListener() {
@@ -90,17 +98,70 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         });
 
 
-        holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_un_selected);
 
-        if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
+        switch (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).getVehicleType()){
+            case PICKUP :
 
-            holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_selected);
+                if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
 
-            // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
-        } else {
-            holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_un_selected);
-            //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
+                    holder.vehicleIcons.setImageResource(R.drawable.v_truck_selected);
+                } else {
+                    holder.vehicleIcons.setImageResource(R.drawable.v_truck_un_selected);
+                }
+                break;
+
+            case CAR_TRANSPORTER :
+
+                if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
+
+                    holder.vehicleIcons.setImageResource(R.drawable.v_car_transport_selected);
+                } else {
+                    holder.vehicleIcons.setImageResource(R.drawable.v_car_transport_un_selected);
+                }
+                break;
+
+            case TATA_MAGIC :
+
+                if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
+
+                    holder.vehicleIcons.setImageResource(R.drawable.v_tata_magic_selected);
+                } else {
+                    holder.vehicleIcons.setImageResource(R.drawable.v_tata_magic_un_selected);
+                }
+                break;
+
+            case SEMI_TRAILER :
+
+                if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
+
+                    holder.vehicleIcons.setImageResource(R.drawable.v_semi_trailer_selected);
+                } else {
+                    holder.vehicleIcons.setImageResource(R.drawable.v_semi_trailer_un_selected);
+                }
+                break;
+
+            case TRUCK :
+
+                if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
+
+                    holder.vehicleIcons.setImageResource(R.drawable.v_pickup_selected);
+                } else {
+                    holder.vehicleIcons.setImageResource(R.drawable.v_pickup_un_selected);
+                }
+                break;
+
+
+            case TATA_ACE :
+                if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
+
+                    holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_selected);
+                } else {
+                    holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_un_selected);
+                }
+                break;
         }
+      //  holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_un_selected);
+
 
 
     }
