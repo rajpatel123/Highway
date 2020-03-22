@@ -866,6 +866,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:text="@string/done"
+                android:visibility="gone"
                 android:textColor="#FFF"
                 />
 

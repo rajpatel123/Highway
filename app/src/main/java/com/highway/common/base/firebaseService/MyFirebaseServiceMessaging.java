@@ -130,28 +130,44 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
                         break;
                     case TRIP_STARTED:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+
                         sendNotification(jsonObject, type,"You are on your way!");
 
                         break;
                     case Constants.ARRIVED:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+
                         sendNotification(jsonObject, type,"I have arrived!");
 
                         break;
                     case PICKEDUP:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+
                         sendNotification(jsonObject, type,"You are on your way!");
 
                         break;
                     case DROPPED:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
                         sendNotification(jsonObject, type,"Dropped!");
 
 //                        sendNotification(jsonObject, type,"Thanks for booking with Highway, it was a great trip with you");
 
                         break;
                     case COMPLETED:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+                        sendNotification(jsonObject, type,"Trip Completed");
+
                         break;
                     case RATING:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+                        sendNotification(jsonObject, type,"Rating done");
+
                         break;
                     case INVOICE:
+                        jsonObject.put(Constants.PUSH_TYPE, type);
+                        sendNotification(jsonObject, type,"Payment Received");
+
                         break;
 
 

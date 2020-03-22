@@ -613,10 +613,9 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                     BookingAcceptRejectResponse resp = response.body();
                     BaseUtil.jsonFromModel(resp);
 
-                    if (TRIP_ACCEPTED.equalsIgnoreCase("" + resp.getStatus())) {
+                    if (!resp.getStatus()) {
                         stopMediaPlayer();
                         ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
-
                     }
 
                     if (isAccepted) {

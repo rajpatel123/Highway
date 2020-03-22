@@ -1,6 +1,7 @@
 package com.highway.customer.customerActivity;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.customerModelClass.bookingVehicleList.VehicleList;
-import com.highway.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,8 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         holder.faireChargeTv3.setText("\u20B9" + vehicleList.getVehicleFare());
 
 
+        Log.d("Data" + vehicleList.getVehicleName(), "" + vehicleList.isSelected());
+
         holder.infoImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,34 +72,34 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         holder.row_linearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                row_index = position;
+
+                updateItems(holder);
+                bookingVehicleListResponse.getVehicleData().getVehicleList().get(row_index).setSelected(true);
+
+                notifyDataSetChanged();
+
+
                 if (onClickEvents != null) {
-                    row_index = position;
-
-                    updateItems(holder);
-                    bookingVehicleListResponse.getVehicleData().getVehicleList().get(row_index).setSelected(true);
-
-                    notifyDataSetChanged();
-
-
-                   /*  onClickEvents.onCLickTruck(holder.getAdapterPosition(),
-                           vehicleList.getVehicleFare());
-                            notifyDataSetChanged();*/
+                    onClickEvents.onCLickTruck(position,
+                            vehicleList.getVehicleFare());
 
                 }
             }
         });
-        if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(row_index).isSelected()) {
-            if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(row_index).getVehicleTypeId().equalsIgnoreCase("6")){
-                Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.v_tata_ace_selected);
-            }
+
+
+        holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_un_selected);
+
+        if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
+
+            holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_selected);
 
             // holder.canRsnTv.setTextColor(Color.parseColor("#ffffff"));
         } else {
-            if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(row_index).getVehicleTypeId().equalsIgnoreCase("6")) {
-                Utils.setTintForImage(context,holder.vehicleIcons,R.drawable.v_tata_ace_un_selected);
-
-            }
-                //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
+            holder.vehicleIcons.setImageResource(R.drawable.v_tata_ace_un_selected);
+            //holder.canRsnTv.setTextColor(Color.parseColor("#000000"));
         }
 
 

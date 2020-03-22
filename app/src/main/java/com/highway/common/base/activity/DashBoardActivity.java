@@ -122,6 +122,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     private List<CancelTrip> cancelTrips = new ArrayList<>();
     private IncomingRequestFragmentForDriver incomingFragment;
     private BookingConformedActivity bookingConformed;
+    private InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment;
 
 
     public List<CancelTrip> getCancelTrips() {
@@ -985,7 +986,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
 
     public void showInVoiceBottomSheetCustomer() {
-        InvoiceBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
+         addPhotoBottomDialogFragment =
                 InvoiceBottomDialogFragmentForCustomer.newInstance();
         addPhotoBottomDialogFragment.setCancelable(false);
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
@@ -1006,6 +1007,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     public void showratingBottomSheetForCustomer() {
         RatingBottomDialogFragmentForCustomer addPhotoBottomDialogFragment =
                 RatingBottomDialogFragmentForCustomer.newInstance();
+        addPhotoBottomDialogFragment.setCancelable(false);
         addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
                 RatingBottomDialogFragmentForCustomer.class.getSimpleName());
     }
@@ -1105,6 +1107,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED)) {
                             showInVoiceBottomSheetCustomer();
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE)) {
+                          if (addPhotoBottomDialogFragment!=null){
+                              addPhotoBottomDialogFragment.dismiss();
+                          }
                             showratingBottomSheetForCustomer();
 
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)) {

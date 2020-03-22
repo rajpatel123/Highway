@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.highway.R;
 import com.highway.common.base.HighwayApplication;
+import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoice;
 import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceReq;
@@ -84,6 +86,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     private TextView payAbleAmout;
     private int yy, mm, dd;
     TextView start_time,end_time;
+    private DashBoardActivity dashboardActivity;
 
     public static InvoiceBottomDialogFragmentForCustomer newInstance() {
         InvoiceBottomDialogFragmentForCustomer fragment = new InvoiceBottomDialogFragmentForCustomer();
@@ -159,21 +162,19 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
 
         tripdate();
         getInvoiceForCustomer();
-        clicklistner();
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
 
 
         return view;
     }
 
     private void clicklistner() {
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RatingBottomDialogFragmentForCustomer ratingBottomDialogFragmentForCustomer = RatingBottomDialogFragmentForCustomer.newInstance();
-                ratingBottomDialogFragmentForCustomer.show(getActivity().getSupportFragmentManager(), RatingBottomDialogFragmentForCustomer.TAG);
-
-            }
-        });
 
     }
 
@@ -243,6 +244,7 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        dashboardActivity = (DashBoardActivity) getActivity();
 
     }
 

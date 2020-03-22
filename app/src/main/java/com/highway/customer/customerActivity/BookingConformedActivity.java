@@ -149,14 +149,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
 
-    // USING BROADCAST RECEIVER
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String data = intent.getStringExtra("key");
-            acptTripTv.setText(data);
-        }
-    };
+
     private String driverMobile;
     private CountDownTimer countDownTimer;
     private Iterable<? extends LatLng> list;
@@ -260,7 +253,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     getSupportActionBar().setTitle("TRIP " + bookTripIdCode);
 
                     HighwayApplication.getInstance().setCurrentTripId(bookId);
-                    performAfterNotification(tripStatus.getCurrentTripStatus());
 
 
                     destName = tripStatus.getDestinationAddress();
@@ -282,6 +274,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
                     markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
                     markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+                    performAfterNotification(tripStatus.getCurrentTripStatus());
 
 
                 }
@@ -436,7 +429,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     finish();
 
                 } else if (pushData.getString(PUSH_TYPE).equalsIgnoreCase(DROPPED)) {
-                    performAfterNotification(data.getType());
+                    performAfterNotification(pushData.getString(PUSH_TYPE));
                 }
 
 
@@ -788,21 +781,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         switch (status) {
 
             case TRIP_NEW:
-                if (data != null) {
-                    sourceTV.setText("" + data.getSource());
-                    destTV.setText("" + data.getDestination());
-                    driverName.setText(data.getCustomer());
-                    driverMobile = data.getMobile();
-                    userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-                } else {
-                    if (tripStatus != null) {
-                        sourceTV.setText("" + tripStatus.getSourceAddress());
-                        destTV.setText("" + tripStatus.getDestinationAddress());
-                        driverName.setText(tripStatus.getName());
-                        driverMobile = tripStatus.getMobile();
-                        userId = HighwayPrefs.getString(getApplicationContext(), Constants.ID);
-                    }
-                }
+                sourceTV.setText("" + sourceName);
+                destTV.setText("" + destName);
                 break;
 
             case TRIP_ACCEPTED:
@@ -849,17 +829,13 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     }
                 }
 
-                InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance();
-                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);
 
                 finish();
                 break;
 
             case COMPLETED:
 
-               /* InvoiceBottomDialogFragmentForCustomer invoiceBottomDialogFragmentForCustomer = InvoiceBottomDialogFragmentForCustomer.newInstance();
-                invoiceBottomDialogFragmentForCustomer.show(getSupportFragmentManager(), InvoiceBottomDialogFragmentForCustomer.TAG);DASH
-                finish();*/
+                finish();
                 break;
 
             case RATING:
