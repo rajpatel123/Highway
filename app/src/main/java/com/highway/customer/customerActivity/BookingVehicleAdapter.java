@@ -78,7 +78,6 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
                     notifyDataSetChanged();
 
-
                    /*  onClickEvents.onCLickTruck(holder.getAdapterPosition(),
                            vehicleList.getVehicleFare());
                             notifyDataSetChanged();*/
