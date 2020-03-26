@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.highway.R;
+import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.commonretrofit.RestClient;
@@ -27,6 +28,7 @@ import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,12 +38,15 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     private EditText verifyPin;
     private Button btnVerify;
     private ImageView backImage;
-    private TextView resend;
+    public TextView resend;
     private TextView mobileNumberTV, changeNumberTv;
     String userId;
 
 
     SmsReceiver smsReceiver = new SmsReceiver();
+    public String otpNumber;
+    public String usermobileNumber;
+    public String userLoginRoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +60,12 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         changeNumberTv = findViewById(R.id.changeNumber);
 
 
-
         timerInOtp();                          // time count down of otp
 
-        mobileNumberTV.setText(HighwayPrefs.getString(this, Constants.USERMOBILE));
+       // mobileNumberTV.setText(HighwayPrefs.getString(this, Constants.USERMOBILE));
+        usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
+        userLoginRoleId = HighwayPrefs.getString(getApplicationContext(),Constants.ROLEID);
+
 
         smsReceiver.bindListener(this);
 
@@ -69,7 +76,6 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
             }
         });
 
-
         changeNumberTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +84,38 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                 finish();
             }
         });
+
+
+        resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resendOtpOperation();
+
+            }
+        });
+
+    }
+
+    private void resendOtpOperation() {
+        LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
+        loginReqUpdated.setRoleId(userLoginRoleId);
+        loginReqUpdated.setMobile(usermobileNumber);
+
+        RestClient.loginUser(loginReqUpdated, new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+              if (response!=null && response.code()==200 && response.body()!=null){
+                  Toast.makeText(MobileOtpVerificationActivity.this, "Otp resend on your mobile number!", Toast.LENGTH_SHORT).show();
+              }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(MobileOtpVerificationActivity.this, "Otp resend Failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
     }
 
@@ -100,8 +138,8 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     public void verifyPinOperation() {
 
         boolean check = true;
-        String otpNumber = verifyPin.getText().toString().trim();
-        String usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
+         otpNumber = verifyPin.getText().toString().trim();
+         usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
 
         if (otpNumber.isEmpty()) {
             verifyPin.setError("enter a valid otp");
@@ -218,7 +256,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     @Override
     public void messageReceived(String messageText) {
         verifyPin.setText(messageText);
-        verifyPinOperation();
+       // verifyPinOperation();
 
     }
 }

@@ -39,6 +39,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
     String phone_number;
     private int backpress;
     private String customerLogInId;
+    private String customerLoginRoleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,7 @@ public class LoginActivityForCustomer extends AppCompatActivity {
         CustomerPhoneNo = findViewById(R.id.edtTxtMobNo);
         btnSendOtp = findViewById(R.id.btnSendOtp);
 
-        //customerLogInId = getIntent().getStringExtra("customerRoleId");
-
+        customerLoginRoleId = HighwayPrefs.getString(getApplicationContext(), "customerRoleId");
 
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,10 +80,11 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
         if (validateInput()) {
 
-            customerLogInId = HighwayPrefs.getString(getApplicationContext(), "customerRoleId");
+            //customerLogInId = HighwayPrefs.getString(getApplicationContext(), "customerRoleId");
             LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
             loginReqUpdated.setMobile(phone_number);
-            loginReqUpdated.setRoleId(customerLogInId);
+           // loginReqUpdated.setRoleId(customerLogInId);
+            loginReqUpdated.setRoleId(customerLoginRoleId);
 
             if (Utils.isInternetConnected(this)) {
 
@@ -97,7 +98,8 @@ public class LoginActivityForCustomer extends AppCompatActivity {
                             if (response.code() == 200) {
                                 Intent intent = new Intent(LoginActivityForCustomer.this, MobileOtpVerificationActivity.class);
                                 HighwayPrefs.putString(LoginActivityForCustomer.this, Constants.USERMOBILE, phone_number);
-                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, customerLogInId);
+                                //HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, customerLogInId);
+                                HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, customerLoginRoleId);
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(LoginActivityForCustomer.this, "Pls verify Otp  !", Toast.LENGTH_SHORT).show();

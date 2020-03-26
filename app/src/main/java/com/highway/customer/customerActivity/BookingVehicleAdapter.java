@@ -104,9 +104,9 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
                 if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
 
-                    holder.vehicleIcons.setImageResource(R.drawable.v_truck_selected);
+                    holder.vehicleIcons.setImageResource(R.drawable.v_pickup_selected);
                 } else {
-                    holder.vehicleIcons.setImageResource(R.drawable.v_truck_un_selected);
+                    holder.vehicleIcons.setImageResource(R.drawable.v_pickup_un_selected);
                 }
                 break;
 
@@ -144,9 +144,9 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
                 if (bookingVehicleListResponse.getVehicleData().getVehicleList().get(position).isSelected()) {
 
-                    holder.vehicleIcons.setImageResource(R.drawable.v_pickup_selected);
+                    holder.vehicleIcons.setImageResource(R.drawable.v_truck_selected);
                 } else {
-                    holder.vehicleIcons.setImageResource(R.drawable.v_pickup_un_selected);
+                    holder.vehicleIcons.setImageResource(R.drawable.v_truck_un_selected);
                 }
                 break;
 
