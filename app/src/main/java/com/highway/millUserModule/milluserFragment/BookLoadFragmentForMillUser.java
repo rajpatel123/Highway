@@ -1,7 +1,9 @@
 package com.highway.millUserModule.milluserFragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -26,6 +29,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,6 +54,7 @@ import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDrop
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
+import com.highway.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,7 +95,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
     ApproxLoadDropDownResponse approxLoadDropDownResponse;
     List<String> goodsTitle;
     List<String> approxLoadTitle;
-    private String goodsTypeId,approxLoadId;
+    private String goodsTypeId, approxLoadId;
 
 
     private DashBoardActivity millActivity;
@@ -129,9 +134,13 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
         btnBookNow = view.findViewById(R.id.BtnBookNow);
 
 
-        mapInitialization();
+        Places.initialize(millActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+
+        if (!Places.isInitialized()) {
+            Places.initialize(millActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+        }
+
         onClickListener();
-        //spinnerOperation();
         goodsTypesSpinnerOperation();
         approxWeightOfGoodsSpinOperation();
 
@@ -144,13 +153,6 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
         millActivity = (DashBoardActivity) getActivity();
     }
 
-    public void mapInitialization() {
-        Places.initialize(millActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-
-        if (!Places.isInitialized()) {
-            Places.initialize(millActivity, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-        }
-    }
 
     public void onClickListener() {
         sourceLatLng.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +169,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
             }
         });
 
+
         destLatLng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +184,8 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
             }
         });
 
+
+
         edtSourceLOcationBookLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,7 +198,6 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_SOURCE);
             }
         });
-
 
         btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,6 +227,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(millActivity, "Nothing item selected for  goods type", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -242,12 +247,135 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(millActivity, "Nothing shoe approx load", Toast.LENGTH_SHORT).show();
+                Toast.makeText(millActivity, "Nothing item selected for approx book load", Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
+    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == AUTOCOMPLETE_REQUEST_CODE_SOURCE) {
+
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
+
+                if (!TextUtils.isEmpty(place.getName())) {
+                    edtSourceLOcationBookLoad.setText("" + place.getName());
+                    if (mMap != null && place.getLatLng() != null) {
+
+                        LatLng latLng = place.getLatLng();
+                        sourceName = place.getName();
+                        sourceLatitude = latLng.latitude;
+                        sourceLongitude = latLng.longitude;
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
+                        mMap.moveCamera(cameraUpdate);
+
+                        // if (sourceLatitude > 0 && destLatitude > 0)
+                        //  openBookingActivity();
+                    }
+                }
+            } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE_DEST) {
+
+                Place placeDest = Autocomplete.getPlaceFromIntent(data);
+
+                if (!TextUtils.isEmpty(placeDest.getName())) {
+                    Log.i("TAG", "Place: " + placeDest.getName() + ", " + placeDest.getId());
+                    if (TextUtils.isEmpty(placeDest.getAddress())) {
+                        edtDropLocationBookload.setText("" + placeDest.getName());
+                    } else {
+                        edtDropLocationBookload.setText(placeDest.getName() + "" + placeDest.getAddress());
+                    }
+                    if (mMap != null && placeDest.getLatLng() != null) {
+
+                        LatLng latLng = placeDest.getLatLng();
+
+                        destName = placeDest.getName();
+                        destLatitude = latLng.latitude;
+                        destLongitude = latLng.longitude;
+                        //  if (sourceLatitude > 0 && destLatitude > 0)
+                        // openBookingActivity();
+                    }
+
+                }
+            }
+        } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            Status status = Autocomplete.getStatusFromIntent(data);
+            Log.i("TAG", status.getStatusMessage());
+        } else if (resultCode == RESULT_CANCELED) {
+        }
+    }
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        if (ContextCompat.checkSelfPermission(millActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
+
+        //Place current location marker
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+
+        sourceName = Utils.getAddress(millActivity, latLng);
+        sourceLatitude = latLng.latitude;
+        sourceLongitude = latLng.longitude;
+        edtSourceLOcationBookLoad.setText("" + sourceName);
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+
+        Location location1 = new Location("");
+        location1.setLatitude(30.5518691);
+        location1.setLongitude(75.6513571);
+        // showMarker(location1);
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
     }
 
 
@@ -305,7 +433,7 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
                         DataModel data = approxLoadDropDownResponse.getData();
                         ApproxLoadDatum approxLoadDatum = new ApproxLoadDatum();
                         approxLoadDatum.setApproxLoadTitle("-- Select Approx Load --");
-                        data.getApproxLoadData().add(0,approxLoadDatum);
+                        data.getApproxLoadData().add(0, approxLoadDatum);
 
                         if (data != null && data.getApproxLoadData().size() > 0) {
                             approxLoadTitle = new ArrayList<>();
@@ -318,7 +446,6 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
                         }
                     }
                 }
-
             }
 
             @Override
@@ -330,143 +457,5 @@ public class BookLoadFragmentForMillUser extends Fragment implements /*AdapterVi
 
 
     }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == AUTOCOMPLETE_REQUEST_CODE_SOURCE) {
-
-                Place place = Autocomplete.getPlaceFromIntent(data);
-                Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
-
-                if (!TextUtils.isEmpty(place.getName())) {
-                    edtSourceLOcationBookLoad.setText("" + place.getName());
-                    if (mMap != null && place.getLatLng() != null) {
-
-                        LatLng latLng = place.getLatLng();
-                        sourceName = place.getName();
-                        sourceLatitude = latLng.latitude;
-                        sourceLongitude = latLng.longitude;
-                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
-                        mMap.moveCamera(cameraUpdate);
-                    }
-                }
-            } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE_DEST) {
-
-                Place placeDest = Autocomplete.getPlaceFromIntent(data);
-
-                if (!TextUtils.isEmpty(placeDest.getName())) {
-                    Log.i("TAG", "Place: " + placeDest.getName() + ", " + placeDest.getId());
-
-                    edtDropLocationBookload.setText("" + placeDest.getName());
-                    if (mMap != null && placeDest.getLatLng() != null) {
-
-                        LatLng latLng = placeDest.getLatLng();
-
-                        destName = placeDest.getName();
-                        destLatitude = latLng.latitude;
-                        destLongitude = latLng.longitude;
-                    }
-                }
-            }
-        } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-            Status status = Autocomplete.getStatusFromIntent(data);
-            Log.i("TAG", status.getStatusMessage());
-        } else if (resultCode == RESULT_CANCELED) {
-        }
-    }
-
-
-   /* public void spinnerOperation(){
-
-        spGoodsType.setOnItemSelectedListener(this);
-        spApproxWeightOfGoods.setOnItemSelectedListener(this);
-
-       // Spinner Drop down elements
-        List<String> categorieSpGoodsTypes = new ArrayList<>();
-         categorieSpGoodsTypes.add("Item 1");
-        categorieSpGoodsTypes.add("Item 2");
-        categorieSpGoodsTypes.add("Item 3");
-        categorieSpGoodsTypes.add("Item 4");
-        categorieSpGoodsTypes.add("Item 5");
-        categorieSpGoodsTypes.add("Item 6");
-        categorieSpGoodsTypes.add("Item 7");
-        categorieSpGoodsTypes.add("Item 8");
-        categorieSpGoodsTypes.add("Item 9");
-        categorieSpGoodsTypes.add("Item 10");
-
-        // Spinner Drop down elements
-        List<String> categOfApproxWeightOfGoods = new ArrayList<>();
-        categOfApproxWeightOfGoods.add("Item 1");
-        categOfApproxWeightOfGoods.add("Item 2");
-        categOfApproxWeightOfGoods.add("Item 3");
-        categOfApproxWeightOfGoods.add("Item 4");
-        categOfApproxWeightOfGoods.add("Item 5");
-        categOfApproxWeightOfGoods.add("Item 6");
-        categOfApproxWeightOfGoods.add("Item 7");
-        categOfApproxWeightOfGoods.add("Item 8");
-        categOfApproxWeightOfGoods.add("Item 9");
-        categOfApproxWeightOfGoods.add("Item 10");
-
-       // creating Adapter for goots types
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categorieSpGoodsTypes);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spGoodsType.setAdapter(dataAdapter);
-
-        ArrayAdapter<String> loadWeightAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categOfApproxWeightOfGoods);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spGoodsType.setAdapter(loadWeightAdapter);
-        spApproxWeightOfGoods.setAdapter(loadWeightAdapter);
-
-    }
- */
-
-
- /*   @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String item = parent.getItemAtPosition(position).toString();
-       // Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    } */
-
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-
-    }
-
 
 }
