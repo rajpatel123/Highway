@@ -55,6 +55,7 @@ import com.highway.customer.customerAdapter.UpComingTripAdapterForCustomer;
 import com.highway.customer.customerModelClass.bookingVehicleList.BookingVehicleListResponse;
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
+import com.highway.utils.Utils;
 
 import org.json.JSONObject;
 
@@ -150,8 +151,8 @@ public class TripTrackingByCustomer extends AppCompatActivity implements OnMapRe
             destLatitude = Double.parseDouble(bundle.getString("DestAddLatlog"));
             destLongitude= Double.parseDouble(bundle.getString("DestAddLongitude"));
 
-            sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
-            destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
+            edtSourceLOcation.setText(""+ Utils.getAddress(getApplicationContext(),sourceAddLatLng));
+            edtDropLocation.setText(""+Utils.getAddress(getApplicationContext(),destAddLatLng));
 
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
@@ -159,8 +160,6 @@ public class TripTrackingByCustomer extends AppCompatActivity implements OnMapRe
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
-            edtSourceLOcation.setText(sourceName);
-            edtDropLocation.setText(destName);
 
             /*sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
             sourceLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat();
