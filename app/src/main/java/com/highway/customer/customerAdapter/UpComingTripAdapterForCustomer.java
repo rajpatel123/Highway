@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
 import com.highway.customer.customerActivity.BookingConformedActivity;
+import com.highway.customer.customerActivity.TripTrackingByCustomer;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -22,7 +23,8 @@ import java.util.List;
 public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComingTripAdapterForCustomer.ViewHolder> {
     List<UpcomingTrip>upcomingTrips;
     Context context;
-    private SellingListInterface sellingListInterface;
+    public BookTripListInterface bookTripListInterface;
+
 
     public UpComingTripAdapterForCustomer(List<UpcomingTrip>upcomingTrips, Context context){
         this.context = context;
@@ -56,47 +58,24 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         holder.tv6VehicleName.setText("" + upcomingTrip.getVehicleName());
         holder.tv7FairCharge.setText("" + upcomingTrip.getFare());
 
-        // img
-
-        holder.cardView.setOnClickListener(v -> {
-
-//                LatLng sourceAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
-//                LatLng destAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()), Double.parseDouble(upcomingTrip.getDestinationLong()));
-
-            Intent intent = new Intent(context, BookingConformedActivity.class);
-
-            intent.putExtra("SourceAddLatlog",upcomingTrips.get(holder.getAdapterPosition()).getSourceLat());
-            intent.putExtra("DestAddLatlog",upcomingTrips.get(holder.getAdapterPosition()).getSourceLat());
-            intent.putExtra("CompleteDate",upcomingTrips.get(holder.getAdapterPosition()).getEndDate());
-            intent.putExtra("PickupTime",upcomingTrips.get(holder.getAdapterPosition()).getPickupTime());
-            intent.putExtra("DropTime",upcomingTrips.get(holder.getAdapterPosition()).getDropTime());
-            intent.putExtra("VehicleName",upcomingTrips.get(holder.getAdapterPosition()).getVehicleName());
-            intent.putExtra("VehicleNumber",upcomingTrips.get(holder.getAdapterPosition()).getVehicleNumber());
-            intent.putExtra("GetFairCharge",upcomingTrips.get(holder.getAdapterPosition()).getFare());
-
-            context.startActivity(intent);
 
 
-        });
-
-
-
-       /* holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sellingListInterface != null) {
-                    sellingListInterface.sellinglistitem(upcomingTrips.get(position).getTripType());
+                if (bookTripListInterface != null) {
+                    bookTripListInterface.bookTripList(upcomingTrips.get(position).getTripType());
                 }
             }
-        });*/
+        });
 
     }
 
-    public void setSellingListInterface(SellingListInterface sellingListInterface) {
-        this.sellingListInterface = sellingListInterface;
+    public void setBookTripListInterface(BookTripListInterface bookTripListInterface1) {
+        this.bookTripListInterface = bookTripListInterface1;
     }
-    public interface SellingListInterface {       ///
-        public void sellinglistitem(String title);
+    public interface BookTripListInterface {       ///
+        public void bookTripList(String title);
 
 
     }

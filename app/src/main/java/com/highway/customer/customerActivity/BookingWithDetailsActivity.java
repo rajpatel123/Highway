@@ -250,6 +250,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId())
                         && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getGoodsTypeId())) {
                     ReceiverBottomSheetFragment receiverBottomSheetFragment = ReceiverBottomSheetFragment.newInstance().newInstance();
+                    receiverBottomSheetFragment.setCancelable(false);
                     receiverBottomSheetFragment.show(getSupportFragmentManager(), ReceiverBottomSheetFragment.TAG);
                 } else {
                     Toast.makeText(BookingWithDetailsActivity.this, "Please select vehicle and goods type", Toast.LENGTH_LONG).show();

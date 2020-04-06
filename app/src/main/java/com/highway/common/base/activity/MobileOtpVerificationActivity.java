@@ -39,7 +39,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     private Button btnVerify;
     private ImageView backImage;
     public TextView resend;
-    private TextView mobileNumberTV, changeNumberTv;
+    public TextView mobileNumberTV, changeNumberTv;
     String userId;
 
 
@@ -62,10 +62,10 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
 
         timerInOtp();                          // time count down of otp
 
-       // mobileNumberTV.setText(HighwayPrefs.getString(this, Constants.USERMOBILE));
+        mobileNumberTV.setText(HighwayPrefs.getString(this, Constants.USERMOBILE));
         usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
-        userLoginRoleId = HighwayPrefs.getString(getApplicationContext(),Constants.ROLEID);
-
+        userLoginRoleId = HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID);
+       // mobileNumberTV.setText(usermobileNumber);
 
         smsReceiver.bindListener(this);
 
@@ -104,9 +104,9 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         RestClient.loginUser(loginReqUpdated, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-              if (response!=null && response.code()==200 && response.body()!=null){
-                  Toast.makeText(MobileOtpVerificationActivity.this, "Otp resend on your mobile number!", Toast.LENGTH_SHORT).show();
-              }
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    Toast.makeText(MobileOtpVerificationActivity.this, "Otp resend on your mobile number!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -114,7 +114,6 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                 Toast.makeText(MobileOtpVerificationActivity.this, "Otp resend Failed!", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
     }
@@ -138,8 +137,8 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     public void verifyPinOperation() {
 
         boolean check = true;
-         otpNumber = verifyPin.getText().toString().trim();
-         usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
+        otpNumber = verifyPin.getText().toString().trim();
+        //  usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
 
         if (otpNumber.isEmpty()) {
             verifyPin.setError("enter a valid otp");
@@ -256,7 +255,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
     @Override
     public void messageReceived(String messageText) {
         verifyPin.setText(messageText);
-       // verifyPinOperation();
+        verifyPinOperation();
 
     }
 }

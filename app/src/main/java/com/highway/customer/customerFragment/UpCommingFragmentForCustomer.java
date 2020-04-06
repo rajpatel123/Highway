@@ -1,6 +1,7 @@
 package com.highway.customer.customerFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +13,17 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
+import com.highway.customer.customerActivity.TripTrackingByCustomer;
 import com.highway.customer.customerAdapter.UpComingTripAdapterForCustomer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 
 public class UpCommingFragmentForCustomer extends Fragment {
@@ -54,7 +59,40 @@ public class UpCommingFragmentForCustomer extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_customer_up_comming, container, false);
         upcomingRecyclerForCustomer = view.findViewById(R.id.upcomingRecyclerForCustomer);
+
+        trackingInitLocation();
+
         return view;
+    }
+
+    private void trackingInitLocation() {
+        upComingTripAdapterForCustomer.setBookTripListInterface(new UpComingTripAdapterForCustomer.BookTripListInterface() {
+            @Override
+            public void bookTripList(String title) {
+                Intent intent = new Intent(getActivity(), TripTrackingByCustomer.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+
+//
+//                LatLng sourceAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
+//                LatLng destAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()), Double.parseDouble(upcomingTrip.getDestinationLong()));
+
+                intent.putExtra("SourceAddLatlog", upcomingTrips.get(0).getSourceLat());
+                intent.putExtra("SourceAddLongitude",upcomingTrips.get(0).getSourceLong());
+                intent.putExtra("DestAddLatlog", upcomingTrips.get(0).getSourceLat());
+                intent.putExtra("DestAddLongitude", upcomingTrips.get(0).getDestinationLong());
+
+
+                intent.putExtra("CompleteDate", upcomingTrips.get(0).getEndDate());
+                intent.putExtra("PickupTime", upcomingTrips.get(0).getPickupTime());
+                intent.putExtra("DropTime", upcomingTrips.get(0).getDropTime());
+                intent.putExtra("VehicleName", upcomingTrips.get(0).getVehicleName());
+                intent.putExtra("VehicleNumber", upcomingTrips.get(0).getVehicleNumber());
+
+                getActivity().startActivity(intent);
+
+            }
+        });
+
     }
 
 

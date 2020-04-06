@@ -239,7 +239,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 HighwayApplication.getInstance().setCurrentTripId(bookId);
                 HighwayPrefs.putString(getApplicationContext(), "vechicleId", vehicleTypeId);
 //
-//                HighwayPrefs.putString(getApplicationContext(), "bookTripIdCode", bookTripIdCode); // for invoiceBottomDialogfragmentForDriver
+//              HighwayPrefs.putString(getApplicationContext(), "bookTripIdCode", bookTripIdCode); // for invoiceBottomDialogfragmentForDriver
                 HighwayPrefs.putString(getApplicationContext(), "BookingId", bookId);
             } else {
 
@@ -284,8 +284,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         if (HighwayApplication.getInstance().getBookingHTripRequest() != null) {
             initLocations();
         }
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
