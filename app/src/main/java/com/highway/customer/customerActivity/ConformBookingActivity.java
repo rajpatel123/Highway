@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ import com.highway.R;
 import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripResponse;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerFragment.ReceiverBottomSheetFragment;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -100,6 +102,13 @@ public class ConformBookingActivity extends AppCompatActivity implements OnMapRe
         Intent intent = new Intent(activity, ConformBookingActivity.class);
         activity.startActivity(intent);
 
+    }
+
+    public static ReceiverBottomSheetFragment newInstance() {
+        ReceiverBottomSheetFragment fragment = new ReceiverBottomSheetFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -192,8 +201,18 @@ public class ConformBookingActivity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View v) {
 
+                 if (!TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getVehicleTypeId())
+                        && !TextUtils.isEmpty(HighwayApplication.getInstance().getBookingHTripRequest().getGoodsTypeId())) {
+                    ReceiverBottomSheetFragment receiverBottomSheetFragment = ReceiverBottomSheetFragment.newInstance().newInstance();
+                    receiverBottomSheetFragment.setCancelable(false);
+                    receiverBottomSheetFragment.show(getSupportFragmentManager(), ReceiverBottomSheetFragment.TAG);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please update receiver name and number", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
+
 
     }
 

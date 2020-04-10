@@ -57,7 +57,6 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
     public static ReceiverBottomSheetFragment newInstance() {
         ReceiverBottomSheetFragment fragment = new ReceiverBottomSheetFragment();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -190,6 +189,7 @@ public class ReceiverBottomSheetFragment extends BottomSheetDialogFragment {
                             HighwayApplication.getInstance().getBookingHTripRequest().setTripRecevirId(""+response.body().getId());
                             ConformBookingActivity.start((BookingWithDetailsActivity) getActivity());
                             getActivity().finish();
+
                         }
                     }
                 }

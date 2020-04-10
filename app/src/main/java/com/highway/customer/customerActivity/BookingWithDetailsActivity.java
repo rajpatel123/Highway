@@ -373,7 +373,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.position(latLng);
                         markerOptions.title("" + place.getName());
-                        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+                      //  markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
                         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
@@ -396,7 +396,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.position(latLng);
                         markerOptions.title("" + placeDest.getName());
-                        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
+                      //  markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.highway_logo)));
                         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
