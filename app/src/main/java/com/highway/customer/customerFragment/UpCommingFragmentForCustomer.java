@@ -6,18 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
-import com.highway.customer.customerActivity.TripTrackingByCustomer;
+import com.highway.customer.customerActivity.TripTrackingByCustomerActivity;
 import com.highway.customer.customerAdapter.UpComingTripAdapterForCustomer;
 
 import java.util.ArrayList;
@@ -69,7 +67,7 @@ public class UpCommingFragmentForCustomer extends Fragment {
         upComingTripAdapterForCustomer.setBookTripListInterface(new UpComingTripAdapterForCustomer.BookTripListInterface() {
             @Override
             public void bookTripList(String title) {
-                Intent intent = new Intent(getActivity(), TripTrackingByCustomer.class);
+                Intent intent = new Intent(getActivity(), TripTrackingByCustomerActivity.class);
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 
 //
@@ -80,7 +78,6 @@ public class UpCommingFragmentForCustomer extends Fragment {
                 intent.putExtra("SourceAddLongitude",upcomingTrips.get(0).getSourceLong());
                 intent.putExtra("DestAddLatlog", upcomingTrips.get(0).getSourceLat());
                 intent.putExtra("DestAddLongitude", upcomingTrips.get(0).getDestinationLong());
-
 
                 intent.putExtra("CompleteDate", upcomingTrips.get(0).getEndDate());
                 intent.putExtra("PickupTime", upcomingTrips.get(0).getPickupTime());

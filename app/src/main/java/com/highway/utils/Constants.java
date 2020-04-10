@@ -79,4 +79,5 @@ public class Constants {
     public static final String SEMI_TRAILER = "SEMI_TRAILER";
     public static final String TRUCK = "TRUCK";
     public static final String TATA_ACE = "TATA_ACE";
+    public static final String GOODSTYPES = "goodsTypes";
 }

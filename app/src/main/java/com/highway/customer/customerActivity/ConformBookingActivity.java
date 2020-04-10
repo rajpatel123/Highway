@@ -213,7 +213,6 @@ public class ConformBookingActivity extends AppCompatActivity implements OnMapRe
             }
         });
 
-
     }
 
     private void initLocations(Intent intent) {

@@ -215,8 +215,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         infoTV = findViewById(R.id.tripInfo);
         toolbar = findViewById(R.id.toolbar);
         mylocation = findViewById(R.id.mylocation);
-
         mylocation.setOnClickListener(this);
+
         // Using Broadcast for Customer
         /*rejTV = findViewById(R.id.TripRejectedTv);
         acptTripTv = findViewById(R.id.TripAcceptTv);

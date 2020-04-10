@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".drivermodule.driverActivity.TripDetailsForDriverActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottomSheet">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:elevation="@dimen/margin_3"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10dp"
+                        android:background="@drawable/rounded_corner_shape"
+                        android:elevation="@dimen/margin_3"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10dp">
+
+                        <TextView
+                            android:id="@+id/sourceTV"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/padding_5"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="GaurGaurGaurGaurGaurGaurGaurGaur City 2" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".2"
+                            android:rotation="180"
+                            app:srcCompat="@drawable/back_arrow_icon" />
+
+                        <TextView
+                            android:id="@+id/destTV"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:paddingLeft="@dimen/_10dp"
+                            android:text="GaurGaurGaurGaurGaurGaurGaurGaurGaurGaur City 2" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <fragment
+                    android:id="@+id/map"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/dropAdd"
+                    android:layout_gravity="center" />
+
+                <RelativeLayout
+                    android:id="@+id/mylocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/location_bg"
+                    android:elevation="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@drawable/ic_my_location" />
+                </RelativeLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/profile_cardview"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingBottom="@dimen/padding_3">
+
+                    <View
+                        android:layout_width="@dimen/margin_top_30dp"
+                        android:layout_height="8px"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/darkwhite" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2px"
+                        android:layout_marginStart="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_10ssp">
+
+
+                            <TextView
+                                android:id="@+id/CustomerNameTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10dp"
+                                android:text=" Customer Name"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/goodsTypeTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10dp"
+                                android:text="Goods Types" />
+                            <!--android:textColor="@color/quantum_grey700"-->
+
+                            <!-- <LinearLayout
+                                android:id="@+id/bookingSearchingLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                tools:visibility="visible"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:orientation="horizontal">
+
+                               <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Booking will get cancelled if not allocated in  "
+                                    android:textColor="@color/red"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/bookingInfoForDriverAllocation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="10:00"
+                                    android:textColor="@color/red" />
+
+                            </LinearLayout>-->
+
+                        </LinearLayout>
+
+                        <!--  <LinearLayout
+                              android:id="@+id/LLoutPhoneCall"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/_80sdp"
+                              android:layout_gravity="center"
+                              android:gravity="center"
+                              android:layout_weight="3"
+                              android:orientation="vertical">
+
+                              <ImageView
+                                  android:id="@+id/callActionIV"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginStart="2dp"
+                                  android:background="@drawable/rounded_btn_shape"
+                                  android:paddingLeft="@dimen/margin_left_20"
+                                  android:paddingTop="@dimen/padding_5"
+                                  android:layout_gravity="center"
+                                  android:paddingRight="@dimen/padding_right_20"
+                                  android:paddingBottom="@dimen/padding_5"
+                                  app:srcCompat="@drawable/ic_phone_call_image_24dp" />
+                          </LinearLayout>-->
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/detailViewLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_below="@+id/details"
+                        android:layout_marginStart="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:background="@color/quantum_grey" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--    <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/details"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:background="@color/quantum_grey" />-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="30">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_7sdp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:gravity="center"
+                            android:text="@string/invoice"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="@dimen/text_large" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/booking_id_code"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/booking_id"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-#HIG3196"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="#HIG3196"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/start_date"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/start_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="11-March-2020-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="11-March-2020"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/start_time"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/start_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="Start Time"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="Start time"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/end_date"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/end_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="11-March-2020"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="11-March-2020"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/end_time"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/end_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="End Time"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="End Time"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_normal_flow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+
+                            >
+                            <!--            android:visibility="gone"-->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/total_distance_km"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/total_distance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/total_riding_time_minutes"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/travel_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/base_fare_first_2km"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/fixed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/distance_fare"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/distance_fare"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/peek_hour_charges"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/peek_hour_charges"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/night_fare"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/night_fare"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_rental_flow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/total_distance_km"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/rental_total_distance_km"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/travel_time"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/rental_travel_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/rental_hours"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/rental_normal_price"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/rental_normal_price"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/rental_extra_hr_km_price"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/rental_extra_hr_km_price"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_outstation_flow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/round_single"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/outstation_round_single"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+                            <!-- <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <TextView
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:layout_weight="1"
+                                     android:padding="8dp"
+                                     android:singleLine="true"
+                                     android:text="@string/distance_travelled"
+                                     android:textColor="@color/colorPrimaryText"
+                                     android:textSize="@dimen/text_small" />
+
+                                 <TextView
+                                     android:id="@+id/outstation_distance_travelled"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:gravity="end"
+                                     android:hint="-"
+                                     android:padding="8dp"
+                                     android:singleLine="true"
+                                     android:textColor="@color/colorPrimaryText"
+                                     android:textSize="@dimen/text_small" />
+
+                             </LinearLayout>
+     -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/no_of_days"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/outstation_no_of_days"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/distance_fare"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/outstation_distance_fare"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/driver_beta"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/outstation_driver_beta"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/total_riding_charges"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/total_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/Rs_basefair"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/gst"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/tax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/Rs_one"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/discount_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/discount"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/discount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/Rs_one"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/customer_payable_amount"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/payable_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/round_label"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:paddingStart="22dp"
+                                android:paddingEnd="22dp"
+                                android:singleLine="true"
+                                android:text="Rs. 95"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/gst_5"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/tax2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="-0.0"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/commission_10"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/commission"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="-0.0"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="TDS (1%)"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/tds"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:text="@string/provider_earnings"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:id="@+id/provider_earnings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:hint="-"
+                                android:padding="8dp"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_small" />
+
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/black" />
+
+                        <LinearLayout
+                            android:id="@+id/payment_mode_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/lblPaymentType"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
+                                android:padding="8dp"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/text_small"
+                                tools:text="@string/cash" />
+
+
+                        </LinearLayout>
+
+
+                        <!--  <Button
+                              android:id="@+id/btnConfirmPayment"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_margin="8dp"
+                              android:layout_weight="1"
+                              android:background="@color/colorPrimary"
+                              android:text="@string/confirm_payment"
+                              android:textColor="#FFF" />-->
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

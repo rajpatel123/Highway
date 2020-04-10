@@ -40,7 +40,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".customer.customerActivity.TripTrackingByCustomer"></activity>
+        <activity android:name=".drivermodule.driverActivity.TripDetailsForDriverActivity"></activity>
+        <activity android:name=".customer.customerActivity.TripDetailsForCustomersActivity" />
+        <activity android:name=".customer.customerActivity.TripTrackingByCustomerActivity" />
         <activity android:name=".drivermodule.driverActivity.DriverAllTripsActivity" />
 
         <receiver

@@ -1,6 +1,5 @@
 package com.highway.customer.customerAdapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
-import com.highway.customer.customerActivity.BookingConformedActivity;
-import com.highway.customer.customerActivity.TripTrackingByCustomer;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -109,7 +106,7 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
             img2DestIndicator = itemView.findViewById(R.id.Img2DestIndicator);
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
-            cardView= itemView.findViewById(R.id.upcomingCardView);
+            cardView= itemView.findViewById(R.id.CardView);
         }
     }
 }

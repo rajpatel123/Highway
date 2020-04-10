@@ -408,6 +408,7 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
                 HighwayApplication.getInstance().getBookingHTripRequest().setGoodsTypeId(gdTypeId);
                 gdTypeText = data.getStringExtra("type");
                 goodtype.setText(gdTypeText);
+                HighwayPrefs.putString(getApplicationContext(),Constants.GOODSTYPES,gdTypeText);
                 //goodtype.setText(gdTypeId);
             }
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {

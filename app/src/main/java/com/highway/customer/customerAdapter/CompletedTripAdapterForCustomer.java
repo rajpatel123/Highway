@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -20,6 +21,7 @@ import java.util.List;
 public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<CompletedTripAdapterForCustomer.ViewHolder> {
     Context context;
     List<CompletedTrip>completedTrips;
+    public  TripDetailsListInterface tripDetailsListInterface;
 
 
     public CompletedTripAdapterForCustomer(List<CompletedTrip> completedTrips, Context context) {
@@ -53,7 +55,24 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
         holder.tv7FairCharge.setText("" + completedTrip.getFare());
         // img
 
+          holder.cardView.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  if (tripDetailsListInterface!=null){
+                      tripDetailsListInterface.tripDetailsList(completedTrips.get(position).getTripType());
+                  }
+              }
+          });
     }
+
+
+    public void setTripDetailsListInterface(TripDetailsListInterface tripDetailsListInterface1) {
+        this.tripDetailsListInterface = tripDetailsListInterface1;
+    }
+    public interface TripDetailsListInterface {       ///
+        public void tripDetailsList(String title);
+    }
+
 
     @Override
     public int getItemCount() {
@@ -64,6 +83,7 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
 
         private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
+        private CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv1CompleteDate = itemView.findViewById(R.id.Tv1CompleteDate);
@@ -77,6 +97,8 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
             img2DestIndicator = itemView.findViewById(R.id.Img2DestIndicator);
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
+            cardView = itemView.findViewById(R.id.CardView);
+
 
         }
     }

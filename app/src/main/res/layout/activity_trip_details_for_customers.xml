@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.customerActivity.TripDetailsForCustomersActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottomSheet">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:elevation="@dimen/margin_3"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10dp"
+                        android:background="@drawable/rounded_corner_shape"
+                        android:elevation="@dimen/margin_3"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10dp">
+
+                        <TextView
+                            android:id="@+id/sourceTV"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/padding_5"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text="GaurGaurGaurGaurGaurGaurGaurGaur City 2" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".2"
+                            android:rotation="180"
+                            app:srcCompat="@drawable/back_arrow_icon" />
+
+                        <TextView
+                            android:id="@+id/destTV"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:paddingLeft="@dimen/_10dp"
+                            android:text="GaurGaurGaurGaurGaurGaurGaurGaurGaurGaur City 2" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <fragment
+                    android:id="@+id/map"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/dropAdd"
+                    android:layout_gravity="center" />
+
+                <RelativeLayout
+                    android:id="@+id/mylocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/location_bg"
+                    android:elevation="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:srcCompat="@drawable/ic_my_location" />
+                </RelativeLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="55"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/profile_cardview"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingBottom="@dimen/padding_3">
+
+                    <View
+                        android:layout_width="@dimen/margin_top_30dp"
+                        android:layout_height="8px"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/darkwhite" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2px"
+                        android:layout_marginStart="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_10ssp">
+
+
+                            <ImageView
+                                android:id="@+id/Vehicleimg"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:paddingTop="@dimen/_5sdp"
+                                app:srcCompat="@drawable/vehicle" />
+
+
+                            <TextView
+                                android:id="@+id/vehicleNameTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:text=" Tata Ace - UP 73 BV 8987"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/DriverNameTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10dp"
+                                android:text=" Driver Name"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                            <!--android:textColor="@color/quantum_grey700"-->
+
+
+
+                        </LinearLayout>
+
+                        <!--  <LinearLayout
+                              android:id="@+id/LLoutPhoneCall"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/_80sdp"
+                              android:layout_gravity="center"
+                              android:gravity="center"
+                              android:layout_weight="3"
+                              android:orientation="vertical">
+
+                              <ImageView
+                                  android:id="@+id/callActionIV"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginStart="2dp"
+                                  android:background="@drawable/rounded_btn_shape"
+                                  android:paddingLeft="@dimen/margin_left_20"
+                                  android:paddingTop="@dimen/padding_5"
+                                  android:layout_gravity="center"
+                                  android:paddingRight="@dimen/padding_right_20"
+                                  android:paddingBottom="@dimen/padding_5"
+                                  app:srcCompat="@drawable/ic_phone_call_image_24dp" />
+                          </LinearLayout>-->
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/detailViewLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_below="@+id/details"
+                        android:layout_marginStart="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:background="@color/quantum_grey" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10ssp"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--    <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/details"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:background="@color/quantum_grey" />-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="45">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="16dp"
+                            android:text="@string/invoice"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="@dimen/normal_txt" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/booking_id_code"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/booking_id"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="#HIG8805"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+                                <!--                android:text="@string/dash"-->
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/start_date"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/start_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="11-March-2020"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/start_time"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/start_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="Start Time"
+                                    android:text="Start time"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/end_date"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/end_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="11-March-2020"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/end_time"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/end_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="End Time"
+                                    android:text="End Time"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/layout_normal_flow"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:visibility="visible">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/total_distance_km"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/distance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="0.0 km"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/total_riding_time_minutes"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/travel_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="0.0 min(s)"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/base_fare_first_2km"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/fixed"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="Rs.65"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/distance_price"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/distance_price"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/Rs_distance_price"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/peek_hour_charges"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/peek_hour_charges"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/Rs_distance_price"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/night_fare"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/night_fare"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/Rs_distance_price"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp" />
+
+                            <LinearLayout
+                                android:id="@+id/layout_rental_flow"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/total_distance_km"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/rental_total_distance_km"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/travel_time"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/rental_travel_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/rental_hours"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/rental_normal_price"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/rental_normal_price"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/rental_extra_hr_km_price"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/rental_extra_hr_km_price"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp" />
+
+                            <LinearLayout
+                                android:id="@+id/layout_outstation_flow"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/round_single"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/outstation_round_single"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/distance_travelled"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/outstation_distance_travelled"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/no_of_days"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/outstation_no_of_days"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/distance_fare"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/outstation_distance_fare"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ellipsize="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/driver_beta"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/outstation_driver_beta"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="end"
+                                        android:gravity="end"
+                                        android:padding="8dp"
+                                        android:singleLine="true"
+                                        android:text="@string/dash"
+                                        android:textColor="@color/colorPrimaryText"
+                                        android:textSize="@dimen/text_small" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/gst_5"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/tax"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/dash"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/total"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/total"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/Rs_distance_price"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/lnrWalletDetection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/wallet_detection"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/wallet_detection"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/Rs_basefair"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lnrDiscount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/discount"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/discount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/Rs_distance_price"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/payable"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/text_small" />
+
+                                <TextView
+                                    android:id="@+id/payable"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:gravity="end"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/Rs_basefair"
+                                    android:paddingStart="22dp"
+                                    android:paddingEnd="22dp"
+                                    android:layout_marginEnd="2dp"
+                                    android:background="@drawable/round_label"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_small" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/payment_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_money"
+                            android:drawablePadding="8dp"
+                            android:ellipsize="end"
+                            android:gravity="start"
+                            android:padding="8dp"
+                            android:singleLine="true"
+                            android:text="@string/cash"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="@dimen/text_small" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:padding="8dp"
+                            android:text="@string/if_you_are_delighted"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="11sp" />
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/done"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorPrimary"
+                                android:text="@string/done"
+                                android:visibility="gone"
+                                android:textColor="#FFF"
+                                />
+
+                           <!-- <Button
+                                android:id="@+id/pay_now"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorPrimary"
+                                android:text="pay_now"
+                                android:textColor="#FFF"
+                                android:visibility="gone" />-->
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
