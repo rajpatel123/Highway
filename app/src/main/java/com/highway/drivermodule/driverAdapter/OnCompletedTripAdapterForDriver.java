@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,16 +59,26 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
         holder.tv7FairCharge.setText("" + completedTrip.getFare());
 
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (tripDetailListInterface!=null){
+//                    tripDetailListInterface.TripDetailList(completedTrips.get(position).getTripType());
+//                }
+//            }
+//        });
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (tripDetailListInterface!=null){
                     tripDetailListInterface.TripDetailList(completedTrips.get(position).getTripType());
                 }
+
             }
         });
-
 
     }
 
@@ -91,6 +102,7 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
         private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
         public CardView cardView;
+        public LinearLayout linearLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,7 +119,7 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
             cardView = itemView.findViewById(R.id.CardView);
-
+            linearLayout=itemView.findViewById(R.id.LLout1);
 
         }
     }

@@ -68,7 +68,7 @@ public class CompletedFragmentForCustomer extends Fragment {
             public void tripDetailsList(String title) {
 
                 Intent intent = new Intent(getActivity(), TripDetailsForCustomersActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+              //  intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 
                 intent.putExtra("SourceAddLatlog", completedTrips.get(0).getSourceLat());
                 intent.putExtra("SourceAddLongitude",completedTrips.get(0).getSourceLong());

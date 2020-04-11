@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.content.Context;
 import androidx.annotation.NonNull;
@@ -57,12 +58,21 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
 
 
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (bookTripListInterface != null) {
+//                    bookTripListInterface.bookTripList(upcomingTrips.get(position).getTripType());
+//                }
+//            }
+//        });
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (bookTripListInterface != null) {
                     bookTripListInterface.bookTripList(upcomingTrips.get(position).getTripType());
-                }
+               }
             }
         });
 
@@ -92,6 +102,7 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
         public CardView cardView;
+        public LinearLayout linearLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -107,6 +118,7 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
             cardView= itemView.findViewById(R.id.CardView);
+            linearLayout = itemView.findViewById(R.id.LLout1);
         }
     }
 }

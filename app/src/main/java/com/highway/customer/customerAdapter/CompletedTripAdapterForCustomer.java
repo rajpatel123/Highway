@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,8 +21,8 @@ import java.util.List;
 
 public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<CompletedTripAdapterForCustomer.ViewHolder> {
     Context context;
-    List<CompletedTrip>completedTrips;
-    public  TripDetailsListInterface tripDetailsListInterface;
+    List<CompletedTrip> completedTrips;
+    public TripDetailsListInterface tripDetailsListInterface;
 
 
     public CompletedTripAdapterForCustomer(List<CompletedTrip> completedTrips, Context context) {
@@ -33,7 +34,7 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recycler_item, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recycler_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -43,10 +44,10 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
 
         CompletedTrip completedTrip = completedTrips.get(position);
 
-        LatLng sourceAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()),Double.parseDouble(completedTrip.getSourceLong()));
+        LatLng sourceAddLatLng = new LatLng(Double.parseDouble(completedTrip.getSourceLat()), Double.parseDouble(completedTrip.getSourceLong()));
         LatLng destAddLatLng = new LatLng(Double.parseDouble(completedTrip.getDestinationLat()), Double.parseDouble(completedTrip.getDestinationLong()));
 
-        holder.tv1CompleteDate.setText(""+ completedTrip.getEndDate());
+        holder.tv1CompleteDate.setText("" + completedTrip.getEndDate());
         holder.tv2SourceAddress.setText(" " + Utils.getAddress(context, sourceAddLatLng));
         holder.tv4DestAddress.setText(" " + Utils.getAddress(context, destAddLatLng));
         holder.tv3SourceTime.setText("" + completedTrip.getPickupTime());
@@ -55,20 +56,32 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
         holder.tv7FairCharge.setText("" + completedTrip.getFare());
         // img
 
-          holder.cardView.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  if (tripDetailsListInterface!=null){
-                      tripDetailsListInterface.tripDetailsList(completedTrips.get(position).getTripType());
-                  }
-              }
-          });
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (tripDetailsListInterface != null) {
+//                    tripDetailsListInterface.tripDetailsList(completedTrips.get(position).getTripType());
+//                }
+//            }
+//        });
+
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tripDetailsListInterface != null) {
+                    tripDetailsListInterface.tripDetailsList(completedTrips.get(position).getTripType());
+                }
+            }
+        });
+
     }
 
 
     public void setTripDetailsListInterface(TripDetailsListInterface tripDetailsListInterface1) {
         this.tripDetailsListInterface = tripDetailsListInterface1;
     }
+
     public interface TripDetailsListInterface {       ///
         public void tripDetailsList(String title);
     }
@@ -84,6 +97,8 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
         private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
         private CardView cardView;
+        private LinearLayout linearLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv1CompleteDate = itemView.findViewById(R.id.Tv1CompleteDate);
@@ -98,6 +113,8 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
             cardView = itemView.findViewById(R.id.CardView);
+            linearLayout= itemView.findViewById(R.id.LLout1);
+
 
 
         }

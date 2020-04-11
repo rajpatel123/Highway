@@ -68,8 +68,7 @@ public class UpCommingFragmentForCustomer extends Fragment {
             @Override
             public void bookTripList(String title) {
                 Intent intent = new Intent(getActivity(), TripTrackingByCustomerActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-
+               // intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 //
 //                LatLng sourceAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
 //                LatLng destAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()), Double.parseDouble(upcomingTrip.getDestinationLong()));

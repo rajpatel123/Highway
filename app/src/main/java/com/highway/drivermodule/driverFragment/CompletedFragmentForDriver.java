@@ -64,9 +64,7 @@ public class CompletedFragmentForDriver extends Fragment {
             @Override
             public void TripDetailList(String title) {
                 Intent intent = new Intent(getActivity(), TripDetailsForDriverActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-
-
+               // intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("SourceAddLatlog", completedTrips.get(0).getSourceLat());
                 intent.putExtra("SourceAddLongitude",completedTrips.get(0).getSourceLong());
                 intent.putExtra("DestAddLatlog", completedTrips.get(0).getSourceLat());
