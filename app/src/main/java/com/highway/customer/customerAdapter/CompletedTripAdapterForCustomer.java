@@ -22,7 +22,7 @@ import java.util.List;
 public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<CompletedTripAdapterForCustomer.ViewHolder> {
     Context context;
     List<CompletedTrip> completedTrips;
-    public TripDetailsListInterface tripDetailsListInterface;
+    public CompletedTripDetailsInterface completedTripDetailsInterface;
 
 
     public CompletedTripAdapterForCustomer(List<CompletedTrip> completedTrips, Context context) {
@@ -59,8 +59,18 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
 //        holder.cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                if (tripDetailsListInterface != null) {
-//                    tripDetailsListInterface.tripDetailsList(completedTrips.get(position).getTripType());
+//                if (completedTripDetailsInterface != null) {
+////                    completedTripDetailsInterface.tripDetailsList(completedTrips.get(position).getTripType());
+//                    completedTripDetailsInterface.tripDetailsList(completedTrip.getTripType(),
+//                            completedTrip.getSourceLong(), completedTrip.getDestinationLat(),
+//                            completedTrip.getDestinationLong(), completedTrip.getName(),
+//                            completedTrip.getRole(), completedTrip.getVehicleName(),
+//                            completedTrip.getVehicleNumber(), completedTrip.getFare(),
+//                            completedTrip.getStatus(), completedTrip.getTripType(),
+//                            completedTrip.getStartDate(), completedTrip.getEndDate(),
+//                            completedTrip.getPickupTime(), completedTrip.getDropTime()
+//                    );
+//
 //                }
 //            }
 //        });
@@ -69,8 +79,17 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tripDetailsListInterface != null) {
-                    tripDetailsListInterface.tripDetailsList(completedTrips.get(position).getTripType());
+                if (completedTripDetailsInterface != null) {
+                    // completedTripDetailsInterface.tripDetailsList(completedTrips.get(position).getTripType());
+                    completedTripDetailsInterface.tripDetailsList(completedTrip.getSourceLat(),
+                            completedTrip.getSourceLong(), completedTrip.getDestinationLat(),
+                            completedTrip.getDestinationLong(), completedTrip.getName(),
+                            completedTrip.getRole(), completedTrip.getVehicleName(),
+                            completedTrip.getVehicleNumber(), completedTrip.getFare(),
+                            completedTrip.getStatus(), completedTrip.getTripType(),
+                            completedTrip.getStartDate(), completedTrip.getEndDate(),
+                            completedTrip.getPickupTime(), completedTrip.getDropTime()
+                    );
                 }
             }
         });
@@ -78,12 +97,15 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
     }
 
 
-    public void setTripDetailsListInterface(TripDetailsListInterface tripDetailsListInterface1) {
-        this.tripDetailsListInterface = tripDetailsListInterface1;
+    public void setCompletedTripDetailsInterface(CompletedTripDetailsInterface completedTripDetailsInterface1) {
+        this.completedTripDetailsInterface = completedTripDetailsInterface1;
     }
 
-    public interface TripDetailsListInterface {       ///
-        public void tripDetailsList(String title);
+    public interface CompletedTripDetailsInterface {       ///
+        public void tripDetailsList(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                    String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                    String status, String tripType, String startDate, String endDate, String pickupTime,
+                                    String dropTime);
     }
 
 
@@ -113,8 +135,7 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
             cardView = itemView.findViewById(R.id.CardView);
-            linearLayout= itemView.findViewById(R.id.LLout1);
-
+            linearLayout = itemView.findViewById(R.id.LLout1);
 
 
         }

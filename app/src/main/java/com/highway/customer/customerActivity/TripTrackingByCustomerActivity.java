@@ -83,11 +83,9 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
     private GoogleMap mMap;
     private double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
-    private String sourceName;
-    private String destName;
+    private String sourceName, destName, name, role, vehicleName, vehicleNumber, fareCharge,
+            status, tripType, startDate, endDate, pickUpTime, dropTime;
     public String bookTripIdCode, bookId, vehicleTypeId;
-
-
 
 
     @Override
@@ -105,7 +103,6 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
         mylocation.setOnClickListener(this);
 
 
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -115,6 +112,8 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle("Trip Tracking");
+
         }
 
         new FetchURL(TripTrackingByCustomerActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
@@ -135,17 +134,18 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
 
             Bundle bundle = getIntent().getExtras();
 
-            LatLng sourceAddLatLng = new LatLng(Double.parseDouble(bundle.getString("SourceAddLatlog")),Double.parseDouble(bundle.getString("SourceAddLongitude")));
-            LatLng destAddLatLng = new LatLng(Double.parseDouble(bundle.getString("DestAddLatlog")), Double.parseDouble(bundle.getString("DestAddLongitude")));
+            LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
+                                                Double.parseDouble(""+ bundle.getString("sourceLong")));
+            LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                                                Double.parseDouble(""+ bundle.getString("destinationLat")));
 
-            sourceLatitude = Double.parseDouble(bundle.getString("SourceAddLatlog"));
-            sourceLongitude= Double.parseDouble(bundle.getString("SourceAddLongitude"));
+            sourceLatitude = Double.parseDouble("" + bundle.getString("sourceLat"));
+            sourceLongitude = Double.parseDouble("" + bundle.getString("sourceLong"));
+            destLatitude = Double.parseDouble("" + bundle.getString("destinationLat"));
+            destLongitude = Double.parseDouble("" + bundle.getString("destinationLong"));
 
-            destLatitude = Double.parseDouble(bundle.getString("DestAddLatlog"));
-            destLongitude= Double.parseDouble(bundle.getString("DestAddLongitude"));
-
-            edtSourceLOcation.setText(""+ Utils.getAddress(getApplicationContext(),sourceAddLatLng));
-            edtDropLocation.setText(""+Utils.getAddress(getApplicationContext(),destAddLatLng));
+            edtSourceLOcation.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
+            edtDropLocation.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
@@ -153,6 +153,17 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
+            name = bundle.getString("name");
+            role = bundle.getString("role");
+            vehicleName = bundle.getString("vehicleName");
+            vehicleNumber = bundle.getString("vehicleNumber");
+            fareCharge = bundle.getString("fare");
+            status = bundle.getString("status");
+            tripType = bundle.getString("tripType");
+            startDate = bundle.getString("startDate");
+            endDate = bundle.getString("endDate");
+            pickUpTime = bundle.getString("pickupTime");
+            dropTime = bundle.getString("dropTime");
 
             /*sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
             sourceLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat();
@@ -271,7 +282,6 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
     }
 
 
-
     @Override
     public void onLocationChanged(Location location) {
 
@@ -352,14 +362,12 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
     }
 
 
-
-
     @Override
     public void onTaskDone(Object... values) {
 
         if (currentPolyline != null)
             currentPolyline.remove();
-            currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
 
     }
 
@@ -397,7 +405,6 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
         onBackPressed();
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

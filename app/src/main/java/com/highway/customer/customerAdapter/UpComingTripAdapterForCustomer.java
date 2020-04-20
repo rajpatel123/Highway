@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,12 +20,12 @@ import com.highway.utils.Utils;
 import java.util.List;
 
 public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComingTripAdapterForCustomer.ViewHolder> {
-    List<UpcomingTrip>upcomingTrips;
+    List<UpcomingTrip> upcomingTrips;
     Context context;
-    public BookTripListInterface bookTripListInterface;
+    public UpComingBookTripInterface upComingBookTripInterface;
 
 
-    public UpComingTripAdapterForCustomer(List<UpcomingTrip>upcomingTrips, Context context){
+    public UpComingTripAdapterForCustomer(List<UpcomingTrip> upcomingTrips, Context context) {
         this.context = context;
         this.upcomingTrips = upcomingTrips;
     }
@@ -37,7 +38,6 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         return viewHolder;
 
 
-
     }
 
     @Override
@@ -48,7 +48,7 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         LatLng sourceAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()), Double.parseDouble(upcomingTrip.getSourceLong()));
         LatLng destAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()), Double.parseDouble(upcomingTrip.getDestinationLong()));
 
-        holder.tv1CompleteDate.setText("" + upcomingTrip.getEndDate());
+        holder.tv1CompleteDate.setText("" + upcomingTrip.getStartDate());
         holder.tv2SourceAddress.setText(" " + Utils.getAddress(context, sourceAddLatLng));
         holder.tv4DestAddress.setText(" " + Utils.getAddress(context, destAddLatLng));
         holder.tv3SourceTime.setText("" + upcomingTrip.getPickupTime());
@@ -57,12 +57,20 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         holder.tv7FairCharge.setText("" + upcomingTrip.getFare());
 
 
-
 //        holder.cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                if (bookTripListInterface != null) {
-//                    bookTripListInterface.bookTripList(upcomingTrips.get(position).getTripType());
+//                if (upComingBookTripInterface != null) {
+//                    //upComingBookTripInterface.upComingBookTrip(upcomingTrips.get(position).getTripType());
+//                   upComingBookTripInterface.upComingBookTrip(upcomingTrip.getSourceLat(),
+//                           upcomingTrip.getSourceLong(), upcomingTrip.getDestinationLat(),
+//                           upcomingTrip.getDestinationLong(), upcomingTrip.getName(),
+//                           upcomingTrip.getRole(), upcomingTrip.getVehicleName(),
+//                           upcomingTrip.getVehicleNumber(), upcomingTrip.getFare(),
+//                           upcomingTrip.getStatus(), upcomingTrip.getTripType(),
+//                           upcomingTrip.getStartDate(), upcomingTrip.getEndDate(),
+//                           upcomingTrip.getPickupTime(), upcomingTrip.getDropTime()
+//                   );
 //                }
 //            }
 //        });
@@ -70,21 +78,33 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bookTripListInterface != null) {
-                    bookTripListInterface.bookTripList(upcomingTrips.get(position).getTripType());
-               }
+                if (upComingBookTripInterface != null) {
+                    //upCommingBookTripInterface.upCommingBookTrip(upcomingTrips.get(position).getTripType());
+                    upComingBookTripInterface.upComingBookTrip(upcomingTrip.getSourceLat(),
+                            upcomingTrip.getSourceLong(), upcomingTrip.getDestinationLat(),
+                            upcomingTrip.getDestinationLong(), upcomingTrip.getName(),
+                            upcomingTrip.getRole(), upcomingTrip.getVehicleName(),
+                            upcomingTrip.getVehicleNumber(), upcomingTrip.getFare(),
+                            upcomingTrip.getStatus(), upcomingTrip.getTripType(),
+                            upcomingTrip.getStartDate(), upcomingTrip.getEndDate(),
+                            upcomingTrip.getPickupTime(), upcomingTrip.getDropTime()
+                    );
+
+                }
             }
         });
 
     }
 
-    public void setBookTripListInterface(BookTripListInterface bookTripListInterface1) {
-        this.bookTripListInterface = bookTripListInterface1;
+    public void setUpComingBookTripInterface(UpComingBookTripInterface upComingBookTripInterface1) {
+        this.upComingBookTripInterface = upComingBookTripInterface1;
     }
-    public interface BookTripListInterface {       ///
-        public void bookTripList(String title);
 
-
+    public interface UpComingBookTripInterface {       ///
+        public void upComingBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                     String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                     String status, String tripType, String startDate, String endDate, String pickupTime,
+                                     String dropTime);
     }
 
 
@@ -103,6 +123,7 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
         public CardView cardView;
         public LinearLayout linearLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -117,7 +138,7 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
             img2DestIndicator = itemView.findViewById(R.id.Img2DestIndicator);
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
-            cardView= itemView.findViewById(R.id.CardView);
+            cardView = itemView.findViewById(R.id.CardView);
             linearLayout = itemView.findViewById(R.id.LLout1);
         }
     }

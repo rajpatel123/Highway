@@ -62,7 +62,6 @@ public class LoginActivityForCustomer extends AppCompatActivity {
 
     private boolean validateInput() {
         boolean check = true;
-
         phone_number = CustomerPhoneNo.getText().toString();
 
         if (phone_number.isEmpty() || CustomerPhoneNo.length() < 10) {

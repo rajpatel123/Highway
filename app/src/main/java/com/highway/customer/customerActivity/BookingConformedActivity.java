@@ -70,6 +70,7 @@ import com.highway.drivermodule.drivermodels.TripStatus;
 import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
+import com.highway.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -167,6 +168,10 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private String dropTime1;
     private String vehicleNumber1;
 
+    String name, role,getVehicleName, vehicleNumber, faireChargeVal,
+            status, tripType, tripStartDate, tripEndDate, pickUpTime, dropTime;
+
+
 
     public static void start(ConformBookingActivity activity,
                              String bookTripIdCode, String bookId,
@@ -175,6 +180,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                              double sourceLat, double sourceLong, double destLat,
                              double destLong, String tripFare, String sourceAddress,
                              String destAddress) {
+
         Intent intent = new Intent(activity, BookingConformedActivity.class);
         intent.putExtra("bookTripIdCode", bookTripIdCode);
         intent.putExtra("bookId", bookId);
@@ -317,7 +323,10 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         registerReceiver(mySenderBroadCast, intentFilter);
 
         //tapToReturnUpComing();
+        getLandingfromUpcomming();
     }
+
+
 
 
     // USING BROAD CAST RECEIVER
@@ -460,8 +469,10 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
         markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
-
     }
+
+
+
 
 
     public Bitmap createCustomMarker(@DrawableRes int resource) {
@@ -849,7 +860,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
 
     public void tapToReturnUpComing() {
-        // get data throgh card view
 
         Bundle bundle = getIntent().getExtras();
 
@@ -882,6 +892,49 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         driverName.setText(tripStatus1.getName());
         fareValue.setText(tripStatus1.getDropLat());
         //}*/
+
+    }
+
+    private void getLandingfromUpcomming() {
+
+        Bundle bundle = getIntent().getExtras();
+
+        LatLng sourceAddLatLng = new LatLng(Double.parseDouble(""+bundle.getString("sourceLat")),
+                Double.parseDouble(""+bundle.getString("sourceLong")));
+        LatLng destAddLatLng = new LatLng(Double.parseDouble(""+ bundle.getString("destinationLat")),
+                Double.parseDouble(""+bundle.getString("destinationLong")));
+
+        sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
+        sourceLongitude= Double.parseDouble(bundle.getString("sourceLong"));
+
+        destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
+        destLongitude= Double.parseDouble(bundle.getString("destinationLong"));
+
+        sourceTV.setText(""+ Utils.getAddress(getApplicationContext(),sourceAddLatLng));
+        destTV.setText(""+Utils.getAddress(getApplicationContext(),destAddLatLng));
+
+        markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+        markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+
+        markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+        markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+
+        userName = bundle.getString("name");
+        role = bundle.getString("role");
+        getVehicleName = bundle.getString("vehicleName");
+        vehicleNumber = bundle.getString("vehicleNumber");
+        faireChargeVal = bundle.getString("fare");
+        status = bundle.getString("status");
+        tripType = bundle.getString("tripType");
+        tripStartDate = bundle.getString("startDate");
+        tripEndDate = bundle.getString("endDate");
+        pickUpTime = bundle.getString("pickupTime");
+        dropTime = bundle.getString("dropTime");
+
+        driverName.setText(userName);
+        vehicleName.setText(getVehicleName);
+        fareValue.setText(faireChargeVal);
+
 
     }
 

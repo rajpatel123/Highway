@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -21,6 +23,7 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
 
     Context context;
     List<OngoingTrip> ongoingTrips;
+    OnGoingBookTripInterface onGoingBookTripInterface;
 
     public OnGoingTripAdapterForCustomer(List<OngoingTrip> ongoingTrips, Context context) {
         this.context = context;
@@ -51,7 +54,56 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
         holder.tv6VehicleName.setText("" + ongoingTrip.getVehicleName());
         holder.tv7FairCharge.setText("" + ongoingTrip.getFare());
         // img
+
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (onGoingBookTripInterface != null) {
+//                    onGoingBookTripInterface.onGoingBookTrip(ongoingTrip.getSourceLat(),
+//                            ongoingTrip.getSourceLong(), ongoingTrip.getDestinationLat(),
+//                            ongoingTrip.getDestinationLong(), ongoingTrip.getName(),
+//                            ongoingTrip.getRole(), ongoingTrip.getVehicleName(),
+//                            ongoingTrip.getVehicleNumber(), ongoingTrip.getFare(),
+//                            ongoingTrip.getStatus(), ongoingTrip.getTripType(),
+//                            ongoingTrip.getStartDate(), ongoingTrip.getEndDate(),
+//                            ongoingTrip.getPickupTime(), ongoingTrip.getDropTime()
+//                   );
+//                }
+//            }
+//        });
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onGoingBookTripInterface != null) {
+                    onGoingBookTripInterface.onGoingBookTrip(ongoingTrip.getSourceLat(),
+                            ongoingTrip.getSourceLong(), ongoingTrip.getDestinationLat(),
+                            ongoingTrip.getDestinationLong(), ongoingTrip.getName(),
+                            ongoingTrip.getRole(), ongoingTrip.getVehicleName(),
+                            ongoingTrip.getVehicleNumber(), ongoingTrip.getFare(),
+                            ongoingTrip.getStatus(), ongoingTrip.getTripType(),
+                            ongoingTrip.getStartDate(), ongoingTrip.getEndDate(),
+                            ongoingTrip.getPickupTime(), ongoingTrip.getDropTime()
+                    );
+                }
+            }
+        });
+
     }
+
+    public void setOngoingBookTripInterface(OnGoingBookTripInterface onGoingBookTripInterface1) {
+        this.onGoingBookTripInterface = onGoingBookTripInterface1;
+    }
+
+    public interface OnGoingBookTripInterface {       ///
+        public void onGoingBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                     String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                     String status, String tripType, String startDate, String endDate, String pickupTime,
+                                     String dropTime);
+    }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -61,6 +113,8 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
+        CardView cardView;
+        LinearLayout linearLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -75,6 +129,8 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
             img2DestIndicator = itemView.findViewById(R.id.Img2DestIndicator);
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
+            cardView = itemView.findViewById(R.id.CardView);
+            linearLayout = itemView.findViewById(R.id.LLout1);
         }
     }
 }

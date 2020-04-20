@@ -1,4 +1,4 @@
-package com.highway;
+package com.highway.reciever;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

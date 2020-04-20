@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -18,13 +19,13 @@ import com.highway.utils.Utils;
 
 import java.util.List;
 
-public class CancleTripAdapterForCustomer extends RecyclerView.Adapter<CancleTripAdapterForCustomer.ViewHolder> {
+public class CancelTripAdapterForCustomer extends RecyclerView.Adapter<CancelTripAdapterForCustomer.ViewHolder> {
 
-
+    CancelBookTripInterface CancelBookTripInterface;
     Context context;
     List<CancelTrip>cancelTrips;
 
-    public CancleTripAdapterForCustomer(List<CancelTrip>cancelTrips1, Context context1){
+    public CancelTripAdapterForCustomer(List<CancelTrip>cancelTrips1, Context context1){
         this.cancelTrips = cancelTrips1;
         this.context = context1;
     }
@@ -56,15 +57,59 @@ public class CancleTripAdapterForCustomer extends RecyclerView.Adapter<CancleTri
         holder.tv7FairCharge.setText("" + cancelTrip.getFare());
         // img
 
-        holder.LLout.setOnClickListener(new View.OnClickListener() {
+
+//
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (CancelBookTripInterface != null) {
+//                    //upComingBookTripInterface.upComingBookTrip(upcomingTrips.get(position).getTripType());
+//                    CancelBookTripInterface.cancelBookTrip(cancelTrip.getSourceLat(),
+//                            cancelTrip.getSourceLong(), cancelTrip.getDestinationLat(),
+//                            cancelTrip.getDestinationLong(), cancelTrip.getName(),
+//                            cancelTrip.getRole(), cancelTrip.getVehicleName(),
+//                            cancelTrip.getVehicleNumber(), cancelTrip.getFare(),
+//                            cancelTrip.getStatus(), cancelTrip.getTripType(),
+//                            cancelTrip.getStartDate(), cancelTrip.getEndDate(),
+//                            cancelTrip.getPickupTime(), cancelTrip.getDropTime()
+//                   );
+//                }
+//            }
+//        });
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (CancelBookTripInterface != null) {
+                    //CancelBookTripInterface.cancelBookTrip(cancelTrip.get(position).getTripType());
+                    CancelBookTripInterface.cancelBookTrip(cancelTrip.getSourceLat(),
+                            cancelTrip.getSourceLong(), cancelTrip.getDestinationLat(),
+                            cancelTrip.getDestinationLong(), cancelTrip.getName(),
+                            cancelTrip.getRole(), cancelTrip.getVehicleName(),
+                            cancelTrip.getVehicleNumber(), cancelTrip.getFare(),
+                            cancelTrip.getStatus(), cancelTrip.getTripType(),
+                            cancelTrip.getStartDate(), cancelTrip.getEndDate(),
+                            cancelTrip.getPickupTime(), cancelTrip.getDropTime()
+                    );
 
+                }
             }
         });
 
-
     }
+
+    public void setCancelBookTripInterface(CancelBookTripInterface  CancelBookTripInterface1) {
+        this.CancelBookTripInterface = CancelBookTripInterface1;
+    }
+
+    public interface CancelBookTripInterface {       ///
+        public void cancelBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                   String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                   String status, String tripType, String startDate, String endDate, String pickupTime,
+                                   String dropTime
+        );
+    }
+
 
 
 
@@ -78,7 +123,8 @@ public class CancleTripAdapterForCustomer extends RecyclerView.Adapter<CancleTri
 
         private TextView tv1CompleteDate, tv2SourceAddress, tv3SourceTime, tv4DestAddress, tv5DestTime, tv6VehicleName, tv7FairCharge;
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
-        private LinearLayout LLout;
+        private LinearLayout linearLayout;
+        private CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv1CompleteDate = itemView.findViewById(R.id.Tv1CompleteDate);
@@ -92,9 +138,12 @@ public class CancleTripAdapterForCustomer extends RecyclerView.Adapter<CancleTri
             img2DestIndicator = itemView.findViewById(R.id.Img2DestIndicator);
             img3_gmap_locator = itemView.findViewById(R.id.Img3_gmap_Locator);
             img4VehicleImg = itemView.findViewById(R.id.Img4VehicleImg);
-            LLout = itemView.findViewById(R.id.LLout1);
+            cardView = itemView.findViewById(R.id.CardView);
+            linearLayout = itemView.findViewById(R.id.LLout1);
 
 
         }
     }
 }
+
+
