@@ -57,37 +57,46 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         holder.tv7FairCharge.setText("" + upcomingTrip.getFare());
 
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (upComingBookTripInterface != null) {
-//                    //upComingBookTripInterface.upComingBookTrip(upcomingTrips.get(position).getTripType());
-//                   upComingBookTripInterface.upComingBookTrip(upcomingTrip.getSourceLat(),
-//                           upcomingTrip.getSourceLong(), upcomingTrip.getDestinationLat(),
-//                           upcomingTrip.getDestinationLong(), upcomingTrip.getName(),
-//                           upcomingTrip.getRole(), upcomingTrip.getVehicleName(),
-//                           upcomingTrip.getVehicleNumber(), upcomingTrip.getFare(),
-//                           upcomingTrip.getStatus(), upcomingTrip.getTripType(),
-//                           upcomingTrip.getStartDate(), upcomingTrip.getEndDate(),
-//                           upcomingTrip.getPickupTime(), upcomingTrip.getDropTime()
-//                   );
-//                }
-//            }
-//        });
-
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (upComingBookTripInterface != null) {
-                    //upCommingBookTripInterface.upCommingBookTrip(upcomingTrips.get(position).getTripType());
-                    upComingBookTripInterface.upComingBookTrip(upcomingTrip.getSourceLat(),
+                    upComingBookTripInterface.upComingBookTrip(
+
+                           /* upcomingTrips.get(position).getSourceLat(), upcomingTrips.get(position).getSourceLong(),
+                            upcomingTrips.get(position).getDestinationLat(), upcomingTrips.get(position).getDestinationLong(),
+                            upcomingTrips.get(position).getName(), upcomingTrips.get(position).getRole(),
+                            upcomingTrips.get(position).getVehicleName(), upcomingTrips.get(position).getVehicleNumber(),
+                            upcomingTrips.get(position).getFare(), upcomingTrips.get(position).getStatus(),
+                            upcomingTrips.get(position).getTripType(), upcomingTrips.get(position).getStartDate(),
+                            upcomingTrips.get(position).getEndDate(), upcomingTrips.get(position).getPickupTime(),
+                            upcomingTrips.get(position).getDropTime()*/
+
+                    /*upComingBookTripInterface.upComingBookTrip(upcomingTrip.getSourceLat(),
                             upcomingTrip.getSourceLong(), upcomingTrip.getDestinationLat(),
                             upcomingTrip.getDestinationLong(), upcomingTrip.getName(),
                             upcomingTrip.getRole(), upcomingTrip.getVehicleName(),
                             upcomingTrip.getVehicleNumber(), upcomingTrip.getFare(),
                             upcomingTrip.getStatus(), upcomingTrip.getTripType(),
                             upcomingTrip.getStartDate(), upcomingTrip.getEndDate(),
-                            upcomingTrip.getPickupTime(), upcomingTrip.getDropTime()
+                            upcomingTrip.getPickupTime(), upcomingTrip.getDropTime()*/
+
+                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLat(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLong(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getDestinationLat(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getDestinationLong(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getName(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getRole(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getVehicleName(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getVehicleNumber(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getFare(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getStatus(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getTripType(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getStartDate(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getEndDate(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getPickupTime(),
+                            upcomingTrips.get(holder.getAdapterPosition()).getDropTime()
+
                     );
 
                 }
@@ -101,10 +110,11 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
     }
 
     public interface UpComingBookTripInterface {       ///
-        public void upComingBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-                                     String name, String role, String vehicleName, String vehicleNumber, String fare,
-                                     String status, String tripType, String startDate, String endDate, String pickupTime,
-                                     String dropTime);
+        void upComingBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                              String name, String role, String vehicleName, String vehicleNumber, String fare,
+                              String status, String tripType, String startDate, String endDate, String pickupTime,
+                              String dropTime
+        );
     }
 
 

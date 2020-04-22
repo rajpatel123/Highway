@@ -56,39 +56,46 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
         holder.tv7FairCharge.setText("" + completedTrip.getFare());
         // img
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (completedTripDetailsInterface != null) {
-////                    completedTripDetailsInterface.tripDetailsList(completedTrips.get(position).getTripType());
-//                    completedTripDetailsInterface.tripDetailsList(completedTrip.getTripType(),
-//                            completedTrip.getSourceLong(), completedTrip.getDestinationLat(),
-//                            completedTrip.getDestinationLong(), completedTrip.getName(),
-//                            completedTrip.getRole(), completedTrip.getVehicleName(),
-//                            completedTrip.getVehicleNumber(), completedTrip.getFare(),
-//                            completedTrip.getStatus(), completedTrip.getTripType(),
-//                            completedTrip.getStartDate(), completedTrip.getEndDate(),
-//                            completedTrip.getPickupTime(), completedTrip.getDropTime()
-//                    );
-//
-//                }
-//            }
-//        });
 
-
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (completedTripDetailsInterface != null) {
-                    // completedTripDetailsInterface.tripDetailsList(completedTrips.get(position).getTripType());
-                    completedTripDetailsInterface.tripDetailsList(completedTrip.getSourceLat(),
-                            completedTrip.getSourceLong(), completedTrip.getDestinationLat(),
-                            completedTrip.getDestinationLong(), completedTrip.getName(),
-                            completedTrip.getRole(), completedTrip.getVehicleName(),
-                            completedTrip.getVehicleNumber(), completedTrip.getFare(),
-                            completedTrip.getStatus(), completedTrip.getTripType(),
-                            completedTrip.getStartDate(), completedTrip.getEndDate(),
-                            completedTrip.getPickupTime(), completedTrip.getDropTime()
+                    completedTripDetailsInterface.tripDetailsList(
+
+                           /* completedTrip.getSourceLat(), completedTrip.getSourceLong(),
+                            completedTrip.getDestinationLat(), completedTrip.getDestinationLong(),
+                            completedTrip.getName(), completedTrip.getRole(),
+                            completedTrip.getVehicleName(), completedTrip.getVehicleNumber(),
+                            completedTrip.getFare(), completedTrip.getStatus(),
+                            completedTrip.getTripType(), completedTrip.getStartDate(), completedTrip.getEndDate(),
+                            completedTrip.getPickupTime(), completedTrip.getDropTime()*/
+
+                            completedTrips.get(position).getSourceLat(), completedTrips.get(position).getSourceLong(),
+                            completedTrips.get(position).getDestinationLat(), completedTrips.get(position).getDestinationLong(),
+                            completedTrips.get(position).getName(), completedTrips.get(position).getRole(),
+                            completedTrips.get(position).getVehicleName(), completedTrips.get(position).getVehicleNumber(),
+                            completedTrips.get(position).getFare(), completedTrips.get(position).getStatus(),
+                            completedTrips.get(position).getTripType(), completedTrips.get(position).getStartDate(),
+                            completedTrips.get(position).getEndDate(), completedTrips.get(position).getPickupTime(),
+                            completedTrips.get(position).getDropTime()
+
+                           /* completedTrips.get(holder.getAdapterPosition()).getSourceLat(),
+                            completedTrips.get(holder.getAdapterPosition()).getSourceLong(),
+                            completedTrips.get(holder.getAdapterPosition()).getDestinationLat(),
+                            completedTrips.get(holder.getAdapterPosition()).getDestinationLong(),
+                            completedTrips.get(holder.getAdapterPosition()).getName(),
+                            completedTrips.get(holder.getAdapterPosition()).getRole(),
+                            completedTrips.get(holder.getAdapterPosition()).getVehicleName(),
+                            completedTrips.get(holder.getAdapterPosition()).getVehicleNumber(),
+                            completedTrips.get(holder.getAdapterPosition()).getFare(),
+                            completedTrips.get(holder.getAdapterPosition()).getStatus(),
+                            completedTrips.get(holder.getAdapterPosition()).getTripType(),
+                            completedTrips.get(holder.getAdapterPosition()).getStartDate(),
+                            completedTrips.get(holder.getAdapterPosition()).getEndDate(),
+                            completedTrips.get(holder.getAdapterPosition()).getPickupTime(),
+                            completedTrips.get(holder.getAdapterPosition()).getDropTime()*/
+
                     );
                 }
             }

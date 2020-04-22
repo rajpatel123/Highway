@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/LLout1"
     android:layout_margin="@dimen/_10dp"
-    android:elevation="@dimen/_15sdp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CardView"
         android:layout_width="match_parent"
+        android:elevation="@dimen/_15sdp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_5">
 
@@ -17,8 +16,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
+                android:id="@+id/LLout1"
                 android:orientation="vertical">
-                 android:background="@drawable/completed_fragment_item_shape"
+               <!-- android:background="@drawable/completed_fragment_item_shape"-->
                 <TextView
                     android:id="@+id/Tv1CompleteDate"
                     android:layout_width="match_parent"

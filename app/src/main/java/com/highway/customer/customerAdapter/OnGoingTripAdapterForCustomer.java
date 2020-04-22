@@ -55,35 +55,74 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
         holder.tv7FairCharge.setText("" + ongoingTrip.getFare());
         // img
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (onGoingBookTripInterface != null) {
-//                    onGoingBookTripInterface.onGoingBookTrip(ongoingTrip.getSourceLat(),
-//                            ongoingTrip.getSourceLong(), ongoingTrip.getDestinationLat(),
-//                            ongoingTrip.getDestinationLong(), ongoingTrip.getName(),
-//                            ongoingTrip.getRole(), ongoingTrip.getVehicleName(),
-//                            ongoingTrip.getVehicleNumber(), ongoingTrip.getFare(),
-//                            ongoingTrip.getStatus(), ongoingTrip.getTripType(),
-//                            ongoingTrip.getStartDate(), ongoingTrip.getEndDate(),
-//                            ongoingTrip.getPickupTime(), ongoingTrip.getDropTime()
-//                   );
-//                }
-//            }
-//        });
-
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+       /* holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onGoingBookTripInterface != null) {
-                    onGoingBookTripInterface.onGoingBookTrip(ongoingTrip.getSourceLat(),
+                     *//*onGoingBookTripInterface.onGoingBookTrip(
+
+                           ongoingTrips.get(position).getSourceLat(), ongoingTrips.get(position).getSourceLong(),
+                            ongoingTrips.get(position).getDestinationLat(), ongoingTrips.get(position).getDestinationLong(),
+                            ongoingTrips.get(position).getName(), ongoingTrips.get(position).getRole(),
+                            ongoingTrips.get(position).getVehicleName(), ongoingTrips.get(position).getVehicleNumber(),
+                            ongoingTrips.get(position).getFare(), ongoingTrips.get(position).getStatus(),
+                            ongoingTrips.get(position).getTripType(), ongoingTrips.get(position).getStartDate(),
+                            ongoingTrips.get(position).getEndDate(), ongoingTrips.get(position).getPickupTime(),
+                            ongoingTrips.get(position).getDropTime());*//*
+
+                            onGoingBookTripInterface.onGoingBookTrip(ongoingTrip.getSourceLat(),
+                                    ongoingTrip.getSourceLong(), ongoingTrip.getDestinationLat(),
+                                    ongoingTrip.getDestinationLong(), ongoingTrip.getName(),
+                                    ongoingTrip.getRole(), ongoingTrip.getVehicleName(),
+                                    ongoingTrip.getVehicleNumber(), ongoingTrip.getFare(),
+                                    ongoingTrip.getStatus(), ongoingTrip.getTripType(),
+                                    ongoingTrip.getStartDate(), ongoingTrip.getEndDate(),
+                                    ongoingTrip.getPickupTime(), ongoingTrip.getDropTime()
+                            );
+                }
+            }
+        });*/
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onGoingBookTripInterface != null) {
+
+                    onGoingBookTripInterface.onGoingBookTrip(
+                         /*   ongoingTrips.get(position).getSourceLat(), ongoingTrips.get(position).getSourceLong(),
+                            ongoingTrips.get(position).getDestinationLat(), ongoingTrips.get(position).getDestinationLong(),
+                            ongoingTrips.get(position).getName(), ongoingTrips.get(position).getRole(),
+                            ongoingTrips.get(position).getVehicleName(), ongoingTrips.get(position).getVehicleNumber(),
+                            ongoingTrips.get(position).getFare(), ongoingTrips.get(position).getStatus(),
+                            ongoingTrips.get(position).getTripType(), ongoingTrips.get(position).getStartDate(),
+                            ongoingTrips.get(position).getEndDate(), ongoingTrips.get(position).getPickupTime(),
+                            ongoingTrips.get(position).getDropTime());*/
+
+                    /*onGoingBookTripInterface.onGoingBookTrip(ongoingTrip.getSourceLat(),
                             ongoingTrip.getSourceLong(), ongoingTrip.getDestinationLat(),
                             ongoingTrip.getDestinationLong(), ongoingTrip.getName(),
                             ongoingTrip.getRole(), ongoingTrip.getVehicleName(),
                             ongoingTrip.getVehicleNumber(), ongoingTrip.getFare(),
                             ongoingTrip.getStatus(), ongoingTrip.getTripType(),
                             ongoingTrip.getStartDate(), ongoingTrip.getEndDate(),
-                            ongoingTrip.getPickupTime(), ongoingTrip.getDropTime()
+                            ongoingTrip.getPickupTime(), ongoingTrip.getDropTime()*/
+
+                            ongoingTrips.get(holder.getAdapterPosition()).getSourceLat(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getSourceLong(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getDestinationLat(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getDestinationLong(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getName(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getRole(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getVehicleName(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getVehicleNumber(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getFare(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getStatus(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getTripType(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getStartDate(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getEndDate(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getPickupTime(),
+                            ongoingTrips.get(holder.getAdapterPosition()).getDropTime()
+
                     );
                 }
             }
@@ -97,12 +136,10 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
 
     public interface OnGoingBookTripInterface {       ///
         public void onGoingBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-                                     String name, String role, String vehicleName, String vehicleNumber, String fare,
-                                     String status, String tripType, String startDate, String endDate, String pickupTime,
-                                     String dropTime);
+                                    String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                    String status, String tripType, String startDate, String endDate, String pickupTime,
+                                    String dropTime);
     }
-
-
 
 
     @Override
@@ -115,6 +152,7 @@ public class OnGoingTripAdapterForCustomer extends RecyclerView.Adapter<OnGoingT
         private ImageView img1SourceIndicator, img2DestIndicator, img3_gmap_locator, img4VehicleImg;
         CardView cardView;
         LinearLayout linearLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

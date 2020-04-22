@@ -93,18 +93,6 @@ public class UpCommingFragmentForCustomer extends Fragment {
                 intent.putExtra("pickupTime",pickupTime);
                 intent.putExtra("dropTime",dropTime);
 
-               /* LatLng sourceAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getSourceLat()),Double.parseDouble(upcomingTrip.getSourceLong()));
-                LatLng destAddLatLng = new LatLng(Double.parseDouble(upcomingTrip.getDestinationLat()),Double.parseDouble(upcomingTrip.getDestinationLong()));
-                intent.putExtra("SourceAddLatlog", upcomingTrips.get(0).getSourceLat());
-                intent.putExtra("SourceAddLongitude", upcomingTrips.get(0).getSourceLong());
-                intent.putExtra("DestAddLatlog", upcomingTrips.get(0).getSourceLat());
-                intent.putExtra("DestAddLongitude", upcomingTrips.get(0).getDestinationLong());
-                intent.putExtra("CompleteDate", upcomingTrips.get(0).getEndDate());
-                intent.putExtra("PickupTime", upcomingTrips.get(0).getPickupTime());
-                intent.putExtra("DropTime", upcomingTrips.get(0).getDropTime());
-                intent.putExtra("VehicleName", upcomingTrips.get(0).getVehicleName());
-                intent.putExtra("VehicleNumber", upcomingTrips.get(0).getVehicleNumber());*/
-
                 getActivity().startActivity(intent);
 
             }

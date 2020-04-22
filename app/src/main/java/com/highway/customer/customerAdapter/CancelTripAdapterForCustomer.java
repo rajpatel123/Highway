@@ -56,40 +56,48 @@ public class CancelTripAdapterForCustomer extends RecyclerView.Adapter<CancelTri
         holder.tv6VehicleName.setText("" + cancelTrip.getVehicleName());
         holder.tv7FairCharge.setText("" + cancelTrip.getFare());
         // img
-
-
-//
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (CancelBookTripInterface != null) {
-//                    //upComingBookTripInterface.upComingBookTrip(upcomingTrips.get(position).getTripType());
-//                    CancelBookTripInterface.cancelBookTrip(cancelTrip.getSourceLat(),
-//                            cancelTrip.getSourceLong(), cancelTrip.getDestinationLat(),
-//                            cancelTrip.getDestinationLong(), cancelTrip.getName(),
-//                            cancelTrip.getRole(), cancelTrip.getVehicleName(),
-//                            cancelTrip.getVehicleNumber(), cancelTrip.getFare(),
-//                            cancelTrip.getStatus(), cancelTrip.getTripType(),
-//                            cancelTrip.getStartDate(), cancelTrip.getEndDate(),
-//                            cancelTrip.getPickupTime(), cancelTrip.getDropTime()
-//                   );
-//                }
-//            }
-//        });
-
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+        
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CancelBookTripInterface != null) {
-                    //CancelBookTripInterface.cancelBookTrip(cancelTrip.get(position).getTripType());
-                    CancelBookTripInterface.cancelBookTrip(cancelTrip.getSourceLat(),
-                            cancelTrip.getSourceLong(), cancelTrip.getDestinationLat(),
-                            cancelTrip.getDestinationLong(), cancelTrip.getName(),
-                            cancelTrip.getRole(), cancelTrip.getVehicleName(),
-                            cancelTrip.getVehicleNumber(), cancelTrip.getFare(),
-                            cancelTrip.getStatus(), cancelTrip.getTripType(),
+                    CancelBookTripInterface.cancelBookTrip(
+
+                           /* cancelTrip.getSourceLat(), cancelTrip.getSourceLong(),
+                            cancelTrip.getDestinationLat(), cancelTrip.getDestinationLong(),
+                            cancelTrip.getName(), cancelTrip.getRole(), 
+                            cancelTrip.getVehicleName(), cancelTrip.getVehicleNumber(), 
+                            cancelTrip.getFare(), cancelTrip.getStatus(), cancelTrip.getTripType(),
                             cancelTrip.getStartDate(), cancelTrip.getEndDate(),
-                            cancelTrip.getPickupTime(), cancelTrip.getDropTime()
+                            cancelTrip.getPickupTime(), cancelTrip.getDropTime()*/
+
+                            cancelTrips.get(position).getSourceLat(), cancelTrips.get(position).getSourceLong(),
+                            cancelTrips.get(position).getDestinationLat(), cancelTrips.get(position).getDestinationLong(),
+                            cancelTrips.get(position).getName(), cancelTrips.get(position).getRole(),
+                            cancelTrips.get(position).getVehicleName(), cancelTrips.get(position).getVehicleNumber(),
+                            cancelTrips.get(position).getFare(), cancelTrips.get(position).getStatus(),
+                            cancelTrips.get(position).getTripType(), cancelTrips.get(position).getStartDate(),
+                            cancelTrips.get(position).getEndDate(), cancelTrips.get(position).getPickupTime(),
+                            cancelTrips.get(position).getDropTime()
+                           
+                           /* cancelTrips.get(holder.getAdapterPosition()).getSourceLat(),
+                            cancelTrips.get(holder.getAdapterPosition()).getSourceLong(),
+                            cancelTrips.get(holder.getAdapterPosition()).getDestinationLat(),
+                            cancelTrips.get(holder.getAdapterPosition()).getDestinationLong(),
+                            cancelTrips.get(holder.getAdapterPosition()).getName(),
+                            cancelTrips.get(holder.getAdapterPosition()).getRole(),
+                            cancelTrips.get(holder.getAdapterPosition()).getVehicleName(),
+                            cancelTrips.get(holder.getAdapterPosition()).getVehicleNumber(),
+                            cancelTrips.get(holder.getAdapterPosition()).getFare(),
+                            cancelTrips.get(holder.getAdapterPosition()).getStatus(),
+                            cancelTrips.get(holder.getAdapterPosition()).getTripType(),
+                            cancelTrips.get(holder.getAdapterPosition()).getStartDate(),
+                            cancelTrips.get(holder.getAdapterPosition()).getEndDate(),
+                            cancelTrips.get(holder.getAdapterPosition()).getPickupTime(),
+                            cancelTrips.get(holder.getAdapterPosition()).getDropTime()*/
+
+
+
                     );
 
                 }
