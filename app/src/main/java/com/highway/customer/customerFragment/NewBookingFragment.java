@@ -554,7 +554,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     }
 
     public void getNearByDriverLocation() {
-        Utils.showProgressDialog(getActivity());
         RestClient.getNearByDriverLocation( new Callback<NearByDriverLocationResponse>() {
             @Override
             public void onResponse(Call<NearByDriverLocationResponse> call, Response<NearByDriverLocationResponse> response) {

@@ -17,6 +17,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         generatedDensities = []
+        multiDexEnabled true
     }
 
     aaptOptions {
@@ -140,6 +141,6 @@ dependencies {
     /*implementation 'com.google.firebase:firebase-core:10.2.1'*/
 
     implementation 'com.google.android.material:material:1.0.0'
-
+    implementation 'com.android.support:multidex:1.0.1'
 }
 apply plugin: 'com.google.gms.google-services'
