@@ -40,9 +40,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".customer.customerActivity.CancelTripDetailsForCustomerActivity"></activity>
-        <activity android:name=".drivermodule.driverActivity.TripDetailsForDriverActivity" />
-        <activity android:name=".customer.customerActivity.CompletedTripDetailsForCustomersActivity" />
+        <activity android:name=".drivermodule.driverActivity.CancelTripDetailsByDriverActivity" android:theme="@style/AppTheme2"></activity>
+        <activity
+            android:name=".customer.customerActivity.CustomerAllTripsActivity"
+            android:theme="@style/AppTheme2" />
+        <activity android:name=".customer.customerActivity.CancelTripDetailsForCustomerActivity" android:theme="@style/AppTheme2" />
+        <activity android:name=".drivermodule.driverActivity.CompletedTripDetailsForDriverActivity"  android:theme="@style/AppTheme2"/>
+        <activity
+            android:name=".customer.customerActivity.CompletedTripDetailsForCustomersActivity"
+            android:theme="@style/AppTheme2" />
         <activity android:name=".customer.customerActivity.TripTrackingByCustomerActivity" />
         <activity android:name=".drivermodule.driverActivity.DriverAllTripsActivity" />
 

@@ -112,7 +112,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="55"
+                android:layout_weight="65"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -157,7 +157,7 @@
                             <ImageView
                                 android:id="@+id/Vehicleimg"
                                 android:layout_width="match_parent"
-                                android:layout_height="50dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center"
                                 android:paddingTop="@dimen/_5sdp"
                                 app:srcCompat="@drawable/vehicle" />
@@ -167,7 +167,7 @@
                                 android:id="@+id/vehicleNameTV"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_15sdp"
+                                android:layout_marginTop="5dp"
                                 android:text=" Tata Ace - UP 73 BV 8987"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -176,7 +176,7 @@
                                 android:id="@+id/DriverNameTV"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10dp"
+                                android:layout_marginTop="5sp"
                                 android:text=" Driver Name"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
@@ -246,7 +246,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="45">
+                android:layout_weight="35">
 
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"

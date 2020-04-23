@@ -4,15 +4,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,6 +66,7 @@ import com.highway.customer.customerModelClass.customerInvoice.CustomerInvoiceRe
 import com.highway.customer.helper.FetchURL;
 import com.highway.customer.helper.TaskLoadedCallback;
 import com.highway.drivermodule.drivermodels.TripStatus;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -81,37 +85,37 @@ import retrofit2.Response;
 
 public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, TaskLoadedCallback, View.OnClickListener  {
+        LocationListener, TaskLoadedCallback, View.OnClickListener {
 
 
-    TextView bookingIdCode, totalAmount, travelTime, peekHourCharges, nightFare,tax, discount, rentalNormalPrice, rentalTotalDistance, rentalExtraHrKmPrice,
+    TextView bookingIdCode, totalAmount, travelTime, peekHourCharges, nightFare, tax, discount, rentalNormalPrice, rentalTotalDistance, rentalExtraHrKmPrice,
             rentalTravelTime, rentalHours, outstationDistanceFare, outstationDriverBeta, outstationRoundSingle, outstationNoOfDays, startDate, endDate,
-            paymentMode, bookingId,fixed, walletDetection,distancePrice,outstationDistanceTravelled,payAbleAmout;
-    
+            paymentMode, bookingId, fixed, walletDetection, distancePrice, outstationDistanceTravelled, payAbleAmout;
+
     TextView distance, start_time, end_time;
-    TextView sourceTV, destTV,driverNameTV,vehicleNameTV;
+    TextView sourceTV, destTV, driverNameTV, vehicleNameTV;
 
     String userId, sourceName, destName, gdTypeId, goodsType, userRecvNO, userMobileNO, bookTripIdCode, bookId, vehicleTypeId, bookVehicleName, rejTV, acptTripTv;
-    String mobileNo, sourceTV1, destTV1, driverName1, fareValue1, completeDate1, pickUp1, dropTime1, vehicleNumber1,fairCharge;
+    String mobileNo, sourceTV1, destTV1, driverName1, fareValue1, completeDate1, pickUp1, dropTime1, vehicleNumber1, fairCharge;
     LinearLayout paymentModeLayout, layout_normal_flow, layout_rental_flow, layout_outstation_flow, discountLayout, sourceLL, destLL;
 
-     String name, role, vehicleName, vehicleNumber, faireChargeVal,
+    String name, role, vehicleName, vehicleNumber, faireChargeVal,
             status, tripType, tripStartDate, tripEndDate, pickUpTime, dropTime;
 
     NestedScrollView nestedScrollView;
 
-    Button btnConfirmPayment,done;
+    Button btnConfirmPayment, done;
 
     int yy, mm, dd;
 
     String totDistance, tripId, getBookTripIdCode, getBookId, userName, userMobNo;
     DashBoardActivity mActivity;
-    
+
     NumberFormat numberFormat;
 
     LinearLayout lnrWalletDetection;
     LinearLayout lnrDiscount;
-    
+
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public static final int SELECT_TYPE = 4;
     public static final int BOUND_PADDING = 100;
@@ -148,35 +152,27 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_trip_details_for_customers);
 
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setTitle("Completed Trip Details");
         }
 
-        new FetchURL(CompletedTripDetailsForCustomersActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+        IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
+        registerReceiver(mySenderBroadCast, intentFilter);
+        Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
-        Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-
-        if (!Places.isInitialized()) {
-            Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-        }
-
-//        IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
-//        registerReceiver(mySenderBroadCast, intentFilter);
-//
-//        Log.e(TAG, BaseUtil.jsonFromModel(pushData));
-//
-//        intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-//        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-//        registerReceiver(mySenderBroadCast, intentFilter);
+        intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        registerReceiver(mySenderBroadCast, intentFilter);
 
 
         sourceTV = findViewById(R.id.sourceTV);
         destTV = findViewById(R.id.destTV);
         callActionIV = findViewById(R.id.callActionIV);
         mylocation = findViewById(R.id.mylocation);
-        driverNameTV =findViewById(R.id.DriverNameTV);
+        driverNameTV = findViewById(R.id.DriverNameTV);
         vehicleNameTV = findViewById(R.id.vehicleNameTV);
         vehicleimg = findViewById(R.id.Vehicleimg);
 
@@ -220,51 +216,58 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         outstationNoOfDays = findViewById(R.id.outstation_no_of_days);
 
 
-        //Intent intent =getActivity().getIntent();
-        String bookTripIdCode = getIntent().getStringExtra("bookTbripIdCode");
-        bookingIdCode.setText(bookTripIdCode);
+//        Intent intent =this.getIntent();
+//        String bookTripIdCode = getIntent().getStringExtra("bookTbripIdCode");
+//        getBookTripIdCode = HighwayPrefs.getString(getApplicationContext(), "bookTripIdCode");
+//        getBookId = HighwayPrefs.getString(getApplicationContext(), "BookingId");
+//        bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
+//
+//        userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
+//        userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERPHONENO);
+//        goodsType = HighwayPrefs.getString(getApplicationContext(), Constants.GOODSTYPES);
+//
+//        driverNameTV.setText(userName);
+//        vehicleNameTV.setText(bookVehicleName);
+//        bookingIdCode.setText(bookTripIdCode);
 
-        getBookTripIdCode = HighwayPrefs.getString(getApplicationContext(), "bookTripIdCode");
-        getBookId = HighwayPrefs.getString(getApplicationContext(), "BookingId");
+        //new FetchURL(CompletedTripDetailsForCustomersActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
-        userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
-        userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERPHONENO);
-        goodsType= HighwayPrefs.getString(getApplicationContext(),Constants.GOODSTYPES);
-        bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
+        Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
 
-        driverNameTV.setText(userName);
-        vehicleNameTV.setText(bookVehicleName);
+        if (!Places.isInitialized()) {
+            Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+        }
 
         tripdate();
-        getInvoiceForCustomer();
         getCompletedTripDetailForCustomer(getIntent());
+        getInvoiceForCustomer();
+
     }
 
     private void getCompletedTripDetailForCustomer(Intent intent) {
 
-        if (intent!=null){
-                Bundle bundle = getIntent().getExtras();
+        if (intent != null) {
+            Bundle bundle = getIntent().getExtras();
 
-                LatLng sourceAddLatLng = new LatLng(Double.parseDouble(""+bundle.getString("sourceLat")),
-                        Double.parseDouble(""+bundle.getString("sourceLong")));
-                LatLng destAddLatLng = new LatLng(Double.parseDouble(""+ bundle.getString("destinationLat")),
-                        Double.parseDouble(""+bundle.getString("destinationLong")));
+            LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
+                    Double.parseDouble("" + bundle.getString("sourceLong")));
+            LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                    Double.parseDouble("" + bundle.getString("destinationLong")));
 
-                sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
-                sourceLongitude= Double.parseDouble(bundle.getString("sourceLong"));
+            sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
+            sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
 
-                destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
-                destLongitude= Double.parseDouble(bundle.getString("destinationLong"));
+            destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
+            destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
 
-                sourceTV.setText(""+ Utils.getAddress(getApplicationContext(),sourceAddLatLng));
-                destTV.setText(""+Utils.getAddress(getApplicationContext(),destAddLatLng));
+            sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
+            destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
-                markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
-                markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+            markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
 
-                markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-                markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
-
+            markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
             userName = bundle.getString("name");
             role = bundle.getString("role");
@@ -296,9 +299,9 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         RestClient.getCustomerInvoice(customerInvoiceReq, new Callback<CustomerInvoiceResp>() {
             @Override
             public void onResponse(Call<CustomerInvoiceResp> call, Response<CustomerInvoiceResp> response) {
-                if (response!=null && response.code()==200 && response.body()!=null){
-                    if (response.body().getStatus()){
-                        CustomerInvoice customerInvoice =response.body().getCustomerInvoice();
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    if (response.body().getStatus()) {
+                        CustomerInvoice customerInvoice = response.body().getCustomerInvoice();
                         invoiceForCustomer(customerInvoice);
                     }
                 }
@@ -313,21 +316,21 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
 
     private void invoiceForCustomer(CustomerInvoice customerInvoice) {
 
-        bookingId.setText(""+customerInvoice.getBookingTripCode());
-        startDate.setText(""+customerInvoice.getStartDate());
-        endDate.setText(""+customerInvoice.getEndDate());
-        start_time.setText(""+customerInvoice.getStartTime());
-        end_time.setText(" "+customerInvoice.getEndTime());
-        distance.setText(""+customerInvoice.getTotDistance());
-        travelTime.setText(""+customerInvoice.getTravelTime());
-        bookingId.setText(""+customerInvoice.getBasedFarefixed());
-        bookingId.setText(""+customerInvoice.getDistancePrice());
-        peekHourCharges.setText(""+customerInvoice.getPeekHourCharges());
-        nightFare.setText(""+customerInvoice.getNightFare());
-        tax.setText(""+customerInvoice.getTax());
-        totalAmount.setText(""+customerInvoice.getTotalAmount());
-        discount.setText(""+customerInvoice.getDiscount());
-        payAbleAmout.setText(""+customerInvoice.getPaymentMode());
+        bookingId.setText("" + customerInvoice.getBookingTripCode());
+        startDate.setText("" + customerInvoice.getStartDate());
+        endDate.setText("" + customerInvoice.getEndDate());
+        start_time.setText("" + customerInvoice.getStartTime());
+        end_time.setText(" " + customerInvoice.getEndTime());
+        distance.setText("" + customerInvoice.getTotDistance());
+        travelTime.setText("" + customerInvoice.getTravelTime());
+        bookingId.setText("" + customerInvoice.getBasedFarefixed());
+        bookingId.setText("" + customerInvoice.getDistancePrice());
+        peekHourCharges.setText("" + customerInvoice.getPeekHourCharges());
+        nightFare.setText("" + customerInvoice.getNightFare());
+        tax.setText("" + customerInvoice.getTax());
+        totalAmount.setText("" + customerInvoice.getTotalAmount());
+        discount.setText("" + customerInvoice.getDiscount());
+        payAbleAmout.setText("" + customerInvoice.getPaymentMode());
 
     }
 
@@ -382,7 +385,6 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         onBackPressed();
         return super.onContextItemSelected(item);
     }
-
 
 
     @Override
@@ -473,6 +475,7 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
             mMap.setMyLocationEnabled(true);
         }
     }
+
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -533,10 +536,12 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
     }
 
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
@@ -561,9 +566,6 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
             currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
         }
     }
-
-
-
 
 
 }

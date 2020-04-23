@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -17,8 +18,10 @@ import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
 import com.highway.customer.customerActivity.BookingConformedActivity;
+import com.highway.customer.customerActivity.CustomerAllTripsActivity;
 import com.highway.customer.customerActivity.TripTrackingByCustomerActivity;
 import com.highway.customer.customerAdapter.UpComingTripAdapterForCustomer;
+import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,8 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 public class UpCommingFragmentForCustomer extends Fragment {
 
     private RecyclerView upcomingRecyclerForCustomer;
-    DashBoardActivity dashBoardActivity;
+    //DashBoardActivity dashBoardActivity;
+    CustomerAllTripsActivity customerAllTripsActivity;
     UpComingTripAdapterForCustomer upComingTripAdapterForCustomer;
     List<UpcomingTrip> upcomingTrips = new ArrayList<>();
     UpcomingTrip upcomingTrip;
@@ -60,56 +64,56 @@ public class UpCommingFragmentForCustomer extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_customer_up_comming, container, false);
         upcomingRecyclerForCustomer = view.findViewById(R.id.upcomingRecyclerForCustomer);
-
-        upcomingTripTracking();
-
+       // upcomingTripTracking();
         return view;
     }
 
     public void upcomingTripTracking() {
-        upComingTripAdapterForCustomer.setUpComingBookTripInterface(new UpComingTripAdapterForCustomer.UpComingBookTripInterface() {
-            @Override
-            public void upComingBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-                                         String name, String role, String vehicleName, String vehicleNumber, String fare,
-                                         String status, String tripType, String startDate, String endDate, String pickupTime,
-                                         String dropTime) {
+        if (upComingTripAdapterForCustomer != null) {
+            upComingTripAdapterForCustomer.setUpComingBookTripInterface(new UpComingTripAdapterForCustomer.upComingBookTripInterface() {
+                @Override
+                public void upComingBookTripClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                                  String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                                  String status, String tripType, String startDate, String endDate, String pickupTime,
+                                                  String dropTime) {
+                    Toast.makeText(getActivity(), "click success", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), BookingConformedActivity.class);
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 
-                Intent intent = new Intent(getActivity(), BookingConformedActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("sourceLat", sourceLat);
+                    intent.putExtra("sourceLong", sourceLong);
+                    intent.putExtra("destinationLat", destinationLat);
+                    intent.putExtra("destinationLong", destinationLong);
+                    intent.putExtra("name", name);
+                    intent.putExtra("role", role);
+                    intent.putExtra("vehicleName", vehicleName);
+                    intent.putExtra("vehicleNumber", vehicleNumber);
+                    intent.putExtra("fare", fare);
+                    intent.putExtra("status", status);
+                    intent.putExtra("tripType", tripType);
+                    intent.putExtra("startDate", startDate);
+                    intent.putExtra("endDate", endDate);
+                    intent.putExtra("pickupTime", pickupTime);
+                    intent.putExtra("dropTime", dropTime);
 
-                intent.putExtra("sourceLat",sourceLat);
-                intent.putExtra("sourceLong",sourceLong);
-                intent.putExtra("destinationLat",destinationLat);
-                intent.putExtra("destinationLong",destinationLong);
-                intent.putExtra("name",name);
-                intent.putExtra("role",  role);
-                intent.putExtra("vehicleName",vehicleName);
-                intent.putExtra("vehicleNumber",vehicleNumber);
-                intent.putExtra("fare",fare);
-                intent.putExtra("status",status);
-                intent.putExtra("tripType",tripType);
-                intent.putExtra("startDate",startDate);
-                intent.putExtra("endDate",endDate);
-                intent.putExtra("pickupTime",pickupTime);
-                intent.putExtra("dropTime",dropTime);
+                    getActivity().startActivity(intent);
 
-                getActivity().startActivity(intent);
-
-            }
-        });
-
+                }
+            });
+        }
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        customerAllTripsActivity = (CustomerAllTripsActivity) getActivity();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+
     }
 
 
@@ -121,11 +125,10 @@ public class UpCommingFragmentForCustomer extends Fragment {
             upcomingRecyclerForCustomer.setLayoutManager(layoutManager);
             upcomingRecyclerForCustomer.setItemAnimator(new DefaultItemAnimator());
             upcomingRecyclerForCustomer.setAdapter(upComingTripAdapterForCustomer);
+        } else {
+            Toast.makeText(customerAllTripsActivity, "No upcoming data for customer !", Toast.LENGTH_SHORT).show();
 
-        } /*else {
-            Toast.makeText(dashBoardActivity, "No upcoming data for customer !", Toast.LENGTH_SHORT).show();
-
-        }*/
+        }
     }
 
 }

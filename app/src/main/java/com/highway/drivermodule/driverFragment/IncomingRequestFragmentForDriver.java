@@ -222,8 +222,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-            savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
 
         ((DashBoardActivity) getActivity()).appBarLayout.setVisibility(View.GONE);

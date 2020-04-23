@@ -1,5 +1,13 @@
 package com.highway.drivermodule.driverActivity;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -23,14 +31,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -80,9 +80,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TripDetailsForDriverActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class CancelTripDetailsByDriverActivity extends AppCompatActivity  implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, TaskLoadedCallback, View.OnClickListener {
+
 
 
     TextView bookingIdCode, totalAmount, payableAmount, lblPaymentType, totalDistance, travelTime, baseFairefixed, distanceFare, peekHourCharges, nightFare,
@@ -133,6 +134,8 @@ public class TripDetailsForDriverActivity extends AppCompatActivity implements O
     NotificationPushData data = new NotificationPushData();
 
     TripStatus tripStatus;
+    String name, role, vehicleName, vehicleNumber, faireChargeVal,
+            status, tripType, tripStartDate, tripEndDate, pickUpTime, dropTime;
 
     BookingHTripResponse bookingHTripResponse;
 
@@ -140,7 +143,8 @@ public class TripDetailsForDriverActivity extends AppCompatActivity implements O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trip_details_for_driver);
+        setContentView(R.layout.activity_cancel_trip_details_by_driver);
+
 
 
         if (getSupportActionBar() != null) {
@@ -149,7 +153,7 @@ public class TripDetailsForDriverActivity extends AppCompatActivity implements O
             getSupportActionBar().setTitle("Trip Details ");
         }
 
-        new FetchURL(TripDetailsForDriverActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+        new FetchURL(this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
 
@@ -234,6 +238,7 @@ public class TripDetailsForDriverActivity extends AppCompatActivity implements O
         getInvoiceForDriver();
 
         getTripDetails(getIntent());
+
     }
 
 
@@ -255,15 +260,16 @@ public class TripDetailsForDriverActivity extends AppCompatActivity implements O
         if (intent != null) {
 
             Bundle bundle = getIntent().getExtras();
+            LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
+                    Double.parseDouble("" + bundle.getString("sourceLong")));
+            LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                    Double.parseDouble("" + bundle.getString("destinationLong")));
 
-            LatLng sourceAddLatLng = new LatLng(Double.parseDouble(bundle.getString("SourceAddLatlog")), Double.parseDouble(bundle.getString("SourceAddLongitude")));
-            LatLng destAddLatLng = new LatLng(Double.parseDouble(bundle.getString("DestAddLatlog")), Double.parseDouble(bundle.getString("DestAddLongitude")));
+            sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
+            sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
 
-            sourceLatitude = Double.parseDouble(bundle.getString("SourceAddLatlog"));
-            sourceLongitude = Double.parseDouble(bundle.getString("SourceAddLongitude"));
-
-            destLatitude = Double.parseDouble(bundle.getString("DestAddLatlog"));
-            destLongitude = Double.parseDouble(bundle.getString("DestAddLongitude"));
+            destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
+            destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
 
             sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
             destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
@@ -274,12 +280,20 @@ public class TripDetailsForDriverActivity extends AppCompatActivity implements O
             markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
             markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
-            userName = bundle.getString("UserName");
+            userName = bundle.getString("name");
+            role = bundle.getString("role");
+            vehicleName = bundle.getString("vehicleName");
+            vehicleNumber = bundle.getString("vehicleNumber");
+            faireChargeVal = bundle.getString("fare");
+            status = bundle.getString("status");
+            tripType = bundle.getString("tripType");
+            tripStartDate = bundle.getString("startDate");
+            tripEndDate = bundle.getString("endDate");
+            pickUpTime = bundle.getString("pickupTime");
+            dropTime = bundle.getString("dropTime");
+
             customerNameTV.setText(userName);
-            fairchare = bundle.getString("Faircharge");
-            payableAmount.setText(fairchare);
-            /*goodsType = bundle.getString("");
-            goodsTypeTV.setText(goodsType);*/
+
 
         }
     }
@@ -552,6 +566,8 @@ public class TripDetailsForDriverActivity extends AppCompatActivity implements O
             currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
         }
     }
+
+
 
 
 }

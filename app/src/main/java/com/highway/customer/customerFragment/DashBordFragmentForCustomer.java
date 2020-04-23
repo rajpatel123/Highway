@@ -16,7 +16,9 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.GetAllTripByUserIdRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.GetAllTripByUserIdResponse;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.customerActivity.CustomerAllTripsActivity;
 import com.highway.customer.customerAdapter.FragmentTabModeAdapterForCustomer;
+import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
@@ -36,7 +38,8 @@ public class DashBordFragmentForCustomer extends Fragment {
     OnGoingFragmentForCustomer onGoingFragmentForCustomer;
     UpCommingFragmentForCustomer upCommingFragmentForCustomer;
     PendingFragmentForCustomer pendingFragmentForCustomer;
-    DashBoardActivity dashBoardActivity;
+   // DashBoardActivity dashBoardActivity;
+    CustomerAllTripsActivity customerAllTripsActivity;
 
     List<Fragment> customerfragmentList = new ArrayList<>();
     private String userId;
@@ -122,7 +125,7 @@ public class DashBordFragmentForCustomer extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        customerAllTripsActivity = (CustomerAllTripsActivity) getActivity();
 
     }
 
@@ -153,36 +156,36 @@ public class DashBordFragmentForCustomer extends Fragment {
                         GetAllTripByUserIdResponse getAllTripByUserIdResponse = response.body();
                         if (getAllTripByUserIdResponse != null) {
                             if (getAllTripByUserIdResponse.getCompletedTrips() != null && getAllTripByUserIdResponse.getCompletedTrips().size() > 0) {
-                                dashBoardActivity.setCompletedTrips(getAllTripByUserIdResponse.getCompletedTrips());
+                                customerAllTripsActivity.setCompletedTrips(getAllTripByUserIdResponse.getCompletedTrips());
                             }
                             if (getAllTripByUserIdResponse.getOngoingTrips() != null && getAllTripByUserIdResponse.getOngoingTrips().size() > 0) {
-                                dashBoardActivity.setOngoingTrips(getAllTripByUserIdResponse.getOngoingTrips());
+                                customerAllTripsActivity.setOngoingTrips(getAllTripByUserIdResponse.getOngoingTrips());
                             }
                             if (getAllTripByUserIdResponse.getUpcomingTrips() != null && getAllTripByUserIdResponse.getUpcomingTrips().size() > 0) {
-                                dashBoardActivity.setUpcomingTrips(getAllTripByUserIdResponse.getUpcomingTrips());
+                                customerAllTripsActivity.setUpcomingTrips(getAllTripByUserIdResponse.getUpcomingTrips());
                             }
                             if (getAllTripByUserIdResponse.getCancelTrips() != null && getAllTripByUserIdResponse.getCancelTrips().size() > 0) {
-                                dashBoardActivity.setCancelTrips(getAllTripByUserIdResponse.getCancelTrips());
+                                customerAllTripsActivity.setCancelTrips(getAllTripByUserIdResponse.getCancelTrips());
                             }
                             updateAllCustomerFragment();
                         }
                     }
                 } else {
-                    Toast.makeText(dashBoardActivity, "response failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(customerAllTripsActivity, "response failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GetAllTripByUserIdResponse> call, Throwable t) {
-                Toast.makeText(dashBoardActivity, "failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(customerAllTripsActivity, "failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void updateAllCustomerFragment() {
-        completedFragmentForCustomer.completedUpdatedTripListForCustomer(dashBoardActivity.getCompletedTrips());
-        onGoingFragmentForCustomer.ongoingUpdatedTripListForCustomer(dashBoardActivity.getOngoingTrips());
-        cancelFragmentForCustomer.cancelUpdatedTripListForCustomer(dashBoardActivity.getCancelTrips());
-        upCommingFragmentForCustomer.upcomingUpdatedTripListForCustomer(dashBoardActivity.getUpcomingTrips());
+        completedFragmentForCustomer.completedUpdatedTripListForCustomer(customerAllTripsActivity.getCompletedTrips());
+        onGoingFragmentForCustomer.ongoingUpdatedTripListForCustomer(customerAllTripsActivity.getOngoingTrips());
+        cancelFragmentForCustomer.cancelUpdatedTripListForCustomer(customerAllTripsActivity.getCancelTrips());
+        upCommingFragmentForCustomer.upcomingUpdatedTripListForCustomer(customerAllTripsActivity.getUpcomingTrips());
     }
 }

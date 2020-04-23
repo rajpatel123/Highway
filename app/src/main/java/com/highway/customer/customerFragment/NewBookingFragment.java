@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,7 +31,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -46,11 +44,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -63,8 +59,6 @@ import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
-import com.highway.customer.helper.LatLngInterpolator;
-import com.highway.customer.helper.MarkerAnimation;
 import com.highway.utils.Utils;
 
 import java.util.Arrays;
@@ -217,7 +211,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                     }
                     if (mMap != null && place.getLatLng() != null) {
 
-
                         LatLng latLng = place.getLatLng();
                         sourceName = place.getName();
                         sourceLatitude = latLng.latitude;
@@ -319,7 +312,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
             layoutParams.setMargins(0, 180, 180, 0);
-
         }
 
         try {
@@ -386,7 +378,6 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
 
         sourceName = Utils.getAddress(mActivity, latLng);
         sourceLatitude = latLng.latitude;
@@ -563,6 +554,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
     }
 
     public void getNearByDriverLocation() {
+        Utils.showProgressDialog(getActivity());
         RestClient.getNearByDriverLocation( new Callback<NearByDriverLocationResponse>() {
             @Override
             public void onResponse(Call<NearByDriverLocationResponse> call, Response<NearByDriverLocationResponse> response) {

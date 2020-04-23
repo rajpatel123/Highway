@@ -94,6 +94,7 @@ import static com.highway.utils.Constants.RECEIVERPHONENO;
 import static com.highway.utils.Constants.TRIP_ACCEPTED;
 import static com.highway.utils.Constants.TRIP_CANCELED;
 import static com.highway.utils.Constants.TRIP_NEW;
+import static com.highway.utils.Constants.UPCOMING;
 import static com.highway.utils.Constants.VEHICLE_NUMBER;
 import static com.highway.utils.Constants.VEHICLE_TYPE;
 
@@ -280,6 +281,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
                     markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
                     markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+
                     performAfterNotification(tripStatus.getCurrentTripStatus());
 
 
@@ -300,7 +302,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        new FetchURL(BookingConformedActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+//        new FetchURL(getApplicationContext()).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
 
@@ -322,8 +324,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         registerReceiver(mySenderBroadCast, intentFilter);
 
-        //tapToReturnUpComing();
-        getLandingfromUpcomming();
+       tapToLandingfromUpcomming(getIntent());
     }
 
 
@@ -823,7 +824,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                 break;
 
             case DROPPED:
-
                 if (tripStatus != null) {
                     driverName.setText("" + tripStatus.getName());
                     vehicleName.setText("" + tripStatus.getBookingTripCode() + " - " + tripStatus.getName());
@@ -839,7 +839,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     }
                 }
 
-
                 finish();
                 break;
 
@@ -854,88 +853,82 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             case INVOICE:
                 break;
 
+
+            case UPCOMING:
+                if (tripStatus != null) {
+
+//                    driverName.setText("" + tripStatus.getName());
+//                    vehicleName.setText("" + tripStatus.getBookingTripCode() + " - " + tripStatus.getName());
+//                    sourceTV.setText("" + tripStatus.getSourceAddress());
+//                    destTV.setText("" + tripStatus.getDestinationAddress());
+
+//                    driverMobile = tripStatus.getMobile();
+                    bookingSearchingLayout.setVisibility(View.GONE);
+                    LLoutPhoneCall.setVisibility(View.VISIBLE);
+                    callActionIV.setVisibility(View.VISIBLE);
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel();
+                    }
+
+                }
+                break;
+
         }
 
     }
 
 
-    public void tapToReturnUpComing() {
 
-        Bundle bundle = getIntent().getExtras();
+    private void tapToLandingfromUpcomming(Intent intent) {
 
-        sourceTV1 = bundle.getString("SourceAddLatlog");
-        destTV1 = bundle.getString("DestAddLatlog");
-        driverName1 = bundle.getString("VehicleName");       // after change////
-        fareValue1 = bundle.getString("GetFairCharge");
-        ///////////////////////////////////////////////////
-        completeDate1 = bundle.getString("CompleteDate");
-        pickUp1 = bundle.getString("PickupTime");
-        dropTime1 = bundle.getString("DropTime");
-        vehicleNumber1 = bundle.getString("VehicleNumber");
+        if (intent!=null) {
 
-        sourceTV.setText(sourceTV1);
-        destTV.setText(destTV1);
-        driverName.setText(driverName1);
-        fareValue.setText(fareValue1);
+            bookingSearchingLayout.setVisibility(View.GONE);
+            LLoutPhoneCall.setVisibility(View.VISIBLE);
+            callActionIV.setVisibility(View.VISIBLE);
+            if (countDownTimer != null) {
+                countDownTimer.cancel();
+            }
 
-     /*   BookingHTripRequest bookingHTripRequest = new BookingHTripRequest();
-        sourceTV.setText(bookingHTripRequest.getSourceAddress());
-        destTV.setText(bookingHTripRequest.getSourceAddress());
-        driverName.setText(bookingHTripRequest.getVehicleTypeId());
-        fareValue.setText(bookingHTripRequest.getTripFare());
+            Bundle bundle = getIntent().getExtras();
 
-        TripStatus tripStatus1 = new TripStatus();
-       // if (bookingHTripResponse  != null && bookingHTripResponse.getStatus ().toString().equalsIgnoreCase("1")) {
+            LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
+                    Double.parseDouble("" + bundle.getString("sourceLong")));
+            LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                    Double.parseDouble("" + bundle.getString("destinationLong")));
 
-        sourceTV.setText(tripStatus1.getSourceAddress());
-        destTV.setText(tripStatus1.getSourceAddress());
-        driverName.setText(tripStatus1.getName());
-        fareValue.setText(tripStatus1.getDropLat());
-        //}*/
+            sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
+            sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
 
-    }
+            destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
+            destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
 
-    private void getLandingfromUpcomming() {
+            sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
+            destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
-        Bundle bundle = getIntent().getExtras();
+            markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
 
-        LatLng sourceAddLatLng = new LatLng(Double.parseDouble(""+bundle.getString("sourceLat")),
-                Double.parseDouble(""+bundle.getString("sourceLong")));
-        LatLng destAddLatLng = new LatLng(Double.parseDouble(""+ bundle.getString("destinationLat")),
-                Double.parseDouble(""+bundle.getString("destinationLong")));
+            markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
-        sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
-        sourceLongitude= Double.parseDouble(bundle.getString("sourceLong"));
+            userName = bundle.getString("name");
+            role = bundle.getString("role");
+            getVehicleName = bundle.getString("vehicleName");
+            vehicleNumber = bundle.getString("vehicleNumber");
+            faireChargeVal = bundle.getString("fare");
+            status = bundle.getString("status");
+            tripType = bundle.getString("tripType");
+            tripStartDate = bundle.getString("startDate");
+            tripEndDate = bundle.getString("endDate");
+            pickUpTime = bundle.getString("pickupTime");
+            dropTime = bundle.getString("dropTime");
 
-        destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
-        destLongitude= Double.parseDouble(bundle.getString("destinationLong"));
-
-        sourceTV.setText(""+ Utils.getAddress(getApplicationContext(),sourceAddLatLng));
-        destTV.setText(""+Utils.getAddress(getApplicationContext(),destAddLatLng));
-
-        markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
-        markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
-
-        markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-        markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
-
-        userName = bundle.getString("name");
-        role = bundle.getString("role");
-        getVehicleName = bundle.getString("vehicleName");
-        vehicleNumber = bundle.getString("vehicleNumber");
-        faireChargeVal = bundle.getString("fare");
-        status = bundle.getString("status");
-        tripType = bundle.getString("tripType");
-        tripStartDate = bundle.getString("startDate");
-        tripEndDate = bundle.getString("endDate");
-        pickUpTime = bundle.getString("pickupTime");
-        dropTime = bundle.getString("dropTime");
-
-        driverName.setText(userName);
-        vehicleName.setText(getVehicleName);
-        fareValue.setText(faireChargeVal);
-
-
+            driverName.setText(userName);
+            vehicleName.setText(getVehicleName);
+            fareValue.setText(faireChargeVal);
+//            driverName.setText("" + tripStatus.getName());
+        }
     }
 
 

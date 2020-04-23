@@ -1,5 +1,6 @@
 package com.highway.customer.customerAdapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
+import com.highway.customer.customerActivity.BookingConformedActivity;
+import com.highway.customer.customerActivity.CompletedTripDetailsForCustomersActivity;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -22,7 +26,7 @@ import java.util.List;
 public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComingTripAdapterForCustomer.ViewHolder> {
     List<UpcomingTrip> upcomingTrips;
     Context context;
-    public UpComingBookTripInterface upComingBookTripInterface;
+    public upComingBookTripInterface upComingBookTripInterface;
 
 
     public UpComingTripAdapterForCustomer(List<UpcomingTrip> upcomingTrips, Context context) {
@@ -35,6 +39,8 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recycler_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
+
+
         return viewHolder;
 
 
@@ -60,61 +66,68 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (upComingBookTripInterface != null) {
-                    upComingBookTripInterface.upComingBookTrip(
+                Toast.makeText(context, "click success 12165", Toast.LENGTH_SHORT).show();
 
-                           /* upcomingTrips.get(position).getSourceLat(), upcomingTrips.get(position).getSourceLong(),
-                            upcomingTrips.get(position).getDestinationLat(), upcomingTrips.get(position).getDestinationLong(),
-                            upcomingTrips.get(position).getName(), upcomingTrips.get(position).getRole(),
-                            upcomingTrips.get(position).getVehicleName(), upcomingTrips.get(position).getVehicleNumber(),
-                            upcomingTrips.get(position).getFare(), upcomingTrips.get(position).getStatus(),
-                            upcomingTrips.get(position).getTripType(), upcomingTrips.get(position).getStartDate(),
-                            upcomingTrips.get(position).getEndDate(), upcomingTrips.get(position).getPickupTime(),
-                            upcomingTrips.get(position).getDropTime()*/
+                Intent intent = new Intent(context, BookingConformedActivity.class);
 
-                    /*upComingBookTripInterface.upComingBookTrip(upcomingTrip.getSourceLat(),
-                            upcomingTrip.getSourceLong(), upcomingTrip.getDestinationLat(),
-                            upcomingTrip.getDestinationLong(), upcomingTrip.getName(),
-                            upcomingTrip.getRole(), upcomingTrip.getVehicleName(),
-                            upcomingTrip.getVehicleNumber(), upcomingTrip.getFare(),
-                            upcomingTrip.getStatus(), upcomingTrip.getTripType(),
-                            upcomingTrip.getStartDate(), upcomingTrip.getEndDate(),
-                            upcomingTrip.getPickupTime(), upcomingTrip.getDropTime()*/
+                intent.putExtra("sourceLat",upcomingTrips.get(holder.getAdapterPosition()).getSourceLat());
+                intent.putExtra("sourceLong",upcomingTrips.get(holder.getAdapterPosition()).getSourceLong());
+                intent.putExtra("destinationLat",upcomingTrips.get(holder.getAdapterPosition()).getDestinationLat());
+                intent.putExtra("destinationLong",upcomingTrips.get(holder.getAdapterPosition()).getDestinationLong());
+                intent.putExtra("name",upcomingTrips.get(holder.getAdapterPosition()).getName());
+                intent.putExtra("role",upcomingTrips.get(holder.getAdapterPosition()).getRole());
+                intent.putExtra("vehicleName",upcomingTrips.get(holder.getAdapterPosition()).getVehicleName());
+                intent.putExtra("vehicleNumber",upcomingTrips.get(holder.getAdapterPosition()).getVehicleNumber());
+                intent.putExtra("fare",upcomingTrips.get(holder.getAdapterPosition()).getFare());
+                intent.putExtra("status",upcomingTrips.get(holder.getAdapterPosition()).getStatus());
+                intent.putExtra("tripType",upcomingTrips.get(holder.getAdapterPosition()).getTripType());
+                intent.putExtra("startDate",upcomingTrips.get(holder.getAdapterPosition()).getStartDate());
+                intent.putExtra("endDate",upcomingTrips.get(holder.getAdapterPosition()).getEndDate());
+                intent.putExtra("pickupTime",upcomingTrips.get(holder.getAdapterPosition()).getPickupTime());
+                intent.putExtra("dropTime",upcomingTrips.get(holder.getAdapterPosition()).getDropTime());
 
-                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLat(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLong(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getDestinationLat(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getDestinationLong(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getName(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getRole(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getVehicleName(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getVehicleNumber(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getFare(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getStatus(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getTripType(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getStartDate(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getEndDate(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getPickupTime(),
-                            upcomingTrips.get(holder.getAdapterPosition()).getDropTime()
+                context.startActivity(intent);
 
-                    );
-
-                }
+//                if (upComingBookTripInterface!= null) {
+//
+//                    upComingBookTripInterface.upComingBookTripClick(
+//                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLat(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLong(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getDestinationLat(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getDestinationLong(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getName(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getRole(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getVehicleName(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getVehicleNumber(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getFare(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getStatus(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getTripType(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getStartDate(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getEndDate(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getPickupTime(),
+//                            upcomingTrips.get(holder.getAdapterPosition()).getDropTime()
+//
+//                    );
+//
+//                } else {
+//                    Toast.makeText(context, "upComingBookTripInterface =" + upComingBookTripInterface, Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
     }
 
-    public void setUpComingBookTripInterface(UpComingBookTripInterface upComingBookTripInterface1) {
-        this.upComingBookTripInterface = upComingBookTripInterface1;
+    public void setUpComingBookTripInterface(UpComingTripAdapterForCustomer.upComingBookTripInterface upComingBookTripInterface) {
+        this.upComingBookTripInterface = upComingBookTripInterface;
     }
 
-    public interface UpComingBookTripInterface {       ///
-        void upComingBookTrip(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-                              String name, String role, String vehicleName, String vehicleNumber, String fare,
-                              String status, String tripType, String startDate, String endDate, String pickupTime,
-                              String dropTime
+    public interface upComingBookTripInterface {
+        void upComingBookTripClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                   String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                   String status, String tripType, String startDate, String endDate, String pickupTime,
+                                   String dropTime
         );
+
     }
 
 

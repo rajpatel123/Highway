@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".drivermodule.driverActivity.CompletedTripDetailsForDriverActivity">
+    tools:context=".drivermodule.driverActivity.CompletedTripDetailsActivityByDriver">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -112,7 +112,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="70"
+                android:layout_weight="65"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -128,6 +128,8 @@
                         android:layout_height="8px"
                         android:layout_gravity="center_horizontal"
                         android:background="@color/darkwhite" />
+
+
                 </LinearLayout>
 
 
@@ -147,51 +149,41 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="@dimen/_10ssp">
 
 
+                            <ImageView
+                                android:id="@+id/Vehicleimg"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:paddingTop="@dimen/_5sdp"
+                                app:srcCompat="@drawable/vehicle" />
+
+
                             <TextView
-                                android:id="@+id/CustomerNameTV"
+                                android:id="@+id/vehicleNameTV"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10dp"
-                                android:text=" Customer Name"
+                                android:layout_marginTop="5dp"
+                                android:text=" Tata Ace - UP 73 BV 8987"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/goodsTypeTV"
+                                android:id="@+id/CustomerNameTV"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10dp"
-                                android:text="Goods Types" />
+                                android:layout_marginTop="5sp"
+                                android:text=" Driver Name"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
                             <!--android:textColor="@color/quantum_grey700"-->
 
-                            <!-- <LinearLayout
-                                android:id="@+id/bookingSearchingLayout"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                tools:visibility="visible"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:orientation="horizontal">
 
-                               <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Booking will get cancelled if not allocated in  "
-                                    android:textColor="@color/red"
-                                    android:textSize="12sp" />
-                                <TextView
-                                    android:id="@+id/bookingInfoForDriverAllocation"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="10:00"
-                                    android:textColor="@color/red" />
-
-                            </LinearLayout>-->
 
                         </LinearLayout>
 
@@ -254,11 +246,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="30">
+                android:layout_weight="35">
 
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:id="@+id/nested_scroll_view"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -297,9 +291,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="-#HIG3196"
+                                android:text="#HIG3196"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="#HIG3196"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -327,9 +321,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="11-March-2020-"
+                                android:text="11-March-2020"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="11-March-2020"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -356,9 +350,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="Start Time"
+                                android:text="Start time"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="Start time"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -385,9 +379,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="11-March-2020"
+                                android:text="11-March-2020"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="11-March-2020"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -414,9 +408,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="End Time"
+                                android:text="End Time"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="End Time"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -641,7 +635,6 @@
                                     android:textSize="@dimen/text_small" />
 
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -669,7 +662,6 @@
                                     android:textSize="@dimen/text_small" />
 
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -768,34 +760,34 @@
                                     android:textSize="@dimen/text_small" />
 
                             </LinearLayout>
-                            <!-- <LinearLayout
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
-                                 <TextView
-                                     android:layout_width="match_parent"
-                                     android:layout_height="wrap_content"
-                                     android:layout_weight="1"
-                                     android:padding="8dp"
-                                     android:singleLine="true"
-                                     android:text="@string/distance_travelled"
-                                     android:textColor="@color/colorPrimaryText"
-                                     android:textSize="@dimen/text_small" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:text="@string/distance_travelled"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
 
-                                 <TextView
-                                     android:id="@+id/outstation_distance_travelled"
-                                     android:layout_width="wrap_content"
-                                     android:layout_height="wrap_content"
-                                     android:gravity="end"
-                                     android:hint="-"
-                                     android:padding="8dp"
-                                     android:singleLine="true"
-                                     android:textColor="@color/colorPrimaryText"
-                                     android:textSize="@dimen/text_small" />
+                                <TextView
+                                    android:id="@+id/outstation_distance_travelled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:hint="-"
+                                    android:padding="8dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textSize="@dimen/text_small" />
 
-                             </LinearLayout>
-     -->
+                            </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -908,9 +900,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="-"
+                                android:text="@string/Rs_basefair"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@string/Rs_basefair"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -937,14 +929,13 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="-"
+                                android:text="@string/Rs_one"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@string/Rs_one"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
                         </LinearLayout>
-
                         <LinearLayout
                             android:id="@+id/discount_layout"
                             android:layout_width="match_parent"
@@ -967,9 +958,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="-"
+                                android:text="@string/Rs_one"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="@string/Rs_one"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -994,14 +985,14 @@
                                 android:id="@+id/payable_amount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/round_label"
                                 android:gravity="end"
                                 android:hint="-"
+                                android:text="Rs. 95"
                                 android:padding="8dp"
+                                android:background="@drawable/round_label"
                                 android:paddingStart="22dp"
                                 android:paddingEnd="22dp"
                                 android:singleLine="true"
-                                android:text="Rs. 95"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/text_small" />
 
@@ -1028,9 +1019,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="-"
+                                android:text="-0.0"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="-0.0"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -1057,9 +1048,9 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="end"
                                 android:hint="-"
+                                android:text="-0.0"
                                 android:padding="8dp"
                                 android:singleLine="true"
-                                android:text="-0.0"
                                 android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_small" />
 
@@ -1142,24 +1133,24 @@
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_vertical"
                                 android:padding="8dp"
+                                tools:text="@string/cash"
                                 android:textAllCaps="true"
                                 android:textColor="@color/colorPrimaryText"
-                                android:textSize="@dimen/text_small"
-                                tools:text="@string/cash" />
+                                android:textSize="@dimen/text_small" />
 
 
                         </LinearLayout>
 
 
-                        <!--  <Button
-                              android:id="@+id/btnConfirmPayment"
-                              android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:layout_margin="8dp"
-                              android:layout_weight="1"
-                              android:background="@color/colorPrimary"
-                              android:text="@string/confirm_payment"
-                              android:textColor="#FFF" />-->
+                       <!-- <Button
+                            android:id="@+id/btnConfirmPayment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="@string/confirm_payment"
+                            android:textColor="#FFF" />-->
 
                     </LinearLayout>
 
@@ -1174,4 +1165,5 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,7 @@
-package com.highway.drivermodule.driverActivity;
+package com.highway.customer.customerActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHigh
 import java.util.ArrayList;
 import java.util.List;
 
-public class DriverAllTripsActivity extends AppCompatActivity {
+public class CustomerAllTripsActivity extends AppCompatActivity {
 
     public List<CompletedTrip> getCompletedTrips() {
         return completedTrips;
@@ -55,29 +54,25 @@ public class DriverAllTripsActivity extends AppCompatActivity {
     private List<UpcomingTrip> upcomingTrips = new ArrayList<>();
     private List<CancelTrip> cancelTrips = new ArrayList<>();
 
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_all_trips);
-
-        toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_customer_all_trips);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            //  getSupportActionBar().setTitle("Select your goods type");
-
+            getSupportActionBar().setTitle("Customer All Trips");
         }
+
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         onBackPressed();
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

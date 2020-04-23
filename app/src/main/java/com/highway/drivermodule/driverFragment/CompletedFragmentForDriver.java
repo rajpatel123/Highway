@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.CompletedTrip;
 import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
-import com.highway.drivermodule.driverActivity.TripDetailsForDriverActivity;
+import com.highway.drivermodule.driverActivity.CompletedTripDetailsForDriverActivity;
 import com.highway.drivermodule.driverAdapter.OnCompletedTripAdapterForDriver;
 
 import java.util.ArrayList;
@@ -62,21 +63,42 @@ public class CompletedFragmentForDriver extends Fragment {
     private void tripDetailforDriver() {
         onCompletedTripAdapterForDriver.setTripDetailListInterface(new OnCompletedTripAdapterForDriver.TripDetailListInterface() {
             @Override
-            public void TripDetailList(String title) {
-                Intent intent = new Intent(getActivity(), TripDetailsForDriverActivity.class);
-               // intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("SourceAddLatlog", completedTrips.get(0).getSourceLat());
-                intent.putExtra("SourceAddLongitude",completedTrips.get(0).getSourceLong());
-                intent.putExtra("DestAddLatlog", completedTrips.get(0).getSourceLat());
-                intent.putExtra("DestAddLongitude", completedTrips.get(0).getDestinationLong());
+            public void TripDetailListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                            String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                            String status, String tripType, String startDate, String endDate, String pickupTime,
+                                            String dropTime) {
 
-                intent.putExtra("CompleteDate", completedTrips.get(0).getEndDate());
-                intent.putExtra("PickupTime", completedTrips.get(0).getPickupTime());
-                intent.putExtra("DropTime", completedTrips.get(0).getDropTime());
-                intent.putExtra("VehicleName", completedTrips.get(0).getVehicleName());
-                intent.putExtra("VehicleNumber", completedTrips.get(0).getVehicleNumber());
-                intent.putExtra("UserName",completedTrips.get(0).getName());
-                intent.putExtra("Faircharge",completedTrips.get(0).getFare());
+                Intent intent = new Intent(getActivity(), CompletedTripDetailsForDriverActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+
+                intent.putExtra("sourceLat", sourceLat);
+                intent.putExtra("sourceLong", sourceLong);
+                intent.putExtra("destinationLat", destinationLat);
+                intent.putExtra("destinationLong", destinationLong);
+                intent.putExtra("name", name);
+                intent.putExtra("role", role);
+                intent.putExtra("vehicleName", vehicleName);
+                intent.putExtra("vehicleNumber", vehicleNumber);
+                intent.putExtra("fare", fare);
+                intent.putExtra("status", status);
+                intent.putExtra("tripType", tripType);
+                intent.putExtra("startDate", startDate);
+                intent.putExtra("endDate", endDate);
+                intent.putExtra("pickupTime", pickupTime);
+                intent.putExtra("dropTime", dropTime);
+
+//                intent.putExtra("SourceAddLatlog", completedTrips.get(0).getSourceLat());
+//                intent.putExtra("SourceAddLongitude",completedTrips.get(0).getSourceLong());
+//                intent.putExtra("DestAddLatlog", completedTrips.get(0).getSourceLat());
+//                intent.putExtra("DestAddLongitude", completedTrips.get(0).getDestinationLong());
+//
+//                intent.putExtra("CompleteDate", completedTrips.get(0).getEndDate());
+//                intent.putExtra("PickupTime", completedTrips.get(0).getPickupTime());
+//                intent.putExtra("DropTime", completedTrips.get(0).getDropTime());
+//                intent.putExtra("VehicleName", completedTrips.get(0).getVehicleName());
+//                intent.putExtra("VehicleNumber", completedTrips.get(0).getVehicleNumber());
+//                intent.putExtra("UserName",completedTrips.get(0).getName());
+//                intent.putExtra("Faircharge",completedTrips.get(0).getFare());
 
                 getActivity().startActivity(intent);
 
@@ -107,7 +129,7 @@ public class CompletedFragmentForDriver extends Fragment {
             completedRecyclerForDriver.setItemAnimator(new DefaultItemAnimator());
             completedRecyclerForDriver.setAdapter(onCompletedTripAdapterForDriver);
         } else {
-          //  Toast.makeText(dashBoardActivity, "Something went wrong for completed trip list for Driver", Toast.LENGTH_SHORT).show();
+            Toast.makeText(dashBoardActivity, "Something went wrong for completed trip list for Driver", Toast.LENGTH_SHORT).show();
 
         }
 

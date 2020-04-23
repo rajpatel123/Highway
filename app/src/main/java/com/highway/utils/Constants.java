@@ -66,6 +66,7 @@ public class Constants {
     public static final String RATING = "RATING";
     public static final String INVOICE = "INVOICE";
     public static final String TRIP_CANCELED = "TRIP_CANCELED";
+    public static final String UPCOMING = "UPCOMING";
 
 
     public static final String DRIVER_NAME = "driver_name";

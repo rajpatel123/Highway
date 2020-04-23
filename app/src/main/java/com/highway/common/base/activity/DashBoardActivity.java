@@ -47,6 +47,7 @@ import com.highway.common.base.firebaseService.MyFirebaseServiceMessaging;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.RegisterForPushModel;
 import com.highway.customer.customerActivity.BookingConformedActivity;
+import com.highway.customer.customerActivity.CustomerAllTripsActivity;
 import com.highway.customer.customerActivity.WebViewActivity;
 import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
@@ -98,7 +99,8 @@ import static com.highway.utils.Constants.RATING;
 import static com.highway.utils.Constants.TRIP_ACCEPTED;
 import static com.highway.utils.Constants.TRIP_NEW;
 
-public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyFirebaseServiceMessaging.OnMessageRecievedFromPush {
+public class DashBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        MyFirebaseServiceMessaging.OnMessageRecievedFromPush {
 
     private AppBarConfiguration mAppBarConfiguration;
     // for Driver
@@ -502,12 +504,15 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
 
                     case "4":
-                        if (dashBoardFragmentForVehicleOwner == null) {
+                        startActivity(new Intent(this, CustomerAllTripsActivity.class));
+                        /*if (dashBoardFragmentForVehicleOwner == null) {
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForVehicleOwner, "");
+                        replaceFragment(dashBoardFragmentForVehicleOwner, "");*/
+//
 //                        dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
 //                        replaceFragment(dashBordFragmentForCustomer);
+
                         break;
 
                     case "5":

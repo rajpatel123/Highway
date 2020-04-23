@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -59,22 +60,28 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
         holder.tv7FairCharge.setText("" + completedTrip.getFare());
 
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (tripDetailListInterface!=null){
-//                    tripDetailListInterface.TripDetailList(completedTrips.get(position).getTripType());
-//                }
-//            }
-//        });
-
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(context, "click success", Toast.LENGTH_SHORT).show();
                 if (tripDetailListInterface!=null){
-                    tripDetailListInterface.TripDetailList(completedTrips.get(position).getTripType());
+                    tripDetailListInterface.TripDetailListClick(
+                            completedTrips.get(holder.getAdapterPosition()).getSourceLat(),
+                            completedTrips.get(holder.getAdapterPosition()).getSourceLong(),
+                            completedTrips.get(holder.getAdapterPosition()).getDestinationLat(),
+                            completedTrips.get(holder.getAdapterPosition()).getDestinationLong(),
+                            completedTrips.get(holder.getAdapterPosition()).getName(),
+                            completedTrips.get(holder.getAdapterPosition()).getRole(),
+                            completedTrips.get(holder.getAdapterPosition()).getVehicleName(),
+                            completedTrips.get(holder.getAdapterPosition()).getVehicleNumber(),
+                            completedTrips.get(holder.getAdapterPosition()).getFare(),
+                            completedTrips.get(holder.getAdapterPosition()).getStatus(),
+                            completedTrips.get(holder.getAdapterPosition()).getTripType(),
+                            completedTrips.get(holder.getAdapterPosition()).getStartDate(),
+                            completedTrips.get(holder.getAdapterPosition()).getEndDate(),
+                            completedTrips.get(holder.getAdapterPosition()).getPickupTime(),
+                            completedTrips.get(holder.getAdapterPosition()).getDropTime()
+                    );
                 }
 
             }
@@ -86,8 +93,11 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
         this.tripDetailListInterface = tripDetailListInterface;
     }
 
-    public interface TripDetailListInterface {       ///
-        public void TripDetailList(String title);
+    public interface TripDetailListInterface {
+         void TripDetailListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                   String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                   String status, String tripType, String startDate, String endDate, String pickupTime,
+                                   String dropTime);
 
 
     }
