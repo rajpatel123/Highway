@@ -276,6 +276,9 @@ public class CancelTripDetailsForCustomerActivity extends AppCompatActivity impl
             vehicleNameTV.setText(vehicleName);
             payAbleAmout.setText(faireChargeVal);
 
+            // As a raugh;
+            driverNameTV.setText("Anand");
+
         }
 
     }
