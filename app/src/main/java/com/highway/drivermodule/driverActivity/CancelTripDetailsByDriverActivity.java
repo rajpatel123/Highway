@@ -157,7 +157,7 @@ public class CancelTripDetailsByDriverActivity extends AppCompatActivity  implem
             getSupportActionBar().setTitle("Trip Details ");
         }
 
-        new FetchURL(this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+       // new FetchURL(this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
 

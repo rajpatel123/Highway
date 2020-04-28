@@ -219,7 +219,7 @@ public class CompletedTripDetailsForDriverActivity extends AppCompatActivity imp
 
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-        new FetchURL(getApplicationContext()).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+//        new FetchURL(getApplicationContext()).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         if (!Places.isInitialized()) {
             Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
@@ -262,42 +262,42 @@ public class CompletedTripDetailsForDriverActivity extends AppCompatActivity imp
     private void getTripDetails(Intent intent) {
         if (intent != null) {
 
-
             Bundle bundle = getIntent().getExtras();
-            LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
-                    Double.parseDouble("" + bundle.getString("sourceLong")));
-            LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
-                    Double.parseDouble("" + bundle.getString("destinationLong")));
+            if (bundle!=null) {
+                LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
+                        Double.parseDouble("" + bundle.getString("sourceLong")));
+                LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                        Double.parseDouble("" + bundle.getString("destinationLong")));
 
-            sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
-            sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
+                sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
+                sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
 
-            destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
-            destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
+                destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
+                destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
 
-            sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
-            destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
+                sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
+                destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
-            markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
-            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+                markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+                markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
 
-            markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+                markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+                markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
-            userName = bundle.getString("name");
-            role = bundle.getString("role");
-            vehicleName = bundle.getString("vehicleName");
-            vehicleNumber = bundle.getString("vehicleNumber");
-            faireChargeVal = bundle.getString("fare");
-            status = bundle.getString("status");
-            tripType = bundle.getString("tripType");
-            tripStartDate = bundle.getString("startDate");
-            tripEndDate = bundle.getString("endDate");
-            pickUpTime = bundle.getString("pickupTime");
-            dropTime = bundle.getString("dropTime");
+                userName = bundle.getString("name");
+                role = bundle.getString("role");
+                vehicleName = bundle.getString("vehicleName");
+                vehicleNumber = bundle.getString("vehicleNumber");
+                faireChargeVal = bundle.getString("fare");
+                status = bundle.getString("status");
+                tripType = bundle.getString("tripType");
+                tripStartDate = bundle.getString("startDate");
+                tripEndDate = bundle.getString("endDate");
+                pickUpTime = bundle.getString("pickupTime");
+                dropTime = bundle.getString("dropTime");
 
-            customerNameTV.setText(userName);
-
+                customerNameTV.setText(userName);
+            }
 
         }
     }
