@@ -1,6 +1,7 @@
 package com.highway.drivermodule.driverAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.CancelTrip;
+import com.highway.customer.customerActivity.CancelTripDetailsForCustomerActivity;
+import com.highway.drivermodule.driverActivity.CancelTripDetailsByDriverActivity;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -62,7 +65,26 @@ public class CancelTripAdapterForDriver extends RecyclerView.Adapter<CancelTripA
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "click success", Toast.LENGTH_SHORT).show();
-                if (cancleTripDetailInterface != null) {
+
+                Intent intent = new Intent(context, CancelTripDetailsByDriverActivity.class);
+                intent.putExtra("sourceLat",cancelTrips.get(holder.getAdapterPosition()).getSourceLat());
+                intent.putExtra("sourceLong",cancelTrips.get(holder.getAdapterPosition()).getSourceLong());
+                intent.putExtra("destinationLat",cancelTrips.get(holder.getAdapterPosition()).getDestinationLat());
+                intent.putExtra("destinationLong",cancelTrips.get(holder.getAdapterPosition()).getDestinationLong());
+                intent.putExtra("name",cancelTrips.get(holder.getAdapterPosition()).getName());
+                intent.putExtra("role",cancelTrips.get(holder.getAdapterPosition()).getRole());
+                intent.putExtra("vehicleName",cancelTrips.get(holder.getAdapterPosition()).getVehicleName());
+                intent.putExtra("vehicleNumber",cancelTrips.get(holder.getAdapterPosition()).getVehicleNumber());
+                intent.putExtra("fare",cancelTrips.get(holder.getAdapterPosition()).getFare());
+                intent.putExtra("status",cancelTrips.get(holder.getAdapterPosition()).getStatus());
+                intent.putExtra("tripType",cancelTrips.get(holder.getAdapterPosition()).getTripType());
+                intent.putExtra("startDate",cancelTrips.get(holder.getAdapterPosition()).getStartDate());
+                intent.putExtra("endDate",cancelTrips.get(holder.getAdapterPosition()).getEndDate());
+                intent.putExtra("pickupTime",cancelTrips.get(holder.getAdapterPosition()).getPickupTime());
+                intent.putExtra("dropTime",cancelTrips.get(holder.getAdapterPosition()).getDropTime());
+                context.startActivity(intent);
+
+               /* if (cancleTripDetailInterface != null) {
                     cancleTripDetailInterface.TripDetailListClick(
                             cancelTrips.get(holder.getAdapterPosition()).getSourceLat(),
                             cancelTrips.get(holder.getAdapterPosition()).getSourceLong(),
@@ -80,7 +102,7 @@ public class CancelTripAdapterForDriver extends RecyclerView.Adapter<CancelTripA
                             cancelTrips.get(holder.getAdapterPosition()).getPickupTime(),
                             cancelTrips.get(holder.getAdapterPosition()).getDropTime()
                     );
-                }
+                }*/
 
             }
         });

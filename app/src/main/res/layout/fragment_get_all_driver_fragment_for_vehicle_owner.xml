@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverFragmentForVehicleOwner">
+    tools:context=".ownerModule.vehicleOwnerfragment.GetAllDriverFragmentForVehicleOwner">
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/getAllDriverListRecy"

@@ -663,6 +663,16 @@ public class BookingWithDetailsActivity extends AppCompatActivity implements OnM
         HighwayApplication.getInstance().getBookingHTripRequest().setUserId(user_Id);
         bookingVehicleListRequest.setUserId(user_Id);
 
+        bookingVehicleListRequest.setStartLat(Double.parseDouble(String.valueOf(sourceLatitude)));
+        bookingVehicleListRequest.setStartLong(Double.parseDouble(String.valueOf(sourceLongitude)));
+        bookingVehicleListRequest.setEndLat(Double.parseDouble(String.valueOf(destLatitude)));
+        bookingVehicleListRequest.setEndLong(Double.parseDouble(String.valueOf(destLongitude)));
+
+        bookingVehicleListRequest.setStartLat(HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat());
+        bookingVehicleListRequest.setStartLong(HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong());
+        bookingVehicleListRequest.setEndLat(HighwayApplication.getInstance().getBookingHTripRequest().getDestLat());
+        bookingVehicleListRequest.setEndLong(HighwayApplication.getInstance().getBookingHTripRequest().getDestLong());
+
         RestClient.getBookingVehicleList(bookingVehicleListRequest, new Callback<BookingVehicleListResponse>() {
             @Override
             public void onResponse(Call<BookingVehicleListResponse> call, Response<BookingVehicleListResponse> response) {

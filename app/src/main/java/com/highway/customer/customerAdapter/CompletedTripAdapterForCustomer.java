@@ -24,7 +24,7 @@ import java.util.List;
 public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<CompletedTripAdapterForCustomer.ViewHolder> {
     Context context;
     List<CompletedTrip> completedTrips;
-   // public CompletedTripDetailsInterface completedTripDetailsInterface;
+  public CompletedTripDetailsInterface completedTripDetailsInterface;
 
 
     public CompletedTripAdapterForCustomer(List<CompletedTrip> completedTrips, Context context) {
@@ -126,16 +126,16 @@ public class CompletedTripAdapterForCustomer extends RecyclerView.Adapter<Comple
 
     }
 
-//    public void setCompletedTripDetailsInterface(CompletedTripDetailsInterface completedTripDetailsInterface1) {
-//        this.completedTripDetailsInterface = completedTripDetailsInterface1;
-//    }
-//
-//    public interface CompletedTripDetailsInterface {       ///
-//        public void tripDetailsListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-//                                    String name, String role, String vehicleName, String vehicleNumber, String fare,
-//                                    String status, String tripType, String startDate, String endDate, String pickupTime,
-//                                    String dropTime);
-//    }
+    public void setCompletedTripDetailsInterface(CompletedTripDetailsInterface completedTripDetailsInterface1) {
+        this.completedTripDetailsInterface = completedTripDetailsInterface1;
+    }
+
+    public interface CompletedTripDetailsInterface {       ///
+        public void tripDetailsListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                    String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                    String status, String tripType, String startDate, String endDate, String pickupTime,
+                                    String dropTime);
+    }
 
 
     @Override

@@ -29,7 +29,7 @@ import java.util.List;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 
-public class UpCommingFragmentForCustomer extends Fragment {
+public class UpCommingFragmentForCustomer extends Fragment /*implements UpComingTripAdapterForCustomer.UpComingBookTripInterface*/ {
 
     private RecyclerView upcomingRecyclerForCustomer;
     //DashBoardActivity dashBoardActivity;
@@ -64,42 +64,44 @@ public class UpCommingFragmentForCustomer extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_customer_up_comming, container, false);
         upcomingRecyclerForCustomer = view.findViewById(R.id.upcomingRecyclerForCustomer);
-       // upcomingTripTracking();
+        //upcomingTripTracking();
         return view;
     }
 
     public void upcomingTripTracking() {
-        if (upComingTripAdapterForCustomer != null) {
-            upComingTripAdapterForCustomer.setUpComingBookTripInterface(new UpComingTripAdapterForCustomer.upComingBookTripInterface() {
-                @Override
-                public void upComingBookTripClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-                                                  String name, String role, String vehicleName, String vehicleNumber, String fare,
-                                                  String status, String tripType, String startDate, String endDate, String pickupTime,
-                                                  String dropTime) {
-                    Toast.makeText(getActivity(), "click success", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), BookingConformedActivity.class);
-                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        if (upcomingTrips != null && upcomingTrips.size() > 0) {
+            if (upComingTripAdapterForCustomer != null) {
+                upComingTripAdapterForCustomer.setUpComingBookTripInterface(new UpComingTripAdapterForCustomer.UpComingBookTripInterface() {
+                    @Override
+                    public void upComingBookTripClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                                      String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                                      String status, String tripType, String startDate, String endDate, String pickupTime,
+                                                      String dropTime) {
+                        Toast.makeText(getActivity(), "click success", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), BookingConformedActivity.class);
+                        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 
-                    intent.putExtra("sourceLat", sourceLat);
-                    intent.putExtra("sourceLong", sourceLong);
-                    intent.putExtra("destinationLat", destinationLat);
-                    intent.putExtra("destinationLong", destinationLong);
-                    intent.putExtra("name", name);
-                    intent.putExtra("role", role);
-                    intent.putExtra("vehicleName", vehicleName);
-                    intent.putExtra("vehicleNumber", vehicleNumber);
-                    intent.putExtra("fare", fare);
-                    intent.putExtra("status", status);
-                    intent.putExtra("tripType", tripType);
-                    intent.putExtra("startDate", startDate);
-                    intent.putExtra("endDate", endDate);
-                    intent.putExtra("pickupTime", pickupTime);
-                    intent.putExtra("dropTime", dropTime);
+                        intent.putExtra("sourceLat", sourceLat);
+                        intent.putExtra("sourceLong", sourceLong);
+                        intent.putExtra("destinationLat", destinationLat);
+                        intent.putExtra("destinationLong", destinationLong);
+                        intent.putExtra("name", name);
+                        intent.putExtra("role", role);
+                        intent.putExtra("vehicleName", vehicleName);
+                        intent.putExtra("vehicleNumber", vehicleNumber);
+                        intent.putExtra("fare", fare);
+                        intent.putExtra("status", status);
+                        intent.putExtra("tripType", tripType);
+                        intent.putExtra("startDate", startDate);
+                        intent.putExtra("endDate", endDate);
+                        intent.putExtra("pickupTime", pickupTime);
+                        intent.putExtra("dropTime", dropTime);
 
-                    getActivity().startActivity(intent);
+                        getActivity().startActivity(intent);
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
 
@@ -131,4 +133,33 @@ public class UpCommingFragmentForCustomer extends Fragment {
         }
     }
 
+  //  @Override
+    public void upComingBookTripClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                      String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                      String status, String tripType, String startDate, String endDate,
+                                      String pickupTime, String dropTime) {
+
+        Toast.makeText(getActivity(), "click success", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), BookingConformedActivity.class);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+
+        intent.putExtra("sourceLat", sourceLat);
+        intent.putExtra("sourceLong", sourceLong);
+        intent.putExtra("destinationLat", destinationLat);
+        intent.putExtra("destinationLong", destinationLong);
+        intent.putExtra("name", name);
+        intent.putExtra("role", role);
+        intent.putExtra("vehicleName", vehicleName);
+        intent.putExtra("vehicleNumber", vehicleNumber);
+        intent.putExtra("fare", fare);
+        intent.putExtra("status", status);
+        intent.putExtra("tripType", tripType);
+        intent.putExtra("startDate", startDate);
+        intent.putExtra("endDate", endDate);
+        intent.putExtra("pickupTime", pickupTime);
+        intent.putExtra("dropTime", dropTime);
+
+        getActivity().startActivity(intent);
+
+    }
 }

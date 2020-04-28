@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverList_Item_fragment">
+    tools:context=".ownerModule.vehicleOwnerfragment.GetAllDriverList_Item_fragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

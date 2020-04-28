@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
+import com.highway.millUserModule.milluserActivity.MillUserAllTripActivity;
 import com.highway.millUserModule.milluserAdapter.UpComingTripAdapterForMillUser;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
 public class UpComingFragmentForMillUser extends Fragment {
     RecyclerView  upComingRecycForMiller;
     DashBoardActivity dashBoardActivity;
+    MillUserAllTripActivity millUserAllTripActivity;
     List<UpcomingTrip>upcomingTrips;
     UpComingTripAdapterForMillUser upComingTripAdapterForMillUser;
 
@@ -60,7 +62,8 @@ public class UpComingFragmentForMillUser extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        //dashBoardActivity = (DashBoardActivity) getActivity();
+        millUserAllTripActivity = (MillUserAllTripActivity) getActivity();
     }
 
     @Override
@@ -77,7 +80,7 @@ public class UpComingFragmentForMillUser extends Fragment {
             upComingRecycForMiller.setItemAnimator(new DefaultItemAnimator());
             upComingRecycForMiller.setAdapter(upComingTripAdapterForMillUser);
         }else{
-            Toast.makeText(dashBoardActivity, "No upcoming trip for miller", Toast.LENGTH_SHORT).show();
+            Toast.makeText(millUserAllTripActivity, "No upcoming trip for miller", Toast.LENGTH_SHORT).show();
         }
     }
 

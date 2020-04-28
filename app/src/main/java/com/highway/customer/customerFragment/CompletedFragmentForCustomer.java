@@ -64,55 +64,55 @@ public class CompletedFragmentForCustomer extends Fragment {
         return view;
     }
 
-//    private void completedTripDetailsForCustomer() {
-//        if (completedTrips != null && completedTrips.size() > 0) {
-//            if (completedTripAdapterForCustomer!=null) {
-//                completedTripAdapterForCustomer.setCompletedTripDetailsInterface(new CompletedTripAdapterForCustomer.CompletedTripDetailsInterface() {
-//                    @Override
-//                    public void tripDetailsListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-//                                                     String name, String role, String vehicleName, String vehicleNumber, String fare,
-//                                                     String status, String tripType, String startDate, String endDate, String pickupTime,
-//                                                     String dropTime) {
-//
-//                        Intent intent = new Intent(getActivity(), CompletedTripDetailsForCustomersActivity.class);
-//                        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-//
-//                        intent.putExtra("sourceLat", sourceLat);
-//                        intent.putExtra("sourceLong", sourceLong);
-//                        intent.putExtra("destinationLat", destinationLat);
-//                        intent.putExtra("destinationLong", destinationLong);
-//                        intent.putExtra("name", name);
-//                        intent.putExtra("role", role);
-//                        intent.putExtra("vehicleName", vehicleName);
-//                        intent.putExtra("vehicleNumber", vehicleNumber);
-//                        intent.putExtra("fare", fare);
-//                        intent.putExtra("status", status);
-//                        intent.putExtra("tripType", tripType);
-//                        intent.putExtra("startDate", startDate);
-//                        intent.putExtra("endDate", endDate);
-//                        intent.putExtra("pickupTime", pickupTime);
-//                        intent.putExtra("dropTime", dropTime);
-//
-//               /* intent.putExtra("SourceAddLatlog", completedTrips.get(0).getSourceLat());
-//                intent.putExtra("SourceAddLongitude",completedTrips.get(0).getSourceLong());
-//                intent.putExtra("DestAddLatlog", completedTrips.get(0).getSourceLat());
-//                intent.putExtra("DestAddLongitude", completedTrips.get(0).getDestinationLong());
-//
-//                intent.putExtra("CompleteDate", completedTrips.get(0).getEndDate());
-//                intent.putExtra("PickupTime", completedTrips.get(0).getPickupTime());
-//                intent.putExtra("DropTime", completedTrips.get(0).getDropTime());
-//                intent.putExtra("VehicleName", completedTrips.get(0).getVehicleName());
-//                intent.putExtra("VehicleNumber", completedTrips.get(0).getVehicleNumber());
-//                intent.putExtra("FairCharge",completedTrips.get(0).getFare());
-//                intent.putExtra("UserName",completedTrips.get(0).getName());*/
-//                      getActivity().startActivity(intent);
-//
-//
-//                    }
-//                });
-//            }
-//        }
-//    }
+    private void completedTripDetailsForCustomer() {
+        if (completedTrips != null && completedTrips.size() > 0) {
+            if (completedTripAdapterForCustomer!=null) {
+                completedTripAdapterForCustomer.setCompletedTripDetailsInterface(new CompletedTripAdapterForCustomer.CompletedTripDetailsInterface() {
+                    @Override
+                    public void tripDetailsListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                                     String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                                     String status, String tripType, String startDate, String endDate, String pickupTime,
+                                                     String dropTime) {
+
+                        Intent intent = new Intent(getActivity(), CompletedTripDetailsForCustomersActivity.class);
+                        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+
+                        intent.putExtra("sourceLat", sourceLat);
+                        intent.putExtra("sourceLong", sourceLong);
+                        intent.putExtra("destinationLat", destinationLat);
+                        intent.putExtra("destinationLong", destinationLong);
+                        intent.putExtra("name", name);
+                        intent.putExtra("role", role);
+                        intent.putExtra("vehicleName", vehicleName);
+                        intent.putExtra("vehicleNumber", vehicleNumber);
+                        intent.putExtra("fare", fare);
+                        intent.putExtra("status", status);
+                        intent.putExtra("tripType", tripType);
+                        intent.putExtra("startDate", startDate);
+                        intent.putExtra("endDate", endDate);
+                        intent.putExtra("pickupTime", pickupTime);
+                        intent.putExtra("dropTime", dropTime);
+
+               /* intent.putExtra("SourceAddLatlog", completedTrips.get(0).getSourceLat());
+                intent.putExtra("SourceAddLongitude",completedTrips.get(0).getSourceLong());
+                intent.putExtra("DestAddLatlog", completedTrips.get(0).getSourceLat());
+                intent.putExtra("DestAddLongitude", completedTrips.get(0).getDestinationLong());
+
+                intent.putExtra("CompleteDate", completedTrips.get(0).getEndDate());
+                intent.putExtra("PickupTime", completedTrips.get(0).getPickupTime());
+                intent.putExtra("DropTime", completedTrips.get(0).getDropTime());
+                intent.putExtra("VehicleName", completedTrips.get(0).getVehicleName());
+                intent.putExtra("VehicleNumber", completedTrips.get(0).getVehicleNumber());
+                intent.putExtra("FairCharge",completedTrips.get(0).getFare());
+                intent.putExtra("UserName",completedTrips.get(0).getName());*/
+                      getActivity().startActivity(intent);
+
+
+                    }
+                });
+            }
+        }
+    }
 
     public void replaceFragment(Fragment fragment, String tag) {
         try {

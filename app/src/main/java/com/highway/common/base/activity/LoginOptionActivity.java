@@ -3,7 +3,6 @@ package com.highway.common.base.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,8 +15,7 @@ import com.highway.R;
 import com.highway.customer.customerActivity.WelcomeActivityForCustomer;
 import com.highway.drivermodule.driverActivity.WelcomeDriverActivity;
 import com.highway.millUserModule.milluserActivity.WelcomeActivityForMiller;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerActivities.WelcomeOwnerActivity;
-import com.highway.utils.Constants;
+import com.highway.ownerModule.vehicleOwnerActivities.WelcomeOwnerActivity;
 import com.highway.utils.HighwayPrefs;
 
 public class LoginOptionActivity extends AppCompatActivity {

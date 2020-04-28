@@ -217,20 +217,20 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
 
 
 //        Intent intent =this.getIntent();
-//        String bookTripIdCode = getIntent().getStringExtra("bookTbripIdCode");
-//        getBookTripIdCode = HighwayPrefs.getString(getApplicationContext(), "bookTripIdCode");
-//        getBookId = HighwayPrefs.getString(getApplicationContext(), "BookingId");
-//        bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
-//
-//        userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
-//        userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERPHONENO);
-//        goodsType = HighwayPrefs.getString(getApplicationContext(), Constants.GOODSTYPES);
-//
+        String bookTripIdCode = getIntent().getStringExtra("bookTbripIdCode");
+        getBookTripIdCode = HighwayPrefs.getString(getApplicationContext(), "bookTripIdCode");
+        getBookId = HighwayPrefs.getString(getApplicationContext(), "BookingId");
+        bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
+
+        userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
+        userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERPHONENO);
+        goodsType = HighwayPrefs.getString(getApplicationContext(), Constants.GOODSTYPES);
+
 //        driverNameTV.setText(userName);
 //        vehicleNameTV.setText(bookVehicleName);
 //        bookingIdCode.setText(bookTripIdCode);
 
-        //new FetchURL(CompletedTripDetailsForCustomersActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+   // new FetchURL(CompletedTripDetailsForCustomersActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
         Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
 

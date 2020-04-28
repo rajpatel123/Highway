@@ -16,6 +16,7 @@ import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.GetAllTripByUserIdRequest;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.GetAllTripByUserIdResponse;
 import com.highway.commonretrofit.RestClient;
+import com.highway.millUserModule.milluserActivity.MillUserAllTripActivity;
 import com.highway.millUserModule.milluserAdapter.FragmentTabModeAdapterForMiller;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -37,6 +38,7 @@ public class DashBoardFragmentForMillUser extends Fragment {
     OnGoingFragmentForMillUser onGoingFragmentForMillUser;
     PendingFragmentForMillUser pendingFragmentForMillUser;
     UpComingFragmentForMillUser upComingFragmentForMillUser;
+    MillUserAllTripActivity millUserAllTripActivity;
 
     List<Fragment>milluserfragmentlist = new ArrayList<>();
     private String userId;
@@ -124,7 +126,8 @@ public class DashBoardFragmentForMillUser extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        //dashBoardActivity = (DashBoardActivity) getActivity();
+        millUserAllTripActivity = (MillUserAllTripActivity) getActivity();
     }
 
     @Override
@@ -153,29 +156,29 @@ public class DashBoardFragmentForMillUser extends Fragment {
                        GetAllTripByUserIdResponse getAllTripByUserIdResponse = response.body();
                        if (getAllTripByUserIdResponse != null) {
                            if (getAllTripByUserIdResponse.getCompletedTrips() != null && getAllTripByUserIdResponse.getCompletedTrips().size() > 0) {
-                               dashBoardActivity.setCompletedTrips(getAllTripByUserIdResponse.getCompletedTrips());
+                               millUserAllTripActivity.setCompletedTrips(getAllTripByUserIdResponse.getCompletedTrips());
                            }
                            if (getAllTripByUserIdResponse.getOngoingTrips() != null && getAllTripByUserIdResponse.getOngoingTrips().size() > 0) {
-                               dashBoardActivity.setOngoingTrips(getAllTripByUserIdResponse.getOngoingTrips());
+                               millUserAllTripActivity.setOngoingTrips(getAllTripByUserIdResponse.getOngoingTrips());
                            }
                            if (getAllTripByUserIdResponse.getUpcomingTrips() != null && getAllTripByUserIdResponse.getUpcomingTrips().size() > 0) {
-                               dashBoardActivity.setUpcomingTrips(getAllTripByUserIdResponse.getUpcomingTrips());
+                               millUserAllTripActivity.setUpcomingTrips(getAllTripByUserIdResponse.getUpcomingTrips());
                            }
                            if (getAllTripByUserIdResponse.getCancelTrips() != null && getAllTripByUserIdResponse.getCancelTrips().size() > 0) {
-                               dashBoardActivity.setCancelTrips(getAllTripByUserIdResponse.getCancelTrips());
+                               millUserAllTripActivity.setCancelTrips(getAllTripByUserIdResponse.getCancelTrips());
                            }
                            updateAllMillerFragment();
                        }
                    }
                } else {
-                   Toast.makeText(dashBoardActivity, "Response failed", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(millUserAllTripActivity, "Response failed", Toast.LENGTH_SHORT).show();
                }
 
            }
 
            @Override
            public void onFailure(Call<GetAllTripByUserIdResponse> call, Throwable t) {
-               Toast.makeText(dashBoardActivity, "failed", Toast.LENGTH_SHORT).show();
+               Toast.makeText(millUserAllTripActivity, "failed", Toast.LENGTH_SHORT).show();
 
            }
        });
@@ -183,10 +186,10 @@ public class DashBoardFragmentForMillUser extends Fragment {
     }
 
     public void updateAllMillerFragment() {
-        completedFragmentForMillUser.millerCompletedUpdatedTripList(dashBoardActivity.getCompletedTrips());
-        onGoingFragmentForMillUser.millerOnGoingdUpdatedTripList(dashBoardActivity.getOngoingTrips());
-        cancelFragmentForMillUser.millerCancleUpdatedTripList(dashBoardActivity.getCancelTrips());
-        upComingFragmentForMillUser.millerUpCOmingUpdatedTripList(dashBoardActivity.getUpcomingTrips());
+        completedFragmentForMillUser.millerCompletedUpdatedTripList(millUserAllTripActivity.getCompletedTrips());
+        onGoingFragmentForMillUser.millerOnGoingdUpdatedTripList(millUserAllTripActivity.getOngoingTrips());
+        cancelFragmentForMillUser.millerCancleUpdatedTripList(millUserAllTripActivity.getCancelTrips());
+        upComingFragmentForMillUser.millerUpCOmingUpdatedTripList(millUserAllTripActivity.getUpcomingTrips());
 
     }
 }

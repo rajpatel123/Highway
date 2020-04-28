@@ -183,9 +183,9 @@ public class DashBordFragmentForCustomer extends Fragment {
     }
 
     public void updateAllCustomerFragment() {
-        completedFragmentForCustomer.completedUpdatedTripListForCustomer(customerAllTripsActivity.getCompletedTrips());
-        onGoingFragmentForCustomer.ongoingUpdatedTripListForCustomer(customerAllTripsActivity.getOngoingTrips());
-        cancelFragmentForCustomer.cancelUpdatedTripListForCustomer(customerAllTripsActivity.getCancelTrips());
         upCommingFragmentForCustomer.upcomingUpdatedTripListForCustomer(customerAllTripsActivity.getUpcomingTrips());
+        onGoingFragmentForCustomer.ongoingUpdatedTripListForCustomer(customerAllTripsActivity.getOngoingTrips());
+        completedFragmentForCustomer.completedUpdatedTripListForCustomer(customerAllTripsActivity.getCompletedTrips());
+        cancelFragmentForCustomer.cancelUpdatedTripListForCustomer(customerAllTripsActivity.getCancelTrips());
     }
 }

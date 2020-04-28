@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/margin_2"
     android:orientation="vertical"
-    tools:context=".ownermodule.vehicleOwner.vehicleOwnerfragment.AddVehicleFragmentForVehicleOwner">
+    tools:context=".ownerModule.vehicleOwnerfragment.AddVehicleFragmentForVehicleOwner">
 
     <LinearLayout
         android:layout_width="match_parent"

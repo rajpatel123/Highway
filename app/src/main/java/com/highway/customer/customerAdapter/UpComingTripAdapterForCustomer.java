@@ -1,5 +1,6 @@
 package com.highway.customer.customerAdapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.UpcomingTrip;
 import com.highway.customer.customerActivity.BookingConformedActivity;
-import com.highway.customer.customerActivity.CompletedTripDetailsForCustomersActivity;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -26,7 +25,7 @@ import java.util.List;
 public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComingTripAdapterForCustomer.ViewHolder> {
     List<UpcomingTrip> upcomingTrips;
     Context context;
-    public upComingBookTripInterface upComingBookTripInterface;
+    UpComingTripAdapterForCustomer.UpComingBookTripInterface upComingBookTripInterface;
 
 
     public UpComingTripAdapterForCustomer(List<UpcomingTrip> upcomingTrips, Context context) {
@@ -85,11 +84,9 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
                 intent.putExtra("endDate",upcomingTrips.get(holder.getAdapterPosition()).getEndDate());
                 intent.putExtra("pickupTime",upcomingTrips.get(holder.getAdapterPosition()).getPickupTime());
                 intent.putExtra("dropTime",upcomingTrips.get(holder.getAdapterPosition()).getDropTime());
-
                 context.startActivity(intent);
 
 //                if (upComingBookTripInterface!= null) {
-//
 //                    upComingBookTripInterface.upComingBookTripClick(
 //                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLat(),
 //                            upcomingTrips.get(holder.getAdapterPosition()).getSourceLong(),
@@ -106,7 +103,6 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
 //                            upcomingTrips.get(holder.getAdapterPosition()).getEndDate(),
 //                            upcomingTrips.get(holder.getAdapterPosition()).getPickupTime(),
 //                            upcomingTrips.get(holder.getAdapterPosition()).getDropTime()
-//
 //                    );
 //
 //                } else {
@@ -117,11 +113,11 @@ public class UpComingTripAdapterForCustomer extends RecyclerView.Adapter<UpComin
 
     }
 
-    public void setUpComingBookTripInterface(UpComingTripAdapterForCustomer.upComingBookTripInterface upComingBookTripInterface) {
+    public void setUpComingBookTripInterface(UpComingBookTripInterface upComingBookTripInterface) {
         this.upComingBookTripInterface = upComingBookTripInterface;
     }
 
-    public interface upComingBookTripInterface {
+    public interface UpComingBookTripInterface {
         void upComingBookTripClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
                                    String name, String role, String vehicleName, String vehicleNumber, String fare,
                                    String status, String tripType, String startDate, String endDate, String pickupTime,

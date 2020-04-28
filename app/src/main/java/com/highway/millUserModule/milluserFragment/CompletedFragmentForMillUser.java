@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.CompletedTrip;
+import com.highway.millUserModule.milluserActivity.MillUserAllTripActivity;
 import com.highway.millUserModule.milluserAdapter.CompletedTripAdapterForMillUser;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class CompletedFragmentForMillUser extends Fragment {
     DashBoardActivity dashBoardActivity;
+    MillUserAllTripActivity millUserAllTripActivity;
     public RecyclerView completedRecycForMiller;
     CompletedTripAdapterForMillUser completedTripAdapterForMillUser;
     DashBoardFragmentForMillUser dashBoardFragmentForMillUser;
@@ -57,7 +59,8 @@ public class CompletedFragmentForMillUser extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+       // dashBoardActivity = (DashBoardActivity) getActivity();
+        millUserAllTripActivity = (MillUserAllTripActivity) getActivity();
     }
 
     @Override
@@ -74,7 +77,7 @@ public class CompletedFragmentForMillUser extends Fragment {
               completedRecycForMiller.setItemAnimator(new DefaultItemAnimator());
             completedRecycForMiller.setAdapter(completedTripAdapterForMillUser);
         } else {
-            Toast.makeText(dashBoardActivity, "No data completed trip for miller ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(millUserAllTripActivity, "No data completed trip for miller ", Toast.LENGTH_SHORT).show();
         }
 
     }

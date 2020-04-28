@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.OngoingTrip;
+import com.highway.millUserModule.milluserActivity.MillUserAllTripActivity;
 import com.highway.millUserModule.milluserAdapter.OnGoingTripAdapterForMiller;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class OnGoingFragmentForMillUser extends Fragment {
     RecyclerView onGoingRecyFormiller;
     DashBoardActivity dashBoardActivity;
     OnGoingTripAdapterForMiller onGoingTripAdapterForMiller;
+    MillUserAllTripActivity millUserAllTripActivity;
 
     public OnGoingFragmentForMillUser() {
         // Required empty public constructor
@@ -57,7 +59,8 @@ public class OnGoingFragmentForMillUser extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+        //dashBoardActivity = (DashBoardActivity) getActivity();
+        millUserAllTripActivity = (MillUserAllTripActivity) getActivity();
 
     }
 
@@ -74,7 +77,7 @@ public class OnGoingFragmentForMillUser extends Fragment {
             onGoingRecyFormiller.setItemAnimator(new DefaultItemAnimator());
             onGoingRecyFormiller.setAdapter(onGoingTripAdapterForMiller);
         }else {
-            Toast.makeText(dashBoardActivity, "No onGoing trip for mill user", Toast.LENGTH_SHORT).show();
+            Toast.makeText(millUserAllTripActivity, "No onGoing trip for mill user", Toast.LENGTH_SHORT).show();
         }
 
     }

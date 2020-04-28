@@ -1,6 +1,7 @@
 package com.highway.drivermodule.driverAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.model.LatLng;
 import com.highway.R;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.CompletedTrip;
+import com.highway.customer.customerActivity.CompletedTripDetailsForCustomersActivity;
 import com.highway.customer.customerAdapter.UpComingTripAdapterForCustomer;
+import com.highway.drivermodule.driverActivity.CompletedTripDetailsForDriverActivity;
 import com.highway.utils.Utils;
 
 import java.util.List;
@@ -25,7 +28,7 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
 
     private List<CompletedTrip> completedTrips;
     private Context context;
-    public TripDetailListInterface tripDetailListInterface;
+    OnCompletedTripAdapterForDriver.TripDetailListInterface tripDetailListInterface;
 
 
     public OnCompletedTripAdapterForDriver(List<CompletedTrip> completedTrips, Context context) {
@@ -64,7 +67,27 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "click success", Toast.LENGTH_SHORT).show();
-                if (tripDetailListInterface!=null){
+                Intent intent = new Intent(context, CompletedTripDetailsForDriverActivity.class);
+
+                intent.putExtra("sourceLat",completedTrips.get(holder.getAdapterPosition()).getSourceLat());
+                intent.putExtra("sourceLong",completedTrips.get(holder.getAdapterPosition()).getSourceLong());
+                intent.putExtra("destinationLat",completedTrips.get(holder.getAdapterPosition()).getDestinationLat());
+                intent.putExtra("destinationLong",completedTrips.get(holder.getAdapterPosition()).getDestinationLong());
+                intent.putExtra("name",completedTrips.get(holder.getAdapterPosition()).getName());
+                intent.putExtra("role",completedTrips.get(holder.getAdapterPosition()).getRole());
+                intent.putExtra("vehicleName",completedTrips.get(holder.getAdapterPosition()).getVehicleName());
+                intent.putExtra("vehicleNumber",completedTrips.get(holder.getAdapterPosition()).getVehicleNumber());
+                intent.putExtra("fare",completedTrips.get(holder.getAdapterPosition()).getFare());
+                intent.putExtra("status",completedTrips.get(holder.getAdapterPosition()).getStatus());
+                intent.putExtra("tripType",completedTrips.get(holder.getAdapterPosition()).getTripType());
+                intent.putExtra("startDate",completedTrips.get(holder.getAdapterPosition()).getStartDate());
+                intent.putExtra("endDate",completedTrips.get(holder.getAdapterPosition()).getEndDate());
+                intent.putExtra("pickupTime",completedTrips.get(holder.getAdapterPosition()).getPickupTime());
+                intent.putExtra("dropTime",completedTrips.get(holder.getAdapterPosition()).getDropTime());
+
+                context.startActivity(intent);
+
+                /*if (tripDetailListInterface!=null){
                     tripDetailListInterface.TripDetailListClick(
                             completedTrips.get(holder.getAdapterPosition()).getSourceLat(),
                             completedTrips.get(holder.getAdapterPosition()).getSourceLong(),
@@ -82,7 +105,7 @@ public class OnCompletedTripAdapterForDriver extends RecyclerView.Adapter<OnComp
                             completedTrips.get(holder.getAdapterPosition()).getPickupTime(),
                             completedTrips.get(holder.getAdapterPosition()).getDropTime()
                     );
-                }
+                }*/
 
             }
         });

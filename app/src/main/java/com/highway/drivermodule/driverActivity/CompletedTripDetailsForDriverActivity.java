@@ -4,15 +4,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +68,7 @@ import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoice;
 import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceReq;
 import com.highway.drivermodule.driverModelClass.driverInvoice.DriverInvoiceResp;
 import com.highway.drivermodule.drivermodels.TripStatus;
+import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 import com.highway.utils.Utils;
@@ -148,26 +152,8 @@ public class CompletedTripDetailsForDriverActivity extends AppCompatActivity imp
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setTitle("Trip Details ");
+            getSupportActionBar().setTitle("Completed Trip Details ");
         }
-
-        new FetchURL(CompletedTripDetailsForDriverActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
-
-        Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-
-        if (!Places.isInitialized()) {
-            Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
-        }
-
-//        IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
-//        registerReceiver(mySenderBroadCast, intentFilter);
-//
-//        Log.e(TAG, BaseUtil.jsonFromModel(pushData));
-//
-//        intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-//        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-//        registerReceiver(mySenderBroadCast, intentFilter);
-
 
         sourceTV = findViewById(R.id.sourceTV);
         destTV = findViewById(R.id.destTV);
@@ -216,8 +202,7 @@ public class CompletedTripDetailsForDriverActivity extends AppCompatActivity imp
         outstationNoOfDays = findViewById(R.id.outstation_no_of_days);
         nestedScrollView = findViewById(R.id.nested_scroll_view);
 
-
-        //Intent intent =getActivity().getIntent();
+       // Intent intent =getActivity().getIntent();
         String bookTripIdCode = getIntent().getStringExtra("bookTbripIdCode");
         bookingIdCode.setText(bookTripIdCode);
 
@@ -231,6 +216,27 @@ public class CompletedTripDetailsForDriverActivity extends AppCompatActivity imp
 
         customerNameTV.setText(userName);
         goodsTypeTV.setText(goodsType);
+
+
+        Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+        new FetchURL(getApplicationContext()).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
+
+        if (!Places.isInitialized()) {
+            Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
+
+        }
+
+
+        IntentFilter intentFilter = new IntentFilter("com.highway.customer.customerActivity.ACTION_SEND");
+        registerReceiver(mySenderBroadCast, intentFilter);
+
+        Log.e(TAG, BaseUtil.jsonFromModel(pushData));
+
+        intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        registerReceiver(mySenderBroadCast, intentFilter);
+
+
 
         tripdate();
         getInvoiceForDriver();
@@ -255,6 +261,7 @@ public class CompletedTripDetailsForDriverActivity extends AppCompatActivity imp
 
     private void getTripDetails(Intent intent) {
         if (intent != null) {
+
 
             Bundle bundle = getIntent().getExtras();
             LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),

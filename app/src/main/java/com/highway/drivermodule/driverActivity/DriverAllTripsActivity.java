@@ -62,12 +62,12 @@ public class DriverAllTripsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_all_trips);
 
-        toolbar = findViewById(R.id.toolbar);
+       // toolbar = findViewById(R.id.toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            //  getSupportActionBar().setTitle("Select your goods type");
+            getSupportActionBar().setTitle("Driver all trips");
 
         }
     }

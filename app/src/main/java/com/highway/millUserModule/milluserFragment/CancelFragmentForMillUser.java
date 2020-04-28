@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.highway.R;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.customerDiverOwnerModelsClass.allHighwayTripModel.userTrip.CancelTrip;
+import com.highway.millUserModule.milluserActivity.MillUserAllTripActivity;
 import com.highway.millUserModule.milluserAdapter.CancleTripAdapterForMillerUser;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 public class CancelFragmentForMillUser extends Fragment {
     RecyclerView canRecycForMiller;
     DashBoardActivity dashBoardActivity;
+    MillUserAllTripActivity millUserAllTripActivity;
     List<CancelTrip>cancelTrips = new ArrayList<>();
     CancleTripAdapterForMillerUser cancleTripAdapterForMillerUser;
 
@@ -60,7 +62,8 @@ public class CancelFragmentForMillUser extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        dashBoardActivity = (DashBoardActivity) getActivity();
+      //  dashBoardActivity = (DashBoardActivity) getActivity();
+        millUserAllTripActivity = (MillUserAllTripActivity) getActivity();
     }
 
     @Override
@@ -76,7 +79,7 @@ public class CancelFragmentForMillUser extends Fragment {
             canRecycForMiller.setItemAnimator(new DefaultItemAnimator());
             canRecycForMiller.setAdapter(cancleTripAdapterForMillerUser);
         }else{
-            Toast.makeText(dashBoardActivity, "No data for cencle trip for miller ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(millUserAllTripActivity, "No data for cencle trip for miller ", Toast.LENGTH_SHORT).show();
         }
     }
 

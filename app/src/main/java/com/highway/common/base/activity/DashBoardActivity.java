@@ -53,9 +53,7 @@ import com.highway.customer.customerFragment.DashBordFragmentForCustomer;
 import com.highway.customer.customerFragment.InvoiceBottomDialogFragmentForCustomer;
 import com.highway.customer.customerFragment.NewBookingFragment;
 import com.highway.customer.customerFragment.RatingBottomDialogFragmentForCustomer;
-import com.highway.customer.customerModelClass.customerCurrentTripStatus.CustomerTripStatus;
 import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusReq;
-import com.highway.customer.customerModelClass.customerCurrentTripStatus.GetCustomerCurrentTripStatusResp;
 import com.highway.drivermodule.driverActivity.DriverAllTripsActivity;
 import com.highway.drivermodule.driverFragment.DashBoardFragmentForDriver;
 import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
@@ -65,14 +63,16 @@ import com.highway.drivermodule.driverFragment.RatingBottomDialogFragmentForDriv
 import com.highway.drivermodule.drivermodels.DriverDetailRequest;
 import com.highway.drivermodule.drivermodels.DriverDetails;
 import com.highway.drivermodule.drivermodels.TripStatus;
+import com.highway.millUserModule.milluserActivity.MillUserAllTripActivity;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.AddVehicleFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.Assign_D2V_FragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllDriverFragmentForVehicleOwner;
-import com.highway.ownermodule.vehicleOwner.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
+import com.highway.ownerModule.vehicleOwnerActivities.OwnerAllTripActivity;
+import com.highway.ownerModule.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
+import com.highway.ownerModule.vehicleOwnerfragment.AddVehicleFragmentForVehicleOwner;
+import com.highway.ownerModule.vehicleOwnerfragment.Assign_D2V_FragmentForVehicleOwner;
+import com.highway.ownerModule.vehicleOwnerfragment.DashBoardFragmentForVehicleOwner;
+import com.highway.ownerModule.vehicleOwnerfragment.GetAllDriverFragmentForVehicleOwner;
+import com.highway.ownerModule.vehicleOwnerfragment.GetAllVehicleFragmentForVehicleOwner;
 import com.highway.utils.BaseUtil;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -493,10 +493,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         replaceFragment(fragment);*/
                         break;
                     case "2":
-                        if (dashBoardFragmentForMillUser == null) {
+                        startActivity(new Intent(this, MillUserAllTripActivity.class));
+
+                       /* if (dashBoardFragmentForMillUser == null) {
                             dashBoardFragmentForMillUser = DashBoardFragmentForMillUser.newInstance();
                         }
-                        replaceFragment(dashBoardFragmentForMillUser, "");
+                        replaceFragment(dashBoardFragmentForMillUser, "");*/
                         break;
 
                     case "3":
@@ -516,11 +518,13 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
 
                     case "5":
-                        if (dashBoardFragmentForVehicleOwner == null) {
+                       startActivity(new Intent(this, OwnerAllTripActivity.class));
+
+                        /*if (dashBoardFragmentForVehicleOwner == null) {
                             dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                         }
                         replaceFragment(dashBoardFragmentForVehicleOwner, "");
-
+*/
                         break;
                 }
                 break;

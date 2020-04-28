@@ -56,36 +56,38 @@ public class CompletedFragmentForDriver extends Fragment {
         View view = inflater.inflate(R.layout.fragment_driver_completed, container, false);
         completedRecyclerForDriver = view.findViewById(R.id.CompletedRecyclerForDriver);
 
-        tripDetailforDriver();
+       // tripDetailforDriver();
         return view;
     }
 
     private void tripDetailforDriver() {
-        onCompletedTripAdapterForDriver.setTripDetailListInterface(new OnCompletedTripAdapterForDriver.TripDetailListInterface() {
-            @Override
-            public void TripDetailListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-                                            String name, String role, String vehicleName, String vehicleNumber, String fare,
-                                            String status, String tripType, String startDate, String endDate, String pickupTime,
-                                            String dropTime) {
+        if (completedTrips != null && completedTrips.size() > 0) {
+            if (onCompletedTripAdapterForDriver != null) {
+                onCompletedTripAdapterForDriver.setTripDetailListInterface(new OnCompletedTripAdapterForDriver.TripDetailListInterface() {
+                    @Override
+                    public void TripDetailListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                                    String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                                    String status, String tripType, String startDate, String endDate, String pickupTime,
+                                                    String dropTime) {
 
-                Intent intent = new Intent(getActivity(), CompletedTripDetailsForDriverActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                        Intent intent = new Intent(getActivity(), CompletedTripDetailsForDriverActivity.class);
+                        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 
-                intent.putExtra("sourceLat", sourceLat);
-                intent.putExtra("sourceLong", sourceLong);
-                intent.putExtra("destinationLat", destinationLat);
-                intent.putExtra("destinationLong", destinationLong);
-                intent.putExtra("name", name);
-                intent.putExtra("role", role);
-                intent.putExtra("vehicleName", vehicleName);
-                intent.putExtra("vehicleNumber", vehicleNumber);
-                intent.putExtra("fare", fare);
-                intent.putExtra("status", status);
-                intent.putExtra("tripType", tripType);
-                intent.putExtra("startDate", startDate);
-                intent.putExtra("endDate", endDate);
-                intent.putExtra("pickupTime", pickupTime);
-                intent.putExtra("dropTime", dropTime);
+                        intent.putExtra("sourceLat", sourceLat);
+                        intent.putExtra("sourceLong", sourceLong);
+                        intent.putExtra("destinationLat", destinationLat);
+                        intent.putExtra("destinationLong", destinationLong);
+                        intent.putExtra("name", name);
+                        intent.putExtra("role", role);
+                        intent.putExtra("vehicleName", vehicleName);
+                        intent.putExtra("vehicleNumber", vehicleNumber);
+                        intent.putExtra("fare", fare);
+                        intent.putExtra("status", status);
+                        intent.putExtra("tripType", tripType);
+                        intent.putExtra("startDate", startDate);
+                        intent.putExtra("endDate", endDate);
+                        intent.putExtra("pickupTime", pickupTime);
+                        intent.putExtra("dropTime", dropTime);
 
 //                intent.putExtra("SourceAddLatlog", completedTrips.get(0).getSourceLat());
 //                intent.putExtra("SourceAddLongitude",completedTrips.get(0).getSourceLong());
@@ -100,12 +102,13 @@ public class CompletedFragmentForDriver extends Fragment {
 //                intent.putExtra("UserName",completedTrips.get(0).getName());
 //                intent.putExtra("Faircharge",completedTrips.get(0).getFare());
 
-                getActivity().startActivity(intent);
+                        getActivity().startActivity(intent);
 
 
-
+                    }
+                });
             }
-        });
+        }
     }
 
 

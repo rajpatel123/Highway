@@ -56,43 +56,46 @@ public class CancelFragmentForDriver extends Fragment {
         View view = inflater.inflate(R.layout.fragment_driver_cancel, container ,false);
         recyclerViewForDriver = view.findViewById(R.id.CancelRecyclerForDriver);
 
-        cancelTripDetails();
+        //cancelTripDetails();
         return view;
     }
 
     private void cancelTripDetails() {
-        cancelTripAdapterForDriver.setTripDetailListInterface(new CancelTripAdapterForDriver.CancleTripDetailInterface() {
-            @Override
-            public void TripDetailListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
-                                            String name, String role, String vehicleName, String vehicleNumber, String fare,
-                                            String status, String tripType, String startDate, String endDate, String pickupTime,
-                                            String dropTime) {
+        if (cancelTrips != null && cancelTrips.size() > 0) {
+            if (cancelTripAdapterForDriver != null) {
+                cancelTripAdapterForDriver.setTripDetailListInterface(new CancelTripAdapterForDriver.CancleTripDetailInterface() {
+                    @Override
+                    public void TripDetailListClick(String sourceLat, String sourceLong, String destinationLat, String destinationLong,
+                                                    String name, String role, String vehicleName, String vehicleNumber, String fare,
+                                                    String status, String tripType, String startDate, String endDate, String pickupTime,
+                                                    String dropTime) {
 
-                Intent intent = new Intent(getActivity(), CancelTripDetailsByDriverActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                        Intent intent = new Intent(getActivity(), CancelTripDetailsByDriverActivity.class);
+                        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
 
-                intent.putExtra("sourceLat", sourceLat);
-                intent.putExtra("sourceLong", sourceLong);
-                intent.putExtra("destinationLat", destinationLat);
-                intent.putExtra("destinationLong", destinationLong);
-                intent.putExtra("name", name);
-                intent.putExtra("role", role);
-                intent.putExtra("vehicleName", vehicleName);
-                intent.putExtra("vehicleNumber", vehicleNumber);
-                intent.putExtra("fare", fare);
-                intent.putExtra("status", status);
-                intent.putExtra("tripType", tripType);
-                intent.putExtra("startDate", startDate);
-                intent.putExtra("endDate", endDate);
-                intent.putExtra("pickupTime", pickupTime);
-                intent.putExtra("dropTime", dropTime);
+                        intent.putExtra("sourceLat", sourceLat);
+                        intent.putExtra("sourceLong", sourceLong);
+                        intent.putExtra("destinationLat", destinationLat);
+                        intent.putExtra("destinationLong", destinationLong);
+                        intent.putExtra("name", name);
+                        intent.putExtra("role", role);
+                        intent.putExtra("vehicleName", vehicleName);
+                        intent.putExtra("vehicleNumber", vehicleNumber);
+                        intent.putExtra("fare", fare);
+                        intent.putExtra("status", status);
+                        intent.putExtra("tripType", tripType);
+                        intent.putExtra("startDate", startDate);
+                        intent.putExtra("endDate", endDate);
+                        intent.putExtra("pickupTime", pickupTime);
+                        intent.putExtra("dropTime", dropTime);
 
-                getActivity().startActivity(intent);
+                        getActivity().startActivity(intent);
 
 
-
+                    }
+                });
             }
-        });
+        }
     }
 
     @Override

@@ -346,7 +346,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 goingtoPickupLocationView.setVisibility(View.VISIBLE);
                 btnArrived.setVisibility(View.GONE);
                 btnpickedUp.setVisibility(View.VISIBLE);
-                lblLocationType.setText("Drop Location");
+                lblLocationType.setText("Pick Up Location");
                 lblLocationType.setVisibility(View.VISIBLE);
 
                 statusArrivedImg.setColorFilter(ContextCompat.getColor(context, R.color.black_disabled),
