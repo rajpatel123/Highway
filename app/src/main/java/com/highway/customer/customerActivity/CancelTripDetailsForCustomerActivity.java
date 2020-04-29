@@ -308,7 +308,6 @@ public class CancelTripDetailsForCustomerActivity extends AppCompatActivity impl
     }
 
     private void invoiceForCustomer(CustomerInvoice customerInvoice) {
-
         bookingId.setText(""+customerInvoice.getBookingTripCode());
         startDate.setText(""+customerInvoice.getStartDate());
         endDate.setText(""+customerInvoice.getEndDate());
@@ -316,15 +315,14 @@ public class CancelTripDetailsForCustomerActivity extends AppCompatActivity impl
         end_time.setText(" "+customerInvoice.getEndTime());
         distance.setText(""+customerInvoice.getTotDistance());
         travelTime.setText(""+customerInvoice.getTravelTime());
-        bookingId.setText(""+customerInvoice.getBasedFarefixed());
-        bookingId.setText(""+customerInvoice.getDistancePrice());
+        fixed.setText(""+customerInvoice.getBasedFarefixed());
+        distancePrice.setText(""+customerInvoice.getDistancePrice());
         peekHourCharges.setText(""+customerInvoice.getPeekHourCharges());
         nightFare.setText(""+customerInvoice.getNightFare());
         tax.setText(""+customerInvoice.getTax());
         totalAmount.setText(""+customerInvoice.getTotalAmount());
         discount.setText(""+customerInvoice.getDiscount());
         payAbleAmout.setText(""+customerInvoice.getPaymentMode());
-
     }
 
     void tripdate() {

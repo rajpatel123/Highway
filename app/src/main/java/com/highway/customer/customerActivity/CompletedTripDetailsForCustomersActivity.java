@@ -33,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -53,6 +54,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
 import com.highway.R;
+import com.highway.broadCastReceiver.MyIntentService;
 import com.highway.broadCastReceiver.MySenderBroadCast;
 import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
@@ -215,20 +217,9 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         outstationRoundSingle = findViewById(R.id.outstation_round_single);
         outstationNoOfDays = findViewById(R.id.outstation_no_of_days);
 
-
-//        Intent intent =this.getIntent();
-        String bookTripIdCode = getIntent().getStringExtra("bookTbripIdCode");
-        getBookTripIdCode = HighwayPrefs.getString(getApplicationContext(), "bookTripIdCode");
-        getBookId = HighwayPrefs.getString(getApplicationContext(), "BookingId");
-        bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
-
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERPHONENO);
         goodsType = HighwayPrefs.getString(getApplicationContext(), Constants.GOODSTYPES);
-
-//        driverNameTV.setText(userName);
-//        vehicleNameTV.setText(bookVehicleName);
-//        bookingIdCode.setText(bookTripIdCode);
 
    // new FetchURL(CompletedTripDetailsForCustomersActivity.this).execute(getUrl(markerOptions1.getPosition(), markerOptions2.getPosition(), "driving"), "driving");
 
@@ -237,10 +228,10 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         if (!Places.isInitialized()) {
             Places.initialize(this, "AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U");
         }
-
         tripdate();
         getCompletedTripDetailForCustomer(getIntent());
         getInvoiceForCustomer();
+
 
     }
 
@@ -256,13 +247,29 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
 
             sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
             sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
-
             destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
             destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
-
             sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
             destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
+            ////////////////////
+//            destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
+//            sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
+//            sourceTV.setText("" + sourceName);
+//            destTV.setText("" + destName);
+//            destLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLat();
+//            destLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLong();
+//            sourceLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat();
+//            sourceLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong();
+//
+//            destName = tripStatus.getDestinationAddress();
+//            sourceName = tripStatus.getSourceAddress();
+//            destLatitude = Double.parseDouble(tripStatus.getDropLat());
+//            destLongitude = Double.parseDouble(tripStatus.getDropLong());
+//            sourceLatitude = Double.parseDouble(tripStatus.getSourceLat());
+//            sourceLongitude = Double.parseDouble(tripStatus.getSourceLong());
+
+            ///////////////////
             markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
             markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
 
@@ -323,8 +330,8 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         end_time.setText(" " + customerInvoice.getEndTime());
         distance.setText("" + customerInvoice.getTotDistance());
         travelTime.setText("" + customerInvoice.getTravelTime());
-        bookingId.setText("" + customerInvoice.getBasedFarefixed());
-        bookingId.setText("" + customerInvoice.getDistancePrice());
+        fixed.setText("" + customerInvoice.getBasedFarefixed());
+        distancePrice.setText("" + customerInvoice.getDistancePrice());
         peekHourCharges.setText("" + customerInvoice.getPeekHourCharges());
         nightFare.setText("" + customerInvoice.getNightFare());
         tax.setText("" + customerInvoice.getTax());
@@ -333,6 +340,9 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         payAbleAmout.setText("" + customerInvoice.getPaymentMode());
 
     }
+
+
+
 
     void tripdate() {
         final Calendar c = Calendar.getInstance();
@@ -346,6 +356,36 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd, yyyy h:mm a");
         String dateString = sdf.format(date);
         endDate.setText(dateString);
+    }
+
+    // USING BROAD CAST RECEIVER
+    public void broadCastMessage(View view) {
+        Intent serviceIntent = new Intent(this, MyIntentService.class);
+        serviceIntent.putExtra("key", "Inital Value");
+        startService(serviceIntent);
+    }
+
+    // USING BROAD CAST RECEIVER --- registered
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        IntentFilter intentFilter = new IntentFilter(MyIntentService.MY_SERVICE_INTENT);
+//        LocalBroadcastManager.getInstance(getApplicationContext())
+//                .registerReceiver(mReceiver,intentFilter);
+//    }
+//// USING BROAD CAST RECEIVER --- Unregistered
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        LocalBroadcastManager.getInstance(getApplicationContext())
+//                .unregisterReceiver(mReceiver);
+//    }
+//
+//// USING BROAD CAST RECEIVER --- Unregistered
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mySenderBroadCast);
     }
 
     @Override
@@ -384,20 +424,6 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
     public boolean onContextItemSelected(MenuItem item) {
         onBackPressed();
         return super.onContextItemSelected(item);
-    }
-
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        }
     }
 
     public Bitmap createCustomMarker(@DrawableRes int resource) {
@@ -486,34 +512,32 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.mylocation:          // for location
-                updateMyLocation();
-                break;
+    public void onConnected(@Nullable Bundle bundle) {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
+    }
+    @Override
+    public void onConnectionSuspended(int i) {
 
     }
 
-    private void updateMyLocation() {
-        if (mLastLocation == null) {
-            return;
-        }
-        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
     }
 
+    ///**********************
 
     @Override
     public void onLocationChanged(Location location) {
+
         mLastLocation = location;
         updateMyLocation();
 
@@ -532,15 +556,34 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
-
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-    }
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        if (mGoogleApiClient == null) {
+                            buildGoogleApiClient();
+                        }
+                    }
+
+                } else {
+
+                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+
+        }
     }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
@@ -560,12 +603,42 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
     }
 
     @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.mylocation:          // for location
+                updateMyLocation();
+                break;
+        }
+    }
+
+    private void updateMyLocation() {
+        if (mLastLocation == null) {
+            return;
+        }
+        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
+    }
+
+
+
+    @Override
     public void onTaskDone(Object... values) {
         if (currentPolyline != null) {
             currentPolyline.remove();
             currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
         }
     }
+
+
 
 
 }

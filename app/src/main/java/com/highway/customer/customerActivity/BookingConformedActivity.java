@@ -168,10 +168,11 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private String pickUp1;
     private String dropTime1;
     private String vehicleNumber1;
+    LatLng sourceAddLatLng, destAddLatLng;
 
-    String name, role,getVehicleName, vehicleNumber, faireChargeVal,
+    String name, role, getVehicleName, vehicleNumber, faireChargeVal,
             status, tripType, tripStartDate, tripEndDate, pickUpTime, dropTime;
-   // private Object FetchURL;
+    // private Object FetchURL;
 
 
     public static void start(ConformBookingActivity activity,
@@ -273,7 +274,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
                     sourceLatitude = Double.parseDouble(tripStatus.getSourceLat());
                     sourceLongitude = Double.parseDouble(tripStatus.getSourceLong());
 
-
                     sourceTV.setText("" + sourceName);
                     destTV.setText("" + destName);
 
@@ -315,7 +315,6 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         registerReceiver(mySenderBroadCast, intentFilter);
 
 
-
         Log.e(TAG, BaseUtil.jsonFromModel(pushData));
 
         intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -325,10 +324,8 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         clicklistener();
         bookingTimer();
 
-        tapToLandingfromUpcomming(getIntent());
+        tapToLandingFromUpcoming(getIntent());
     }
-
-
 
 
     // USING BROAD CAST RECEIVER
@@ -867,10 +864,9 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     }
 
 
+    private void tapToLandingFromUpcoming(Intent intent) {
 
-    private void tapToLandingfromUpcomming(Intent intent) {
-
-        if (intent!=null) {
+        if (intent != null) {
 
             bookingSearchingLayout.setVisibility(View.GONE);
             LLoutPhoneCall.setVisibility(View.VISIBLE);
@@ -880,44 +876,60 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             }
 
             Bundle bundle = getIntent().getExtras();
-               if (bundle!=null) {
-                   LatLng sourceAddLatLng = new LatLng(Double.parseDouble(bundle.getString("sourceLat")),
-                           Double.parseDouble(bundle.getString("sourceLong")));
-                   LatLng destAddLatLng = new LatLng(Double.parseDouble(bundle.getString("destinationLat")),
-                           Double.parseDouble(bundle.getString("destinationLong")));
+            if (bundle != null) {
+                   /*try {
+                       sourceAddLatLng = new LatLng(Double.parseDouble(""+ bundle.getString("sourceLat")),
+                               Double.parseDouble(""+ bundle.getString("sourceLong")));
+                   } catch (NumberFormatException e) {
+                       sourceAddLatLng = null;
+                   }
 
-                   sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
-                   sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
+                   try {
+                       sourceAddLatLng = new LatLng(Double.parseDouble(""+ bundle.getString("sourceLat")),
+                               Double.parseDouble(""+ bundle.getString("sourceLong")));
+                   } catch (NumberFormatException e) {
+                       sourceAddLatLng = null;
+                   }*/
+                if (sourceAddLatLng != null){
+                    sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
+                            Double.parseDouble("" + bundle.getString("sourceLong")));
 
-                   destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
-                   destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
+                }
+                              destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                        Double.parseDouble("" + bundle.getString("destinationLong")));
 
-                   sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
-                   destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
+                sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
+                sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
 
-                   markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
-                   markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+                destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
+                destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
 
-                   markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-                   markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+                sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
+                destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
-                   userName = bundle.getString("name");
-                   role = bundle.getString("role");
-                   getVehicleName = bundle.getString("vehicleName");
-                   vehicleNumber = bundle.getString("vehicleNumber");
-                   faireChargeVal = bundle.getString("fare");
-                   status = bundle.getString("status");
-                   tripType = bundle.getString("tripType");
-                   tripStartDate = bundle.getString("startDate");
-                   tripEndDate = bundle.getString("endDate");
-                   pickUpTime = bundle.getString("pickupTime");
-                   dropTime = bundle.getString("dropTime");
+                markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+                markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
 
-                   driverName.setText(userName);
-                   vehicleName.setText(getVehicleName);
-                   fareValue.setText(faireChargeVal);
+                markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+                markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+
+                userName = bundle.getString("name");
+                role = bundle.getString("role");
+                getVehicleName = bundle.getString("vehicleName");
+                vehicleNumber = bundle.getString("vehicleNumber");
+                faireChargeVal = bundle.getString("fare");
+                status = bundle.getString("status");
+                tripType = bundle.getString("tripType");
+                tripStartDate = bundle.getString("startDate");
+                tripEndDate = bundle.getString("endDate");
+                pickUpTime = bundle.getString("pickupTime");
+                dropTime = bundle.getString("dropTime");
+
+                driverName.setText(userName);
+                vehicleName.setText(getVehicleName);
+                fareValue.setText(faireChargeVal);
 //            driverName.setText("" + tripStatus.getName());
-               }
+            }
         }
     }
 

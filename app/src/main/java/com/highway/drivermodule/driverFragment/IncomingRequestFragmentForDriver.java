@@ -2,9 +2,11 @@ package com.highway.drivermodule.driverFragment;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -15,6 +17,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,8 +55,11 @@ import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.firebaseService.NotificationPushData;
 import com.highway.commonretrofit.RestClient;
+import com.highway.drivermodule.driverActivity.LocationTrack;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectData;
 import com.highway.drivermodule.driverModelClass.BookingAcceptRejectResponse;
+import com.highway.drivermodule.driverModelClass.update_driver_location.UpdateDriverLocationReqst;
+import com.highway.drivermodule.driverModelClass.update_driver_location.UpdateDriverLocationResp;
 import com.highway.drivermodule.drivermodels.TripStatus;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverResp;
@@ -65,12 +71,16 @@ import com.highway.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.highway.utils.Constants.ARRIVED;
 import static com.highway.utils.Constants.COMPLETED;
 import static com.highway.utils.Constants.DROPPED;
@@ -146,6 +156,18 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
     Context thisContext;
     String mobileNo;
 
+    private ArrayList<String> permissionsToRequest;
+    private ArrayList<String> permissionsRejected = new ArrayList<>();
+    private ArrayList<String> permissions = new ArrayList<>();
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    public LocationTrack locationTrack;
+
+    public int TIMECOUNT = 10000;
+    public boolean ISTRAVERSING = true;
+    public double longitude,latitude;
+    Handler handler = new Handler();
+
+
     MySenderBroadCast mySenderBroadCast = new MySenderBroadCast();
 
     private BroadcastReceiver mInnerReceiver = new BroadcastReceiver() {
@@ -157,6 +179,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
             }
         }
     };
+
 
 
     public IncomingRequestFragmentForDriver() {
@@ -290,9 +313,142 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
         btnpickedUp.setOnClickListener(this);
         init(data.getType());
+
+        gpsTrackingWithOutServiceClass();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.removeCallbacks(sendData);
+                ISTRAVERSING = false;
+
+                gpsTrackingWithOutServiceClass();
+            }
+        }, 5000);                ///  update gps location
+
         return view;
     }
 
+    /////////////location update//////////////////////
+
+    private void gpsTrackingWithOutServiceClass() {
+        permissions.add(ACCESS_FINE_LOCATION);
+        permissions.add(ACCESS_COARSE_LOCATION);
+
+        permissionsToRequest = findUnAskedPermissions(permissions);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            if (permissionsToRequest.size() > 0)
+                requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+        }
+
+        locationTrack = new LocationTrack(getActivity());
+
+        if (locationTrack.canGetLocation()) {
+
+            longitude = locationTrack.getLongitude();
+            latitude = locationTrack.getLatitude();
+//            Toast.makeText(getActivity(), "Longitude:" + Double.toString(longitude) + "\n" +
+//                    "Latitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+
+            ISTRAVERSING = true;
+            handler.postDelayed(sendData, TIMECOUNT);
+
+        } else {
+
+            locationTrack.showSettingsAlert();
+        }
+    }
+
+
+    private Runnable sendData = new Runnable() {
+        public void run() {
+            try {
+                //prepare and send the data here..
+                // gpsTrackingWithServiceClass();
+                if (ISTRAVERSING) {
+                    handler.postDelayed(sendData, TIMECOUNT);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+
+    private ArrayList<String> findUnAskedPermissions(ArrayList<String> wanted) {
+        ArrayList<String> result = new ArrayList<String>();
+
+        for (String perm : wanted) {
+            if (!hasPermission(perm)) {
+                result.add(perm);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (getActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+            }
+        }
+        return true;
+    }
+
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+
+            case ALL_PERMISSIONS_RESULT:
+                for (String perms : permissionsToRequest) {
+                    if (!hasPermission(perms)) {
+                        permissionsRejected.add(perms);
+                    }
+                }
+
+                if (permissionsRejected.size() > 0) {
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
+                            showMessageOKCancel("These permissions are mandatory for the application. Please allow access.",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermissions(permissionsRejected.toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
+                                            }
+                                        }
+                                    });
+                            return;
+                        }
+                    }
+
+                }
+
+                break;
+        }
+
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+    /////////////location update//////////////////////
 
     void init(String status) {
 
@@ -332,7 +488,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 goingtoPickupLocationView.setVisibility(View.VISIBLE);
                 lnrLocationHeader.setVisibility(View.VISIBLE);
                 locationAddressTV.setText(data.getSource());
-                lblLocationType.setText("PickUp Location");
+                lblLocationType.setText("Drop Location");
                 lblLocationType.setVisibility(View.VISIBLE);
 
                 customer_name.setText(data.getCustomer());
@@ -372,6 +528,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                 btnCancelafterArrived.setVisibility(View.GONE);
 
+                updateDriverLocation();  ///////////  driver continuously location updation
+
                 break;
             case DROPPED:
                 ((DashBoardActivity) getActivity()).replaceFragment(DriverOnlineFragment.newInstance(), "");
@@ -394,6 +552,32 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 break;
 
         }
+    }
+
+    private void updateDriverLocation() {
+
+        UpdateDriverLocationReqst updateDriverLocationReqst = new UpdateDriverLocationReqst();
+        userId = HighwayPrefs.getString(getActivity(),Constants.ID);
+        updateDriverLocationReqst.setDriverId(userId);
+        updateDriverLocationReqst.setLat(latitude);
+        updateDriverLocationReqst.setLong(latitude);
+
+        RestClient.getUpdateDriverLocation(updateDriverLocationReqst, new Callback<UpdateDriverLocationResp>() {
+            @Override
+            public void onResponse(Call<UpdateDriverLocationResp> call, Response<UpdateDriverLocationResp> response) {
+                if (response!=null && response.code()==200 && response.body()!=null){
+                    if (response.body().getStatus()){
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UpdateDriverLocationResp> call, Throwable t) {
+                Toast.makeText(getActivity(), "gps location failed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
@@ -542,23 +726,6 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), "Permission granted", Toast.LENGTH_SHORT).show();
-                    call_action();
-                } else {
-                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
 
 
     private void updateDriverStatus(String status, String tripId) {
@@ -689,6 +856,8 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         super.onDestroyView();
         stopMediaPlayer();
         //   getActivity().unregisterReceiver(mInnerReceiver);  /// broadcastReceiver
+        locationTrack.stopListener();
+
     }
 
 

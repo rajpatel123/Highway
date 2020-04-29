@@ -36,6 +36,8 @@ import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRes
 import com.highway.drivermodule.driverModelClass.DriverResponse;
 import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
 import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
+import com.highway.drivermodule.driverModelClass.update_driver_location.UpdateDriverLocationReqst;
+import com.highway.drivermodule.driverModelClass.update_driver_location.UpdateDriverLocationResp;
 import com.highway.drivermodule.drivermodels.DriverDetailRequest;
 import com.highway.drivermodule.drivermodels.DriverDetails;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
@@ -266,5 +268,9 @@ public class RestClient {
         RetrofitClient.getClient().CUSTOMER_INVOICE_RESP_CALL(customerInvoiceReq).enqueue(customerInvoiceRespCallback);
      }
 
+    // update driver location
+    public static void getUpdateDriverLocation(UpdateDriverLocationReqst updateDriverLocationReqst, Callback<UpdateDriverLocationResp>updateDriverLocationRespCallback){
+        RetrofitClient.getClient().UPDATE_DRIVER_LOCATION_RESP_CALL(updateDriverLocationReqst).enqueue(updateDriverLocationRespCallback);
+    }
 
 }

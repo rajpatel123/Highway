@@ -35,6 +35,8 @@ import com.highway.customer.customerModelClass.vehicleInfo.BookingVehicleInfoRes
 import com.highway.drivermodule.driverModelClass.DriverResponse;
 import com.highway.drivermodule.driverModelClass.DriverStartTripRequest;
 import com.highway.drivermodule.driverModelClass.VehicleCurrentLocation;
+import com.highway.drivermodule.driverModelClass.update_driver_location.UpdateDriverLocationReqst;
+import com.highway.drivermodule.driverModelClass.update_driver_location.UpdateDriverLocationResp;
 import com.highway.drivermodule.drivermodels.DriverDetailRequest;
 import com.highway.drivermodule.drivermodels.DriverDetails;
 import com.highway.drivermodule.updateTripStatusByDriver.UpdateTripStatusByDriverReq;
@@ -217,6 +219,10 @@ public interface ApiInterface {
     //CustomerInvoiceReq
     @POST("api/Email/customerInvoice")
     Call<CustomerInvoiceResp>CUSTOMER_INVOICE_RESP_CALL(@Body CustomerInvoiceReq customerInvoiceReq);
+
+    //update driver location
+    @POST("api/Booking/updateDriverLocation")
+    Call<UpdateDriverLocationResp>UPDATE_DRIVER_LOCATION_RESP_CALL(@Body UpdateDriverLocationReqst customerInvoiceReq);
 
 
 }

@@ -228,8 +228,8 @@ public class InvoiceBottomDialogFragmentForCustomer extends BottomSheetDialogFra
         end_time.setText(" "+customerInvoice.getEndTime());
         distance.setText(""+customerInvoice.getTotDistance());
         travelTime.setText(""+customerInvoice.getTravelTime());
-        bookingId.setText(""+customerInvoice.getBasedFarefixed());
-        bookingId.setText(""+customerInvoice.getDistancePrice());
+        fixed.setText(""+customerInvoice.getBasedFarefixed());
+        distancePrice.setText(""+customerInvoice.getDistancePrice());
         peekHourCharges.setText(""+customerInvoice.getPeekHourCharges());
         nightFare.setText(""+customerInvoice.getNightFare());
         tax.setText(""+customerInvoice.getTax());

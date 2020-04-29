@@ -133,50 +133,39 @@ public class TripTrackingByCustomerActivity extends AppCompatActivity implements
         if (intent != null) {
 
             Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
+                        Double.parseDouble("" + bundle.getString("sourceLong")));
+                LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                        Double.parseDouble("" + bundle.getString("destinationLat")));
 
-            LatLng sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
-                                                Double.parseDouble(""+ bundle.getString("sourceLong")));
-            LatLng destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
-                                                Double.parseDouble(""+ bundle.getString("destinationLat")));
+                sourceLatitude = Double.parseDouble("" + bundle.getString("sourceLat"));
+                sourceLongitude = Double.parseDouble("" + bundle.getString("sourceLong"));
+                destLatitude = Double.parseDouble("" + bundle.getString("destinationLat"));
+                destLongitude = Double.parseDouble("" + bundle.getString("destinationLong"));
 
-            sourceLatitude = Double.parseDouble("" + bundle.getString("sourceLat"));
-            sourceLongitude = Double.parseDouble("" + bundle.getString("sourceLong"));
-            destLatitude = Double.parseDouble("" + bundle.getString("destinationLat"));
-            destLongitude = Double.parseDouble("" + bundle.getString("destinationLong"));
+                edtSourceLOcation.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
+                edtDropLocation.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
-            edtSourceLOcation.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
-            edtDropLocation.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
+                markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+                markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
 
-            markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
-            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+                markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+                markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
 
-            markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-            markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+                name = bundle.getString("name");
+                role = bundle.getString("role");
+                vehicleName = bundle.getString("vehicleName");
+                vehicleNumber = bundle.getString("vehicleNumber");
+                fareCharge = bundle.getString("fare");
+                status = bundle.getString("status");
+                tripType = bundle.getString("tripType");
+                startDate = bundle.getString("startDate");
+                endDate = bundle.getString("endDate");
+                pickUpTime = bundle.getString("pickupTime");
+                dropTime = bundle.getString("dropTime");
 
-            name = bundle.getString("name");
-            role = bundle.getString("role");
-            vehicleName = bundle.getString("vehicleName");
-            vehicleNumber = bundle.getString("vehicleNumber");
-            fareCharge = bundle.getString("fare");
-            status = bundle.getString("status");
-            tripType = bundle.getString("tripType");
-            startDate = bundle.getString("startDate");
-            endDate = bundle.getString("endDate");
-            pickUpTime = bundle.getString("pickupTime");
-            dropTime = bundle.getString("dropTime");
-
-            /*sourceName = HighwayApplication.getInstance().getBookingHTripRequest().getSourceAddress();
-            sourceLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLat();
-
-            destName = HighwayApplication.getInstance().getBookingHTripRequest().getDestAddress();
-            destLatitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLat();
-
-            sourceLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getSourceLong();
-            edtSourceLOcation.setText("" + sourceName);
-
-            destLongitude = HighwayApplication.getInstance().getBookingHTripRequest().getDestLong();
-            edtDropLocation.setText("" + destName);*/
-
+            }
         }
     }
 
