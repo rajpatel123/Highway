@@ -324,7 +324,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         clicklistener();
         bookingTimer();
 
-        tapToLandingFromUpcoming(getIntent());
+       // tapToLandingFromUpcoming(getIntent());
     }
 
 
