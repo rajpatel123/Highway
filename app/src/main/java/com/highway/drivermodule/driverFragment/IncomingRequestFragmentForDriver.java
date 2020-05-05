@@ -488,7 +488,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
                 goingtoPickupLocationView.setVisibility(View.VISIBLE);
                 lnrLocationHeader.setVisibility(View.VISIBLE);
                 locationAddressTV.setText(data.getSource());
-                lblLocationType.setText("Drop Location");
+                lblLocationType.setText("PickUp Location");
                 lblLocationType.setVisibility(View.VISIBLE);
 
                 customer_name.setText(data.getCustomer());
@@ -528,7 +528,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
 
                 btnCancelafterArrived.setVisibility(View.GONE);
 
-                updateDriverLocation();  ///////////  driver continuously location updation
+               // updateDriverLocation();  ///////////  driver continuously location updation
 
                 break;
             case DROPPED:
@@ -560,7 +560,7 @@ public class IncomingRequestFragmentForDriver extends Fragment implements View.O
         userId = HighwayPrefs.getString(getActivity(),Constants.ID);
         updateDriverLocationReqst.setDriverId(userId);
         updateDriverLocationReqst.setLat(latitude);
-        updateDriverLocationReqst.setLong(latitude);
+        updateDriverLocationReqst.setLong(longitude);
 
         RestClient.getUpdateDriverLocation(updateDriverLocationReqst, new Callback<UpdateDriverLocationResp>() {
             @Override

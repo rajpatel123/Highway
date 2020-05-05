@@ -134,7 +134,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
     private GoogleMap mMap;
     private Button back_button;
     private Button confirmBooking;
-    private double sourceLatitude, sourceLongitude;
+    public double sourceLatitude, sourceLongitude;
     private double destLatitude, destLongitude;
     private String sourceName;
     private String destName;
@@ -324,7 +324,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
         clicklistener();
         bookingTimer();
 
-       // tapToLandingFromUpcoming(getIntent());
+        tapToLandingFromUpcoming(getIntent());
     }
 
 
@@ -877,41 +877,49 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
             Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
-                   /*try {
-                       sourceAddLatLng = new LatLng(Double.parseDouble(""+ bundle.getString("sourceLat")),
-                               Double.parseDouble(""+ bundle.getString("sourceLong")));
-                   } catch (NumberFormatException e) {
-                       sourceAddLatLng = null;
-                   }
-
-                   try {
-                       sourceAddLatLng = new LatLng(Double.parseDouble(""+ bundle.getString("sourceLat")),
-                               Double.parseDouble(""+ bundle.getString("sourceLong")));
-                   } catch (NumberFormatException e) {
-                       sourceAddLatLng = null;
-                   }*/
-                if (sourceAddLatLng != null){
+                try {
                     sourceAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("sourceLat")),
                             Double.parseDouble("" + bundle.getString("sourceLong")));
+                    destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
+                            Double.parseDouble("" + bundle.getString("destinationLong")));
+                } catch (Exception e) {
+                    sourceAddLatLng = null;
+                    destAddLatLng = null;
 
                 }
-                              destAddLatLng = new LatLng(Double.parseDouble("" + bundle.getString("destinationLat")),
-                        Double.parseDouble("" + bundle.getString("destinationLong")));
 
-                sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
-                sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
+                try {
+                    sourceLatitude = Double.parseDouble(bundle.getString("sourceLat"));
+                    sourceLongitude = Double.parseDouble(bundle.getString("sourceLong"));
+                    destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
+                    destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
+                } catch (Exception e) {
+//                    sourceLatitude = Double.parseDouble(null);
+//                    sourceLongitude = Double.parseDouble(null);
+//                    destLatitude = Double.parseDouble(null);
+//                    destLongitude = Double.parseDouble(null);
+                }
 
-                destLatitude = Double.parseDouble(bundle.getString("destinationLat"));
-                destLongitude = Double.parseDouble(bundle.getString("destinationLong"));
+                try {
+                    sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
+                    destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
 
-                sourceTV.setText("" + Utils.getAddress(getApplicationContext(), sourceAddLatLng));
-                destTV.setText("" + Utils.getAddress(getApplicationContext(), destAddLatLng));
+                } catch (Exception e) {
+                    sourceTV = null;
+                    destTV = null;
+                }
 
-                markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
-                markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+                try {
+                    markerOptions1 = new MarkerOptions().position(new LatLng(sourceLatitude, sourceLongitude));
+                    markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pins)));
+                    markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
+                    markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+                } catch (Exception e) {
+                    markerOptions1 = null;
+                    markerOptions2 = null;
 
-                markerOptions2 = new MarkerOptions().position(new LatLng(destLatitude, destLongitude));
-                markerOptions2.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(R.drawable.ic_pin)));
+                }
+
 
                 userName = bundle.getString("name");
                 role = bundle.getString("role");
