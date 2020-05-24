@@ -154,7 +154,6 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_trip_details_for_customers);
 
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -168,7 +167,6 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         registerReceiver(mySenderBroadCast, intentFilter);
-
 
         sourceTV = findViewById(R.id.sourceTV);
         destTV = findViewById(R.id.destTV);
@@ -216,6 +214,11 @@ public class CompletedTripDetailsForCustomersActivity extends AppCompatActivity 
         outstationDriverBeta = findViewById(R.id.outstation_driver_beta);
         outstationRoundSingle = findViewById(R.id.outstation_round_single);
         outstationNoOfDays = findViewById(R.id.outstation_no_of_days);
+
+        String bookTripIdCode = getIntent().getStringExtra("bookTbripIdCode");
+        getBookTripIdCode = HighwayPrefs.getString(getApplicationContext(), "bookTripIdCode");
+        getBookId = HighwayPrefs.getString(getApplicationContext(), "BookingId");
+        bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");  // booking vehicle nane
 
         userName = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERNAME);
         userMobNo = HighwayPrefs.getString(getApplicationContext(), Constants.RECEIVERPHONENO);
