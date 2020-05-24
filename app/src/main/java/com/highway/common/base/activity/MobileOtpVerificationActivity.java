@@ -69,7 +69,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         mobileNumberTV.setText(HighwayPrefs.getString(this, Constants.USERMOBILE));
         usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
         userLoginRoleId = HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID);
-        // mobileNumberTV.setText(usermobileNumber);
+       // mobileNumberTV.setText(usermobileNumber);
 
         smsReceiver.bindListener(this);
 
