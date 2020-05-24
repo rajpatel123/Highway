@@ -204,7 +204,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
 
     }
 
-
+/////////////////////////////////all file are uptodate///////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
