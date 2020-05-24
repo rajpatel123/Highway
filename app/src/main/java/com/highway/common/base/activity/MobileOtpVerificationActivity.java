@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.highway.R;
 import com.highway.common.base.commonModel.login.LoginReqUpdated;
@@ -22,7 +23,13 @@ import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
 import com.highway.commonretrofit.RestClient;
 import com.highway.customer.customerActivity.LoginActivityForCustomer;
+import com.highway.customer.customerFragment.NewBookingFragment;
+import com.highway.drivermodule.driverActivity.LoginActivityForDriver;
+import com.highway.drivermodule.driverFragment.DriverOnlineFragment;
+import com.highway.drivermodule.driverFragment.IncomingRequestFragmentForDriver;
 import com.highway.interfaces.SmsListener;
+import com.highway.millUserModule.milluserActivity.LoginActivityForMiller;
+import com.highway.ownerModule.vehicleOwnerActivities.LoginActivityForVehicleOwner;
 import com.highway.reciever.SmsReceiver;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -79,9 +86,40 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         changeNumberTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MobileOtpVerificationActivity.this, LoginActivityForCustomer.class);
+               /* Intent intent = new Intent(MobileOtpVerificationActivity.this, LoginActivityForCustomer.class);
                 startActivity(intent);
-                finish();
+                finish();*/
+
+                switch (userLoginRoleId) {
+                    case "1":                                     // Admin
+
+                        break;
+
+                    case "2":                                    //  mill user
+                        Intent intent = new Intent(MobileOtpVerificationActivity.this, LoginActivityForMiller.class);
+                        startActivity(intent);
+                        finish();
+                       break;
+
+                    case "3":                                              // Driver
+                        Intent intentD = new Intent(MobileOtpVerificationActivity.this, LoginActivityForDriver.class);
+                        startActivity(intentD);
+                        finish();
+                        break;
+
+                    case "4":                                   //  Customer
+                        Intent intentC = new Intent(MobileOtpVerificationActivity.this, LoginActivityForCustomer.class);
+                        startActivity(intentC);
+                        finish();
+                        break;
+
+                    case "5":                              // Owner .. vehicle Owner
+                        Intent intentVO = new Intent(MobileOtpVerificationActivity.this, LoginActivityForVehicleOwner.class);
+                        startActivity(intentVO);
+                        finish();
+                        break;
+                }
+
             }
         });
 

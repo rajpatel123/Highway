@@ -240,7 +240,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         //getPushData();
         navigationInitView();
         updateNavViewHeader();
-        // navAccordingRoleId();// According RoleId Navigation Icon
+        navAccordingRoleId();// According RoleId Navigation Icon
 
 
     }
@@ -940,7 +940,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onResume() {
         super.onResume();
-        navAccordingRoleId();
+       // navAccordingRoleId();
 
 
     }
