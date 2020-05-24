@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,6 +51,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
@@ -61,8 +64,10 @@ import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.utils.Utils;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -159,12 +164,14 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             @Override
             public void onClick(View v) {
 
-                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+                List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.ADDRESS, Place.Field.LAT_LNG);
 
-                Intent intent = new Autocomplete.IntentBuilder(
-                        AutocompleteActivityMode.FULLSCREEN, fields)
-                        .setCountry("IN")
-                        .build(mActivity);
+                    Intent intent = new Autocomplete.IntentBuilder(
+                            AutocompleteActivityMode.FULLSCREEN, fields)
+                            .setCountry("IN")
+                            .setTypeFilter(TypeFilter.ADDRESS)
+                            .build(mActivity);
+
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE_DEST);
 
             }
@@ -201,18 +208,20 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             if (requestCode == AUTOCOMPLETE_REQUEST_CODE_SOURCE) {
 
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
+                LatLng latLng = place.getLatLng();
+                Log.e("TAG", "Place: " + place.getName() + ", " + place.getAddress());
+                Log.e("TAG", "Place1: " + place.getLatLng() + ", " + place.getAddress());
 
                 if (!TextUtils.isEmpty(place.getName())) {
-                    if (TextUtils.isEmpty(place.getAddress())) {
-                        edtSourceLOcationEDT.setText("" + place.getName());
+                    if (TextUtils.isEmpty(Utils.getAddress(mActivity, latLng))) {
+                        edtSourceLOcationEDT.setText("" + Utils.getAddress(mActivity, latLng));
                     } else {
-                        edtSourceLOcationEDT.setText(place.getName()+ "" + place.getAddress());
+                        edtSourceLOcationEDT.setText(Utils.getAddress(mActivity, latLng));
                     }
                     if (mMap != null && place.getLatLng() != null) {
 
-                        LatLng latLng = place.getLatLng();
-                        sourceName = place.getName();
+
+                        sourceName = Utils.getAddress(mActivity, latLng);
                         sourceLatitude = latLng.latitude;
                         sourceLongitude = latLng.longitude;
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14);
@@ -224,6 +233,30 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                     }
 
                 }
+
+
+
+                double MyLat = latLng.latitude;
+                double MyLong = latLng.longitude;
+                Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(MyLat, MyLong, 1);
+                    String stateName = addresses.get(0).getAddressLine(0);
+                    String cityName = addresses.get(0).getLocality();
+                    Log.e("stateName","::"+stateName);
+
+                    Log.e("stateName12","::"+     Utils.getAddress(mActivity, latLng));
+
+                  //  edit_profile_city_editText.setText(place.getName() + "," + stateName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                }
+
+
+
+
+
             } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE_DEST) {
 
                 Place placeDest = Autocomplete.getPlaceFromIntent(data);
