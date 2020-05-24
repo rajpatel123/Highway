@@ -366,7 +366,7 @@
                             android:gravity="center"
                             android:text="CANCLE TRIP "
                             android:textColor="@color/red_money"
-                            android:textSize="@dimen/margin_16"
+                            android:textSize="@dimen/margin_14"
                             android:textStyle="normal" />
                     </LinearLayout>
 
@@ -401,7 +401,7 @@
                             android:gravity="center"
                             android:text="INFO"
                             android:textColor="@color/project_color"
-                            android:textSize="@dimen/margin_16"
+                            android:textSize="@dimen/margin_14"
                             android:textStyle="normal" />
                     </LinearLayout>
                 </LinearLayout>

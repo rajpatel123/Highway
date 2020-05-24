@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.renderscript.Script;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -236,7 +237,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         MyFirebaseServiceMessaging myFirebaseServiceMessaging = new MyFirebaseServiceMessaging();
         myFirebaseServiceMessaging.setPushListener(this);
-        getPushData();
+        //getPushData();
         navigationInitView();
         updateNavViewHeader();
         // navAccordingRoleId();// According RoleId Navigation Icon
@@ -1045,13 +1046,19 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                     TripStatus tripStatus = response.body().getDriverTripStatus();
                     Log.d("Driver Details", "" + tripStatus.getCurrentTripStatus());
 
-                    if (!tripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)) {
+                    if (!tripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING) && !tripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE) && !tripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED)) {
+
                         HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
                         HighwayApplication.getInstance().setUserDetails(tripStatus);
                         incomingFragment = IncomingRequestFragmentForDriver.newInstance();
                         Bundle bundle = new Bundle();
                         incomingFragment.setArguments(bundle);
                         replaceFragment(incomingFragment, "Online");
+                    }else if (tripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED) || !tripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE)){
+                        showInvoiceBottomSheetDriver();
+                    }else if(!tripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)){
+                        showratingBottomSheetDriver();
+
                     }
 
                 }
