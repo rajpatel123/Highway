@@ -240,7 +240,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         //getPushData();
         navigationInitView();
         updateNavViewHeader();
-        navAccordingRoleId();// According RoleId Navigation Icon
 
 
     }
@@ -940,7 +939,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onResume() {
         super.onResume();
-       // navAccordingRoleId();
+        navAccordingRoleId();
 
 
     }
@@ -1045,11 +1044,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 if (response != null && response.code() == 200 && response.body() != null) {
                     TripStatus tripStatus = response.body().getDriverTripStatus();
                     Log.d("Driver Details", "" + tripStatus.getCurrentTripStatus());
-
+                    HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
+                    HighwayApplication.getInstance().setUserDetails(tripStatus);
                     if (!tripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING) && !tripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE) && !tripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED)) {
 
-                        HighwayApplication.getInstance().setCurrentTripId(tripStatus.getBookingTripId());
-                        HighwayApplication.getInstance().setUserDetails(tripStatus);
                         incomingFragment = IncomingRequestFragmentForDriver.newInstance();
                         Bundle bundle = new Bundle();
                         incomingFragment.setArguments(bundle);
@@ -1107,10 +1105,10 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 if (response != null && response.code() == 200 && response.body() != null) {
                     TripStatus customerTripStatus = response.body().getDriverTripStatus();
                     //  Log.d("Customer Details", "" + customerTripStatus.getCurrentTripStatus());
-
+                    HighwayApplication.getInstance().setCurrentTripId(customerTripStatus.getBookingTripId());
+                    HighwayApplication.getInstance().setUserDetails(customerTripStatus);
                     if (customerTripStatus.getRatingStatus().equalsIgnoreCase("0")) {
-                        HighwayApplication.getInstance().setCurrentTripId(customerTripStatus.getBookingTripId());
-                        HighwayApplication.getInstance().setUserDetails(customerTripStatus);
+
 
 
                         if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(TRIP_ACCEPTED)
@@ -1129,6 +1127,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                             showratingBottomSheetForCustomer();
 
                         } else if (customerTripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)) {
+                            showratingBottomSheetForCustomer();
+
                         }
 
                        /* dashBordFragmentForCustomer = DashBordFragmentForCustomer.newInstance();
