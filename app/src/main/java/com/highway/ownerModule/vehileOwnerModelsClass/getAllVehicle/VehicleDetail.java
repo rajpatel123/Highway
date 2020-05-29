@@ -47,10 +47,10 @@ public class VehicleDetail {
     private Object address;
     @SerializedName("Latitude")
     @Expose
-    private Object latitude;
+    private String latitude;
     @SerializedName("Longitude")
     @Expose
-    private Object longitude;
+    private String longitude;
 
     public String getVehicleName() {
         return vehicleName;
@@ -156,19 +156,19 @@ public class VehicleDetail {
         this.address = address;
     }
 
-    public Object getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Object latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public Object getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Object longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 

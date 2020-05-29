@@ -403,8 +403,9 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 getCustomerDetails();
                 break;
 
-            case "5":                              // Owner .. vehicle Owner
-                Fragment fragment5 = NewBookingFragment.newInstance();
+            case "5":                         // Owner .. vehicle Owner
+                dashBoardToolbar.setTitle("All Vehicle List");
+                Fragment fragment5 = GetAllVehicleFragmentForVehicleOwner.newInstance();
                 replaceFragment(fragment5, "");
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
@@ -471,6 +472,12 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setOnAllvehicalList(){
+
+        dashBoardToolbar.setTitle("All Vehicle List");
+
     }
 
 
@@ -595,7 +602,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         if (addDriverFragmentForVehicleOwner == null) {
                         }
                         addDriverFragmentForVehicleOwner = AddDriverFragmentForVehicleOwner.newInstance();
-                        replaceFragment(addDriverFragmentForVehicleOwner, "");
+                        replaceFragmentq2(addDriverFragmentForVehicleOwner, "AddDriverFragmentForVehicleOwner");
                         break;
                 }
                 break;
@@ -863,6 +870,21 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             if (fragmentManager != null) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.nav_host_fragment, fragment, tag);
+                fragmentTransaction.addToBackStack(tag);
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void replaceFragmentq2(Fragment fragment, String tag) {
+        try {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            if (fragmentManager != null) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, tag);
+                fragmentTransaction.addToBackStack(tag);
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commitAllowingStateLoss();
             }

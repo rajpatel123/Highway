@@ -46,6 +46,8 @@ import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDro
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
+import com.highway.ownerModule.ownerrrModel.cityResp.CityResp;
+import com.highway.ownerModule.ownerrrModel.stateResp.StateResp;
 import com.highway.ownerModule.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
 import com.highway.ownerModule.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverResponse;
 import com.highway.ownerModule.vehileOwnerModelsClass.addVehicle.AddVehicleRequest;
@@ -117,6 +119,18 @@ public class RestClient {
     public static void addNewDriver(AddNewDriverRequest addNewDriverRequest, Callback<AddNewDriverResponse> addNewDriverResponseCallback) {
         RetrofitClient.getClient().addNewDriverResponseCall(addNewDriverRequest).enqueue(addNewDriverResponseCallback);
     }
+
+
+    // state
+    public static void onState(Callback<StateResp> addNewDriverResponseCallback) {
+        RetrofitClient.getClient().onState().enqueue(addNewDriverResponseCallback);
+    }
+
+    // City
+    public static void onCity(String stateId, Callback<CityResp> addNewDriverResponseCallback) {
+        RetrofitClient.getClient().onCity(stateId).enqueue(addNewDriverResponseCallback);
+    }
+
 
 
     public static void registerForPush(RegisterForPushModel obj, Callback<ResponseBody> addNewDriverResponseCallback) {

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownerModule.vehicleOwnerAdapter.GetAllVehicleAdapterForVehicleOwner;
 import com.highway.ownerModule.vehileOwnerModelsClass.getAllVehicle.DataVehicle;
@@ -66,8 +67,7 @@ public class GetAllVehicleFragmentForVehicleOwner extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_get_all_vehicle_fragment_for_vehicle_owner, container, false);
         getAllVehicleRecyclerView = view.findViewById(R.id.GetAllVehicleRecyclerView);
-
-
+        ((DashBoardActivity)getActivity()).setOnAllvehicalList();
         getAllVehicle();
         return view;
     }
