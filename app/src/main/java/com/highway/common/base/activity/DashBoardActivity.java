@@ -1052,7 +1052,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         Bundle bundle = new Bundle();
                         incomingFragment.setArguments(bundle);
                         replaceFragment(incomingFragment, "Online");
-                    }else if (tripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED) || !tripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE)){
+                    }else if (tripStatus.getCurrentTripStatus().equalsIgnoreCase(DROPPED) || tripStatus.getCurrentTripStatus().equalsIgnoreCase(INVOICE)){
                         showInvoiceBottomSheetDriver();
                     }else if(!tripStatus.getCurrentTripStatus().equalsIgnoreCase(RATING)){
                         showratingBottomSheetDriver();
