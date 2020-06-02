@@ -23,6 +23,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highway.R;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownerModule.ownerrrModel.cityResp.CityResp;
@@ -103,6 +105,7 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
         spState = view.findViewById(R.id.spState);
         spCity = view.findViewById(R.id.spCity);
         onStateDropdown();
+
         onSpinner();
 
 
@@ -138,10 +141,10 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
                 stateId = stateID.get(position);
              //   onDistric();
                 if (stateId.equalsIgnoreCase("125254555")){
+                    onCityDropdown(stateId);
 
-                    onCityDropdown();
                 }else {
-                    onCityDropdown();
+                    onCityDropdown(stateId );
                 }
             }
 
@@ -298,7 +301,10 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
 
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
-                          // if (response.body().getId()) {
+                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                            Log.e("response  :: ", gson.toJson(response.body()));
+
+                            // if (response.body().getId()) {
                           /*  dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                             Bundle bundle = new Bundle();
                             dashBoardFragmentForVehicleOwner.setArguments(bundle);
@@ -346,6 +352,9 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
                 public void onResponse(Call<StateResp> call, Response<StateResp> response) {
                     Utils.dismissProgressDialog();
 
+                   try {
+
+
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
                             // if (response.body().getId()) {
@@ -370,6 +379,9 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
                             //}
                         }
                     }
+                   }catch (Exception e){
+                       e.printStackTrace();
+                   }
                 }
 
                 @Override
@@ -380,11 +392,21 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
 
     }
 
-    public void onCityDropdown() {
+    public void onCityDropdown(String stateId) {
 
+         Log.e("stateId","::"+stateId);
 
         Utils.showProgressDialog(getActivity());
+        city.clear();
+        city.add("Select City");
+        cityID.add("125");
+        ArrayAdapter<String> dataAdapter12 = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinne_city, city);
 
+        // Drop down layout style - list view with radio button
+        dataAdapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spCity.setAdapter(dataAdapter12);
         RestClient.onCity(stateId, new Callback<CityResp>() {
             @Override
             public void onResponse(Call<CityResp> call, Response<CityResp> response) {
@@ -393,10 +415,9 @@ public class AddDriverFragmentForVehicleOwner extends Fragment {
                 if (response.body() != null) {
                     if (response.body().getStatus()) {
                         // if (response.body().getId()) {
-
+                        city.clear();
                         city.add("Select City");
                         cityID.add("125");
-
 
                         for (int i = 0; i <response.body().getCityDropdown().size(); i++) {
 

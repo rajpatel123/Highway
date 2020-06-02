@@ -317,7 +317,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "2":                                    //  mill user
                 Fragment fragment2 = NewBookingFragment.newInstance();
-                replaceFragment(fragment2, "");
+                replaceFragmentHome(fragment2, "");
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -378,7 +378,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
             case "4":                                   //  Customer
                 Fragment fragment4 = NewBookingFragment.newInstance();
-                replaceFragment(fragment4, "");
+                replaceFragmentHome(fragment4, "");
                 newBooking.setVisible(true);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -406,7 +406,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case "5":                         // Owner .. vehicle Owner
                 dashBoardToolbar.setTitle("All Vehicle List");
                 Fragment fragment5 = GetAllVehicleFragmentForVehicleOwner.newInstance();
-                replaceFragment(fragment5, "");
+                replaceFragmentHome(fragment5, "");
                 newBooking.setVisible(false);
                 myBooking.setVisible(true);
                 millBooking.setVisible(false);
@@ -489,7 +489,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_new_booking:
                 dashBoardToolbar.setTitle("New Booking");
                 Fragment newBookingFragment = NewBookingFragment.newInstance();
-                replaceFragment(newBookingFragment, "");
+                replaceFragmentHome(newBookingFragment, "");
                 break;
 
             case R.id.nav_my_booking:
@@ -878,6 +878,22 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
             e.printStackTrace();
         }
     }
+
+    public void replaceFragmentHome(Fragment fragment, String tag) {
+        try {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            if (fragmentManager != null) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, tag);
+
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void replaceFragmentq2(Fragment fragment, String tag) {
         try {
             FragmentManager fragmentManager = getSupportFragmentManager();

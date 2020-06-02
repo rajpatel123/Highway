@@ -46,6 +46,8 @@ import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDro
 import com.highway.millUserModule.SpinnerModelForMiller.ApproxLoad.ApproxLoadDropDownResponse;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypeDropDownRequest;
 import com.highway.millUserModule.SpinnerModelForMiller.GoodsTypes.GoodsTypesDropDownResponse;
+import com.highway.ownerModule.ownerRequest.vehicleOnOff.VehicleOnOffReq;
+import com.highway.ownerModule.ownerrrModel.VehicleOnOffResp.VehicleOnOffResponse;
 import com.highway.ownerModule.ownerrrModel.cityResp.CityResp;
 import com.highway.ownerModule.ownerrrModel.stateResp.StateResp;
 import com.highway.ownerModule.vehileOwnerModelsClass.addNewDriverThroughVehicleOwner.AddNewDriverRequest;
@@ -174,6 +176,10 @@ public class RestClient {
     // getAll Vehicle details
     public static void getAllVehicleDetails(GetAllVehicleRequest getAllVehicleRequest, Callback<GetAllVehicleResponse> getAllVehicleResponseCallback) {
         RetrofitClient.getClient().getVehicleResponse(getAllVehicleRequest).enqueue(getAllVehicleResponseCallback);
+    }
+
+    public static void getvehicleOnOff(VehicleOnOffReq getAllVehicleRequest, Callback<VehicleOnOffResponse> getAllVehicleResponseCallback) {
+        RetrofitClient.getClient().getrvehicleOnOff(getAllVehicleRequest).enqueue(getAllVehicleResponseCallback);
     }
 
     // Assign Driver 2 vehicle

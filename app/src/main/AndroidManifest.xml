@@ -93,6 +93,9 @@
         <activity
             android:name=".customer.customerActivity.CancelOrderTripByCustomerWithReasonActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".ownerModule.vehicleOwnerActivities.GetAllVehicleDetailsActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".common.base.bookingBottomSheet.BottomProgressBarActivity"
             android:screenOrientation="portrait" />

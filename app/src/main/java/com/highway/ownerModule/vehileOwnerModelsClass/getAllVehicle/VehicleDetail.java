@@ -4,11 +4,29 @@ package com.highway.ownerModule.vehileOwnerModelsClass.getAllVehicle;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleDetail {
+public class VehicleDetail  {
 
     @SerializedName("VehicleName")
     @Expose
     private String vehicleName;
+
+    @SerializedName("VehicleId")
+    @Expose
+    private String VehicleId;
+
+
+
+    @SerializedName("VehicleOnOff")
+    @Expose
+    private String VehicleOnOff;
+
+    @SerializedName("VehicleImage")
+    @Expose
+    private String VehicleImage;
+
+
+
+
     @SerializedName("VehicleNumber")
     @Expose
     private String vehicleNumber;
@@ -29,13 +47,13 @@ public class VehicleDetail {
     private Object driverId;
     @SerializedName("DriverName")
     @Expose
-    private Object driverName;
+    private String driverName;
     @SerializedName("Mobile")
     @Expose
-    private Object mobile;
+    private String mobile;
     @SerializedName("Email")
     @Expose
-    private Object email;
+    private String email;
     @SerializedName("DLNumber")
     @Expose
     private Object dLNumber;
@@ -108,27 +126,27 @@ public class VehicleDetail {
         this.driverId = driverId;
     }
 
-    public Object getDriverName() {
+    public String getDriverName() {
         return driverName;
     }
 
-    public void setDriverName(Object driverName) {
+    public void setDriverName(String driverName) {
         this.driverName = driverName;
     }
 
-    public Object getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Object mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -160,6 +178,14 @@ public class VehicleDetail {
         return latitude;
     }
 
+    public String getVehicleOnOff() {
+        return VehicleOnOff;
+    }
+
+    public void setVehicleOnOff(String vehicleOnOff) {
+        VehicleOnOff = vehicleOnOff;
+    }
+
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
@@ -172,4 +198,19 @@ public class VehicleDetail {
         this.longitude = longitude;
     }
 
+    public String getVehicleImage() {
+        return VehicleImage;
+    }
+
+    public String getVehicleId() {
+        return VehicleId;
+    }
+
+    public void setVehicleId(String vehicleId) {
+        VehicleId = vehicleId;
+    }
+
+    public void setVehicleImage(String vehicleImage) {
+        VehicleImage = vehicleImage;
+    }
 }
