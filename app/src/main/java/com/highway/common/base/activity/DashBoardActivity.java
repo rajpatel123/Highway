@@ -806,6 +806,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                         break;
                 }
                 Intent intent = new Intent(this, WebViewActivity.class);
+                intent.putExtra("title", "About Us");
                 startActivity(intent);
                 break;
 
