@@ -207,7 +207,11 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
             @Override
             public void onResponse(Call<VehicleAssignDropDowanResponse> call, Response<VehicleAssignDropDowanResponse> response) {
 
+
                 if (response.body() != null) {
+                try {
+
+
                     if (response.body().getStatus()) {
                         vehicleAssignDropDowanResponse = response.body();
                         VehicleData vehicleData = null;
@@ -237,6 +241,9 @@ public class Assign_D2V_FragmentForVehicleOwner extends Fragment {
                         }
 
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 }
             }
 
