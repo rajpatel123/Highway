@@ -241,6 +241,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         navigationInitView();
         updateNavViewHeader();
 
+        navAccordingRoleId();
 
     }
 
@@ -977,7 +978,6 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onResume() {
         super.onResume();
-        navAccordingRoleId();
 
 
     }
