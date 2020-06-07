@@ -67,6 +67,7 @@ import com.highway.drivermodule.drivermodels.TripStatus;
 import com.highway.millUserModule.milluserActivity.MillUserAllTripActivity;
 import com.highway.millUserModule.milluserFragment.BookLoadFragmentForMillUser;
 import com.highway.millUserModule.milluserFragment.DashBoardFragmentForMillUser;
+import com.highway.ownerModule.vehicleOwnerActivities.AddDriverVehicleOwnerActivity;
 import com.highway.ownerModule.vehicleOwnerActivities.OwnerAllTripActivity;
 import com.highway.ownerModule.vehicleOwnerfragment.AddDriverFragmentForVehicleOwner;
 import com.highway.ownerModule.vehicleOwnerfragment.AddVehicleFragmentForVehicleOwner;
@@ -587,7 +588,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
                 break;
 
             case R.id.nav_add_driver:
-                dashBoardToolbar.setTitle("Add Driver");
+               // dashBoardToolbar.setTitle("Add Driver");
                 switch (userRole) {
                     case "1":
                         break;
@@ -600,10 +601,8 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
                         break;
                     case "5":
-                        if (addDriverFragmentForVehicleOwner == null) {
-                        }
-                        addDriverFragmentForVehicleOwner = AddDriverFragmentForVehicleOwner.newInstance();
-                        replaceFragmentq2(addDriverFragmentForVehicleOwner, "AddDriverFragmentForVehicleOwner");
+                        Intent ii = new Intent(getApplicationContext(), AddDriverVehicleOwnerActivity.class);
+                        startActivity(ii);
                         break;
                 }
                 break;
