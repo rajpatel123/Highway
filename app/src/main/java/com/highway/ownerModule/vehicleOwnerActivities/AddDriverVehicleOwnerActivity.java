@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.commonretrofit.RestClient;
 import com.highway.ownerModule.ownerrrModel.cityResp.CityResp;
 import com.highway.ownerModule.ownerrrModel.stateResp.StateResp;
@@ -46,7 +47,8 @@ public class AddDriverVehicleOwnerActivity extends AppCompatActivity {
     RecyclerView addDriverRecyView;
     private Toolbar addDriverToolbar;
     public EditText edtTxtDriverName, edtTxtDriverMobNo, edtTxtDriverEmail,
-            edtTxtDriverAddress, edtTxtDlNumber, edtTxtDlExpireDate;
+            edtTxtDriverAddress, edtTxtDlNumber;
+    TextView edtTxtDlExpireDate;
     public ImageView imgDatePicker;
     public Button btnAddNewDriver;
     String driverName, driverEmail, driverMobNo, driverDlNo, dlExpireDate, driverAddress, user_Id;
@@ -66,11 +68,13 @@ public class AddDriverVehicleOwnerActivity extends AppCompatActivity {
     Spinner spState, spCity;
     String stateId = "";
     String cityIDdddd = "";
+    DashBoardActivity dashBoardActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_add_new_driver);
+
         edtTxtDriverName = findViewById(R.id.EdtTxtDriverName);
         edtTxtDriverMobNo = findViewById(R.id.EdtTxtDriverMobNo);
         edtTxtDriverEmail = findViewById(R.id.EdtTxtDriverEmailNos);
@@ -143,7 +147,14 @@ public class AddDriverVehicleOwnerActivity extends AppCompatActivity {
         btnAddNewDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ValidationAddDriver();
+                 ValidationAddDriver();
+
+               /* if (getAllDriverFragmentForVehicleOwner == null) {
+                    getAllDriverFragmentForVehicleOwner = GetAllDriverFragmentForVehicleOwner.newInstance();
+                }
+                replaceFragment(getAllDriverFragmentForVehicleOwner, "");*/
+
+                //     getApplicationContext().getSupportFragmentManager().beginTransaction().replace(R.id.your_container_layout,ob).addToBackStack(null).commit();
 
             }
         });
@@ -291,7 +302,10 @@ public class AddDriverVehicleOwnerActivity extends AppCompatActivity {
 
 
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+
                             finish();
+
                         } else {
                             Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
 

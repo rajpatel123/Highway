@@ -863,7 +863,24 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void  getDriverVehicle( String tag) {
+        GetAllDriverFragmentForVehicleOwner fragment = GetAllDriverFragmentForVehicleOwner.newInstance();
 
+        try {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            if (fragmentManager != null) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, tag);
+                fragmentTransaction.addToBackStack(tag);
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     public void replaceFragment(Fragment fragment, String tag) {
         try {
