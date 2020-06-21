@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.highway.R;
@@ -432,18 +433,20 @@ public class AddVehicleFragmentForVehicleOwner extends Fragment {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
                                 //if (response.body().getId())
-                                dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
+                               /* dashBoardFragmentForVehicleOwner = DashBoardFragmentForVehicleOwner.newInstance();
                                 Bundle bundle = new Bundle();
                                 dashBoardFragmentForVehicleOwner.setArguments(bundle);
-
-                                getActivity().getSupportFragmentManager().popBackStackImmediate("Frag1", 0);
-
+*/
+                                Toast.makeText(getActivity(), "Vehicle added Successfully", Toast.LENGTH_SHORT).show();
+                                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                              //   ((DashBoardActivity) getActivity()).replaceFragment(dashBoardFragmentForVehicleOwner, " ");
 
                                /* Intent intent = new Intent(getActivity(), DashBoardActivity.class);
                                 startActivity(intent);
                                 getActivity().finish();*/
-                                Toast.makeText(getActivity(), "Vehicle added Successfully", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
