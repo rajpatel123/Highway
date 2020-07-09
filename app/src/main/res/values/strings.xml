@@ -636,6 +636,9 @@
 
     <string name="paytm">Paytm</string>
     <string name="you_have_successfully_paid">You have successfully paid</string>
+    <string name="user_type_c">Customer</string>
+    <string name="user_type_d">Driver</string>
+    <string name="join_msg">Join Highway as a</string>
 
 
 </resources>

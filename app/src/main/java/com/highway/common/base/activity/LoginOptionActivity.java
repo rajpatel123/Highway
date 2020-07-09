@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.highway.R;
+import com.highway.customer.customerActivity.LoginActivityForCustomer;
 import com.highway.customer.customerActivity.WelcomeActivityForCustomer;
 import com.highway.drivermodule.driverActivity.WelcomeDriverActivity;
 import com.highway.millUserModule.milluserActivity.WelcomeActivityForMiller;
@@ -20,9 +21,7 @@ import com.highway.utils.HighwayPrefs;
 
 public class LoginOptionActivity extends AppCompatActivity {
 
-    private LinearLayout customer, driver, miller, owner;
-    private ImageView imgCustomer, imgDriver,imgMiller, imgOwner;
-    private TextView tvCustomer,tvMiller,tvOwner,tvDriver;
+    private TextView customer, driver;
     private Button  btnNext;
     private String userRoleId;
     Intent intent;
@@ -38,45 +37,26 @@ public class LoginOptionActivity extends AppCompatActivity {
     }
 
     public void initialView(){
-        customer  = findViewById(R.id.LinearCustomer);
-        driver = findViewById(R.id.LinearDriver);
-        miller = findViewById(R.id.LinearMiller);
-        owner = findViewById(R.id.LnearOwner);
-        // for img
-        imgCustomer = findViewById(R.id.ImgCustomer);
-        imgMiller = findViewById(R.id.ImgMiller);
-        imgOwner = findViewById(R.id.ImgOwner);
-        imgDriver = findViewById(R.id.ImgDriver);
-        // for text
-        tvCustomer = findViewById(R.id.txtCustomer);
-        tvMiller = findViewById(R.id.txtMiller);
-        tvOwner = findViewById(R.id.txtOwner);
-        tvDriver = findViewById(R.id.txtDriver);
+        customer  = findViewById(R.id.customerTv);
+        driver = findViewById(R.id.driverTv);
+
         //for button
         btnNext = findViewById(R.id.btnNext);
 
     }
 
     public void clickListenerView(){
-        miller.setOnClickListener(v -> {
-            userRoleId="2";
-            updateSelectionView(miller);
-        });
 
         driver.setOnClickListener(v -> {
-            userRoleId="3";
+            userRoleId="1";
             updateSelectionView(driver);
         });
 
         customer.setOnClickListener(v -> {
-            userRoleId = "4";
+            userRoleId = "2";
             updateSelectionView(customer);
         });
 
-        owner.setOnClickListener(v -> {
-            userRoleId= "5";
-            updateSelectionView(owner);
-        });
 
         btnNext.setOnClickListener(view -> {
 
@@ -85,33 +65,18 @@ public class LoginOptionActivity extends AppCompatActivity {
 
             }else{
                 switch (userRoleId){
-                    case "2":
-                        intent = new Intent(LoginOptionActivity.this, WelcomeActivityForMiller.class);
-                        HighwayPrefs.putString(getApplicationContext(), "millerRoleId" ,userRoleId);
-                        startActivity(intent);
-                        finish();
-                        break;
-
-                    case "3":
-                        intent = new Intent(LoginOptionActivity.this, WelcomeDriverActivity.class);
-                      //  intent.putExtra("driverRoleId", userRoleId);
+                    case "1":
+                        intent = new Intent(LoginOptionActivity.this, LoginActivityForCustomer.class);
+                        //  intent.putExtra("driverRoleId", userRoleId);
                         HighwayPrefs.putString(getApplicationContext(),"driverRoleId",userRoleId);
                         startActivity(intent);
                         finish();
                         break;
 
-                    case "4":
-                        intent = new Intent(LoginOptionActivity.this, WelcomeActivityForCustomer.class);
-                       // intent.putExtra("customerRoleId", userRoleId);
-                        HighwayPrefs.putString(getApplicationContext(),"customerRoleId",userRoleId);
-                        startActivity(intent);
-                        finish();
-                        break;
-
-                    case "5":
-                        intent = new Intent(LoginOptionActivity.this, WelcomeOwnerActivity.class);
-                     //   intent.putExtra("ownerRoleId", userRoleId);
-                        HighwayPrefs.putString(getApplicationContext(),"ownerRoleId",userRoleId);
+                    case "2":
+                        intent = new Intent(LoginOptionActivity.this, WelcomeDriverActivity.class);
+                      //  intent.putExtra("driverRoleId", userRoleId);
+                        HighwayPrefs.putString(getApplicationContext(),"driverRoleId",userRoleId);
                         startActivity(intent);
                         finish();
                         break;
@@ -119,11 +84,10 @@ public class LoginOptionActivity extends AppCompatActivity {
             }
         });
     }
-    private void updateSelectionView(LinearLayout selectedView) {
-        customer.setBackgroundResource(R.drawable.cardview_border_default);
-        driver.setBackgroundResource(R.drawable.cardview_border_default);
-        miller.setBackgroundResource(R.drawable.cardview_border_default);
-        owner.setBackgroundResource(R.drawable.cardview_border_default);
-        selectedView.setBackgroundResource(R.drawable.cardview_border_selected);
+    private void updateSelectionView(TextView selectedView) {
+        customer.setBackgroundResource(R.drawable.rounded_user_type_selecter_white);
+        driver.setBackgroundResource(R.drawable.rounded_user_type_selecter_white);
+
+        selectedView.setBackgroundResource(R.drawable.rounded_user_type_selecter);
     }
 }
