@@ -16,7 +16,7 @@
         android:layout_margin="@dimen/margin_top_10"
         android:background="@drawable/btn_shape_draw"
         android:text=" Next "
-        android:textColor="@color/white" />
+        android:textColor="@color/white"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,6 +24,7 @@
         android:layout_centerInParent="true">
 
         <TextView
+            style="@style/zl_text_14_medium"
             android:id="@+id/msgTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,13 +34,13 @@
 
         <TextView
             android:id="@+id/customerTv"
+            style="@style/zl_text_20_bold"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/msgTv"
             android:layout_centerHorizontal="true"
             android:text="@string/user_type_c"
             android:textColor="@color/black"
-            android:textSize="36sp"
             android:layout_marginTop="@dimen/_30sdp"
             android:gravity="center"
             android:paddingStart="@dimen/_25sdp"
@@ -47,29 +48,27 @@
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:background="@drawable/rounded_user_type_selecter"
-            android:textStyle="bold" />
+            />
 
 
         <TextView
             android:id="@+id/driverTv"
             android:layout_width="240dp"
+            style="@style/zl_text_20_bold"
+
             android:layout_height="wrap_content"
             android:layout_below="@+id/customerTv"
             android:layout_centerHorizontal="true"
            android:layout_marginTop="@dimen/_10dp"
-            android:text="@string/user_type_d"
+            android:text="@string/transporter"
             android:textColor="@color/black"
             android:gravity="center"
-
             android:paddingStart="@dimen/_25sdp"
             android:paddingEnd="@dimen/_25sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:background="@drawable/rounded_user_type_selecter_white"
-
-            android:textSize="36sp"
-
-            android:textStyle="bold" />
+            />
 
     </RelativeLayout>
 

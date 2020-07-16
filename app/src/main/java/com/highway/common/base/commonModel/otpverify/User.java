@@ -1,15 +1,9 @@
-
 package com.highway.common.base.commonModel.otpverify;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-
-    @SerializedName("driverVerifyBy")
-    @Expose
-    private String driverVerifyBy;
     @SerializedName("User_Id")
     @Expose
     private String userId;
@@ -19,9 +13,6 @@ public class User {
     @SerializedName("Mobile")
     @Expose
     private String mobile;
-    @SerializedName("Image")
-    @Expose
-    private String image;
     @SerializedName("Email")
     @Expose
     private String email;
@@ -43,6 +34,9 @@ public class User {
     @SerializedName("isBoolean")
     @Expose
     private String isBoolean;
+    @SerializedName("driverVerifyBy")
+    @Expose
+    private Integer driverVerifyBy;
 
     public String getUserId() {
         return userId;
@@ -66,14 +60,6 @@ public class User {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getEmail() {
@@ -132,11 +118,12 @@ public class User {
         this.isBoolean = isBoolean;
     }
 
-    public String getDriverVerifyBy() {
+    public Integer getDriverVerifyBy() {
         return driverVerifyBy;
     }
 
-    public void setDriverVerifyBy(String driverVerifyBy) {
+    public void setDriverVerifyBy(Integer driverVerifyBy) {
         this.driverVerifyBy = driverVerifyBy;
     }
+
 }

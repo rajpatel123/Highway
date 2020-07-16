@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/send_rec">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:src="@drawable/welcom_side_1st" />
-
-        <!-- <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="@string/slide_1__title"
-             android:textColor="@android:color/black"
-             android:textSize="@dimen/slide_title"
-             android:textStyle="bold" />-->
-
-    </LinearLayout>
+        android:layout_above="@+id/layoutDots"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:text="Send and receive goods quickly\nand efficiently"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
 
 
 </RelativeLayout>

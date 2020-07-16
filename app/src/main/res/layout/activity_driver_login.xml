@@ -1,158 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".drivers.driverActivity.DriverLoginActivity">
+    android:background="@color/white"
+    tools:context=".customer.customerActivity.LoginActivityForCustomer">
 
+    <Button
+        android:id="@+id/btnSendOtp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/_20sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_shape_draw"
+        android:text="Enter Highway "
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/edtTxtMobNo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_40"
+        android:layout_below="@+id/topRL"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/input_bottom_line"
+        android:hint="Enter your phone number"
+        android:inputType="number"
+        android:maxLength="15"
+        android:maxLines="1"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16dp" />
 
     <RelativeLayout
+        android:id="@+id/topRL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_group_1290">
 
-        <LinearLayout
-            android:id="@+id/login_page"
+        <TextView
+            style="@style/zl_text_14_regular"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:paddingTop="1dp"
-            android:background="@color/project_yellow_color"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="@dimen/margin_Top80"
-                android:text="Driver Login/Register  "
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="Enter phone number and password.we shall "
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginBottom="50dp"
-                android:text="create an account"
-                android:textColor="@color/black"
-                android:textStyle="normal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/login_page">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/login_page"
-                    android:layout_marginLeft="@dimen/margin_30"
-                    android:layout_marginTop="@dimen/margin_50"
-                    android:layout_marginRight="@dimen/margin_30"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingLeft="@dimen/padding_5"
-                            android:text="Mobile Number "
-                            android:textColor="@color/white"
-                            android:textSize="18dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:background="@drawable/input_round_shape">
-
-                        <EditText
-                            android:id="@+id/edtTxtDriverMobNo"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/margin_40"
-                            android:background="@null"
-                            android:hint="Enter Mobile Number"
-                            android:inputType="phone"
-                            android:maxLength="10"
-                            android:maxLines="1"
-                            android:paddingLeft="@dimen/_10dp"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_16dp" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_top_30"
-                        android:text="@string/By_accepting____"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/size_14"
-                        android:textStyle="normal" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/term_and_condition"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/size_14"
-                        android:textStyle="normal" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_left_30"
-                        android:layout_marginRight="@dimen/margin_right_30"
-                        android:text="@string/of_highway"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/size_14"
-                        android:textStyle="normal" />
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/margin_50">
-
-                        <Button
-                            android:id="@+id/btnSendDriverOtp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_below="@+id/forgot_password"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/btn_shape_draw"
-                            android:paddingLeft="@dimen/padding_left_50"
-                            android:paddingRight="@dimen/padding_right_50"
-                            android:text="Send OTP "
-                            android:textColor="@color/project_yellow_color" />
-                    </LinearLayout>
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_230sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:text="Join us to get booking from your\n nearest Location"
+            android:textSize="20sp" />
     </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/otphint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtTxtMobNo"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:text="You will receive an OTP to verify this number"
+        android:textColor="#B28826"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>

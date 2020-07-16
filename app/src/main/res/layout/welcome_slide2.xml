@@ -2,32 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-   >
-    <!--android:background="@color/bg_screen2"-->
-    <LinearLayout
-        android:layout_width="wrap_content"
+    android:background="@drawable/track">
+
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="@dimen/desc_padding"
-            android:paddingRight="@dimen/desc_padding"
-            android:text="@string/slide_2__desc"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/slide_desc" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/highway1" />
-
-    </LinearLayout>
+        android:layout_above="@+id/layoutDots"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:text="Track your goods \nthroughout the delivery"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
 
 
 </RelativeLayout>

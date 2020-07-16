@@ -11,6 +11,21 @@ private String userId;
 @SerializedName("Name")
 @Expose
 private String name;
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @SerializedName("Role_Id")
+@Expose
+private String role;
+
+
 @SerializedName("Email")
 @Expose
 private String email;

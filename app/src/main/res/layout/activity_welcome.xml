@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/send_rec"
     tools:showIn="@layout/activity_welcome">
 
 
@@ -12,14 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
     <LinearLayout
         android:id="@+id/layoutDots"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dots_height"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dots_margin_bottom"
+        android:layout_marginBottom="@dimen/_100sdp"
         android:gravity="center"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal"/>
 
     <View
         android:layout_width="match_parent"
@@ -33,19 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="@null"
+        android:layout_margin="@dimen/_30sdp"
+        android:layout_centerHorizontal="true"
         android:text="@string/next"
-        android:textColor="@android:color/black" />
+        android:background="@color/black"
+        android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/btn_skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="@null"
-        android:text="@string/skip"
-        android:textColor="@android:color/black" />
 
 </RelativeLayout>

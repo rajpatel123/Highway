@@ -1,4 +1,4 @@
-package com.highway.common.base.activity;
+package com.highway.drivermodule.driverActivity;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -24,7 +24,6 @@ import com.highway.R;
 import com.highway.common.base.commonModel.registration.RegistrationReqUpdated;
 import com.highway.common.base.commonModel.registration.RegistrationRespUpdated;
 import com.highway.commonretrofit.RestClient;
-import com.highway.customer.customerActivity.WelcomeActivityForCustomer;
 import com.highway.utils.CameraUtils;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
@@ -43,15 +42,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegistrationDetailsActivity extends AppCompatActivity {
+public class DriverRegistrationDetailsActivity extends AppCompatActivity {
 
-    private TextView customerTv, goodsProverTV;
+    private TextView driverTv, ownerTv;
     private Button btnSubmit;
 
     private ImageView regBackArrow;
-    String userName, userRole, userId,userEmail;
+    String userName, userRole, userId, userEmail;
 
-    private EditText userNameEdt,userEmailEdt;
+    private EditText userNameEdt, userEmailEdt;
     private Toolbar regToolbar;
 
     // Activity request codes
@@ -78,7 +77,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
     private static String imageStoragePath;
     private String base64UserImg;
-    private String customerRoleId="4";
+    private String customerRoleId = "3";
     private String driverRoleId;
     private String millerRoleId;
     private String ownerRoleID;
@@ -87,7 +86,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration_details);
+        setContentView(R.layout.activity_driver_registration_details);
 
         initView();  // finding by id
         setOnClickListener();
@@ -113,28 +112,28 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
         regBackArrow = findViewById(R.id.regBackArrow);
 
-        customerTv = findViewById(R.id.customerTv);
+        driverTv = findViewById(R.id.driverTv);
         userNameEdt = findViewById(R.id.userName);
         userEmailEdt = findViewById(R.id.userEmailEdt);
-        goodsProverTV = findViewById(R.id.goodsProvider);
+        ownerTv = findViewById(R.id.ownerTv);
         btnSubmit = findViewById(R.id.btnSubmitDetails);
 
 
-        customerTv.setOnClickListener(new View.OnClickListener() {
+        driverTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customerRoleId = "4";
+                customerRoleId = "3";
 
-                updateSelectionView(customerTv);
+                updateSelectionView(driverTv);
             }
         });
 
 
-        goodsProverTV.setOnClickListener(new View.OnClickListener() {
+        ownerTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-   customerRoleId = "2";
-                updateSelectionView(goodsProverTV);
+                customerRoleId = "5";
+                updateSelectionView(ownerTv);
             }
         });
 
@@ -145,7 +144,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(RegistrationDetailsActivity.this, WelcomeActivityForCustomer.class);
+                //Intent intent = new Intent(DriverRegistrationDetailsActivity.this, WelcomeActivityForCustomer.class);
                 //startActivity(intent);
 
                 regDetailValidationOperation();
@@ -237,7 +236,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                 .setMessage("Camera needs few permissions to work properly. Grant them in settings.")
                 .setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        CameraUtils.openSettings(RegistrationDetailsActivity.this);
+                        CameraUtils.openSettings(DriverRegistrationDetailsActivity.this);
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -258,8 +257,8 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
 
 
     private void updateSelectionView(TextView selectedView) {
-        customerTv.setBackgroundResource(R.drawable.rounded_corner_white);
-        goodsProverTV.setBackgroundResource(R.drawable.rounded_corner_white);
+        driverTv.setBackgroundResource(R.drawable.rounded_corner_white);
+        ownerTv.setBackgroundResource(R.drawable.rounded_corner_white);
 
         selectedView.setBackgroundResource(R.drawable.rounded_corner_selecter);
     }
@@ -276,7 +275,6 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
         } else {
             userNameEdt.setError(null);
         }
-
 
 
         if (userName.isEmpty() && validEmail(userEmail)) {
@@ -322,7 +320,7 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
                                 if (response.body().getUser().getUserStatus().equalsIgnoreCase("1")) {
-                                    Intent intent = new Intent(RegistrationDetailsActivity.this, WelcomeActivityForCustomer.class);
+                                    Intent intent = new Intent(DriverRegistrationDetailsActivity.this, WelcomeDriverActivity.class);
                                     HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, response.body().getUser().getRoleId());
                                     HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getUser().getName());
                                     HighwayPrefs.putString(getApplicationContext(), Constants.USERMOBILE, response.body().getUser().getMobile());
@@ -336,17 +334,17 @@ public class RegistrationDetailsActivity extends AppCompatActivity {
                                     finish();
                                 }
                             } else if (response.body().getUser().getUserStatus().equalsIgnoreCase("0")) {
-                                Toast.makeText(RegistrationDetailsActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DriverRegistrationDetailsActivity.this, "Sign up Failed", Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(RegistrationDetailsActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DriverRegistrationDetailsActivity.this, "Pls Enter your details", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<RegistrationRespUpdated> call, Throwable t) {
-                        Toast.makeText(RegistrationDetailsActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DriverRegistrationDetailsActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

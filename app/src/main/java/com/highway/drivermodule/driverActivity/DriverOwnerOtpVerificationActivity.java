@@ -1,4 +1,4 @@
-package com.highway.common.base.activity;
+package com.highway.drivermodule.driverActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
+import com.highway.common.base.activity.RegistrationDetailsActivity;
 import com.highway.common.base.commonModel.login.LoginReqUpdated;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpRequest;
 import com.highway.common.base.commonModel.otpverify.VerifyOtpResponse;
@@ -36,12 +38,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MobileOtpVerificationActivity extends AppCompatActivity implements SmsListener {
+public class DriverOwnerOtpVerificationActivity extends AppCompatActivity implements SmsListener {
 
     private EditText verifyPin;
     private Button btnVerify;
     private ImageView backImage;
-    public TextView resend,oTPHintTv;
+    public TextView resend;
     public TextView mobileNumberTV, changeNumberTv;
     String userId;
 
@@ -59,11 +61,10 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         verifyPin = findViewById(R.id.verifyPin_edittext);
         btnVerify = findViewById(R.id.verifyPin_btn);
         resend = findViewById(R.id.resend);
-        oTPHintTv = findViewById(R.id.hint);
         mobileNumberTV = findViewById(R.id.mobileNumber);
         changeNumberTv = findViewById(R.id.changeNumber);
         Bundle b = getIntent().getExtras();
-        LoginRoleId = b.getString("LoginRoleId");
+         LoginRoleId = b.getString("LoginRoleId");
 
         timerInOtp();                          // time count down of otp
 
@@ -71,7 +72,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         usermobileNumber = HighwayPrefs.getString(getApplicationContext(), Constants.USERMOBILE);
         userLoginRoleId = HighwayPrefs.getString(getApplicationContext(), Constants.ROLEID);
        // mobileNumberTV.setText(usermobileNumber);
-        oTPHintTv.setText("Verification OTP has been sent to +91"+ usermobileNumber);
+
         smsReceiver.bindListener(this);
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
@@ -84,14 +85,8 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         changeNumberTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String driverRoleId = HighwayPrefs.getString(getApplicationContext(), "driverRoleId");
-
-                Log.e("driver","::"+driverRoleId);
-                Intent intent = new Intent(MobileOtpVerificationActivity.this, LoginActivityForCustomer.class);
-                // bookVehicleName = HighwayPrefs.getString(getApplicationContext(), "bookVehicleName");
+                Intent intent = new Intent(DriverOwnerOtpVerificationActivity.this, LoginActivityForDriver.class);
                 startActivity(intent);
-
                 finish();
 
             }
@@ -117,13 +112,13 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response != null && response.code() == 200 && response.body() != null) {
-                    Toast.makeText(MobileOtpVerificationActivity.this, "Otp resend on your mobile number!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DriverOwnerOtpVerificationActivity.this, "Otp resend on your mobile number!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(MobileOtpVerificationActivity.this, "Otp resend Failed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DriverOwnerOtpVerificationActivity.this, "Otp resend Failed!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -176,7 +171,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                         if (response.body() != null && response.body().getStatus()) {
                           //  if (response.body().getStatus()) {
                                 if (TextUtils.isEmpty(response.body().getUser().getName())) {
-                                    Intent intent = new Intent(MobileOtpVerificationActivity.this, RegistrationDetailsActivity.class);
+                                    Intent intent = new Intent(DriverOwnerOtpVerificationActivity.this, DriverRegistrationDetailsActivity.class);
                                     userId = response.body().getUser().getUserId();
                                     HighwayPrefs.putString(getApplicationContext(), Constants.ID, userId);
 
@@ -190,7 +185,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                                 } else {
                                     gotoDashboardAfterLogin(response.body());
 
-                               /* Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
+                               /* Intent intent = new Intent(DriverOwnerOtpVerificationActivity.this, DashBoardActivity.class);
 
                                 HighwayPrefs.putBoolean(getApplicationContext(), Constants.LOGGED_IN, true);
                                 HighwayPrefs.putString(getApplicationContext(), Constants.NAME, response.body().getName());
@@ -202,21 +197,21 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, response.body().getAddress());
 
                                 startActivity(intent);
-                                Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DriverOwnerOtpVerificationActivity.this, "Wlcm to Highway", Toast.LENGTH_SHORT).show();
                                 finish();*/
                                 }
                            /* }else {
-                                Toast.makeText(MobileOtpVerificationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DriverOwnerOtpVerificationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }*/
                         } else {
-                            Toast.makeText(MobileOtpVerificationActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DriverOwnerOtpVerificationActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
 
                         }
                     }
 
                     @Override
                     public void onFailure(Call<VerifyOtpResponse> call, Throwable t) {
-                        Toast.makeText(MobileOtpVerificationActivity.this, "Otp verification failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DriverOwnerOtpVerificationActivity.this, "Otp verification failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -226,7 +221,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
 
     private void gotoDashboardAfterLogin(VerifyOtpResponse verifyOtpResponse) {
 
-        Intent intent = new Intent(MobileOtpVerificationActivity.this, DashBoardActivity.class);
+        Intent intent = new Intent(DriverOwnerOtpVerificationActivity.this, DashBoardActivity.class);
 
         HighwayPrefs.putBoolean(getApplicationContext(), Constants.LOGGED_IN, true);
         HighwayPrefs.putString(getApplicationContext(), Constants.ID, verifyOtpResponse.getUser().getUserId());
@@ -245,7 +240,7 @@ public class MobileOtpVerificationActivity extends AppCompatActivity implements 
         HighwayPrefs.putString(getApplicationContext(), Constants.ADDRESS, verifyOtpResponse.getUser().getAddress());
 
         startActivity(intent);
-        Toast.makeText(MobileOtpVerificationActivity.this, "Wlcm to Highway ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(DriverOwnerOtpVerificationActivity.this, "Wlcm to Highway ", Toast.LENGTH_SHORT).show();
         finish();
     }
 

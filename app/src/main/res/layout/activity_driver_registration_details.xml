@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+
+    tools:context=".common.base.activity.RegistrationDetailsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/regToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <ImageView
+            android:id="@+id/regBackArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_arrow_back_white_24dp"
+            android:tint="@color/black" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        style="@style/zl_text_16_medium"
+        android:id="@+id/aboutTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/regToolbar"
+        android:layout_margin="@dimen/_20sdp"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:text="Tell us a little about you" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutTxt"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            style="@style/zl_text_14_medium"
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your name"
+            android:layout_margin="@dimen/_20sdp"/>
+
+        <EditText
+            style="@style/zl_text_14_medium"
+            android:id="@+id/userEmailEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your enail"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            />
+        <TextView
+            android:id="@+id/areYouTxt"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Are you a" />
+        <TextView
+            style="@style/zl_text_20_bold"
+            android:id="@+id/driverTv"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/user_type_d"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_25sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:background="@drawable/rounded_corner_selecter"
+            />
+
+
+        <TextView
+            style="@style/zl_text_20_bold"
+            android:id="@+id/ownerTv"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/owner"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_25sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:background="@drawable/rounded_corner_white"
+            android:textSize="30sp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmitDetails"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black"
+        android:gravity="center"
+        android:text="Submit "
+        android:layout_margin="@dimen/_20sdp"
+        android:textColor="@color/white"
+
+        />
+</RelativeLayout>

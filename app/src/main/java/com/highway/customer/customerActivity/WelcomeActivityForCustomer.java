@@ -20,6 +20,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.highway.R;
+import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.utils.Constants;
 import com.highway.utils.HighwayPrefs;
 
@@ -52,7 +53,6 @@ public class WelcomeActivityForCustomer extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
 
 
@@ -74,12 +74,7 @@ public class WelcomeActivityForCustomer extends AppCompatActivity {
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchHomeScreen();
-            }
-        });
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +117,7 @@ public class WelcomeActivityForCustomer extends AppCompatActivity {
 
     private void launchHomeScreen() {
         HighwayPrefs.setFirstTimeLaunch(this, Constants.IS_FIRST_TIME_LAUNCH_CUSTOMER,false);
-        startActivity(new Intent(WelcomeActivityForCustomer.this, LoginActivityForCustomer.class));
+        startActivity(new Intent(WelcomeActivityForCustomer.this, DashBoardActivity.class));
         finish();
     }
 
@@ -137,11 +132,11 @@ public class WelcomeActivityForCustomer extends AppCompatActivity {
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
                 btnNext.setText(getString(R.string.start));
-                btnSkip.setVisibility(View.GONE);
+                //btnSkip.setVisibility(View.GONE);
             } else {
                 // still pages are left
                 btnNext.setText(getString(R.string.next));
-                btnSkip.setVisibility(View.VISIBLE);
+                //btnSkip.setVisibility(View.VISIBLE);
             }
         }
 

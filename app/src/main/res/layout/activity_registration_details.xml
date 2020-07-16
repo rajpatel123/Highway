@@ -4,124 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+
     tools:context=".common.base.activity.RegistrationDetailsActivity">
-    <LinearLayout
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/regToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/regBackArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_arrow_back_white_24dp"
+                android:tint="@color/black" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        style="@style/zl_text_16_medium"
+        android:id="@+id/aboutTxt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/regToolbar"
+        android:layout_margin="@dimen/_20sdp"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:text="Tell us a little about you" />
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/regAppToolbar"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/regToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-
-                <ImageView
-                    android:id="@+id/regBackArrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/ic_arrow_back_white_24dp" />
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/ImglinearProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/regToolbar"
+            android:layout_below="@+id/aboutTxt"
             android:gravity="center"
-            android:visibility="gone">
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/regUserImg"
-                android:layout_width="@dimen/margin_width_120"
-                android:layout_height="@dimen/margin_height_120"
-                android:layout_gravity="center"
-                android:padding="15dp"
-                android:src="@drawable/circularimg" />
-        </RelativeLayout>
+           <EditText
+               style="@style/zl_text_14_medium"
+               android:id="@+id/userName"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Enter your name"
+               android:layout_margin="@dimen/_20sdp"/>
 
-
-
-            <LinearLayout
-                android:id="@+id/lineardata"
+            <EditText
+                style="@style/zl_text_14_medium"
+                android:id="@+id/userEmailEdt"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Enter your enail"
+               android:layout_marginStart="@dimen/_20sdp"
+               android:layout_marginEnd="@dimen/_20sdp"
+                />
+            <TextView
+                android:id="@+id/areYouTxt"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/_20ssp"
-                android:layout_marginRight="@dimen/_20ssp"
-                android:layout_marginTop="@dimen/_50sdp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtUserName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:padding="4dp"
-                    android:text="Name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/size_20" />
-
-                <EditText
-                    android:id="@+id/edtTxtInputUserName"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40"
-                    android:hint="Enter Name"
-                    android:maxLength="30"
-                    android:maxLines="1"
-                    android:padding="4dp"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/txtUserEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:padding="4dp"
-                    android:text="Email"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/size_20" />
-
-                <EditText
-                    android:id="@+id/edtTxtInputUserEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40"
-                    android:hint="Enter Email"
-                    android:maxLength="30"
-                    android:maxLines="1"
-                    android:padding="4dp"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-        <Button
-            android:id="@+id/btnSubmitDetails"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:layout_marginLeft="@dimen/_20ssp"
-            android:layout_marginRight="@dimen/_20ssp"
-            android:background="@color/black"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:text="Submit "
-            android:textColor="@color/project_yellow_color"
-            android:textSize="@dimen/size_20"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="Are you a" />
+            <TextView
+                style="@style/zl_text_20_bold"
+                android:id="@+id/customerTv"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/user_type_c"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:paddingStart="@dimen/_25sdp"
+                android:paddingEnd="@dimen/_25sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corner_selecter"
+                 />
 
 
+            <TextView
+                style="@style/zl_text_20_bold"
+                android:id="@+id/goodsProvider"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/goods_provider"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:paddingStart="@dimen/_25sdp"
+                android:paddingEnd="@dimen/_25sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:background="@drawable/rounded_corner_white"
+                android:textSize="30sp"
+                 />
+        </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmitDetails"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black"
+        android:gravity="center"
+        android:text="Submit "
+        android:layout_margin="@dimen/_20sdp"
+        android:textColor="@color/white"
+
+        />
 </RelativeLayout>

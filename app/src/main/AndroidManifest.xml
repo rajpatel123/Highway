@@ -157,6 +157,15 @@
         <activity
             android:name=".common.base.activity.LoginOptionActivity"
             android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".drivermodule.driverActivity.DriverRegistrationDetailsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".drivermodule.driverActivity.DriverOwnerOtpVerificationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".millUserModule.milluserActivity.LoginActivityForMiller"
             android:screenOrientation="portrait" />

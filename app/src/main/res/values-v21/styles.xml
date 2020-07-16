@@ -7,7 +7,66 @@
     </style>
 
 
+    <!--New Font styles-->
+    <style name="zl_text_14_bold" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
 
+    <style name="zl_text_14_regular" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="zl_text_14_medium" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:textColor">@color/black_disabled</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+    <!--New Font styles-->
+    <style name="zl_text_16_bold" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="zl_text_16_regular" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="zl_text_20_bold" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_20ssp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="zl_text_20_regular" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_20ssp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="zl_text_16_medium" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textColor">@color/black_disabled</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
+
+
+    <style name="zl_text_12_medium" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColor">@color/black_disabled</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+
+
+
+    <!---->
 
 
 </resources>

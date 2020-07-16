@@ -2,36 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-   <!-- android:background="@color/bg_screen3">-->
+    android:background="@drawable/loading">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_above="@+id/layoutDots"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:text="Safe loading and \nunloading"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/desc_padding"
-            android:paddingRight="@dimen/desc_padding"
-            android:text="@string/slide_3_desc"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/slide_desc" />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/highway4"
-            />
-           <!-- android:src="@drawable/ic_discount" />-->
-
-
-
-    </LinearLayout>
 
 </RelativeLayout>

@@ -164,8 +164,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
     public Toolbar dashBoardToolbar;
     public AppBarLayout appBarLayout;
-    private CircleImageView nevCircularUserImgView;
-    private TextView nevUserName, nevUserMobNo;
+    private TextView nevUserName, nevUserMobNo,nameFLetter;
     String name, image, mobNo;
     private NavigationView navigationView;
     String userRole;
@@ -263,7 +262,7 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
 
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_dash_board);
-        nevCircularUserImgView = headerView.findViewById(R.id.imageView);
+        nameFLetter = headerView.findViewById(R.id.nameFLetter);
         nevUserName = headerView.findViewById(R.id.userProfileName);
         nevUserMobNo = headerView.findViewById(R.id.userMobileNo);
 
@@ -297,17 +296,18 @@ public class DashBoardActivity extends AppCompatActivity implements NavigationVi
 
         nevUserName.setText(name);
         nevUserMobNo.setText(mobNo);
+        nameFLetter.setText(name.substring(0,1));
 
-        if (!TextUtils.isEmpty(image)) {
-            Picasso.with(this).load(image)
-                    .error(R.drawable.highway_logo)
-                    .into(nevCircularUserImgView);
-        } else {
-            Picasso.with(this)
-                    .load(R.drawable.highway_logo)
-                    .error(R.drawable.highway_logo)
-                    .into(nevCircularUserImgView);
-        }
+//        if (!TextUtils.isEmpty(image)) {
+//            Picasso.with(this).load(image)
+//                    .error(R.drawable.highway_logo)
+//                    .into(nevCircularUserImgView);
+//        } else {
+//            Picasso.with(this)
+//                    .load(R.drawable.highway_logo)
+//                    .error(R.drawable.highway_logo)
+//                    .into(nevCircularUserImgView);
+//        }
     }
 
     public void navAccordingRoleId() {

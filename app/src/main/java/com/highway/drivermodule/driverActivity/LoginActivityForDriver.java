@@ -42,8 +42,8 @@ public class LoginActivityForDriver extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_login);
 
-        edtDriverMobNo = findViewById(R.id.edtTxtDriverMobNo);
-        sendOtp = findViewById(R.id.btnSendDriverOtp);
+        edtDriverMobNo = findViewById(R.id.edtTxtMobNo);
+        sendOtp = findViewById(R.id.btnSendOtp);
 
         //  driverLoginRoleId = getIntent().getStringExtra("driverRoleId");
         driverLoginRoleId = HighwayPrefs.getString(getApplicationContext(), "driverRoleId");
@@ -79,7 +79,7 @@ public class LoginActivityForDriver extends AppCompatActivity {
 
             LoginReqUpdated loginReqUpdated = new LoginReqUpdated();
             loginReqUpdated.setMobile(phone_number);
-            loginReqUpdated.setRoleId(driverLoginRoleId);
+            //loginReqUpdated.setRoleId(driverLoginRoleId);
 
             if (Utils.isInternetConnected(this)) {
 
@@ -92,7 +92,7 @@ public class LoginActivityForDriver extends AppCompatActivity {
 
                         if (response.body() != null) {
                             if (response.code() == 200) {
-                                Intent intent = new Intent(LoginActivityForDriver.this, MobileOtpVerificationActivity.class);
+                                Intent intent = new Intent(LoginActivityForDriver.this, DriverOwnerOtpVerificationActivity.class);
                                 HighwayPrefs.putString(LoginActivityForDriver.this, Constants.USERMOBILE, phone_number);
                                 HighwayPrefs.putString(getApplicationContext(), Constants.ROLEID, driverLoginRoleId);
                                 intent.putExtra("LoginRoleId", driverLoginRoleId);

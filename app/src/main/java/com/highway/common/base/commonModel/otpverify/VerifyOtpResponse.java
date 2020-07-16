@@ -1,4 +1,3 @@
-
 package com.highway.common.base.commonModel.otpverify;
 
 import com.google.gson.annotations.Expose;
@@ -6,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class VerifyOtpResponse {
 
-    @SerializedName("Status")
+    @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("Message")
+    @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("user")
