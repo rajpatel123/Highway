@@ -250,7 +250,7 @@ public class BookingConformedActivity extends AppCompatActivity implements OnMap
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-            if (getIntent().hasExtra("bookTripIdCode")) {
+            if(getIntent().hasExtra("bookTripIdCode")) {
                 bookTripIdCode = getIntent().getStringExtra("bookTripIdCode");
                 bookId = getIntent().getStringExtra("bookId");
                 vehicleTypeId = getIntent().getStringExtra("vTypeId");

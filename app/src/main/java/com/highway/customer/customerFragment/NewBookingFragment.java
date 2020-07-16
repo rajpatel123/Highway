@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -90,7 +91,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
 
     TextView edtSourceLOcationEDT;
     TextView edtDropLocation;
-
+Button proceedBtn;
     LinearLayout sourceLL;
     LinearLayout destLL;
 
@@ -133,6 +134,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
         edtDropLocation = view.findViewById(R.id.edtDropLocation);
         sourceLL = view.findViewById(R.id.sourceLL);
         destLL = view.findViewById(R.id.destLL);
+        proceedBtn = view.findViewById(R.id.proceedBtn);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -195,6 +197,13 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
             getNearByDriverLocation();
         }
 
+        proceedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Intent intent = new Intent(mActivity,BookingProcessActivtiy.class)
+            }
+        });
+
         return view;
     }
 
@@ -218,7 +227,7 @@ public class NewBookingFragment extends Fragment implements OnMapReadyCallback, 
                         edtSourceLOcationEDT.setText(Utils.getAddress(mActivity, latLng));
                     }
                     if (mMap != null && place.getLatLng() != null) {
-
+                        proceedBtn.setVisibility(View.VISIBLE);
 
                         sourceName = Utils.getAddress(mActivity, latLng);
                         sourceLatitude = latLng.latitude;

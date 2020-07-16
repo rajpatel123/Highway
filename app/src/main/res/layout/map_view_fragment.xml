@@ -19,11 +19,13 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/sourceLL"
+                android:id="@+id/sourceLLL"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
+                android:visibility="gone"
+
                 android:background="@drawable/oval_shape_white"
                 android:elevation="@dimen/margin_5"
                 android:gravity="center"
@@ -44,7 +46,7 @@
                         android:background="@drawable/source_indicator" />
 
                     <TextView
-                        android:id="@+id/edtSourceLOcation"
+                        android:id="@+id/edtSourceLOcations"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -70,6 +72,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:visibility="gone"
                 android:background="@drawable/oval_shape_white"
                 android:elevation="@dimen/margin_5"
                 android:gravity="center"
@@ -135,7 +138,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 
-
+        <include layout="@layout/pickup_location_bottomsheet"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
     </FrameLayout>
 
 
