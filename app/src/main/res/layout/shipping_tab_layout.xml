@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:id="@+id/shipmentScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/goodsTitle"
+                style="@style/zl_text_16_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:text="Goods Details"
+                android:textColor="#707070" />
+
+
+            <TextView
+                android:id="@+id/goodsTpeSpinner"
+                style="@style/zl_text_14_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/goodsTitle"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/button_border"
+                android:drawableEnd="@drawable/ic_dropdown"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/_30sdp"
+                android:padding="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:text="Choose Goods Type"
+                android:textColor="#707070" />
+
+
+            <TextView
+                android:id="@+id/goodsSizeSpinner"
+                style="@style/zl_text_14_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/goodsTpeSpinner"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/button_border"
+                android:drawableEnd="@drawable/ic_dropdown"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/_30sdp"
+                android:padding="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:text="Goods Size"
+                android:textColor="#707070" />
+
+            <TextView
+                android:id="@+id/vehicleType"
+                style="@style/zl_text_16_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_below="@+id/goodsSizeSpinner"
+                android:text="Choose Vehicle"
+                android:textColor="#707070" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vehicleType"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:id="@+id/vehicleListRV"/>
+
+            <Button
+                android:id="@+id/proceedAfterVehicleSlectionBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#000"
+                android:visibility="visible"
+                android:layout_below="@+id/vehicleListRV"
+                android:layout_margin="@dimen/_20sdp"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="PROCEED"
+                android:textColor="#fff" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

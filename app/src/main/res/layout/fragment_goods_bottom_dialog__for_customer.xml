@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.customerFragment.InvoiceBottomDialogFragmentForCustomer">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+
+
+
+
+        <TextView
+            android:id="@+id/goodsTypesubtext"
+            style="@style/zl_text_12_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/goodsType"
+            android:text="You can only choose one good type per delivery"
+            android:textColor="#B28826" />
+
+        <TextView
+            android:id="@+id/goodsType"
+            style="@style/zl_text_14_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Goods Type"
+            android:textColor="#707070" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+           android:layout_below="@+id/goodsTypesubtext"
+            android:id="@+id/goodTypesRecyclerView"/>
+
+        <Button
+            android:id="@+id/doneBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/goodTypesRecyclerView"
+            android:background="@color/black"
+            android:text="@string/done"
+            android:textColor="#FFF"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -60,9 +60,9 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
         // holder.tv1.setText(android_versionnames[position]);
         VehicleList vehicleList = bookingVehicleListResponse.getVehicleData().getVehicleList().get(position);
 
-        holder.tataAceTv1.setText("" + vehicleList.getVehicleName());
-        holder.faireChargeTv3.setText("\u20B9" + vehicleList.getVehicleFare());
-        holder.timeDurationTv2.setText(vehicleList.getTimeDuration());
+        holder.vehicleNameNUmber.setText("" + vehicleList.getVehicleName()+"-");
+        holder.faireChargeTv3.setText("Rs." + vehicleList.getVehicleFare());
+       // holder.timeDurationTv2.setText(vehicleList.getTimeDuration());
 
 
 
@@ -196,19 +196,19 @@ public class BookingVehicleAdapter extends RecyclerView.Adapter<BookingVehicleAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tataAceTv1, timeTv2, faireChargeTv3,timeDurationTv2;
+        TextView vehicleNameNUmber, timeTv2, faireChargeTv3,timeDurationTv2;
         ImageView vehicleIcons, infoImg;
         LinearLayout row_linearlayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tataAceTv1 = itemView.findViewById(R.id.tataAceTv1);
-            timeTv2 = itemView.findViewById(R.id.timeDurationTv2);
+            vehicleNameNUmber = itemView.findViewById(R.id.vehicleNameNUmber);
+           // timeTv2 = itemView.findViewById(R.id.timeDurationTv2);
             faireChargeTv3 = itemView.findViewById(R.id.faireChargeTv3);
             vehicleIcons = itemView.findViewById(R.id.vehicleImg1);
             infoImg = itemView.findViewById(R.id.infoImg);
             row_linearlayout = itemView.findViewById(R.id.Llayout1);
-            timeDurationTv2 = itemView.findViewById(R.id.timeDurationTv2);
+            //timeDurationTv2 = itemView.findViewById(R.id.timeDurationTv2);
 
         }
     }

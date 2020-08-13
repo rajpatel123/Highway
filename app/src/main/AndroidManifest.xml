@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".customer.BookingProcessActivtiy"></activity>
+        <activity android:name=".customer.CustomerBookingSuccessfullActivity"></activity>
+        <activity android:name=".customer.BookingProcessActivtiy" />
         <activity
             android:name=".millUserModule.milluserActivity.MillUserAllTripActivity"
             android:theme="@style/AppTheme2" />
@@ -37,15 +38,12 @@
         <activity
             android:name=".drivermodule.driverActivity.DriverAllTripsActivity"
             android:theme="@style/AppTheme2" />
-
         <activity
             android:name=".customer.customerActivity.BookingInfoDetailsActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".customer.customerActivity.CustomerAllTripsActivityNew"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".customer.customerActivity.GoodTypeDetailsRecyclerItemActivity"
             android:screenOrientation="portrait" />
@@ -79,14 +77,12 @@
         <activity
             android:name=".customer.customerActivity.WebViewActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".customer.customerActivity.GoodsTypeDetailActivity"
             android:screenOrientation="portrait" /> <!-- The API key for Google Maps-based APIs. -->
         <activity
             android:name=".customer.customerActivity.BookingWithDetailsActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".customer.customerActivity.WelcomeActivityForCustomer"
             android:screenOrientation="portrait" />
@@ -145,12 +141,14 @@
         <activity
             android:name=".drivermodule.driverActivity.LoginActivityForDriver"
             android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDRMI4wJHUfwtsX3zoNqVaTReXyHtIAT6U" />
+
         <receiver
             android:name=".reciever.PushReciever"
             android:enabled="true"
@@ -164,7 +162,6 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".reciever.PushNavigateReceiver"
             android:exported="false">
@@ -185,6 +182,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -205,7 +203,6 @@
     <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
-
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 

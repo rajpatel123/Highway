@@ -40,9 +40,10 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
 
     RecyclerView recyclerViewGoodsTypeList;
     GoodsTypeAdapter goodsTypeAdapter;
+    GoodsTypeDataResponse goodsTypeDataResponse;
+
     List<GoodTypeDatum> goodTypeDatumList = new ArrayList<>();
     Context context;
-    GoodsTypeDataResponse goodsTypeDataResponse;
     TypeData typeData;
 
     @Override
@@ -118,7 +119,7 @@ public class GoodsTypeDetailActivity extends AppCompatActivity implements GoodsT
     }
 
     @Override
-    public void onSelectGoodType(String id, String type) {
+    public void onSelectGoodType(int position, String id, String type) {
         Intent data = new Intent();
         data.putExtra("id", id);
         data.putExtra("type", type);

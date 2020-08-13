@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".customer.BookingProcessActivtiy">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp">
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -19,112 +20,145 @@
             app:navigationIcon="@drawable/back_arrow_icon"
             app:title="Pickup Location" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:minHeight="48dp"
-    android:paddingStart="@dimen/_15sdp"
-    android:paddingEnd="@dimen/_20sdp"
-    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            style="@style/zl_text_14_medium"
-            android:id="@+id/pickupTv"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="@color/green"
-            android:text="Pickup"/>
-        <View
-            android:id="@+id/pickupVV"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/green"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            style="@style/zl_text_14_medium"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="48dp"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_20sdp">
 
-            android:id="@+id/deliveryTv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Delivery"/>
-        <View
-            android:id="@+id/deliveryVV"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="5dp"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            android:background="@color/grey"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            style="@style/zl_text_14_medium"
+                <TextView
+                    android:id="@+id/pickupTv"
+                    style="@style/zl_text_14_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Pickup"
+                    android:textColor="@color/green" />
 
-            android:id="@+id/shipmentTv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Shipment"/>
-        <View
-            android:id="@+id/shipmentVV"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="5dp"
+                <View
+                    android:id="@+id/pickupVV"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/green" />
+            </LinearLayout>
 
-            android:background="@color/grey"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            style="@style/zl_text_14_medium"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            android:id="@+id/paymentTv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Payment"/>
-        <View
-            android:id="@+id/paymentVV"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="5dp"
+                <TextView
+                    android:id="@+id/deliveryTv"
+                    style="@style/zl_text_14_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Delivery" />
 
-            android:background="@color/grey"/>
-    </LinearLayout>
+                <View
+                    android:id="@+id/deliveryVV"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="15dp"
+
+                    android:background="@color/grey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/shipmentTv"
+
+                    style="@style/zl_text_14_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Shipment" />
+
+                <View
+                    android:id="@+id/shipmentVV"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="15dp"
+
+                    android:background="@color/grey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/paymentTv"
+
+                    style="@style/zl_text_14_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Payment" />
+
+                <View
+                    android:id="@+id/paymentVV"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="15dp"
+
+                    android:background="@color/grey" />
+            </LinearLayout>
 
 
-</LinearLayout>
+        </LinearLayout>
+
+
     </com.google.android.material.appbar.AppBarLayout>
-    <fragment
-        android:id="@+id/map"
-        class="com.google.android.gms.maps.SupportMapFragment"
+
+    <include
+        android:id="@+id/pickup_tab_layoutView"
+        layout="@layout/pickup_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:visibility="gone" />
+
+
+    <include
+        android:id="@+id/delivery_tab_layoutView"
+        layout="@layout/delivery_tab_layout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/appBarLayout"
 
-        android:layout_gravity="center" />
+        android:layout_marginTop="@dimen/_40sdp"
+        android:visibility="gone" />
 
-    <include layout="@layout/delivery_location_bottomsheet"
-android:layout_alignParentBottom="true"        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+    <include
+        android:id="@+id/shipment_tab_layoutView"
+        layout="@layout/shipping_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:visibility="gone" />
+
+
 </RelativeLayout>

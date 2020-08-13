@@ -60,6 +60,7 @@ import com.highway.common.base.HighwayApplication;
 import com.highway.common.base.activity.DashBoardActivity;
 import com.highway.common.base.commonModel.bookingHTrip.BookingHTripRequest;
 import com.highway.commonretrofit.RestClient;
+import com.highway.customer.BookingProcessActivtiy;
 import com.highway.customer.customerActivity.BookingWithDetailsActivity;
 import com.highway.customer.customerModelClass.driverLocation.NearByDriverLocationResponse;
 import com.highway.utils.Utils;
@@ -200,7 +201,14 @@ Button proceedBtn;
         proceedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(mActivity,BookingProcessActivtiy.class)
+            Intent intent = new Intent(mActivity, BookingProcessActivtiy.class);
+                HighwayApplication.getInstance().setBookingHTripRequest(new BookingHTripRequest());
+                if (!TextUtils.isEmpty(sourceName)) {
+                    HighwayApplication.getInstance().getBookingHTripRequest().setSourceAddress(sourceName);
+                    HighwayApplication.getInstance().getBookingHTripRequest().setSourceLat(sourceLatitude);
+                    HighwayApplication.getInstance().getBookingHTripRequest().setSourceLong(sourceLongitude);
+                }
+            startActivity(intent);
             }
         });
 
@@ -419,15 +427,19 @@ Button proceedBtn;
         sourceName = Utils.getAddress(mActivity, latLng);
         sourceLatitude = latLng.latitude;
         sourceLongitude = latLng.longitude;
-        edtSourceLOcationEDT.setText("" + sourceName);
+        if (!TextUtils.isEmpty(sourceName) && sourceLatitude>0){
+            proceedBtn.setVisibility(View.VISIBLE);
+            edtSourceLOcationEDT.setText("" + sourceName);
+
+        }
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(14));
 
-        Location location1 = new Location("");
-        location1.setLatitude(30.5518691);
-        location1.setLongitude(75.6513571);
+//        Location location1 = new Location("");
+//        location1.setLatitude(30.5518691);
+//        location1.setLongitude(75.6513571);
         // showMarker(location1);
         //stop location updates
         if (mGoogleApiClient != null) {

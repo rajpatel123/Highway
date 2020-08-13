@@ -13,6 +13,15 @@ public class GoodTypeDatum {
     @Expose
     private String goodsTypeTitle;
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    private boolean isSelected=false;
     public String getGoodsTypeId() {
         return goodsTypeId;
     }

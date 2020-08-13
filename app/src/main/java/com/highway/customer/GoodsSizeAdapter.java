@@ -1,4 +1,4 @@
-package com.highway.customer.customerAdapter;
+package com.highway.customer;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import com.highway.R;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodTypeDatum;
 import com.highway.customer.customerModelClass.selectYoursGoodsType.GoodsTypeDataResponse;
 
-public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.ViewHolder> {
+public class GoodsSizeAdapter extends RecyclerView.Adapter<GoodsSizeAdapter.ViewHolder> {
     Context context;
 
     OnGoodTypeSelect onGoodTypeSelect;
@@ -21,7 +21,7 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
     GoodsTypeDataResponse goodsTypeDataResponse;
 
 
-    public GoodsTypeAdapter(GoodsTypeDataResponse goodsTypeDataResponses1, Context context1, OnGoodTypeSelect onGoodTypeSelect) {
+    public GoodsSizeAdapter(GoodsTypeDataResponse goodsTypeDataResponses1, Context context1, OnGoodTypeSelect onGoodTypeSelect) {
         this.context = context1;
         this.goodsTypeDataResponse = goodsTypeDataResponses1;
         this.onGoodTypeSelect = onGoodTypeSelect;
@@ -47,6 +47,7 @@ public class GoodsTypeAdapter extends RecyclerView.Adapter<GoodsTypeAdapter.View
             holder.goodsTypeTv1.setTextColor(context.getResources().getColor(R.color.white));
         }else{
             holder.goodsTypeTv1.setBackgroundResource(R.drawable.button_border);
+
             holder.goodsTypeTv1.setTextColor(context.getResources().getColor(R.color.black));
 
         }

@@ -58,6 +58,7 @@
 
 
         <ImageView
+            android:id="@+id/setLocationImg"
             android:layout_width="0dp"
             android:layout_weight=".5"
             android:layout_height="wrap_content"

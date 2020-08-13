@@ -15,6 +15,56 @@ private String vehicleTypeId;
 @SerializedName("TripRecevirId")
 @Expose
 private String tripRecevirId;
+
+
+@SerializedName("tripRecevirName")
+@Expose
+private String tripRecevirName;
+
+@SerializedName("tripRecevirNumber")
+@Expose
+private String tripRecevirNumber;
+
+    public String getTripRecevirName() {
+        return tripRecevirName;
+    }
+
+    public void setTripRecevirName(String tripRecevirName) {
+        this.tripRecevirName = tripRecevirName;
+    }
+
+    public String getTripRecevirNumber() {
+        return tripRecevirNumber;
+    }
+
+    public void setTripRecevirNumber(String tripRecevirNumber) {
+        this.tripRecevirNumber = tripRecevirNumber;
+    }
+
+    public String getTripPickupName() {
+        return tripPickupName;
+    }
+
+    public void setTripPickupName(String tripPickupName) {
+        this.tripPickupName = tripPickupName;
+    }
+
+    public String getTripPickupNumber() {
+        return tripPickupNumber;
+    }
+
+    public void setTripPickupNumber(String tripPickupNumber) {
+        this.tripPickupNumber = tripPickupNumber;
+    }
+
+    @SerializedName("tripPickupName")
+@Expose
+private String tripPickupName;
+
+@SerializedName("tripPickupNumber")
+@Expose
+private String tripPickupNumber;
+
 @SerializedName("GoodsTypeId")
 @Expose
 private String goodsTypeId;
@@ -39,9 +89,22 @@ private String tripFare;
 @SerializedName("sourceAddress")
 @Expose
 private String sourceAddress;
-@SerializedName("destAddress")
+
+    public String getGoodsSize() {
+        return goodsSize;
+    }
+
+    public void setGoodsSize(String goodsSize) {
+        this.goodsSize = goodsSize;
+    }
+
+    @SerializedName("destAddress")
 @Expose
 private String destAddress;
+
+@SerializedName("goodsSize")
+@Expose
+private String goodsSize;
 
 public String getUserId() {
 return userId;
